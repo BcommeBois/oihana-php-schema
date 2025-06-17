@@ -5,10 +5,23 @@ namespace org\schema\constants\iso;
 use oihana\reflections\traits\ConstantsTrait;
 
 /**
- * Enumerate currency codes as defined by the ISO 4217 standard.
- * ISO 4217 is an international standard that defines alpha codes and numeric codes
- * for the representation of currencies and provides information about the relationships
- * between individual currencies and their minor units.
+ * Class ISO4217
+ *
+ * Provides a set of constants representing currency codes as defined by the ISO 4217 standard.
+ *
+ * ISO 4217 is an international standard published by the International Organization for Standardization (ISO),
+ * which specifies codes for the representation of currencies. Each currency is represented by a three-letter
+ * (alpha-3) code (e.g., 'USD' for US Dollar, 'EUR' for Euro), and is often accompanied by a numeric code
+ * and information about the number of minor units (e.g., cents) used.
+ *
+ * These codes are commonly used in banking, finance, e-commerce, and software systems for unambiguous
+ * identification of currencies in data exchange.
+ *
+ * Example usage:
+ *   $currency = ISO4217::USD; // 'USD' for US Dollar
+ *
+ * @see https://www.iso.org/iso-4217-currency-codes.html Official ISO 4217 documentation
+ * @see https://en.wikipedia.org/wiki/ISO_4217 Wikipedia: ISO 4217
  */
 class ISO4217
 {
