@@ -13,6 +13,7 @@ trait Properties
         ConceptualObject ,
         CompoundPriceSpecification ,
         ContactPoint ,
+        CreativeWork ,
         Edge ,
         Event ,
         GeoCoordinates ,

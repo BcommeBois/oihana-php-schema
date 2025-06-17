@@ -4,6 +4,10 @@ namespace org\schema\traits;
 
 use org\schema\AggregateRating;
 use org\schema\Audience;
+use org\schema\CreativeWork;
+use org\schema\creativeWork\MediaObject;
+use org\schema\creativeWork\medias\AudioObject;
+use org\schema\creativeWork\WebPage;
 use org\schema\DefinedTerm;
 use org\schema\Demand;
 use org\schema\InteractionCounter;
@@ -80,6 +84,12 @@ trait CreativeWorkTrait
     public null|array|Person $accountablePerson ;
 
     /**
+     * Indicates a page documenting how licenses can be purchased or otherwise acquired, for the current item.
+     * @var string|CreativeWork|null
+     */
+    public null|string|CreativeWork $acquireLicensePage ;
+
+    /**
      * The overall rating, based on a collection of reviews or ratings, of the item.
      * @var array|AggregateRating|null
      */
@@ -89,6 +99,26 @@ trait CreativeWorkTrait
      * The alternative headline of this content.
      */
     public string|object|null $alternativeHeadline ;
+
+    /**
+     * Indicates a page or other link involved in archival of a CreativeWork. In the case of MediaReview,
+     * the items in a MediaReviewItem may often become inaccessible,
+     * but be archived by archival, journalistic, activist, or law enforcement organizations.
+     * In such cases, the referenced page may not directly publish the content.
+     */
+    public string|WebPage|null $archivedAt ;
+
+    /**
+     * The item being described is intended to assess the competency or learning outcome defined by the referenced term.
+     * @var string|DefinedTerm|null
+     */
+    public null|string|DefinedTerm $assesses ;
+
+    /**
+     * A media object that encodes this CreativeWork. This property is a synonym for encoding.
+     * @var array|MediaObject|null
+     */
+    public null|array|MediaObject $associatedMedia ;
 
     /**
      * An intended audience, i.e. a group for whom something was created.
@@ -103,7 +133,7 @@ trait CreativeWorkTrait
     /**
      * The author of this content.
      */
-    public string|object $author ;
+    public null|string|AudioObject $author ;
 
     /**
      * The location depicted or described in the content. For example, the location in a photograph or painting.
@@ -313,9 +343,18 @@ trait CreativeWorkTrait
     public string|object|null $typicalAgeRange ;
 
     /**
+     * The schema.org usageInfo property indicates further information about a CreativeWork.
+     * This property is applicable both to works that are freely available and to those that require payment or other transactions.
+     * It can reference additional information, e.g. community expectations on preferred linking and citation conventions, as well as purchasing details.
+     * For something that can be commercially licensed, usageInfo can provide detailed, resource-specific information about licensing options.
+     * This property can be used alongside the license property which indicates license(s) applicable to some piece of content. The usageInfo property can provide information about other licensing options, e.g. acquiring commercial usage rights for an image that is also available under non-commercial creative commons licenses.
+     */
+    public string|CreativeWork|null $usageInfo ;
+
+    /**
      * The version of the CreativeWork embodied by a specified resource.
      */
-    public ?string $version ;
+    public null|string|int $version ;
 
     /**
      * An embedded video object.
