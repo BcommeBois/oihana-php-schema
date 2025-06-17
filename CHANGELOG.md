@@ -10,4 +10,4 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
-- Adds traits\UriTrait
+- Adds schema\ folder with all first classes and helpers
