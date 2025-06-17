@@ -7,6 +7,7 @@ use org\schema\creativeWork\Certification;
 use org\schema\creativeWork\Map;
 use org\schema\creativeWork\medias\ImageObject;
 use org\schema\creativeWork\Photograph;
+use org\schema\creativeWork\Website;
 use org\schema\DefinedTerm;
 use org\schema\Demand;
 use org\schema\Event;
@@ -20,7 +21,6 @@ use org\schema\PostalAddress;
 use org\schema\PropertyValue;
 use org\schema\Review;
 use org\schema\Service;
-use org\schema\creativeWork\Website;
 
 /**
  * Entities that have a somewhat fixed, physical extension.

@@ -2,12 +2,7 @@
 
 namespace org\schema\creativeWork ;
 
-use org\schema\creativeWork\enumerations\MeasurementMethodEnum;
-use org\schema\creativeWork\medias\DataDownload;
 use org\schema\DataFeedItem;
-use org\schema\DefinedTerm;
-use org\schema\Property;
-use org\schema\PropertyValue;
 use org\schema\Thing;
 
 /**

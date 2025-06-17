@@ -2,9 +2,9 @@
 
 namespace org\schema\constants\uncefact;
 
+use oihana\reflections\traits\ConstantsTrait;
 use org\schema\constants\properties\Prop;
 use org\schema\PropertyValue;
-use oihana\reflections\traits\ConstantsTrait;
 
 /**
  * UN/CEFACT Unit of Measure Symbols and Codes Enumeration Class (Recommendation 20).

@@ -3,8 +3,6 @@
 namespace org\schema\creativeWork ;
 
 use org\schema\CreativeWork;
-use org\schema\creativeWork\enumerations\BookFormatType;
-use org\schema\DefinedTerm;
 use org\schema\Organization;
 use org\schema\Person;
 

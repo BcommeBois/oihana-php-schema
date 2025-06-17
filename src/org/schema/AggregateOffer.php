@@ -2,15 +2,6 @@
 
 namespace org\schema;
 
-use DateTime;
-use org\schema\enumerations\AdultOrientedEnumeration;
-use org\schema\enumerations\BusinessEntityType;
-use org\schema\enumerations\BusinessFunction;
-use org\schema\enumerations\DeliveryMethod;
-use org\schema\enumerations\OfferItemCondition;
-use org\schema\places\AdministrativeArea;
-use org\schema\services\LoanOrCredit;
-
 /**
  * When a single product is associated with multiple offers (for example, the same pair of shoes is offered by different merchants), then AggregateOffer can be used.
  * @see https://schema.org/AggregateOffer
