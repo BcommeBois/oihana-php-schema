@@ -221,7 +221,7 @@ trait CreativeWorkTrait
      * A resource that was used in the creation of this resource. This term can be repeated for multiple sources.
      */
     public array|object|null $isBasedOn ;
-    
+
     /**
      * Keywords or tags used to describe some item. Multiple textual entries in a keywords list are typically delimited by commas, or by repeating the property.
      * @var string|DefinedTerm|array|null
