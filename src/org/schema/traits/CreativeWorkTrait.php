@@ -196,11 +196,6 @@ trait CreativeWorkTrait
     public ?string $expires ;
 
     /**
-     * Indicates an item or CreativeWork that is part of this item, or CreativeWork (in some sense).
-     */
-    public array|object|null $hasPart ;
-
-    /**
      * The headline of this content.
      */
     public string|object|null $headline ;
