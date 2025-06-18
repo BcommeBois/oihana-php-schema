@@ -48,10 +48,11 @@ class DataSet extends MediaObject
     public null|string|DefinedTerm|MeasurementMethodEnum $measurementTechnique ;
 
     /**
-     * The variableMeasured property can indicate (repeated as necessary) the variables that are measured in some dataset, either described as text or as pairs of identifier and description using PropertyValue, or more explicitly as a StatisticalVariable.
-     * @var string|Property|PropertyValue|StatisticalVariable|null
+     * The variableMeasured property can indicate (repeated as necessary) the variables that are measured in some dataset,
+     * either described as text or as pairs of identifier and description using PropertyValue, or more explicitly as a StatisticalVariable.
+     * @var string|Property|PropertyValue|StatisticalVariable|null|array
      */
-    public null|string|Property|PropertyValue|StatisticalVariable $variableMeasured ;
+    public null|string|Property|PropertyValue|StatisticalVariable|array $variableMeasured ;
 }
 
 
