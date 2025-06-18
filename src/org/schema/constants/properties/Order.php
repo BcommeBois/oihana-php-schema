@@ -2,9 +2,6 @@
 
 namespace org\schema\constants\properties;
 
-/**
- * The Order properties enumeration.
- */
 trait Order
 {
     const string ACCEPTED_OFFER           = 'acceptedPaymentMethod' ;

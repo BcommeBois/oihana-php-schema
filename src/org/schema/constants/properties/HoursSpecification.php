@@ -2,9 +2,6 @@
 
 namespace org\schema\constants\properties;
 
-/**
- * The OpeningHoursSpecification properties enumeration.
- */
 trait HoursSpecification
 {
     const string CLOSES        = 'closes' ;

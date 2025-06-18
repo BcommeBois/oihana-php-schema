@@ -2,9 +2,6 @@
 
 namespace org\schema\constants\properties;
 
-/**
- * The Event properties enumeration.
- */
 trait Event
 {
     const string AUDIENCE     = 'audience'    ;

@@ -2,9 +2,6 @@
 
 namespace org\schema\constants\properties;
 
-/**
- * The PostalAddress properties enumeration.
- */
 trait PostalAddress
 {
     const string ADDRESS = 'address' ;

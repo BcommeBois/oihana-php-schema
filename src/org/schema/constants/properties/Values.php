@@ -2,9 +2,6 @@
 
 namespace org\schema\constants\properties;
 
-/**
- * The QuantitativeValue properties enumeration.
- */
 trait Values
 {
     const string ADDITIONAL_PROPERTY   = 'additionalProperty' ;

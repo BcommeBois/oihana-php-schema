@@ -2,9 +2,6 @@
 
 namespace org\schema\constants\properties;
 
-/**
- * The medias properties enumeration.
- */
 trait Medias
 {
     const string AUDIO      = 'audio'     ;

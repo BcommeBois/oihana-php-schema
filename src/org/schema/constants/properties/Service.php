@@ -2,9 +2,6 @@
 
 namespace org\schema\constants\properties;
 
-/**
- * The QuantitativeValue properties enumeration.
- */
 trait Service
 {
     const string AGGREGATE_RATING  = 'aggregateRating' ;

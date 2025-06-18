@@ -2,9 +2,6 @@
 
 namespace org\schema\constants\properties;
 
-/**
- * The Person properties enumeration.
- */
 trait Person
 {
     const string PEOPLE           = 'people' ;

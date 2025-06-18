@@ -2,9 +2,6 @@
 
 namespace org\schema\constants\properties;
 
-/**
- * The GeoCoordinates properties enumeration.
- */
 trait GeoCoordinates
 {
     const string DISTANCE  = 'distance'  ;

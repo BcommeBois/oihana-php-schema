@@ -2,9 +2,6 @@
 
 namespace org\schema\constants\properties;
 
-/**
- * The ConceptualObject properties enumeration.
- */
 trait ConceptualObject
 {
     const string CONCEPTUAL_OBJECTS     = 'conceptualObjects' ;

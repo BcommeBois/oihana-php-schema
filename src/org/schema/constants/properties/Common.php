@@ -2,9 +2,6 @@
 
 namespace org\schema\constants\properties;
 
-/**
- * The thing properties enumeration.
- */
 trait Common
 {
     const string ACTIVE = 'active' ;

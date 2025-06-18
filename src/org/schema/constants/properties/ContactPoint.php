@@ -2,9 +2,6 @@
 
 namespace org\schema\constants\properties;
 
-/**
- * The ContactPoint properties enumeration.
- */
 trait ContactPoint
 {
     public const string AREA_SERVED        = 'areaServed' ;

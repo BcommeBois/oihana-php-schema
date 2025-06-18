@@ -2,9 +2,6 @@
 
 namespace org\schema\constants\properties;
 
-/**
- * The Thing properties enumeration.
- */
 trait Thing
 {
     const string ABOUT                      = 'about' ;

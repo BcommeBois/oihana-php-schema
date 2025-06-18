@@ -2,10 +2,6 @@
 
 namespace org\schema\constants\properties;
 
-/**
- * The most generic kind of creative work, including books, movies, photographs, software programs, etc.
- * @see https://schema.org/CreativeWork
- */
 trait CreativeWork
 {
     const string ABOUT                  = 'about' ;

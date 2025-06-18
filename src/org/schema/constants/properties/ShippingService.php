@@ -2,9 +2,6 @@
 
 namespace org\schema\constants\properties;
 
-/**
- * The ShippingService properties enumeration.
- */
 trait ShippingService
 {
     const string FULFILLMENT_TYPE      = 'fulfillmentType' ;

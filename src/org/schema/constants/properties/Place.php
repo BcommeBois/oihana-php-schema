@@ -2,9 +2,6 @@
 
 namespace org\schema\constants\properties;
 
-/**
- * The Place properties enumeration.
- */
 trait Place
 {
     const string LOCATION = 'location' ;

@@ -2,9 +2,6 @@
 
 namespace org\schema\constants\properties;
 
-/**
- * The Organization properties enumeration.
- */
 trait Organization
 {
     const string ORGANIZATIONS = 'organizations' ;

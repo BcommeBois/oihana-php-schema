@@ -2,9 +2,6 @@
 
 namespace org\schema\constants\properties;
 
-/**
- * The OpeningHoursSpecification properties enumeration.
- */
 trait PriceSpecification
 {
     const string ELIGIBLE_QUANTITY           = 'eligibleQuantity' ;

@@ -11,9 +11,9 @@ use org\schema\StatisticalVariable;
 
 /**
  * All or part of a Dataset in downloadable form.
- * @see https://schema.org/DataSet
+ * @see https://schema.org/Dataset
  */
-class DataSet extends MediaObject
+class Dataset extends MediaObject
 {
     /**
      * A downloadable form of this dataset, at a specific location, in a specific format. This property can be repeated if different variations are available. There is no expectation that different downloadable distributions must contain exactly equivalent information (see also DCAT on this point). Different distributions might include or exclude different subsets of the entire dataset, for example.
