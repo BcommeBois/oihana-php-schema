@@ -4,7 +4,7 @@ namespace org\schema ;
 
 use DateTime;
 use JsonSerializable;
-use org\schema\traits\helpers\ThingTrait;
+use org\schema\traits\ThingTrait;
 
 class Thing implements JsonSerializable
 {
