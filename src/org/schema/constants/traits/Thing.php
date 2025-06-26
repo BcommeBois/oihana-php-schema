@@ -28,6 +28,10 @@ trait Thing
     const string CREATED    = 'created'  ;
     const string MODIFIED   = 'modified' ;
     const string REVISION   = 'revision' ;
+    const string _KEY       = '_key'     ;
+    const string _REV       = '_rev'     ;
+    const string _TYPE      = '_type'    ;
+    const string _ID        = '_id'      ;
 
     // --------- Specials
 
@@ -37,10 +41,6 @@ trait Thing
     const string IS_SIMILAR_TO = 'isSimilarTo' ;
 
     const string KEY   = 'key'   ;
-    const string _KEY  = '_key'  ;
-    const string _REV  = '_rev'  ;
-    const string _TYPE = '_type' ;
-    const string _ID   = '_id'   ;
     const string IDS   = 'ids'   ;
 
     const string HAS_PART = 'hasPart' ;
