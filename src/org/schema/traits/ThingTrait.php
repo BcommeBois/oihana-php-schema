@@ -20,14 +20,11 @@ trait ThingTrait
     {
         if( isset( $init ) )
         {
-            if( is_array( $init ) )
+            foreach ( $init as $key => $value )
             {
-                foreach ( $init as $key => $value )
+                if( property_exists( $this , $key ) )
                 {
-                    if( property_exists( $this , $key ) )
-                    {
-                        $this->{ $key } = $value ;
-                    }
+                    $this->{ $key } = $value ;
                 }
             }
         }
