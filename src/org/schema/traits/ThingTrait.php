@@ -46,19 +46,11 @@ trait ThingTrait
      */
     public function jsonSerialize() : array
     {
-        $object =
+        return
         [
             Prop::AT_TYPE    => $this->getClassName( $this ) ,
-            Prop::AT_CONTEXT => static::CONTEXT
+            Prop::AT_CONTEXT => static::CONTEXT ,
+            ...$this->jsonSerializeFromPublicProperties( static::class , true )
         ] ;
-
-        $properties = $this->getPublicProperties( static::class ) ;
-        foreach( $properties as $property )
-        {
-            $name = $property->getName();
-            $object[ $name ] = $this->{ $name } ?? null ;
-        }
-
-        return compress( $object ) ;
     }
 }
