@@ -5,8 +5,6 @@ namespace org\schema\traits ;
 use oihana\reflections\traits\ReflectionTrait;
 use ReflectionException;
 
-use function oihana\core\arrays\compress;
-
 use org\schema\constants\Prop;
 
 trait ThingTrait
@@ -45,9 +43,9 @@ trait ThingTrait
     {
         return
         [
+            ...$this->jsonSerializeFromPublicProperties( static::class , true ) ,
             Prop::AT_TYPE    => $this->getClassName( $this ) ,
             Prop::AT_CONTEXT => static::CONTEXT ,
-            ...$this->jsonSerializeFromPublicProperties( static::class , true )
         ] ;
     }
 }
