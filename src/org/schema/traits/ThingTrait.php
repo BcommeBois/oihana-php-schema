@@ -45,7 +45,7 @@ trait ThingTrait
     {
         $object =
         [
-            Prop::AT_TYPE    => $this->getClassName( self::class ) ,
+            Prop::AT_TYPE    => $this->getShortName( self::class ) ,
             Prop::AT_CONTEXT => static::CONTEXT
         ] ;
 
