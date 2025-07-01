@@ -50,7 +50,7 @@ trait ThingTrait
 
         ] ;
 
-        $properties = $this->getPublicProperties( static::class ) ;
+        $properties = $this->getPublicProperties( $this ) ;
         foreach( $properties as $property )
         {
             $name = $property->getName();
