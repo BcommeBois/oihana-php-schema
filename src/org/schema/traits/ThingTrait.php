@@ -45,11 +45,11 @@ trait ThingTrait
     {
         $object =
         [
-            Prop::AT_TYPE    => $this->getClassName( static::class ) ,
+            Prop::AT_TYPE    => $this->getClassName( self::class ) ,
             Prop::AT_CONTEXT => static::CONTEXT
         ] ;
 
-        $properties = $this->getPublicProperties( static::class ) ;
+        $properties = $this->getPublicProperties( self::class ) ;
         foreach( $properties as $property )
         {
             $name = $property->getName();
