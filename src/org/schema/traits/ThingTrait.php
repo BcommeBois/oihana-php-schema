@@ -7,6 +7,8 @@ use ReflectionException;
 
 use org\schema\constants\Prop;
 
+use function oihana\core\arrays\compress;
+
 trait ThingTrait
 {
     /**
@@ -41,11 +43,20 @@ trait ThingTrait
      */
     public function jsonSerialize() : array
     {
-        return
+        $object =
         [
-            ...$this->jsonSerializeFromPublicProperties( static::class , true ) ,
             Prop::AT_TYPE    => $this->getClassName( $this ) ,
-            Prop::AT_CONTEXT => static::CONTEXT ,
+            Prop::AT_CONTEXT => static::CONTEXT
+
         ] ;
+
+        $properties = $this->getPublicProperties( static::class ) ;
+        foreach( $properties as $property )
+        {
+            $name = $property->getName();
+            $object[ $name ] = $this->{ $name } ?? null ;
+        }
+
+        return compress( $object ) ;
     }
 }
