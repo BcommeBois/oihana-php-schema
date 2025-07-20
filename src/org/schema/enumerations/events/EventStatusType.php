@@ -1,6 +1,6 @@
 <?php
 
-namespace org\schema\events\enumerations;
+namespace org\schema\enumerations\events;
 
 use org\schema\Enumeration;
 
