@@ -1,0 +1,127 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+<section class="phpdocumentor-section">
+
+<a href="https://github.com/BcommeBois/oihana-php-schema" class="phpdocumentor-title__link">
+    <img src="assets/images/oihana-php-schema-logo-inline-512x160.png" alt="Oihana PHP Schema" style="width: 256px; height: 80px;"/>
+</a>
+
+</br>
+
+<h3>🔗 Project on GitHub</h3>
+<p>View the full source code and contribute on GitHub:</p>
+<p>
+    <a href="https://github.com/BcommeBois/oihana-php-schema" target="_blank">
+        https://github.com/BcommeBois/oihana-php-schema
+    </a>
+</p>
+
+<h3>✨ Key Features</h3>
+<ul>
+    <li>✔️ Full modeling of Schema.org entities</li>
+    <li>🧩 Automatic JSON-LD serialization (<code>JsonSerializable</code>)</li>
+    <li>🪄 Recursive object hydration (including nested types and union types)</li>
+    <li>🧠 Internal reflection system (<code>oihana\reflections</code>)</li>
+    <li>🎯 Safe property access via constants (e.g. <code>Prop::NAME</code>)</li>
+    <li>📚 Extensible architecture for custom ontologies</li>
+    <li>🔐 Support for ArangoDB metadata (<code>_id</code>, <code>_key</code>, <code>_rev</code>, <code>_from</code>, <code>_to</code>)</li>
+</ul>
+
+<h3>📦 Installation</h3>
+<p>This library requires <a href="https://php.net/releases/" target="_blank">PHP 8.4+</a> and is installed via <a href="https://getcomposer.org/" target="_blank">Composer</a>:</p>
+<pre class="language-bash prettyprint">composer require oihana/php-schema</pre>
+
+<h3>🚀 Quick Example</h3>
+<p>Here is a basic usage example using <code>Person</code> and <code>PostalAddress</code>:</p>
+
+<pre class="prettyprint"><code class="language-php">use org\schema\Person;
+use org\schema\PostalAddress;
+use org\schema\constants\Prop;
+
+$person = new Person
+([
+    Prop::ID      => '2555' ,
+    Prop::NAME    => 'John Doe' ,
+    Prop::ADDRESS => new PostalAddress
+    ([
+        Prop::STREET_ADDRESS => '2 chemin des Vergers' ,
+        Prop::POSTAL_CODE    => '49170'
+    ])
+]);
+
+echo json_encode($person, JSON_PRETTY_PRINT);
+</code></pre>
+
+<p>JSON-LD output:</p>
+<pre class="prettyprint"><code class="language-json">{
+  "@type": "Person",
+  "@context": "https://schema.org",
+  "id": "2555",
+  "name": "John Doe",
+  "address":
+  {
+    "@type": "PostalAddress",
+    "@context": "https://schema.org",
+    "streetAddress": "2 chemin des Vergers",
+    "postalCode": "49170"
+  }
+}
+</code></pre>
+
+<h3>🧠 Internal Architecture</h3>
+<p>All schema entities inherit from a base class <code>Thing</code>, which handles metadata, public properties, and JSON-LD serialization logic:</p>
+<ul>
+    <li>Constructor: Hydrates the object via array or stdClass</li>
+    <li>JSON Serialization: Reflects public properties and adds <code>@type</code> and <code>@context</code></li>
+    <li>Reflection helpers: Provided via internal <code>ReflectionTrait</code></li>
+</ul>
+
+<h3>🔐 Property Constants</h3>
+<p>The <code>Prop</code> class enumerates all known schema properties as constants for safe access:</p>
+
+<pre class="prettyprint"><code class="language-php">use org\schema\constants\Prop;
+
+$event = new Event
+([
+    Prop::NAME     => 'Oihana Conf 2025',
+    Prop::LOCATION => new Place( [ Prop::NAME => 'Nantes' ] )
+]);
+</code></pre>
+
+<h3>✅ Running Unit Tests</h3>
+<p>Run all unit tests:</p>
+<pre class="language-bash prettyprint">composer run-script test</pre>
+
+<p>Run a specific test:</p>
+<pre class="language-bash prettyprint">composer run test ./tests/org/schema/ThingTest.php</pre>
+
+<h3>📄 License</h3>
+<p>This project is licensed under the <strong><a href="https://www.mozilla.org/en-US/MPL/2.0/" target="_blank">Mozilla Public License 2.0 (MPL-2.0)</a></strong>.</p>
+
+<h3>👤 About the Author</h3>
+<ul>
+    <li><strong>Name:</strong> Marc ALCARAZ (aka <em>eKameleon</em>)</li>
+    <li><strong>Website:</strong> <a href="https://www.ooop.fr" target="_blank">www.ooop.fr</a></li>
+    <li><strong>Email:</strong> <a href="mailto:marc@ooop.fr">marc@ooop.fr</a></li>
+</ul>
+
+{% set node = project.namespace %}
+
+{{
+    include
+    (
+        'components/table-of-contents.html.twig',
+        {
+            'node'       : project.namespace,
+            'namespaces' : usesNamespaces or not usesPackages ? node.children : [] ,
+            'packages'   : usesPackages ? project.package.children : []
+        }
+    )
+}}
+
+{{ include('components/constants.html.twig', {'node': project.namespace}) }}
+{{ include('components/functions.html.twig', {'node': project.namespace}) }}
+
+</section>
+{% endblock %}
