@@ -3,6 +3,9 @@
 namespace org\schema;
 
 use DateTime;
+
+use oihana\reflections\attributes\HydrateWith;
+
 use org\schema\creativeWork\Certification;
 use org\schema\creativeWork\medias\ImageObject;
 
@@ -15,14 +18,14 @@ class Product extends Thing
     /**
      * A property-value pair representing an additional characteristic of the entity,
      * e.g. a product feature or another characteristic for which there is no matching property in schema.org.
-     * @var array|PropertyValue|null
      */
+    #[HydrateWith( PropertyValue::class ) ]
     public null|array|PropertyValue $additionalProperty = null ;
 
     /**
      * The overall rating, based on a collection of reviews or ratings, of the item.
-     * @var array|AggregateRating|null
      */
+    #[HydrateWith( AggregateRating::class ) ]
     public null|array|AggregateRating $aggregateRating ;
 
     /**
@@ -32,8 +35,8 @@ class Product extends Thing
 
     /**
      * An intended audience, i.e. a group for whom something was created. Supersedes serviceAudience.
-     * @var array|Audience|null
      */
+    #[HydrateWith( Audience::class ) ]
     public null|array|Audience $audience ;
 
     /**
@@ -124,15 +127,15 @@ class Product extends Thing
 
     /**
      * Certification information about a product, organization, service, place, or person.
-     * @var array|Certification|null
      */
+    #[HydrateWith( Certification::class ) ]
     public null|array|Certification $hasCertification ;
 
     /**
      * A measurement of an item, For example, the inseam of pants, the wheel size of a bicycle, the gauge of a screw, or the carbon footprint measured for certification by an authority.
      * Usually an exact measurement, but can also be a range of measurements for adjustable products, for example belts and ski bindings.
-     * @var array|QuantitativeValue|null
      */
+    #[HydrateWith( QuantitativeValue::class ) ]
     public null|array|QuantitativeValue $hasMeasurement ;
 
     /**
@@ -149,14 +152,14 @@ class Product extends Thing
 
     /**
      * A pointer to another product (or multiple products) for which this product is an accessory or spare part.
-     * @var Product|array|null
      */
+    #[HydrateWith(Product::class)]
     public null|Product|array $isAccessoryOrSparePartFor ;
 
     /**
      * A pointer to another product (or multiple products) for which this product is a consumable.
-     * @var Product|array|null
      */
+    #[HydrateWith( Product::class )]
     public null|Product|array $isConsumableFor ;
 
     /**
@@ -179,8 +182,8 @@ class Product extends Thing
 
     /**
      * Indicates the kind of product that this is a variant of. In the case of ProductModel, this is a pointer (from a ProductModel) to a base product from which this product is a variant.
-     * @var ProductModel|ProductGroup|array|null
      */
+    #[HydrateWith( ProductModel::class , ProductGroup::class ) ]
     public null|array|ProductModel|ProductGroup $isVariantOf ;
 
     /**
@@ -246,8 +249,8 @@ class Product extends Thing
 
     /**
      * An offer to provide this item.
-     * @var array|Offer|null|Demand
      */
+    #[HydrateWith(Offer::class, Demand::class)]
     public array|Offer|Demand|null $offers ;
 
     /**
@@ -283,8 +286,8 @@ class Product extends Thing
 
     /**
      * A review of the item.
-     * @var array|Review|null
      */
+    #[HydrateWith( Review::class )]
     public null|array|Review $review ;
 
     /**
@@ -293,8 +296,8 @@ class Product extends Thing
      * a QuantitativeValue with a unitCode,
      * or a comprehensive and structured SizeSpecification;
      * in other cases, the width, height, depth and weight properties may be more applicable.
-     * @var null|string|DefinedTerm|QuantitativeValue|SizeSpecification|array
      */
+    #[HydrateWith( DefinedTerm::class , QuantitativeValue::class , SizeSpecification::class ) ]
     public null|string|DefinedTerm|QuantitativeValue|SizeSpecification|array $size ;
 
     /**
