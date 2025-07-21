@@ -1,5 +1,6 @@
-# oihana-php-schema
-Oihana PHP - Schema library
+# Oihana PHP - Schema
+
+![Oihana PHP Schema](https://raw.githubusercontent.com/BcommeBois/oihana-php-schema/main/assets/images/oihana-php-schema-logo-inline-512x160.png)
 
 The Oihana schema library is based on the Schema.org vocabulary.
 
