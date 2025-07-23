@@ -49,7 +49,7 @@ class ThingTraitTest extends TestCase
 
         $data = $thing->jsonSerialize();
 
-        // echo var_dump($data) . PHP_EOL;
+        // echo var_dump( $data ) . PHP_EOL;
 
         $this->assertArrayHasKey(Prop::AT_TYPE    , $data ) ;
         $this->assertArrayHasKey(Prop::AT_CONTEXT , $data ) ;

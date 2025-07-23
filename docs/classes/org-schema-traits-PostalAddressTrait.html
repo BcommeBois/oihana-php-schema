@@ -476,6 +476,8 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
                         if (xhr.status < 400 && xhr.responseText) {
                             code.textContent = xhr.responseText;
                             Prism.highlightElement(code);
+                            d=document.getElementsByClassName("line-numbers");
+                            d[0].scrollTop = d[0].children[1].offsetTop;
                             return;
                         }
 

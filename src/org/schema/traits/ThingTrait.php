@@ -103,7 +103,7 @@ trait ThingTrait
     {
         $object =
         [
-            Prop::AT_TYPE    => $this->getClassName( $this ) ,
+            Prop::AT_TYPE    => $this->getShortName( $this ) ,
             Prop::AT_CONTEXT => static::CONTEXT
         ] ;
 
