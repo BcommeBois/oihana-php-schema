@@ -375,6 +375,13 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
 <dd>The author of this content.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-CreativeWorkTrait.html#property_award">$award</a>
+    <span>
+                        &nbsp;: null|string|array&lt;string|int, mixed&gt;            </span>
+</dt>
+<dd>An award won by or for this item.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-creativeWork-MediaObject.html#property_bitrate">$bitrate</a>
     <span>
                         &nbsp;: float|null            </span>
@@ -403,6 +410,41 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
 <dd>The number of channel of the audio</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-CreativeWorkTrait.html#property_character">$character</a>
+    <span>
+                        &nbsp;: null|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Person.html"><abbr title="\org\schema\Person">Person</abbr></a>            </span>
+</dt>
+<dd>Fictional person connected with a creative work.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-CreativeWorkTrait.html#property_citation">$citation</a>
+    <span>
+                        &nbsp;: null|string|<a href="classes/org-schema-CreativeWork.html"><abbr title="\org\schema\CreativeWork">CreativeWork</abbr></a>|array&lt;string|int, mixed&gt;            </span>
+</dt>
+<dd>A citation or reference to another creative work, such as another publication, web page, scholarly article, etc.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-CreativeWorkTrait.html#property_comment">$comment</a>
+    <span>
+                        &nbsp;: <a href="classes/org-schema-creativeWork-Comment.html"><abbr title="\org\schema\creativeWork\Comment">Comment</abbr></a>|array&lt;string|int, mixed&gt;|null            </span>
+</dt>
+<dd>Comments, typically from users.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-CreativeWorkTrait.html#property_commentCount">$commentCount</a>
+    <span>
+                        &nbsp;: int|null            </span>
+</dt>
+<dd>The number of comments this CreativeWork (e.g. Article, Question or Answer) has received.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-CreativeWorkTrait.html#property_conditionsOfAccess">$conditionsOfAccess</a>
+    <span>
+                        &nbsp;: null|string|object            </span>
+</dt>
+<dd>Conditions that affect the availability of, or method(s) of access to, an item.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-traits-CreativeWorkTrait.html#property_contentLocation">$contentLocation</a>
     <span>
                         &nbsp;: string|<a href="classes/org-schema-Place.html"><abbr title="\org\schema\Place">Place</abbr></a>|null            </span>
@@ -412,9 +454,17 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-traits-CreativeWorkTrait.html#property_contentRating">$contentRating</a>
     <span>
-                        &nbsp;: string            </span>
+                        &nbsp;: null|string|<a href="classes/org-schema-Rating.html"><abbr title="\org\schema\Rating">Rating</abbr></a>|array&lt;string|int, mixed&gt;            </span>
 </dt>
 <dd>Official rating of a piece of content—for example,&#039;MPAA PG-13&#039;.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-CreativeWorkTrait.html#property_contentReferenceTime">$contentReferenceTime</a>
+    <span>
+                        &nbsp;: string|null|<abbr title="\DateTime">DateTime</abbr>            </span>
+</dt>
+<dd>The specific time described by a creative work, for works (e.g. articles, video objects etc.)
+that emphasise a particular moment within an Event.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-creativeWork-MediaObject.html#property_contentSize">$contentSize</a>
@@ -433,23 +483,45 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-traits-CreativeWorkTrait.html#property_contributor">$contributor</a>
     <span>
-                        &nbsp;: string|object|null            </span>
+                        &nbsp;: null|<a href="classes/org-schema-Organization.html"><abbr title="\org\schema\Organization">Organization</abbr></a>|<a href="classes/org-schema-Person.html"><abbr title="\org\schema\Person">Person</abbr></a>|array&lt;string|int, mixed&gt;            </span>
 </dt>
 <dd>A secondary contributor to the CreativeWork or Event.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-traits-CreativeWorkTrait.html#property_copyrightHolder">$copyrightHolder</a>
     <span>
-                        &nbsp;: string|null            </span>
+                        &nbsp;: null|<a href="classes/org-schema-Organization.html"><abbr title="\org\schema\Organization">Organization</abbr></a>|<a href="classes/org-schema-Person.html"><abbr title="\org\schema\Person">Person</abbr></a>|array&lt;string|int, mixed&gt;            </span>
 </dt>
 <dd>The party holding the legal copyright to the CreativeWork.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-CreativeWorkTrait.html#property_copyrightNotice">$copyrightNotice</a>
+    <span>
+                        &nbsp;: string|object|null            </span>
+</dt>
+<dd>Text of a notice appropriate for describing the copyright aspects of this Creative Work,
+ideally indicating the owner of the copyright for the Work.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-traits-CreativeWorkTrait.html#property_copyrightYear">$copyrightYear</a>
     <span>
-                        &nbsp;: string|null            </span>
+                        &nbsp;: null|int|string            </span>
 </dt>
 <dd>The year during which the claimed copyright for the CreativeWork was first asserted.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-CreativeWorkTrait.html#property_correction">$correction</a>
+    <span>
+                        &nbsp;: null|<a href="classes/org-schema-creativeWork-comments-CorrectionComment.html"><abbr title="\org\schema\creativeWork\comments\CorrectionComment">CorrectionComment</abbr></a>|string            </span>
+</dt>
+<dd>Indicates a correction to a CreativeWork, either via a CorrectionComment, textually or in another document.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-CreativeWorkTrait.html#property_countryOfOrigin">$countryOfOrigin</a>
+    <span>
+                        &nbsp;: <a href="classes/org-schema-places-Country.html"><abbr title="\org\schema\places\Country">Country</abbr></a>|null            </span>
+</dt>
+<dd>The country of origin of something, including products as well as creative works such as movie and TV content.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_created">$created</a>
@@ -457,6 +529,27 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
                         &nbsp;: null|string|<abbr title="\DateTime">DateTime</abbr>            </span>
 </dt>
 <dd>Date of creation of the resource.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-CreativeWorkTrait.html#property_creativeWorkStatus">$creativeWorkStatus</a>
+    <span>
+                        &nbsp;: string|<a href="classes/org-schema-DefinedTerm.html"><abbr title="\org\schema\DefinedTerm">DefinedTerm</abbr></a>|null            </span>
+</dt>
+<dd>The status of a creative work in terms of its stage in a lifecycle.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-CreativeWorkTrait.html#property_creator">$creator</a>
+    <span>
+                        &nbsp;: <a href="classes/org-schema-Organization.html"><abbr title="\org\schema\Organization">Organization</abbr></a>|<a href="classes/org-schema-Person.html"><abbr title="\org\schema\Person">Person</abbr></a>|array&lt;string|int, mixed&gt;|null            </span>
+</dt>
+<dd>The creator/author of this CreativeWork. This is the same as the Author property for CreativeWork.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-CreativeWorkTrait.html#property_creditText">$creditText</a>
+    <span>
+                        &nbsp;: null|object|string            </span>
+</dt>
+<dd>Text that can be used to credit person(s) and/or organization(s) associated with a published Creative Work.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-traits-CreativeWorkTrait.html#property_dateCreated">$dateCreated</a>
@@ -487,11 +580,25 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
 <dd>A short description of the item.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-CreativeWorkTrait.html#property_digitalSourceType">$digitalSourceType</a>
+    <span>
+                        &nbsp;: null|<a href="classes/org-schema-enumerations-medias-IPTCDigitalSourceEnumeration.html"><abbr title="\org\schema\enumerations\medias\IPTCDigitalSourceEnumeration">IPTCDigitalSourceEnumeration</abbr></a>            </span>
+</dt>
+<dd>Indicates an IPTCDigitalSourceEnumeration code indicating the nature of the digital source(s) for some CreativeWork.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_disambiguatingDescription">$disambiguatingDescription</a>
     <span>
                         &nbsp;: string|null            </span>
 </dt>
 <dd>A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-CreativeWorkTrait.html#property_discussionUrl">$discussionUrl</a>
+    <span>
+                        &nbsp;: null|string            </span>
+</dt>
+<dd>A link to the page containing the comments of the CreativeWork.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-creativeWork-MediaObject.html#property_duration">$duration</a>
@@ -501,11 +608,40 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
 <dd>The duration of the item.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-CreativeWorkTrait.html#property_editEIDR">$editEIDR</a>
+    <span>
+                        &nbsp;: null|string            </span>
+</dt>
+<dd>An EIDR (Entertainment Identifier Registry) identifier representing a specific
+edit / edition for a work of film or television.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-traits-CreativeWorkTrait.html#property_editor">$editor</a>
     <span>
                         &nbsp;: string|null            </span>
 </dt>
 <dd>Specifies the Person who edited the CreativeWork.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-CreativeWorkTrait.html#property_educationalAlignment">$educationalAlignment</a>
+    <span>
+                        &nbsp;: <a href="classes/org-schema-AlignmentObject.html"><abbr title="\org\schema\AlignmentObject">AlignmentObject</abbr></a>|null            </span>
+</dt>
+<dd>An alignment to an established educational framework.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-CreativeWorkTrait.html#property_educationalLevel">$educationalLevel</a>
+    <span>
+                        &nbsp;: null|string|<a href="classes/org-schema-DefinedTerm.html"><abbr title="\org\schema\DefinedTerm">DefinedTerm</abbr></a>            </span>
+</dt>
+<dd>The level in terms of progression through an educational or training context.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-CreativeWorkTrait.html#property_educationalUse">$educationalUse</a>
+    <span>
+                        &nbsp;: null|string|<a href="classes/org-schema-DefinedTerm.html"><abbr title="\org\schema\DefinedTerm">DefinedTerm</abbr></a>            </span>
+</dt>
+<dd>The purpose of a work in the context of education; for example, &#039;assignment&#039;, &#039;group work&#039;.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-creativeWork-MediaObject.html#property_embedUrl">$embedUrl</a>
@@ -524,16 +660,17 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-traits-CreativeWorkTrait.html#property_encoding">$encoding</a>
     <span>
-                        &nbsp;: string|null            </span>
+                        &nbsp;: null|string|<a href="classes/org-schema-creativeWork-MediaObject.html"><abbr title="\org\schema\creativeWork\MediaObject">MediaObject</abbr></a>            </span>
 </dt>
-<dd>The encoding of this content.</dd>
+<dd>A media object that encodes this CreativeWork. This property is a synonym for associatedMedia.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-traits-CreativeWorkTrait.html#property_encodingFormat">$encodingFormat</a>
     <span>
                         &nbsp;: string|null            </span>
 </dt>
-<dd>Media type typically expressed using a MIME format (see IANA site and MDN reference) e.g. application/zip for a SoftwareApplication binary, audio/mpeg for .mp3 etc.).</dd>
+<dd>Media type typically expressed using a MIME format (see IANA site and MDN reference)
+e.g. application/zip for a SoftwareApplication binary, audio/mpeg for .mp3 etc.).</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-creativeWork-MediaObject.html#property_endTime">$endTime</a>
@@ -543,11 +680,39 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
 <dd>The endTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to end. For actions that span a period of time, when the action was performed. E.g. John wrote a book from January to December. For media, including audio and video, it&#039;s the time offset of the end of a clip within a larger file.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-CreativeWorkTrait.html#property_exampleOfWork">$exampleOfWork</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;|<a href="classes/org-schema-CreativeWork.html"><abbr title="\org\schema\CreativeWork">CreativeWork</abbr></a>|null            </span>
+</dt>
+<dd>A creative work that this work is an example/instance/realization/derivation of.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-traits-CreativeWorkTrait.html#property_expires">$expires</a>
     <span>
                         &nbsp;: string|null            </span>
 </dt>
-<dd>Date the content expires and is no longer useful or available. For example a VideoObject or NewsArticle whose availability or relevance is time-limited, or a ClaimReview fact check whose publisher wants to indicate that it may no longer be relevant (or helpful to highlight) after some date.</dd>
+<dd>Date the content expires and is no longer useful or available.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-CreativeWorkTrait.html#property_funder">$funder</a>
+    <span>
+                        &nbsp;: null|<a href="classes/org-schema-Organization.html"><abbr title="\org\schema\Organization">Organization</abbr></a>|<a href="classes/org-schema-Person.html"><abbr title="\org\schema\Person">Person</abbr></a>            </span>
+</dt>
+<dd>A person or organization that supports (sponsors) something through some kind of financial contribution.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-CreativeWorkTrait.html#property_funding">$funding</a>
+    <span>
+                        &nbsp;: null|<a href="classes/org-schema-Grant.html"><abbr title="\org\schema\Grant">Grant</abbr></a>|array&lt;string|int, mixed&gt;            </span>
+</dt>
+<dd>A Grant that directly or indirectly provide funding or sponsorship for this item.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-CreativeWorkTrait.html#property_genre">$genre</a>
+    <span>
+                        &nbsp;: null|string|<a href="classes/org-schema-DefinedTerm.html"><abbr title="\org\schema\DefinedTerm">DefinedTerm</abbr></a>            </span>
+</dt>
+<dd>Genre of the creative work, broadcast channel or group.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_hasPart">$hasPart</a>
@@ -715,7 +880,7 @@ e.g. a region where the transaction is not allowed.</dd>
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-traits-CreativeWorkTrait.html#property_position">$position</a>
     <span>
-                        &nbsp;: int|null            </span>
+                        &nbsp;: null|int|string            </span>
 </dt>
 <dd>The position of an item in a series or sequence of items.</dd>
 
@@ -1216,7 +1381,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">30</span>
+    <span class="phpdocumentor-element-found-in__line">39</span>
 
     </aside>
 
@@ -1255,7 +1420,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">36</span>
+    <span class="phpdocumentor-element-found-in__line">45</span>
 
     </aside>
 
@@ -1294,7 +1459,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">54</span>
+    <span class="phpdocumentor-element-found-in__line">63</span>
 
     </aside>
 
@@ -1333,7 +1498,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">60</span>
+    <span class="phpdocumentor-element-found-in__line">69</span>
 
     </aside>
 
@@ -1372,7 +1537,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">66</span>
+    <span class="phpdocumentor-element-found-in__line">75</span>
 
     </aside>
 
@@ -1411,7 +1576,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">72</span>
+    <span class="phpdocumentor-element-found-in__line">81</span>
 
     </aside>
 
@@ -1450,7 +1615,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">78</span>
+    <span class="phpdocumentor-element-found-in__line">87</span>
 
     </aside>
 
@@ -1489,7 +1654,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">42</span>
+    <span class="phpdocumentor-element-found-in__line">51</span>
 
     </aside>
 
@@ -1528,7 +1693,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">48</span>
+    <span class="phpdocumentor-element-found-in__line">57</span>
 
     </aside>
 
@@ -1567,7 +1732,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">84</span>
+    <span class="phpdocumentor-element-found-in__line">93</span>
 
     </aside>
 
@@ -1606,7 +1771,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">90</span>
+    <span class="phpdocumentor-element-found-in__line">99</span>
 
     </aside>
 
@@ -1723,7 +1888,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">96</span>
+    <span class="phpdocumentor-element-found-in__line">105</span>
 
     </aside>
 
@@ -1801,7 +1966,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">101</span>
+    <span class="phpdocumentor-element-found-in__line">110</span>
 
     </aside>
 
@@ -1840,7 +2005,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">109</span>
+    <span class="phpdocumentor-element-found-in__line">118</span>
 
     </aside>
 
@@ -1883,7 +2048,7 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">115</span>
+    <span class="phpdocumentor-element-found-in__line">124</span>
 
     </aside>
 
@@ -1961,7 +2126,7 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">121</span>
+    <span class="phpdocumentor-element-found-in__line">130</span>
 
     </aside>
 
@@ -2000,7 +2165,7 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">126</span>
+    <span class="phpdocumentor-element-found-in__line">135</span>
 
     </aside>
 
@@ -2039,7 +2204,7 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">131</span>
+    <span class="phpdocumentor-element-found-in__line">140</span>
 
     </aside>
 
@@ -2117,7 +2282,7 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">136</span>
+    <span class="phpdocumentor-element-found-in__line">145</span>
 
     </aside>
 
@@ -2128,6 +2293,45 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
         <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__type">null|string|<a href="classes/org-schema-creativeWork-medias-AudioObject.html"><abbr title="\org\schema\creativeWork\medias\AudioObject">AudioObject</abbr></a></span>
     <span class="phpdocumentor-signature__name">$author</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_award">
+        $award
+        <a href="classes/org-schema-traits-CreativeWorkTrait.html#property_award" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">150</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">An award won by or for this item.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">null|string|array&lt;string|int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__name">$award</span>
     </code>
 
     
@@ -2302,6 +2506,208 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
             -public
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_character">
+        $character
+        <a href="classes/org-schema-traits-CreativeWorkTrait.html#property_character" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">155</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Fictional person connected with a creative work.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">null|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Person.html"><abbr title="\org\schema\Person">Person</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$character</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_citation">
+        $citation
+        <a href="classes/org-schema-traits-CreativeWorkTrait.html#property_citation" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">160</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A citation or reference to another creative work, such as another publication, web page, scholarly article, etc.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">null|string|<a href="classes/org-schema-CreativeWork.html"><abbr title="\org\schema\CreativeWork">CreativeWork</abbr></a>|array&lt;string|int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__name">$citation</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_comment">
+        $comment
+        <a href="classes/org-schema-traits-CreativeWorkTrait.html#property_comment" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">166</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Comments, typically from users.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/org-schema-creativeWork-Comment.html"><abbr title="\org\schema\creativeWork\Comment">Comment</abbr></a>|array&lt;string|int, mixed&gt;|null</span>
+    <span class="phpdocumentor-signature__name">$comment</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_commentCount">
+        $commentCount
+        <a href="classes/org-schema-traits-CreativeWorkTrait.html#property_commentCount" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">173</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The number of comments this CreativeWork (e.g. Article, Question or Answer) has received.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">int|null</span>
+    <span class="phpdocumentor-signature__name">$commentCount</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>This is most applicable to works published in Web sites with commenting system; additional comments may exist elsewhere.</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_conditionsOfAccess">
+        $conditionsOfAccess
+        <a href="classes/org-schema-traits-CreativeWorkTrait.html#property_conditionsOfAccess" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">184</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Conditions that affect the availability of, or method(s) of access to, an item.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">null|string|object</span>
+    <span class="phpdocumentor-signature__name">$conditionsOfAccess</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Typically used for real world items such as an ArchiveComponent held by an ArchiveOrganization.
+This property is not suitable for use as a general Web access control mechanism.
+It is expressed only in natural language.</p>
+<p>For example &quot;Available by appointment from the Reading Room&quot; or &quot;Accessible only from logged-in accounts &quot;.</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_contentLocation">
         $contentLocation
         <a href="classes/org-schema-traits-CreativeWorkTrait.html#property_contentLocation" class="headerlink"><i class="fas fa-link"></i></a>
@@ -2312,7 +2718,7 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">141</span>
+    <span class="phpdocumentor-element-found-in__line">189</span>
 
     </aside>
 
@@ -2351,7 +2757,7 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">146</span>
+    <span class="phpdocumentor-element-found-in__line">194</span>
 
     </aside>
 
@@ -2360,8 +2766,48 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">string</span>
+            <span class="phpdocumentor-signature__type">null|string|<a href="classes/org-schema-Rating.html"><abbr title="\org\schema\Rating">Rating</abbr></a>|array&lt;string|int, mixed&gt;</span>
     <span class="phpdocumentor-signature__name">$contentRating</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_contentReferenceTime">
+        $contentReferenceTime
+        <a href="classes/org-schema-traits-CreativeWorkTrait.html#property_contentReferenceTime" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">200</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The specific time described by a creative work, for works (e.g. articles, video objects etc.)
+that emphasise a particular moment within an Event.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null|<abbr title="\DateTime">DateTime</abbr></span>
+    <span class="phpdocumentor-signature__name">$contentReferenceTime</span>
     </code>
 
     
@@ -2468,7 +2914,7 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">151</span>
+    <span class="phpdocumentor-element-found-in__line">205</span>
 
     </aside>
 
@@ -2477,7 +2923,7 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">string|object|null</span>
+            <span class="phpdocumentor-signature__type">null|<a href="classes/org-schema-Organization.html"><abbr title="\org\schema\Organization">Organization</abbr></a>|<a href="classes/org-schema-Person.html"><abbr title="\org\schema\Person">Person</abbr></a>|array&lt;string|int, mixed&gt;</span>
     <span class="phpdocumentor-signature__name">$contributor</span>
     </code>
 
@@ -2507,7 +2953,7 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">156</span>
+    <span class="phpdocumentor-element-found-in__line">210</span>
 
     </aside>
 
@@ -2516,8 +2962,48 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">string|null</span>
+            <span class="phpdocumentor-signature__type">null|<a href="classes/org-schema-Organization.html"><abbr title="\org\schema\Organization">Organization</abbr></a>|<a href="classes/org-schema-Person.html"><abbr title="\org\schema\Person">Person</abbr></a>|array&lt;string|int, mixed&gt;</span>
     <span class="phpdocumentor-signature__name">$copyrightHolder</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_copyrightNotice">
+        $copyrightNotice
+        <a href="classes/org-schema-traits-CreativeWorkTrait.html#property_copyrightNotice" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">217</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Text of a notice appropriate for describing the copyright aspects of this Creative Work,
+ideally indicating the owner of the copyright for the Work.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|object|null</span>
+    <span class="phpdocumentor-signature__name">$copyrightNotice</span>
     </code>
 
     
@@ -2546,7 +3032,7 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">161</span>
+    <span class="phpdocumentor-element-found-in__line">223</span>
 
     </aside>
 
@@ -2555,11 +3041,95 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">string|null</span>
+            <span class="phpdocumentor-signature__type">null|int|string</span>
     <span class="phpdocumentor-signature__name">$copyrightYear</span>
     </code>
 
     
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_correction">
+        $correction
+        <a href="classes/org-schema-traits-CreativeWorkTrait.html#property_correction" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">229</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Indicates a correction to a CreativeWork, either via a CorrectionComment, textually or in another document.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">null|<a href="classes/org-schema-creativeWork-comments-CorrectionComment.html"><abbr title="\org\schema\creativeWork\comments\CorrectionComment">CorrectionComment</abbr></a>|string</span>
+    <span class="phpdocumentor-signature__name">$correction</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_countryOfOrigin">
+        $countryOfOrigin
+        <a href="classes/org-schema-traits-CreativeWorkTrait.html#property_countryOfOrigin" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">243</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The country of origin of something, including products as well as creative works such as movie and TV content.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/org-schema-places-Country.html"><abbr title="\org\schema\places\Country">Country</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__name">$countryOfOrigin</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>In the case of TV and movie, this would be the country of the principle offices of the production company
+or individual responsible for the movie. For other kinds of CreativeWork it is difficult to provide
+fully general guidance, and properties such as contentLocation and locationCreated may be more applicable.</p>
+<p>In the case of products, the country of origin of the product. The exact interpretation of this may vary
+by context and product type, and cannot be fully enumerated here.</p>
+</section>
+
     
     
 
@@ -2614,6 +3184,126 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
             -public
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_creativeWorkStatus">
+        $creativeWorkStatus
+        <a href="classes/org-schema-traits-CreativeWorkTrait.html#property_creativeWorkStatus" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">254</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The status of a creative work in terms of its stage in a lifecycle.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|<a href="classes/org-schema-DefinedTerm.html"><abbr title="\org\schema\DefinedTerm">DefinedTerm</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__name">$creativeWorkStatus</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Example terms include Incomplete, Draft, Published, Obsolete.</p>
+<p>Some organizations define a set of terms for the stages of their publication lifecycle.</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_creator">
+        $creator
+        <a href="classes/org-schema-traits-CreativeWorkTrait.html#property_creator" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">260</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The creator/author of this CreativeWork. This is the same as the Author property for CreativeWork.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/org-schema-Organization.html"><abbr title="\org\schema\Organization">Organization</abbr></a>|<a href="classes/org-schema-Person.html"><abbr title="\org\schema\Person">Person</abbr></a>|array&lt;string|int, mixed&gt;|null</span>
+    <span class="phpdocumentor-signature__name">$creator</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_creditText">
+        $creditText
+        <a href="classes/org-schema-traits-CreativeWorkTrait.html#property_creditText" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">266</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Text that can be used to credit person(s) and/or organization(s) associated with a published Creative Work.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">null|object|string</span>
+    <span class="phpdocumentor-signature__name">$creditText</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_dateCreated">
         $dateCreated
         <a href="classes/org-schema-traits-CreativeWorkTrait.html#property_dateCreated" class="headerlink"><i class="fas fa-link"></i></a>
@@ -2624,7 +3314,7 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">166</span>
+    <span class="phpdocumentor-element-found-in__line">271</span>
 
     </aside>
 
@@ -2663,7 +3353,7 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">171</span>
+    <span class="phpdocumentor-element-found-in__line">276</span>
 
     </aside>
 
@@ -2702,7 +3392,7 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">176</span>
+    <span class="phpdocumentor-element-found-in__line">281</span>
 
     </aside>
 
@@ -2770,6 +3460,45 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
             -public
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_digitalSourceType">
+        $digitalSourceType
+        <a href="classes/org-schema-traits-CreativeWorkTrait.html#property_digitalSourceType" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">286</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Indicates an IPTCDigitalSourceEnumeration code indicating the nature of the digital source(s) for some CreativeWork.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">null|<a href="classes/org-schema-enumerations-medias-IPTCDigitalSourceEnumeration.html"><abbr title="\org\schema\enumerations\medias\IPTCDigitalSourceEnumeration">IPTCDigitalSourceEnumeration</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$digitalSourceType</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_disambiguatingDescription">
         $disambiguatingDescription
         <a href="classes/org-schema-Thing.html#property_disambiguatingDescription" class="headerlink"><i class="fas fa-link"></i></a>
@@ -2791,6 +3520,45 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
         <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__type">string|null</span>
     <span class="phpdocumentor-signature__name">$disambiguatingDescription</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_discussionUrl">
+        $discussionUrl
+        <a href="classes/org-schema-traits-CreativeWorkTrait.html#property_discussionUrl" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">292</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A link to the page containing the comments of the CreativeWork.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">null|string</span>
+    <span class="phpdocumentor-signature__name">$discussionUrl</span>
     </code>
 
     
@@ -2848,6 +3616,53 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
             -public
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_editEIDR">
+        $editEIDR
+        <a href="classes/org-schema-traits-CreativeWorkTrait.html#property_editEIDR" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">308</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">An EIDR (Entertainment Identifier Registry) identifier representing a specific
+edit / edition for a work of film or television.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">null|string</span>
+    <span class="phpdocumentor-signature__name">$editEIDR</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>For example, the motion picture known as &quot;Ghostbusters&quot; whose
+titleEIDR is &quot;10.5240/7EC7-228A-510A-053E-CBB8-J&quot; has several edits,
+e.g. &quot;10.5240/1F2A-E1C5-680A-14C6-E76B-I&quot; and &quot;10.5240/8A35-3BEE-6497-5D12-9E4F-3&quot;.</p>
+<p>Since schema.org types like Movie and TVEpisode can be used for both works and their multiple expressions,
+it is possible to use titleEIDR alone (for a general description), or alongside editEIDR
+for a more edit-specific description.</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_editor">
         $editor
         <a href="classes/org-schema-traits-CreativeWorkTrait.html#property_editor" class="headerlink"><i class="fas fa-link"></i></a>
@@ -2858,7 +3673,7 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">181</span>
+    <span class="phpdocumentor-element-found-in__line">313</span>
 
     </aside>
 
@@ -2869,6 +3684,128 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
         <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__type">string|null</span>
     <span class="phpdocumentor-signature__name">$editor</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_educationalAlignment">
+        $educationalAlignment
+        <a href="classes/org-schema-traits-CreativeWorkTrait.html#property_educationalAlignment" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">322</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">An alignment to an established educational framework.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/org-schema-AlignmentObject.html"><abbr title="\org\schema\AlignmentObject">AlignmentObject</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__name">$educationalAlignment</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>This property should not be used where the nature of the alignment can be described using a simple property,
+for example to express that a resource teaches or assesses a competency.</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_educationalLevel">
+        $educationalLevel
+        <a href="classes/org-schema-traits-CreativeWorkTrait.html#property_educationalLevel" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">331</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The level in terms of progression through an educational or training context.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">null|string|<a href="classes/org-schema-DefinedTerm.html"><abbr title="\org\schema\DefinedTerm">DefinedTerm</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$educationalLevel</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Examples of educational levels include 'beginner', 'intermediate' or 'advanced', and formal sets of level indicators.</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_educationalUse">
+        $educationalUse
+        <a href="classes/org-schema-traits-CreativeWorkTrait.html#property_educationalUse" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">338</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The purpose of a work in the context of education; for example, &#039;assignment&#039;, &#039;group work&#039;.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">null|string|<a href="classes/org-schema-DefinedTerm.html"><abbr title="\org\schema\DefinedTerm">DefinedTerm</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$educationalUse</span>
     </code>
 
     
@@ -2975,16 +3912,16 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">186</span>
+    <span class="phpdocumentor-element-found-in__line">345</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">The encoding of this content.</p>
+        <p class="phpdocumentor-summary">A media object that encodes this CreativeWork. This property is a synonym for associatedMedia.</p>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">string|null</span>
+            <span class="phpdocumentor-signature__type">null|string|<a href="classes/org-schema-creativeWork-MediaObject.html"><abbr title="\org\schema\creativeWork\MediaObject">MediaObject</abbr></a></span>
     <span class="phpdocumentor-signature__name">$encoding</span>
     </code>
 
@@ -3014,11 +3951,12 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">191</span>
+    <span class="phpdocumentor-element-found-in__line">359</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Media type typically expressed using a MIME format (see IANA site and MDN reference) e.g. application/zip for a SoftwareApplication binary, audio/mpeg for .mp3 etc.).</p>
+        <p class="phpdocumentor-summary">Media type typically expressed using a MIME format (see IANA site and MDN reference)
+e.g. application/zip for a SoftwareApplication binary, audio/mpeg for .mp3 etc.).</p>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -3027,7 +3965,12 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
     <span class="phpdocumentor-signature__name">$encodingFormat</span>
     </code>
 
-    
+        <section class="phpdocumentor-description"><p>In cases where a CreativeWork has several media type representations, encoding can be used to indicate
+each MediaObject alongside particular encodingFormat information.</p>
+<p>Unregistered or niche encoding and file formats can be indicated instead
+via the most appropriate URL, e.g. defining Web page or a Wikipedia/Wikidata entry.</p>
+</section>
+
     
     
 
@@ -3084,6 +4027,47 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
             -public
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_exampleOfWork">
+        $exampleOfWork
+        <a href="classes/org-schema-traits-CreativeWorkTrait.html#property_exampleOfWork" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">368</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A creative work that this work is an example/instance/realization/derivation of.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|<a href="classes/org-schema-CreativeWork.html"><abbr title="\org\schema\CreativeWork">CreativeWork</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__name">$exampleOfWork</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Inverse property: workExample</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_expires">
         $expires
         <a href="classes/org-schema-traits-CreativeWorkTrait.html#property_expires" class="headerlink"><i class="fas fa-link"></i></a>
@@ -3094,17 +4078,140 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">196</span>
+    <span class="phpdocumentor-element-found-in__line">378</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Date the content expires and is no longer useful or available. For example a VideoObject or NewsArticle whose availability or relevance is time-limited, or a ClaimReview fact check whose publisher wants to indicate that it may no longer be relevant (or helpful to highlight) after some date.</p>
+        <p class="phpdocumentor-summary">Date the content expires and is no longer useful or available.</p>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__type">string|null</span>
     <span class="phpdocumentor-signature__name">$expires</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>For example a VideoObject or NewsArticle whose availability or relevance is time-limited,
+or a ClaimReview fact check whose publisher wants to indicate that it may no longer be relevant
+(or helpful to highlight) after some date.</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_funder">
+        $funder
+        <a href="classes/org-schema-traits-CreativeWorkTrait.html#property_funder" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">385</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A person or organization that supports (sponsors) something through some kind of financial contribution.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">null|<a href="classes/org-schema-Organization.html"><abbr title="\org\schema\Organization">Organization</abbr></a>|<a href="classes/org-schema-Person.html"><abbr title="\org\schema\Person">Person</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$funder</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_funding">
+        $funding
+        <a href="classes/org-schema-traits-CreativeWorkTrait.html#property_funding" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">392</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A Grant that directly or indirectly provide funding or sponsorship for this item.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">null|<a href="classes/org-schema-Grant.html"><abbr title="\org\schema\Grant">Grant</abbr></a>|array&lt;string|int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__name">$funding</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>See also ownershipFundingInfo.</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_genre">
+        $genre
+        <a href="classes/org-schema-traits-CreativeWorkTrait.html#property_genre" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">398</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Genre of the creative work, broadcast channel or group.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">null|string|<a href="classes/org-schema-DefinedTerm.html"><abbr title="\org\schema\DefinedTerm">DefinedTerm</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$genre</span>
     </code>
 
     
@@ -3172,7 +4279,7 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">201</span>
+    <span class="phpdocumentor-element-found-in__line">403</span>
 
     </aside>
 
@@ -3408,7 +4515,7 @@ e.g. a region where the transaction is not allowed.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">206</span>
+    <span class="phpdocumentor-element-found-in__line">408</span>
 
     </aside>
 
@@ -3447,7 +4554,7 @@ e.g. a region where the transaction is not allowed.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">213</span>
+    <span class="phpdocumentor-element-found-in__line">415</span>
 
     </aside>
 
@@ -3527,7 +4634,7 @@ e.g. a region where the transaction is not allowed.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">218</span>
+    <span class="phpdocumentor-element-found-in__line">420</span>
 
     </aside>
 
@@ -3566,7 +4673,7 @@ e.g. a region where the transaction is not allowed.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">223</span>
+    <span class="phpdocumentor-element-found-in__line">425</span>
 
     </aside>
 
@@ -3644,7 +4751,7 @@ e.g. a region where the transaction is not allowed.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">229</span>
+    <span class="phpdocumentor-element-found-in__line">431</span>
 
     </aside>
 
@@ -3722,7 +4829,7 @@ e.g. a region where the transaction is not allowed.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">234</span>
+    <span class="phpdocumentor-element-found-in__line">436</span>
 
     </aside>
 
@@ -3761,7 +4868,7 @@ e.g. a region where the transaction is not allowed.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">239</span>
+    <span class="phpdocumentor-element-found-in__line">441</span>
 
     </aside>
 
@@ -3800,7 +4907,7 @@ e.g. a region where the transaction is not allowed.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">245</span>
+    <span class="phpdocumentor-element-found-in__line">447</span>
 
     </aside>
 
@@ -3839,7 +4946,7 @@ e.g. a region where the transaction is not allowed.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">250</span>
+    <span class="phpdocumentor-element-found-in__line">452</span>
 
     </aside>
 
@@ -3956,7 +5063,7 @@ e.g. a region where the transaction is not allowed.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">256</span>
+    <span class="phpdocumentor-element-found-in__line">458</span>
 
     </aside>
 
@@ -4034,7 +5141,7 @@ e.g. a region where the transaction is not allowed.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">261</span>
+    <span class="phpdocumentor-element-found-in__line">463</span>
 
     </aside>
 
@@ -4043,7 +5150,7 @@ e.g. a region where the transaction is not allowed.</p>
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">int|null</span>
+            <span class="phpdocumentor-signature__type">null|int|string</span>
     <span class="phpdocumentor-signature__name">$position</span>
     </code>
 
@@ -4112,7 +5219,7 @@ e.g. a region where the transaction is not allowed.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">266</span>
+    <span class="phpdocumentor-element-found-in__line">468</span>
 
     </aside>
 
@@ -4190,7 +5297,7 @@ e.g. a region where the transaction is not allowed.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">271</span>
+    <span class="phpdocumentor-element-found-in__line">473</span>
 
     </aside>
 
@@ -4268,7 +5375,7 @@ e.g. a region where the transaction is not allowed.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">276</span>
+    <span class="phpdocumentor-element-found-in__line">478</span>
 
     </aside>
 
@@ -4349,7 +5456,7 @@ Specify the countries in ISO 3166 format.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">281</span>
+    <span class="phpdocumentor-element-found-in__line">483</span>
 
     </aside>
 
@@ -4429,7 +5536,7 @@ Specify the countries in ISO 3166 format.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">287</span>
+    <span class="phpdocumentor-element-found-in__line">489</span>
 
     </aside>
 
@@ -4547,7 +5654,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">292</span>
+    <span class="phpdocumentor-element-found-in__line">494</span>
 
     </aside>
 
@@ -4586,7 +5693,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">297</span>
+    <span class="phpdocumentor-element-found-in__line">499</span>
 
     </aside>
 
@@ -4670,7 +5777,7 @@ Note that Event uses startDate/endDate instead of startTime/endTime, even when d
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">302</span>
+    <span class="phpdocumentor-element-found-in__line">504</span>
 
     </aside>
 
@@ -4709,7 +5816,7 @@ Note that Event uses startDate/endDate instead of startTime/endTime, even when d
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">308</span>
+    <span class="phpdocumentor-element-found-in__line">510</span>
 
     </aside>
 
@@ -4750,7 +5857,7 @@ Note that Event uses startDate/endDate instead of startTime/endTime, even when d
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">318</span>
+    <span class="phpdocumentor-element-found-in__line">520</span>
 
     </aside>
 
@@ -4828,7 +5935,7 @@ Note that Event uses startDate/endDate instead of startTime/endTime, even when d
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">313</span>
+    <span class="phpdocumentor-element-found-in__line">515</span>
 
     </aside>
 
@@ -4867,7 +5974,7 @@ Note that Event uses startDate/endDate instead of startTime/endTime, even when d
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">323</span>
+    <span class="phpdocumentor-element-found-in__line">525</span>
 
     </aside>
 
@@ -4945,7 +6052,7 @@ Note that Event uses startDate/endDate instead of startTime/endTime, even when d
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">328</span>
+    <span class="phpdocumentor-element-found-in__line">530</span>
 
     </aside>
 
@@ -4984,7 +6091,7 @@ Note that Event uses startDate/endDate instead of startTime/endTime, even when d
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">333</span>
+    <span class="phpdocumentor-element-found-in__line">535</span>
 
     </aside>
 
@@ -5101,7 +6208,7 @@ Note that Event uses startDate/endDate instead of startTime/endTime, even when d
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">342</span>
+    <span class="phpdocumentor-element-found-in__line">544</span>
 
     </aside>
 
@@ -5145,7 +6252,7 @@ This property can be used alongside the license property which indicates license
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">347</span>
+    <span class="phpdocumentor-element-found-in__line">549</span>
 
     </aside>
 
@@ -5184,7 +6291,7 @@ This property can be used alongside the license property which indicates license
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">352</span>
+    <span class="phpdocumentor-element-found-in__line">554</span>
 
     </aside>
 
@@ -5571,31 +6678,54 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_audio">$audio</a></li>
                                                     <li class=""><a href="classes/org-schema-creativeWork-medias-AudioObject.html#property_audioCodec">$audioCodec</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_author">$author</a></li>
+                                                    <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_award">$award</a></li>
                                                     <li class=""><a href="classes/org-schema-creativeWork-MediaObject.html#property_bitrate">$bitrate</a></li>
                                                     <li class=""><a href="classes/org-schema-creativeWork-medias-AudioObject.html#property_bitsPerSample">$bitsPerSample</a></li>
                                                     <li class=""><a href="classes/org-schema-creativeWork-medias-AudioObject.html#property_caption">$caption</a></li>
                                                     <li class=""><a href="classes/org-schema-creativeWork-medias-AudioObject.html#property_channels">$channels</a></li>
+                                                    <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_character">$character</a></li>
+                                                    <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_citation">$citation</a></li>
+                                                    <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_comment">$comment</a></li>
+                                                    <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_commentCount">$commentCount</a></li>
+                                                    <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_conditionsOfAccess">$conditionsOfAccess</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_contentLocation">$contentLocation</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_contentRating">$contentRating</a></li>
+                                                    <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_contentReferenceTime">$contentReferenceTime</a></li>
                                                     <li class=""><a href="classes/org-schema-creativeWork-MediaObject.html#property_contentSize">$contentSize</a></li>
                                                     <li class=""><a href="classes/org-schema-creativeWork-MediaObject.html#property_contentUrl">$contentUrl</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_contributor">$contributor</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_copyrightHolder">$copyrightHolder</a></li>
+                                                    <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_copyrightNotice">$copyrightNotice</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_copyrightYear">$copyrightYear</a></li>
+                                                    <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_correction">$correction</a></li>
+                                                    <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_countryOfOrigin">$countryOfOrigin</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_created">$created</a></li>
+                                                    <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_creativeWorkStatus">$creativeWorkStatus</a></li>
+                                                    <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_creator">$creator</a></li>
+                                                    <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_creditText">$creditText</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_dateCreated">$dateCreated</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_dateModified">$dateModified</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_datePublished">$datePublished</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_description">$description</a></li>
+                                                    <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_digitalSourceType">$digitalSourceType</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_disambiguatingDescription">$disambiguatingDescription</a></li>
+                                                    <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_discussionUrl">$discussionUrl</a></li>
                                                     <li class=""><a href="classes/org-schema-creativeWork-MediaObject.html#property_duration">$duration</a></li>
+                                                    <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_editEIDR">$editEIDR</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_editor">$editor</a></li>
+                                                    <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_educationalAlignment">$educationalAlignment</a></li>
+                                                    <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_educationalLevel">$educationalLevel</a></li>
+                                                    <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_educationalUse">$educationalUse</a></li>
                                                     <li class=""><a href="classes/org-schema-creativeWork-MediaObject.html#property_embedUrl">$embedUrl</a></li>
                                                     <li class=""><a href="classes/org-schema-creativeWork-MediaObject.html#property_encodesCreativeWork">$encodesCreativeWork</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_encoding">$encoding</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_encodingFormat">$encodingFormat</a></li>
                                                     <li class=""><a href="classes/org-schema-creativeWork-MediaObject.html#property_endTime">$endTime</a></li>
+                                                    <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_exampleOfWork">$exampleOfWork</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_expires">$expires</a></li>
+                                                    <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_funder">$funder</a></li>
+                                                    <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_funding">$funding</a></li>
+                                                    <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_genre">$genre</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_hasPart">$hasPart</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_headline">$headline</a></li>
                                                     <li class=""><a href="classes/org-schema-creativeWork-MediaObject.html#property_height">$height</a></li>
