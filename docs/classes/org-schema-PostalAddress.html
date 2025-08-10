@@ -101,7 +101,7 @@
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    DefinedRegion
+    PostalAddress
 
         <span class="phpdocumentor-element__extends">
         extends <a href="classes/org-schema-ContactPoint.html"><abbr title="\org\schema\ContactPoint">ContactPoint</abbr></a>
@@ -109,6 +109,9 @@
     
     
     
+            <span class="phpdocumentor-element__extends">
+            uses
+                            <a href="classes/org-schema-traits-PostalAddressTrait.html"><abbr title="\org\schema\traits\PostalAddressTrait">PostalAddressTrait</abbr></a>                    </span>
     </h2>
 
 <div class="phpdocumentor-label-line">
@@ -117,34 +120,16 @@
 </div>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/DefinedRegion.php"><a href="files/src-org-schema-definedregion.html"><abbr title="src/org/schema/DefinedRegion.php">DefinedRegion.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/PostalAddress.php"><a href="files/src-org-schema-postaladdress.html"><abbr title="src/org/schema/PostalAddress.php">PostalAddress.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">10</span>
+    <span class="phpdocumentor-element-found-in__line">7</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">A DefinedRegion is a geographic area defined by potentially arbitrary (rather than political, administrative or natural geographical) criteria.</p>
+        
 
 
-    <section class="phpdocumentor-description"><p>Properties are provided for defining a region by reference to sets of postal codes.</p>
-</section>
 
-
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="classes/org-schema-DefinedRegion.html#tags" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">see</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                                    <span class="phpdocumentor-tag-link"><a href="https://schema.org/DefinedRegion">https://schema.org/DefinedRegion</a></span>
-                                        
-                                             
-                                    </dd>
-                                            </dl>
 
 
 
@@ -152,7 +137,7 @@
 
 <h3 id="toc">
     Table of Contents
-    <a href="classes/org-schema-DefinedRegion.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/org-schema-PostalAddress.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h3>
 
@@ -164,7 +149,7 @@
 
 <h4 id="toc-constants">
     Constants
-    <a href="classes/org-schema-DefinedRegion.html#toc-constants" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/org-schema-PostalAddress.html#toc-constants" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
@@ -180,7 +165,7 @@
 
 <h4 id="toc-properties">
     Properties
-    <a href="classes/org-schema-DefinedRegion.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/org-schema-PostalAddress.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
@@ -234,21 +219,21 @@
 <dd>An additionalType for the item.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a class="" href="classes/org-schema-DefinedRegion.html#property_addressCountry">$addressCountry</a>
+    <a class="" href="classes/org-schema-traits-PostalAddressTrait.html#property_addressCountry">$addressCountry</a>
     <span>
                         &nbsp;: null|string            </span>
 </dt>
 <dd>The country.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a class="" href="classes/org-schema-DefinedRegion.html#property_addressLocality">$addressLocality</a>
+    <a class="" href="classes/org-schema-traits-PostalAddressTrait.html#property_addressLocality">$addressLocality</a>
     <span>
                         &nbsp;: null|string            </span>
 </dt>
 <dd>The locality in which the street address is, and which is in the region. For example, Mountain View.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a class="" href="classes/org-schema-DefinedRegion.html#property_addressRegion">$addressRegion</a>
+    <a class="" href="classes/org-schema-traits-PostalAddressTrait.html#property_addressRegion">$addressRegion</a>
     <span>
                         &nbsp;: null|string            </span>
 </dt>
@@ -388,25 +373,18 @@
 <dd>The name of the item.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a class="" href="classes/org-schema-DefinedRegion.html#property_postalCode">$postalCode</a>
+    <a class="" href="classes/org-schema-traits-PostalAddressTrait.html#property_postalCode">$postalCode</a>
     <span>
                         &nbsp;: null|string            </span>
 </dt>
 <dd>The postal code. For example, 94043.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a class="" href="classes/org-schema-DefinedRegion.html#property_postalCodePrefix">$postalCodePrefix</a>
+    <a class="" href="classes/org-schema-traits-PostalAddressTrait.html#property_postOfficeBoxNumber">$postOfficeBoxNumber</a>
     <span>
                         &nbsp;: null|string            </span>
 </dt>
-<dd>A defined range of postal codes indicated by a common textual prefix. Used for non-numeric systems such as UK.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a class="" href="classes/org-schema-DefinedRegion.html#property_postalCodeRange">$postalCodeRange</a>
-    <span>
-                        &nbsp;: null|string|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-PostalCodeRangeSpecification.html"><abbr title="\org\schema\PostalCodeRangeSpecification">PostalCodeRangeSpecification</abbr></a>            </span>
-</dt>
-<dd>A defined range of postal codes.</dd>
+<dd>The post office box number for PO box addresses.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-traits-ContactPointTrait.html#property_productSupported">$productSupported</a>
@@ -421,6 +399,13 @@
                         &nbsp;: string|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Person.html"><abbr title="\org\schema\Person">Person</abbr></a>|<a href="classes/org-schema-Organization.html"><abbr title="\org\schema\Organization">Organization</abbr></a>|null            </span>
 </dt>
 <dd>The publisher of the resource.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-PostalAddressTrait.html#property_streetAddress">$streetAddress</a>
+    <span>
+                        &nbsp;: null|string            </span>
+</dt>
+<dd>The street address. For example, 1600 Amphitheatre Pkwy.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-traits-ContactPointTrait.html#property_telephone">$telephone</a>
@@ -440,7 +425,7 @@
 
 <h4 id="toc-methods">
     Methods
-    <a href="classes/org-schema-DefinedRegion.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/org-schema-PostalAddress.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
@@ -466,7 +451,7 @@
     <section class="phpdocumentor-constants">
         <h3 class="phpdocumentor-elements__header" id="constants">
             Constants
-            <a href="classes/org-schema-DefinedRegion.html#constants" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/org-schema-PostalAddress.html#constants" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
                     <article class="phpdocumentor-element -constant -public ">
@@ -507,7 +492,7 @@
     <section class="phpdocumentor-properties">
         <h3 class="phpdocumentor-elements__header" id="properties">
             Properties
-            <a href="classes/org-schema-DefinedRegion.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/org-schema-PostalAddress.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
                     <article
@@ -792,15 +777,15 @@
 >
     <h4 class="phpdocumentor-element__name" id="property_addressCountry">
         $addressCountry
-        <a href="classes/org-schema-DefinedRegion.html#property_addressCountry" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/org-schema-traits-PostalAddressTrait.html#property_addressCountry" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                                             </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/DefinedRegion.php"><a href="files/src-org-schema-definedregion.html"><abbr title="src/org/schema/DefinedRegion.php">DefinedRegion.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PostalAddressTrait.php"><a href="files/src-org-schema-traits-postaladdresstrait.html"><abbr title="src/org/schema/traits/PostalAddressTrait.php">PostalAddressTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">18</span>
+    <span class="phpdocumentor-element-found-in__line">13</span>
 
     </aside>
 
@@ -834,15 +819,15 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
 >
     <h4 class="phpdocumentor-element__name" id="property_addressLocality">
         $addressLocality
-        <a href="classes/org-schema-DefinedRegion.html#property_addressLocality" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/org-schema-traits-PostalAddressTrait.html#property_addressLocality" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                                             </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/DefinedRegion.php"><a href="files/src-org-schema-definedregion.html"><abbr title="src/org/schema/DefinedRegion.php">DefinedRegion.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PostalAddressTrait.php"><a href="files/src-org-schema-traits-postaladdresstrait.html"><abbr title="src/org/schema/traits/PostalAddressTrait.php">PostalAddressTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">24</span>
+    <span class="phpdocumentor-element-found-in__line">19</span>
 
     </aside>
 
@@ -873,15 +858,15 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
 >
     <h4 class="phpdocumentor-element__name" id="property_addressRegion">
         $addressRegion
-        <a href="classes/org-schema-DefinedRegion.html#property_addressRegion" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/org-schema-traits-PostalAddressTrait.html#property_addressRegion" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                                             </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/DefinedRegion.php"><a href="files/src-org-schema-definedregion.html"><abbr title="src/org/schema/DefinedRegion.php">DefinedRegion.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PostalAddressTrait.php"><a href="files/src-org-schema-traits-postaladdresstrait.html"><abbr title="src/org/schema/traits/PostalAddressTrait.php">PostalAddressTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">31</span>
+    <span class="phpdocumentor-element-found-in__line">26</span>
 
     </aside>
 
@@ -1659,15 +1644,15 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
 >
     <h4 class="phpdocumentor-element__name" id="property_postalCode">
         $postalCode
-        <a href="classes/org-schema-DefinedRegion.html#property_postalCode" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/org-schema-traits-PostalAddressTrait.html#property_postalCode" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                                             </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/DefinedRegion.php"><a href="files/src-org-schema-definedregion.html"><abbr title="src/org/schema/DefinedRegion.php">DefinedRegion.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PostalAddressTrait.php"><a href="files/src-org-schema-traits-postaladdresstrait.html"><abbr title="src/org/schema/traits/PostalAddressTrait.php">PostalAddressTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">37</span>
+    <span class="phpdocumentor-element-found-in__line">38</span>
 
     </aside>
 
@@ -1696,66 +1681,27 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
             -public
                                                                     "
 >
-    <h4 class="phpdocumentor-element__name" id="property_postalCodePrefix">
-        $postalCodePrefix
-        <a href="classes/org-schema-DefinedRegion.html#property_postalCodePrefix" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_postOfficeBoxNumber">
+        $postOfficeBoxNumber
+        <a href="classes/org-schema-traits-PostalAddressTrait.html#property_postOfficeBoxNumber" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                                             </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/DefinedRegion.php"><a href="files/src-org-schema-definedregion.html"><abbr title="src/org/schema/DefinedRegion.php">DefinedRegion.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PostalAddressTrait.php"><a href="files/src-org-schema-traits-postaladdresstrait.html"><abbr title="src/org/schema/traits/PostalAddressTrait.php">PostalAddressTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">43</span>
+    <span class="phpdocumentor-element-found-in__line">32</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">A defined range of postal codes indicated by a common textual prefix. Used for non-numeric systems such as UK.</p>
+        <p class="phpdocumentor-summary">The post office box number for PO box addresses.</p>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__type">null|string</span>
-    <span class="phpdocumentor-signature__name">$postalCodePrefix</span>
-    </code>
-
-    
-    
-    
-
-    
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -public
-                                                                    "
->
-    <h4 class="phpdocumentor-element__name" id="property_postalCodeRange">
-        $postalCodeRange
-        <a href="classes/org-schema-DefinedRegion.html#property_postalCodeRange" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                            </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/DefinedRegion.php"><a href="files/src-org-schema-definedregion.html"><abbr title="src/org/schema/DefinedRegion.php">DefinedRegion.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">49</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">A defined range of postal codes.</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">null|string|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-PostalCodeRangeSpecification.html"><abbr title="\org\schema\PostalCodeRangeSpecification">PostalCodeRangeSpecification</abbr></a></span>
-    <span class="phpdocumentor-signature__name">$postalCodeRange</span>
+    <span class="phpdocumentor-signature__name">$postOfficeBoxNumber</span>
     </code>
 
     
@@ -1852,6 +1798,45 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
             -public
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_streetAddress">
+        $streetAddress
+        <a href="classes/org-schema-traits-PostalAddressTrait.html#property_streetAddress" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PostalAddressTrait.php"><a href="files/src-org-schema-traits-postaladdresstrait.html"><abbr title="src/org/schema/traits/PostalAddressTrait.php">PostalAddressTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">44</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The street address. For example, 1600 Amphitheatre Pkwy.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">null|string</span>
+    <span class="phpdocumentor-signature__name">$streetAddress</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_telephone">
         $telephone
         <a href="classes/org-schema-traits-ContactPointTrait.html#property_telephone" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1928,7 +1913,7 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/org-schema-DefinedRegion.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/org-schema-PostalAddress.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
                     <article
@@ -2104,7 +2089,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
     <div class="phpdocumentor-modal-bg" data-exit-button></div>
     <div class="phpdocumentor-modal-container">
         <div class="phpdocumentor-modal-content">
-            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/src/org/schema/DefinedRegion.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/src/org/schema/PostalAddress.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
         </div>
         <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
     </div>
@@ -2205,9 +2190,9 @@ echo json_encode($person, JSON_PRETTY_PRINT);
             <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                        <li><a href="classes/org-schema-DefinedRegion.html#toc-constants">Constants</a></li>
-                                                            <li><a href="classes/org-schema-DefinedRegion.html#toc-properties">Properties</a></li>
-                                                            <li><a href="classes/org-schema-DefinedRegion.html#toc-methods">Methods</a></li>
+                                        <li><a href="classes/org-schema-PostalAddress.html#toc-constants">Constants</a></li>
+                                                            <li><a href="classes/org-schema-PostalAddress.html#toc-properties">Properties</a></li>
+                                                            <li><a href="classes/org-schema-PostalAddress.html#toc-methods">Methods</a></li>
                                     </ul>
             </li>
                             <li class="phpdocumentor-on-this-page-section__title">Constants</li>
@@ -2227,9 +2212,9 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                                                     <li class=""><a href="classes/org-schema-Thing.html#property__to">$_to</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_active">$active</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_additionalType">$additionalType</a></li>
-                                                    <li class=""><a href="classes/org-schema-DefinedRegion.html#property_addressCountry">$addressCountry</a></li>
-                                                    <li class=""><a href="classes/org-schema-DefinedRegion.html#property_addressLocality">$addressLocality</a></li>
-                                                    <li class=""><a href="classes/org-schema-DefinedRegion.html#property_addressRegion">$addressRegion</a></li>
+                                                    <li class=""><a href="classes/org-schema-traits-PostalAddressTrait.html#property_addressCountry">$addressCountry</a></li>
+                                                    <li class=""><a href="classes/org-schema-traits-PostalAddressTrait.html#property_addressLocality">$addressLocality</a></li>
+                                                    <li class=""><a href="classes/org-schema-traits-PostalAddressTrait.html#property_addressRegion">$addressRegion</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_alternateName">$alternateName</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-ContactPointTrait.html#property_areaServed">$areaServed</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-ContactPointTrait.html#property_availableLanguage">$availableLanguage</a></li>
@@ -2249,11 +2234,11 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_license">$license</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_modified">$modified</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_name">$name</a></li>
-                                                    <li class=""><a href="classes/org-schema-DefinedRegion.html#property_postalCode">$postalCode</a></li>
-                                                    <li class=""><a href="classes/org-schema-DefinedRegion.html#property_postalCodePrefix">$postalCodePrefix</a></li>
-                                                    <li class=""><a href="classes/org-schema-DefinedRegion.html#property_postalCodeRange">$postalCodeRange</a></li>
+                                                    <li class=""><a href="classes/org-schema-traits-PostalAddressTrait.html#property_postalCode">$postalCode</a></li>
+                                                    <li class=""><a href="classes/org-schema-traits-PostalAddressTrait.html#property_postOfficeBoxNumber">$postOfficeBoxNumber</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-ContactPointTrait.html#property_productSupported">$productSupported</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_publisher">$publisher</a></li>
+                                                    <li class=""><a href="classes/org-schema-traits-PostalAddressTrait.html#property_streetAddress">$streetAddress</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-ContactPointTrait.html#property_telephone">$telephone</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_url">$url</a></li>
                                             </ul>
@@ -2283,7 +2268,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
     </section>
 </section>
         </div>
-        <a href="classes/org-schema-DefinedRegion.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/org-schema-PostalAddress.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

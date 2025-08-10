@@ -101,10 +101,10 @@
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    DefinedRegion
+    Schedule
 
         <span class="phpdocumentor-element__extends">
-        extends <a href="classes/org-schema-ContactPoint.html"><abbr title="\org\schema\ContactPoint">ContactPoint</abbr></a>
+        extends <a href="classes/org-schema-Intangible.html"><abbr title="\org\schema\Intangible">Intangible</abbr></a>
     </span>
     
     
@@ -117,22 +117,25 @@
 </div>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/DefinedRegion.php"><a href="files/src-org-schema-definedregion.html"><abbr title="src/org/schema/DefinedRegion.php">DefinedRegion.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Schedule.php"><a href="files/src-org-schema-schedule.html"><abbr title="src/org/schema/Schedule.php">Schedule.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">10</span>
+    <span class="phpdocumentor-element-found-in__line">16</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">A DefinedRegion is a geographic area defined by potentially arbitrary (rather than political, administrative or natural geographical) criteria.</p>
+            <p class="phpdocumentor-summary">A schedule defines a repeating time period used to describe a regularly occurring Event.</p>
 
 
-    <section class="phpdocumentor-description"><p>Properties are provided for defining a region by reference to sets of postal codes.</p>
+    <section class="phpdocumentor-description"><p>At a minimum a schedule will specify repeatFrequency which describes the interval between occurrences of the event.
+Additional information can be provided to specify the schedule more precisely.
+This includes identifying the day(s) of the week or month when the recurring event will take place, in addition to its start and end time.
+Schedules may also have start and end dates to indicate when they are active, e.g. to define a limited calendar of events.</p>
 </section>
 
 
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
-        <a href="classes/org-schema-DefinedRegion.html#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/org-schema-Schedule.html#tags" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h5>
     <dl class="phpdocumentor-tag-list">
@@ -140,7 +143,7 @@
                     <span class="phpdocumentor-tag__name">see</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
-                                                                                    <span class="phpdocumentor-tag-link"><a href="https://schema.org/DefinedRegion">https://schema.org/DefinedRegion</a></span>
+                                                                                    <span class="phpdocumentor-tag-link"><a href="https://schema.org/Schedule">https://schema.org/Schedule</a></span>
                                         
                                              
                                     </dd>
@@ -152,7 +155,7 @@
 
 <h3 id="toc">
     Table of Contents
-    <a href="classes/org-schema-DefinedRegion.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/org-schema-Schedule.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h3>
 
@@ -164,7 +167,7 @@
 
 <h4 id="toc-constants">
     Constants
-    <a href="classes/org-schema-DefinedRegion.html#toc-constants" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/org-schema-Schedule.html#toc-constants" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
@@ -180,7 +183,7 @@
 
 <h4 id="toc-properties">
     Properties
-    <a href="classes/org-schema-DefinedRegion.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/org-schema-Schedule.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
@@ -234,27 +237,6 @@
 <dd>An additionalType for the item.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a class="" href="classes/org-schema-DefinedRegion.html#property_addressCountry">$addressCountry</a>
-    <span>
-                        &nbsp;: null|string            </span>
-</dt>
-<dd>The country.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a class="" href="classes/org-schema-DefinedRegion.html#property_addressLocality">$addressLocality</a>
-    <span>
-                        &nbsp;: null|string            </span>
-</dt>
-<dd>The locality in which the street address is, and which is in the region. For example, Mountain View.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a class="" href="classes/org-schema-DefinedRegion.html#property_addressRegion">$addressRegion</a>
-    <span>
-                        &nbsp;: null|string            </span>
-</dt>
-<dd>The region in which the locality is, and which is in the country.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_alternateName">$alternateName</a>
     <span>
                         &nbsp;: string|object|null            </span>
@@ -262,32 +244,32 @@
 <dd>An alias for the item.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a class="" href="classes/org-schema-traits-ContactPointTrait.html#property_areaServed">$areaServed</a>
+    <a class="" href="classes/org-schema-Schedule.html#property_byDay">$byDay</a>
     <span>
-                        &nbsp;: null|string|<a href="classes/org-schema-Place.html"><abbr title="\org\schema\Place">Place</abbr></a>|<a href="classes/org-schema-GeoShape.html"><abbr title="\org\schema\GeoShape">GeoShape</abbr></a>            </span>
+                        &nbsp;: <a href="classes/org-schema-enumerations-DayOfWeek.html"><abbr title="\org\schema\enumerations\DayOfWeek">DayOfWeek</abbr></a>|<a href="classes/org-schema-DefinedTerm.html"><abbr title="\org\schema\DefinedTerm">DefinedTerm</abbr></a>|string|array&lt;string|int, mixed&gt;|null            </span>
 </dt>
-<dd>The geographic area where a service or offered item is provided.</dd>
+<dd>Defines the day(s) of the week on which a recurring Event takes place.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a class="" href="classes/org-schema-traits-ContactPointTrait.html#property_availableLanguage">$availableLanguage</a>
+    <a class="" href="classes/org-schema-Schedule.html#property_byMonth">$byMonth</a>
     <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;|string|null            </span>
+                        &nbsp;: int|array&lt;string|int, mixed&gt;|null            </span>
 </dt>
-<dd>A language someone may use with or at the item, service or place.</dd>
+<dd>Defines the month(s) of the year on which a recurring Event takes place.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a class="" href="classes/org-schema-traits-ContactPointTrait.html#property_contactOption">$contactOption</a>
+    <a class="" href="classes/org-schema-Schedule.html#property_byMonthDay">$byMonthDay</a>
     <span>
-                        &nbsp;: mixed            </span>
+                        &nbsp;: int|array&lt;string|int, mixed&gt;|null            </span>
 </dt>
-<dd>An option available on this contact point (e.g. a toll-free number or support for hearing-impaired callers).</dd>
+<dd>Defines the day(s) of the month on which a recurring Event takes place.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a class="" href="classes/org-schema-traits-ContactPointTrait.html#property_contactType">$contactType</a>
+    <a class="" href="classes/org-schema-Schedule.html#property_byMonthWeek">$byMonthWeek</a>
     <span>
-                        &nbsp;: string|null            </span>
+                        &nbsp;: int|array&lt;string|int, mixed&gt;|null            </span>
 </dt>
-<dd>A person or organization can have different contact points, for different purposes.</dd>
+<dd>Defines the week(s) of the month on which a recurring Event takes place.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_created">$created</a>
@@ -311,18 +293,32 @@
 <dd>A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a class="" href="classes/org-schema-traits-ContactPointTrait.html#property_email">$email</a>
+    <a class="" href="classes/org-schema-Schedule.html#property_duration">$duration</a>
     <span>
-                        &nbsp;: null|string|array&lt;string|int, mixed&gt;            </span>
+                        &nbsp;: null|int|float|string|<a href="classes/org-schema-Duration.html"><abbr title="\org\schema\Duration">Duration</abbr></a>|<a href="classes/org-schema-QuantitativeValue.html"><abbr title="\org\schema\QuantitativeValue">QuantitativeValue</abbr></a>            </span>
 </dt>
-<dd>The email address.</dd>
+<dd>The duration of the item (movie, audio recording, event, etc.) in ISO 8601 duration format.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a class="" href="classes/org-schema-traits-ContactPointTrait.html#property_faxNumber">$faxNumber</a>
+    <a class="" href="classes/org-schema-Schedule.html#property_endDate">$endDate</a>
     <span>
-                        &nbsp;: null|string|array&lt;string|int, mixed&gt;            </span>
+                        &nbsp;: null|string|int|<abbr title="\DateTime">DateTime</abbr>            </span>
 </dt>
-<dd>The fax number.</dd>
+<dd>The end date and time of the event or item (in ISO 8601 date format).</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Schedule.html#property_endTime">$endTime</a>
+    <span>
+                        &nbsp;: null|string|int|<abbr title="\DateTime">DateTime</abbr>            </span>
+</dt>
+<dd>The endTime of something.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Schedule.html#property_exceptDate">$exceptDate</a>
+    <span>
+                        &nbsp;: string|array&lt;string|int, mixed&gt;|int|<abbr title="\DateTime">DateTime</abbr>|null            </span>
+</dt>
+<dd>Defines a Date or DateTime during which a scheduled Event will not take place. The property allows exceptions to a Schedule to be specified. If an exception is specified as a DateTime then only the event that would have started at that specific date and time should be excluded from the schedule. If an exception is specified as a Date then any event that is scheduled for that 24 hour period should be excluded from the schedule.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_hasPart">$hasPart</a>
@@ -330,13 +326,6 @@
                         &nbsp;: string|<a href="classes/org-schema-Thing.html"><abbr title="\org\schema\Thing">Thing</abbr></a>|array&lt;string|int, mixed&gt;|null            </span>
 </dt>
 <dd>Indicates an item that this part of this item.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a class="" href="classes/org-schema-traits-ContactPointTrait.html#property_hoursAvailable">$hoursAvailable</a>
-    <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;|null            </span>
-</dt>
-<dd>The hours during which this service or contact is available.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_id">$id</a>
@@ -388,34 +377,6 @@
 <dd>The name of the item.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a class="" href="classes/org-schema-DefinedRegion.html#property_postalCode">$postalCode</a>
-    <span>
-                        &nbsp;: null|string            </span>
-</dt>
-<dd>The postal code. For example, 94043.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a class="" href="classes/org-schema-DefinedRegion.html#property_postalCodePrefix">$postalCodePrefix</a>
-    <span>
-                        &nbsp;: null|string            </span>
-</dt>
-<dd>A defined range of postal codes indicated by a common textual prefix. Used for non-numeric systems such as UK.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a class="" href="classes/org-schema-DefinedRegion.html#property_postalCodeRange">$postalCodeRange</a>
-    <span>
-                        &nbsp;: null|string|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-PostalCodeRangeSpecification.html"><abbr title="\org\schema\PostalCodeRangeSpecification">PostalCodeRangeSpecification</abbr></a>            </span>
-</dt>
-<dd>A defined range of postal codes.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a class="" href="classes/org-schema-traits-ContactPointTrait.html#property_productSupported">$productSupported</a>
-    <span>
-                        &nbsp;: string|null            </span>
-</dt>
-<dd>The product or service this support contact point is related to (such as product support for a particular product line).</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_publisher">$publisher</a>
     <span>
                         &nbsp;: string|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Person.html"><abbr title="\org\schema\Person">Person</abbr></a>|<a href="classes/org-schema-Organization.html"><abbr title="\org\schema\Organization">Organization</abbr></a>|null            </span>
@@ -423,11 +384,39 @@
 <dd>The publisher of the resource.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a class="" href="classes/org-schema-traits-ContactPointTrait.html#property_telephone">$telephone</a>
+    <a class="" href="classes/org-schema-Schedule.html#property_repeatCount">$repeatCount</a>
     <span>
-                        &nbsp;: null|string|array&lt;string|int, mixed&gt;            </span>
+                        &nbsp;: int|null            </span>
 </dt>
-<dd>The telephone number.</dd>
+<dd>Defines the number of times a recurring Event will take place.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Schedule.html#property_repeatFrequency">$repeatFrequency</a>
+    <span>
+                        &nbsp;: <a href="classes/org-schema-Duration.html"><abbr title="\org\schema\Duration">Duration</abbr></a>|string|int|float|null            </span>
+</dt>
+<dd>Defines the frequency at which Events will occur according to a schedule Schedule. The intervals between events should be defined as a Duration of time.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Schedule.html#property_scheduleTimezone">$scheduleTimezone</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>Indicates the timezone for which the time(s) indicated in the Schedule are given. The value provided should be among those listed in the IANA Time Zone Database.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Schedule.html#property_startDate">$startDate</a>
+    <span>
+                        &nbsp;: null|string|int|<abbr title="\DateTime">DateTime</abbr>            </span>
+</dt>
+<dd>The start date and time of the event or item (in ISO 8601 date format).</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Schedule.html#property_startTime">$startTime</a>
+    <span>
+                        &nbsp;: null|string|int|<abbr title="\DateTime">DateTime</abbr>            </span>
+</dt>
+<dd>The startTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to start. For actions that span a period of time, when the action was performed. E.g. John wrote a book from January to December. For media, including audio and video, it&#039;s the time offset of the start of a clip within a larger file.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_url">$url</a>
@@ -440,7 +429,7 @@
 
 <h4 id="toc-methods">
     Methods
-    <a href="classes/org-schema-DefinedRegion.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/org-schema-Schedule.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
@@ -466,7 +455,7 @@
     <section class="phpdocumentor-constants">
         <h3 class="phpdocumentor-elements__header" id="constants">
             Constants
-            <a href="classes/org-schema-DefinedRegion.html#constants" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/org-schema-Schedule.html#constants" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
                     <article class="phpdocumentor-element -constant -public ">
@@ -507,7 +496,7 @@
     <section class="phpdocumentor-properties">
         <h3 class="phpdocumentor-elements__header" id="properties">
             Properties
-            <a href="classes/org-schema-DefinedRegion.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/org-schema-Schedule.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
                     <article
@@ -790,128 +779,6 @@
             -public
                                                                     "
 >
-    <h4 class="phpdocumentor-element__name" id="property_addressCountry">
-        $addressCountry
-        <a href="classes/org-schema-DefinedRegion.html#property_addressCountry" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                            </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/DefinedRegion.php"><a href="files/src-org-schema-definedregion.html"><abbr title="src/org/schema/DefinedRegion.php">DefinedRegion.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">18</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">The country.</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">null|string</span>
-    <span class="phpdocumentor-signature__name">$addressCountry</span>
-    </code>
-
-        <section class="phpdocumentor-description"><p>Recommended to be in 2-letter ISO 3166-1 alpha-2 format, for example &quot;US&quot;.
-For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &quot;SGP&quot; or a full country name such as &quot;Singapore&quot; can also be used.</p>
-</section>
-
-    
-    
-
-    
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -public
-                                                                    "
->
-    <h4 class="phpdocumentor-element__name" id="property_addressLocality">
-        $addressLocality
-        <a href="classes/org-schema-DefinedRegion.html#property_addressLocality" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                            </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/DefinedRegion.php"><a href="files/src-org-schema-definedregion.html"><abbr title="src/org/schema/DefinedRegion.php">DefinedRegion.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">24</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">The locality in which the street address is, and which is in the region. For example, Mountain View.</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">null|string</span>
-    <span class="phpdocumentor-signature__name">$addressLocality</span>
-    </code>
-
-    
-    
-    
-
-    
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -public
-                                                                    "
->
-    <h4 class="phpdocumentor-element__name" id="property_addressRegion">
-        $addressRegion
-        <a href="classes/org-schema-DefinedRegion.html#property_addressRegion" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                            </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/DefinedRegion.php"><a href="files/src-org-schema-definedregion.html"><abbr title="src/org/schema/DefinedRegion.php">DefinedRegion.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">31</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">The region in which the locality is, and which is in the country.</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">null|string</span>
-    <span class="phpdocumentor-signature__name">$addressRegion</span>
-    </code>
-
-        <section class="phpdocumentor-description"><p>For example, California or another appropriate first-level Administrative division.</p>
-</section>
-
-    
-    
-
-    
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -public
-                                                                    "
->
     <h4 class="phpdocumentor-element__name" id="property_alternateName">
         $alternateName
         <a href="classes/org-schema-Thing.html#property_alternateName" class="headerlink"><i class="fas fa-link"></i></a>
@@ -951,69 +818,30 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
             -public
                                                                     "
 >
-    <h4 class="phpdocumentor-element__name" id="property_areaServed">
-        $areaServed
-        <a href="classes/org-schema-traits-ContactPointTrait.html#property_areaServed" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_byDay">
+        $byDay
+        <a href="classes/org-schema-Schedule.html#property_byDay" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                                             </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ContactPointTrait.php"><a href="files/src-org-schema-traits-contactpointtrait.html"><abbr title="src/org/schema/traits/ContactPointTrait.php">ContactPointTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Schedule.php"><a href="files/src-org-schema-schedule.html"><abbr title="src/org/schema/Schedule.php">Schedule.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">17</span>
+    <span class="phpdocumentor-element-found-in__line">23</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">The geographic area where a service or offered item is provided.</p>
+        <p class="phpdocumentor-summary">Defines the day(s) of the week on which a recurring Event takes place.</p>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">null|string|<a href="classes/org-schema-Place.html"><abbr title="\org\schema\Place">Place</abbr></a>|<a href="classes/org-schema-GeoShape.html"><abbr title="\org\schema\GeoShape">GeoShape</abbr></a></span>
-    <span class="phpdocumentor-signature__name">$areaServed</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/org-schema-enumerations-DayOfWeek.html"><abbr title="\org\schema\enumerations\DayOfWeek">DayOfWeek</abbr></a>|<a href="classes/org-schema-DefinedTerm.html"><abbr title="\org\schema\DefinedTerm">DefinedTerm</abbr></a>|string|array&lt;string|int, mixed&gt;|null</span>
+    <span class="phpdocumentor-signature__name">$byDay</span>
     </code>
 
-    
-    
-    
-
-    
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -public
-                                                                    "
->
-    <h4 class="phpdocumentor-element__name" id="property_availableLanguage">
-        $availableLanguage
-        <a href="classes/org-schema-traits-ContactPointTrait.html#property_availableLanguage" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                            </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ContactPointTrait.php"><a href="files/src-org-schema-traits-contactpointtrait.html"><abbr title="src/org/schema/traits/ContactPointTrait.php">ContactPointTrait.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">24</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">A language someone may use with or at the item, service or place.</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|string|null</span>
-    <span class="phpdocumentor-signature__name">$availableLanguage</span>
-    </code>
-
-        <section class="phpdocumentor-description"><p>Please use one of the language codes from the IETF BCP 47 standard.</p>
+        <section class="phpdocumentor-description"><p>May be specified using either DayOfWeek, or alternatively Text conforming to iCal's syntax for byDay recurrence rules.</p>
 </section>
 
     
@@ -1031,30 +859,32 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
             -public
                                                                     "
 >
-    <h4 class="phpdocumentor-element__name" id="property_contactOption">
-        $contactOption
-        <a href="classes/org-schema-traits-ContactPointTrait.html#property_contactOption" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_byMonth">
+        $byMonth
+        <a href="classes/org-schema-Schedule.html#property_byMonth" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                                             </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ContactPointTrait.php"><a href="files/src-org-schema-traits-contactpointtrait.html"><abbr title="src/org/schema/traits/ContactPointTrait.php">ContactPointTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Schedule.php"><a href="files/src-org-schema-schedule.html"><abbr title="src/org/schema/Schedule.php">Schedule.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">30</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">An option available on this contact point (e.g. a toll-free number or support for hearing-impaired callers).</p>
+        <p class="phpdocumentor-summary">Defines the month(s) of the year on which a recurring Event takes place.</p>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">$contactOption</span>
+            <span class="phpdocumentor-signature__type">int|array&lt;string|int, mixed&gt;|null</span>
+    <span class="phpdocumentor-signature__name">$byMonth</span>
     </code>
 
-    
+        <section class="phpdocumentor-description"><p>Specified as an Integer between 1-12. January is 1.</p>
+</section>
+
     
     
 
@@ -1070,30 +900,71 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
             -public
                                                                     "
 >
-    <h4 class="phpdocumentor-element__name" id="property_contactType">
-        $contactType
-        <a href="classes/org-schema-traits-ContactPointTrait.html#property_contactType" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_byMonthDay">
+        $byMonthDay
+        <a href="classes/org-schema-Schedule.html#property_byMonthDay" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                                             </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ContactPointTrait.php"><a href="files/src-org-schema-traits-contactpointtrait.html"><abbr title="src/org/schema/traits/ContactPointTrait.php">ContactPointTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Schedule.php"><a href="files/src-org-schema-schedule.html"><abbr title="src/org/schema/Schedule.php">Schedule.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">37</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">A person or organization can have different contact points, for different purposes.</p>
+        <p class="phpdocumentor-summary">Defines the day(s) of the month on which a recurring Event takes place.</p>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">string|null</span>
-    <span class="phpdocumentor-signature__name">$contactType</span>
+            <span class="phpdocumentor-signature__type">int|array&lt;string|int, mixed&gt;|null</span>
+    <span class="phpdocumentor-signature__name">$byMonthDay</span>
     </code>
 
-        <section class="phpdocumentor-description"><p>For example, a sales contact point, a PR contact point and so on. This property is used to specify the kind of contact point.</p>
+        <section class="phpdocumentor-description"><p>Specified as an Integer between 1-31.</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_byMonthWeek">
+        $byMonthWeek
+        <a href="classes/org-schema-Schedule.html#property_byMonthWeek" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Schedule.php"><a href="files/src-org-schema-schedule.html"><abbr title="src/org/schema/Schedule.php">Schedule.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">44</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Defines the week(s) of the month on which a recurring Event takes place.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">int|array&lt;string|int, mixed&gt;|null</span>
+    <span class="phpdocumentor-signature__name">$byMonthWeek</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Specified as an Integer between 1-5. For clarity, byMonthWeek is best used in conjunction with byDay to indicate concepts like the first and third Mondays of a month.</p>
 </section>
 
     
@@ -1228,27 +1099,27 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
             -public
                                                                     "
 >
-    <h4 class="phpdocumentor-element__name" id="property_email">
-        $email
-        <a href="classes/org-schema-traits-ContactPointTrait.html#property_email" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_duration">
+        $duration
+        <a href="classes/org-schema-Schedule.html#property_duration" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                                             </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ContactPointTrait.php"><a href="files/src-org-schema-traits-contactpointtrait.html"><abbr title="src/org/schema/traits/ContactPointTrait.php">ContactPointTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Schedule.php"><a href="files/src-org-schema-schedule.html"><abbr title="src/org/schema/Schedule.php">Schedule.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">43</span>
+    <span class="phpdocumentor-element-found-in__line">50</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">The email address.</p>
+        <p class="phpdocumentor-summary">The duration of the item (movie, audio recording, event, etc.) in ISO 8601 duration format.</p>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">null|string|array&lt;string|int, mixed&gt;</span>
-    <span class="phpdocumentor-signature__name">$email</span>
+            <span class="phpdocumentor-signature__type">null|int|float|string|<a href="classes/org-schema-Duration.html"><abbr title="\org\schema\Duration">Duration</abbr></a>|<a href="classes/org-schema-QuantitativeValue.html"><abbr title="\org\schema\QuantitativeValue">QuantitativeValue</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$duration</span>
     </code>
 
     
@@ -1267,30 +1138,116 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
             -public
                                                                     "
 >
-    <h4 class="phpdocumentor-element__name" id="property_faxNumber">
-        $faxNumber
-        <a href="classes/org-schema-traits-ContactPointTrait.html#property_faxNumber" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_endDate">
+        $endDate
+        <a href="classes/org-schema-Schedule.html#property_endDate" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                                             </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ContactPointTrait.php"><a href="files/src-org-schema-traits-contactpointtrait.html"><abbr title="src/org/schema/traits/ContactPointTrait.php">ContactPointTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Schedule.php"><a href="files/src-org-schema-schedule.html"><abbr title="src/org/schema/Schedule.php">Schedule.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">49</span>
+    <span class="phpdocumentor-element-found-in__line">55</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">The fax number.</p>
+        <p class="phpdocumentor-summary">The end date and time of the event or item (in ISO 8601 date format).</p>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">null|string|array&lt;string|int, mixed&gt;</span>
-    <span class="phpdocumentor-signature__name">$faxNumber</span>
+            <span class="phpdocumentor-signature__type">null|string|int|<abbr title="\DateTime">DateTime</abbr></span>
+    <span class="phpdocumentor-signature__name">$endDate</span>
     </code>
 
     
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_endTime">
+        $endTime
+        <a href="classes/org-schema-Schedule.html#property_endTime" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Schedule.php"><a href="files/src-org-schema-schedule.html"><abbr title="src/org/schema/Schedule.php">Schedule.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">65</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The endTime of something.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">null|string|int|<abbr title="\DateTime">DateTime</abbr></span>
+    <span class="phpdocumentor-signature__name">$endTime</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to end.
+For actions that span a period of time, when the action was performed. E.g. John wrote a book from January to December.
+For media, including audio and video, it's the time offset of the end of a clip within a larger file.
+Note that Event uses startDate/endDate instead of startTime/endTime, even when describing dates with times.
+This situation may be clarified in future revisions.</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_exceptDate">
+        $exceptDate
+        <a href="classes/org-schema-Schedule.html#property_exceptDate" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Schedule.php"><a href="files/src-org-schema-schedule.html"><abbr title="src/org/schema/Schedule.php">Schedule.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">72</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Defines a Date or DateTime during which a scheduled Event will not take place. The property allows exceptions to a Schedule to be specified. If an exception is specified as a DateTime then only the event that would have started at that specific date and time should be excluded from the schedule. If an exception is specified as a Date then any event that is scheduled for that 24 hour period should be excluded from the schedule.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|array&lt;string|int, mixed&gt;|int|<abbr title="\DateTime">DateTime</abbr>|null</span>
+    <span class="phpdocumentor-signature__name">$exceptDate</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>This allows a whole day to be excluded from the schedule without having to itemise every scheduled event.</p>
+</section>
+
     
     
 
@@ -1327,45 +1284,6 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
         <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__type">string|<a href="classes/org-schema-Thing.html"><abbr title="\org\schema\Thing">Thing</abbr></a>|array&lt;string|int, mixed&gt;|null</span>
     <span class="phpdocumentor-signature__name">$hasPart</span>
-    </code>
-
-    
-    
-    
-
-    
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -public
-                                                                    "
->
-    <h4 class="phpdocumentor-element__name" id="property_hoursAvailable">
-        $hoursAvailable
-        <a href="classes/org-schema-traits-ContactPointTrait.html#property_hoursAvailable" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                            </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ContactPointTrait.php"><a href="files/src-org-schema-traits-contactpointtrait.html"><abbr title="src/org/schema/traits/ContactPointTrait.php">ContactPointTrait.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">55</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">The hours during which this service or contact is available.</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|null</span>
-    <span class="phpdocumentor-signature__name">$hoursAvailable</span>
     </code>
 
     
@@ -1657,162 +1575,6 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
             -public
                                                                     "
 >
-    <h4 class="phpdocumentor-element__name" id="property_postalCode">
-        $postalCode
-        <a href="classes/org-schema-DefinedRegion.html#property_postalCode" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                            </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/DefinedRegion.php"><a href="files/src-org-schema-definedregion.html"><abbr title="src/org/schema/DefinedRegion.php">DefinedRegion.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">37</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">The postal code. For example, 94043.</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">null|string</span>
-    <span class="phpdocumentor-signature__name">$postalCode</span>
-    </code>
-
-    
-    
-    
-
-    
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -public
-                                                                    "
->
-    <h4 class="phpdocumentor-element__name" id="property_postalCodePrefix">
-        $postalCodePrefix
-        <a href="classes/org-schema-DefinedRegion.html#property_postalCodePrefix" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                            </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/DefinedRegion.php"><a href="files/src-org-schema-definedregion.html"><abbr title="src/org/schema/DefinedRegion.php">DefinedRegion.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">43</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">A defined range of postal codes indicated by a common textual prefix. Used for non-numeric systems such as UK.</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">null|string</span>
-    <span class="phpdocumentor-signature__name">$postalCodePrefix</span>
-    </code>
-
-    
-    
-    
-
-    
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -public
-                                                                    "
->
-    <h4 class="phpdocumentor-element__name" id="property_postalCodeRange">
-        $postalCodeRange
-        <a href="classes/org-schema-DefinedRegion.html#property_postalCodeRange" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                            </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/DefinedRegion.php"><a href="files/src-org-schema-definedregion.html"><abbr title="src/org/schema/DefinedRegion.php">DefinedRegion.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">49</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">A defined range of postal codes.</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">null|string|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-PostalCodeRangeSpecification.html"><abbr title="\org\schema\PostalCodeRangeSpecification">PostalCodeRangeSpecification</abbr></a></span>
-    <span class="phpdocumentor-signature__name">$postalCodeRange</span>
-    </code>
-
-    
-    
-    
-
-    
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -public
-                                                                    "
->
-    <h4 class="phpdocumentor-element__name" id="property_productSupported">
-        $productSupported
-        <a href="classes/org-schema-traits-ContactPointTrait.html#property_productSupported" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                            </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ContactPointTrait.php"><a href="files/src-org-schema-traits-contactpointtrait.html"><abbr title="src/org/schema/traits/ContactPointTrait.php">ContactPointTrait.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">61</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">The product or service this support contact point is related to (such as product support for a particular product line).</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">string|null</span>
-    <span class="phpdocumentor-signature__name">$productSupported</span>
-    </code>
-
-    
-    
-    
-
-    
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -public
-                                                                    "
->
     <h4 class="phpdocumentor-element__name" id="property_publisher">
         $publisher
         <a href="classes/org-schema-Thing.html#property_publisher" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1852,27 +1614,183 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
             -public
                                                                     "
 >
-    <h4 class="phpdocumentor-element__name" id="property_telephone">
-        $telephone
-        <a href="classes/org-schema-traits-ContactPointTrait.html#property_telephone" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_repeatCount">
+        $repeatCount
+        <a href="classes/org-schema-Schedule.html#property_repeatCount" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                                             </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ContactPointTrait.php"><a href="files/src-org-schema-traits-contactpointtrait.html"><abbr title="src/org/schema/traits/ContactPointTrait.php">ContactPointTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Schedule.php"><a href="files/src-org-schema-schedule.html"><abbr title="src/org/schema/Schedule.php">Schedule.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">67</span>
+    <span class="phpdocumentor-element-found-in__line">78</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">The telephone number.</p>
+        <p class="phpdocumentor-summary">Defines the number of times a recurring Event will take place.</p>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">null|string|array&lt;string|int, mixed&gt;</span>
-    <span class="phpdocumentor-signature__name">$telephone</span>
+            <span class="phpdocumentor-signature__type">int|null</span>
+    <span class="phpdocumentor-signature__name">$repeatCount</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_repeatFrequency">
+        $repeatFrequency
+        <a href="classes/org-schema-Schedule.html#property_repeatFrequency" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Schedule.php"><a href="files/src-org-schema-schedule.html"><abbr title="src/org/schema/Schedule.php">Schedule.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">84</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Defines the frequency at which Events will occur according to a schedule Schedule. The intervals between events should be defined as a Duration of time.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/org-schema-Duration.html"><abbr title="\org\schema\Duration">Duration</abbr></a>|string|int|float|null</span>
+    <span class="phpdocumentor-signature__name">$repeatFrequency</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_scheduleTimezone">
+        $scheduleTimezone
+        <a href="classes/org-schema-Schedule.html#property_scheduleTimezone" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Schedule.php"><a href="files/src-org-schema-schedule.html"><abbr title="src/org/schema/Schedule.php">Schedule.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">90</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Indicates the timezone for which the time(s) indicated in the Schedule are given. The value provided should be among those listed in the IANA Time Zone Database.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$scheduleTimezone</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_startDate">
+        $startDate
+        <a href="classes/org-schema-Schedule.html#property_startDate" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Schedule.php"><a href="files/src-org-schema-schedule.html"><abbr title="src/org/schema/Schedule.php">Schedule.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">95</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The start date and time of the event or item (in ISO 8601 date format).</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">null|string|int|<abbr title="\DateTime">DateTime</abbr></span>
+    <span class="phpdocumentor-signature__name">$startDate</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_startTime">
+        $startTime
+        <a href="classes/org-schema-Schedule.html#property_startTime" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Schedule.php"><a href="files/src-org-schema-schedule.html"><abbr title="src/org/schema/Schedule.php">Schedule.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">100</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The startTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to start. For actions that span a period of time, when the action was performed. E.g. John wrote a book from January to December. For media, including audio and video, it&#039;s the time offset of the start of a clip within a larger file.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">null|string|int|<abbr title="\DateTime">DateTime</abbr></span>
+    <span class="phpdocumentor-signature__name">$startTime</span>
     </code>
 
     
@@ -1928,7 +1846,7 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/org-schema-DefinedRegion.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/org-schema-Schedule.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
                     <article
@@ -2104,7 +2022,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
     <div class="phpdocumentor-modal-bg" data-exit-button></div>
     <div class="phpdocumentor-modal-container">
         <div class="phpdocumentor-modal-content">
-            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/src/org/schema/DefinedRegion.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/src/org/schema/Schedule.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
         </div>
         <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
     </div>
@@ -2205,9 +2123,9 @@ echo json_encode($person, JSON_PRETTY_PRINT);
             <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                        <li><a href="classes/org-schema-DefinedRegion.html#toc-constants">Constants</a></li>
-                                                            <li><a href="classes/org-schema-DefinedRegion.html#toc-properties">Properties</a></li>
-                                                            <li><a href="classes/org-schema-DefinedRegion.html#toc-methods">Methods</a></li>
+                                        <li><a href="classes/org-schema-Schedule.html#toc-constants">Constants</a></li>
+                                                            <li><a href="classes/org-schema-Schedule.html#toc-properties">Properties</a></li>
+                                                            <li><a href="classes/org-schema-Schedule.html#toc-methods">Methods</a></li>
                                     </ul>
             </li>
                             <li class="phpdocumentor-on-this-page-section__title">Constants</li>
@@ -2227,21 +2145,19 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                                                     <li class=""><a href="classes/org-schema-Thing.html#property__to">$_to</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_active">$active</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_additionalType">$additionalType</a></li>
-                                                    <li class=""><a href="classes/org-schema-DefinedRegion.html#property_addressCountry">$addressCountry</a></li>
-                                                    <li class=""><a href="classes/org-schema-DefinedRegion.html#property_addressLocality">$addressLocality</a></li>
-                                                    <li class=""><a href="classes/org-schema-DefinedRegion.html#property_addressRegion">$addressRegion</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_alternateName">$alternateName</a></li>
-                                                    <li class=""><a href="classes/org-schema-traits-ContactPointTrait.html#property_areaServed">$areaServed</a></li>
-                                                    <li class=""><a href="classes/org-schema-traits-ContactPointTrait.html#property_availableLanguage">$availableLanguage</a></li>
-                                                    <li class=""><a href="classes/org-schema-traits-ContactPointTrait.html#property_contactOption">$contactOption</a></li>
-                                                    <li class=""><a href="classes/org-schema-traits-ContactPointTrait.html#property_contactType">$contactType</a></li>
+                                                    <li class=""><a href="classes/org-schema-Schedule.html#property_byDay">$byDay</a></li>
+                                                    <li class=""><a href="classes/org-schema-Schedule.html#property_byMonth">$byMonth</a></li>
+                                                    <li class=""><a href="classes/org-schema-Schedule.html#property_byMonthDay">$byMonthDay</a></li>
+                                                    <li class=""><a href="classes/org-schema-Schedule.html#property_byMonthWeek">$byMonthWeek</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_created">$created</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_description">$description</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_disambiguatingDescription">$disambiguatingDescription</a></li>
-                                                    <li class=""><a href="classes/org-schema-traits-ContactPointTrait.html#property_email">$email</a></li>
-                                                    <li class=""><a href="classes/org-schema-traits-ContactPointTrait.html#property_faxNumber">$faxNumber</a></li>
+                                                    <li class=""><a href="classes/org-schema-Schedule.html#property_duration">$duration</a></li>
+                                                    <li class=""><a href="classes/org-schema-Schedule.html#property_endDate">$endDate</a></li>
+                                                    <li class=""><a href="classes/org-schema-Schedule.html#property_endTime">$endTime</a></li>
+                                                    <li class=""><a href="classes/org-schema-Schedule.html#property_exceptDate">$exceptDate</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_hasPart">$hasPart</a></li>
-                                                    <li class=""><a href="classes/org-schema-traits-ContactPointTrait.html#property_hoursAvailable">$hoursAvailable</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_id">$id</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_identifier">$identifier</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_image">$image</a></li>
@@ -2249,12 +2165,12 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_license">$license</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_modified">$modified</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_name">$name</a></li>
-                                                    <li class=""><a href="classes/org-schema-DefinedRegion.html#property_postalCode">$postalCode</a></li>
-                                                    <li class=""><a href="classes/org-schema-DefinedRegion.html#property_postalCodePrefix">$postalCodePrefix</a></li>
-                                                    <li class=""><a href="classes/org-schema-DefinedRegion.html#property_postalCodeRange">$postalCodeRange</a></li>
-                                                    <li class=""><a href="classes/org-schema-traits-ContactPointTrait.html#property_productSupported">$productSupported</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_publisher">$publisher</a></li>
-                                                    <li class=""><a href="classes/org-schema-traits-ContactPointTrait.html#property_telephone">$telephone</a></li>
+                                                    <li class=""><a href="classes/org-schema-Schedule.html#property_repeatCount">$repeatCount</a></li>
+                                                    <li class=""><a href="classes/org-schema-Schedule.html#property_repeatFrequency">$repeatFrequency</a></li>
+                                                    <li class=""><a href="classes/org-schema-Schedule.html#property_scheduleTimezone">$scheduleTimezone</a></li>
+                                                    <li class=""><a href="classes/org-schema-Schedule.html#property_startDate">$startDate</a></li>
+                                                    <li class=""><a href="classes/org-schema-Schedule.html#property_startTime">$startTime</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_url">$url</a></li>
                                             </ul>
                 </li>
@@ -2283,7 +2199,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
     </section>
 </section>
         </div>
-        <a href="classes/org-schema-DefinedRegion.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/org-schema-Schedule.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

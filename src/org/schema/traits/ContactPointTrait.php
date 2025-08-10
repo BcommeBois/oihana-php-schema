@@ -5,6 +5,10 @@ namespace org\schema\traits ;
 use org\schema\GeoShape;
 use org\schema\Place;
 
+/**
+ * A contact point—for example, a Customer Complaints department.
+ * @see https://schema.org/ContactPoint
+ */
 trait ContactPointTrait
 {
     /**

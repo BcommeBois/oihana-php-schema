@@ -101,10 +101,10 @@
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    DefinedRegion
+    Permit
 
         <span class="phpdocumentor-element__extends">
-        extends <a href="classes/org-schema-ContactPoint.html"><abbr title="\org\schema\ContactPoint">ContactPoint</abbr></a>
+        extends <a href="classes/org-schema-Intangible.html"><abbr title="\org\schema\Intangible">Intangible</abbr></a>
     </span>
     
     
@@ -117,22 +117,20 @@
 </div>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/DefinedRegion.php"><a href="files/src-org-schema-definedregion.html"><abbr title="src/org/schema/DefinedRegion.php">DefinedRegion.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Permit.php"><a href="files/src-org-schema-permit.html"><abbr title="src/org/schema/Permit.php">Permit.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">10</span>
+    <span class="phpdocumentor-element-found-in__line">12</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">A DefinedRegion is a geographic area defined by potentially arbitrary (rather than political, administrative or natural geographical) criteria.</p>
+            <p class="phpdocumentor-summary">A permit issued by an organization, e.g. a parking pass.</p>
 
 
-    <section class="phpdocumentor-description"><p>Properties are provided for defining a region by reference to sets of postal codes.</p>
-</section>
 
 
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
-        <a href="classes/org-schema-DefinedRegion.html#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/org-schema-Permit.html#tags" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h5>
     <dl class="phpdocumentor-tag-list">
@@ -140,7 +138,7 @@
                     <span class="phpdocumentor-tag__name">see</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
-                                                                                    <span class="phpdocumentor-tag-link"><a href="https://schema.org/DefinedRegion">https://schema.org/DefinedRegion</a></span>
+                                                                                    <span class="phpdocumentor-tag-link"><a href="https://schema.org/Permit">https://schema.org/Permit</a></span>
                                         
                                              
                                     </dd>
@@ -152,7 +150,7 @@
 
 <h3 id="toc">
     Table of Contents
-    <a href="classes/org-schema-DefinedRegion.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/org-schema-Permit.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h3>
 
@@ -164,7 +162,7 @@
 
 <h4 id="toc-constants">
     Constants
-    <a href="classes/org-schema-DefinedRegion.html#toc-constants" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/org-schema-Permit.html#toc-constants" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
@@ -180,7 +178,7 @@
 
 <h4 id="toc-properties">
     Properties
-    <a href="classes/org-schema-DefinedRegion.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/org-schema-Permit.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
@@ -234,60 +232,11 @@
 <dd>An additionalType for the item.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a class="" href="classes/org-schema-DefinedRegion.html#property_addressCountry">$addressCountry</a>
-    <span>
-                        &nbsp;: null|string            </span>
-</dt>
-<dd>The country.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a class="" href="classes/org-schema-DefinedRegion.html#property_addressLocality">$addressLocality</a>
-    <span>
-                        &nbsp;: null|string            </span>
-</dt>
-<dd>The locality in which the street address is, and which is in the region. For example, Mountain View.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a class="" href="classes/org-schema-DefinedRegion.html#property_addressRegion">$addressRegion</a>
-    <span>
-                        &nbsp;: null|string            </span>
-</dt>
-<dd>The region in which the locality is, and which is in the country.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_alternateName">$alternateName</a>
     <span>
                         &nbsp;: string|object|null            </span>
 </dt>
 <dd>An alias for the item.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a class="" href="classes/org-schema-traits-ContactPointTrait.html#property_areaServed">$areaServed</a>
-    <span>
-                        &nbsp;: null|string|<a href="classes/org-schema-Place.html"><abbr title="\org\schema\Place">Place</abbr></a>|<a href="classes/org-schema-GeoShape.html"><abbr title="\org\schema\GeoShape">GeoShape</abbr></a>            </span>
-</dt>
-<dd>The geographic area where a service or offered item is provided.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a class="" href="classes/org-schema-traits-ContactPointTrait.html#property_availableLanguage">$availableLanguage</a>
-    <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;|string|null            </span>
-</dt>
-<dd>A language someone may use with or at the item, service or place.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a class="" href="classes/org-schema-traits-ContactPointTrait.html#property_contactOption">$contactOption</a>
-    <span>
-                        &nbsp;: mixed            </span>
-</dt>
-<dd>An option available on this contact point (e.g. a toll-free number or support for hearing-impaired callers).</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a class="" href="classes/org-schema-traits-ContactPointTrait.html#property_contactType">$contactType</a>
-    <span>
-                        &nbsp;: string|null            </span>
-</dt>
-<dd>A person or organization can have different contact points, for different purposes.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_created">$created</a>
@@ -311,32 +260,11 @@
 <dd>A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a class="" href="classes/org-schema-traits-ContactPointTrait.html#property_email">$email</a>
-    <span>
-                        &nbsp;: null|string|array&lt;string|int, mixed&gt;            </span>
-</dt>
-<dd>The email address.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a class="" href="classes/org-schema-traits-ContactPointTrait.html#property_faxNumber">$faxNumber</a>
-    <span>
-                        &nbsp;: null|string|array&lt;string|int, mixed&gt;            </span>
-</dt>
-<dd>The fax number.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_hasPart">$hasPart</a>
     <span>
                         &nbsp;: string|<a href="classes/org-schema-Thing.html"><abbr title="\org\schema\Thing">Thing</abbr></a>|array&lt;string|int, mixed&gt;|null            </span>
 </dt>
 <dd>Indicates an item that this part of this item.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a class="" href="classes/org-schema-traits-ContactPointTrait.html#property_hoursAvailable">$hoursAvailable</a>
-    <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;|null            </span>
-</dt>
-<dd>The hours during which this service or contact is available.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_id">$id</a>
@@ -367,6 +295,20 @@
 <dd>Indicates an item that this item is part of.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Permit.html#property_issuedBy">$issuedBy</a>
+    <span>
+                        &nbsp;: <a href="classes/org-schema-Organization.html"><abbr title="\org\schema\Organization">Organization</abbr></a>|null            </span>
+</dt>
+<dd>The organization issuing the item, for example a Permit, Ticket, or Certification.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Permit.html#property_issuedThrough">$issuedThrough</a>
+    <span>
+                        &nbsp;: <a href="classes/org-schema-Service.html"><abbr title="\org\schema\Service">Service</abbr></a>|null            </span>
+</dt>
+<dd>The service through which the permit was granted.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_license">$license</a>
     <span>
                         &nbsp;: string|object|null            </span>
@@ -388,32 +330,11 @@
 <dd>The name of the item.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a class="" href="classes/org-schema-DefinedRegion.html#property_postalCode">$postalCode</a>
+    <a class="" href="classes/org-schema-Permit.html#property_permitAudience">$permitAudience</a>
     <span>
-                        &nbsp;: null|string            </span>
+                        &nbsp;: array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Audience.html"><abbr title="\org\schema\Audience">Audience</abbr></a>|null            </span>
 </dt>
-<dd>The postal code. For example, 94043.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a class="" href="classes/org-schema-DefinedRegion.html#property_postalCodePrefix">$postalCodePrefix</a>
-    <span>
-                        &nbsp;: null|string            </span>
-</dt>
-<dd>A defined range of postal codes indicated by a common textual prefix. Used for non-numeric systems such as UK.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a class="" href="classes/org-schema-DefinedRegion.html#property_postalCodeRange">$postalCodeRange</a>
-    <span>
-                        &nbsp;: null|string|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-PostalCodeRangeSpecification.html"><abbr title="\org\schema\PostalCodeRangeSpecification">PostalCodeRangeSpecification</abbr></a>            </span>
-</dt>
-<dd>A defined range of postal codes.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a class="" href="classes/org-schema-traits-ContactPointTrait.html#property_productSupported">$productSupported</a>
-    <span>
-                        &nbsp;: string|null            </span>
-</dt>
-<dd>The product or service this support contact point is related to (such as product support for a particular product line).</dd>
+<dd>The target audience for this permit.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_publisher">$publisher</a>
@@ -423,24 +344,45 @@
 <dd>The publisher of the resource.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a class="" href="classes/org-schema-traits-ContactPointTrait.html#property_telephone">$telephone</a>
-    <span>
-                        &nbsp;: null|string|array&lt;string|int, mixed&gt;            </span>
-</dt>
-<dd>The telephone number.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_url">$url</a>
     <span>
                         &nbsp;: int|string|null            </span>
 </dt>
 <dd>URL of the item.</dd>
 
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Permit.html#property_validFor">$validFor</a>
+    <span>
+                        &nbsp;: <a href="classes/org-schema-Duration.html"><abbr title="\org\schema\Duration">Duration</abbr></a>|int|float|null            </span>
+</dt>
+<dd>The duration of validity of a permit or similar thing.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Permit.html#property_validFrom">$validFrom</a>
+    <span>
+                        &nbsp;: string|int|<abbr title="\DateTime">DateTime</abbr>|null            </span>
+</dt>
+<dd>The date when the item becomes valid (DateTime).</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Permit.html#property_validIn">$validIn</a>
+    <span>
+                        &nbsp;: null|<a href="classes/org-schema-places-AdministrativeArea.html"><abbr title="\org\schema\places\AdministrativeArea">AdministrativeArea</abbr></a>            </span>
+</dt>
+<dd>The geographic area where the item is valid. Applies for example to a Permit, a Certification, or an EducationalOccupationalCredential.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Permit.html#property_validUntil">$validUntil</a>
+    <span>
+                        &nbsp;: string|int|<abbr title="\DateTime">DateTime</abbr>|null            </span>
+</dt>
+<dd>The date when the item is no longer valid.</dd>
+
     </dl>
 
 <h4 id="toc-methods">
     Methods
-    <a href="classes/org-schema-DefinedRegion.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/org-schema-Permit.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
@@ -466,7 +408,7 @@
     <section class="phpdocumentor-constants">
         <h3 class="phpdocumentor-elements__header" id="constants">
             Constants
-            <a href="classes/org-schema-DefinedRegion.html#constants" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/org-schema-Permit.html#constants" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
                     <article class="phpdocumentor-element -constant -public ">
@@ -507,7 +449,7 @@
     <section class="phpdocumentor-properties">
         <h3 class="phpdocumentor-elements__header" id="properties">
             Properties
-            <a href="classes/org-schema-DefinedRegion.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/org-schema-Permit.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
                     <article
@@ -790,128 +732,6 @@
             -public
                                                                     "
 >
-    <h4 class="phpdocumentor-element__name" id="property_addressCountry">
-        $addressCountry
-        <a href="classes/org-schema-DefinedRegion.html#property_addressCountry" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                            </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/DefinedRegion.php"><a href="files/src-org-schema-definedregion.html"><abbr title="src/org/schema/DefinedRegion.php">DefinedRegion.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">18</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">The country.</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">null|string</span>
-    <span class="phpdocumentor-signature__name">$addressCountry</span>
-    </code>
-
-        <section class="phpdocumentor-description"><p>Recommended to be in 2-letter ISO 3166-1 alpha-2 format, for example &quot;US&quot;.
-For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &quot;SGP&quot; or a full country name such as &quot;Singapore&quot; can also be used.</p>
-</section>
-
-    
-    
-
-    
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -public
-                                                                    "
->
-    <h4 class="phpdocumentor-element__name" id="property_addressLocality">
-        $addressLocality
-        <a href="classes/org-schema-DefinedRegion.html#property_addressLocality" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                            </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/DefinedRegion.php"><a href="files/src-org-schema-definedregion.html"><abbr title="src/org/schema/DefinedRegion.php">DefinedRegion.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">24</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">The locality in which the street address is, and which is in the region. For example, Mountain View.</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">null|string</span>
-    <span class="phpdocumentor-signature__name">$addressLocality</span>
-    </code>
-
-    
-    
-    
-
-    
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -public
-                                                                    "
->
-    <h4 class="phpdocumentor-element__name" id="property_addressRegion">
-        $addressRegion
-        <a href="classes/org-schema-DefinedRegion.html#property_addressRegion" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                            </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/DefinedRegion.php"><a href="files/src-org-schema-definedregion.html"><abbr title="src/org/schema/DefinedRegion.php">DefinedRegion.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">31</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">The region in which the locality is, and which is in the country.</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">null|string</span>
-    <span class="phpdocumentor-signature__name">$addressRegion</span>
-    </code>
-
-        <section class="phpdocumentor-description"><p>For example, California or another appropriate first-level Administrative division.</p>
-</section>
-
-    
-    
-
-    
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -public
-                                                                    "
->
     <h4 class="phpdocumentor-element__name" id="property_alternateName">
         $alternateName
         <a href="classes/org-schema-Thing.html#property_alternateName" class="headerlink"><i class="fas fa-link"></i></a>
@@ -936,166 +756,6 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
     </code>
 
     
-    
-    
-
-    
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -public
-                                                                    "
->
-    <h4 class="phpdocumentor-element__name" id="property_areaServed">
-        $areaServed
-        <a href="classes/org-schema-traits-ContactPointTrait.html#property_areaServed" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                            </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ContactPointTrait.php"><a href="files/src-org-schema-traits-contactpointtrait.html"><abbr title="src/org/schema/traits/ContactPointTrait.php">ContactPointTrait.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">17</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">The geographic area where a service or offered item is provided.</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">null|string|<a href="classes/org-schema-Place.html"><abbr title="\org\schema\Place">Place</abbr></a>|<a href="classes/org-schema-GeoShape.html"><abbr title="\org\schema\GeoShape">GeoShape</abbr></a></span>
-    <span class="phpdocumentor-signature__name">$areaServed</span>
-    </code>
-
-    
-    
-    
-
-    
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -public
-                                                                    "
->
-    <h4 class="phpdocumentor-element__name" id="property_availableLanguage">
-        $availableLanguage
-        <a href="classes/org-schema-traits-ContactPointTrait.html#property_availableLanguage" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                            </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ContactPointTrait.php"><a href="files/src-org-schema-traits-contactpointtrait.html"><abbr title="src/org/schema/traits/ContactPointTrait.php">ContactPointTrait.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">24</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">A language someone may use with or at the item, service or place.</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|string|null</span>
-    <span class="phpdocumentor-signature__name">$availableLanguage</span>
-    </code>
-
-        <section class="phpdocumentor-description"><p>Please use one of the language codes from the IETF BCP 47 standard.</p>
-</section>
-
-    
-    
-
-    
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -public
-                                                                    "
->
-    <h4 class="phpdocumentor-element__name" id="property_contactOption">
-        $contactOption
-        <a href="classes/org-schema-traits-ContactPointTrait.html#property_contactOption" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                            </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ContactPointTrait.php"><a href="files/src-org-schema-traits-contactpointtrait.html"><abbr title="src/org/schema/traits/ContactPointTrait.php">ContactPointTrait.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">30</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">An option available on this contact point (e.g. a toll-free number or support for hearing-impaired callers).</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">$contactOption</span>
-    </code>
-
-    
-    
-    
-
-    
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -public
-                                                                    "
->
-    <h4 class="phpdocumentor-element__name" id="property_contactType">
-        $contactType
-        <a href="classes/org-schema-traits-ContactPointTrait.html#property_contactType" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                            </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ContactPointTrait.php"><a href="files/src-org-schema-traits-contactpointtrait.html"><abbr title="src/org/schema/traits/ContactPointTrait.php">ContactPointTrait.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">37</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">A person or organization can have different contact points, for different purposes.</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">string|null</span>
-    <span class="phpdocumentor-signature__name">$contactType</span>
-    </code>
-
-        <section class="phpdocumentor-description"><p>For example, a sales contact point, a PR contact point and so on. This property is used to specify the kind of contact point.</p>
-</section>
-
     
     
 
@@ -1228,84 +888,6 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
             -public
                                                                     "
 >
-    <h4 class="phpdocumentor-element__name" id="property_email">
-        $email
-        <a href="classes/org-schema-traits-ContactPointTrait.html#property_email" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                            </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ContactPointTrait.php"><a href="files/src-org-schema-traits-contactpointtrait.html"><abbr title="src/org/schema/traits/ContactPointTrait.php">ContactPointTrait.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">43</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">The email address.</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">null|string|array&lt;string|int, mixed&gt;</span>
-    <span class="phpdocumentor-signature__name">$email</span>
-    </code>
-
-    
-    
-    
-
-    
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -public
-                                                                    "
->
-    <h4 class="phpdocumentor-element__name" id="property_faxNumber">
-        $faxNumber
-        <a href="classes/org-schema-traits-ContactPointTrait.html#property_faxNumber" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                            </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ContactPointTrait.php"><a href="files/src-org-schema-traits-contactpointtrait.html"><abbr title="src/org/schema/traits/ContactPointTrait.php">ContactPointTrait.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">49</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">The fax number.</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">null|string|array&lt;string|int, mixed&gt;</span>
-    <span class="phpdocumentor-signature__name">$faxNumber</span>
-    </code>
-
-    
-    
-    
-
-    
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -public
-                                                                    "
->
     <h4 class="phpdocumentor-element__name" id="property_hasPart">
         $hasPart
         <a href="classes/org-schema-Thing.html#property_hasPart" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1327,45 +909,6 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
         <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__type">string|<a href="classes/org-schema-Thing.html"><abbr title="\org\schema\Thing">Thing</abbr></a>|array&lt;string|int, mixed&gt;|null</span>
     <span class="phpdocumentor-signature__name">$hasPart</span>
-    </code>
-
-    
-    
-    
-
-    
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -public
-                                                                    "
->
-    <h4 class="phpdocumentor-element__name" id="property_hoursAvailable">
-        $hoursAvailable
-        <a href="classes/org-schema-traits-ContactPointTrait.html#property_hoursAvailable" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                            </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ContactPointTrait.php"><a href="files/src-org-schema-traits-contactpointtrait.html"><abbr title="src/org/schema/traits/ContactPointTrait.php">ContactPointTrait.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">55</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">The hours during which this service or contact is available.</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|null</span>
-    <span class="phpdocumentor-signature__name">$hoursAvailable</span>
     </code>
 
     
@@ -1540,6 +1083,84 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
             -public
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_issuedBy">
+        $issuedBy
+        <a href="classes/org-schema-Permit.html#property_issuedBy" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Permit.php"><a href="files/src-org-schema-permit.html"><abbr title="src/org/schema/Permit.php">Permit.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">18</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The organization issuing the item, for example a Permit, Ticket, or Certification.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/org-schema-Organization.html"><abbr title="\org\schema\Organization">Organization</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__name">$issuedBy</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_issuedThrough">
+        $issuedThrough
+        <a href="classes/org-schema-Permit.html#property_issuedThrough" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Permit.php"><a href="files/src-org-schema-permit.html"><abbr title="src/org/schema/Permit.php">Permit.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">24</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The service through which the permit was granted.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/org-schema-Service.html"><abbr title="\org\schema\Service">Service</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__name">$issuedThrough</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_license">
         $license
         <a href="classes/org-schema-Thing.html#property_license" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1657,144 +1278,27 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
             -public
                                                                     "
 >
-    <h4 class="phpdocumentor-element__name" id="property_postalCode">
-        $postalCode
-        <a href="classes/org-schema-DefinedRegion.html#property_postalCode" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_permitAudience">
+        $permitAudience
+        <a href="classes/org-schema-Permit.html#property_permitAudience" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                                             </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/DefinedRegion.php"><a href="files/src-org-schema-definedregion.html"><abbr title="src/org/schema/DefinedRegion.php">DefinedRegion.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Permit.php"><a href="files/src-org-schema-permit.html"><abbr title="src/org/schema/Permit.php">Permit.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">37</span>
+    <span class="phpdocumentor-element-found-in__line">30</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">The postal code. For example, 94043.</p>
+        <p class="phpdocumentor-summary">The target audience for this permit.</p>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">null|string</span>
-    <span class="phpdocumentor-signature__name">$postalCode</span>
-    </code>
-
-    
-    
-    
-
-    
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -public
-                                                                    "
->
-    <h4 class="phpdocumentor-element__name" id="property_postalCodePrefix">
-        $postalCodePrefix
-        <a href="classes/org-schema-DefinedRegion.html#property_postalCodePrefix" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                            </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/DefinedRegion.php"><a href="files/src-org-schema-definedregion.html"><abbr title="src/org/schema/DefinedRegion.php">DefinedRegion.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">43</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">A defined range of postal codes indicated by a common textual prefix. Used for non-numeric systems such as UK.</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">null|string</span>
-    <span class="phpdocumentor-signature__name">$postalCodePrefix</span>
-    </code>
-
-    
-    
-    
-
-    
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -public
-                                                                    "
->
-    <h4 class="phpdocumentor-element__name" id="property_postalCodeRange">
-        $postalCodeRange
-        <a href="classes/org-schema-DefinedRegion.html#property_postalCodeRange" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                            </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/DefinedRegion.php"><a href="files/src-org-schema-definedregion.html"><abbr title="src/org/schema/DefinedRegion.php">DefinedRegion.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">49</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">A defined range of postal codes.</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">null|string|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-PostalCodeRangeSpecification.html"><abbr title="\org\schema\PostalCodeRangeSpecification">PostalCodeRangeSpecification</abbr></a></span>
-    <span class="phpdocumentor-signature__name">$postalCodeRange</span>
-    </code>
-
-    
-    
-    
-
-    
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -public
-                                                                    "
->
-    <h4 class="phpdocumentor-element__name" id="property_productSupported">
-        $productSupported
-        <a href="classes/org-schema-traits-ContactPointTrait.html#property_productSupported" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                            </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ContactPointTrait.php"><a href="files/src-org-schema-traits-contactpointtrait.html"><abbr title="src/org/schema/traits/ContactPointTrait.php">ContactPointTrait.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">61</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">The product or service this support contact point is related to (such as product support for a particular product line).</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">string|null</span>
-    <span class="phpdocumentor-signature__name">$productSupported</span>
+            <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Audience.html"><abbr title="\org\schema\Audience">Audience</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__name">$permitAudience</span>
     </code>
 
     
@@ -1852,45 +1356,6 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
             -public
                                                                     "
 >
-    <h4 class="phpdocumentor-element__name" id="property_telephone">
-        $telephone
-        <a href="classes/org-schema-traits-ContactPointTrait.html#property_telephone" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                            </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ContactPointTrait.php"><a href="files/src-org-schema-traits-contactpointtrait.html"><abbr title="src/org/schema/traits/ContactPointTrait.php">ContactPointTrait.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">67</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">The telephone number.</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-        <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">null|string|array&lt;string|int, mixed&gt;</span>
-    <span class="phpdocumentor-signature__name">$telephone</span>
-    </code>
-
-    
-    
-    
-
-    
-
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -public
-                                                                    "
->
     <h4 class="phpdocumentor-element__name" id="property_url">
         $url
         <a href="classes/org-schema-Thing.html#property_url" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1923,12 +1388,168 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
     
 
 </article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_validFor">
+        $validFor
+        <a href="classes/org-schema-Permit.html#property_validFor" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Permit.php"><a href="files/src-org-schema-permit.html"><abbr title="src/org/schema/Permit.php">Permit.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">36</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The duration of validity of a permit or similar thing.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/org-schema-Duration.html"><abbr title="\org\schema\Duration">Duration</abbr></a>|int|float|null</span>
+    <span class="phpdocumentor-signature__name">$validFor</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_validFrom">
+        $validFrom
+        <a href="classes/org-schema-Permit.html#property_validFrom" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Permit.php"><a href="files/src-org-schema-permit.html"><abbr title="src/org/schema/Permit.php">Permit.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">42</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The date when the item becomes valid (DateTime).</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|int|<abbr title="\DateTime">DateTime</abbr>|null</span>
+    <span class="phpdocumentor-signature__name">$validFrom</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_validIn">
+        $validIn
+        <a href="classes/org-schema-Permit.html#property_validIn" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Permit.php"><a href="files/src-org-schema-permit.html"><abbr title="src/org/schema/Permit.php">Permit.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">48</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The geographic area where the item is valid. Applies for example to a Permit, a Certification, or an EducationalOccupationalCredential.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">null|<a href="classes/org-schema-places-AdministrativeArea.html"><abbr title="\org\schema\places\AdministrativeArea">AdministrativeArea</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$validIn</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_validUntil">
+        $validUntil
+        <a href="classes/org-schema-Permit.html#property_validUntil" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Permit.php"><a href="files/src-org-schema-permit.html"><abbr title="src/org/schema/Permit.php">Permit.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">54</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The date when the item is no longer valid.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|int|<abbr title="\DateTime">DateTime</abbr>|null</span>
+    <span class="phpdocumentor-signature__name">$validUntil</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
             </section>
 
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/org-schema-DefinedRegion.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/org-schema-Permit.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
                     <article
@@ -2104,7 +1725,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
     <div class="phpdocumentor-modal-bg" data-exit-button></div>
     <div class="phpdocumentor-modal-container">
         <div class="phpdocumentor-modal-content">
-            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/src/org/schema/DefinedRegion.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/src/org/schema/Permit.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
         </div>
         <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
     </div>
@@ -2205,9 +1826,9 @@ echo json_encode($person, JSON_PRETTY_PRINT);
             <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                        <li><a href="classes/org-schema-DefinedRegion.html#toc-constants">Constants</a></li>
-                                                            <li><a href="classes/org-schema-DefinedRegion.html#toc-properties">Properties</a></li>
-                                                            <li><a href="classes/org-schema-DefinedRegion.html#toc-methods">Methods</a></li>
+                                        <li><a href="classes/org-schema-Permit.html#toc-constants">Constants</a></li>
+                                                            <li><a href="classes/org-schema-Permit.html#toc-properties">Properties</a></li>
+                                                            <li><a href="classes/org-schema-Permit.html#toc-methods">Methods</a></li>
                                     </ul>
             </li>
                             <li class="phpdocumentor-on-this-page-section__title">Constants</li>
@@ -2227,35 +1848,27 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                                                     <li class=""><a href="classes/org-schema-Thing.html#property__to">$_to</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_active">$active</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_additionalType">$additionalType</a></li>
-                                                    <li class=""><a href="classes/org-schema-DefinedRegion.html#property_addressCountry">$addressCountry</a></li>
-                                                    <li class=""><a href="classes/org-schema-DefinedRegion.html#property_addressLocality">$addressLocality</a></li>
-                                                    <li class=""><a href="classes/org-schema-DefinedRegion.html#property_addressRegion">$addressRegion</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_alternateName">$alternateName</a></li>
-                                                    <li class=""><a href="classes/org-schema-traits-ContactPointTrait.html#property_areaServed">$areaServed</a></li>
-                                                    <li class=""><a href="classes/org-schema-traits-ContactPointTrait.html#property_availableLanguage">$availableLanguage</a></li>
-                                                    <li class=""><a href="classes/org-schema-traits-ContactPointTrait.html#property_contactOption">$contactOption</a></li>
-                                                    <li class=""><a href="classes/org-schema-traits-ContactPointTrait.html#property_contactType">$contactType</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_created">$created</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_description">$description</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_disambiguatingDescription">$disambiguatingDescription</a></li>
-                                                    <li class=""><a href="classes/org-schema-traits-ContactPointTrait.html#property_email">$email</a></li>
-                                                    <li class=""><a href="classes/org-schema-traits-ContactPointTrait.html#property_faxNumber">$faxNumber</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_hasPart">$hasPart</a></li>
-                                                    <li class=""><a href="classes/org-schema-traits-ContactPointTrait.html#property_hoursAvailable">$hoursAvailable</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_id">$id</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_identifier">$identifier</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_image">$image</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_isPartOf">$isPartOf</a></li>
+                                                    <li class=""><a href="classes/org-schema-Permit.html#property_issuedBy">$issuedBy</a></li>
+                                                    <li class=""><a href="classes/org-schema-Permit.html#property_issuedThrough">$issuedThrough</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_license">$license</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_modified">$modified</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_name">$name</a></li>
-                                                    <li class=""><a href="classes/org-schema-DefinedRegion.html#property_postalCode">$postalCode</a></li>
-                                                    <li class=""><a href="classes/org-schema-DefinedRegion.html#property_postalCodePrefix">$postalCodePrefix</a></li>
-                                                    <li class=""><a href="classes/org-schema-DefinedRegion.html#property_postalCodeRange">$postalCodeRange</a></li>
-                                                    <li class=""><a href="classes/org-schema-traits-ContactPointTrait.html#property_productSupported">$productSupported</a></li>
+                                                    <li class=""><a href="classes/org-schema-Permit.html#property_permitAudience">$permitAudience</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_publisher">$publisher</a></li>
-                                                    <li class=""><a href="classes/org-schema-traits-ContactPointTrait.html#property_telephone">$telephone</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_url">$url</a></li>
+                                                    <li class=""><a href="classes/org-schema-Permit.html#property_validFor">$validFor</a></li>
+                                                    <li class=""><a href="classes/org-schema-Permit.html#property_validFrom">$validFrom</a></li>
+                                                    <li class=""><a href="classes/org-schema-Permit.html#property_validIn">$validIn</a></li>
+                                                    <li class=""><a href="classes/org-schema-Permit.html#property_validUntil">$validUntil</a></li>
                                             </ul>
                 </li>
             
@@ -2283,7 +1896,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
     </section>
 </section>
         </div>
-        <a href="classes/org-schema-DefinedRegion.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/org-schema-Permit.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 
