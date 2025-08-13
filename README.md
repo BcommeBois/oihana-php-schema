@@ -5,6 +5,10 @@
 Oihana Schema is a PHP library that provides an object-oriented implementation of the [Schema.org](https://www.schema.org) vocabulary. 
 It is designed to encapsulate structured data using strongly typed value objects, with automatic serialization and hydration features.
 
+[![Latest Version](https://img.shields.io/packagist/v/oihana/php-schema.svg?style=flat-square)](https://packagist.org/packages/oihana/php-schema)  
+[![Total Downloads](https://img.shields.io/packagist/dt/oihana/php-schema.svg?style=flat-square)](https://packagist.org/packages/oihana/php-schema)  
+[![License](https://img.shields.io/packagist/l/oihana/php-schema.svg?style=flat-square)](LICENSE)
+
 This library is ideal for representing database records or REST API resources in a structured, semantically rich way, compatible with JSON-LD and linked data ecosystems.
 
 ## ✨ Key Features
@@ -132,15 +136,15 @@ In the meantime, explore the following namespaces:
 
 To run all tests:
 ```bash
-composer run-script test
+composer test
 ```
 
 To run a specific test file:
 ```bash
-composer run test ./tests/schema/ThingTest.php
+composer test ./tests/org/schema/ThingTest.php
 ```
 
-## 🧾 Licence
+## 🧾 License
 
 This project is licensed under the [Mozilla Public License 2.0 (MPL-2.0)](https://www.mozilla.org/en-US/MPL/2.0/).
 
@@ -159,3 +163,110 @@ Run the command :
 ```bash
 composer doc
 ```
+
+## 🧩 Advanced Usage
+
+### Union-typed properties
+Some properties accept multiple types. For instance, `publisher` may be a `string`, a `Person`, or an `Organization`.
+```php
+use org\schema\CreativeWork;
+use org\schema\Person;
+use org\schema\Organization;
+use org\schema\constants\Prop;
+
+$post = new CreativeWork
+([
+    Prop::NAME      => 'Release Notes',
+    Prop::PUBLISHER => new Organization([ Prop::NAME => 'Oihana' ])
+]);
+```
+
+### Arrays and nested entities
+You can compose objects with arrays of other entities, leveraging the public-typed properties.
+```php
+use org\schema\Thing;
+use org\schema\constants\Prop;
+
+$parent = new Thing
+([
+    Prop::NAME   => 'Bundle',
+    Prop::HAS_PART => 
+    [
+        new Thing([ Prop::NAME => 'Part A' ]),
+        new Thing([ Prop::NAME => 'Part B' ]),
+    ],
+]);
+```
+
+### JSON-LD metadata for ArangoDB
+Base `Thing` supports ArangoDB-style metadata fields to facilitate graph storage:
+`_key`, `_id`, `_rev`, `_from`, `_to`.
+```php
+use org\schema\Thing;
+
+$edge = new Thing
+([
+    '_from' => 'users/2555',
+    '_to'   => 'groups/42',
+]);
+```
+
+### Deep/recursive hydration
+The constructor copies provided values into public properties. For deep graphs and automatic casting, you can rely on the internal reflection utilities exposed by `oihana/php-reflect` (see developer docs). A typical approach is to call a reflection-based `hydrate()` to materialize nested arrays into value objects.
+
+## 🧱 Extending the Library
+
+Define your own types by extending `org\schema\Thing` or a more specific class, and add your public-typed properties. You can also define constants alongside `org\schema\constants\Prop` for safer access.
+```php
+namespace app\domain;
+
+use org\schema\Thing;
+
+class CustomAsset extends Thing
+{
+    public ?string $slug;
+    public ?string $category;
+}
+```
+
+## ⚙️ Installation Notes
+
+- This package requires PHP 8.4+.
+- It depends on `oihana/php-core` and `oihana/php-reflect`. If your project enforces stable versions only, you may need to allow dev versions while these libraries are pre-release:
+  - In your root composer.json: set `"minimum-stability": "dev"` and `"prefer-stable": true` if needed.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please:
+- Open an issue to discuss significant changes before submitting a PR.
+- Add tests when fixing a bug or adding a feature.
+- Keep code style consistent and types explicit.
+
+Local setup:
+```bash
+composer install
+composer test
+composer doc
+```
+
+## 🔒 Security
+
+If you discover a security vulnerability, please email `marc@ooop.fr`. Do not open a public issue for security reports.
+
+## 📜 Changelog
+
+See `CHANGELOG.md` for notable changes.
+
+## 🔗 Related Packages
+
+- [oihana/php-core](https://github.com/BcommeBois/oihana-php-core) – core helpers and utilities used by this library
+- [oihana/php-reflect](https://github.com/BcommeBois/oihana-php-reflect) – reflection and hydration utilities
+
+## ❓ FAQ
+
+- Why JSON-LD?  
+  It’s a web-native, schema-friendly format that plays well with linked data and search engines.
+- Can I output plain arrays?  
+  Yes, `jsonSerialize()` returns arrays that you can pass to any JSON encoder.
+- How to ignore nulls?  
+  Serialization automatically removes null values.

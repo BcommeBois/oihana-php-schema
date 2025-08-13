@@ -4,7 +4,7 @@ namespace org\schema;
 
 use DateTime;
 
-use oihana\reflections\attributes\HydrateWith;
+use oihana\reflect\attributes\HydrateWith;
 
 use org\schema\creativeWork\Certification;
 use org\schema\creativeWork\medias\ImageObject;

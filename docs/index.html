@@ -101,6 +101,19 @@
 
 </br>
 
+<p>
+    <a href="https://packagist.org/packages/oihana/php-schema" target="_blank">
+        <img alt="Latest Version" src="https://img.shields.io/packagist/v/oihana/php-schema.svg?style=flat-square"/>
+    </a>
+    <a href="https://packagist.org/packages/oihana/php-schema" target="_blank">
+        <img alt="Total Downloads" src="https://img.shields.io/packagist/dt/oihana/php-schema.svg?style=flat-square"/>
+    </a>
+    <a href="LICENSE" target="_blank">
+        <img alt="License" src="https://img.shields.io/packagist/l/oihana/php-schema.svg?style=flat-square"/>
+    </a>
+    <br/>
+</p>
+
 <h3>🔗 Project on GitHub</h3>
 <p>View the full source code and contribute on GitHub:</p>
 <p>
@@ -183,10 +196,10 @@ $event = new Event
 
 <h3>✅ Running Unit Tests</h3>
 <p>Run all unit tests:</p>
-<pre class="language-bash prettyprint">composer run-script test</pre>
+<pre class="language-bash prettyprint">composer test</pre>
 
 <p>Run a specific test:</p>
-<pre class="language-bash prettyprint">composer run test ./tests/org/schema/ThingTest.php</pre>
+<pre class="language-bash prettyprint">composer test ./tests/org/schema/ThingTest.php</pre>
 
 <h3>📄 License</h3>
 <p>This project is licensed under the <strong><a href="https://www.mozilla.org/en-US/MPL/2.0/" target="_blank">Mozilla Public License 2.0 (MPL-2.0)</a></strong>.</p>
@@ -196,6 +209,119 @@ $event = new Event
     <li><strong>Name:</strong> Marc ALCARAZ (aka <em>eKameleon</em>)</li>
     <li><strong>Website:</strong> <a href="https://www.ooop.fr" target="_blank">www.ooop.fr</a></li>
     <li><strong>Email:</strong> <a href="mailto:marc@ooop.fr">marc@ooop.fr</a></li>
+</ul>
+
+<h3>📚 Documentation</h3>
+<p>
+    Full project documentation is available at:
+    <a href="https://bcommebois.github.io/oihana-php-schema" target="_blank">https://bcommebois.github.io/oihana-php-schema</a>
+    <br/>
+    Explore namespaces:
+    <code>org\schema\</code>, <code>org\schema\traits</code>, <code>org\schema\constants</code>
+    for types, behaviors and property constants.
+    A complete developer guide is coming soon (UML, object maps, property references).
+    
+    
+</p>
+
+<h3>🧩 Advanced Usage</h3>
+
+<h4>Union-typed properties</h4>
+<p>Some properties accept multiple types. For instance, <code>publisher</code> may be a <code>string</code>, a <code>Person</code>, or an <code>Organization</code>.</p>
+<pre class="prettyprint"><code class="language-php">use org\schema\CreativeWork;
+use org\schema\Person;
+use org\schema\Organization;
+use org\schema\constants\Prop;
+
+$post = new CreativeWork([
+    Prop::NAME      => 'Release Notes',
+    Prop::PUBLISHER => new Organization([ Prop::NAME => 'Oihana' ])
+]);
+</code></pre>
+
+<h4>Arrays and nested entities</h4>
+<p>Compose objects with arrays of other entities via typed public properties.</p>
+<pre class="prettyprint"><code class="language-php">use org\schema\Thing;
+use org\schema\constants\Prop;
+
+$parent = new Thing([
+    Prop::NAME    => 'Bundle',
+    Prop::HAS_PART => [
+        new Thing([ Prop::NAME => 'Part A' ]),
+        new Thing([ Prop::NAME => 'Part B' ]),
+    ],
+]);
+</code></pre>
+
+<h4>JSON-LD metadata for ArangoDB</h4>
+<p>Base <code>Thing</code> supports ArangoDB-style metadata fields to facilitate graph storage: <code>_key</code>, <code>_id</code>, <code>_rev</code>, <code>_from</code>, <code>_to</code>.</p>
+<pre class="prettyprint"><code class="language-php">use org\schema\Thing;
+
+$edge = new Thing([
+    '_from' => 'users/2555',
+    '_to'   => 'groups/42',
+]);
+</code></pre>
+
+<h4>Deep/recursive hydration</h4>
+<p>
+The constructor copies provided values into public properties. For deep graphs and automatic casting,
+you can rely on the internal reflection utilities exposed by <code>oihana/php-reflect</code>.
+Typical usage is to call a reflection-based <code>hydrate()</code> to materialize nested arrays into value objects.
+</p>
+
+<h3>🧱 Extending the Library</h3>
+<p>Extend <code>org\schema\Thing</code> (or a more specific class) and declare typed public properties. You can also add constants alongside <code>org\schema\constants\Prop</code>.</p>
+<pre class="prettyprint"><code class="language-php">namespace app\domain;
+
+use org\schema\Thing;
+
+class CustomAsset extends Thing
+{
+    public ?string $slug;
+    public ?string $category;
+}
+</code></pre>
+
+<h3>⚙️ Installation Notes</h3>
+<ul>
+    <li>Requires PHP 8.4+.</li>
+    <li>Depends on <code>oihana/php-core</code> and <code>oihana/php-reflect</code>. If your project enforces stable-only, consider setting <code>"minimum-stability": "dev"</code> and <code>"prefer-stable": true</code> while these libraries are pre-release.</li>
+    
+</ul>
+
+<h3>🤝 Contributing</h3>
+<p>Contributions are welcome:</p>
+<ul>
+    <li>Open an issue to discuss significant changes before a PR.</li>
+    <li>Add tests for bug fixes and new features.</li>
+    <li>Keep code style consistent and types explicit.</li>
+</ul>
+<pre class="language-bash prettyprint">composer install
+composer test
+composer doc</pre>
+
+<h3>🔒 Security</h3>
+<p>If you discover a security vulnerability, email <code>marc@ooop.fr</code>. Do not open a public issue.</p>
+
+<h3>📜 Changelog</h3>
+<p>See <code>CHANGELOG.md</code> for notable changes.</p>
+
+<h3>🔗 Related Packages</h3>
+<ul>
+    <li><a href="https://github.com/BcommeBois/oihana-php-core">oihana/php-core</a> – core helpers and utilities used by this library</li>
+    <li><a href="https://github.com/BcommeBois/oihana-php-reflect">oihana/php-reflect</a> – reflection and hydration utilities</li>
+</ul>
+
+<h3>🛠️ Generate the Documentation</h3>
+<p>We use <a href="https://phpdoc.org/" target="_blank">phpDocumentor</a> to generate this site.</p>
+<pre class="language-bash prettyprint">composer doc</pre>
+
+<h3>❓ FAQ</h3>
+<ul>
+    <li><strong>Why JSON-LD?</strong> It’s schema-friendly, web-native, and search-engine friendly.</li>
+    <li><strong>Can I output plain arrays?</strong> Yes, <code>jsonSerialize()</code> returns arrays you can pass to any encoder.</li>
+    <li><strong>How to ignore nulls?</strong> Serialization automatically removes null values.</li>
 </ul>
 
 

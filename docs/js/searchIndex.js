@@ -2776,101 +2776,6 @@ Search.appendIndex(
             "summary": "The\u0020start\u0020date\u0020and\u0020time\u0020of\u0020the\u0020item\u0020\u0028in\u0020ISO\u00208601\u0020date\u0020format\u0029.",
             "url": "classes/org-schema-Grant.html#property_startDate"
         },                {
-            "fqsen": "\\org\\schema\\helpers\\TimeInterval",
-            "name": "TimeInterval",
-            "summary": "The\u0020TimeInterval\u0020helper\u0020to\u0020format\u0020a\u0020duration.",
-            "url": "classes/org-schema-helpers-TimeInterval.html"
-        },                {
-            "fqsen": "\\org\\schema\\helpers\\TimeInterval\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "Creates\u0020a\u0020new\u0020TimeInterval\u0020instance.",
-            "url": "classes/org-schema-helpers-TimeInterval.html#method___construct"
-        },                {
-            "fqsen": "\\org\\schema\\helpers\\TimeInterval\u003A\u003Aparse\u0028\u0029",
-            "name": "parse",
-            "summary": "Attempt\u0020to\u0020parse\u0020one\u0020of\u0020the\u0020forms\u0020of\u0020duration.",
-            "url": "classes/org-schema-helpers-TimeInterval.html#method_parse"
-        },                {
-            "fqsen": "\\org\\schema\\helpers\\TimeInterval\u003A\u003AtoSeconds\u0028\u0029",
-            "name": "toSeconds",
-            "summary": "Returns\u0020the\u0020duration\u0020as\u0020an\u0020amount\u0020of\u0020seconds.",
-            "url": "classes/org-schema-helpers-TimeInterval.html#method_toSeconds"
-        },                {
-            "fqsen": "\\org\\schema\\helpers\\TimeInterval\u003A\u003AtoMinutes\u0028\u0029",
-            "name": "toMinutes",
-            "summary": "Returns\u0020the\u0020duration\u0020as\u0020an\u0020amount\u0020of\u0020minutes.",
-            "url": "classes/org-schema-helpers-TimeInterval.html#method_toMinutes"
-        },                {
-            "fqsen": "\\org\\schema\\helpers\\TimeInterval\u003A\u003Aformatted\u0028\u0029",
-            "name": "formatted",
-            "summary": "Returns\u0020the\u0020duration\u0020as\u0020a\u0020colon\u0020formatted\u0020string",
-            "url": "classes/org-schema-helpers-TimeInterval.html#method_formatted"
-        },                {
-            "fqsen": "\\org\\schema\\helpers\\TimeInterval\u003A\u003Ahumanize\u0028\u0029",
-            "name": "humanize",
-            "summary": "Returns\u0020the\u0020duration\u0020as\u0020a\u0020human\u002Dreadable\u0020string.",
-            "url": "classes/org-schema-helpers-TimeInterval.html#method_humanize"
-        },                {
-            "fqsen": "\\org\\schema\\helpers\\TimeInterval\u003A\u003AnumberBreakdown\u0028\u0029",
-            "name": "numberBreakdown",
-            "summary": "",
-            "url": "classes/org-schema-helpers-TimeInterval.html#method_numberBreakdown"
-        },                {
-            "fqsen": "\\org\\schema\\helpers\\TimeInterval\u003A\u003Areset\u0028\u0029",
-            "name": "reset",
-            "summary": "Resets\u0020the\u0020Duration\u0020object\u0020by\u0020clearing\u0020the\u0020output\u0020and\u0020values.",
-            "url": "classes/org-schema-helpers-TimeInterval.html#method_reset"
-        },                {
-            "fqsen": "\\org\\schema\\helpers\\TimeInterval\u003A\u003A\u0024output",
-            "name": "output",
-            "summary": "",
-            "url": "classes/org-schema-helpers-TimeInterval.html#property_output"
-        },                {
-            "fqsen": "\\org\\schema\\helpers\\TimeInterval\u003A\u003A\u0024days",
-            "name": "days",
-            "summary": "",
-            "url": "classes/org-schema-helpers-TimeInterval.html#property_days"
-        },                {
-            "fqsen": "\\org\\schema\\helpers\\TimeInterval\u003A\u003A\u0024hours",
-            "name": "hours",
-            "summary": "",
-            "url": "classes/org-schema-helpers-TimeInterval.html#property_hours"
-        },                {
-            "fqsen": "\\org\\schema\\helpers\\TimeInterval\u003A\u003A\u0024hoursPerDay",
-            "name": "hoursPerDay",
-            "summary": "",
-            "url": "classes/org-schema-helpers-TimeInterval.html#property_hoursPerDay"
-        },                {
-            "fqsen": "\\org\\schema\\helpers\\TimeInterval\u003A\u003A\u0024minutes",
-            "name": "minutes",
-            "summary": "",
-            "url": "classes/org-schema-helpers-TimeInterval.html#property_minutes"
-        },                {
-            "fqsen": "\\org\\schema\\helpers\\TimeInterval\u003A\u003A\u0024seconds",
-            "name": "seconds",
-            "summary": "",
-            "url": "classes/org-schema-helpers-TimeInterval.html#property_seconds"
-        },                {
-            "fqsen": "\\org\\schema\\helpers\\TimeInterval\u003A\u003A\u0024daysRegex",
-            "name": "daysRegex",
-            "summary": "",
-            "url": "classes/org-schema-helpers-TimeInterval.html#property_daysRegex"
-        },                {
-            "fqsen": "\\org\\schema\\helpers\\TimeInterval\u003A\u003A\u0024hoursRegex",
-            "name": "hoursRegex",
-            "summary": "",
-            "url": "classes/org-schema-helpers-TimeInterval.html#property_hoursRegex"
-        },                {
-            "fqsen": "\\org\\schema\\helpers\\TimeInterval\u003A\u003A\u0024minutesRegex",
-            "name": "minutesRegex",
-            "summary": "",
-            "url": "classes/org-schema-helpers-TimeInterval.html#property_minutesRegex"
-        },                {
-            "fqsen": "\\org\\schema\\helpers\\TimeInterval\u003A\u003A\u0024secondsRegex",
-            "name": "secondsRegex",
-            "summary": "",
-            "url": "classes/org-schema-helpers-TimeInterval.html#property_secondsRegex"
-        },                {
             "fqsen": "\\org\\schema\\Intangible",
             "name": "Intangible",
             "summary": "A\u0020utility\u0020class\u0020that\u0020serves\u0020as\u0020the\u0020umbrella\u0020for\u0020a\u0020number\u0020of\u0020\u0027intangible\u0027\u0020things\u0020such\u0020as\u0020quantities,\u0020structured\u0020values,\u0020etc.",
@@ -7165,11 +7070,6 @@ Search.appendIndex(
             "name": "enumerations",
             "summary": "",
             "url": "namespaces/org-schema-events-enumerations.html"
-        },                {
-            "fqsen": "\\org\\schema\\helpers",
-            "name": "helpers",
-            "summary": "",
-            "url": "namespaces/org-schema-helpers.html"
         },                {
             "fqsen": "\\org\\schema\\items",
             "name": "items",

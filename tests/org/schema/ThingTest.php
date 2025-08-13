@@ -1,8 +1,9 @@
 <?php
 
-namespace org\schema ;
+namespace tests\org\schema ;
 
 use org\schema\constants\Prop;
+use org\schema\Thing;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
 

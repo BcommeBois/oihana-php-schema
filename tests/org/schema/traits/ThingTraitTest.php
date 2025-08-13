@@ -1,9 +1,10 @@
 <?php
 
-namespace org\schema\traits;
+namespace tests\org\schema\traits;
 
 use JsonSerializable;
 use org\schema\constants\Prop;
+use org\schema\traits\ThingTrait;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
 

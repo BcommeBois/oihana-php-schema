@@ -2,8 +2,9 @@
 
 namespace org\schema\traits ;
 
-use oihana\reflections\traits\ReflectionTrait;
 use ReflectionException;
+
+use oihana\reflect\traits\ReflectionTrait;
 
 use org\schema\constants\Prop;
 

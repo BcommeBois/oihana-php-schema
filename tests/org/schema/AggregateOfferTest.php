@@ -1,10 +1,14 @@
 <?php
 
-namespace org\schema ;
+namespace tests\org\schema ;
 
-use org\schema\constants\Prop;
-use PHPUnit\Framework\TestCase;
 use ReflectionException;
+
+use org\schema\AggregateOffer;
+use org\schema\constants\Prop;
+use org\schema\Thing;
+
+use PHPUnit\Framework\TestCase;
 
 class AggregateOfferTest extends TestCase
 {
