@@ -3,6 +3,7 @@
 namespace fr\ooop\schema;
 
 use org\schema\Intangible;
+use fr\ooop\schema\constants\traits\PaginationTrait ;
 
 /**
  * Represents pagination information for a collection of items.
@@ -17,6 +18,8 @@ use org\schema\Intangible;
  */
 class Pagination extends Intangible
 {
+    use PaginationTrait ;
+
     /**
      * The @context of the json-ld representation of the thing.
      */
@@ -40,7 +43,6 @@ class Pagination extends Intangible
      * @var int|null
      */
     public null|int $maxLimit ;
-
 
     /**
      * The minimum allowed number of items per page.

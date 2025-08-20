@@ -17,12 +17,12 @@ class PaginationTest extends TestCase
         $pagination = new Pagination();
 
         // Properties should exist and be null by default
-        $this->assertObjectHasProperty(Ooop::LIMIT           , $pagination ) ;
-        $this->assertObjectHasProperty(Ooop::MAX_LIMIT       , $pagination ) ;
-        $this->assertObjectHasProperty(Ooop::MIN_LIMIT       , $pagination ) ;
-        $this->assertObjectHasProperty(Ooop::OFFSET          , $pagination ) ;
-        $this->assertObjectHasProperty(Ooop::NUMBER_OF_PAGES , $pagination ) ;
-        $this->assertObjectHasProperty(Ooop::PAGE            , $pagination ) ;
+        $this->assertObjectHasProperty(Pagination::LIMIT           , $pagination ) ;
+        $this->assertObjectHasProperty(Pagination::MAX_LIMIT       , $pagination ) ;
+        $this->assertObjectHasProperty(Pagination::MIN_LIMIT       , $pagination ) ;
+        $this->assertObjectHasProperty(Pagination::OFFSET          , $pagination ) ;
+        $this->assertObjectHasProperty(Pagination::NUMBER_OF_PAGES , $pagination ) ;
+        $this->assertObjectHasProperty(Pagination::PAGE            , $pagination ) ;
 
         $this->assertNull($pagination->limit         ?? null ) ;
         $this->assertNull($pagination->maxLimit      ?? null ) ;
@@ -36,11 +36,11 @@ class PaginationTest extends TestCase
     {
         $pagination = new Pagination
         ([
-            Ooop::LIMIT           => 10 ,
-            Ooop::OFFSET          => 20 ,
-            Ooop::MAX_LIMIT       => 100 ,
-            Ooop::NUMBER_OF_PAGES => 500 ,
-            Ooop::PAGE            => 5
+            Pagination::LIMIT           => 10 ,
+            Pagination::OFFSET          => 20 ,
+            Pagination::MAX_LIMIT       => 100 ,
+            Pagination::NUMBER_OF_PAGES => 500 ,
+            Pagination::PAGE            => 5
         ]);
 
         $this->assertSame(10,  $pagination->limit);
