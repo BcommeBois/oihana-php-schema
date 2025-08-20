@@ -1,6 +1,6 @@
 <?php
 
-namespace fr\ooop\constants\traits;
+namespace fr\ooop\schema\constants\traits;
 
 trait Pagination
 {

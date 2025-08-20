@@ -17,7 +17,7 @@ This library is ideal for representing database records or REST API resources in
  - 🧩 Automatic JSON-LD serialization (JsonSerializable)
  - 🪄 Recursive object hydration (including nested types and union types)
  - 🧠 Internal reflection system (oihana\reflections)
- - 🎯 Safe property access via constants (e.g. Prop::NAME)
+ - 🎯 Safe property access via constants (e.g. Schema::NAME)
  - 📚 Extensible architecture for custom ontologies
  - 🔐 Support for ArangoDB metadata (_id, _key, _rev, _from, _to)
 
@@ -36,16 +36,16 @@ Simple usage
 ```php
 use org\schema\Person;
 use org\schema\PostalAddress;
-use org\schema\constants\Prop;
+use org\schema\constants\Schema;
 
 $person = new Person
 ([
-    Prop::ID      => '2555',
-    Prop::NAME    => 'John Doe',
-    Prop::ADDRESS => new PostalAddress
+    Schema::ID      => '2555',
+    Schema::NAME    => 'John Doe',
+    Schema::ADDRESS => new PostalAddress
     ([
-        Prop::STREET_ADDRESS => '2 chemin des Vergers',
-        Prop::POSTAL_CODE    => '49170'
+        Schema::STREET_ADDRESS => '2 chemin des Vergers',
+        Schema::POSTAL_CODE    => '49170'
     ])
 ]);
 
@@ -93,15 +93,16 @@ $person = $reflection->hydrate
 
 ## 🔐 Safe Property Access
 
-The org\schema\constants\Prop class contains constant names for every property in the **Schema.org** ontology and its extensions:
+The org\schema\constants\Schema class contains constant names for every property in the **Schema.org** ontology and its extensions:
 
 ```php
-use org\schema\constants\Prop;
+use org\schema\constants\Schema;
+use org\schema\Event;
 
 $event = new Event
 ([
-    Prop::NAME     => 'Oihana Conf 2025',
-    Prop::LOCATION => new Place([ Prop::NAME => 'Nantes' ])
+    Schema::NAME     => 'Oihana Conf 2025',
+    Schema::LOCATION => new Place([ Schema::NAME => 'Nantes' ])
 ]);
 ```
 
@@ -132,6 +133,35 @@ In the meantime, explore the following namespaces:
 - org\schema\traits for logic traits
 - org\schema\constants for property constants
 
+## 🇫🇷 fr\\ooop Namespace (Ooop extensions)
+
+In addition to the Schema.org core under `org\\schema`, this library provides an extension namespace for Ooop-specific needs used in the French ecosystem: `fr\\ooop\\schema`.
+
+What you will find there:
+- Value objects for domain-specific concepts (e.g., `fr\\ooop\\schema\\Pagination`).
+- A constants container `fr\\ooop\\schema\\constants\\Ooop` exposing safe property names via traits (e.g., `Pagination` constants).
+
+Example: model pagination parameters with JSON-LD support
+```php
+use fr\ooop\schema\Pagination;
+use fr\ooop\schema\constants\Ooop;
+
+$pagination = new Pagination
+([
+    Ooop::LIMIT => 50,
+    Ooop::PAGE  => 2,
+]);
+
+// JSON-LD with a dedicated context for Ooop extensions
+echo json_encode($pagination, JSON_UNESCAPED_SLASHES);
+// {"@type":"Pagination","@context":"https://schema.ooop.fr","limit":50,"page":2}
+```
+
+Key points:
+- `Pagination` extends `org\schema\Intangible` and integrates seamlessly with the rest of the model.
+- `Pagination::CONTEXT` defaults to `https://schema.ooop.fr` to distinguish Ooop extensions.
+- Use `fr\ooop\schema\constants\Ooop` to reference property names safely: `Ooop::LIMIT`, `Ooop::OFFSET`, `Ooop::MAX_LIMIT`, `Ooop::MIN_LIMIT`, `Ooop::NUMBER_OF_PAGES`, `Ooop::PAGE`.
+
 ## ✅ Running Unit Tests
 
 To run all tests:
@@ -142,6 +172,7 @@ composer test
 To run a specific test file:
 ```bash
 composer test ./tests/org/schema/ThingTest.php
+composer test ./tests/fr/ooop/schema/PaginationTest.php
 ```
 
 ## 🧾 License
@@ -172,12 +203,12 @@ Some properties accept multiple types. For instance, `publisher` may be a `strin
 use org\schema\CreativeWork;
 use org\schema\Person;
 use org\schema\Organization;
-use org\schema\constants\Prop;
+use org\schema\constants\Schema;
 
 $post = new CreativeWork
 ([
-    Prop::NAME      => 'Release Notes',
-    Prop::PUBLISHER => new Organization([ Prop::NAME => 'Oihana' ])
+    Schema::NAME      => 'Release Notes',
+    Schema::PUBLISHER => new Organization([ Schema::NAME => 'Oihana' ])
 ]);
 ```
 
@@ -185,15 +216,15 @@ $post = new CreativeWork
 You can compose objects with arrays of other entities, leveraging the public-typed properties.
 ```php
 use org\schema\Thing;
-use org\schema\constants\Prop;
+use org\schema\constants\Schema;
 
 $parent = new Thing
 ([
-    Prop::NAME   => 'Bundle',
-    Prop::HAS_PART => 
+    Schema::NAME   => 'Bundle',
+    Schema::HAS_PART => 
     [
-        new Thing([ Prop::NAME => 'Part A' ]),
-        new Thing([ Prop::NAME => 'Part B' ]),
+        new Thing([ Schema::NAME => 'Part A' ]),
+        new Thing([ Schema::NAME => 'Part B' ]),
     ],
 ]);
 ```
@@ -216,7 +247,7 @@ The constructor copies provided values into public properties. For deep graphs a
 
 ## 🧱 Extending the Library
 
-Define your own types by extending `org\schema\Thing` or a more specific class, and add your public-typed properties. You can also define constants alongside `org\schema\constants\Prop` for safer access.
+Define your own types by extending `org\schema\Thing` or a more specific class, and add your public-typed properties. You can also define constants alongside `org\schema\constants\Schema` for safer access.
 ```php
 namespace app\domain;
 

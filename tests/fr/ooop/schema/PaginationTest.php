@@ -3,10 +3,10 @@
 namespace tests\fr\ooop\schema ;
 
 use fr\ooop\schema\Pagination;
+use fr\ooop\schema\constants\Ooop;
 
 use org\schema\constants\Schema;
 
-use fr\ooop\constants\Ooop;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
 
