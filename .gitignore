@@ -28,3 +28,6 @@ coverage.xml
 
 # Node
 node_modules/
+
+# Warp
+WARP.md

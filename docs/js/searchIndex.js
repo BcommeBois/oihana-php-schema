@@ -1,6 +1,46 @@
 Search.appendIndex(
     [
                 {
+            "fqsen": "\\fr\\ooop\\constants\\Ooop",
+            "name": "Ooop",
+            "summary": "",
+            "url": "classes/fr-ooop-constants-Ooop.html"
+        },                {
+            "fqsen": "\\fr\\ooop\\constants\\traits\\Pagination",
+            "name": "Pagination",
+            "summary": "",
+            "url": "classes/fr-ooop-constants-traits-Pagination.html"
+        },                {
+            "fqsen": "\\fr\\ooop\\schema\\Pagination",
+            "name": "Pagination",
+            "summary": "Represents\u0020pagination\u0020information\u0020for\u0020a\u0020collection\u0020of\u0020items.",
+            "url": "classes/fr-ooop-schema-Pagination.html"
+        },                {
+            "fqsen": "\\fr\\ooop\\schema\\Pagination\u003A\u003ACONTEXT",
+            "name": "CONTEXT",
+            "summary": "The\u0020\u0040context\u0020of\u0020the\u0020json\u002Dld\u0020representation\u0020of\u0020the\u0020thing.",
+            "url": "classes/fr-ooop-schema-Pagination.html#constant_CONTEXT"
+        },                {
+            "fqsen": "\\fr\\ooop\\schema\\Pagination\u003A\u003A\u0024limit",
+            "name": "limit",
+            "summary": "The\u0020\u0027limit\u0027\u0020key.",
+            "url": "classes/fr-ooop-schema-Pagination.html#property_limit"
+        },                {
+            "fqsen": "\\fr\\ooop\\schema\\Pagination\u003A\u003A\u0024maxLimit",
+            "name": "maxLimit",
+            "summary": "The\u0020\u0027maxLimit\u0027\u0020key.",
+            "url": "classes/fr-ooop-schema-Pagination.html#property_maxLimit"
+        },                {
+            "fqsen": "\\fr\\ooop\\schema\\Pagination\u003A\u003A\u0024minLimit",
+            "name": "minLimit",
+            "summary": "The\u0020\u0027minLimit\u0027\u0020key.",
+            "url": "classes/fr-ooop-schema-Pagination.html#property_minLimit"
+        },                {
+            "fqsen": "\\fr\\ooop\\schema\\Pagination\u003A\u003A\u0024offset",
+            "name": "offset",
+            "summary": "The\u0020\u0027offset\u0027\u0020key.",
+            "url": "classes/fr-ooop-schema-Pagination.html#property_offset"
+        },                {
             "fqsen": "\\org\\schema\\Action",
             "name": "Action",
             "summary": "An\u0020action\u0020performed\u0020by\u0020a\u0020direct\u0020agent\u0020and\u0020indirect\u0020participants\u0020upon\u0020a\u0020direct\u0020object.\u0020Optionally\u0020happens\u0020at\u0020a\u0020location\u0020with\u0020the\u0020help\u0020of\u0020an\u0020inanimate\u0020instrument.",
@@ -236,6 +276,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/org-schema-constants-Prop.html"
         },                {
+            "fqsen": "\\org\\schema\\constants\\Schema",
+            "name": "Schema",
+            "summary": "Collection\u0020of\u0020schema.org\u0020property\u0020name\u0020constants.",
+            "url": "classes/org-schema-constants-Schema.html"
+        },                {
             "fqsen": "\\org\\schema\\constants\\traits\\AggregateOffer",
             "name": "AggregateOffer",
             "summary": "The\u0020Offer\u0020properties\u0020enumeration.",
@@ -413,7 +458,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\org\\schema\\ContactPoint",
             "name": "ContactPoint",
-            "summary": "",
+            "summary": "The\u0020most\u0020generic\u0020type\u0020of\u0020item.",
             "url": "classes/org-schema-ContactPoint.html"
         },                {
             "fqsen": "\\org\\schema\\Context",
@@ -4598,7 +4643,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\org\\schema\\PostalAddress",
             "name": "PostalAddress",
-            "summary": "",
+            "summary": "The\u0020most\u0020generic\u0020type\u0020of\u0020item.",
             "url": "classes/org-schema-PostalAddress.html"
         },                {
             "fqsen": "\\org\\schema\\PostalCodeRangeSpecification",
@@ -5853,7 +5898,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\org\\schema\\Thing",
             "name": "Thing",
-            "summary": "",
+            "summary": "The\u0020most\u0020generic\u0020type\u0020of\u0020item.",
             "url": "classes/org-schema-Thing.html"
         },                {
             "fqsen": "\\org\\schema\\Thing\u003A\u003A\u0024_key",
@@ -6975,6 +7020,31 @@ Search.appendIndex(
             "name": "\\",
             "summary": "",
             "url": "namespaces/default.html"
+        },                {
+            "fqsen": "\\fr\\ooop\\constants",
+            "name": "constants",
+            "summary": "",
+            "url": "namespaces/fr-ooop-constants.html"
+        },                {
+            "fqsen": "\\fr\\ooop",
+            "name": "ooop",
+            "summary": "",
+            "url": "namespaces/fr-ooop.html"
+        },                {
+            "fqsen": "\\fr",
+            "name": "fr",
+            "summary": "",
+            "url": "namespaces/fr.html"
+        },                {
+            "fqsen": "\\fr\\ooop\\constants\\traits",
+            "name": "traits",
+            "summary": "",
+            "url": "namespaces/fr-ooop-constants-traits.html"
+        },                {
+            "fqsen": "\\fr\\ooop\\schema",
+            "name": "schema",
+            "summary": "",
+            "url": "namespaces/fr-ooop-schema.html"
         },                {
             "fqsen": "\\org\\schema",
             "name": "schema",

@@ -6,6 +6,16 @@ use DateTime;
 use JsonSerializable;
 use org\schema\traits\ThingTrait;
 
+/**
+ * The most generic type of item.
+ * Represents any kind of item in a structured data model.
+ *
+ * Can be extended by more specific types such as `Person`, `Organization`, `Event`, etc.
+ *
+ * @see https://schema.org/Thing
+ *
+ * @package org\schema
+ */
 class Thing implements JsonSerializable
 {
     use ThingTrait ;

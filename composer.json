@@ -24,7 +24,8 @@
     {
         "psr-4" :
         {
-            "org\\schema\\": "src/org/schema"
+            "org\\schema\\": "src/org/schema" ,
+            "fr\\ooop\\": "src/fr/ooop"
         }
     },
     "autoload-dev": {
