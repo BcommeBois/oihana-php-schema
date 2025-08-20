@@ -17,29 +17,36 @@ class PaginationTest extends TestCase
         $pagination = new Pagination();
 
         // Properties should exist and be null by default
-        $this->assertObjectHasProperty(Ooop::LIMIT     , $pagination );
-        $this->assertObjectHasProperty(Ooop::MAX_LIMIT , $pagination );
-        $this->assertObjectHasProperty(Ooop::MIN_LIMIT , $pagination );
-        $this->assertObjectHasProperty(Ooop::OFFSET    , $pagination );
+        $this->assertObjectHasProperty(Ooop::LIMIT           , $pagination ) ;
+        $this->assertObjectHasProperty(Ooop::MAX_LIMIT       , $pagination ) ;
+        $this->assertObjectHasProperty(Ooop::MIN_LIMIT       , $pagination ) ;
+        $this->assertObjectHasProperty(Ooop::OFFSET          , $pagination ) ;
+        $this->assertObjectHasProperty(Ooop::NUMBER_OF_PAGES , $pagination ) ;
+        $this->assertObjectHasProperty(Ooop::PAGE            , $pagination ) ;
 
-        $this->assertNull($pagination->limit    ?? null ) ;
-        $this->assertNull($pagination->maxLimit ?? null ) ;
-        $this->assertNull($pagination->minLimit ?? null ) ;
-        $this->assertNull($pagination->offset   ?? null ) ;
+        $this->assertNull($pagination->limit         ?? null ) ;
+        $this->assertNull($pagination->maxLimit      ?? null ) ;
+        $this->assertNull($pagination->minLimit      ?? null ) ;
+        $this->assertNull($pagination->offset        ?? null ) ;
+        $this->assertNull($pagination->numberOfPages ?? null ) ;
+        $this->assertNull($pagination->page          ?? null ) ;
     }
 
     public function testConstructorInitializesProperties()
     {
         $pagination = new Pagination
         ([
-            Ooop::LIMIT     => 10,
-            Ooop::OFFSET    => 20,
-            Ooop::MAX_LIMIT => 100,
+            Ooop::LIMIT           => 10 ,
+            Ooop::OFFSET          => 20 ,
+            Ooop::MAX_LIMIT       => 100 ,
+            Ooop::NUMBER_OF_PAGES => 500 ,
+            Ooop::PAGE            => 5
         ]);
 
         $this->assertSame(10,  $pagination->limit);
         $this->assertSame(20,  $pagination->offset);
         $this->assertSame(100, $pagination->maxLimit);
+        $this->assertSame(500, $pagination->numberOfPages);
         $this->assertNull($pagination->minLimit ?? null);
     }
 

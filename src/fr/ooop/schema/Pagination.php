@@ -23,26 +23,56 @@ class Pagination extends Intangible
     public const string CONTEXT = 'https://schema.ooop.fr';
 
     /**
-     * The 'limit' key.
+     * The number of items to return per page.
+     *
+     * Can be null if unspecified. Used to limit the number of items returned
+     * in a paginated collection.
+     *
      * @var int|null
      */
     public null|int $limit ;
 
     /**
-     * The 'maxLimit' key.
+     * The maximum allowed number of items per page.
+     *
+     * This can be used to enforce an upper bound on the `limit` value.
+     *
      * @var int|null
      */
     public null|int $maxLimit ;
 
+
     /**
-     * The 'minLimit' key.
+     * The minimum allowed number of items per page.
+     *
+     * This can be used to enforce a lower bound on the `limit` value.
+     *
      * @var int|null
      */
     public null|int $minLimit ;
 
     /**
-     * The 'offset' key.
+     * The number of pages in the paginated collection.
+     * @var int|null
+     * @see https://schema.org/numberOfPages
+     */
+    public null|int $numberOfPages ;
+
+    /**
+     * The number of items to skip before starting to collect the result set.
+     *
+     * Useful for paginated collections where items are retrieved in segments.
+     *
      * @var int|null
      */
     public null|int $offset ;
+
+    /**
+     * The current page number in the paginated collection.
+     *
+     * Starts at 1 by convention. Can be null if not specified.
+     *
+     * @var int|null
+     */
+    public null|int $page ;
 }

@@ -321,21 +321,21 @@ in JSON-LD or structured data.</p>
     <span>
                         &nbsp;: int|null            </span>
 </dt>
-<dd>The &#039;limit&#039; key.</dd>
+<dd>The number of items to return per page.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/fr-ooop-schema-Pagination.html#property_maxLimit">$maxLimit</a>
     <span>
                         &nbsp;: int|null            </span>
 </dt>
-<dd>The &#039;maxLimit&#039; key.</dd>
+<dd>The maximum allowed number of items per page.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/fr-ooop-schema-Pagination.html#property_minLimit">$minLimit</a>
     <span>
                         &nbsp;: int|null            </span>
 </dt>
-<dd>The &#039;minLimit&#039; key.</dd>
+<dd>The minimum allowed number of items per page.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_modified">$modified</a>
@@ -352,11 +352,25 @@ in JSON-LD or structured data.</p>
 <dd>The name of the item.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/fr-ooop-schema-Pagination.html#property_numberOfPages">$numberOfPages</a>
+    <span>
+                        &nbsp;: int|null            </span>
+</dt>
+<dd>The number of pages in the paginated collection.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/fr-ooop-schema-Pagination.html#property_offset">$offset</a>
     <span>
                         &nbsp;: int|null            </span>
 </dt>
-<dd>The &#039;offset&#039; key.</dd>
+<dd>The number of items to skip before starting to collect the result set.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/fr-ooop-schema-Pagination.html#property_page">$page</a>
+    <span>
+                        &nbsp;: int|null            </span>
+</dt>
+<dd>The current page number in the paginated collection.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_publisher">$publisher</a>
@@ -1126,11 +1140,11 @@ in JSON-LD or structured data.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/fr/ooop/schema/Pagination.php"><a href="files/src-fr-ooop-schema-pagination.html"><abbr title="src/fr/ooop/schema/Pagination.php">Pagination.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">29</span>
+    <span class="phpdocumentor-element-found-in__line">33</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">The &#039;limit&#039; key.</p>
+        <p class="phpdocumentor-summary">The number of items to return per page.</p>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -1139,7 +1153,10 @@ in JSON-LD or structured data.</p>
     <span class="phpdocumentor-signature__name">$limit</span>
     </code>
 
-    
+        <section class="phpdocumentor-description"><p>Can be null if unspecified. Used to limit the number of items returned
+in a paginated collection.</p>
+</section>
+
     
     
 
@@ -1165,11 +1182,11 @@ in JSON-LD or structured data.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/fr/ooop/schema/Pagination.php"><a href="files/src-fr-ooop-schema-pagination.html"><abbr title="src/fr/ooop/schema/Pagination.php">Pagination.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">35</span>
+    <span class="phpdocumentor-element-found-in__line">42</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">The &#039;maxLimit&#039; key.</p>
+        <p class="phpdocumentor-summary">The maximum allowed number of items per page.</p>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -1178,7 +1195,9 @@ in JSON-LD or structured data.</p>
     <span class="phpdocumentor-signature__name">$maxLimit</span>
     </code>
 
-    
+        <section class="phpdocumentor-description"><p>This can be used to enforce an upper bound on the <code class="prettyprint">limit</code> value.</p>
+</section>
+
     
     
 
@@ -1204,11 +1223,11 @@ in JSON-LD or structured data.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/fr/ooop/schema/Pagination.php"><a href="files/src-fr-ooop-schema-pagination.html"><abbr title="src/fr/ooop/schema/Pagination.php">Pagination.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">41</span>
+    <span class="phpdocumentor-element-found-in__line">52</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">The &#039;minLimit&#039; key.</p>
+        <p class="phpdocumentor-summary">The minimum allowed number of items per page.</p>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -1217,7 +1236,9 @@ in JSON-LD or structured data.</p>
     <span class="phpdocumentor-signature__name">$minLimit</span>
     </code>
 
-    
+        <section class="phpdocumentor-description"><p>This can be used to enforce a lower bound on the <code class="prettyprint">limit</code> value.</p>
+</section>
+
     
     
 
@@ -1311,6 +1332,60 @@ in JSON-LD or structured data.</p>
             -public
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_numberOfPages">
+        $numberOfPages
+        <a href="classes/fr-ooop-schema-Pagination.html#property_numberOfPages" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/fr/ooop/schema/Pagination.php"><a href="files/src-fr-ooop-schema-pagination.html"><abbr title="src/fr/ooop/schema/Pagination.php">Pagination.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">59</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The number of pages in the paginated collection.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">int|null</span>
+    <span class="phpdocumentor-signature__name">$numberOfPages</span>
+    </code>
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/fr-ooop-schema-Pagination.html#property_numberOfPages#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                    <span class="phpdocumentor-tag-link"><a href="https://schema.org/numberOfPages">https://schema.org/numberOfPages</a></span>
+                                        
+                                             
+                                    </dd>
+                                            </dl>
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_offset">
         $offset
         <a href="classes/fr-ooop-schema-Pagination.html#property_offset" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1321,11 +1396,11 @@ in JSON-LD or structured data.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/fr/ooop/schema/Pagination.php"><a href="files/src-fr-ooop-schema-pagination.html"><abbr title="src/fr/ooop/schema/Pagination.php">Pagination.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">47</span>
+    <span class="phpdocumentor-element-found-in__line">68</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">The &#039;offset&#039; key.</p>
+        <p class="phpdocumentor-summary">The number of items to skip before starting to collect the result set.</p>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -1334,7 +1409,50 @@ in JSON-LD or structured data.</p>
     <span class="phpdocumentor-signature__name">$offset</span>
     </code>
 
+        <section class="phpdocumentor-description"><p>Useful for paginated collections where items are retrieved in segments.</p>
+</section>
+
     
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_page">
+        $page
+        <a href="classes/fr-ooop-schema-Pagination.html#property_page" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/fr/ooop/schema/Pagination.php"><a href="files/src-fr-ooop-schema-pagination.html"><abbr title="src/fr/ooop/schema/Pagination.php">Pagination.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">77</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The current page number in the paginated collection.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">int|null</span>
+    <span class="phpdocumentor-signature__name">$page</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Starts at 1 by convention. Can be null if not specified.</p>
+</section>
+
     
     
 
@@ -1740,7 +1858,9 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                                                     <li class=""><a href="classes/fr-ooop-schema-Pagination.html#property_minLimit">$minLimit</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_modified">$modified</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_name">$name</a></li>
+                                                    <li class=""><a href="classes/fr-ooop-schema-Pagination.html#property_numberOfPages">$numberOfPages</a></li>
                                                     <li class=""><a href="classes/fr-ooop-schema-Pagination.html#property_offset">$offset</a></li>
+                                                    <li class=""><a href="classes/fr-ooop-schema-Pagination.html#property_page">$page</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_publisher">$publisher</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_url">$url</a></li>
                                             </ul>
