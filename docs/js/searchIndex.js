@@ -6,10 +6,55 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/fr-ooop-schema-constants-Ooop.html"
         },                {
+            "fqsen": "\\fr\\ooop\\schema\\constants\\traits\\LogTrait",
+            "name": "LogTrait",
+            "summary": "",
+            "url": "classes/fr-ooop-schema-constants-traits-LogTrait.html"
+        },                {
             "fqsen": "\\fr\\ooop\\schema\\constants\\traits\\PaginationTrait",
             "name": "PaginationTrait",
             "summary": "",
             "url": "classes/fr-ooop-schema-constants-traits-PaginationTrait.html"
+        },                {
+            "fqsen": "\\fr\\ooop\\schema\\Log",
+            "name": "Log",
+            "summary": "The\u0020most\u0020generic\u0020type\u0020of\u0020item.",
+            "url": "classes/fr-ooop-schema-Log.html"
+        },                {
+            "fqsen": "\\fr\\ooop\\schema\\Log\u003A\u003AtoArray\u0028\u0029",
+            "name": "toArray",
+            "summary": "Returns\u0020the\u0020array\u0020representation\u0020of\u0020the\u0020log\u0020definition.",
+            "url": "classes/fr-ooop-schema-Log.html#method_toArray"
+        },                {
+            "fqsen": "\\fr\\ooop\\schema\\Log\u003A\u003A__toString\u0028\u0029",
+            "name": "__toString",
+            "summary": "Returns\u0020the\u0020string\u0020representation\u0020of\u0020the\u0020thing.",
+            "url": "classes/fr-ooop-schema-Log.html#method___toString"
+        },                {
+            "fqsen": "\\fr\\ooop\\schema\\Log\u003A\u003ACONTEXT",
+            "name": "CONTEXT",
+            "summary": "The\u0020\u0040context\u0020of\u0020the\u0020json\u002Dld\u0020representation\u0020of\u0020the\u0020thing.",
+            "url": "classes/fr-ooop-schema-Log.html#constant_CONTEXT"
+        },                {
+            "fqsen": "\\fr\\ooop\\schema\\Log\u003A\u003A\u0024date",
+            "name": "date",
+            "summary": "The\u0020date\u0020of\u0020the\u0020log\u0020\u0028YYYY\u002DMM\u002DDD\u0029.",
+            "url": "classes/fr-ooop-schema-Log.html#property_date"
+        },                {
+            "fqsen": "\\fr\\ooop\\schema\\Log\u003A\u003A\u0024level",
+            "name": "level",
+            "summary": "The\u0020level\u0020of\u0020the\u0020log\u0020\u0028e.g.,\u0020INFO,\u0020ERROR,\u0020DEBUG\u0029.",
+            "url": "classes/fr-ooop-schema-Log.html#property_level"
+        },                {
+            "fqsen": "\\fr\\ooop\\schema\\Log\u003A\u003A\u0024message",
+            "name": "message",
+            "summary": "The\u0020message\u0020of\u0020the\u0020log.",
+            "url": "classes/fr-ooop-schema-Log.html#property_message"
+        },                {
+            "fqsen": "\\fr\\ooop\\schema\\Log\u003A\u003A\u0024time",
+            "name": "time",
+            "summary": "The\u0020time\u0020of\u0020the\u0020log.",
+            "url": "classes/fr-ooop-schema-Log.html#property_time"
         },                {
             "fqsen": "\\fr\\ooop\\schema\\Pagination",
             "name": "Pagination",

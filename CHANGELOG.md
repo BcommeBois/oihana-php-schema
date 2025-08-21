@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ## [Unreleased]
 
 - Adds ooop\schema (new package)
+- Adds ooop\schema\Log
 - Adds ooop\schema\Pagination
 - Adds the org\schema\constants\Schema constant
 
