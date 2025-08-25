@@ -21,7 +21,7 @@ class Person extends Thing
     /**
      * Physical address of the item (PostalAddress or any object to describe it).
      */
-    public PostalAddress|string|null $address = null ;
+    public PostalAddress|string|array|null $address = null ;
 
     /**
      * An organization that this person is affiliated with. For example, a school/university, a club, or a team.

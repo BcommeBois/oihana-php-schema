@@ -5,14 +5,9 @@ namespace org\schema\traits ;
 use ReflectionException;
 
 use oihana\reflect\traits\ReflectionTrait;
-
-use org\schema\constants\Prop;
-
-use function oihana\core\arrays\compress;
+use org\schema\constants\Schema;
 
 /**
- * Trait ThingTrait
- *
  * Provides common behavior for schema.org entities, including:
  * - Object hydration from array or object
  * - Automatic JSON-LD serialization
@@ -30,6 +25,8 @@ trait ThingTrait
      *
      * @param array|object|null $init A data array or object used to initialize the instance.
      *                                Keys must match public property names.
+     *
+     * @throws ReflectionException
      *
      * @example
      * ```php
@@ -49,11 +46,33 @@ trait ThingTrait
     {
         if( isset( $init ) )
         {
+            $init = (array) $init ;
+
+            if ( isset( $init[ Schema::AT_TYPE ] ) )
+            {
+                $this->atType = $init[ Schema::AT_TYPE ];
+                unset( $init[ Schema::AT_TYPE ] ) ;
+            }
+
+            if ( isset( $init[ Schema::AT_CONTEXT ] ) )
+            {
+                $this->atContext = $init[ Schema::AT_CONTEXT ];
+                unset( $init[ Schema::AT_CONTEXT ] );
+            }
+
+            $publicProperties = [];
+            $properties       = $this->getPublicProperties( $this );
+
+            foreach ( $properties as $property )
+            {
+                $publicProperties[ $property->getName() ] = true ;
+            }
+
             foreach ( $init as $key => $value )
             {
-                if( property_exists( $this , $key ) )
+                if ( isset( $publicProperties[ $key ] ) )
                 {
-                    $this->{ $key } = $value ;
+                    $this->{ $key } = $value;
                 }
             }
         }
@@ -67,14 +86,28 @@ trait ThingTrait
     public const string CONTEXT = 'https://schema.org' ;
 
     /**
+     * The JSON-LD `@context` value.
+     *
+     * Default is `https://schema.org`.
+     * @var string|null
+     */
+    private ?string $atContext = null;
+
+    /**
+     * The JSON-LD `@type` value.
+     *
+     * This can be manually set or automatically inferred from the class name.
+     * @var string|null
+     */
+    private ?string $atType = null;
+
+    /**
      * Serializes the current object into a JSON-LD array.
      *
-     * This method will include all public properties, the schema.org @context,
-     * and the inferred @type based on the class name.
+     * Includes public properties, the JSON-LD `@context` and `@type`.
+     * Null values are automatically removed.
      *
-     * Null values will be automatically removed using `compress()`.
-     *
-     * @return array A JSON-LD array representation of the object.
+     * @return array JSON-LD representation of the object.
      *
      * @throws ReflectionException If reflection fails when accessing properties.
      *
@@ -83,7 +116,8 @@ trait ThingTrait
      * use org\schema\Person;
      * use org\schema\constants\Prop;
      *
-     * $person = new Person([
+     * $person = new Person
+     * ([
      *     Prop::NAME => 'John Smith',
      *     Prop::ID   => 'jsmith-001'
      * ]);
@@ -93,28 +127,64 @@ trait ThingTrait
      * Output:
      * ```json
      * {
-     *   "@type": "Person",
-     *   "@context": "https://schema.org",
-     *   "id": "jsmith-001",
-     *   "name": "John Smith"
+     *    "@type": "Person",
+     *    "@context": "https://schema.org",
+     *    "id": "jsmith-001",
+     *    "name": "John Smith"
      * }
      * ```
      */
     public function jsonSerialize() : array
     {
-        $object =
+        return
         [
-            Prop::AT_TYPE    => $this->getShortName( $this ) ,
-            Prop::AT_CONTEXT => static::CONTEXT
-        ] ;
+            Schema::AT_TYPE    => $this->atType    ?? $this->getShortName( $this ) ,
+            Schema::AT_CONTEXT => $this->atContext ?? static::CONTEXT ,
+            ... $this->jsonSerializeFromPublicProperties( $this , true )
+        ];
+    }
 
-        $properties = $this->getPublicProperties( $this ) ;
-        foreach( $properties as $property )
-        {
-            $name = $property->getName();
-            $object[ $name ] = $this->{ $name } ?? null ;
-        }
+    /**
+     * Sets the internal JSON-LD `@context` attribute.
+     *
+     * Useful if you need a custom JSON-LD context.
+     *
+     * @param string $context
+     * @return $this
+     */
+    public function withAtContext( string $context ) :static
+    {
+        $this->atContext = $context ;
+        return $this ;
+    }
 
-        return compress( $object ) ;
+    /**
+     * Initializes both JSON-LD metadata: `@type` and `@context`.
+     *
+     * Can be called from constructor or later to override default values.
+     *
+     * @param string|null $atType Optional JSON-LD type
+     * @param string|null $atContext Optional JSON-LD context
+     * @return $this
+     */
+    public function withJSONLDMeta( ?string $atType = null , ?string $atContext = null ) :static
+    {
+        $this->atContext = $atContext ;
+        $this->atType    = $atType ;
+        return $this ;
+    }
+
+    /**
+     * Sets the internal JSON-LD `@type` attribute.
+     *
+     * Allows overriding the default type inferred from the class.
+     *
+     * @param string $type
+     * @return $this
+     */
+    public function withAtType( string $type ) :static
+    {
+        $this->atType = $type;
+        return $this ;
     }
 }

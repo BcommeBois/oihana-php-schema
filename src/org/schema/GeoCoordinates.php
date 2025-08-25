@@ -12,7 +12,7 @@ class GeoCoordinates extends Thing
     /**
      * Physical address of the item.
      */
-    public null|string|PostalAddress $address ;
+    public null|string|array|PostalAddress $address ;
 
     /**
      * The country. Recommended to be in 2-letter ISO 3166-1 alpha-2 format, for example "US". For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as "SGP" or a full country name such as "Singapore" can also be used.

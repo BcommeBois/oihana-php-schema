@@ -6918,7 +6918,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\org\\schema\\traits\\ThingTrait",
             "name": "ThingTrait",
-            "summary": "Trait\u0020ThingTrait",
+            "summary": "Provides\u0020common\u0020behavior\u0020for\u0020schema.org\u0020entities,\u0020including\u003A\n\u002D\u0020Object\u0020hydration\u0020from\u0020array\u0020or\u0020object\n\u002D\u0020Automatic\u0020JSON\u002DLD\u0020serialization\n\u002D\u0020Integration\u0020with\u0020internal\u0020reflection\u0020tools",
             "url": "classes/org-schema-traits-ThingTrait.html"
         },                {
             "fqsen": "\\org\\schema\\traits\\ThingTrait\u003A\u003A__construct\u0028\u0029",
@@ -6930,6 +6930,31 @@ Search.appendIndex(
             "name": "jsonSerialize",
             "summary": "Serializes\u0020the\u0020current\u0020object\u0020into\u0020a\u0020JSON\u002DLD\u0020array.",
             "url": "classes/org-schema-traits-ThingTrait.html#method_jsonSerialize"
+        },                {
+            "fqsen": "\\org\\schema\\traits\\ThingTrait\u003A\u003AwithAtContext\u0028\u0029",
+            "name": "withAtContext",
+            "summary": "Sets\u0020the\u0020internal\u0020JSON\u002DLD\u0020\u0060\u0040context\u0060\u0020attribute.",
+            "url": "classes/org-schema-traits-ThingTrait.html#method_withAtContext"
+        },                {
+            "fqsen": "\\org\\schema\\traits\\ThingTrait\u003A\u003AwithJSONLDMeta\u0028\u0029",
+            "name": "withJSONLDMeta",
+            "summary": "Initializes\u0020both\u0020JSON\u002DLD\u0020metadata\u003A\u0020\u0060\u0040type\u0060\u0020and\u0020\u0060\u0040context\u0060.",
+            "url": "classes/org-schema-traits-ThingTrait.html#method_withJSONLDMeta"
+        },                {
+            "fqsen": "\\org\\schema\\traits\\ThingTrait\u003A\u003AwithAtType\u0028\u0029",
+            "name": "withAtType",
+            "summary": "Sets\u0020the\u0020internal\u0020JSON\u002DLD\u0020\u0060\u0040type\u0060\u0020attribute.",
+            "url": "classes/org-schema-traits-ThingTrait.html#method_withAtType"
+        },                {
+            "fqsen": "\\org\\schema\\traits\\ThingTrait\u003A\u003A\u0024atContext",
+            "name": "atContext",
+            "summary": "The\u0020JSON\u002DLD\u0020\u0060\u0040context\u0060\u0020value.",
+            "url": "classes/org-schema-traits-ThingTrait.html#property_atContext"
+        },                {
+            "fqsen": "\\org\\schema\\traits\\ThingTrait\u003A\u003A\u0024atType",
+            "name": "atType",
+            "summary": "The\u0020JSON\u002DLD\u0020\u0060\u0040type\u0060\u0020value.",
+            "url": "classes/org-schema-traits-ThingTrait.html#property_atType"
         },                {
             "fqsen": "\\org\\schema\\traits\\ValueTrait",
             "name": "ValueTrait",

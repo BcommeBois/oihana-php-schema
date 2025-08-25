@@ -353,6 +353,20 @@ or might be considered mutually incompatible by upstream maintainers of the defi
 </dt>
 <dd>URL of the item.</dd>
 
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/org-schema-traits-ThingTrait.html#property_atContext">$atContext</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>The JSON-LD `@context` value.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/org-schema-traits-ThingTrait.html#property_atType">$atType</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>The JSON-LD `@type` value.</dd>
+
     </dl>
 
 <h4 id="toc-methods">
@@ -375,6 +389,27 @@ or might be considered mutually incompatible by upstream maintainers of the defi
 </dt>
 <dd>Serializes the current object into a JSON-LD array.</dd>
 
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/org-schema-traits-ThingTrait.html#method_withAtContext">withAtContext()</a>
+    <span>
+                                &nbsp;: $this    </span>
+</dt>
+<dd>Sets the internal JSON-LD `@context` attribute.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/org-schema-traits-ThingTrait.html#method_withAtType">withAtType()</a>
+    <span>
+                                &nbsp;: $this    </span>
+</dt>
+<dd>Sets the internal JSON-LD `@type` attribute.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/org-schema-traits-ThingTrait.html#method_withJSONLDMeta">withJSONLDMeta()</a>
+    <span>
+                                &nbsp;: $this    </span>
+</dt>
+<dd>Initializes both JSON-LD metadata: `@type` and `@context`.</dd>
+
     </dl>
 
 
@@ -396,7 +431,7 @@ or might be considered mutually incompatible by upstream maintainers of the defi
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">67</span>
+    <span class="phpdocumentor-element-found-in__line">86</span>
 
     </aside>
 
@@ -1284,6 +1319,88 @@ or might be considered mutually incompatible by upstream maintainers of the defi
     
 
 </article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_atContext">
+        $atContext
+        <a href="classes/org-schema-traits-ThingTrait.html#property_atContext" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">94</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The JSON-LD `@context` value.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$atContext</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+        <section class="phpdocumentor-description"><p>Default is <code class="prettyprint">https://schema.org</code>.</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_atType">
+        $atType
+        <a href="classes/org-schema-traits-ThingTrait.html#property_atType" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">102</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The JSON-LD `@type` value.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$atType</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+        <section class="phpdocumentor-description"><p>This can be manually set or automatically inferred from the class name.</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
             </section>
 
             <section class="phpdocumentor-methods">
@@ -1306,7 +1423,7 @@ or might be considered mutually incompatible by upstream maintainers of the defi
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">48</span>
+    <span class="phpdocumentor-element-found-in__line">45</span>
 
     </aside>
 
@@ -1345,6 +1462,14 @@ Keys must match public property names.</p>
     </h5>
     <dl class="phpdocumentor-tag-list">
                                     <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\ReflectionException">ReflectionException</abbr></span>
+                                                            
+                                             
+                                    </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
                     <span class="phpdocumentor-tag__name">example</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
@@ -1383,7 +1508,7 @@ echo $person-&gt;name; // Outputs: Jane Doe
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">103</span>
+    <span class="phpdocumentor-element-found-in__line">137</span>
 
     </aside>
 
@@ -1396,9 +1521,8 @@ echo $person-&gt;name; // Outputs: Jane Doe
     <div class="phpdocumentor-label-line">
         </div>
     
-        <section class="phpdocumentor-description"><p>This method will include all public properties, the schema.org @context,
-and the inferred @type based on the class name.</p>
-<p>Null values will be automatically removed using <code class="prettyprint">compress()</code>.</p>
+        <section class="phpdocumentor-description"><p>Includes public properties, the JSON-LD <code class="prettyprint">@context</code> and <code class="prettyprint">@type</code>.
+Null values are automatically removed.</p>
 </section>
 
     
@@ -1427,7 +1551,8 @@ and the inferred @type based on the class name.</p>
                                                  <section class="phpdocumentor-description"><pre class="prettyprint"><code class="language-php">use org\schema\Person;
 use org\schema\constants\Prop;
 
-$person = new Person([
+$person = new Person
+([
     Prop::NAME =&gt; 'John Smith',
     Prop::ID   =&gt; 'jsmith-001'
 ]);
@@ -1436,10 +1561,10 @@ echo json_encode($person, JSON_PRETTY_PRINT);
 </code></pre>
 <p>Output:</p>
 <pre class="prettyprint"><code class="language-json">{
-  &quot;@type&quot;: &quot;Person&quot;,
-  &quot;@context&quot;: &quot;https://schema.org&quot;,
-  &quot;id&quot;: &quot;jsmith-001&quot;,
-  &quot;name&quot;: &quot;John Smith&quot;
+   &quot;@type&quot;: &quot;Person&quot;,
+   &quot;@context&quot;: &quot;https://schema.org&quot;,
+   &quot;id&quot;: &quot;jsmith-001&quot;,
+   &quot;name&quot;: &quot;John Smith&quot;
 }
 </code></pre>
 </section>
@@ -1453,9 +1578,173 @@ echo json_encode($person, JSON_PRETTY_PRINT);
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
                     &mdash;
-                <section class="phpdocumentor-description"><p>A JSON-LD array representation of the object.</p>
+                <section class="phpdocumentor-description"><p>JSON-LD representation of the object.</p>
 </section>
 
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_withAtContext">
+        withAtContext()
+        <a href="classes/org-schema-traits-ThingTrait.html#method_withAtContext" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">155</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets the internal JSON-LD `@context` attribute.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">withAtContext</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$context</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">$this</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Useful if you need a custom JSON-LD context.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$context</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">$this</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_withAtType">
+        withAtType()
+        <a href="classes/org-schema-traits-ThingTrait.html#method_withAtType" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">185</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets the internal JSON-LD `@type` attribute.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">withAtType</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$type</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">$this</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Allows overriding the default type inferred from the class.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$type</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">$this</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_withJSONLDMeta">
+        withJSONLDMeta()
+        <a href="classes/org-schema-traits-ThingTrait.html#method_withJSONLDMeta" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">170</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Initializes both JSON-LD metadata: `@type` and `@context`.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">withJSONLDMeta</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$atType</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$atContext</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">$this</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Can be called from constructor or later to override default values.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$atType</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Optional JSON-LD type</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$atContext</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Optional JSON-LD context</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">$this</span>
             </section>
 
 </article>
@@ -1603,6 +1892,8 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_publisher">$publisher</a></li>
                                                     <li class=""><a href="classes/org-schema-Enumeration.html#property_supersededBy">$supersededBy</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_url">$url</a></li>
+                                                    <li class=""><a href="classes/org-schema-traits-ThingTrait.html#property_atContext">$atContext</a></li>
+                                                    <li class=""><a href="classes/org-schema-traits-ThingTrait.html#property_atType">$atType</a></li>
                                             </ul>
                 </li>
             
@@ -1611,6 +1902,9 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                 <ul class="phpdocumentor-list -clean">
                                             <li class=""><a href="classes/org-schema-traits-ThingTrait.html#method___construct">__construct()</a></li>
                                             <li class=""><a href="classes/org-schema-traits-ThingTrait.html#method_jsonSerialize">jsonSerialize()</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-ThingTrait.html#method_withAtContext">withAtContext()</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-ThingTrait.html#method_withAtType">withAtType()</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-ThingTrait.html#method_withJSONLDMeta">withJSONLDMeta()</a></li>
                                     </ul>
             </li>
                     </ul>
