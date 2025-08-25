@@ -37,7 +37,7 @@ trait PlaceTrait
     /**
      * Physical address of the item (PostalAddress or any object to describe it).
      */
-    public PostalAddress|string|null $address = null ;
+    public PostalAddress|string|array|null $address = null ;
 
     /**
      * An amenity feature (e.g. a characteristic or service) of the Accommodation.

@@ -34,7 +34,7 @@ class Organization extends Thing
     /**
      * Physical address of the item (PostalAddress or any object to describe it).
      */
-    public null|string|PostalAddress $address = null ;
+    public null|string|array|PostalAddress $address = null ;
 
     /**
      * The number of completed interactions for this entity, in a particular role (the 'agent'), in a particular action (indicated in the statistic), and in a particular context (i.e. interactionService).
