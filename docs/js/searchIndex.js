@@ -341,10 +341,30 @@ Search.appendIndex(
             "summary": "The\u0020Offer\u0020properties\u0020enumeration.",
             "url": "classes/org-schema-constants-traits-AggregateOffer.html"
         },                {
+            "fqsen": "\\org\\schema\\constants\\traits\\AggregateRating",
+            "name": "AggregateRating",
+            "summary": "The\u0020AggregateRating\u0020properties\u0020enumeration.",
+            "url": "classes/org-schema-constants-traits-AggregateRating.html"
+        },                {
+            "fqsen": "\\org\\schema\\constants\\traits\\AlignmentObject",
+            "name": "AlignmentObject",
+            "summary": "The\u0020AlignmentObject\u0020properties\u0020enumeration.",
+            "url": "classes/org-schema-constants-traits-AlignmentObject.html"
+        },                {
+            "fqsen": "\\org\\schema\\constants\\traits\\Audience",
+            "name": "Audience",
+            "summary": "The\u0020Audience\u0020properties\u0020enumeration.",
+            "url": "classes/org-schema-constants-traits-Audience.html"
+        },                {
             "fqsen": "\\org\\schema\\constants\\traits\\Brand",
             "name": "Brand",
             "summary": "The\u0020Brand\u0020properties\u0020enumeration.",
             "url": "classes/org-schema-constants-traits-Brand.html"
+        },                {
+            "fqsen": "\\org\\schema\\constants\\traits\\CategoryCode",
+            "name": "CategoryCode",
+            "summary": "The\u0020CategoryCode\u0020properties\u0020enumeration.",
+            "url": "classes/org-schema-constants-traits-CategoryCode.html"
         },                {
             "fqsen": "\\org\\schema\\constants\\traits\\Claim",
             "name": "Claim",
@@ -380,6 +400,16 @@ Search.appendIndex(
             "name": "Dataset",
             "summary": "",
             "url": "classes/org-schema-constants-traits-Dataset.html"
+        },                {
+            "fqsen": "\\org\\schema\\constants\\traits\\DefinedTerm",
+            "name": "DefinedTerm",
+            "summary": "The\u0020DefinedTerm\u0020properties\u0020enumeration.",
+            "url": "classes/org-schema-constants-traits-DefinedTerm.html"
+        },                {
+            "fqsen": "\\org\\schema\\constants\\traits\\DefinedTermSet",
+            "name": "DefinedTermSet",
+            "summary": "The\u0020DefinedTermSet\u0020properties\u0020enumeration.",
+            "url": "classes/org-schema-constants-traits-DefinedTermSet.html"
         },                {
             "fqsen": "\\org\\schema\\constants\\traits\\Edge",
             "name": "Edge",
@@ -431,6 +461,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/org-schema-constants-traits-Offer.html"
         },                {
+            "fqsen": "\\org\\schema\\constants\\traits\\OfferShippingDetails",
+            "name": "OfferShippingDetails",
+            "summary": "The\u0020OfferShippingDetails\u0020properties\u0020enumeration.",
+            "url": "classes/org-schema-constants-traits-OfferShippingDetails.html"
+        },                {
             "fqsen": "\\org\\schema\\constants\\traits\\Order",
             "name": "Order",
             "summary": "",
@@ -461,10 +496,35 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/org-schema-constants-traits-PriceSpecification.html"
         },                {
+            "fqsen": "\\org\\schema\\constants\\traits\\Product",
+            "name": "Product",
+            "summary": "The\u0020Product\u0020properties\u0020enumeration.",
+            "url": "classes/org-schema-constants-traits-Product.html"
+        },                {
+            "fqsen": "\\org\\schema\\constants\\traits\\ProductGroup",
+            "name": "ProductGroup",
+            "summary": "The\u0020ProductGroup\u0020properties\u0020enumeration.",
+            "url": "classes/org-schema-constants-traits-ProductGroup.html"
+        },                {
+            "fqsen": "\\org\\schema\\constants\\traits\\ProductModel",
+            "name": "ProductModel",
+            "summary": "The\u0020ProductModel\u0020properties\u0020enumeration.",
+            "url": "classes/org-schema-constants-traits-ProductModel.html"
+        },                {
             "fqsen": "\\org\\schema\\constants\\traits\\Properties",
             "name": "Properties",
             "summary": "Enumeration\u0020of\u0020all\u0020properties\u0020defines\u0020in\u0020the\u0020schema.org\u0020and\u0020custom\u0020ontologies.",
             "url": "classes/org-schema-constants-traits-Properties.html"
+        },                {
+            "fqsen": "\\org\\schema\\constants\\traits\\Rating",
+            "name": "Rating",
+            "summary": "The\u0020Rating\u0020properties\u0020enumeration.",
+            "url": "classes/org-schema-constants-traits-Rating.html"
+        },                {
+            "fqsen": "\\org\\schema\\constants\\traits\\Review",
+            "name": "Review",
+            "summary": "The\u0020Review\u0020properties\u0020enumeration.",
+            "url": "classes/org-schema-constants-traits-Review.html"
         },                {
             "fqsen": "\\org\\schema\\constants\\traits\\Service",
             "name": "Service",
@@ -4778,7 +4838,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\org\\schema\\Product",
             "name": "Product",
-            "summary": "Any\u0020offered\u0020product\u0020or\u0020service.\u0020For\u0020example\u003A\u0020a\u0020pair\u0020of\u0020shoes\u003B\u0020a\u0020concert\u0020ticket\u003B\u0020the\u0020rental\u0020of\u0020a\u0020car\u003B\u0020a\u0020haircut\u003B\u0020or\u0020an\u0020episode\u0020of\u0020a\u0020TV\u0020show\u0020streamed\u0020online.",
+            "summary": "Any\u0020offered\u0020product\u0020or\u0020service.\u0020For\u0020example\u003A\u0020a\u0020pair\u0020of\u0020shoes\u003B\u0020a\u0020concert\u0020ticket\u003B\nthe\u0020rental\u0020of\u0020a\u0020car\u003B\u0020a\u0020haircut\u003B\u0020or\u0020an\u0020episode\u0020of\u0020a\u0020TV\u0020show\u0020streamed\u0020online.",
             "url": "classes/org-schema-Product.html"
         },                {
             "fqsen": "\\org\\schema\\Product\u003A\u003A\u0024additionalProperty",
@@ -5028,7 +5088,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\org\\schema\\ProductGroup",
             "name": "ProductGroup",
-            "summary": "Any\u0020offered\u0020product\u0020or\u0020service.\u0020For\u0020example\u003A\u0020a\u0020pair\u0020of\u0020shoes\u003B\u0020a\u0020concert\u0020ticket\u003B\u0020the\u0020rental\u0020of\u0020a\u0020car\u003B\u0020a\u0020haircut\u003B\u0020or\u0020an\u0020episode\u0020of\u0020a\u0020TV\u0020show\u0020streamed\u0020online.",
+            "summary": "Any\u0020offered\u0020product\u0020or\u0020service.\u0020For\u0020example\u003A\u0020a\u0020pair\u0020of\u0020shoes\u003B\u0020a\u0020concert\u0020ticket\u003B\nthe\u0020rental\u0020of\u0020a\u0020car\u003B\u0020a\u0020haircut\u003B\u0020or\u0020an\u0020episode\u0020of\u0020a\u0020TV\u0020show\u0020streamed\u0020online.",
             "url": "classes/org-schema-ProductGroup.html"
         },                {
             "fqsen": "\\org\\schema\\ProductGroup\u003A\u003A\u0024hasVariant",
@@ -5048,7 +5108,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\org\\schema\\ProductModel",
             "name": "ProductModel",
-            "summary": "Any\u0020offered\u0020product\u0020or\u0020service.\u0020For\u0020example\u003A\u0020a\u0020pair\u0020of\u0020shoes\u003B\u0020a\u0020concert\u0020ticket\u003B\u0020the\u0020rental\u0020of\u0020a\u0020car\u003B\u0020a\u0020haircut\u003B\u0020or\u0020an\u0020episode\u0020of\u0020a\u0020TV\u0020show\u0020streamed\u0020online.",
+            "summary": "Any\u0020offered\u0020product\u0020or\u0020service.\u0020For\u0020example\u003A\u0020a\u0020pair\u0020of\u0020shoes\u003B\u0020a\u0020concert\u0020ticket\u003B\nthe\u0020rental\u0020of\u0020a\u0020car\u003B\u0020a\u0020haircut\u003B\u0020or\u0020an\u0020episode\u0020of\u0020a\u0020TV\u0020show\u0020streamed\u0020online.",
             "url": "classes/org-schema-ProductModel.html"
         },                {
             "fqsen": "\\org\\schema\\ProductModel\u003A\u003A\u0024predecessorOf",

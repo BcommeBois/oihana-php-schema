@@ -12,10 +12,9 @@ use org\schema\constants\traits\Properties;
  * custom extensions used by this package. Using constants instead of raw
  * strings prevents typos, eases refactoring, and improves IDE auto-completion.
  *
- * The constants are imported from multiple Traits (see the org\schema\constants\traits
- * namespace). When this class uses these traits, their constants become
- * available as if they were declared directly on the class, and can therefore be
- * referenced statically (e.g., Schema::NAME, Schema::AT_TYPE, etc.).
+ * The constants are imported from multiple Traits (see the org\schema\constants\traits namespace).
+ * When this class uses these traits, their constants become available as if they were declared directly
+ * on the class, and can therefore be referenced statically (e.g., Schema::NAME, Schema::AT_TYPE, etc.).
  *
  * Typical use cases include building JSON-LD or other structured data arrays
  * where keys must match schema.org property names exactly.
