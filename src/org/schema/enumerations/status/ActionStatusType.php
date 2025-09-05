@@ -2,8 +2,6 @@
 
 namespace org\schema\enumerations\status;
 
-use org\schema\Enumeration;
-
 /**
  * The status of an Action.
  * Members:
@@ -13,7 +11,7 @@ use org\schema\Enumeration;
  * - PotentialActionStatus
  * @see https://schema.org/ActionStatusType
  */
-class ActionStatusType extends Enumeration
+class ActionStatusType extends StatusEnumeration
 {
 
 }

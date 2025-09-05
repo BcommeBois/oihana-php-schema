@@ -108,80 +108,25 @@
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/org.html">org</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/org-schema.html">schema</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/org-schema-constants.html">constants</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/org-schema-constants-traits.html">traits</a></li>
     </ul>
 
-    <article class="phpdocumentor-element -class">
+    <article class="phpdocumentor-element -trait">
         <h2 class="phpdocumentor-content__title">
-    Schema
-
-    
-    
-    
-            <span class="phpdocumentor-element__extends">
-            uses
-                            <a href="classes/org-schema-constants-traits-Properties.html"><abbr title="\org\schema\constants\traits\Properties">Properties</abbr></a>                    </span>
+    EntryPoint
     </h2>
 
-<div class="phpdocumentor-label-line">
-
-
-</div>
-
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/Schema.php"><a href="files/src-org-schema-constants-schema.html"><abbr title="src/org/schema/constants/Schema.php">Schema.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/EntryPoint.php"><a href="files/src-org-schema-constants-traits-entrypoint.html"><abbr title="src/org/schema/constants/traits/EntryPoint.php">EntryPoint.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">43</span>
+    <span class="phpdocumentor-element-found-in__line">5</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">Collection of schema.org property name constants.</p>
+        
 
 
-    <section class="phpdocumentor-description"><p>This class exposes, through a composition of traits, a comprehensive set of
-constants that represent property names defined by schema.org and a few
-custom extensions used by this package. Using constants instead of raw
-strings prevents typos, eases refactoring, and improves IDE auto-completion.</p>
-<p>The constants are imported from multiple Traits (see the org\schema\constants\traits namespace).
-When this class uses these traits, their constants become available as if they were declared directly
-on the class, and can therefore be referenced statically (e.g., Schema::NAME, Schema::AT_TYPE, etc.).</p>
-<p>Typical use cases include building JSON-LD or other structured data arrays
-where keys must match schema.org property names exactly.</p>
-<p>Example:</p>
-<pre class="prettyprint"><code class="language-php">use org\schema\constants\Schema ;
-$person = new Person
-([
-    Schema::AT_TYPE =&gt; 'Person',
-    Schema::NAME    =&gt; 'Alice',
-    Schema::URL     =&gt; 'https://example.com/alice',
-]);
-</code></pre>
-<p>Notes:</p>
-<ul>
-<li>This class is intentionally lightweight and contains no methods or state;
-it only aggregates constants.</li>
-<li>If you prefer a shorter alias, you can import it as &quot;Schema&quot; or any name
-of your choice via PHP's use-as syntax.</li>
-</ul>
-</section>
 
-
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="classes/org-schema-constants-Schema.html#tags" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">see</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                                    <span class="phpdocumentor-tag-link"><a href="https://schema.org/">https://schema.org/</a></span>
-                                        
-                                                 <section class="phpdocumentor-description"><p>Official schema.org vocabulary</p>
-</section>
-
-                                    </dd>
-                                            </dl>
 
 
 
@@ -189,7 +134,7 @@ of your choice via PHP's use-as syntax.</li>
 
 <h3 id="toc">
     Table of Contents
-    <a href="classes/org-schema-constants-Schema.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/org-schema-constants-traits-EntryPoint.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h3>
 
@@ -199,6 +144,50 @@ of your choice via PHP's use-as syntax.</li>
 
 
 
+<h4 id="toc-constants">
+    Constants
+    <a href="classes/org-schema-constants-traits-EntryPoint.html#toc-constants" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-EntryPoint.html#constant_ACTION_APPLICATION">ACTION_APPLICATION</a>
+    <span>
+        &nbsp;= &#039;actionApplication&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-EntryPoint.html#constant_ACTION_PLATFORM">ACTION_PLATFORM</a>
+    <span>
+        &nbsp;= &#039;actionPlatform&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-EntryPoint.html#constant_CONTENT_TYPE">CONTENT_TYPE</a>
+    <span>
+        &nbsp;= &#039;contentType&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-EntryPoint.html#constant_ENCODING_TYPE">ENCODING_TYPE</a>
+    <span>
+        &nbsp;= &#039;encodingType&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-EntryPoint.html#constant_HTTP_METHOD">HTTP_METHOD</a>
+    <span>
+        &nbsp;= &#039;httpMethod&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-EntryPoint.html#constant_URL_TEMPLATE">URL_TEMPLATE</a>
+    <span>
+        &nbsp;= &#039;urlTemplate&#039;                            </span>
+</dt>
+
+    </dl>
+
 
 
 
@@ -206,6 +195,199 @@ of your choice via PHP's use-as syntax.</li>
 
 
         
+    <section class="phpdocumentor-constants">
+        <h3 class="phpdocumentor-elements__header" id="constants">
+            Constants
+            <a href="classes/org-schema-constants-traits-EntryPoint.html#constants" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_ACTION_APPLICATION">
+        ACTION_APPLICATION
+        <a href="classes/org-schema-constants-traits-EntryPoint.html#constant_ACTION_APPLICATION" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/EntryPoint.php"><a href="files/src-org-schema-constants-traits-entrypoint.html"><abbr title="src/org/schema/constants/traits/EntryPoint.php">EntryPoint.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">7</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">ACTION_APPLICATION</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;actionApplication&#039;</span>
+</code>
+
+
+    
+    
+    
+
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_ACTION_PLATFORM">
+        ACTION_PLATFORM
+        <a href="classes/org-schema-constants-traits-EntryPoint.html#constant_ACTION_PLATFORM" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/EntryPoint.php"><a href="files/src-org-schema-constants-traits-entrypoint.html"><abbr title="src/org/schema/constants/traits/EntryPoint.php">EntryPoint.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">8</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">ACTION_PLATFORM</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;actionPlatform&#039;</span>
+</code>
+
+
+    
+    
+    
+
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_CONTENT_TYPE">
+        CONTENT_TYPE
+        <a href="classes/org-schema-constants-traits-EntryPoint.html#constant_CONTENT_TYPE" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/EntryPoint.php"><a href="files/src-org-schema-constants-traits-entrypoint.html"><abbr title="src/org/schema/constants/traits/EntryPoint.php">EntryPoint.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">9</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">CONTENT_TYPE</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;contentType&#039;</span>
+</code>
+
+
+    
+    
+    
+
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_ENCODING_TYPE">
+        ENCODING_TYPE
+        <a href="classes/org-schema-constants-traits-EntryPoint.html#constant_ENCODING_TYPE" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/EntryPoint.php"><a href="files/src-org-schema-constants-traits-entrypoint.html"><abbr title="src/org/schema/constants/traits/EntryPoint.php">EntryPoint.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">10</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">ENCODING_TYPE</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;encodingType&#039;</span>
+</code>
+
+
+    
+    
+    
+
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_HTTP_METHOD">
+        HTTP_METHOD
+        <a href="classes/org-schema-constants-traits-EntryPoint.html#constant_HTTP_METHOD" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/EntryPoint.php"><a href="files/src-org-schema-constants-traits-entrypoint.html"><abbr title="src/org/schema/constants/traits/EntryPoint.php">EntryPoint.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">11</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">HTTP_METHOD</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;httpMethod&#039;</span>
+</code>
+
+
+    
+    
+    
+
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_URL_TEMPLATE">
+        URL_TEMPLATE
+        <a href="classes/org-schema-constants-traits-EntryPoint.html#constant_URL_TEMPLATE" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/EntryPoint.php"><a href="files/src-org-schema-constants-traits-entrypoint.html"><abbr title="src/org/schema/constants/traits/EntryPoint.php">EntryPoint.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">12</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">URL_TEMPLATE</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;urlTemplate&#039;</span>
+</code>
+
+
+    
+    
+    
+
+    
+
+</article>
+            </section>
 
         
 
@@ -214,7 +396,7 @@ of your choice via PHP's use-as syntax.</li>
     <div class="phpdocumentor-modal-bg" data-exit-button></div>
     <div class="phpdocumentor-modal-container">
         <div class="phpdocumentor-modal-content">
-            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/src/org/schema/constants/Schema.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/src/org/schema/constants/traits/EntryPoint.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
         </div>
         <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
     </div>
@@ -315,11 +497,21 @@ of your choice via PHP's use-as syntax.</li>
             <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
+                                        <li><a href="classes/org-schema-constants-traits-EntryPoint.html#toc-constants">Constants</a></li>
                                                                             </ul>
             </li>
-            
-            
-                    </ul>
+                        <li class="phpdocumentor-on-this-page-section__title">Constants</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                            <li class=""><a href="classes/org-schema-constants-traits-EntryPoint.html#constant_ACTION_APPLICATION">ACTION_APPLICATION</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-EntryPoint.html#constant_ACTION_PLATFORM">ACTION_PLATFORM</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-EntryPoint.html#constant_CONTENT_TYPE">CONTENT_TYPE</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-EntryPoint.html#constant_ENCODING_TYPE">ENCODING_TYPE</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-EntryPoint.html#constant_HTTP_METHOD">HTTP_METHOD</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-EntryPoint.html#constant_URL_TEMPLATE">URL_TEMPLATE</a></li>
+                                    </ul>
+            </li>
+                                            </ul>
     </section>
 
                 </section>
@@ -336,7 +528,7 @@ of your choice via PHP's use-as syntax.</li>
     </section>
 </section>
         </div>
-        <a href="classes/org-schema-constants-Schema.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/org-schema-constants-traits-EntryPoint.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

@@ -108,80 +108,25 @@
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/org.html">org</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/org-schema.html">schema</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/org-schema-constants.html">constants</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/org-schema-constants-traits.html">traits</a></li>
     </ul>
 
-    <article class="phpdocumentor-element -class">
+    <article class="phpdocumentor-element -trait">
         <h2 class="phpdocumentor-content__title">
-    Schema
-
-    
-    
-    
-            <span class="phpdocumentor-element__extends">
-            uses
-                            <a href="classes/org-schema-constants-traits-Properties.html"><abbr title="\org\schema\constants\traits\Properties">Properties</abbr></a>                    </span>
+    Measurement
     </h2>
 
-<div class="phpdocumentor-label-line">
-
-
-</div>
-
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/Schema.php"><a href="files/src-org-schema-constants-schema.html"><abbr title="src/org/schema/constants/Schema.php">Schema.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/Measurement.php"><a href="files/src-org-schema-constants-traits-measurement.html"><abbr title="src/org/schema/constants/traits/Measurement.php">Measurement.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">43</span>
+    <span class="phpdocumentor-element-found-in__line">5</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">Collection of schema.org property name constants.</p>
+        
 
 
-    <section class="phpdocumentor-description"><p>This class exposes, through a composition of traits, a comprehensive set of
-constants that represent property names defined by schema.org and a few
-custom extensions used by this package. Using constants instead of raw
-strings prevents typos, eases refactoring, and improves IDE auto-completion.</p>
-<p>The constants are imported from multiple Traits (see the org\schema\constants\traits namespace).
-When this class uses these traits, their constants become available as if they were declared directly
-on the class, and can therefore be referenced statically (e.g., Schema::NAME, Schema::AT_TYPE, etc.).</p>
-<p>Typical use cases include building JSON-LD or other structured data arrays
-where keys must match schema.org property names exactly.</p>
-<p>Example:</p>
-<pre class="prettyprint"><code class="language-php">use org\schema\constants\Schema ;
-$person = new Person
-([
-    Schema::AT_TYPE =&gt; 'Person',
-    Schema::NAME    =&gt; 'Alice',
-    Schema::URL     =&gt; 'https://example.com/alice',
-]);
-</code></pre>
-<p>Notes:</p>
-<ul>
-<li>This class is intentionally lightweight and contains no methods or state;
-it only aggregates constants.</li>
-<li>If you prefer a shorter alias, you can import it as &quot;Schema&quot; or any name
-of your choice via PHP's use-as syntax.</li>
-</ul>
-</section>
 
-
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="classes/org-schema-constants-Schema.html#tags" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">see</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                                    <span class="phpdocumentor-tag-link"><a href="https://schema.org/">https://schema.org/</a></span>
-                                        
-                                                 <section class="phpdocumentor-description"><p>Official schema.org vocabulary</p>
-</section>
-
-                                    </dd>
-                                            </dl>
 
 
 
@@ -189,7 +134,7 @@ of your choice via PHP's use-as syntax.</li>
 
 <h3 id="toc">
     Table of Contents
-    <a href="classes/org-schema-constants-Schema.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/org-schema-constants-traits-Measurement.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h3>
 
@@ -199,6 +144,32 @@ of your choice via PHP's use-as syntax.</li>
 
 
 
+<h4 id="toc-constants">
+    Constants
+    <a href="classes/org-schema-constants-traits-Measurement.html#toc-constants" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-Measurement.html#constant_DIMENSION">DIMENSION</a>
+    <span>
+        &nbsp;= &#039;dimension&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-Measurement.html#constant_UNIT">UNIT</a>
+    <span>
+        &nbsp;= &#039;unit&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-Measurement.html#constant_VALUE">VALUE</a>
+    <span>
+        &nbsp;= &#039;value&#039;                            </span>
+</dt>
+
+    </dl>
+
 
 
 
@@ -206,6 +177,106 @@ of your choice via PHP's use-as syntax.</li>
 
 
         
+    <section class="phpdocumentor-constants">
+        <h3 class="phpdocumentor-elements__header" id="constants">
+            Constants
+            <a href="classes/org-schema-constants-traits-Measurement.html#constants" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_DIMENSION">
+        DIMENSION
+        <a href="classes/org-schema-constants-traits-Measurement.html#constant_DIMENSION" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/Measurement.php"><a href="files/src-org-schema-constants-traits-measurement.html"><abbr title="src/org/schema/constants/traits/Measurement.php">Measurement.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">7</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">DIMENSION</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;dimension&#039;</span>
+</code>
+
+
+    
+    
+    
+
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_UNIT">
+        UNIT
+        <a href="classes/org-schema-constants-traits-Measurement.html#constant_UNIT" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/Measurement.php"><a href="files/src-org-schema-constants-traits-measurement.html"><abbr title="src/org/schema/constants/traits/Measurement.php">Measurement.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">8</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">UNIT</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;unit&#039;</span>
+</code>
+
+
+    
+    
+    
+
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_VALUE">
+        VALUE
+        <a href="classes/org-schema-constants-traits-Measurement.html#constant_VALUE" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/Measurement.php"><a href="files/src-org-schema-constants-traits-measurement.html"><abbr title="src/org/schema/constants/traits/Measurement.php">Measurement.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">9</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">VALUE</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;value&#039;</span>
+</code>
+
+
+    
+    
+    
+
+    
+
+</article>
+            </section>
 
         
 
@@ -214,7 +285,7 @@ of your choice via PHP's use-as syntax.</li>
     <div class="phpdocumentor-modal-bg" data-exit-button></div>
     <div class="phpdocumentor-modal-container">
         <div class="phpdocumentor-modal-content">
-            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/src/org/schema/constants/Schema.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/src/org/schema/constants/traits/Measurement.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
         </div>
         <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
     </div>
@@ -315,11 +386,18 @@ of your choice via PHP's use-as syntax.</li>
             <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
+                                        <li><a href="classes/org-schema-constants-traits-Measurement.html#toc-constants">Constants</a></li>
                                                                             </ul>
             </li>
-            
-            
-                    </ul>
+                        <li class="phpdocumentor-on-this-page-section__title">Constants</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                            <li class=""><a href="classes/org-schema-constants-traits-Measurement.html#constant_DIMENSION">DIMENSION</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-Measurement.html#constant_UNIT">UNIT</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-Measurement.html#constant_VALUE">VALUE</a></li>
+                                    </ul>
+            </li>
+                                            </ul>
     </section>
 
                 </section>
@@ -336,7 +414,7 @@ of your choice via PHP's use-as syntax.</li>
     </section>
 </section>
         </div>
-        <a href="classes/org-schema-constants-Schema.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/org-schema-constants-traits-Measurement.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

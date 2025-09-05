@@ -336,6 +336,11 @@ Search.appendIndex(
             "summary": "Collection\u0020of\u0020schema.org\u0020property\u0020name\u0020constants.",
             "url": "classes/org-schema-constants-Schema.html"
         },                {
+            "fqsen": "\\org\\schema\\constants\\traits\\Action",
+            "name": "Action",
+            "summary": "",
+            "url": "classes/org-schema-constants-traits-Action.html"
+        },                {
             "fqsen": "\\org\\schema\\constants\\traits\\AggregateOffer",
             "name": "AggregateOffer",
             "summary": "The\u0020Offer\u0020properties\u0020enumeration.",
@@ -386,6 +391,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/org-schema-constants-traits-ConceptualObject.html"
         },                {
+            "fqsen": "\\org\\schema\\constants\\traits\\ConstraintNode",
+            "name": "ConstraintNode",
+            "summary": "",
+            "url": "classes/org-schema-constants-traits-ConstraintNode.html"
+        },                {
             "fqsen": "\\org\\schema\\constants\\traits\\ContactPoint",
             "name": "ContactPoint",
             "summary": "",
@@ -396,10 +406,20 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/org-schema-constants-traits-CreativeWork.html"
         },                {
+            "fqsen": "\\org\\schema\\constants\\traits\\DataFeedItem",
+            "name": "DataFeedItem",
+            "summary": "",
+            "url": "classes/org-schema-constants-traits-DataFeedItem.html"
+        },                {
             "fqsen": "\\org\\schema\\constants\\traits\\Dataset",
             "name": "Dataset",
             "summary": "",
             "url": "classes/org-schema-constants-traits-Dataset.html"
+        },                {
+            "fqsen": "\\org\\schema\\constants\\traits\\DefinedRegion",
+            "name": "DefinedRegion",
+            "summary": "",
+            "url": "classes/org-schema-constants-traits-DefinedRegion.html"
         },                {
             "fqsen": "\\org\\schema\\constants\\traits\\DefinedTerm",
             "name": "DefinedTerm",
@@ -411,25 +431,70 @@ Search.appendIndex(
             "summary": "The\u0020DefinedTermSet\u0020properties\u0020enumeration.",
             "url": "classes/org-schema-constants-traits-DefinedTermSet.html"
         },                {
+            "fqsen": "\\org\\schema\\constants\\traits\\DeliveryChargeSpecification",
+            "name": "DeliveryChargeSpecification",
+            "summary": "",
+            "url": "classes/org-schema-constants-traits-DeliveryChargeSpecification.html"
+        },                {
+            "fqsen": "\\org\\schema\\constants\\traits\\Demand",
+            "name": "Demand",
+            "summary": "",
+            "url": "classes/org-schema-constants-traits-Demand.html"
+        },                {
             "fqsen": "\\org\\schema\\constants\\traits\\Edge",
             "name": "Edge",
             "summary": "",
             "url": "classes/org-schema-constants-traits-Edge.html"
+        },                {
+            "fqsen": "\\org\\schema\\constants\\traits\\EndorsementRating",
+            "name": "EndorsementRating",
+            "summary": "",
+            "url": "classes/org-schema-constants-traits-EndorsementRating.html"
+        },                {
+            "fqsen": "\\org\\schema\\constants\\traits\\EntryPoint",
+            "name": "EntryPoint",
+            "summary": "",
+            "url": "classes/org-schema-constants-traits-EntryPoint.html"
+        },                {
+            "fqsen": "\\org\\schema\\constants\\traits\\Enumeration",
+            "name": "Enumeration",
+            "summary": "",
+            "url": "classes/org-schema-constants-traits-Enumeration.html"
         },                {
             "fqsen": "\\org\\schema\\constants\\traits\\Event",
             "name": "Event",
             "summary": "",
             "url": "classes/org-schema-constants-traits-Event.html"
         },                {
+            "fqsen": "\\org\\schema\\constants\\traits\\FinancialIncentive",
+            "name": "FinancialIncentive",
+            "summary": "",
+            "url": "classes/org-schema-constants-traits-FinancialIncentive.html"
+        },                {
+            "fqsen": "\\org\\schema\\constants\\traits\\GeoCircle",
+            "name": "GeoCircle",
+            "summary": "",
+            "url": "classes/org-schema-constants-traits-GeoCircle.html"
+        },                {
             "fqsen": "\\org\\schema\\constants\\traits\\GeoCoordinates",
             "name": "GeoCoordinates",
             "summary": "",
             "url": "classes/org-schema-constants-traits-GeoCoordinates.html"
         },                {
+            "fqsen": "\\org\\schema\\constants\\traits\\GeoShape",
+            "name": "GeoShape",
+            "summary": "",
+            "url": "classes/org-schema-constants-traits-GeoShape.html"
+        },                {
             "fqsen": "\\org\\schema\\constants\\traits\\GeospatialGeometry",
             "name": "GeospatialGeometry",
             "summary": "",
             "url": "classes/org-schema-constants-traits-GeospatialGeometry.html"
+        },                {
+            "fqsen": "\\org\\schema\\constants\\traits\\Grant",
+            "name": "Grant",
+            "summary": "",
+            "url": "classes/org-schema-constants-traits-Grant.html"
         },                {
             "fqsen": "\\org\\schema\\constants\\traits\\HoursSpecification",
             "name": "HoursSpecification",
@@ -440,6 +505,41 @@ Search.appendIndex(
             "name": "I18n",
             "summary": "",
             "url": "classes/org-schema-constants-traits-I18n.html"
+        },                {
+            "fqsen": "\\org\\schema\\constants\\traits\\InteractionCounter",
+            "name": "InteractionCounter",
+            "summary": "",
+            "url": "classes/org-schema-constants-traits-InteractionCounter.html"
+        },                {
+            "fqsen": "\\org\\schema\\constants\\traits\\Invoice",
+            "name": "Invoice",
+            "summary": "",
+            "url": "classes/org-schema-constants-traits-Invoice.html"
+        },                {
+            "fqsen": "\\org\\schema\\constants\\traits\\ItemList",
+            "name": "ItemList",
+            "summary": "",
+            "url": "classes/org-schema-constants-traits-ItemList.html"
+        },                {
+            "fqsen": "\\org\\schema\\constants\\traits\\Keyword",
+            "name": "Keyword",
+            "summary": "",
+            "url": "classes/org-schema-constants-traits-Keyword.html"
+        },                {
+            "fqsen": "\\org\\schema\\constants\\traits\\ListItem",
+            "name": "ListItem",
+            "summary": "",
+            "url": "classes/org-schema-constants-traits-ListItem.html"
+        },                {
+            "fqsen": "\\org\\schema\\constants\\traits\\LocationFeatureSpecification",
+            "name": "LocationFeatureSpecification",
+            "summary": "",
+            "url": "classes/org-schema-constants-traits-LocationFeatureSpecification.html"
+        },                {
+            "fqsen": "\\org\\schema\\constants\\traits\\Measurement",
+            "name": "Measurement",
+            "summary": "",
+            "url": "classes/org-schema-constants-traits-Measurement.html"
         },                {
             "fqsen": "\\org\\schema\\constants\\traits\\MediaObject",
             "name": "MediaObject",
@@ -455,6 +555,16 @@ Search.appendIndex(
             "name": "MediaSubscription",
             "summary": "",
             "url": "classes/org-schema-constants-traits-MediaSubscription.html"
+        },                {
+            "fqsen": "\\org\\schema\\constants\\traits\\MemberProgram",
+            "name": "MemberProgram",
+            "summary": "",
+            "url": "classes/org-schema-constants-traits-MemberProgram.html"
+        },                {
+            "fqsen": "\\org\\schema\\constants\\traits\\MemberProgramTier",
+            "name": "MemberProgramTier",
+            "summary": "",
+            "url": "classes/org-schema-constants-traits-MemberProgramTier.html"
         },                {
             "fqsen": "\\org\\schema\\constants\\traits\\Offer",
             "name": "Offer",
@@ -2485,6 +2595,11 @@ Search.appendIndex(
             "name": "PotentialActionStatus",
             "summary": "A\u0020description\u0020of\u0020an\u0020action\u0020that\u0020is\u0020supported.",
             "url": "classes/org-schema-enumerations-status-PotentialActionStatus.html"
+        },                {
+            "fqsen": "\\org\\schema\\enumerations\\status\\StatusEnumeration",
+            "name": "StatusEnumeration",
+            "summary": "Lists\u0020or\u0020enumerations\u0020dealing\u0020with\u0020status\u0020types.",
+            "url": "classes/org-schema-enumerations-status-StatusEnumeration.html"
         },                {
             "fqsen": "\\org\\schema\\enumerations\\StatusEnumeration",
             "name": "StatusEnumeration",
