@@ -4,6 +4,7 @@ namespace org\schema ;
 
 use DateTime;
 use JsonSerializable;
+use org\schema\creativeWork\medias\ImageObject;
 use org\schema\traits\ThingTrait;
 
 /**
@@ -112,7 +113,7 @@ class Thing implements JsonSerializable
     /**
      * The image reference of this resource.
      */
-    public string|object|null $image ;
+    public string|ImageObject|array|null $image ;
 
     /**
      * Indicates an item that this item is part of.
