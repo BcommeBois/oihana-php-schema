@@ -311,7 +311,7 @@ class Offer extends Intangible
      * An entity which offers (sells / leases / lends / loans) the services / goods.
      * A seller may also be a provider.
      */
-    public null|Organization|Person|Thing|string|int $seller ;
+    public null|Organization|Person|Thing|string|int|array $seller ;
 
     /**
      * The serial number or any alphanumeric identifier of a particular product.
