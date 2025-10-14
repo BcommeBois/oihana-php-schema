@@ -6,16 +6,16 @@ trait PostalAddress
 {
     const string ADDRESS = 'address' ;
 
-    const string ADDITIONAL_ADDRESS       = 'addressName' ;
-    const string ADDRESS_COUNTRY          = 'addressCountry' ;
-    const string ADDRESS_DEPARTMENT       = 'addressDepartment' ;
-    const string ADDRESS_LOCALITY         = 'addressLocality' ;
-    const string ADDRESS_REGION           = 'addressRegion' ;
-    const string POSTAL_OFFICE_BOX_NUMBER = 'postOfficeBoxNumber' ;
-    const string POSTAL_CODE              = 'postalCode' ;
-    const string POSTAL_CODE_PREFIX       = 'postalCodePrefix' ;
-    const string POSTAL_CODE_RANGE        = 'postalCodeRange' ;
-    const string STREET_ADDRESS           = 'streetAddress' ;
+    const string ADDITIONAL_ADDRESS     = 'addressName' ;
+    const string ADDRESS_COUNTRY        = 'addressCountry' ;
+    const string ADDRESS_DEPARTMENT     = 'addressDepartment' ;
+    const string ADDRESS_LOCALITY       = 'addressLocality' ;
+    const string ADDRESS_REGION         = 'addressRegion' ;
+    const string POST_OFFICE_BOX_NUMBER = 'postOfficeBoxNumber' ;
+    const string POSTAL_CODE            = 'postalCode' ;
+    const string POSTAL_CODE_PREFIX     = 'postalCodePrefix' ;
+    const string POSTAL_CODE_RANGE      = 'postalCodeRange' ;
+    const string STREET_ADDRESS         = 'streetAddress' ;
 
     const string FULL_ADDITIONAL_ADDRESS     = 'address.additionalAddress' ;
     const string FULL_ADDRESS_COUNTRY        = 'address.addressCountry' ;
