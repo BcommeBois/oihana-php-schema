@@ -2,7 +2,6 @@
 
 namespace org\schema;
 
-use DateTime;
 use org\schema\creativeWork\HowTo;
 use org\schema\enumerations\status\ActionStatusType;
 
@@ -39,7 +38,7 @@ class Action extends Thing
      * Note that Event uses startDate/endDate instead of startTime/endTime, even when describing dates with times.
      * This situation may be clarified in future revisions.
      */
-    public null|string|int|DateTime $endTime ;
+    public null|string|int $endTime ;
 
     /**
      * For failed actions, more information on the cause of the failure.
@@ -88,7 +87,7 @@ class Action extends Thing
     /**
      * The startTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to start. For actions that span a period of time, when the action was performed. E.g. John wrote a book from January to December. For media, including audio and video, it's the time offset of the start of a clip within a larger file.
      */
-    public null|string|int|DateTime $startTime ;
+    public null|string|int $startTime ;
 
     /**
      * Indicates a target EntryPoint, or url, for an Action.

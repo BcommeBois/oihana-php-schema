@@ -2,8 +2,6 @@
 
 namespace org\schema;
 
-use DateTime;
-
 /**
  * A structured value representing a price or price range. Typically, only the subclasses of this type are used for markup. It is recommended to use MonetaryAmount to describe independent amounts of money such as a salary, credit
  * @see https://schema.org/PriceSpecification
@@ -62,15 +60,15 @@ class PriceSpecification extends StructuredValue
 
     /**
      * The date when the item becomes valid.
-     * @var string|DateTime|null
+     * @var string|int|null
      */
-    public null|string|DateTime $validFrom ;
+    public null|string|int $validFrom ;
 
     /**
      * The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
-     * @var string|DateTime|null
+     * @var string|int|null
      */
-    public null|string|DateTime $validThrough ;
+    public null|string|int $validThrough ;
 
     /**
      * Specifies whether the applicable value-added tax (VAT) is included in the price specification or not.

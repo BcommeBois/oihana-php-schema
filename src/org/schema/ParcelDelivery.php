@@ -2,7 +2,6 @@
 
 namespace org\schema;
 
-use DateTime;
 use org\schema\enumerations\DeliveryMethod;
 use org\schema\events\DeliveryEvent;
 
@@ -26,15 +25,15 @@ class ParcelDelivery extends Intangible
 
     /**
      * The earliest date the package may arrive.
-     * @var null|string|int|DateTime
+     * @var null|string|int
      */
-    public null|string|int|DateTime $expectedArrivalFrom ;
+    public null|string|int $expectedArrivalFrom ;
 
     /**
      * The latest date the package may arrive.
-     * @var null|string|int|DateTime
+     * @var null|string|int
      */
-    public null|string|int|DateTime $expectedArrivalUntil ;
+    public null|string|int $expectedArrivalUntil ;
 
     /**
      * Method used for delivery or shipping.

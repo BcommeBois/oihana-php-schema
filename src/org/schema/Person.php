@@ -2,7 +2,6 @@
 
 namespace org\schema;
 
-use DateTime;
 use org\schema\creativeWork\Certification;
 use org\schema\creativeWork\medias\ImageObject;
 use org\schema\organizations\EducationalOrganization;
@@ -49,7 +48,7 @@ class Person extends Thing
     /**
      * The Date of birth.
      */
-    public string|null|DateTime $birthDate ;
+    public string|null $birthDate ;
 
     /**
      * The place where the person was born.
@@ -83,7 +82,7 @@ class Person extends Thing
     /**
      * The Date of death.
      */
-    public string|null|DateTime $deathDate ;
+    public string|null $deathDate ;
 
     /**
      * The place where the person died.

@@ -23,14 +23,14 @@ class OpeningHoursSpecification extends StructuredValue
     public array|string|null $opens ;
 
     /**
-     * The date when the item becomes valid (DateTime).
+     * The date when the item becomes valid.
      */
-    public string $validFrom ;
+    public string|int|null $validFrom ;
 
     /**
-     * The end of the validity of offer, price specification, or opening hours data (DateTime).
+     * The end of the validity of offer, price specification, or opening hours data (Date Time).
      */
-    public string $validThrough ;
+    public string|int|null $validThrough ;
 }
 
 

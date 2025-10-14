@@ -2,7 +2,6 @@
 
 namespace org\schema;
 
-use DateTimeInterface;
 use org\schema\enumerations\status\PaymentStatusType;
 
 /**
@@ -57,9 +56,9 @@ class Invoice extends Intangible
 
     /**
      * The date that payment is due.
-     * @var string|DateTimeInterface|null
+     * @var string|int|null
      */
-    public null|string|DateTimeInterface $paymentDueDate ;
+    public null|string|int $paymentDueDate ;
 
     /**
      * The name of the credit card or other method of payment for the order.
@@ -95,9 +94,9 @@ class Invoice extends Intangible
 
     /**
      * The date the invoice is scheduled to be paid.
-     * @var DateTimeInterface|string|null
+     * @var int|string|null
      */
-    public null|string|DateTimeInterface $scheduledPaymentDate ;
+    public null|string|int $scheduledPaymentDate ;
 
     /**
      * The total amount due.

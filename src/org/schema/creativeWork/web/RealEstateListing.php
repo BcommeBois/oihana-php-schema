@@ -2,7 +2,6 @@
 
 namespace org\schema\creativeWork\web ;
 
-use DateTime;
 use org\schema\creativeWork\WebPage;
 use org\schema\Duration;
 use org\schema\QuantitativeValue;
@@ -16,9 +15,9 @@ class RealEstateListing extends WebPage
 {
     /**
      * Publication date of an online listing.
-     * @var string|DateTime|null
+     * @var string|null|int
      */
-    public null|string|DateTime $datePosted ;
+    public null|string|int $datePosted ;
 
     /**
      * Length of the lease for some Accommodation, either particular to some Offer or in some cases intrinsic to the property.

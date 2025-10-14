@@ -2,7 +2,6 @@
 
 namespace org\schema;
 
-use DateTime;
 use org\schema\enumerations\DayOfWeek;
 
 /**
@@ -52,7 +51,7 @@ class Schedule extends Intangible
     /**
      * The end date and time of the event or item (in ISO 8601 date format).
      */
-    public null|string|int|DateTime $endDate ;
+    public null|string|int $endDate ;
 
     /**
      * The endTime of something.
@@ -62,14 +61,14 @@ class Schedule extends Intangible
      * Note that Event uses startDate/endDate instead of startTime/endTime, even when describing dates with times.
      * This situation may be clarified in future revisions.
      */
-    public null|string|int|DateTime $endTime ;
+    public null|string|int $endTime ;
 
     /**
-     * Defines a Date or DateTime during which a scheduled Event will not take place. The property allows exceptions to a Schedule to be specified. If an exception is specified as a DateTime then only the event that would have started at that specific date and time should be excluded from the schedule. If an exception is specified as a Date then any event that is scheduled for that 24 hour period should be excluded from the schedule.
+     * Defines a Date or Date Time during which a scheduled Event will not take place. The property allows exceptions to a Schedule to be specified. If an exception is specified as a Date Time then only the event that would have started at that specific date and time should be excluded from the schedule. If an exception is specified as a Date then any event that is scheduled for that 24 hour period should be excluded from the schedule.
      * This allows a whole day to be excluded from the schedule without having to itemise every scheduled event.
-     * @var string|array|int|DateTime|null
+     * @var string|array|int|null
      */
-    public null|array|string|int|DateTime $exceptDate ;
+    public null|array|string|int $exceptDate ;
 
     /**
      * Defines the number of times a recurring Event will take place.
@@ -92,10 +91,10 @@ class Schedule extends Intangible
     /**
      * The start date and time of the event or item (in ISO 8601 date format).
      */
-    public null|string|int|DateTime $startDate ;
+    public null|string|int $startDate ;
 
     /**
      * The startTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to start. For actions that span a period of time, when the action was performed. E.g. John wrote a book from January to December. For media, including audio and video, it's the time offset of the start of a clip within a larger file.
      */
-    public null|string|int|DateTime $startTime ;
+    public null|string|int $startTime ;
 }

@@ -2,7 +2,6 @@
 
 namespace org\schema;
 
-use DateTime;
 use org\schema\enumerations\events\EventAttendanceModeEnumeration;
 use org\schema\enumerations\events\EventStatusType;
 use org\schema\organizations\PerformingGroup;
@@ -59,9 +58,9 @@ class Event extends Thing
 
     /**
      * The time admission will commence.
-     * @var string|DateTime|null
+     * @var string|int|null
      */
-    public null|string|DateTime $doorTime ;
+    public null|string|int $doorTime ;
 
     /**
      * The duration of the item (movie, audio recording, event, etc.) in ISO 8601 duration format.
@@ -72,7 +71,7 @@ class Event extends Thing
     /**
      * The end date and time of the event or item (in ISO 8601 date format).
      */
-    public null|string|int|DateTime $endDate ;
+    public null|string|int $endDate ;
 
     /**
      * The eventAttendanceMode of an event indicates whether it occurs online, offline, or a mix.
@@ -182,7 +181,7 @@ class Event extends Thing
     /**
      * The start date and time of the event or item (in ISO 8601 date format).
      */
-    public null|string|int|DateTime $startDate ;
+    public null|string|int $startDate ;
 
     /**
      * An Event that is part of this event. For example, a conference event includes many presentations, each of which is a subEvent of the conference. Supersedes subEvents.

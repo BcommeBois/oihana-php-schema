@@ -2,8 +2,6 @@
 
 namespace org\schema;
 
-use DateTime;
-
 use oihana\reflect\attributes\HydrateWith;
 
 use org\schema\creativeWork\Certification;
@@ -268,22 +266,22 @@ class Product extends Thing
 
     /**
      * The date of production of the item, e.g. vehicle.
-     * @var string|DateTime|null
+     * @var string|null|int
      */
-    public null|string|DateTime $productionDate ;
+    public null|string|int $productionDate ;
 
     /**
      * The date the item, e.g. vehicle, was purchased by the current owner.
-     * @var string|DateTime|null
+     * @var string|int|null
      */
-    public null|string|DateTime $purchaseDate ;
+    public null|string|int $purchaseDate ;
 
     /**
      * The release date of a product or product model.
      * This can be used to distinguish the exact variant of a product.
-     * @var string|DateTime|null
+     * @var string|int|null
      */
-    public null|string|DateTime $releaseDate ;
+    public null|string|int $releaseDate ;
 
     /**
      * A review of the item.

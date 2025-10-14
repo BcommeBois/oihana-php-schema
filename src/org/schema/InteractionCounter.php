@@ -2,7 +2,6 @@
 
 namespace org\schema;
 
-use DateTime;
 use org\schema\creativeWork\SoftwareApplication;
 use org\schema\creativeWork\WebSite;
 
@@ -21,13 +20,13 @@ class InteractionCounter extends StructuredValue
      * Note that Event uses startDate/endDate instead of startTime/endTime, even when describing dates with times.
      * This situation may be clarified in future revisions.
      */
-    public null|string|int|DateTime $endTime ;
+    public null|string|int $endTime ;
 
     /**
      * The WebSite or SoftwareApplication where the interactions took place.
-     * @var SoftwareApplication|Website|null
+     * @var SoftwareApplication|WebSite|null
      */
-    public null|SoftwareApplication|Website $interactionService ;
+    public null|SoftwareApplication|WebSite $interactionService ;
 
     /**
      * The Action representing the type of interaction. For up votes, +1s, etc. use LikeAction. For down votes use DislikeAction. Otherwise, use the most specific Action.
@@ -44,7 +43,7 @@ class InteractionCounter extends StructuredValue
     /**
      * The startTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to start. For actions that span a period of time, when the action was performed. E.g. John wrote a book from January to December. For media, including audio and video, it's the time offset of the start of a clip within a larger file.
      */
-    public null|string|int|DateTime $startTime ;
+    public null|string|int $startTime ;
 
     /**
      * The number of interactions for the CreativeWork using the WebSite or SoftwareApplication.

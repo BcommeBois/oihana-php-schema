@@ -2,7 +2,6 @@
 
 namespace org\schema;
 
-use DateTime;
 use org\schema\enumerations\IncentiveType;
 use org\schema\enumerations\status\IncentiveStatus;
 use org\schema\services\LoanOrCredit;
@@ -112,14 +111,14 @@ class FinancialIncentive extends Intangible
     public null|string|DefinedTerm|Enumeration $qualifiedExpense ;
 
     /**
-     * The date when the item becomes valid (DateTime).
+     * The date when the item becomes valid.
      */
-    public null|string|int|DateTime $validFrom ;
+    public null|string|int $validFrom ;
 
     /**
-     * The end of the validity of offer, price specification, or opening hours data (DateTime).
+     * The end of the validity of offer, price specification, or opening hours data.
      */
-    public null|string|int|DateTime $validThrough ;
+    public null|string|int $validThrough ;
 }
 
 

@@ -2,8 +2,6 @@
 
 namespace org\schema;
 
-use DateTime;
-
 /**
  * A monetary value or range.
  * This type can be used to describe an amount of money such as $50 USD, or a range as in describing a bank account being suitable for a balance between £1,000 and £1,000,000 GBP, or the value of a salary, etc. It is recommended to use PriceSpecification Types to describe the price of an Offer, Invoice, etc.
@@ -31,14 +29,14 @@ class MonetaryAmount extends StructuredValue
     public ?int $minValue ;
 
     /**
-     * The date when the item becomes valid (DateTime).
+     * The date when the item becomes valid.
      */
-    public null|string|int|DateTime $validFrom ;
+    public null|string|int $validFrom ;
 
     /**
-     * The end of the validity of offer, price specification, or opening hours data (DateTime).
+     * The end of the validity of offer, price specification, or opening hours data.
      */
-    public null|string|int|DateTime $validThrough ;
+    public null|string|int $validThrough ;
 
     /**
      * The value of a QuantitativeValue or property value node.

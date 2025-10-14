@@ -2,8 +2,6 @@
 
 namespace org\schema;
 
-use DateTime;
-
 /**
  * Used to describe a ticket to an event, a flight, a bus ride, etc.
  * @see https://schema.org/Ticket
@@ -12,9 +10,9 @@ class Ticket extends Intangible
 {
     /**
      * The date the ticket was issued.
-     * @var string|int|DateTime|null
+     * @var string|int|null
      */
-    public null|string|int|DateTime $dateIssued ;
+    public null|string|int $dateIssued ;
 
     /**
      * The organization issuing the item, for example a Permit, Ticket, or Certification.

@@ -15,10 +15,10 @@ class MockThing implements JsonSerializable
 {
     use ThingTrait;
 
-    public ?string $name = '' ;
-    public int     $age  = 0  ;
-    public ?string $description = null;
-    protected string $secret = 'hidden';
+    public ?string   $name        = '' ;
+    public int       $age         = 0  ;
+    public ?string   $description = null;
+    protected string $secret      = 'hidden';
 }
 
 class MockEmptyThing implements JsonSerializable
@@ -37,6 +37,9 @@ class ThingTraitTest extends TestCase
         $this->assertNull($thing->description);
     }
 
+    /**
+     * @throws ReflectionException
+     */
     public function testConstructorInitializesProperties()
     {
         $thing = new MockThing( ['name' => 'Alice' , 'age' => 30 ] );
@@ -44,6 +47,9 @@ class ThingTraitTest extends TestCase
         $this->assertSame(30      , $thing->age);
     }
 
+    /**
+     * @throws ReflectionException
+     */
     public function testConstructorWithStdClassObject()
     {
         $init = new stdClass();
@@ -56,6 +62,9 @@ class ThingTraitTest extends TestCase
         $this->assertSame(35, $thing->age);
     }
 
+    /**
+     * @throws ReflectionException
+     */
     public function testConstructorIgnoresUnknownProperties()
     {
         $thing = new MockThing( ['unknown' => 'value', 'name' => 'Bob'] );
@@ -64,6 +73,9 @@ class ThingTraitTest extends TestCase
         $this->assertObjectNotHasProperty('unknown', $thing ) ;
     }
 
+    /**
+     * @throws ReflectionException
+     */
     public function testConstructorIgnoresProtectedProperties()
     {
         $thing = new MockThing(['secret' => 'attempted_override', 'name' => 'Eve']);
@@ -200,12 +212,11 @@ class ThingTraitTest extends TestCase
      */
     public function testFullWorkflow()
     {
-        // Construction avec données
         $thing = new MockThing
         ([
-            'name' => 'Integration Test',
-            'age' => 42,
-            'description' => 'A complete test',
+            'name'         => 'Integration Test',
+            'age'          => 42,
+            'description'  => 'A complete test',
             'unknown_prop' => 'should be ignored'
         ]);
 
@@ -226,6 +237,90 @@ class ThingTraitTest extends TestCase
 
         $this->assertEquals($expected, $json);
         $this->assertArrayNotHasKey('unknown_prop', $json);
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testToJsonSchema()
+    {
+        $thing = new MockThing
+        ([
+            'name'         => 'Integration Test',
+            'age'          => 42,
+            'description'  => 'A complete test',
+        ]);
+
+        $schema = $thing->toJsonSchema();
+
+        $expected =
+        [
+            'type'       => 'object' ,
+            'properties' =>
+            [
+                'name' =>
+                [
+                    "default" => "",
+                    "oneOf"   =>
+                    [
+                        [ 'type' => 'null'   ] ,
+                        [ 'type' => 'string' ] ,
+                    ]
+                ] ,
+                'age' =>
+                [
+                    "default" => 0 ,
+                    'type'    => 'integer'
+                ] ,
+                'description' =>
+                [
+                    "oneOf" =>
+                    [
+                        [ 'type' => 'null'   ] ,
+                        [ 'type' => 'string' ] ,
+                    ]
+                ] ,
+            ]
+        ];
+
+        $this->assertEquals( $expected , $schema ) ;
+    }
+
+    public function testJsonSchema()
+    {
+        $schema = MockThing::jsonSchema();
+
+        $expected =
+        [
+            'type'       => 'object' ,
+            'properties' =>
+            [
+                'name' =>
+                [
+                    "default" => "",
+                    "oneOf"   =>
+                    [
+                        [ 'type' => 'null'   ] ,
+                        [ 'type' => 'string' ] ,
+                    ]
+                ] ,
+                'age' =>
+                [
+                    "default" => 0 ,
+                    'type'    => 'integer'
+                ] ,
+                'description' =>
+                [
+                    "oneOf" =>
+                    [
+                        [ 'type' => 'null'   ] ,
+                        [ 'type' => 'string' ] ,
+                    ]
+                ] ,
+            ]
+        ];
+
+        $this->assertEquals( $expected , $schema ) ;
     }
 }
 

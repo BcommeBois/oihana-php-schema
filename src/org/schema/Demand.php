@@ -2,7 +2,6 @@
 
 namespace org\schema;
 
-use DateTime;
 use org\schema\enumerations\BusinessEntityType;
 use org\schema\enumerations\BusinessFunction;
 use org\schema\enumerations\DeliveryMethod;
@@ -210,17 +209,17 @@ class Demand extends Intangible
     public ?string $sku ;
 
     /**
-     * The date when the item becomes valid (DateTime).
+     * The date when the item becomes valid.
      */
-    public null|string|int|DateTime $validFrom ;
+    public null|string|int $validFrom ;
 
     /**
-     * The end of the validity of offer, price specification, or opening hours data (DateTime).
+     * The end of the validity of offer, price specification, or opening hours data.
      */
-    public null|string|int|DateTime $validThrough ;
+    public null|string|int $validThrough ;
 
     /**
-     * The end of the validity of offer, price specification, or opening hours data (DateTime).
+     * The end of the validity of offer, price specification, or opening hours data.
      */
     public null|string|DefinedTerm|WarrantyPromise $warranty ;
 }

@@ -2,7 +2,6 @@
 
 namespace org\schema;
 
-use DateTime;
 use org\schema\enumerations\AdultOrientedEnumeration;
 use org\schema\enumerations\BusinessEntityType;
 use org\schema\enumerations\BusinessFunction;
@@ -297,9 +296,9 @@ class Offer extends Intangible
 
     /**
      * The date after which the price is no longer available.
-     * @var DateTime|string|null
+     * @var int|string|null
      */
-    public null|string|DateTime $priceValidUntil ;
+    public null|string|int $priceValidUntil ;
 
     /**
      * A review of the item.
@@ -337,17 +336,17 @@ class Offer extends Intangible
     public ?MemberProgramTier $validForMemberTier ;
 
     /**
-     * The date when the item becomes valid (DateTime).
+     * The date when the item becomes valid.
      */
-    public null|string|int|DateTime $validFrom ;
+    public null|string|int $validFrom ;
 
     /**
-     * The end of the validity of offer, price specification, or opening hours data (DateTime).
+     * The end of the validity of offer, price specification, or opening hours data.
      */
-    public null|string|int|DateTime $validThrough ;
+    public null|string|int $validThrough ;
 
     /**
-     * The end of the validity of offer, price specification, or opening hours data (DateTime).
+     * The warranty promise(s) included in the offer.
      */
     public null|string|DefinedTerm|WarrantyPromise $warranty ;
 }

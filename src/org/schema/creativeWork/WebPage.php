@@ -2,7 +2,6 @@
 
 namespace org\schema\creativeWork ;
 
-use DateTime;
 use org\schema\CreativeWork;
 use org\schema\creativeWork\medias\ImageObject;
 use org\schema\creativeWork\web\BreadcrumbList;
@@ -26,9 +25,9 @@ class WebPage extends CreativeWork
 
     /**
      * Date on which the content on this web page was last reviewed for accuracy and/or completeness.
-     * @var null|string|DateTime
+     * @var null|string|int
      */
-    public null|string|DateTime $lastReviewed ;
+    public null|string|int $lastReviewed ;
 
     /**
      * Indicates if this web page element is the main subject of the page.

@@ -2,7 +2,6 @@
 
 namespace org\schema\creativeWork ;
 
-use DateTime;
 use org\schema\CreativeWork;
 use org\schema\GeoShape;
 use org\schema\MediaSubscription;
@@ -54,9 +53,9 @@ class MediaObject extends CreativeWork
     /**
      * The endTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to end. For actions that span a period of time, when the action was performed. E.g. John wrote a book from January to December. For media, including audio and video, it's the time offset of the end of a clip within a larger file.
      * Note that Event uses startDate/endDate instead of startTime/endTime, even when describing dates with times. This situation may be clarified in future revisions.
-     * @var string|DateTime|int|null
+     * @var string|int|null
      */
-    public null|string|DateTime|int $endTime ;
+    public null|string|int $endTime ;
 
     /**
      * The height of the item.
@@ -122,15 +121,15 @@ class MediaObject extends CreativeWork
      * E.g. John wrote a book from January to December.
      * For media, including audio and video, it's the time offset of the start of a clip within a larger file.
      * Note that Event uses startDate/endDate instead of startTime/endTime, even when describing dates with times. This situation may be clarified in future revisions.
-     * @var string|DateTime|int|null
+     * @var string|int|null
      */
-    public null|string|DateTime|int $startTime ;
+    public null|string|int $startTime ;
 
     /**
      * Date (including time if available) when this media object was uploaded to this site.
-     * @var string|DateTime|null|int
+     * @var string|null|int
      */
-    public null|string|DateTime|int $uploadDate ;
+    public null|string|int $uploadDate ;
 
     /**
      * The width of the item.

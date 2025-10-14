@@ -15,11 +15,13 @@ class AggregateOfferTest extends TestCase
     public function testConstructorWithNoArguments()
     {
         $thing = new AggregateOffer();
-
         $this->assertObjectHasProperty( Prop::NAME , $thing );
         $this->assertNull( $thing->name ?? null , 'The name property must be null by default');
     }
 
+    /**
+     * @throws ReflectionException
+     */
     public function testConstructorInitializesProperties()
     {
         $thing = new AggregateOffer( ['name' => 'Prix public'  ] );
@@ -46,6 +48,9 @@ class AggregateOfferTest extends TestCase
         $this->assertEquals(Thing::CONTEXT , $data[ Prop::AT_CONTEXT ] ) ;
     }
 
+    /**
+     * @throws ReflectionException
+     */
     public function testJsonEncode()
     {
         $thing = [ new AggregateOffer( ['name' => 'Prix public' ] ) ];
@@ -54,5 +59,19 @@ class AggregateOfferTest extends TestCase
 
         $this->assertEquals('[{"@type":"AggregateOffer","@context":"https://schema.org","name":"Prix public"}]' , $json ) ;
     }
+
+    // public function testToJsonSchema()
+    // {
+    //     $schema = AggregateOffer::jsonSchema();
+    //
+    //     echo PHP_EOL . json_encode( $schema , JSON_UNESCAPED_SLASHES ) . PHP_EOL . PHP_EOL ;
+    //
+    //     $expected =
+    //     [
+    //
+    //     ];
+    //
+    //     $this->assertEquals( $expected , $schema ) ;
+    // }
 }
 

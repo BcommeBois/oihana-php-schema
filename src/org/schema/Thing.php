@@ -2,7 +2,6 @@
 
 namespace org\schema ;
 
-use DateTime;
 use JsonSerializable;
 use org\schema\creativeWork\medias\ImageObject;
 use org\schema\traits\ThingTrait;
@@ -87,7 +86,7 @@ class Thing implements JsonSerializable
     /**
      * Date of creation of the resource.
      */
-    public null|string|DateTime $created ;
+    public null|string $created ;
 
     /**
      * A short description of the item.
@@ -129,7 +128,7 @@ class Thing implements JsonSerializable
     /**
      * Date on which the resource was changed.
      */
-    public null|string|DateTime $modified ;
+    public null|string $modified ;
 
     /**
      * The publisher of the resource.

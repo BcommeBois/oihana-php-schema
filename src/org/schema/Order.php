@@ -2,7 +2,6 @@
 
 namespace org\schema;
 
-use DateTime;
 use org\schema\enumerations\status\OrderStatus;
 
 /**
@@ -69,9 +68,9 @@ class Order extends Intangible
 
     /**
      * Date order was placed.
-     * @var string|int|DateTime|null
+     * @var string|int|null
      */
-    public null|string|int|DateTime $orderDate ;
+    public null|string|int $orderDate ;
 
     /**
      * The delivery of the parcel related to this order or order item.
@@ -105,9 +104,9 @@ class Order extends Intangible
 
     /**
      * The date that payment is due.
-     * @var string|int|DateTime|null
+     * @var string|int|null
      */
-    public null|string|int|DateTime $paymentDueDate ;
+    public null|string|int $paymentDueDate ;
 
     /**
      * The name of the credit card or other method of payment for the order.

@@ -2,8 +2,6 @@
 
 namespace org\schema;
 
-use DateTime;
-
 /**
  * Specifies a location feature by providing a structured value representing a feature of an accommodation as a property-value pair of varying degrees of formality.
  * @see https://schema.org/LocationFeatureSpecification
@@ -17,12 +15,12 @@ class LocationFeatureSpecification extends PropertyValue
     public null|array|OpeningHoursSpecification $hoursAvailable ;
 
     /**
-     * The date when the item becomes valid (DateTime).
+     * The date when the item becomes valid.
      */
-    public null|string|int|DateTime $validFrom ;
+    public null|string|int $validFrom ;
 
     /**
      * The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.
      */
-    public null|string|int|DateTime $validThrough ;
+    public null|string|int $validThrough ;
 }

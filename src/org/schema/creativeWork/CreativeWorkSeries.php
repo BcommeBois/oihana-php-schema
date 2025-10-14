@@ -2,7 +2,6 @@
 
 namespace org\schema\creativeWork ;
 
-use DateTime;
 use org\schema\CreativeWork;
 
 /**
@@ -13,9 +12,9 @@ class CreativeWorkSeries extends CreativeWork
 {
     /**
      * The end date and time of the item (in ISO 8601 date format).
-     * @var string|int|DateTime|null
+     * @var string|int|null
      */
-    public null|string|int|DateTime $endDate ;
+    public null|string|int $endDate ;
 
     /**
      * The International Standard Serial Number (ISSN) that identifies this serial publication. You can repeat this property to identify different formats of, or the linking ISSN (ISSN-L) for, this serial publication.
@@ -25,9 +24,9 @@ class CreativeWorkSeries extends CreativeWork
 
     /**
      * The start date and time of the item (in ISO 8601 date format).
-     * @var string|int|DateTime|null
+     * @var string|int|null
      */
-    public null|string|int|DateTime $startDate ;
+    public null|string|int $startDate ;
 }
 
 

@@ -2,7 +2,6 @@
 
 namespace org\schema;
 
-use DateTime;
 use org\schema\places\AdministrativeArea;
 
 /**
@@ -36,10 +35,10 @@ class Permit extends Intangible
     public null|Duration|int|float $validFor ;
 
    /**
-    * The date when the item becomes valid (DateTime).
-    * @var string|int|DateTime|null
+    * The date when the item becomes valid.
+    * @var string|int|null
     */
-   public null|string|int|DateTime $validFrom ;
+   public null|string|int $validFrom ;
 
    /**
     * The geographic area where the item is valid. Applies for example to a Permit, a Certification, or an EducationalOccupationalCredential.
@@ -49,7 +48,7 @@ class Permit extends Intangible
 
     /**
      * The date when the item is no longer valid.
-     * @var string|int|DateTime|null
+     * @var string|int|null
      */
-    public null|string|int|DateTime $validUntil ;
+    public null|string|int $validUntil ;
 }

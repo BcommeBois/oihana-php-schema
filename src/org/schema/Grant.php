@@ -2,8 +2,6 @@
 
 namespace org\schema;
 
-use DateTime;
-
 /**
  * A grant, typically financial or otherwise quantifiable, of resources.
  *
@@ -71,9 +69,9 @@ class Grant extends Intangible
      *
      * Note : not standard.
      *
-     * @var string|int|DateTime|null
+     * @var string|int|null
      */
-    public null|string|int|DateTime $endDate ;
+    public null|string|int $endDate ;
 
     /**
      * Indicates something directly or indirectly funded or sponsored through a Grant.
@@ -114,9 +112,9 @@ class Grant extends Intangible
      *
      * Note : not standard.
      *
-     * @var string|int|DateTime|null
+     * @var string|int|null
      */
-    public null|string|int|DateTime $startDate ;
+    public null|string|int $startDate ;
 }
 
 

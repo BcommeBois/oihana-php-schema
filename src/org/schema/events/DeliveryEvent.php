@@ -2,7 +2,6 @@
 
 namespace org\schema\events;
 
-use DateTime;
 use org\schema\enumerations\DeliveryMethod;
 use org\schema\Event;
 
@@ -20,15 +19,15 @@ class DeliveryEvent extends Event
 
     /**
      * When the item is available for pickup from the store, locker, etc.
-     * @var null|string|int|DateTime
+     * @var null|string|int
      */
-    public null|string|int|DateTime $availableFrom ;
+    public null|string|int $availableFrom ;
 
     /**
      * After this date, the item will no longer be available for pickup.
-     * @var null|string|int|DateTime
+     * @var null|string|int
      */
-    public null|string|int|DateTime $availableThrough ;
+    public null|string|int $availableThrough ;
 
     /**
      * Method used for delivery or shipping.
