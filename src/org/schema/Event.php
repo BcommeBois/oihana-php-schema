@@ -3,8 +3,8 @@
 namespace org\schema;
 
 use DateTime;
-use org\schema\events\enumerations\EventAttendanceModeEnumeration;
-use org\schema\events\enumerations\EventStatusType;
+use org\schema\enumerations\events\EventAttendanceModeEnumeration;
+use org\schema\enumerations\events\EventStatusType;
 use org\schema\organizations\PerformingGroup;
 
 /**
