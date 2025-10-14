@@ -89,9 +89,9 @@ trait PlaceTrait
 
     /**
      * The geo coordinates of the place (GeoShape or GeoCoordinates).
-     * @var null|GeoCoordinates|GeoShape
+     * @var null|array|GeoCoordinates|GeoShape
      */
-    public null|GeoCoordinates|GeoShape $geo ;
+    public null|array|GeoCoordinates|GeoShape $geo ;
 
     use GeospatialGeometryTrait ;
 
