@@ -36,8 +36,7 @@
     "require": {
         "php": ">=8.4",
         "oihana/php-core": "dev-main",
-        "oihana/php-reflect": "dev-main",
-        "spiral/json-schema-generator": "^2.1"
+        "oihana/php-reflect": "dev-main"
     },
     "require-dev": {
         "phpunit/phpunit": "^12",
