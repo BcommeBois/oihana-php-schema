@@ -239,6 +239,7 @@ class ThingTraitTest extends TestCase
         $this->assertArrayNotHasKey('unknown_prop', $json);
     }
 
+
     /**
      * @throws ReflectionException
      */
@@ -251,16 +252,19 @@ class ThingTraitTest extends TestCase
             'description'  => 'A complete test',
         ]);
 
-        $schema = $thing->toJsonSchema();
+        $schema = $thing->toJsonSchema() ; // $strict = true (default)
 
         $expected =
         [
-            'type'       => 'object' ,
+            'type'                 => 'object' ,
+            '$schema'              => 'http://json-schema.org/draft-07/schema#' ,
+            'title'                => 'MockThing' ,
+            'additionalProperties' => false ,
             'properties' =>
             [
                 'name' =>
                 [
-                    "default" => "",
+                    "default" => 'Integration Test' ,
                     "oneOf"   =>
                     [
                         [ 'type' => 'null'   ] ,
@@ -269,12 +273,48 @@ class ThingTraitTest extends TestCase
                 ] ,
                 'age' =>
                 [
-                    "default" => 0 ,
+                    "default" => 42 ,
                     'type'    => 'integer'
                 ] ,
                 'description' =>
                 [
-                    "oneOf" =>
+                    "default" => 'A complete test' ,
+                    "oneOf"   =>
+                    [
+                        [ 'type' => 'null'   ] ,
+                        [ 'type' => 'string' ] ,
+                    ]
+                ] ,
+            ]
+        ];
+
+        $this->assertEquals( $expected , $schema ) ;
+
+        $schema = $thing->toJsonSchema(false );
+
+        $expected =
+        [
+            'type'       => 'object' ,
+            'properties' =>
+            [
+                'name' =>
+                [
+                    "default" => 'Integration Test' ,
+                    "oneOf"   =>
+                    [
+                        [ 'type' => 'null'   ] ,
+                        [ 'type' => 'string' ] ,
+                    ]
+                ] ,
+                'age' =>
+                [
+                    "default" => 42 ,
+                    'type'    => 'integer'
+                ] ,
+                'description' =>
+                [
+                    "default" => 'A complete test' ,
+                    "oneOf"   =>
                     [
                         [ 'type' => 'null'   ] ,
                         [ 'type' => 'string' ] ,
@@ -286,13 +326,19 @@ class ThingTraitTest extends TestCase
         $this->assertEquals( $expected , $schema ) ;
     }
 
+    /**
+     * @throws ReflectionException
+     */
     public function testJsonSchema()
     {
         $schema = MockThing::jsonSchema();
 
         $expected =
         [
-            'type'       => 'object' ,
+            'type'                  => 'object' ,
+            '$schema'              => 'http://json-schema.org/draft-07/schema#' ,
+            'title'                => 'MockThing' ,
+            'additionalProperties' => false ,
             'properties' =>
             [
                 'name' =>
