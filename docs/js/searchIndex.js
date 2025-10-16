@@ -1953,17 +1953,17 @@ Search.appendIndex(
         },                {
             "fqsen": "\\org\\schema\\Demand\u003A\u003A\u0024validFrom",
             "name": "validFrom",
-            "summary": "The\u0020date\u0020when\u0020the\u0020item\u0020becomes\u0020valid\u0020\u0028DateTime\u0029.",
+            "summary": "The\u0020date\u0020when\u0020the\u0020item\u0020becomes\u0020valid.",
             "url": "classes/org-schema-Demand.html#property_validFrom"
         },                {
             "fqsen": "\\org\\schema\\Demand\u003A\u003A\u0024validThrough",
             "name": "validThrough",
-            "summary": "The\u0020end\u0020of\u0020the\u0020validity\u0020of\u0020offer,\u0020price\u0020specification,\u0020or\u0020opening\u0020hours\u0020data\u0020\u0028DateTime\u0029.",
+            "summary": "The\u0020end\u0020of\u0020the\u0020validity\u0020of\u0020offer,\u0020price\u0020specification,\u0020or\u0020opening\u0020hours\u0020data.",
             "url": "classes/org-schema-Demand.html#property_validThrough"
         },                {
             "fqsen": "\\org\\schema\\Demand\u003A\u003A\u0024warranty",
             "name": "warranty",
-            "summary": "The\u0020end\u0020of\u0020the\u0020validity\u0020of\u0020offer,\u0020price\u0020specification,\u0020or\u0020opening\u0020hours\u0020data\u0020\u0028DateTime\u0029.",
+            "summary": "The\u0020end\u0020of\u0020the\u0020validity\u0020of\u0020offer,\u0020price\u0020specification,\u0020or\u0020opening\u0020hours\u0020data.",
             "url": "classes/org-schema-Demand.html#property_warranty"
         },                {
             "fqsen": "\\org\\schema\\Distance",
@@ -2893,12 +2893,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\org\\schema\\FinancialIncentive\u003A\u003A\u0024validFrom",
             "name": "validFrom",
-            "summary": "The\u0020date\u0020when\u0020the\u0020item\u0020becomes\u0020valid\u0020\u0028DateTime\u0029.",
+            "summary": "The\u0020date\u0020when\u0020the\u0020item\u0020becomes\u0020valid.",
             "url": "classes/org-schema-FinancialIncentive.html#property_validFrom"
         },                {
             "fqsen": "\\org\\schema\\FinancialIncentive\u003A\u003A\u0024validThrough",
             "name": "validThrough",
-            "summary": "The\u0020end\u0020of\u0020the\u0020validity\u0020of\u0020offer,\u0020price\u0020specification,\u0020or\u0020opening\u0020hours\u0020data\u0020\u0028DateTime\u0029.",
+            "summary": "The\u0020end\u0020of\u0020the\u0020validity\u0020of\u0020offer,\u0020price\u0020specification,\u0020or\u0020opening\u0020hours\u0020data.",
             "url": "classes/org-schema-FinancialIncentive.html#property_validThrough"
         },                {
             "fqsen": "\\org\\schema\\GeoCircle",
@@ -3238,7 +3238,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\org\\schema\\LocationFeatureSpecification\u003A\u003A\u0024validFrom",
             "name": "validFrom",
-            "summary": "The\u0020date\u0020when\u0020the\u0020item\u0020becomes\u0020valid\u0020\u0028DateTime\u0029.",
+            "summary": "The\u0020date\u0020when\u0020the\u0020item\u0020becomes\u0020valid.",
             "url": "classes/org-schema-LocationFeatureSpecification.html#property_validFrom"
         },                {
             "fqsen": "\\org\\schema\\LocationFeatureSpecification\u003A\u003A\u0024validThrough",
@@ -3348,12 +3348,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\org\\schema\\MonetaryAmount\u003A\u003A\u0024validFrom",
             "name": "validFrom",
-            "summary": "The\u0020date\u0020when\u0020the\u0020item\u0020becomes\u0020valid\u0020\u0028DateTime\u0029.",
+            "summary": "The\u0020date\u0020when\u0020the\u0020item\u0020becomes\u0020valid.",
             "url": "classes/org-schema-MonetaryAmount.html#property_validFrom"
         },                {
             "fqsen": "\\org\\schema\\MonetaryAmount\u003A\u003A\u0024validThrough",
             "name": "validThrough",
-            "summary": "The\u0020end\u0020of\u0020the\u0020validity\u0020of\u0020offer,\u0020price\u0020specification,\u0020or\u0020opening\u0020hours\u0020data\u0020\u0028DateTime\u0029.",
+            "summary": "The\u0020end\u0020of\u0020the\u0020validity\u0020of\u0020offer,\u0020price\u0020specification,\u0020or\u0020opening\u0020hours\u0020data.",
             "url": "classes/org-schema-MonetaryAmount.html#property_validThrough"
         },                {
             "fqsen": "\\org\\schema\\MonetaryAmount\u003A\u003A\u0024value",
@@ -3618,17 +3618,17 @@ Search.appendIndex(
         },                {
             "fqsen": "\\org\\schema\\Offer\u003A\u003A\u0024validFrom",
             "name": "validFrom",
-            "summary": "The\u0020date\u0020when\u0020the\u0020item\u0020becomes\u0020valid\u0020\u0028DateTime\u0029.",
+            "summary": "The\u0020date\u0020when\u0020the\u0020item\u0020becomes\u0020valid.",
             "url": "classes/org-schema-Offer.html#property_validFrom"
         },                {
             "fqsen": "\\org\\schema\\Offer\u003A\u003A\u0024validThrough",
             "name": "validThrough",
-            "summary": "The\u0020end\u0020of\u0020the\u0020validity\u0020of\u0020offer,\u0020price\u0020specification,\u0020or\u0020opening\u0020hours\u0020data\u0020\u0028DateTime\u0029.",
+            "summary": "The\u0020end\u0020of\u0020the\u0020validity\u0020of\u0020offer,\u0020price\u0020specification,\u0020or\u0020opening\u0020hours\u0020data.",
             "url": "classes/org-schema-Offer.html#property_validThrough"
         },                {
             "fqsen": "\\org\\schema\\Offer\u003A\u003A\u0024warranty",
             "name": "warranty",
-            "summary": "The\u0020end\u0020of\u0020the\u0020validity\u0020of\u0020offer,\u0020price\u0020specification,\u0020or\u0020opening\u0020hours\u0020data\u0020\u0028DateTime\u0029.",
+            "summary": "The\u0020warranty\u0020promise\u0028s\u0029\u0020included\u0020in\u0020the\u0020offer.",
             "url": "classes/org-schema-Offer.html#property_warranty"
         },                {
             "fqsen": "\\org\\schema\\OfferCatalog",
@@ -3723,12 +3723,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\org\\schema\\OpeningHoursSpecification\u003A\u003A\u0024validFrom",
             "name": "validFrom",
-            "summary": "The\u0020date\u0020when\u0020the\u0020item\u0020becomes\u0020valid\u0020\u0028DateTime\u0029.",
+            "summary": "The\u0020date\u0020when\u0020the\u0020item\u0020becomes\u0020valid.",
             "url": "classes/org-schema-OpeningHoursSpecification.html#property_validFrom"
         },                {
             "fqsen": "\\org\\schema\\OpeningHoursSpecification\u003A\u003A\u0024validThrough",
             "name": "validThrough",
-            "summary": "The\u0020end\u0020of\u0020the\u0020validity\u0020of\u0020offer,\u0020price\u0020specification,\u0020or\u0020opening\u0020hours\u0020data\u0020\u0028DateTime\u0029.",
+            "summary": "The\u0020end\u0020of\u0020the\u0020validity\u0020of\u0020offer,\u0020price\u0020specification,\u0020or\u0020opening\u0020hours\u0020data\u0020\u0028Date\u0020Time\u0029.",
             "url": "classes/org-schema-OpeningHoursSpecification.html#property_validThrough"
         },                {
             "fqsen": "\\org\\schema\\Order",
@@ -4288,7 +4288,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\org\\schema\\Permit\u003A\u003A\u0024validFrom",
             "name": "validFrom",
-            "summary": "The\u0020date\u0020when\u0020the\u0020item\u0020becomes\u0020valid\u0020\u0028DateTime\u0029.",
+            "summary": "The\u0020date\u0020when\u0020the\u0020item\u0020becomes\u0020valid.",
             "url": "classes/org-schema-Permit.html#property_validFrom"
         },                {
             "fqsen": "\\org\\schema\\Permit\u003A\u003A\u0024validIn",
@@ -4690,11 +4690,6 @@ Search.appendIndex(
             "name": "petsAllowed",
             "summary": "Indicates\u0020whether\u0020pets\u0020are\u0020allowed\u0020to\u0020enter\u0020the\u0020accommodation\u0020or\u0020lodging\u0020business.\u0020More\u0020detailed\u0020information\u0020can\u0020be\u0020put\u0020in\u0020a\u0020text\u0020value.",
             "url": "classes/org-schema-places-Accommodation.html#property_petsAllowed"
-        },                {
-            "fqsen": "\\org\\schema\\places\\Accommodation\u003A\u003A\u0024tourBookingPage",
-            "name": "tourBookingPage",
-            "summary": "A\u0020page\u0020providing\u0020information\u0020on\u0020how\u0020to\u0020book\u0020a\u0020tour\u0020of\u0020some\u0020Place,\u0020such\u0020as\u0020an\u0020Accommodation\u0020or\u0020ApartmentComplex\u0020in\u0020a\u0020real\u0020estate\u0020setting,\u0020as\u0020well\u0020as\u0020other\u0020kinds\u0020of\u0020tours\u0020as\u0020appropriate.",
-            "url": "classes/org-schema-places-Accommodation.html#property_tourBookingPage"
         },                {
             "fqsen": "\\org\\schema\\places\\Accommodation\u003A\u003A\u0024yearBuilt",
             "name": "yearBuilt",
@@ -5503,7 +5498,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\org\\schema\\Schedule\u003A\u003A\u0024exceptDate",
             "name": "exceptDate",
-            "summary": "Defines\u0020a\u0020Date\u0020or\u0020DateTime\u0020during\u0020which\u0020a\u0020scheduled\u0020Event\u0020will\u0020not\u0020take\u0020place.\u0020The\u0020property\u0020allows\u0020exceptions\u0020to\u0020a\u0020Schedule\u0020to\u0020be\u0020specified.\u0020If\u0020an\u0020exception\u0020is\u0020specified\u0020as\u0020a\u0020DateTime\u0020then\u0020only\u0020the\u0020event\u0020that\u0020would\u0020have\u0020started\u0020at\u0020that\u0020specific\u0020date\u0020and\u0020time\u0020should\u0020be\u0020excluded\u0020from\u0020the\u0020schedule.\u0020If\u0020an\u0020exception\u0020is\u0020specified\u0020as\u0020a\u0020Date\u0020then\u0020any\u0020event\u0020that\u0020is\u0020scheduled\u0020for\u0020that\u002024\u0020hour\u0020period\u0020should\u0020be\u0020excluded\u0020from\u0020the\u0020schedule.",
+            "summary": "Defines\u0020a\u0020Date\u0020or\u0020Date\u0020Time\u0020during\u0020which\u0020a\u0020scheduled\u0020Event\u0020will\u0020not\u0020take\u0020place.\u0020The\u0020property\u0020allows\u0020exceptions\u0020to\u0020a\u0020Schedule\u0020to\u0020be\u0020specified.\u0020If\u0020an\u0020exception\u0020is\u0020specified\u0020as\u0020a\u0020Date\u0020Time\u0020then\u0020only\u0020the\u0020event\u0020that\u0020would\u0020have\u0020started\u0020at\u0020that\u0020specific\u0020date\u0020and\u0020time\u0020should\u0020be\u0020excluded\u0020from\u0020the\u0020schedule.\u0020If\u0020an\u0020exception\u0020is\u0020specified\u0020as\u0020a\u0020Date\u0020then\u0020any\u0020event\u0020that\u0020is\u0020scheduled\u0020for\u0020that\u002024\u0020hour\u0020period\u0020should\u0020be\u0020excluded\u0020from\u0020the\u0020schedule.",
             "url": "classes/org-schema-Schedule.html#property_exceptDate"
         },                {
             "fqsen": "\\org\\schema\\Schedule\u003A\u003A\u0024repeatCount",
@@ -6718,7 +6713,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\org\\schema\\traits\\CreativeWorkTrait\u003A\u003A\u0024temporalCoverage",
             "name": "temporalCoverage",
-            "summary": "The\u0020temporalCoverage\u0020of\u0020a\u0020CreativeWork\u0020indicates\u0020the\u0020period\u0020that\u0020the\u0020content\u0020applies\u0020to,\u0020i.e.\u0020that\u0020it\u0020describes,\u0020either\u0020as\u0020a\u0020DateTime\u0020or\u0020as\u0020a\u0020textual\u0020string\u0020indicating\u0020a\u0020time\u0020period\u0020in\u0020ISO\u00208601\u0020time\u0020interval\u0020format.\u0020In\u0020the\u0020case\u0020of\u0020a\u0020Dataset\u0020it\u0020will\u0020typically\u0020indicate\u0020the\u0020relevant\u0020time\u0020period\u0020in\u0020a\u0020precise\u0020notation\u0020\u0028e.g.\u0020for\u0020a\u00202011\u0020census\u0020dataset,\u0020the\u0020year\u00202011\u0020would\u0020be\u0020written\u0020\u00222011\/2012\u0022\u0029.\u0020Other\u0020forms\u0020of\u0020content\u0020e.g.\u0020ScholarlyArticle,\u0020Book,\u0020TVSeries\u0020or\u0020TVEpisode\u0020may\u0020indicate\u0020their\u0020temporalCoverage\u0020in\u0020broader\u0020terms\u0020\u002D\u0020textually\u0020or\u0020via\u0020well\u002Dknown\u0020URL.\u0020Written\u0020works\u0020such\u0020as\u0020books\u0020may\u0020sometimes\u0020have\u0020precise\u0020temporal\u0020coverage\u0020too,\u0020e.g.\u0020a\u0020work\u0020set\u0020in\u00201939\u0020\u002D\u00201945\u0020can\u0020be\u0020indicated\u0020in\u0020ISO\u00208601\u0020interval\u0020format\u0020format\u0020via\u0020\u00221939\/1945\u0022.",
+            "summary": "The\u0020temporalCoverage\u0020of\u0020a\u0020CreativeWork\u0020indicates\u0020the\u0020period\u0020that\u0020the\u0020content\u0020applies\u0020to,\u0020i.e.\u0020that\u0020it\u0020describes,\u0020either\u0020as\u0020a\u0020Date\u0020Time\u0020or\u0020as\u0020a\u0020textual\u0020string\u0020indicating\u0020a\u0020time\u0020period\u0020in\u0020ISO\u00208601\u0020time\u0020interval\u0020format.\u0020In\u0020the\u0020case\u0020of\u0020a\u0020Dataset\u0020it\u0020will\u0020typically\u0020indicate\u0020the\u0020relevant\u0020time\u0020period\u0020in\u0020a\u0020precise\u0020notation\u0020\u0028e.g.\u0020for\u0020a\u00202011\u0020census\u0020dataset,\u0020the\u0020year\u00202011\u0020would\u0020be\u0020written\u0020\u00222011\/2012\u0022\u0029.\u0020Other\u0020forms\u0020of\u0020content\u0020e.g.\u0020ScholarlyArticle,\u0020Book,\u0020TVSeries\u0020or\u0020TVEpisode\u0020may\u0020indicate\u0020their\u0020temporalCoverage\u0020in\u0020broader\u0020terms\u0020\u002D\u0020textually\u0020or\u0020via\u0020well\u002Dknown\u0020URL.\u0020Written\u0020works\u0020such\u0020as\u0020books\u0020may\u0020sometimes\u0020have\u0020precise\u0020temporal\u0020coverage\u0020too,\u0020e.g.\u0020a\u0020work\u0020set\u0020in\u00201939\u0020\u002D\u00201945\u0020can\u0020be\u0020indicated\u0020in\u0020ISO\u00208601\u0020interval\u0020format\u0020format\u0020via\u0020\u00221939\/1945\u0022.",
             "url": "classes/org-schema-traits-CreativeWorkTrait.html#property_temporalCoverage"
         },                {
             "fqsen": "\\org\\schema\\traits\\CreativeWorkTrait\u003A\u003A\u0024thumbnailUrl",
@@ -7093,7 +7088,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\org\\schema\\traits\\ThingTrait",
             "name": "ThingTrait",
-            "summary": "Provides\u0020common\u0020behavior\u0020for\u0020schema.org\u0020entities,\u0020including\u003A\n\u002D\u0020Object\u0020hydration\u0020from\u0020array\u0020or\u0020object\n\u002D\u0020Automatic\u0020JSON\u002DLD\u0020serialization\n\u002D\u0020Integration\u0020with\u0020internal\u0020reflection\u0020tools",
+            "summary": "Provides\u0020common\u0020behavior\u0020for\u0020schema.org\u0020entities,\u0020including\u003A\n\u002D\u0020Object\u0020hydration\u0020from\u0020array\u0020or\u0020object\n\u002D\u0020Automatic\u0020JSON\u002DLD\u0020serialization\n\u002D\u0020JSON\u0020Schema\u0020generation\u0020and\u0020validation\n\u002D\u0020Integration\u0020with\u0020internal\u0020reflection\u0020tools",
             "url": "classes/org-schema-traits-ThingTrait.html"
         },                {
             "fqsen": "\\org\\schema\\traits\\ThingTrait\u003A\u003A__construct\u0028\u0029",

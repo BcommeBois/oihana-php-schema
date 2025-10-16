@@ -1,0 +1,766 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://schema.oihana.xyz/InvestmentOrDeposit.json",
+    "title": "InvestmentOrDeposit",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "_from": {
+            "type": "string"
+        },
+        "_id": {
+            "type": "string"
+        },
+        "_key": {
+            "type": "string"
+        },
+        "_rev": {
+            "type": "string"
+        },
+        "_to": {
+            "type": "string"
+        },
+        "active": {
+            "type": "boolean"
+        },
+        "additionalType": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "object"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "type": "object"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "aggregateRating": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/AggregateRating"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/AggregateRating"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "alternateName": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "object"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "amount": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/MonetaryAmount"
+                },
+                {
+                    "type": "integer"
+                },
+                {
+                    "type": "number"
+                }
+            ]
+        },
+        "annualPercentageRate": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/QuantitativeValue"
+                },
+                {
+                    "type": "integer"
+                },
+                {
+                    "type": "number"
+                }
+            ]
+        },
+        "areaServed": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Place"
+                },
+                {
+                    "$ref": "#/$defs/GeoShape"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "audience": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Audience"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Audience"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "availableChannel": {
+            "$ref": "#/$defs/ServiceChannel"
+        },
+        "award": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "brand": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Brand"
+                },
+                {
+                    "$ref": "#/$defs/Organization"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Brand"
+                            },
+                            {
+                                "$ref": "#/$defs/Organization"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "broker": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Person"
+                },
+                {
+                    "$ref": "#/$defs/Organization"
+                }
+            ]
+        },
+        "category": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/CategoryCode"
+                },
+                {
+                    "$ref": "#/$defs/Thing"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/CategoryCode"
+                            },
+                            {
+                                "$ref": "#/$defs/Thing"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "created": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        },
+        "disambiguatingDescription": {
+            "type": "string"
+        },
+        "feesAndCommissionsSpecification": {
+            "type": "string"
+        },
+        "hasCertification": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Certification"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Certification"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "hasOfferCatalog": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/OfferCatalog"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/OfferCatalog"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "hasPart": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Thing"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Thing"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "hoursAvailable": {
+            "$ref": "#/$defs/OpeningHoursSpecification"
+        },
+        "id": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "integer"
+                }
+            ]
+        },
+        "identifier": {
+            "type": "string"
+        },
+        "image": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/ImageObject"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/ImageObject"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "interestRate": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/QuantitativeValue"
+                },
+                {
+                    "type": "integer"
+                },
+                {
+                    "type": "number"
+                }
+            ]
+        },
+        "isPartOf": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Thing"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Thing"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "isRelatedTo": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Product"
+                },
+                {
+                    "$ref": "#/$defs/Service"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Product"
+                            },
+                            {
+                                "$ref": "#/$defs/Service"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "isSimilarTo": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Product"
+                },
+                {
+                    "$ref": "#/$defs/Service"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Product"
+                            },
+                            {
+                                "$ref": "#/$defs/Service"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "license": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "object"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "logo": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/ImageObject"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "modified": {
+            "type": "string"
+        },
+        "name": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "integer"
+                }
+            ]
+        },
+        "offers": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Offer"
+                },
+                {
+                    "$ref": "#/$defs/Demand"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Offer"
+                            },
+                            {
+                                "$ref": "#/$defs/Demand"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "provider": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Person"
+                },
+                {
+                    "$ref": "#/$defs/Organization"
+                }
+            ]
+        },
+        "providerMobility": {
+            "type": "string"
+        },
+        "publisher": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Person"
+                },
+                {
+                    "$ref": "#/$defs/Organization"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Person"
+                            },
+                            {
+                                "$ref": "#/$defs/Organization"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "review": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Review"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Review"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "serviceOutput": {
+            "$ref": "#/$defs/Thing"
+        },
+        "serviceType": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Enumeration"
+                },
+                {
+                    "$ref": "#/$defs/DefinedTerm"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "slogan": {
+            "type": "string"
+        },
+        "termsOfService": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "object"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "url": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "integer"
+                }
+            ]
+        }
+    },
+    "$defs": {
+        "AggregateRating": {
+            "title": "AggregateRating",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Audience": {
+            "title": "Audience",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Brand": {
+            "title": "Brand",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "CategoryCode": {
+            "title": "CategoryCode",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Certification": {
+            "title": "Certification",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "DefinedTerm": {
+            "title": "DefinedTerm",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Demand": {
+            "title": "Demand",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Enumeration": {
+            "title": "Enumeration",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "GeoShape": {
+            "title": "GeoShape",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "ImageObject": {
+            "title": "ImageObject",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "MonetaryAmount": {
+            "title": "MonetaryAmount",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Offer": {
+            "title": "Offer",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "OfferCatalog": {
+            "title": "OfferCatalog",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "OpeningHoursSpecification": {
+            "title": "OpeningHoursSpecification",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Organization": {
+            "title": "Organization",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Person": {
+            "title": "Person",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Place": {
+            "title": "Place",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Product": {
+            "title": "Product",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "QuantitativeValue": {
+            "title": "QuantitativeValue",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Review": {
+            "title": "Review",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Service": {
+            "title": "Service",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "ServiceChannel": {
+            "title": "ServiceChannel",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Thing": {
+            "title": "Thing",
+            "type": "object",
+            "additionalProperties": true
+        }
+    }
+}

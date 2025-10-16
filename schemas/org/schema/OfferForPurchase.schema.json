@@ -1,0 +1,1114 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://schema.oihana.xyz/OfferForPurchase.json",
+    "title": "OfferForPurchase",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "_from": {
+            "type": "string"
+        },
+        "_id": {
+            "type": "string"
+        },
+        "_key": {
+            "type": "string"
+        },
+        "_rev": {
+            "type": "string"
+        },
+        "_to": {
+            "type": "string"
+        },
+        "acceptedPaymentMethod": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/PaymentMethod"
+                },
+                {
+                    "$ref": "#/$defs/LoanOrCredit"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/PaymentMethod"
+                            },
+                            {
+                                "$ref": "#/$defs/LoanOrCredit"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "active": {
+            "type": "boolean"
+        },
+        "additionalProperty": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/PropertyValue"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/PropertyValue"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "additionalType": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "object"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "type": "object"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "addon": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Offer"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Offer"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "advanceBookingRequirement": {
+            "$ref": "#/$defs/QuantitativeValue"
+        },
+        "aggregateRating": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/AggregateRating"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/AggregateRating"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "alternateName": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "object"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "areaServed": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Place"
+                },
+                {
+                    "$ref": "#/$defs/GeoShape"
+                },
+                {
+                    "$ref": "#/$defs/AdministrativeArea"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "asin": {
+            "type": "string"
+        },
+        "availability": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "object"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "availabilityEnds": {
+            "type": "string"
+        },
+        "availabilityStarts": {
+            "type": "string"
+        },
+        "availableAtOrFrom": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Place"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Place"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "availableDeliveryMethod": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/DeliveryMethod"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/DeliveryMethod"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "businessFunction": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/BusinessFunction"
+                },
+                {
+                    "$ref": "#/$defs/DefinedTerm"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/BusinessFunction"
+                            },
+                            {
+                                "$ref": "#/$defs/DefinedTerm"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "category": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/CategoryCode"
+                },
+                {
+                    "$ref": "#/$defs/Thing"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "checkoutPageURLTemplate": {
+            "type": "string"
+        },
+        "created": {
+            "type": "string"
+        },
+        "deliveryLeadTime": {
+            "$ref": "#/$defs/QuantitativeValue"
+        },
+        "description": {
+            "type": "string"
+        },
+        "disambiguatingDescription": {
+            "type": "string"
+        },
+        "eligibleCustomerType": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/BusinessEntityType"
+                },
+                {
+                    "$ref": "#/$defs/DefinedTerm"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/BusinessEntityType"
+                            },
+                            {
+                                "$ref": "#/$defs/DefinedTerm"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "eligibleDuration": {
+            "$ref": "#/$defs/QuantitativeValue"
+        },
+        "eligibleQuantity": {
+            "$ref": "#/$defs/QuantitativeValue"
+        },
+        "eligibleRegion": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Place"
+                },
+                {
+                    "$ref": "#/$defs/GeoShape"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "eligibleTransactionVolume": {
+            "$ref": "#/$defs/PriceSpecification"
+        },
+        "gtin": {
+            "type": "string"
+        },
+        "gtin12": {
+            "type": "string"
+        },
+        "gtin13": {
+            "type": "string"
+        },
+        "gtin14": {
+            "type": "string"
+        },
+        "gtin8": {
+            "type": "string"
+        },
+        "hasAdultConsideration": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/AdultOrientedEnumeration"
+                },
+                {
+                    "$ref": "#/$defs/DefinedTerm"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/AdultOrientedEnumeration"
+                            },
+                            {
+                                "$ref": "#/$defs/DefinedTerm"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "hasGS1DigitalLink": {
+            "type": "string"
+        },
+        "hasMeasurement": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/QuantitativeValue"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/QuantitativeValue"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "hasMerchantReturnPolicy": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/MerchantReturnPolicy"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/MerchantReturnPolicy"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "hasPart": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Thing"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Thing"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "id": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "integer"
+                }
+            ]
+        },
+        "identifier": {
+            "type": "string"
+        },
+        "image": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/ImageObject"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/ImageObject"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "includesObject": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/TypeAndQuantityNode"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/TypeAndQuantityNode"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "ineligibleRegion": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Place"
+                },
+                {
+                    "$ref": "#/$defs/GeoShape"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "inventoryLevel": {
+            "$ref": "#/$defs/QuantitativeValue"
+        },
+        "isFamilyFriendly": {
+            "type": "boolean"
+        },
+        "isPartOf": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Thing"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Thing"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "itemCondition": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/OfferItemCondition"
+                },
+                {
+                    "$ref": "#/$defs/DefinedTerm"
+                }
+            ]
+        },
+        "itemOffered": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/CreativeWork"
+                },
+                {
+                    "$ref": "#/$defs/Event"
+                },
+                {
+                    "$ref": "#/$defs/Product"
+                },
+                {
+                    "$ref": "#/$defs/Service"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/CreativeWork"
+                            },
+                            {
+                                "$ref": "#/$defs/Event"
+                            },
+                            {
+                                "$ref": "#/$defs/Product"
+                            },
+                            {
+                                "$ref": "#/$defs/Service"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "leaseLength": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/QuantitativeValue"
+                },
+                {
+                    "$ref": "#/$defs/Duration"
+                }
+            ]
+        },
+        "license": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "object"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "mobileUrl": {
+            "type": "string"
+        },
+        "modified": {
+            "type": "string"
+        },
+        "mpn": {
+            "type": "string"
+        },
+        "name": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "integer"
+                }
+            ]
+        },
+        "offeredBy": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Organization"
+                },
+                {
+                    "$ref": "#/$defs/Person"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Organization"
+                            },
+                            {
+                                "$ref": "#/$defs/Person"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "price": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "number"
+                }
+            ]
+        },
+        "priceCurrency": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "object"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "priceSpecification": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/PriceSpecification"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/PriceSpecification"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "priceValidUntil": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "integer"
+                }
+            ]
+        },
+        "publisher": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Person"
+                },
+                {
+                    "$ref": "#/$defs/Organization"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Person"
+                            },
+                            {
+                                "$ref": "#/$defs/Organization"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "review": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Review"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Review"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "seller": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Organization"
+                },
+                {
+                    "$ref": "#/$defs/Person"
+                },
+                {
+                    "$ref": "#/$defs/Thing"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "integer"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Organization"
+                            },
+                            {
+                                "$ref": "#/$defs/Person"
+                            },
+                            {
+                                "$ref": "#/$defs/Thing"
+                            },
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "integer"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "serialNumber": {
+            "type": "string"
+        },
+        "shippingDetails": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/OfferShippingDetails"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/OfferShippingDetails"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "sku": {
+            "type": "string"
+        },
+        "url": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "integer"
+                }
+            ]
+        },
+        "validForMemberTier": {
+            "$ref": "#/$defs/MemberProgramTier"
+        },
+        "validFrom": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "integer"
+                }
+            ]
+        },
+        "validThrough": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "integer"
+                }
+            ]
+        },
+        "warranty": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/DefinedTerm"
+                },
+                {
+                    "$ref": "#/$defs/WarrantyPromise"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        }
+    },
+    "$defs": {
+        "AdministrativeArea": {
+            "title": "AdministrativeArea",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "AdultOrientedEnumeration": {
+            "title": "AdultOrientedEnumeration",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "AggregateRating": {
+            "title": "AggregateRating",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "BusinessEntityType": {
+            "title": "BusinessEntityType",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "BusinessFunction": {
+            "title": "BusinessFunction",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "CategoryCode": {
+            "title": "CategoryCode",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "CreativeWork": {
+            "title": "CreativeWork",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "DefinedTerm": {
+            "title": "DefinedTerm",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "DeliveryMethod": {
+            "title": "DeliveryMethod",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Duration": {
+            "title": "Duration",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Event": {
+            "title": "Event",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "GeoShape": {
+            "title": "GeoShape",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "ImageObject": {
+            "title": "ImageObject",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "LoanOrCredit": {
+            "title": "LoanOrCredit",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "MemberProgramTier": {
+            "title": "MemberProgramTier",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "MerchantReturnPolicy": {
+            "title": "MerchantReturnPolicy",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Offer": {
+            "title": "Offer",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "OfferItemCondition": {
+            "title": "OfferItemCondition",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "OfferShippingDetails": {
+            "title": "OfferShippingDetails",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Organization": {
+            "title": "Organization",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "PaymentMethod": {
+            "title": "PaymentMethod",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Person": {
+            "title": "Person",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Place": {
+            "title": "Place",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "PriceSpecification": {
+            "title": "PriceSpecification",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Product": {
+            "title": "Product",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "PropertyValue": {
+            "title": "PropertyValue",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "QuantitativeValue": {
+            "title": "QuantitativeValue",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Review": {
+            "title": "Review",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Service": {
+            "title": "Service",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Thing": {
+            "title": "Thing",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "TypeAndQuantityNode": {
+            "title": "TypeAndQuantityNode",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "WarrantyPromise": {
+            "title": "WarrantyPromise",
+            "type": "object",
+            "additionalProperties": true
+        }
+    }
+}

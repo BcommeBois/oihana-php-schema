@@ -478,7 +478,7 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-traits-CreativeWorkTrait.html#property_contentReferenceTime">$contentReferenceTime</a>
     <span>
-                        &nbsp;: string|null|<abbr title="\DateTime">DateTime</abbr>            </span>
+                        &nbsp;: string|null|int            </span>
 </dt>
 <dd>The specific time described by a creative work, for works (e.g. articles, video objects etc.)
 that emphasise a particular moment within an Event.</dd>
@@ -543,7 +543,7 @@ ideally indicating the owner of the copyright for the Work.</dd>
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_created">$created</a>
     <span>
-                        &nbsp;: null|string|<abbr title="\DateTime">DateTime</abbr>            </span>
+                        &nbsp;: null|string            </span>
 </dt>
 <dd>Date of creation of the resource.</dd>
 
@@ -699,7 +699,7 @@ e.g. application/zip for a SoftwareApplication binary, audio/mpeg for .mp3 etc.)
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-creativeWork-MediaObject.html#property_endTime">$endTime</a>
     <span>
-                        &nbsp;: string|<abbr title="\DateTime">DateTime</abbr>|int|null            </span>
+                        &nbsp;: string|int|null            </span>
 </dt>
 <dd>The endTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to end. For actions that span a period of time, when the action was performed. E.g. John wrote a book from January to December. For media, including audio and video, it&#039;s the time offset of the end of a clip within a larger file.</dd>
 
@@ -741,7 +741,7 @@ e.g. application/zip for a SoftwareApplication binary, audio/mpeg for .mp3 etc.)
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_hasPart">$hasPart</a>
     <span>
-                        &nbsp;: string|<a href="classes/org-schema-Thing.html"><abbr title="\org\schema\Thing">Thing</abbr></a>|array&lt;string|int, mixed&gt;|null            </span>
+                        &nbsp;: string|<a href="classes/org-schema-Thing.html"><abbr title="\org\schema\Thing">Thing</abbr></a>|array&lt;string|int, <a href="classes/org-schema-Thing.html"><abbr title="\org\schema\Thing">Thing</abbr></a>&gt;|null            </span>
 </dt>
 <dd>Indicates an item that this part of this item.</dd>
 
@@ -776,7 +776,7 @@ e.g. application/zip for a SoftwareApplication binary, audio/mpeg for .mp3 etc.)
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_image">$image</a>
     <span>
-                        &nbsp;: string|<a href="classes/org-schema-creativeWork-medias-ImageObject.html"><abbr title="\org\schema\creativeWork\medias\ImageObject">ImageObject</abbr></a>|array&lt;string|int, mixed&gt;|null            </span>
+                        &nbsp;: string|<a href="classes/org-schema-creativeWork-medias-ImageObject.html"><abbr title="\org\schema\creativeWork\medias\ImageObject">ImageObject</abbr></a>|array&lt;string|int, <a href="classes/org-schema-creativeWork-medias-ImageObject.html"><abbr title="\org\schema\creativeWork\medias\ImageObject">ImageObject</abbr></a>|string&gt;|null            </span>
 </dt>
 <dd>The image reference of this resource.</dd>
 
@@ -827,7 +827,7 @@ e.g. a region where the transaction is not allowed.</dd>
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_isPartOf">$isPartOf</a>
     <span>
-                        &nbsp;: string|<a href="classes/org-schema-Thing.html"><abbr title="\org\schema\Thing">Thing</abbr></a>|array&lt;string|int, mixed&gt;|null            </span>
+                        &nbsp;: string|<a href="classes/org-schema-Thing.html"><abbr title="\org\schema\Thing">Thing</abbr></a>|array&lt;string|int, <a href="classes/org-schema-Thing.html"><abbr title="\org\schema\Thing">Thing</abbr></a>&gt;|null            </span>
 </dt>
 <dd>Indicates an item that this item is part of.</dd>
 
@@ -876,7 +876,7 @@ e.g. a region where the transaction is not allowed.</dd>
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_modified">$modified</a>
     <span>
-                        &nbsp;: null|string|<abbr title="\DateTime">DateTime</abbr>            </span>
+                        &nbsp;: null|string            </span>
 </dt>
 <dd>Date on which the resource was changed.</dd>
 
@@ -946,7 +946,7 @@ e.g. a region where the transaction is not allowed.</dd>
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_publisher">$publisher</a>
     <span>
-                        &nbsp;: string|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Person.html"><abbr title="\org\schema\Person">Person</abbr></a>|<a href="classes/org-schema-Organization.html"><abbr title="\org\schema\Organization">Organization</abbr></a>|null            </span>
+                        &nbsp;: string|array&lt;string|int, string|<a href="classes/org-schema-Person.html"><abbr title="\org\schema\Person">Person</abbr></a>|<a href="classes/org-schema-Organization.html"><abbr title="\org\schema\Organization">Organization</abbr></a>&gt;|<a href="classes/org-schema-Person.html"><abbr title="\org\schema\Person">Person</abbr></a>|<a href="classes/org-schema-Organization.html"><abbr title="\org\schema\Organization">Organization</abbr></a>|null            </span>
 </dt>
 <dd>The publisher of the resource.</dd>
 
@@ -1017,7 +1017,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-creativeWork-MediaObject.html#property_startTime">$startTime</a>
     <span>
-                        &nbsp;: string|<abbr title="\DateTime">DateTime</abbr>|int|null            </span>
+                        &nbsp;: string|int|null            </span>
 </dt>
 <dd>The startTime of something.</dd>
 
@@ -1033,7 +1033,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <span>
                         &nbsp;: string|object|null            </span>
 </dt>
-<dd>The temporalCoverage of a CreativeWork indicates the period that the content applies to, i.e. that it describes, either as a DateTime or as a textual string indicating a time period in ISO 8601 time interval format. In the case of a Dataset it will typically indicate the relevant time period in a precise notation (e.g. for a 2011 census dataset, the year 2011 would be written &quot;2011/2012&quot;). Other forms of content e.g. ScholarlyArticle, Book, TVSeries or TVEpisode may indicate their temporalCoverage in broader terms - textually or via well-known URL. Written works such as books may sometimes have precise temporal coverage too, e.g. a work set in 1939 - 1945 can be indicated in ISO 8601 interval format format via &quot;1939/1945&quot;.</dd>
+<dd>The temporalCoverage of a CreativeWork indicates the period that the content applies to, i.e. that it describes, either as a Date Time or as a textual string indicating a time period in ISO 8601 time interval format. In the case of a Dataset it will typically indicate the relevant time period in a precise notation (e.g. for a 2011 census dataset, the year 2011 would be written &quot;2011/2012&quot;). Other forms of content e.g. ScholarlyArticle, Book, TVSeries or TVEpisode may indicate their temporalCoverage in broader terms - textually or via well-known URL. Written works such as books may sometimes have precise temporal coverage too, e.g. a work set in 1939 - 1945 can be indicated in ISO 8601 interval format format via &quot;1939/1945&quot;.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-traits-CreativeWorkTrait.html#property_text">$text</a>
@@ -1087,7 +1087,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-creativeWork-MediaObject.html#property_uploadDate">$uploadDate</a>
     <span>
-                        &nbsp;: string|<abbr title="\DateTime">DateTime</abbr>|null|int            </span>
+                        &nbsp;: string|null|int            </span>
 </dt>
 <dd>Date (including time if available) when this media object was uploaded to this site.</dd>
 
@@ -1218,7 +1218,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">86</span>
+    <span class="phpdocumentor-element-found-in__line">96</span>
 
     </aside>
 
@@ -1266,7 +1266,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">45</span>
+    <span class="phpdocumentor-element-found-in__line">44</span>
 
     </aside>
 
@@ -1305,7 +1305,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">34</span>
+    <span class="phpdocumentor-element-found-in__line">33</span>
 
     </aside>
 
@@ -1344,7 +1344,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">29</span>
+    <span class="phpdocumentor-element-found-in__line">28</span>
 
     </aside>
 
@@ -1383,7 +1383,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">39</span>
+    <span class="phpdocumentor-element-found-in__line">38</span>
 
     </aside>
 
@@ -1422,7 +1422,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">51</span>
+    <span class="phpdocumentor-element-found-in__line">50</span>
 
     </aside>
 
@@ -1461,7 +1461,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">39</span>
+    <span class="phpdocumentor-element-found-in__line">38</span>
 
     </aside>
 
@@ -1500,7 +1500,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">45</span>
+    <span class="phpdocumentor-element-found-in__line">44</span>
 
     </aside>
 
@@ -1539,7 +1539,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">63</span>
+    <span class="phpdocumentor-element-found-in__line">62</span>
 
     </aside>
 
@@ -1578,7 +1578,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">69</span>
+    <span class="phpdocumentor-element-found-in__line">68</span>
 
     </aside>
 
@@ -1617,7 +1617,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">75</span>
+    <span class="phpdocumentor-element-found-in__line">74</span>
 
     </aside>
 
@@ -1656,7 +1656,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">81</span>
+    <span class="phpdocumentor-element-found-in__line">80</span>
 
     </aside>
 
@@ -1695,7 +1695,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">87</span>
+    <span class="phpdocumentor-element-found-in__line">86</span>
 
     </aside>
 
@@ -1734,7 +1734,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">51</span>
+    <span class="phpdocumentor-element-found-in__line">50</span>
 
     </aside>
 
@@ -1773,7 +1773,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">57</span>
+    <span class="phpdocumentor-element-found-in__line">56</span>
 
     </aside>
 
@@ -1812,7 +1812,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">93</span>
+    <span class="phpdocumentor-element-found-in__line">92</span>
 
     </aside>
 
@@ -1851,7 +1851,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">99</span>
+    <span class="phpdocumentor-element-found-in__line">98</span>
 
     </aside>
 
@@ -1890,7 +1890,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">80</span>
+    <span class="phpdocumentor-element-found-in__line">79</span>
 
     </aside>
 
@@ -1968,7 +1968,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">85</span>
+    <span class="phpdocumentor-element-found-in__line">84</span>
 
     </aside>
 
@@ -2007,7 +2007,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">105</span>
+    <span class="phpdocumentor-element-found-in__line">104</span>
 
     </aside>
 
@@ -2046,7 +2046,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">75</span>
+    <span class="phpdocumentor-element-found-in__line">74</span>
 
     </aside>
 
@@ -2085,7 +2085,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">110</span>
+    <span class="phpdocumentor-element-found-in__line">109</span>
 
     </aside>
 
@@ -2124,7 +2124,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">118</span>
+    <span class="phpdocumentor-element-found-in__line">117</span>
 
     </aside>
 
@@ -2167,7 +2167,7 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">124</span>
+    <span class="phpdocumentor-element-found-in__line">123</span>
 
     </aside>
 
@@ -2206,7 +2206,7 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/creativeWork/MediaObject.php"><a href="files/src-org-schema-creativework-mediaobject.html"><abbr title="src/org/schema/creativeWork/MediaObject.php">MediaObject.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">21</span>
+    <span class="phpdocumentor-element-found-in__line">20</span>
 
     </aside>
 
@@ -2245,7 +2245,7 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">130</span>
+    <span class="phpdocumentor-element-found-in__line">129</span>
 
     </aside>
 
@@ -2284,7 +2284,7 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">135</span>
+    <span class="phpdocumentor-element-found-in__line">134</span>
 
     </aside>
 
@@ -2323,7 +2323,7 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">140</span>
+    <span class="phpdocumentor-element-found-in__line">139</span>
 
     </aside>
 
@@ -2401,7 +2401,7 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">145</span>
+    <span class="phpdocumentor-element-found-in__line">144</span>
 
     </aside>
 
@@ -2440,7 +2440,7 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">150</span>
+    <span class="phpdocumentor-element-found-in__line">149</span>
 
     </aside>
 
@@ -2479,7 +2479,7 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/creativeWork/MediaObject.php"><a href="files/src-org-schema-creativework-mediaobject.html"><abbr title="src/org/schema/creativeWork/MediaObject.php">MediaObject.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">26</span>
+    <span class="phpdocumentor-element-found-in__line">25</span>
 
     </aside>
 
@@ -2635,7 +2635,7 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">155</span>
+    <span class="phpdocumentor-element-found-in__line">154</span>
 
     </aside>
 
@@ -2674,7 +2674,7 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">160</span>
+    <span class="phpdocumentor-element-found-in__line">159</span>
 
     </aside>
 
@@ -2713,7 +2713,7 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">166</span>
+    <span class="phpdocumentor-element-found-in__line">165</span>
 
     </aside>
 
@@ -2752,7 +2752,7 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">173</span>
+    <span class="phpdocumentor-element-found-in__line">172</span>
 
     </aside>
 
@@ -2793,7 +2793,7 @@ but be archived by archival, journalistic, activist, or law enforcement organiza
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">184</span>
+    <span class="phpdocumentor-element-found-in__line">183</span>
 
     </aside>
 
@@ -2837,7 +2837,7 @@ It is expressed only in natural language.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">189</span>
+    <span class="phpdocumentor-element-found-in__line">188</span>
 
     </aside>
 
@@ -2876,7 +2876,7 @@ It is expressed only in natural language.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">194</span>
+    <span class="phpdocumentor-element-found-in__line">193</span>
 
     </aside>
 
@@ -2915,7 +2915,7 @@ It is expressed only in natural language.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">200</span>
+    <span class="phpdocumentor-element-found-in__line">199</span>
 
     </aside>
 
@@ -2925,7 +2925,7 @@ that emphasise a particular moment within an Event.</p>
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">string|null|<abbr title="\DateTime">DateTime</abbr></span>
+            <span class="phpdocumentor-signature__type">string|null|int</span>
     <span class="phpdocumentor-signature__name">$contentReferenceTime</span>
     </code>
 
@@ -2955,7 +2955,7 @@ that emphasise a particular moment within an Event.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/creativeWork/MediaObject.php"><a href="files/src-org-schema-creativework-mediaobject.html"><abbr title="src/org/schema/creativeWork/MediaObject.php">MediaObject.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">31</span>
+    <span class="phpdocumentor-element-found-in__line">30</span>
 
     </aside>
 
@@ -2994,7 +2994,7 @@ that emphasise a particular moment within an Event.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/creativeWork/MediaObject.php"><a href="files/src-org-schema-creativework-mediaobject.html"><abbr title="src/org/schema/creativeWork/MediaObject.php">MediaObject.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">36</span>
+    <span class="phpdocumentor-element-found-in__line">35</span>
 
     </aside>
 
@@ -3033,7 +3033,7 @@ that emphasise a particular moment within an Event.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">205</span>
+    <span class="phpdocumentor-element-found-in__line">204</span>
 
     </aside>
 
@@ -3072,7 +3072,7 @@ that emphasise a particular moment within an Event.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">210</span>
+    <span class="phpdocumentor-element-found-in__line">209</span>
 
     </aside>
 
@@ -3111,7 +3111,7 @@ that emphasise a particular moment within an Event.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">217</span>
+    <span class="phpdocumentor-element-found-in__line">216</span>
 
     </aside>
 
@@ -3151,7 +3151,7 @@ ideally indicating the owner of the copyright for the Work.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">223</span>
+    <span class="phpdocumentor-element-found-in__line">222</span>
 
     </aside>
 
@@ -3190,7 +3190,7 @@ ideally indicating the owner of the copyright for the Work.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">229</span>
+    <span class="phpdocumentor-element-found-in__line">228</span>
 
     </aside>
 
@@ -3229,7 +3229,7 @@ ideally indicating the owner of the copyright for the Work.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">243</span>
+    <span class="phpdocumentor-element-found-in__line">242</span>
 
     </aside>
 
@@ -3274,7 +3274,7 @@ by context and product type, and cannot be fully enumerated here.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">90</span>
+    <span class="phpdocumentor-element-found-in__line">89</span>
 
     </aside>
 
@@ -3283,7 +3283,7 @@ by context and product type, and cannot be fully enumerated here.</p>
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">null|string|<abbr title="\DateTime">DateTime</abbr></span>
+            <span class="phpdocumentor-signature__type">null|string</span>
     <span class="phpdocumentor-signature__name">$created</span>
     </code>
 
@@ -3313,7 +3313,7 @@ by context and product type, and cannot be fully enumerated here.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">254</span>
+    <span class="phpdocumentor-element-found-in__line">253</span>
 
     </aside>
 
@@ -3355,7 +3355,7 @@ by context and product type, and cannot be fully enumerated here.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">260</span>
+    <span class="phpdocumentor-element-found-in__line">259</span>
 
     </aside>
 
@@ -3394,7 +3394,7 @@ by context and product type, and cannot be fully enumerated here.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">266</span>
+    <span class="phpdocumentor-element-found-in__line">265</span>
 
     </aside>
 
@@ -3433,7 +3433,7 @@ by context and product type, and cannot be fully enumerated here.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">271</span>
+    <span class="phpdocumentor-element-found-in__line">270</span>
 
     </aside>
 
@@ -3472,7 +3472,7 @@ by context and product type, and cannot be fully enumerated here.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">276</span>
+    <span class="phpdocumentor-element-found-in__line">275</span>
 
     </aside>
 
@@ -3511,7 +3511,7 @@ by context and product type, and cannot be fully enumerated here.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">281</span>
+    <span class="phpdocumentor-element-found-in__line">280</span>
 
     </aside>
 
@@ -3550,7 +3550,7 @@ by context and product type, and cannot be fully enumerated here.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">95</span>
+    <span class="phpdocumentor-element-found-in__line">94</span>
 
     </aside>
 
@@ -3589,7 +3589,7 @@ by context and product type, and cannot be fully enumerated here.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">286</span>
+    <span class="phpdocumentor-element-found-in__line">285</span>
 
     </aside>
 
@@ -3667,7 +3667,7 @@ by context and product type, and cannot be fully enumerated here.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">106</span>
+    <span class="phpdocumentor-element-found-in__line">105</span>
 
     </aside>
 
@@ -3706,7 +3706,7 @@ by context and product type, and cannot be fully enumerated here.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">292</span>
+    <span class="phpdocumentor-element-found-in__line">291</span>
 
     </aside>
 
@@ -3745,7 +3745,7 @@ by context and product type, and cannot be fully enumerated here.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/creativeWork/MediaObject.php"><a href="files/src-org-schema-creativework-mediaobject.html"><abbr title="src/org/schema/creativeWork/MediaObject.php">MediaObject.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">41</span>
+    <span class="phpdocumentor-element-found-in__line">40</span>
 
     </aside>
 
@@ -3784,7 +3784,7 @@ by context and product type, and cannot be fully enumerated here.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">308</span>
+    <span class="phpdocumentor-element-found-in__line">307</span>
 
     </aside>
 
@@ -3831,7 +3831,7 @@ for a more edit-specific description.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">313</span>
+    <span class="phpdocumentor-element-found-in__line">312</span>
 
     </aside>
 
@@ -3870,7 +3870,7 @@ for a more edit-specific description.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">322</span>
+    <span class="phpdocumentor-element-found-in__line">321</span>
 
     </aside>
 
@@ -3912,7 +3912,7 @@ for example to express that a resource teaches or assesses a competency.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">331</span>
+    <span class="phpdocumentor-element-found-in__line">330</span>
 
     </aside>
 
@@ -3953,7 +3953,7 @@ for example to express that a resource teaches or assesses a competency.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">338</span>
+    <span class="phpdocumentor-element-found-in__line">337</span>
 
     </aside>
 
@@ -3992,7 +3992,7 @@ for example to express that a resource teaches or assesses a competency.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/creativeWork/MediaObject.php"><a href="files/src-org-schema-creativework-mediaobject.html"><abbr title="src/org/schema/creativeWork/MediaObject.php">MediaObject.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">46</span>
+    <span class="phpdocumentor-element-found-in__line">45</span>
 
     </aside>
 
@@ -4031,7 +4031,7 @@ for example to express that a resource teaches or assesses a competency.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/creativeWork/MediaObject.php"><a href="files/src-org-schema-creativework-mediaobject.html"><abbr title="src/org/schema/creativeWork/MediaObject.php">MediaObject.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">52</span>
+    <span class="phpdocumentor-element-found-in__line">51</span>
 
     </aside>
 
@@ -4070,7 +4070,7 @@ for example to express that a resource teaches or assesses a competency.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">345</span>
+    <span class="phpdocumentor-element-found-in__line">344</span>
 
     </aside>
 
@@ -4109,7 +4109,7 @@ for example to express that a resource teaches or assesses a competency.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">359</span>
+    <span class="phpdocumentor-element-found-in__line">358</span>
 
     </aside>
 
@@ -4154,7 +4154,7 @@ via the most appropriate URL, e.g. defining Web page or a Wikipedia/Wikidata ent
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/creativeWork/MediaObject.php"><a href="files/src-org-schema-creativework-mediaobject.html"><abbr title="src/org/schema/creativeWork/MediaObject.php">MediaObject.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">59</span>
+    <span class="phpdocumentor-element-found-in__line">58</span>
 
     </aside>
 
@@ -4163,7 +4163,7 @@ via the most appropriate URL, e.g. defining Web page or a Wikipedia/Wikidata ent
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">string|<abbr title="\DateTime">DateTime</abbr>|int|null</span>
+            <span class="phpdocumentor-signature__type">string|int|null</span>
     <span class="phpdocumentor-signature__name">$endTime</span>
     </code>
 
@@ -4195,7 +4195,7 @@ via the most appropriate URL, e.g. defining Web page or a Wikipedia/Wikidata ent
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">368</span>
+    <span class="phpdocumentor-element-found-in__line">367</span>
 
     </aside>
 
@@ -4236,7 +4236,7 @@ via the most appropriate URL, e.g. defining Web page or a Wikipedia/Wikidata ent
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">378</span>
+    <span class="phpdocumentor-element-found-in__line">377</span>
 
     </aside>
 
@@ -4279,7 +4279,7 @@ or a ClaimReview fact check whose publisher wants to indicate that it may no lon
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">385</span>
+    <span class="phpdocumentor-element-found-in__line">384</span>
 
     </aside>
 
@@ -4318,7 +4318,7 @@ or a ClaimReview fact check whose publisher wants to indicate that it may no lon
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">392</span>
+    <span class="phpdocumentor-element-found-in__line">391</span>
 
     </aside>
 
@@ -4359,7 +4359,7 @@ or a ClaimReview fact check whose publisher wants to indicate that it may no lon
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">398</span>
+    <span class="phpdocumentor-element-found-in__line">397</span>
 
     </aside>
 
@@ -4398,7 +4398,7 @@ or a ClaimReview fact check whose publisher wants to indicate that it may no lon
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">101</span>
+    <span class="phpdocumentor-element-found-in__line">100</span>
 
     </aside>
 
@@ -4407,7 +4407,7 @@ or a ClaimReview fact check whose publisher wants to indicate that it may no lon
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">string|<a href="classes/org-schema-Thing.html"><abbr title="\org\schema\Thing">Thing</abbr></a>|array&lt;string|int, mixed&gt;|null</span>
+            <span class="phpdocumentor-signature__type">string|<a href="classes/org-schema-Thing.html"><abbr title="\org\schema\Thing">Thing</abbr></a>|array&lt;string|int, <a href="classes/org-schema-Thing.html"><abbr title="\org\schema\Thing">Thing</abbr></a>&gt;|null</span>
     <span class="phpdocumentor-signature__name">$hasPart</span>
     </code>
 
@@ -4437,7 +4437,7 @@ or a ClaimReview fact check whose publisher wants to indicate that it may no lon
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">403</span>
+    <span class="phpdocumentor-element-found-in__line">402</span>
 
     </aside>
 
@@ -4476,7 +4476,7 @@ or a ClaimReview fact check whose publisher wants to indicate that it may no lon
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/creativeWork/MediaObject.php"><a href="files/src-org-schema-creativework-mediaobject.html"><abbr title="src/org/schema/creativeWork/MediaObject.php">MediaObject.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">64</span>
+    <span class="phpdocumentor-element-found-in__line">63</span>
 
     </aside>
 
@@ -4515,7 +4515,7 @@ or a ClaimReview fact check whose publisher wants to indicate that it may no lon
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">58</span>
+    <span class="phpdocumentor-element-found-in__line">57</span>
 
     </aside>
 
@@ -4554,7 +4554,7 @@ or a ClaimReview fact check whose publisher wants to indicate that it may no lon
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">111</span>
+    <span class="phpdocumentor-element-found-in__line">110</span>
 
     </aside>
 
@@ -4602,7 +4602,7 @@ or a ClaimReview fact check whose publisher wants to indicate that it may no lon
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">string|<a href="classes/org-schema-creativeWork-medias-ImageObject.html"><abbr title="\org\schema\creativeWork\medias\ImageObject">ImageObject</abbr></a>|array&lt;string|int, mixed&gt;|null</span>
+            <span class="phpdocumentor-signature__type">string|<a href="classes/org-schema-creativeWork-medias-ImageObject.html"><abbr title="\org\schema\creativeWork\medias\ImageObject">ImageObject</abbr></a>|array&lt;string|int, <a href="classes/org-schema-creativeWork-medias-ImageObject.html"><abbr title="\org\schema\creativeWork\medias\ImageObject">ImageObject</abbr></a>|string&gt;|null</span>
     <span class="phpdocumentor-signature__name">$image</span>
     </code>
 
@@ -4632,7 +4632,7 @@ or a ClaimReview fact check whose publisher wants to indicate that it may no lon
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/creativeWork/MediaObject.php"><a href="files/src-org-schema-creativework-mediaobject.html"><abbr title="src/org/schema/creativeWork/MediaObject.php">MediaObject.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">72</span>
+    <span class="phpdocumentor-element-found-in__line">71</span>
 
     </aside>
 
@@ -4673,7 +4673,7 @@ e.g. a region where the transaction is not allowed.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">408</span>
+    <span class="phpdocumentor-element-found-in__line">407</span>
 
     </aside>
 
@@ -4712,7 +4712,7 @@ e.g. a region where the transaction is not allowed.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">415</span>
+    <span class="phpdocumentor-element-found-in__line">414</span>
 
     </aside>
 
@@ -4753,7 +4753,7 @@ e.g. a region where the transaction is not allowed.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/creativeWork/MediaObject.php"><a href="files/src-org-schema-creativework-mediaobject.html"><abbr title="src/org/schema/creativeWork/MediaObject.php">MediaObject.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">78</span>
+    <span class="phpdocumentor-element-found-in__line">77</span>
 
     </aside>
 
@@ -4792,7 +4792,7 @@ e.g. a region where the transaction is not allowed.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">420</span>
+    <span class="phpdocumentor-element-found-in__line">419</span>
 
     </aside>
 
@@ -4831,7 +4831,7 @@ e.g. a region where the transaction is not allowed.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">425</span>
+    <span class="phpdocumentor-element-found-in__line">424</span>
 
     </aside>
 
@@ -4879,7 +4879,7 @@ e.g. a region where the transaction is not allowed.</p>
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">string|<a href="classes/org-schema-Thing.html"><abbr title="\org\schema\Thing">Thing</abbr></a>|array&lt;string|int, mixed&gt;|null</span>
+            <span class="phpdocumentor-signature__type">string|<a href="classes/org-schema-Thing.html"><abbr title="\org\schema\Thing">Thing</abbr></a>|array&lt;string|int, <a href="classes/org-schema-Thing.html"><abbr title="\org\schema\Thing">Thing</abbr></a>&gt;|null</span>
     <span class="phpdocumentor-signature__name">$isPartOf</span>
     </code>
 
@@ -4909,7 +4909,7 @@ e.g. a region where the transaction is not allowed.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">431</span>
+    <span class="phpdocumentor-element-found-in__line">430</span>
 
     </aside>
 
@@ -4948,7 +4948,7 @@ e.g. a region where the transaction is not allowed.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">127</span>
+    <span class="phpdocumentor-element-found-in__line">128</span>
 
     </aside>
 
@@ -4987,7 +4987,7 @@ e.g. a region where the transaction is not allowed.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">436</span>
+    <span class="phpdocumentor-element-found-in__line">435</span>
 
     </aside>
 
@@ -5026,7 +5026,7 @@ e.g. a region where the transaction is not allowed.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">441</span>
+    <span class="phpdocumentor-element-found-in__line">440</span>
 
     </aside>
 
@@ -5065,7 +5065,7 @@ e.g. a region where the transaction is not allowed.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">447</span>
+    <span class="phpdocumentor-element-found-in__line">446</span>
 
     </aside>
 
@@ -5104,7 +5104,7 @@ e.g. a region where the transaction is not allowed.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">452</span>
+    <span class="phpdocumentor-element-found-in__line">451</span>
 
     </aside>
 
@@ -5143,7 +5143,7 @@ e.g. a region where the transaction is not allowed.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">132</span>
+    <span class="phpdocumentor-element-found-in__line">133</span>
 
     </aside>
 
@@ -5152,7 +5152,7 @@ e.g. a region where the transaction is not allowed.</p>
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">null|string|<abbr title="\DateTime">DateTime</abbr></span>
+            <span class="phpdocumentor-signature__type">null|string</span>
     <span class="phpdocumentor-signature__name">$modified</span>
     </code>
 
@@ -5221,7 +5221,7 @@ e.g. a region where the transaction is not allowed.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">70</span>
+    <span class="phpdocumentor-element-found-in__line">69</span>
 
     </aside>
 
@@ -5260,7 +5260,7 @@ e.g. a region where the transaction is not allowed.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">458</span>
+    <span class="phpdocumentor-element-found-in__line">457</span>
 
     </aside>
 
@@ -5299,7 +5299,7 @@ e.g. a region where the transaction is not allowed.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/creativeWork/MediaObject.php"><a href="files/src-org-schema-creativework-mediaobject.html"><abbr title="src/org/schema/creativeWork/MediaObject.php">MediaObject.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">83</span>
+    <span class="phpdocumentor-element-found-in__line">82</span>
 
     </aside>
 
@@ -5338,7 +5338,7 @@ e.g. a region where the transaction is not allowed.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">463</span>
+    <span class="phpdocumentor-element-found-in__line">462</span>
 
     </aside>
 
@@ -5377,7 +5377,7 @@ e.g. a region where the transaction is not allowed.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/creativeWork/MediaObject.php"><a href="files/src-org-schema-creativework-mediaobject.html"><abbr title="src/org/schema/creativeWork/MediaObject.php">MediaObject.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">88</span>
+    <span class="phpdocumentor-element-found-in__line">87</span>
 
     </aside>
 
@@ -5416,7 +5416,7 @@ e.g. a region where the transaction is not allowed.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">468</span>
+    <span class="phpdocumentor-element-found-in__line">467</span>
 
     </aside>
 
@@ -5455,7 +5455,7 @@ e.g. a region where the transaction is not allowed.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/creativeWork/MediaObject.php"><a href="files/src-org-schema-creativework-mediaobject.html"><abbr title="src/org/schema/creativeWork/MediaObject.php">MediaObject.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">94</span>
+    <span class="phpdocumentor-element-found-in__line">93</span>
 
     </aside>
 
@@ -5494,7 +5494,7 @@ e.g. a region where the transaction is not allowed.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">473</span>
+    <span class="phpdocumentor-element-found-in__line">472</span>
 
     </aside>
 
@@ -5533,7 +5533,7 @@ e.g. a region where the transaction is not allowed.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">138</span>
+    <span class="phpdocumentor-element-found-in__line">139</span>
 
     </aside>
 
@@ -5542,7 +5542,7 @@ e.g. a region where the transaction is not allowed.</p>
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">string|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Person.html"><abbr title="\org\schema\Person">Person</abbr></a>|<a href="classes/org-schema-Organization.html"><abbr title="\org\schema\Organization">Organization</abbr></a>|null</span>
+            <span class="phpdocumentor-signature__type">string|array&lt;string|int, string|<a href="classes/org-schema-Person.html"><abbr title="\org\schema\Person">Person</abbr></a>|<a href="classes/org-schema-Organization.html"><abbr title="\org\schema\Organization">Organization</abbr></a>&gt;|<a href="classes/org-schema-Person.html"><abbr title="\org\schema\Person">Person</abbr></a>|<a href="classes/org-schema-Organization.html"><abbr title="\org\schema\Organization">Organization</abbr></a>|null</span>
     <span class="phpdocumentor-signature__name">$publisher</span>
     </code>
 
@@ -5572,7 +5572,7 @@ e.g. a region where the transaction is not allowed.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">478</span>
+    <span class="phpdocumentor-element-found-in__line">477</span>
 
     </aside>
 
@@ -5611,7 +5611,7 @@ e.g. a region where the transaction is not allowed.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/creativeWork/MediaObject.php"><a href="files/src-org-schema-creativework-mediaobject.html"><abbr title="src/org/schema/creativeWork/MediaObject.php">MediaObject.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">102</span>
+    <span class="phpdocumentor-element-found-in__line">101</span>
 
     </aside>
 
@@ -5653,7 +5653,7 @@ Specify the countries in ISO 3166 format.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">483</span>
+    <span class="phpdocumentor-element-found-in__line">482</span>
 
     </aside>
 
@@ -5692,7 +5692,7 @@ Specify the countries in ISO 3166 format.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/creativeWork/MediaObject.php"><a href="files/src-org-schema-creativework-mediaobject.html"><abbr title="src/org/schema/creativeWork/MediaObject.php">MediaObject.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">109</span>
+    <span class="phpdocumentor-element-found-in__line">108</span>
 
     </aside>
 
@@ -5733,7 +5733,7 @@ Specify the countries in ISO 3166 format.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">489</span>
+    <span class="phpdocumentor-element-found-in__line">488</span>
 
     </aside>
 
@@ -5811,7 +5811,7 @@ Specify the countries in ISO 3166 format.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/creativeWork/MediaObject.php"><a href="files/src-org-schema-creativework-mediaobject.html"><abbr title="src/org/schema/creativeWork/MediaObject.php">MediaObject.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">116</span>
+    <span class="phpdocumentor-element-found-in__line">115</span>
 
     </aside>
 
@@ -5851,7 +5851,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">494</span>
+    <span class="phpdocumentor-element-found-in__line">493</span>
 
     </aside>
 
@@ -5890,7 +5890,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">499</span>
+    <span class="phpdocumentor-element-found-in__line">498</span>
 
     </aside>
 
@@ -5929,7 +5929,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/creativeWork/MediaObject.php"><a href="files/src-org-schema-creativework-mediaobject.html"><abbr title="src/org/schema/creativeWork/MediaObject.php">MediaObject.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">127</span>
+    <span class="phpdocumentor-element-found-in__line">126</span>
 
     </aside>
 
@@ -5938,7 +5938,7 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">string|<abbr title="\DateTime">DateTime</abbr>|int|null</span>
+            <span class="phpdocumentor-signature__type">string|int|null</span>
     <span class="phpdocumentor-signature__name">$startTime</span>
     </code>
 
@@ -5974,7 +5974,7 @@ Note that Event uses startDate/endDate instead of startTime/endTime, even when d
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">504</span>
+    <span class="phpdocumentor-element-found-in__line">503</span>
 
     </aside>
 
@@ -6013,11 +6013,11 @@ Note that Event uses startDate/endDate instead of startTime/endTime, even when d
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">510</span>
+    <span class="phpdocumentor-element-found-in__line">509</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">The temporalCoverage of a CreativeWork indicates the period that the content applies to, i.e. that it describes, either as a DateTime or as a textual string indicating a time period in ISO 8601 time interval format. In the case of a Dataset it will typically indicate the relevant time period in a precise notation (e.g. for a 2011 census dataset, the year 2011 would be written &quot;2011/2012&quot;). Other forms of content e.g. ScholarlyArticle, Book, TVSeries or TVEpisode may indicate their temporalCoverage in broader terms - textually or via well-known URL. Written works such as books may sometimes have precise temporal coverage too, e.g. a work set in 1939 - 1945 can be indicated in ISO 8601 interval format format via &quot;1939/1945&quot;.</p>
+        <p class="phpdocumentor-summary">The temporalCoverage of a CreativeWork indicates the period that the content applies to, i.e. that it describes, either as a Date Time or as a textual string indicating a time period in ISO 8601 time interval format. In the case of a Dataset it will typically indicate the relevant time period in a precise notation (e.g. for a 2011 census dataset, the year 2011 would be written &quot;2011/2012&quot;). Other forms of content e.g. ScholarlyArticle, Book, TVSeries or TVEpisode may indicate their temporalCoverage in broader terms - textually or via well-known URL. Written works such as books may sometimes have precise temporal coverage too, e.g. a work set in 1939 - 1945 can be indicated in ISO 8601 interval format format via &quot;1939/1945&quot;.</p>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -6054,7 +6054,7 @@ Note that Event uses startDate/endDate instead of startTime/endTime, even when d
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">520</span>
+    <span class="phpdocumentor-element-found-in__line">519</span>
 
     </aside>
 
@@ -6132,7 +6132,7 @@ Note that Event uses startDate/endDate instead of startTime/endTime, even when d
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">515</span>
+    <span class="phpdocumentor-element-found-in__line">514</span>
 
     </aside>
 
@@ -6171,7 +6171,7 @@ Note that Event uses startDate/endDate instead of startTime/endTime, even when d
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">525</span>
+    <span class="phpdocumentor-element-found-in__line">524</span>
 
     </aside>
 
@@ -6249,7 +6249,7 @@ Note that Event uses startDate/endDate instead of startTime/endTime, even when d
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">530</span>
+    <span class="phpdocumentor-element-found-in__line">529</span>
 
     </aside>
 
@@ -6288,7 +6288,7 @@ Note that Event uses startDate/endDate instead of startTime/endTime, even when d
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">535</span>
+    <span class="phpdocumentor-element-found-in__line">534</span>
 
     </aside>
 
@@ -6327,7 +6327,7 @@ Note that Event uses startDate/endDate instead of startTime/endTime, even when d
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/creativeWork/MediaObject.php"><a href="files/src-org-schema-creativework-mediaobject.html"><abbr title="src/org/schema/creativeWork/MediaObject.php">MediaObject.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">133</span>
+    <span class="phpdocumentor-element-found-in__line">132</span>
 
     </aside>
 
@@ -6336,7 +6336,7 @@ Note that Event uses startDate/endDate instead of startTime/endTime, even when d
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">string|<abbr title="\DateTime">DateTime</abbr>|null|int</span>
+            <span class="phpdocumentor-signature__type">string|null|int</span>
     <span class="phpdocumentor-signature__name">$uploadDate</span>
     </code>
 
@@ -6366,7 +6366,7 @@ Note that Event uses startDate/endDate instead of startTime/endTime, even when d
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">64</span>
+    <span class="phpdocumentor-element-found-in__line">63</span>
 
     </aside>
 
@@ -6405,7 +6405,7 @@ Note that Event uses startDate/endDate instead of startTime/endTime, even when d
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">544</span>
+    <span class="phpdocumentor-element-found-in__line">543</span>
 
     </aside>
 
@@ -6449,7 +6449,7 @@ This property can be used alongside the license property which indicates license
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">549</span>
+    <span class="phpdocumentor-element-found-in__line">548</span>
 
     </aside>
 
@@ -6488,7 +6488,7 @@ This property can be used alongside the license property which indicates license
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/CreativeWorkTrait.php"><a href="files/src-org-schema-traits-creativeworktrait.html"><abbr title="src/org/schema/traits/CreativeWorkTrait.php">CreativeWorkTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">554</span>
+    <span class="phpdocumentor-element-found-in__line">553</span>
 
     </aside>
 
@@ -6605,7 +6605,7 @@ This property can be used alongside the license property which indicates license
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/creativeWork/MediaObject.php"><a href="files/src-org-schema-creativework-mediaobject.html"><abbr title="src/org/schema/creativeWork/MediaObject.php">MediaObject.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">138</span>
+    <span class="phpdocumentor-element-found-in__line">137</span>
 
     </aside>
 
@@ -6644,7 +6644,7 @@ This property can be used alongside the license property which indicates license
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">94</span>
+    <span class="phpdocumentor-element-found-in__line">104</span>
 
     </aside>
 
@@ -6685,7 +6685,7 @@ This property can be used alongside the license property which indicates license
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">102</span>
+    <span class="phpdocumentor-element-found-in__line">112</span>
 
     </aside>
 
@@ -6731,7 +6731,7 @@ This property can be used alongside the license property which indicates license
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">45</span>
+    <span class="phpdocumentor-element-found-in__line">55</span>
 
     </aside>
 
@@ -6816,7 +6816,7 @@ echo $person-&gt;name; // Outputs: Jane Doe
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">137</span>
+    <span class="phpdocumentor-element-found-in__line">147</span>
 
     </aside>
 
@@ -6906,7 +6906,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">155</span>
+    <span class="phpdocumentor-element-found-in__line">165</span>
 
     </aside>
 
@@ -6957,7 +6957,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">185</span>
+    <span class="phpdocumentor-element-found-in__line">195</span>
 
     </aside>
 
@@ -7008,7 +7008,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">170</span>
+    <span class="phpdocumentor-element-found-in__line">180</span>
 
     </aside>
 

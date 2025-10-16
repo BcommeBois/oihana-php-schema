@@ -1,0 +1,359 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://schema.oihana.xyz/InteractionCounter.json",
+    "title": "InteractionCounter",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "_from": {
+            "type": "string"
+        },
+        "_id": {
+            "type": "string"
+        },
+        "_key": {
+            "type": "string"
+        },
+        "_rev": {
+            "type": "string"
+        },
+        "_to": {
+            "type": "string"
+        },
+        "active": {
+            "type": "boolean"
+        },
+        "additionalType": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "object"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "type": "object"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "alternateName": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "object"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "created": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        },
+        "disambiguatingDescription": {
+            "type": "string"
+        },
+        "endTime": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "integer"
+                }
+            ]
+        },
+        "hasPart": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Thing"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Thing"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "id": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "integer"
+                }
+            ]
+        },
+        "identifier": {
+            "type": "string"
+        },
+        "image": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/ImageObject"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/ImageObject"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "interactionService": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/SoftwareApplication"
+                },
+                {
+                    "$ref": "#/$defs/WebSite"
+                }
+            ]
+        },
+        "interactionType": {
+            "$ref": "#/$defs/Action"
+        },
+        "isPartOf": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Thing"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Thing"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "license": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "object"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "location": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Place"
+                },
+                {
+                    "$ref": "#/$defs/PostalAddress"
+                },
+                {
+                    "$ref": "#/$defs/VirtualLocation"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "modified": {
+            "type": "string"
+        },
+        "name": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "integer"
+                }
+            ]
+        },
+        "publisher": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Person"
+                },
+                {
+                    "$ref": "#/$defs/Organization"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Person"
+                            },
+                            {
+                                "$ref": "#/$defs/Organization"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "startTime": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "integer"
+                }
+            ]
+        },
+        "url": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "integer"
+                }
+            ]
+        },
+        "userInteractionCount": {
+            "type": "integer"
+        }
+    },
+    "$defs": {
+        "Action": {
+            "title": "Action",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "ImageObject": {
+            "title": "ImageObject",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Organization": {
+            "title": "Organization",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Person": {
+            "title": "Person",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Place": {
+            "title": "Place",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "PostalAddress": {
+            "title": "PostalAddress",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "SoftwareApplication": {
+            "title": "SoftwareApplication",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Thing": {
+            "title": "Thing",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "VirtualLocation": {
+            "title": "VirtualLocation",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "WebSite": {
+            "title": "WebSite",
+            "type": "object",
+            "additionalProperties": true
+        }
+    }
+}

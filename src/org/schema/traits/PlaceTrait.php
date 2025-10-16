@@ -21,6 +21,7 @@ use org\schema\PostalAddress;
 use org\schema\PropertyValue;
 use org\schema\Review;
 use org\schema\Service;
+use org\schema\Thing;
 
 /**
  * Entities that have a somewhat fixed, physical extension.
@@ -36,6 +37,7 @@ trait PlaceTrait
 
     /**
      * Physical address of the item (PostalAddress or any object to describe it).
+     * @var PostalAddress|string|array<PostalAddress|string>|null
      */
     public PostalAddress|string|array|null $address = null ;
 
@@ -72,18 +74,19 @@ trait PlaceTrait
 
     /**
      * The Email address.
+     * @var null|string|PropertyValue|array<PropertyValue|string>
      */
     public null|string|PropertyValue|array $email ;
 
     /**
      * Upcoming or past events associated with this place or organization (legacy spelling; see singular form, event).
-     * @var null|array|Event
+     * @var null|Event|array<Event>
      */
     public null|array|Event $event ;
 
     /**
      * The fax number.
-     * @var string|null|array|PropertyValue
+     * @var string|null|array<PropertyValue|string>|PropertyValue
      */
     public null|string|PropertyValue|array $faxNumber ;
 
@@ -214,6 +217,7 @@ trait PlaceTrait
 
     /**
      * The special opening hours of a certain place.
+     * @var null|array<OpeningHoursSpecification>|OpeningHoursSpecification
      */
     public null|array|OpeningHoursSpecification $specialOpeningHoursSpecification ;
 
@@ -225,9 +229,10 @@ trait PlaceTrait
 
     /**
      * A page providing information on how to book a tour of some Place, such as an Accommodation or ApartmentComplex in a real estate setting, as well as other kinds of tours as appropriate.
-     * @var null|string|object
+     * @var null|string|Thing
      */
-    public null|string|object $tourBookingPage ;
+    public null|string|Thing $tourBookingPage ;
+
     /**
      * The collection of all websites of this place.
      */

@@ -1,0 +1,740 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://schema.oihana.xyz/Demand.json",
+    "title": "Demand",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "_from": {
+            "type": "string"
+        },
+        "_id": {
+            "type": "string"
+        },
+        "_key": {
+            "type": "string"
+        },
+        "_rev": {
+            "type": "string"
+        },
+        "_to": {
+            "type": "string"
+        },
+        "acceptedPaymentMethod": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/PaymentMethod"
+                },
+                {
+                    "$ref": "#/$defs/LoanOrCredit"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/PaymentMethod"
+                            },
+                            {
+                                "$ref": "#/$defs/LoanOrCredit"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "active": {
+            "type": "boolean"
+        },
+        "additionalType": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "object"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "type": "object"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "advanceBookingRequirement": {
+            "$ref": "#/$defs/QuantitativeValue"
+        },
+        "alternateName": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "object"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "areaServed": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Place"
+                },
+                {
+                    "$ref": "#/$defs/GeoShape"
+                },
+                {
+                    "$ref": "#/$defs/AdministrativeArea"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "asin": {
+            "type": "string"
+        },
+        "availability": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "object"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "availabilityEnds": {
+            "type": "string"
+        },
+        "availabilityStarts": {
+            "type": "string"
+        },
+        "availableAtOrFrom": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Place"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Place"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "availableDeliveryMethod": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/DeliveryMethod"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/DeliveryMethod"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "businessFunction": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/BusinessFunction"
+                },
+                {
+                    "$ref": "#/$defs/DefinedTerm"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/BusinessFunction"
+                            },
+                            {
+                                "$ref": "#/$defs/DefinedTerm"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "created": {
+            "type": "string"
+        },
+        "deliveryLeadTime": {
+            "$ref": "#/$defs/QuantitativeValue"
+        },
+        "description": {
+            "type": "string"
+        },
+        "disambiguatingDescription": {
+            "type": "string"
+        },
+        "eligibleCustomerType": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/BusinessEntityType"
+                },
+                {
+                    "$ref": "#/$defs/DefinedTerm"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/BusinessEntityType"
+                            },
+                            {
+                                "$ref": "#/$defs/DefinedTerm"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "eligibleDuration": {
+            "$ref": "#/$defs/QuantitativeValue"
+        },
+        "eligibleQuantity": {
+            "$ref": "#/$defs/QuantitativeValue"
+        },
+        "eligibleRegion": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Place"
+                },
+                {
+                    "$ref": "#/$defs/GeoShape"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "eligibleTransactionVolume": {
+            "$ref": "#/$defs/PriceSpecification"
+        },
+        "gtin": {
+            "type": "string"
+        },
+        "gtin12": {
+            "type": "string"
+        },
+        "gtin13": {
+            "type": "string"
+        },
+        "gtin14": {
+            "type": "string"
+        },
+        "gtin8": {
+            "type": "string"
+        },
+        "hasPart": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Thing"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Thing"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "id": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "integer"
+                }
+            ]
+        },
+        "identifier": {
+            "type": "string"
+        },
+        "image": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/ImageObject"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/ImageObject"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "includesObject": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/TypeAndQuantityNode"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/TypeAndQuantityNode"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "ineligibleRegion": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Place"
+                },
+                {
+                    "$ref": "#/$defs/GeoShape"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "inventoryLevel": {
+            "$ref": "#/$defs/QuantitativeValue"
+        },
+        "isPartOf": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Thing"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Thing"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "itemCondition": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/OfferItemCondition"
+                },
+                {
+                    "$ref": "#/$defs/DefinedTerm"
+                }
+            ]
+        },
+        "itemOffered": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/CreativeWork"
+                },
+                {
+                    "$ref": "#/$defs/Event"
+                },
+                {
+                    "$ref": "#/$defs/Product"
+                },
+                {
+                    "$ref": "#/$defs/Service"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/CreativeWork"
+                            },
+                            {
+                                "$ref": "#/$defs/Event"
+                            },
+                            {
+                                "$ref": "#/$defs/Product"
+                            },
+                            {
+                                "$ref": "#/$defs/Service"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "license": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "object"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "modified": {
+            "type": "string"
+        },
+        "mpn": {
+            "type": "string"
+        },
+        "name": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "integer"
+                }
+            ]
+        },
+        "priceSpecification": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/PriceSpecification"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/PriceSpecification"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "publisher": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Person"
+                },
+                {
+                    "$ref": "#/$defs/Organization"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Person"
+                            },
+                            {
+                                "$ref": "#/$defs/Organization"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "seller": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Organization"
+                },
+                {
+                    "$ref": "#/$defs/Person"
+                }
+            ]
+        },
+        "serialNumber": {
+            "type": "string"
+        },
+        "sku": {
+            "type": "string"
+        },
+        "url": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "integer"
+                }
+            ]
+        },
+        "validFrom": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "integer"
+                }
+            ]
+        },
+        "validThrough": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "integer"
+                }
+            ]
+        },
+        "warranty": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/DefinedTerm"
+                },
+                {
+                    "$ref": "#/$defs/WarrantyPromise"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        }
+    },
+    "$defs": {
+        "AdministrativeArea": {
+            "title": "AdministrativeArea",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "BusinessEntityType": {
+            "title": "BusinessEntityType",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "BusinessFunction": {
+            "title": "BusinessFunction",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "CreativeWork": {
+            "title": "CreativeWork",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "DefinedTerm": {
+            "title": "DefinedTerm",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "DeliveryMethod": {
+            "title": "DeliveryMethod",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Event": {
+            "title": "Event",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "GeoShape": {
+            "title": "GeoShape",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "ImageObject": {
+            "title": "ImageObject",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "LoanOrCredit": {
+            "title": "LoanOrCredit",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "OfferItemCondition": {
+            "title": "OfferItemCondition",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Organization": {
+            "title": "Organization",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "PaymentMethod": {
+            "title": "PaymentMethod",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Person": {
+            "title": "Person",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Place": {
+            "title": "Place",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "PriceSpecification": {
+            "title": "PriceSpecification",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Product": {
+            "title": "Product",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "QuantitativeValue": {
+            "title": "QuantitativeValue",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Service": {
+            "title": "Service",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Thing": {
+            "title": "Thing",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "TypeAndQuantityNode": {
+            "title": "TypeAndQuantityNode",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "WarrantyPromise": {
+            "title": "WarrantyPromise",
+            "type": "object",
+            "additionalProperties": true
+        }
+    }
+}

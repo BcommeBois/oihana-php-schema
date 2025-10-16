@@ -366,7 +366,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_created">$created</a>
     <span>
-                        &nbsp;: null|string|<abbr title="\DateTime">DateTime</abbr>            </span>
+                        &nbsp;: null|string            </span>
 </dt>
 <dd>Date of creation of the resource.</dd>
 
@@ -492,7 +492,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_hasPart">$hasPart</a>
     <span>
-                        &nbsp;: string|<a href="classes/org-schema-Thing.html"><abbr title="\org\schema\Thing">Thing</abbr></a>|array&lt;string|int, mixed&gt;|null            </span>
+                        &nbsp;: string|<a href="classes/org-schema-Thing.html"><abbr title="\org\schema\Thing">Thing</abbr></a>|array&lt;string|int, <a href="classes/org-schema-Thing.html"><abbr title="\org\schema\Thing">Thing</abbr></a>&gt;|null            </span>
 </dt>
 <dd>Indicates an item that this part of this item.</dd>
 
@@ -513,7 +513,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_image">$image</a>
     <span>
-                        &nbsp;: string|<a href="classes/org-schema-creativeWork-medias-ImageObject.html"><abbr title="\org\schema\creativeWork\medias\ImageObject">ImageObject</abbr></a>|array&lt;string|int, mixed&gt;|null            </span>
+                        &nbsp;: string|<a href="classes/org-schema-creativeWork-medias-ImageObject.html"><abbr title="\org\schema\creativeWork\medias\ImageObject">ImageObject</abbr></a>|array&lt;string|int, <a href="classes/org-schema-creativeWork-medias-ImageObject.html"><abbr title="\org\schema\creativeWork\medias\ImageObject">ImageObject</abbr></a>|string&gt;|null            </span>
 </dt>
 <dd>The image reference of this resource.</dd>
 
@@ -548,7 +548,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_isPartOf">$isPartOf</a>
     <span>
-                        &nbsp;: string|<a href="classes/org-schema-Thing.html"><abbr title="\org\schema\Thing">Thing</abbr></a>|array&lt;string|int, mixed&gt;|null            </span>
+                        &nbsp;: string|<a href="classes/org-schema-Thing.html"><abbr title="\org\schema\Thing">Thing</abbr></a>|array&lt;string|int, <a href="classes/org-schema-Thing.html"><abbr title="\org\schema\Thing">Thing</abbr></a>&gt;|null            </span>
 </dt>
 <dd>Indicates an item that this item is part of.</dd>
 
@@ -590,7 +590,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_modified">$modified</a>
     <span>
-                        &nbsp;: null|string|<abbr title="\DateTime">DateTime</abbr>            </span>
+                        &nbsp;: null|string            </span>
 </dt>
 <dd>Date on which the resource was changed.</dd>
 
@@ -639,14 +639,14 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Offer.html#property_priceValidUntil">$priceValidUntil</a>
     <span>
-                        &nbsp;: <abbr title="\DateTime">DateTime</abbr>|string|null            </span>
+                        &nbsp;: int|string|null            </span>
 </dt>
 <dd>The date after which the price is no longer available.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_publisher">$publisher</a>
     <span>
-                        &nbsp;: string|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Person.html"><abbr title="\org\schema\Person">Person</abbr></a>|<a href="classes/org-schema-Organization.html"><abbr title="\org\schema\Organization">Organization</abbr></a>|null            </span>
+                        &nbsp;: string|array&lt;string|int, string|<a href="classes/org-schema-Person.html"><abbr title="\org\schema\Person">Person</abbr></a>|<a href="classes/org-schema-Organization.html"><abbr title="\org\schema\Organization">Organization</abbr></a>&gt;|<a href="classes/org-schema-Person.html"><abbr title="\org\schema\Person">Person</abbr></a>|<a href="classes/org-schema-Organization.html"><abbr title="\org\schema\Organization">Organization</abbr></a>|null            </span>
 </dt>
 <dd>The publisher of the resource.</dd>
 
@@ -702,23 +702,23 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Offer.html#property_validFrom">$validFrom</a>
     <span>
-                        &nbsp;: null|string|int|<abbr title="\DateTime">DateTime</abbr>            </span>
+                        &nbsp;: null|string|int            </span>
 </dt>
-<dd>The date when the item becomes valid (DateTime).</dd>
+<dd>The date when the item becomes valid.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Offer.html#property_validThrough">$validThrough</a>
     <span>
-                        &nbsp;: null|string|int|<abbr title="\DateTime">DateTime</abbr>            </span>
+                        &nbsp;: null|string|int            </span>
 </dt>
-<dd>The end of the validity of offer, price specification, or opening hours data (DateTime).</dd>
+<dd>The end of the validity of offer, price specification, or opening hours data.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Offer.html#property_warranty">$warranty</a>
     <span>
                         &nbsp;: null|string|<a href="classes/org-schema-DefinedTerm.html"><abbr title="\org\schema\DefinedTerm">DefinedTerm</abbr></a>|<a href="classes/org-schema-WarrantyPromise.html"><abbr title="\org\schema\WarrantyPromise">WarrantyPromise</abbr></a>            </span>
 </dt>
-<dd>The end of the validity of offer, price specification, or opening hours data (DateTime).</dd>
+<dd>The warranty promise(s) included in the offer.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/org-schema-traits-ThingTrait.html#property_atContext">$atContext</a>
@@ -798,7 +798,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">86</span>
+    <span class="phpdocumentor-element-found-in__line">96</span>
 
     </aside>
 
@@ -846,7 +846,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">45</span>
+    <span class="phpdocumentor-element-found-in__line">44</span>
 
     </aside>
 
@@ -885,7 +885,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">34</span>
+    <span class="phpdocumentor-element-found-in__line">33</span>
 
     </aside>
 
@@ -924,7 +924,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">29</span>
+    <span class="phpdocumentor-element-found-in__line">28</span>
 
     </aside>
 
@@ -963,7 +963,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">39</span>
+    <span class="phpdocumentor-element-found-in__line">38</span>
 
     </aside>
 
@@ -1002,7 +1002,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">51</span>
+    <span class="phpdocumentor-element-found-in__line">50</span>
 
     </aside>
 
@@ -1041,7 +1041,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">25</span>
+    <span class="phpdocumentor-element-found-in__line">24</span>
 
     </aside>
 
@@ -1080,7 +1080,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">80</span>
+    <span class="phpdocumentor-element-found-in__line">79</span>
 
     </aside>
 
@@ -1119,7 +1119,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">30</span>
+    <span class="phpdocumentor-element-found-in__line">29</span>
 
     </aside>
 
@@ -1158,7 +1158,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">85</span>
+    <span class="phpdocumentor-element-found-in__line">84</span>
 
     </aside>
 
@@ -1197,7 +1197,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">36</span>
+    <span class="phpdocumentor-element-found-in__line">35</span>
 
     </aside>
 
@@ -1236,7 +1236,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">42</span>
+    <span class="phpdocumentor-element-found-in__line">41</span>
 
     </aside>
 
@@ -1275,7 +1275,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">48</span>
+    <span class="phpdocumentor-element-found-in__line">47</span>
 
     </aside>
 
@@ -1314,7 +1314,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">75</span>
+    <span class="phpdocumentor-element-found-in__line">74</span>
 
     </aside>
 
@@ -1353,7 +1353,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">53</span>
+    <span class="phpdocumentor-element-found-in__line">52</span>
 
     </aside>
 
@@ -1392,7 +1392,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">58</span>
+    <span class="phpdocumentor-element-found-in__line">57</span>
 
     </aside>
 
@@ -1431,7 +1431,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">63</span>
+    <span class="phpdocumentor-element-found-in__line">62</span>
 
     </aside>
 
@@ -1470,7 +1470,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">68</span>
+    <span class="phpdocumentor-element-found-in__line">67</span>
 
     </aside>
 
@@ -1509,7 +1509,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">73</span>
+    <span class="phpdocumentor-element-found-in__line">72</span>
 
     </aside>
 
@@ -1548,7 +1548,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">78</span>
+    <span class="phpdocumentor-element-found-in__line">77</span>
 
     </aside>
 
@@ -1587,7 +1587,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">83</span>
+    <span class="phpdocumentor-element-found-in__line">82</span>
 
     </aside>
 
@@ -1626,7 +1626,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">98</span>
+    <span class="phpdocumentor-element-found-in__line">97</span>
 
     </aside>
 
@@ -1678,7 +1678,7 @@ Commonly used values:</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">104</span>
+    <span class="phpdocumentor-element-found-in__line">103</span>
 
     </aside>
 
@@ -1733,7 +1733,7 @@ Commonly used values:</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">112</span>
+    <span class="phpdocumentor-element-found-in__line">111</span>
 
     </aside>
 
@@ -1775,7 +1775,7 @@ Parameter naming and standardization are not specified here.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">90</span>
+    <span class="phpdocumentor-element-found-in__line">89</span>
 
     </aside>
 
@@ -1784,7 +1784,7 @@ Parameter naming and standardization are not specified here.</p>
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">null|string|<abbr title="\DateTime">DateTime</abbr></span>
+            <span class="phpdocumentor-signature__type">null|string</span>
     <span class="phpdocumentor-signature__name">$created</span>
     </code>
 
@@ -1814,7 +1814,7 @@ Parameter naming and standardization are not specified here.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">118</span>
+    <span class="phpdocumentor-element-found-in__line">117</span>
 
     </aside>
 
@@ -1853,7 +1853,7 @@ Parameter naming and standardization are not specified here.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">95</span>
+    <span class="phpdocumentor-element-found-in__line">94</span>
 
     </aside>
 
@@ -1892,7 +1892,7 @@ Parameter naming and standardization are not specified here.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">106</span>
+    <span class="phpdocumentor-element-found-in__line">105</span>
 
     </aside>
 
@@ -1931,7 +1931,7 @@ Parameter naming and standardization are not specified here.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">124</span>
+    <span class="phpdocumentor-element-found-in__line">123</span>
 
     </aside>
 
@@ -1970,7 +1970,7 @@ Parameter naming and standardization are not specified here.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">130</span>
+    <span class="phpdocumentor-element-found-in__line">129</span>
 
     </aside>
 
@@ -2009,7 +2009,7 @@ Parameter naming and standardization are not specified here.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">137</span>
+    <span class="phpdocumentor-element-found-in__line">136</span>
 
     </aside>
 
@@ -2050,7 +2050,7 @@ Parameter naming and standardization are not specified here.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">142</span>
+    <span class="phpdocumentor-element-found-in__line">141</span>
 
     </aside>
 
@@ -2089,7 +2089,7 @@ Parameter naming and standardization are not specified here.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">148</span>
+    <span class="phpdocumentor-element-found-in__line">147</span>
 
     </aside>
 
@@ -2128,7 +2128,7 @@ Parameter naming and standardization are not specified here.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">155</span>
+    <span class="phpdocumentor-element-found-in__line">154</span>
 
     </aside>
 
@@ -2169,7 +2169,7 @@ Parameter naming and standardization are not specified here.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">162</span>
+    <span class="phpdocumentor-element-found-in__line">161</span>
 
     </aside>
 
@@ -2210,7 +2210,7 @@ Parameter naming and standardization are not specified here.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">169</span>
+    <span class="phpdocumentor-element-found-in__line">168</span>
 
     </aside>
 
@@ -2251,7 +2251,7 @@ Parameter naming and standardization are not specified here.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">175</span>
+    <span class="phpdocumentor-element-found-in__line">174</span>
 
     </aside>
 
@@ -2290,7 +2290,7 @@ Parameter naming and standardization are not specified here.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">181</span>
+    <span class="phpdocumentor-element-found-in__line">180</span>
 
     </aside>
 
@@ -2329,7 +2329,7 @@ Parameter naming and standardization are not specified here.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">198</span>
+    <span class="phpdocumentor-element-found-in__line">197</span>
 
     </aside>
 
@@ -2382,7 +2382,7 @@ Parameter naming and standardization are not specified here.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">205</span>
+    <span class="phpdocumentor-element-found-in__line">204</span>
 
     </aside>
 
@@ -2423,7 +2423,7 @@ Parameter naming and standardization are not specified here.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">212</span>
+    <span class="phpdocumentor-element-found-in__line">211</span>
 
     </aside>
 
@@ -2464,7 +2464,7 @@ Parameter naming and standardization are not specified here.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">218</span>
+    <span class="phpdocumentor-element-found-in__line">217</span>
 
     </aside>
 
@@ -2503,7 +2503,7 @@ Parameter naming and standardization are not specified here.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">101</span>
+    <span class="phpdocumentor-element-found-in__line">100</span>
 
     </aside>
 
@@ -2512,7 +2512,7 @@ Parameter naming and standardization are not specified here.</p>
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">string|<a href="classes/org-schema-Thing.html"><abbr title="\org\schema\Thing">Thing</abbr></a>|array&lt;string|int, mixed&gt;|null</span>
+            <span class="phpdocumentor-signature__type">string|<a href="classes/org-schema-Thing.html"><abbr title="\org\schema\Thing">Thing</abbr></a>|array&lt;string|int, <a href="classes/org-schema-Thing.html"><abbr title="\org\schema\Thing">Thing</abbr></a>&gt;|null</span>
     <span class="phpdocumentor-signature__name">$hasPart</span>
     </code>
 
@@ -2542,7 +2542,7 @@ Parameter naming and standardization are not specified here.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">58</span>
+    <span class="phpdocumentor-element-found-in__line">57</span>
 
     </aside>
 
@@ -2581,7 +2581,7 @@ Parameter naming and standardization are not specified here.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">111</span>
+    <span class="phpdocumentor-element-found-in__line">110</span>
 
     </aside>
 
@@ -2629,7 +2629,7 @@ Parameter naming and standardization are not specified here.</p>
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">string|<a href="classes/org-schema-creativeWork-medias-ImageObject.html"><abbr title="\org\schema\creativeWork\medias\ImageObject">ImageObject</abbr></a>|array&lt;string|int, mixed&gt;|null</span>
+            <span class="phpdocumentor-signature__type">string|<a href="classes/org-schema-creativeWork-medias-ImageObject.html"><abbr title="\org\schema\creativeWork\medias\ImageObject">ImageObject</abbr></a>|array&lt;string|int, <a href="classes/org-schema-creativeWork-medias-ImageObject.html"><abbr title="\org\schema\creativeWork\medias\ImageObject">ImageObject</abbr></a>|string&gt;|null</span>
     <span class="phpdocumentor-signature__name">$image</span>
     </code>
 
@@ -2659,7 +2659,7 @@ Parameter naming and standardization are not specified here.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">224</span>
+    <span class="phpdocumentor-element-found-in__line">223</span>
 
     </aside>
 
@@ -2698,7 +2698,7 @@ Parameter naming and standardization are not specified here.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">229</span>
+    <span class="phpdocumentor-element-found-in__line">228</span>
 
     </aside>
 
@@ -2737,7 +2737,7 @@ Parameter naming and standardization are not specified here.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">235</span>
+    <span class="phpdocumentor-element-found-in__line">234</span>
 
     </aside>
 
@@ -2776,7 +2776,7 @@ Parameter naming and standardization are not specified here.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">241</span>
+    <span class="phpdocumentor-element-found-in__line">240</span>
 
     </aside>
 
@@ -2824,7 +2824,7 @@ Parameter naming and standardization are not specified here.</p>
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">string|<a href="classes/org-schema-Thing.html"><abbr title="\org\schema\Thing">Thing</abbr></a>|array&lt;string|int, mixed&gt;|null</span>
+            <span class="phpdocumentor-signature__type">string|<a href="classes/org-schema-Thing.html"><abbr title="\org\schema\Thing">Thing</abbr></a>|array&lt;string|int, <a href="classes/org-schema-Thing.html"><abbr title="\org\schema\Thing">Thing</abbr></a>&gt;|null</span>
     <span class="phpdocumentor-signature__name">$isPartOf</span>
     </code>
 
@@ -2854,7 +2854,7 @@ Parameter naming and standardization are not specified here.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">248</span>
+    <span class="phpdocumentor-element-found-in__line">247</span>
 
     </aside>
 
@@ -2895,7 +2895,7 @@ Parameter naming and standardization are not specified here.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">256</span>
+    <span class="phpdocumentor-element-found-in__line">255</span>
 
     </aside>
 
@@ -2937,7 +2937,7 @@ Using a second type, such as Product or a subtype of Product, can clarify the na
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">262</span>
+    <span class="phpdocumentor-element-found-in__line">261</span>
 
     </aside>
 
@@ -2976,7 +2976,7 @@ Using a second type, such as Product or a subtype of Product, can clarify the na
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">127</span>
+    <span class="phpdocumentor-element-found-in__line">128</span>
 
     </aside>
 
@@ -3015,7 +3015,7 @@ Using a second type, such as Product or a subtype of Product, can clarify the na
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">268</span>
+    <span class="phpdocumentor-element-found-in__line">267</span>
 
     </aside>
 
@@ -3054,7 +3054,7 @@ Using a second type, such as Product or a subtype of Product, can clarify the na
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">132</span>
+    <span class="phpdocumentor-element-found-in__line">133</span>
 
     </aside>
 
@@ -3063,7 +3063,7 @@ Using a second type, such as Product or a subtype of Product, can clarify the na
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">null|string|<abbr title="\DateTime">DateTime</abbr></span>
+            <span class="phpdocumentor-signature__type">null|string</span>
     <span class="phpdocumentor-signature__name">$modified</span>
     </code>
 
@@ -3093,7 +3093,7 @@ Using a second type, such as Product or a subtype of Product, can clarify the na
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">274</span>
+    <span class="phpdocumentor-element-found-in__line">273</span>
 
     </aside>
 
@@ -3132,7 +3132,7 @@ Using a second type, such as Product or a subtype of Product, can clarify the na
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">70</span>
+    <span class="phpdocumentor-element-found-in__line">69</span>
 
     </aside>
 
@@ -3171,7 +3171,7 @@ Using a second type, such as Product or a subtype of Product, can clarify the na
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">280</span>
+    <span class="phpdocumentor-element-found-in__line">279</span>
 
     </aside>
 
@@ -3210,7 +3210,7 @@ Using a second type, such as Product or a subtype of Product, can clarify the na
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">285</span>
+    <span class="phpdocumentor-element-found-in__line">284</span>
 
     </aside>
 
@@ -3249,7 +3249,7 @@ Using a second type, such as Product or a subtype of Product, can clarify the na
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">290</span>
+    <span class="phpdocumentor-element-found-in__line">289</span>
 
     </aside>
 
@@ -3288,7 +3288,7 @@ Using a second type, such as Product or a subtype of Product, can clarify the na
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">296</span>
+    <span class="phpdocumentor-element-found-in__line">295</span>
 
     </aside>
 
@@ -3327,7 +3327,7 @@ Using a second type, such as Product or a subtype of Product, can clarify the na
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">302</span>
+    <span class="phpdocumentor-element-found-in__line">301</span>
 
     </aside>
 
@@ -3336,7 +3336,7 @@ Using a second type, such as Product or a subtype of Product, can clarify the na
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type"><abbr title="\DateTime">DateTime</abbr>|string|null</span>
+            <span class="phpdocumentor-signature__type">int|string|null</span>
     <span class="phpdocumentor-signature__name">$priceValidUntil</span>
     </code>
 
@@ -3366,7 +3366,7 @@ Using a second type, such as Product or a subtype of Product, can clarify the na
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">138</span>
+    <span class="phpdocumentor-element-found-in__line">139</span>
 
     </aside>
 
@@ -3375,7 +3375,7 @@ Using a second type, such as Product or a subtype of Product, can clarify the na
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">string|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Person.html"><abbr title="\org\schema\Person">Person</abbr></a>|<a href="classes/org-schema-Organization.html"><abbr title="\org\schema\Organization">Organization</abbr></a>|null</span>
+            <span class="phpdocumentor-signature__type">string|array&lt;string|int, string|<a href="classes/org-schema-Person.html"><abbr title="\org\schema\Person">Person</abbr></a>|<a href="classes/org-schema-Organization.html"><abbr title="\org\schema\Organization">Organization</abbr></a>&gt;|<a href="classes/org-schema-Person.html"><abbr title="\org\schema\Person">Person</abbr></a>|<a href="classes/org-schema-Organization.html"><abbr title="\org\schema\Organization">Organization</abbr></a>|null</span>
     <span class="phpdocumentor-signature__name">$publisher</span>
     </code>
 
@@ -3405,7 +3405,7 @@ Using a second type, such as Product or a subtype of Product, can clarify the na
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">308</span>
+    <span class="phpdocumentor-element-found-in__line">307</span>
 
     </aside>
 
@@ -3444,7 +3444,7 @@ Using a second type, such as Product or a subtype of Product, can clarify the na
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">314</span>
+    <span class="phpdocumentor-element-found-in__line">313</span>
 
     </aside>
 
@@ -3485,7 +3485,7 @@ Using a second type, such as Product or a subtype of Product, can clarify the na
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">320</span>
+    <span class="phpdocumentor-element-found-in__line">319</span>
 
     </aside>
 
@@ -3526,7 +3526,7 @@ Using a second type, such as Product or a subtype of Product, can clarify the na
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">326</span>
+    <span class="phpdocumentor-element-found-in__line">325</span>
 
     </aside>
 
@@ -3565,7 +3565,7 @@ Using a second type, such as Product or a subtype of Product, can clarify the na
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">331</span>
+    <span class="phpdocumentor-element-found-in__line">330</span>
 
     </aside>
 
@@ -3604,7 +3604,7 @@ Using a second type, such as Product or a subtype of Product, can clarify the na
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">64</span>
+    <span class="phpdocumentor-element-found-in__line">63</span>
 
     </aside>
 
@@ -3643,7 +3643,7 @@ Using a second type, such as Product or a subtype of Product, can clarify the na
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">337</span>
+    <span class="phpdocumentor-element-found-in__line">336</span>
 
     </aside>
 
@@ -3682,16 +3682,16 @@ Using a second type, such as Product or a subtype of Product, can clarify the na
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">342</span>
+    <span class="phpdocumentor-element-found-in__line">341</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">The date when the item becomes valid (DateTime).</p>
+        <p class="phpdocumentor-summary">The date when the item becomes valid.</p>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">null|string|int|<abbr title="\DateTime">DateTime</abbr></span>
+            <span class="phpdocumentor-signature__type">null|string|int</span>
     <span class="phpdocumentor-signature__name">$validFrom</span>
     </code>
 
@@ -3721,16 +3721,16 @@ Using a second type, such as Product or a subtype of Product, can clarify the na
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">347</span>
+    <span class="phpdocumentor-element-found-in__line">346</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">The end of the validity of offer, price specification, or opening hours data (DateTime).</p>
+        <p class="phpdocumentor-summary">The end of the validity of offer, price specification, or opening hours data.</p>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">null|string|int|<abbr title="\DateTime">DateTime</abbr></span>
+            <span class="phpdocumentor-signature__type">null|string|int</span>
     <span class="phpdocumentor-signature__name">$validThrough</span>
     </code>
 
@@ -3760,11 +3760,11 @@ Using a second type, such as Product or a subtype of Product, can clarify the na
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Offer.php"><a href="files/src-org-schema-offer.html"><abbr title="src/org/schema/Offer.php">Offer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">352</span>
+    <span class="phpdocumentor-element-found-in__line">351</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">The end of the validity of offer, price specification, or opening hours data (DateTime).</p>
+        <p class="phpdocumentor-summary">The warranty promise(s) included in the offer.</p>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -3799,7 +3799,7 @@ Using a second type, such as Product or a subtype of Product, can clarify the na
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">94</span>
+    <span class="phpdocumentor-element-found-in__line">104</span>
 
     </aside>
 
@@ -3840,7 +3840,7 @@ Using a second type, such as Product or a subtype of Product, can clarify the na
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">102</span>
+    <span class="phpdocumentor-element-found-in__line">112</span>
 
     </aside>
 
@@ -3886,7 +3886,7 @@ Using a second type, such as Product or a subtype of Product, can clarify the na
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">45</span>
+    <span class="phpdocumentor-element-found-in__line">55</span>
 
     </aside>
 
@@ -3971,7 +3971,7 @@ echo $person-&gt;name; // Outputs: Jane Doe
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">137</span>
+    <span class="phpdocumentor-element-found-in__line">147</span>
 
     </aside>
 
@@ -4061,7 +4061,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">155</span>
+    <span class="phpdocumentor-element-found-in__line">165</span>
 
     </aside>
 
@@ -4112,7 +4112,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">185</span>
+    <span class="phpdocumentor-element-found-in__line">195</span>
 
     </aside>
 
@@ -4163,7 +4163,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">170</span>
+    <span class="phpdocumentor-element-found-in__line">180</span>
 
     </aside>
 

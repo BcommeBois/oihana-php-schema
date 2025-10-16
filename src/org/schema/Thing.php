@@ -95,7 +95,7 @@ class Thing implements JsonSerializable
 
     /**
      * Indicates an item that this part of this item.
-     * @var string|Thing|array|null
+     * @var string|Thing|array<Thing>|null
      */
     public null|string|Thing|array $hasPart ;
 
@@ -111,17 +111,19 @@ class Thing implements JsonSerializable
 
     /**
      * The image reference of this resource.
+     * @var string|ImageObject|array<ImageObject|string>|null
      */
     public string|ImageObject|array|null $image ;
 
     /**
      * Indicates an item that this item is part of.
-     * @var string|Thing|array|null
+     * @var string|Thing|array<Thing>|null
      */
     public null|string|Thing|array $isPartOf ;
 
     /**
      * A legal document giving official permission to do something with the resource.
+     * @var string|object|null
      */
     public string|object|null $license ;
 
@@ -132,7 +134,7 @@ class Thing implements JsonSerializable
 
     /**
      * The publisher of the resource.
-     * @var string|array|Person|Organization|null
+     * @var string|array<string|Person|Organization>|Person|Organization|null
      */
     public string|array|Person|Organization|null $publisher ;
 }

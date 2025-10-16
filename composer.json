@@ -18,7 +18,9 @@
     },
     "scripts": {
         "doc": "rm -rf docs && mkdir docs && cp -r assets docs/assets && ./vendor/bin/phpdoc -c phpdoc.xml -v" ,
-        "test": "./vendor/bin/phpunit"
+        "test": "./vendor/bin/phpunit",
+        "schemas:all": "php bin/generate-schemas.php",
+        "schema:place": "php bin/generate-schema.php org\\schema\\Place"
     },
     "autoload" :
     {

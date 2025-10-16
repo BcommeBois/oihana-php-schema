@@ -1,0 +1,1875 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://schema.oihana.xyz/EducationalOrganization.json",
+    "title": "EducationalOrganization",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "_from": {
+            "type": "string"
+        },
+        "_id": {
+            "type": "string"
+        },
+        "_key": {
+            "type": "string"
+        },
+        "_rev": {
+            "type": "string"
+        },
+        "_to": {
+            "type": "string"
+        },
+        "acceptedPaymentMethod": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/PaymentMethod"
+                },
+                {
+                    "$ref": "#/$defs/LoanOrCredit"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/PaymentMethod"
+                            },
+                            {
+                                "$ref": "#/$defs/LoanOrCredit"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "actionableFeedbackPolicy": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/CreativeWork"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "active": {
+            "type": "boolean"
+        },
+        "additional": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "object"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "additionalType": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "object"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "type": "object"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "address": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/PostalAddress"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/PostalAddress"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "agentInteractionStatistic": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/InteractionCounter"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/InteractionCounter"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "aggregateRating": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/AggregateRating"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/AggregateRating"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "alternateName": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "object"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "alumni": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Person"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Person"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "amenityFeature": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/LocationFeatureSpecification"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/LocationFeatureSpecification"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "ape": {
+            "type": "string"
+        },
+        "areaServed": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Place"
+                },
+                {
+                    "$ref": "#/$defs/GeoShape"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "award": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "branchCode": {
+            "type": "string"
+        },
+        "brand": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Brand"
+                },
+                {
+                    "$ref": "#/$defs/Organization"
+                }
+            ]
+        },
+        "contactPoint": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/ContactPoint"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/ContactPoint"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "containedInsPlace": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Place"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Place"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "containsPlace": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Place"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Place"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "created": {
+            "type": "string"
+        },
+        "department": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Organization"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Organization"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "description": {
+            "type": "string"
+        },
+        "disambiguatingDescription": {
+            "type": "string"
+        },
+        "dissolutionDate": {
+            "type": "string"
+        },
+        "duns": {
+            "type": "string"
+        },
+        "email": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/PropertyValue"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/PropertyValue"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "employees": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Person"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Person"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "event": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Event"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Event"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "faxNumber": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/PropertyValue"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/PropertyValue"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "founder": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Organization"
+                },
+                {
+                    "$ref": "#/$defs/Person"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Organization"
+                            },
+                            {
+                                "$ref": "#/$defs/Person"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "foundingDate": {
+            "type": "string"
+        },
+        "foundingLocation": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Place"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "geo": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/GeoCoordinates"
+                },
+                {
+                    "$ref": "#/$defs/GeoShape"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/GeoCoordinates"
+                            },
+                            {
+                                "$ref": "#/$defs/GeoShape"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "geoContains": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/GeospatialGeometry"
+                },
+                {
+                    "$ref": "#/$defs/Place"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/GeospatialGeometry"
+                            },
+                            {
+                                "$ref": "#/$defs/Place"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "geoCoveredBy": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/GeospatialGeometry"
+                },
+                {
+                    "$ref": "#/$defs/Place"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/GeospatialGeometry"
+                            },
+                            {
+                                "$ref": "#/$defs/Place"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "geoCovers": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/GeospatialGeometry"
+                },
+                {
+                    "$ref": "#/$defs/Place"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/GeospatialGeometry"
+                            },
+                            {
+                                "$ref": "#/$defs/Place"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "geoCrosses": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/GeospatialGeometry"
+                },
+                {
+                    "$ref": "#/$defs/Place"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/GeospatialGeometry"
+                            },
+                            {
+                                "$ref": "#/$defs/Place"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "geoDisjoint": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/GeospatialGeometry"
+                },
+                {
+                    "$ref": "#/$defs/Place"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/GeospatialGeometry"
+                            },
+                            {
+                                "$ref": "#/$defs/Place"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "geoEquals": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/GeospatialGeometry"
+                },
+                {
+                    "$ref": "#/$defs/Place"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/GeospatialGeometry"
+                            },
+                            {
+                                "$ref": "#/$defs/Place"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "geoIntersects": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/GeospatialGeometry"
+                },
+                {
+                    "$ref": "#/$defs/Place"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/GeospatialGeometry"
+                            },
+                            {
+                                "$ref": "#/$defs/Place"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "geoOverlaps": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/GeospatialGeometry"
+                },
+                {
+                    "$ref": "#/$defs/Place"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/GeospatialGeometry"
+                            },
+                            {
+                                "$ref": "#/$defs/Place"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "geoTouches": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/GeospatialGeometry"
+                },
+                {
+                    "$ref": "#/$defs/Place"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/GeospatialGeometry"
+                            },
+                            {
+                                "$ref": "#/$defs/Place"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "geoWithin": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/GeospatialGeometry"
+                },
+                {
+                    "$ref": "#/$defs/Place"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/GeospatialGeometry"
+                            },
+                            {
+                                "$ref": "#/$defs/Place"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "hasCertification": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Certification"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Certification"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "hasDriveThroughService": {
+            "type": "boolean"
+        },
+        "hasMap": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Map"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "hasOfferCatalog": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/OfferCatalog"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/OfferCatalog"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "hasPOS": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Place"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Place"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "hasPart": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Thing"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Thing"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "hasShippingService": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "object"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "type": "object"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "id": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "integer"
+                }
+            ]
+        },
+        "identifier": {
+            "type": "string"
+        },
+        "image": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/ImageObject"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/ImageObject"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "images": {
+            "type": "array"
+        },
+        "interactionStatistic": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/InteractionCounter"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/InteractionCounter"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "isAccessibleForFree": {
+            "type": "boolean"
+        },
+        "isPartOf": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Thing"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Thing"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "isicV4": {
+            "type": "string"
+        },
+        "iso6523Code": {
+            "type": "string"
+        },
+        "keywords": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/DefinedTerm"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/DefinedTerm"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "latitude": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "integer"
+                },
+                {
+                    "type": "number"
+                }
+            ]
+        },
+        "legalForm": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "object"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "legalName": {
+            "type": "string"
+        },
+        "leiCode": {
+            "type": "string"
+        },
+        "license": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "object"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "location": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Place"
+                },
+                {
+                    "$ref": "#/$defs/PostalAddress"
+                },
+                {
+                    "$ref": "#/$defs/VirtualLocation"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "logo": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/ImageObject"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "longitude": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "integer"
+                },
+                {
+                    "type": "number"
+                }
+            ]
+        },
+        "makesOffer": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Offer"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Offer"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "maximumAttendeeCapacity": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "integer"
+                }
+            ]
+        },
+        "member": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Person"
+                },
+                {
+                    "$ref": "#/$defs/Organization"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Person"
+                            },
+                            {
+                                "$ref": "#/$defs/Organization"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "memberOf": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Organization"
+                },
+                {
+                    "$ref": "#/$defs/MemberProgramTier"
+                },
+                {
+                    "$ref": "#/$defs/ProgramMembership"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Organization"
+                            },
+                            {
+                                "$ref": "#/$defs/MemberProgramTier"
+                            },
+                            {
+                                "$ref": "#/$defs/ProgramMembership"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "modified": {
+            "type": "string"
+        },
+        "naics": {
+            "type": "string"
+        },
+        "name": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "integer"
+                }
+            ]
+        },
+        "nonprofitStatus": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/DefinedTerm"
+                },
+                {
+                    "$ref": "#/$defs/NonprofitType"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "numberOfEmployees": {
+            "$ref": "#/$defs/QuantitativeValue"
+        },
+        "offers": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Offer"
+                },
+                {
+                    "$ref": "#/$defs/Demand"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Offer"
+                            },
+                            {
+                                "$ref": "#/$defs/Demand"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "openingHours": {
+            "type": "string"
+        },
+        "openingHoursSpecification": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/OpeningHoursSpecification"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/OpeningHoursSpecification"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "owns": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Product"
+                },
+                {
+                    "$ref": "#/$defs/OwnershipInfo"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Product"
+                            },
+                            {
+                                "$ref": "#/$defs/OwnershipInfo"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "parentOrganization": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Organization"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Organization"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "photo": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/ImageObject"
+                },
+                {
+                    "$ref": "#/$defs/Photograph"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/ImageObject"
+                            },
+                            {
+                                "$ref": "#/$defs/Photograph"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "photos": {
+            "type": "array"
+        },
+        "providers": {
+            "type": "array"
+        },
+        "publicAccess": {
+            "type": "boolean"
+        },
+        "publisher": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Person"
+                },
+                {
+                    "$ref": "#/$defs/Organization"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Person"
+                            },
+                            {
+                                "$ref": "#/$defs/Organization"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "publishingPrinciples": {
+            "oneOf": [
+                {
+                    "$ref": "#/$defs/CreativeWork"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "remainingAttendee": {
+            "type": "integer"
+        },
+        "review": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Review"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Review"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "seeks": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Demand"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Demand"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "service": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Service"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Service"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "skills": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/DefinedTerm"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/DefinedTerm"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "slogan": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "object"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "smokingAllowed": {
+            "type": "boolean"
+        },
+        "specialOpeningHoursSpecification": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/OpeningHoursSpecification"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/OpeningHoursSpecification"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "sponsor": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Person"
+                },
+                {
+                    "$ref": "#/$defs/Organization"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Person"
+                            },
+                            {
+                                "$ref": "#/$defs/Organization"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "subOrganization": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Organization"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/Organization"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "taxID": {
+            "type": "string"
+        },
+        "telephone": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/PropertyValue"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/PropertyValue"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "tourBookingPage": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/Thing"
+                },
+                {
+                    "type": "string"
+                }
+            ]
+        },
+        "url": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "integer"
+                }
+            ]
+        },
+        "vatID": {
+            "type": "string"
+        },
+        "website": {
+            "oneOf": [
+                {
+                    "type": "null"
+                },
+                {
+                    "$ref": "#/$defs/WebSite"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/$defs/WebSite"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    },
+    "$defs": {
+        "AggregateRating": {
+            "title": "AggregateRating",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Brand": {
+            "title": "Brand",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Certification": {
+            "title": "Certification",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "ContactPoint": {
+            "title": "ContactPoint",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "CreativeWork": {
+            "title": "CreativeWork",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "DefinedTerm": {
+            "title": "DefinedTerm",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Demand": {
+            "title": "Demand",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Event": {
+            "title": "Event",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "GeoCoordinates": {
+            "title": "GeoCoordinates",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "GeoShape": {
+            "title": "GeoShape",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "GeospatialGeometry": {
+            "title": "GeospatialGeometry",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "ImageObject": {
+            "title": "ImageObject",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "InteractionCounter": {
+            "title": "InteractionCounter",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "LoanOrCredit": {
+            "title": "LoanOrCredit",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "LocationFeatureSpecification": {
+            "title": "LocationFeatureSpecification",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Map": {
+            "title": "Map",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "MemberProgramTier": {
+            "title": "MemberProgramTier",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "NonprofitType": {
+            "title": "NonprofitType",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Offer": {
+            "title": "Offer",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "OfferCatalog": {
+            "title": "OfferCatalog",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "OpeningHoursSpecification": {
+            "title": "OpeningHoursSpecification",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Organization": {
+            "title": "Organization",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "OwnershipInfo": {
+            "title": "OwnershipInfo",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "PaymentMethod": {
+            "title": "PaymentMethod",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Person": {
+            "title": "Person",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Photograph": {
+            "title": "Photograph",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Place": {
+            "title": "Place",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "PostalAddress": {
+            "title": "PostalAddress",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Product": {
+            "title": "Product",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "ProgramMembership": {
+            "title": "ProgramMembership",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "PropertyValue": {
+            "title": "PropertyValue",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "QuantitativeValue": {
+            "title": "QuantitativeValue",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Review": {
+            "title": "Review",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Service": {
+            "title": "Service",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "Thing": {
+            "title": "Thing",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "VirtualLocation": {
+            "title": "VirtualLocation",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "WebSite": {
+            "title": "WebSite",
+            "type": "object",
+            "additionalProperties": true
+        }
+    }
+}

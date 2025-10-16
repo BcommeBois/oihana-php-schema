@@ -232,6 +232,18 @@ composer doc</pre>
     <li><strong>How to ignore nulls?</strong> Serialization automatically removes null values.</li>
 </ul>
 
+<h3>🧮 JSON Schema Generation</h3>
+<p>Generate JSON Schemas from the typed public properties of your classes.</p>
+<p>Single class (example: Place):</p>
+<pre class="language-bash prettyprint">composer schema:place</pre>
+<p>All classes under <code>src/org/schema</code>:</p>
+<pre class="language-bash prettyprint">composer schemas:all</pre>
+<p>
+  Schemas are written to <code>schemas/*.schema.json</code>.<br/>
+  Union types are represented as <code>oneOf</code>; class types are emitted as <code>$ref</code> into local <code>$defs</code>.<br/>
+  Requires Composer autoload; run <code>composer dump-autoload -o</code> if classes are not found.
+</p>
+
 {% set node = project.namespace %}
 
 {{

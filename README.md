@@ -243,7 +243,9 @@ $edge = new Thing
 ```
 
 ### Deep/recursive hydration
-The constructor copies provided values into public properties. For deep graphs and automatic casting, you can rely on the internal reflection utilities exposed by `oihana/php-reflect` (see developer docs). A typical approach is to call a reflection-based `hydrate()` to materialize nested arrays into value objects.
+The constructor copies provided values into public properties. 
+
+For deep graphs and automatic casting, you can rely on the internal reflection utilities exposed by `oihana/php-reflect` (see developer docs). A typical approach is to call a reflection-based `hydrate()` to materialize nested arrays into value objects.
 
 ## 🧱 Extending the Library
 
@@ -301,3 +303,35 @@ See `CHANGELOG.md` for notable changes.
   Yes, `jsonSerialize()` returns arrays that you can pass to any JSON encoder.
 - How to ignore nulls?  
   Serialization automatically removes null values.
+
+## 🧮 JSON Schema Generation
+
+Generate JSON Schemas from the typed public properties of your classes.
+
+- Single class (example: Place):
+```bash
+composer schema:place
+```
+
+- All classes under `src/org/schema`:
+```bash
+composer schemas:all
+```
+
+Details:
+- Schemas are written to `schemas/*.schema.json`.
+- Union types are represented as `oneOf`; class types are emitted as `$ref` into local `$defs`.
+- Requires Composer autoload (run `composer dump-autoload -o` if classes are not found).
+
+### Output layout and cleanup
+
+- Namespaces map to folders under `schemas/`:
+  - `org\schema\...` → `schemas/org/schema/.../*.schema.json`
+  - `fr\ooop\schema\...` → `schemas/fr/ooop/schema/.../*.schema.json`
+- Running `composer schemas:all` first deletes previous `*.schema.json` under `schemas/` to avoid stale files, then regenerates everything.
+
+### Array unions handling
+
+When a property type includes `array` plus other types (e.g. `string|ImageObject|array<ImageObject|string>|null`), the generator emits:
+- direct options for `string`, `ImageObject`, `null` (if present)
+- and an `array` variant whose `items` use a `oneOf` of the non-array types (here `ImageObject` and `string`).

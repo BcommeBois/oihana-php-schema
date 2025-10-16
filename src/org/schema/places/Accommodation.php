@@ -95,12 +95,6 @@ class Accommodation extends Place
     public null|bool|string $petsAllowed ;
 
     /**
-     * A page providing information on how to book a tour of some Place, such as an Accommodation or ApartmentComplex in a real estate setting, as well as other kinds of tours as appropriate.
-     * @var string|null
-     */
-    public ?string $tourBookingPage ;
-
-    /**
      * The year an Accommodation was constructed. This corresponds to the YearBuilt field in RESO.
      * @var int|null
      */

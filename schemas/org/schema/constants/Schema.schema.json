@@ -1,0 +1,9 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://schema.oihana.xyz/Schema.json",
+    "title": "Schema",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": [],
+    "$defs": []
+}
