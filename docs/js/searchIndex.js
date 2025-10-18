@@ -7266,6 +7266,106 @@ Search.appendIndex(
             "summary": "Further\u0020documentation\u0020describing\u0020the\u0020Web\u0020API\u0020in\u0020more\u0020detail.",
             "url": "classes/org-schema-WebAPI.html#property_documentation"
         },                {
+            "fqsen": "\\xyz\\oihana\\schema\\constants\\Oihana",
+            "name": "Oihana",
+            "summary": "",
+            "url": "classes/xyz-oihana-schema-constants-Oihana.html"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\constants\\Oihana\u003A\u003ASCHEMA",
+            "name": "SCHEMA",
+            "summary": "The\u0020default\u0020oihana\u0020schema.",
+            "url": "classes/xyz-oihana-schema-constants-Oihana.html#constant_SCHEMA"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\constants\\traits\\LogTrait",
+            "name": "LogTrait",
+            "summary": "",
+            "url": "classes/xyz-oihana-schema-constants-traits-LogTrait.html"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\constants\\traits\\PaginationTrait",
+            "name": "PaginationTrait",
+            "summary": "",
+            "url": "classes/xyz-oihana-schema-constants-traits-PaginationTrait.html"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\Log",
+            "name": "Log",
+            "summary": "The\u0020most\u0020generic\u0020type\u0020of\u0020item.",
+            "url": "classes/xyz-oihana-schema-Log.html"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\Log\u003A\u003AtoArray\u0028\u0029",
+            "name": "toArray",
+            "summary": "Returns\u0020the\u0020array\u0020representation\u0020of\u0020the\u0020log\u0020definition.",
+            "url": "classes/xyz-oihana-schema-Log.html#method_toArray"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\Log\u003A\u003A__toString\u0028\u0029",
+            "name": "__toString",
+            "summary": "Returns\u0020the\u0020string\u0020representation\u0020of\u0020the\u0020thing.",
+            "url": "classes/xyz-oihana-schema-Log.html#method___toString"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\Log\u003A\u003ACONTEXT",
+            "name": "CONTEXT",
+            "summary": "The\u0020\u0040context\u0020of\u0020the\u0020json\u002Dld\u0020representation\u0020of\u0020the\u0020thing.",
+            "url": "classes/xyz-oihana-schema-Log.html#constant_CONTEXT"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\Log\u003A\u003A\u0024date",
+            "name": "date",
+            "summary": "The\u0020date\u0020of\u0020the\u0020log\u0020\u0028YYYY\u002DMM\u002DDD\u0029.",
+            "url": "classes/xyz-oihana-schema-Log.html#property_date"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\Log\u003A\u003A\u0024level",
+            "name": "level",
+            "summary": "The\u0020level\u0020of\u0020the\u0020log\u0020\u0028e.g.,\u0020INFO,\u0020ERROR,\u0020DEBUG\u0029.",
+            "url": "classes/xyz-oihana-schema-Log.html#property_level"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\Log\u003A\u003A\u0024message",
+            "name": "message",
+            "summary": "The\u0020message\u0020of\u0020the\u0020log.",
+            "url": "classes/xyz-oihana-schema-Log.html#property_message"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\Log\u003A\u003A\u0024time",
+            "name": "time",
+            "summary": "The\u0020time\u0020of\u0020the\u0020log.",
+            "url": "classes/xyz-oihana-schema-Log.html#property_time"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\Pagination",
+            "name": "Pagination",
+            "summary": "Represents\u0020pagination\u0020information\u0020for\u0020a\u0020collection\u0020of\u0020items.",
+            "url": "classes/xyz-oihana-schema-Pagination.html"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\Pagination\u003A\u003ACONTEXT",
+            "name": "CONTEXT",
+            "summary": "The\u0020\u0040context\u0020of\u0020the\u0020json\u002Dld\u0020representation\u0020of\u0020the\u0020thing.",
+            "url": "classes/xyz-oihana-schema-Pagination.html#constant_CONTEXT"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\Pagination\u003A\u003A\u0024limit",
+            "name": "limit",
+            "summary": "The\u0020number\u0020of\u0020items\u0020to\u0020return\u0020per\u0020page.",
+            "url": "classes/xyz-oihana-schema-Pagination.html#property_limit"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\Pagination\u003A\u003A\u0024maxLimit",
+            "name": "maxLimit",
+            "summary": "The\u0020maximum\u0020allowed\u0020number\u0020of\u0020items\u0020per\u0020page.",
+            "url": "classes/xyz-oihana-schema-Pagination.html#property_maxLimit"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\Pagination\u003A\u003A\u0024minLimit",
+            "name": "minLimit",
+            "summary": "The\u0020minimum\u0020allowed\u0020number\u0020of\u0020items\u0020per\u0020page.",
+            "url": "classes/xyz-oihana-schema-Pagination.html#property_minLimit"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\Pagination\u003A\u003A\u0024numberOfPages",
+            "name": "numberOfPages",
+            "summary": "The\u0020number\u0020of\u0020pages\u0020in\u0020the\u0020paginated\u0020collection.",
+            "url": "classes/xyz-oihana-schema-Pagination.html#property_numberOfPages"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\Pagination\u003A\u003A\u0024offset",
+            "name": "offset",
+            "summary": "The\u0020number\u0020of\u0020items\u0020to\u0020skip\u0020before\u0020starting\u0020to\u0020collect\u0020the\u0020result\u0020set.",
+            "url": "classes/xyz-oihana-schema-Pagination.html#property_offset"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\Pagination\u003A\u003A\u0024page",
+            "name": "page",
+            "summary": "The\u0020current\u0020page\u0020number\u0020in\u0020the\u0020paginated\u0020collection.",
+            "url": "classes/xyz-oihana-schema-Pagination.html#property_page"
+        },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",
@@ -7420,5 +7520,30 @@ Search.appendIndex(
             "name": "helpers",
             "summary": "",
             "url": "namespaces/org-schema-traits-helpers.html"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\constants",
+            "name": "constants",
+            "summary": "",
+            "url": "namespaces/xyz-oihana-schema-constants.html"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\constants\\traits",
+            "name": "traits",
+            "summary": "",
+            "url": "namespaces/xyz-oihana-schema-constants-traits.html"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema",
+            "name": "schema",
+            "summary": "",
+            "url": "namespaces/xyz-oihana-schema.html"
+        },                {
+            "fqsen": "\\xyz\\oihana",
+            "name": "oihana",
+            "summary": "",
+            "url": "namespaces/xyz-oihana.html"
+        },                {
+            "fqsen": "\\xyz",
+            "name": "xyz",
+            "summary": "",
+            "url": "namespaces/xyz.html"
         }            ]
 );
