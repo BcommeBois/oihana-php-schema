@@ -4,6 +4,7 @@ namespace org\schema ;
 
 use JsonSerializable;
 use org\schema\creativeWork\medias\ImageObject;
+use org\schema\traits\ArangoDBTrait;
 use org\schema\traits\ThingTrait;
 
 /**
@@ -18,38 +19,13 @@ use org\schema\traits\ThingTrait;
  */
 class Thing implements JsonSerializable
 {
-    use ThingTrait ;
-
-    // ---------- metadatas
-
-    /**
-     * The metadata unique key identifier of the thing.
-     */
-    public null|string $_key  ;
+    use ArangoDBTrait,
+        ThingTrait ;
 
     /**
-     * The metadata identifier of the item.
+     * JSON-LD @context declaration for Schema.org.
      */
-    public null|string $_id  ;
-
-    /**
-     * The metadata revision value of the thing.
-     */
-    public null|string $_rev ;
-
-    /**
-     * The metadata to indicates the edge 'from' identifier.
-     * @var string|null
-     */
-    public null|string $_from ;
-
-    /**
-     * The metadata to indicates the edge 'to' identifier.
-     * @var string|null
-     */
-    public null|string $_to ;
-
-    // ----------
+    public const string CONTEXT = 'https://schema.org' ;
 
     /**
      * The unique identifier of the item.

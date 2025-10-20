@@ -2,19 +2,12 @@
 
 namespace org\schema\traits ;
 
-use oihana\reflect\traits\JsonSchemaTrait;
-use ReflectionClass;
 use ReflectionException;
-use ReflectionNamedType;
-use ReflectionProperty;
-use ReflectionUnionType;
 
-use oihana\reflect\traits\ReflectionTrait;
+use oihana\reflect\traits\JsonSchemaTrait;
+
 use org\schema\constants\Schema;
 
-
-use function oihana\core\json\getJsonType;
-use function oihana\reflect\helpers\getPublicProperties;
 
 /**
  * Provides common behavior for schema.org entities, including:
@@ -89,11 +82,6 @@ trait ThingTrait
     }
 
     use JsonSchemaTrait ;
-
-    /**
-     * JSON-LD @context declaration for Schema.org.
-     */
-    public const string CONTEXT = 'https://schema.org' ;
 
     /**
      * The JSON-LD `@context` value.

@@ -7,15 +7,43 @@ use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\constants\traits\PaginationTrait;
 
 /**
- * Represents pagination information for a collection of items.
+ * Represents pagination metadata.
  *
- * Extends `Intangible` as defined in schema.org.
+ * This class defines structured pagination information for a collection of items, such as
+ * limits, offsets, and page numbers, following the {@see Oihana::SCHEMA} context for
+ * JSON-LD interoperability.
  *
- * This class can be used to describe limits, offsets, and bounds for paginated collections
- * in JSON-LD or structured data.
+ * It extends the {@see Intangible} type from Schema.org and uses {@see PaginationTrait}
+ * to provide constants and helper methods related to paginated collections.
+ *
+ * ### Example
+ * ```php
+ * use xyz\oihana\schema\Pagination;
+ *
+ * $pagination = new Pagination();
+ * $pagination->page          = 2;
+ * $pagination->limit         = 20;
+ * $pagination->numberOfPages = 10;
+ * $pagination->offset        = 20;
+ *
+ * print_r($pagination);
+ * // Pagination Object
+ * // (
+ * //     [page]          => 2
+ * //     [limit]         => 20
+ * //     [numberOfPages] => 10
+ * //     [offset]        => 20
+ * // )
+ * ```
+ *
+ * This schema can be used to describe paginated datasets in structured formats
+ * such as JSON-LD, APIs, or linked data, ensuring interoperability with other schema-based models.
  *
  * @see https://schema.org/Intangible
- * @package fr\ooop\schema
+ *
+ * @package xyz\oihana\schema
+ * @author  Marc Alcaraz (ekameleon)
+ * @since   1.0.1
  */
 class Pagination extends Intangible
 {

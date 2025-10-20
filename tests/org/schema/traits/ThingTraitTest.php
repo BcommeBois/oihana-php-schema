@@ -15,6 +15,11 @@ class MockThing implements JsonSerializable
 {
     use ThingTrait;
 
+    /**
+     * JSON-LD @context declaration for Schema.org.
+     */
+    public const string CONTEXT = 'https://schema.org' ;
+
     public ?string   $name        = '' ;
     public int       $age         = 0  ;
     public ?string   $description = null;
@@ -24,6 +29,8 @@ class MockThing implements JsonSerializable
 class MockEmptyThing implements JsonSerializable
 {
     use ThingTrait;
+
+    public const string CONTEXT = 'https://schema.org' ;
 }
 
 class ThingTraitTest extends TestCase
@@ -343,8 +350,7 @@ class ThingTraitTest extends TestCase
             [
                 'name' =>
                 [
-                    "default" => "",
-                    "oneOf"   =>
+                    "oneOf" =>
                     [
                         [ 'type' => 'null'   ] ,
                         [ 'type' => 'string' ] ,
@@ -352,8 +358,7 @@ class ThingTraitTest extends TestCase
                 ] ,
                 'age' =>
                 [
-                    "default" => 0 ,
-                    'type'    => 'integer'
+                    'type' => 'integer'
                 ] ,
                 'description' =>
                 [

@@ -22,12 +22,17 @@ trait Thing
 
     // --------- Metadatas
 
+    // JSON-LD
     const string AT_CONTEXT = '@context' ;
     const string AT_ID      = '@id'      ;
     const string AT_TYPE    = '@type'    ;
-    const string CREATED    = 'created'  ;
-    const string MODIFIED   = 'modified' ;
-    const string REVISION   = 'revision' ;
+
+    // Dublin Core
+    const string CREATED  = 'created'  ;
+    const string MODIFIED = 'modified' ;
+    const string REVISION = 'revision' ;
+
+    // ArangoDB
     const string _KEY       = '_key'     ;
     const string _REV       = '_rev'     ;
     const string _TYPE      = '_type'    ;
