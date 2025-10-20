@@ -10,6 +10,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - Adds xyz\oihana\schema\Log
 - Adds xyz\oihana\schema\Pagination
 
+- Adds the org\schema\DublinCore class
+
 - Adds the org\schema\constants\Schema constant
 
 ## [1.0.0] - 2025-06-17
