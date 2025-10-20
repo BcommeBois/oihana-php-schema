@@ -133,34 +133,34 @@ In the meantime, explore the following namespaces:
 - org\schema\traits for logic traits
 - org\schema\constants for property constants
 
-## 🇫🇷 fr\\ooop Namespace (Ooop extensions)
+## 🇫🇷 xyz\\oihana Namespace (oihana.xyz extensions)
 
-In addition to the Schema.org core under `org\\schema`, this library provides an extension namespace for Ooop-specific needs used in the French ecosystem: `fr\\ooop\\schema`.
+In addition to the Schema.org core under `org\\schema`, this library provides an extension namespace for Oihana-specific needs used in the ecosystem: `xyz\\oihana\\schema`.
 
 What you will find there:
-- Value objects for domain-specific concepts (e.g., `fr\\ooop\\schema\\Pagination`).
-- A constants container `fr\\ooop\\schema\\constants\\Ooop` exposing safe property names via traits (e.g., `Pagination` constants).
+- Value objects for domain-specific concepts (e.g., `xyz\\oihana\\schema\\Pagination`).
+- A constants container `xyz\\oihana\\schema\\constants\\Oihana` exposing safe property names via traits (e.g., `Pagination` constants).
 
 Example: model pagination parameters with JSON-LD support
 ```php
-use fr\ooop\schema\Pagination;
-use fr\ooop\schema\constants\Ooop;
+use xyz\oihana\schema\Pagination;
+use xyz\oihana\schema\constants\Oihana;
 
 $pagination = new Pagination
 ([
-    Ooop::LIMIT => 50,
-    Ooop::PAGE  => 2,
+    Oihana::LIMIT => 50,
+    Oihana::PAGE  => 2,
 ]);
 
-// JSON-LD with a dedicated context for Ooop extensions
+// JSON-LD with a dedicated context for Oihana extensions
 echo json_encode($pagination, JSON_UNESCAPED_SLASHES);
-// {"@type":"Pagination","@context":"https://schema.ooop.fr","limit":50,"page":2}
+// {"@type":"Pagination","@context":"https://schema.oihana.xyz","limit":50,"page":2}
 ```
 
 Key points:
 - `Pagination` extends `org\schema\Intangible` and integrates seamlessly with the rest of the model.
-- `Pagination::CONTEXT` defaults to `https://schema.ooop.fr` to distinguish Ooop extensions.
-- Use `fr\ooop\schema\constants\Ooop` to reference property names safely: `Ooop::LIMIT`, `Ooop::OFFSET`, `Ooop::MAX_LIMIT`, `Ooop::MIN_LIMIT`, `Ooop::NUMBER_OF_PAGES`, `Ooop::PAGE`.
+- `Pagination::CONTEXT` defaults to `https://schema.oihana.xyz` to distinguish Oihana extensions.
+- Use `xyz\oihana\schema\constants\Oihana` to reference property names safely: `Oihana::LIMIT`, `Oihana::OFFSET`, `Oihana::MAX_LIMIT`, `Oihana::MIN_LIMIT`, `Oihana::NUMBER_OF_PAGES`, `Oihana::PAGE`.
 
 ## ✅ Running Unit Tests
 
@@ -172,7 +172,7 @@ composer test
 To run a specific test file:
 ```bash
 composer test ./tests/org/schema/ThingTest.php
-composer test ./tests/fr/ooop/schema/PaginationTest.php
+composer test ./tests/xyz/oihana/schema/PaginationTest.php
 ```
 
 ## 🧾 License
@@ -327,7 +327,7 @@ Details:
 
 - Namespaces map to folders under `schemas/`:
   - `org\schema\...` → `schemas/org/schema/.../*.schema.json`
-  - `fr\ooop\schema\...` → `schemas/fr/ooop/schema/.../*.schema.json`
+  - `xyz\oihana\schema\...` → `schemas/xyz/oihana/schema/.../*.schema.json`
 - Running `composer schemas:all` first deletes previous `*.schema.json` under `schemas/` to avoid stale files, then regenerates everything.
 
 ### Array unions handling
