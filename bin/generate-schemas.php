@@ -20,7 +20,7 @@ function classFromFile(string $file, string $baseDir, string $baseNs): ?string
 
 $roots = [
     [ 'src' => realpath(__DIR__ . '/../src/org/schema'), 'ns' => 'org\\schema\\' ],
-    [ 'src' => realpath(__DIR__ . '/../src/fr/ooop/schema'), 'ns' => 'fr\\ooop\\schema\\' ],
+    [ 'src' => realpath(__DIR__ . '/../src/xyz/oihana/schema'), 'ns' => 'xyz\\oihana\\schema\\' ],
 ];
 $schemasRoot = __DIR__ . '/../schemas';
 
