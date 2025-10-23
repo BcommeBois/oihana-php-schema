@@ -70,7 +70,7 @@ trait PlaceTrait
     /**
      * The basic containment relation between a place and another that it contains.
      */
-    public array|Place|null $containedInsPlace ;
+    public array|Place|null $containedInPlace ;
 
     /**
      * The Email address.

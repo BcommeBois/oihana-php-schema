@@ -7106,10 +7106,10 @@ Search.appendIndex(
             "summary": "The\u0020basic\u0020containment\u0020relation\u0020between\u0020a\u0020place\u0020and\u0020another\u0020that\u0020it\u0020contains.",
             "url": "classes/org-schema-traits-PlaceTrait.html#property_containsPlace"
         },                {
-            "fqsen": "\\org\\schema\\traits\\PlaceTrait\u003A\u003A\u0024containedInsPlace",
-            "name": "containedInsPlace",
+            "fqsen": "\\org\\schema\\traits\\PlaceTrait\u003A\u003A\u0024containedInPlace",
+            "name": "containedInPlace",
             "summary": "The\u0020basic\u0020containment\u0020relation\u0020between\u0020a\u0020place\u0020and\u0020another\u0020that\u0020it\u0020contains.",
-            "url": "classes/org-schema-traits-PlaceTrait.html#property_containedInsPlace"
+            "url": "classes/org-schema-traits-PlaceTrait.html#property_containedInPlace"
         },                {
             "fqsen": "\\org\\schema\\traits\\PlaceTrait\u003A\u003A\u0024email",
             "name": "email",
