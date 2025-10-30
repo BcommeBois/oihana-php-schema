@@ -37,8 +37,7 @@ class Thing implements JsonSerializable
      * @var int|string|null
      */
     public int|string|null $url ;
-
-
+    
     /**
      * The active flag.
      */

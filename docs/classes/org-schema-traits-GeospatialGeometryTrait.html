@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+            <title>Oihana Php Schema</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="../">
+    <link rel="icon" href="images/favicon.ico"/>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/base.css">
+            <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/template.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" integrity="sha256-ybRkN9dBjhcS2qrW1z+hfCxq+1aBdwyQM5wlQoQVt/0=" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism-okaidia.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.css">
+                <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
+        <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
+        <script src="js/template.js"></script>
+        <script src="js/search.js"></script>
+        <script defer src="js/searchIndex.js"></script>
+    </head>
+<body id="top">
+    <header class="phpdocumentor-header phpdocumentor-section">
+    <h1 class="phpdocumentor-title">
+    <a href="" class="phpdocumentor-title__link">
+        <img src="assets/images/oihana-php-schema-logo-inline-512x160.png" alt="Oihana PHP System" style="width: 128px; height: 40px;"/>
+    </a>
+</h1>    <input class="phpdocumentor-header__menu-button" type="checkbox" id="menu-button" name="menu-button" />
+    <label class="phpdocumentor-header__menu-icon" for="menu-button">
+        <i class="fas fa-bars"></i>
+    </label>
+    <section data-search-form class="phpdocumentor-search">
+    <label>
+        <span class="visually-hidden">Search for</span>
+        <svg class="phpdocumentor-search__icon" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="7.5" cy="7.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <line x1="12.4892" y1="12.2727" x2="19.1559" y2="18.9393" stroke="currentColor" stroke-width="3"/>
+        </svg>
+        <input type="search" class="phpdocumentor-field phpdocumentor-search__field" placeholder="Loading .." disabled />
+    </label>
+</section>
+
+    <nav class="phpdocumentor-topnav">
+    <ul class="phpdocumentor-topnav__menu">
+                        <li class="phpdocumentor-topnav__menu-item -social">
+                <a href="https://github.com/BcommeBois/oihana-php-system">
+                    <span>
+                                                                        <i class="fab fa-github"></i>
+                                                
+                    </span>
+                </a>
+            </li>
+                </ul>
+</nav>
+</header>
+
+    <main class="phpdocumentor">
+        <div class="phpdocumentor-section">
+            <input class="phpdocumentor-sidebar__menu-button" type="checkbox" id="sidebar-button" name="sidebar-button" />
+<label class="phpdocumentor-sidebar__menu-icon" for="sidebar-button">
+    Menu
+</label>
+<aside class="phpdocumentor-column -three phpdocumentor-sidebar">
+                    <section class="phpdocumentor-sidebar__category -namespaces">
+            <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/org.html" class="">org</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/org-schema.html" class="">schema</a>
+                
+            </li>
+            </ul>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/xyz.html" class="">xyz</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/xyz-oihana.html" class="">oihana</a>
+                
+            </li>
+            </ul>
+
+                        </section>
+            
+    <section class="phpdocumentor-sidebar__category -reports">
+        <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
+                <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/errors.html">Errors</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/markers.html">Markers</a></h3>
+    </section>
+
+    <section class="phpdocumentor-sidebar__category -indices">
+        <h2 class="phpdocumentor-sidebar__category-header">Indices</h2>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="indices/files.html">Files</a></h3>
+    </section>
+</aside>
+
+            <div class="phpdocumentor-column -nine phpdocumentor-content">
+                                <section>
+                                        <ul class="phpdocumentor-breadcrumbs">
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/org.html">org</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/org-schema.html">schema</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/org-schema-traits.html">traits</a></li>
+    </ul>
+
+    <article class="phpdocumentor-element -trait">
+        <h2 class="phpdocumentor-content__title">
+    GeospatialGeometryTrait
+    </h2>
+
+        <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/GeospatialGeometryTrait.php"><a href="files/src-org-schema-traits-geospatialgeometrytrait.html"><abbr title="src/org/schema/traits/GeospatialGeometryTrait.php">GeospatialGeometryTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">13</span>
+
+    </aside>
+
+            <p class="phpdocumentor-summary">(Eventually to be defined as) a supertype of GeoShape designed to accommodate definitions from Geo-Spatial best practices.</p>
+
+
+
+
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/org-schema-traits-GeospatialGeometryTrait.html#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                    <span class="phpdocumentor-tag-link"><a href="https://schema.org/GeospatialGeometry">https://schema.org/GeospatialGeometry</a></span>
+                                        
+                                             
+                                    </dd>
+                            <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                    <span class="phpdocumentor-tag-link"><a href="https://en.wikipedia.org/wiki/DE-9IM">https://en.wikipedia.org/wiki/DE-9IM</a></span>
+                                        
+                                             
+                                    </dd>
+                                            </dl>
+
+
+
+
+
+<h3 id="toc">
+    Table of Contents
+    <a href="classes/org-schema-traits-GeospatialGeometryTrait.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h3>
+
+
+
+
+
+
+
+
+
+<h4 id="toc-properties">
+    Properties
+    <a href="classes/org-schema-traits-GeospatialGeometryTrait.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-GeospatialGeometryTrait.html#property_geoContains">$geoContains</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;|<a href="classes/org-schema-GeospatialGeometry.html"><abbr title="\org\schema\GeospatialGeometry">GeospatialGeometry</abbr></a>|<a href="classes/org-schema-Place.html"><abbr title="\org\schema\Place">Place</abbr></a>|null            </span>
+</dt>
+<dd>Represents a relationship between two geometries (or the places they represent), relating a containing geometry to a contained geometry. &quot;a contains b iff no points of b lie in the exterior of a, and at least one point of the interior of b lies in the interior of a&quot;. As defined in DE-9IM.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-GeospatialGeometryTrait.html#property_geoCoveredBy">$geoCoveredBy</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;|<a href="classes/org-schema-GeospatialGeometry.html"><abbr title="\org\schema\GeospatialGeometry">GeospatialGeometry</abbr></a>|<a href="classes/org-schema-Place.html"><abbr title="\org\schema\Place">Place</abbr></a>|null            </span>
+</dt>
+<dd>Represents a relationship between two geometries (or the places they represent), relating a geometry to another that covers it. As defined in DE-9IM.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-GeospatialGeometryTrait.html#property_geoCovers">$geoCovers</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;|<a href="classes/org-schema-GeospatialGeometry.html"><abbr title="\org\schema\GeospatialGeometry">GeospatialGeometry</abbr></a>|<a href="classes/org-schema-Place.html"><abbr title="\org\schema\Place">Place</abbr></a>|null            </span>
+</dt>
+<dd>Represents a relationship between two geometries (or the places they represent), relating a covering geometry to a covered geometry. &quot;Every point of b is a point of (the interior or boundary of) a&quot;. As defined in DE-9IM.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-GeospatialGeometryTrait.html#property_geoCrosses">$geoCrosses</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;|<a href="classes/org-schema-GeospatialGeometry.html"><abbr title="\org\schema\GeospatialGeometry">GeospatialGeometry</abbr></a>|<a href="classes/org-schema-Place.html"><abbr title="\org\schema\Place">Place</abbr></a>|null            </span>
+</dt>
+<dd>Represents a relationship between two geometries (or the places they represent), relating a geometry to another that crosses it: &quot;a crosses b: they have some but not all interior points in common, and the dimension of the intersection is less than that of at least one of them&quot;. As defined in DE-9IM.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-GeospatialGeometryTrait.html#property_geoDisjoint">$geoDisjoint</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;|<a href="classes/org-schema-GeospatialGeometry.html"><abbr title="\org\schema\GeospatialGeometry">GeospatialGeometry</abbr></a>|<a href="classes/org-schema-Place.html"><abbr title="\org\schema\Place">Place</abbr></a>|null            </span>
+</dt>
+<dd>Represents spatial relations in which two geometries (or the places they represent) are topologically disjoint: &quot;they have no point in common. They form a set of disconnected geometries.&quot; (A symmetric relationship, as defined in DE-9IM.)</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-GeospatialGeometryTrait.html#property_geoEquals">$geoEquals</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;|<a href="classes/org-schema-GeospatialGeometry.html"><abbr title="\org\schema\GeospatialGeometry">GeospatialGeometry</abbr></a>|<a href="classes/org-schema-Place.html"><abbr title="\org\schema\Place">Place</abbr></a>|null            </span>
+</dt>
+<dd>Represents spatial relations in which two geometries (or the places they represent) are topologically equal, as defined in DE-9IM. &quot;Two geometries are topologically equal if their interiors intersect and no part of the interior or boundary of one geometry intersects the exterior of the other&quot; (a symmetric relationship).</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-GeospatialGeometryTrait.html#property_geoIntersects">$geoIntersects</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;|<a href="classes/org-schema-GeospatialGeometry.html"><abbr title="\org\schema\GeospatialGeometry">GeospatialGeometry</abbr></a>|<a href="classes/org-schema-Place.html"><abbr title="\org\schema\Place">Place</abbr></a>|null            </span>
+</dt>
+<dd>Represents spatial relations in which two geometries (or the places they represent) have at least one point in common. As defined in DE-9IM.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-GeospatialGeometryTrait.html#property_geoOverlaps">$geoOverlaps</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;|<a href="classes/org-schema-GeospatialGeometry.html"><abbr title="\org\schema\GeospatialGeometry">GeospatialGeometry</abbr></a>|<a href="classes/org-schema-Place.html"><abbr title="\org\schema\Place">Place</abbr></a>|null            </span>
+</dt>
+<dd>Represents a relationship between two geometries (or the places they represent), relating a geometry to another that geospatially overlaps it, i.e. they have some but not all points in common. As defined in DE-9IM.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-GeospatialGeometryTrait.html#property_geoTouches">$geoTouches</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;|<a href="classes/org-schema-GeospatialGeometry.html"><abbr title="\org\schema\GeospatialGeometry">GeospatialGeometry</abbr></a>|<a href="classes/org-schema-Place.html"><abbr title="\org\schema\Place">Place</abbr></a>|null            </span>
+</dt>
+<dd>Represents spatial relations in which two geometries (or the places they represent) touch: &quot;they have at least one boundary point in common, but no interior points.&quot; (A symmetric relationship, as defined in DE-9IM.)</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-GeospatialGeometryTrait.html#property_geoWithin">$geoWithin</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;|<a href="classes/org-schema-GeospatialGeometry.html"><abbr title="\org\schema\GeospatialGeometry">GeospatialGeometry</abbr></a>|<a href="classes/org-schema-Place.html"><abbr title="\org\schema\Place">Place</abbr></a>|null            </span>
+</dt>
+<dd>Represents a relationship between two geometries (or the places they represent), relating a geometry to one that contains it, i.e. it is inside (i.e. within) its interior. As defined in DE-9IM.</dd>
+
+    </dl>
+
+
+
+
+
+        
+
+        
+    <section class="phpdocumentor-properties">
+        <h3 class="phpdocumentor-elements__header" id="properties">
+            Properties
+            <a href="classes/org-schema-traits-GeospatialGeometryTrait.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_geoContains">
+        $geoContains
+        <a href="classes/org-schema-traits-GeospatialGeometryTrait.html#property_geoContains" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/GeospatialGeometryTrait.php"><a href="files/src-org-schema-traits-geospatialgeometrytrait.html"><abbr title="src/org/schema/traits/GeospatialGeometryTrait.php">GeospatialGeometryTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">19</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Represents a relationship between two geometries (or the places they represent), relating a containing geometry to a contained geometry. &quot;a contains b iff no points of b lie in the exterior of a, and at least one point of the interior of b lies in the interior of a&quot;. As defined in DE-9IM.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|<a href="classes/org-schema-GeospatialGeometry.html"><abbr title="\org\schema\GeospatialGeometry">GeospatialGeometry</abbr></a>|<a href="classes/org-schema-Place.html"><abbr title="\org\schema\Place">Place</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__name">$geoContains</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_geoCoveredBy">
+        $geoCoveredBy
+        <a href="classes/org-schema-traits-GeospatialGeometryTrait.html#property_geoCoveredBy" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/GeospatialGeometryTrait.php"><a href="files/src-org-schema-traits-geospatialgeometrytrait.html"><abbr title="src/org/schema/traits/GeospatialGeometryTrait.php">GeospatialGeometryTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">25</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Represents a relationship between two geometries (or the places they represent), relating a geometry to another that covers it. As defined in DE-9IM.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|<a href="classes/org-schema-GeospatialGeometry.html"><abbr title="\org\schema\GeospatialGeometry">GeospatialGeometry</abbr></a>|<a href="classes/org-schema-Place.html"><abbr title="\org\schema\Place">Place</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__name">$geoCoveredBy</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_geoCovers">
+        $geoCovers
+        <a href="classes/org-schema-traits-GeospatialGeometryTrait.html#property_geoCovers" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/GeospatialGeometryTrait.php"><a href="files/src-org-schema-traits-geospatialgeometrytrait.html"><abbr title="src/org/schema/traits/GeospatialGeometryTrait.php">GeospatialGeometryTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">31</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Represents a relationship between two geometries (or the places they represent), relating a covering geometry to a covered geometry. &quot;Every point of b is a point of (the interior or boundary of) a&quot;. As defined in DE-9IM.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|<a href="classes/org-schema-GeospatialGeometry.html"><abbr title="\org\schema\GeospatialGeometry">GeospatialGeometry</abbr></a>|<a href="classes/org-schema-Place.html"><abbr title="\org\schema\Place">Place</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__name">$geoCovers</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_geoCrosses">
+        $geoCrosses
+        <a href="classes/org-schema-traits-GeospatialGeometryTrait.html#property_geoCrosses" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/GeospatialGeometryTrait.php"><a href="files/src-org-schema-traits-geospatialgeometrytrait.html"><abbr title="src/org/schema/traits/GeospatialGeometryTrait.php">GeospatialGeometryTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">37</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Represents a relationship between two geometries (or the places they represent), relating a geometry to another that crosses it: &quot;a crosses b: they have some but not all interior points in common, and the dimension of the intersection is less than that of at least one of them&quot;. As defined in DE-9IM.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|<a href="classes/org-schema-GeospatialGeometry.html"><abbr title="\org\schema\GeospatialGeometry">GeospatialGeometry</abbr></a>|<a href="classes/org-schema-Place.html"><abbr title="\org\schema\Place">Place</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__name">$geoCrosses</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_geoDisjoint">
+        $geoDisjoint
+        <a href="classes/org-schema-traits-GeospatialGeometryTrait.html#property_geoDisjoint" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/GeospatialGeometryTrait.php"><a href="files/src-org-schema-traits-geospatialgeometrytrait.html"><abbr title="src/org/schema/traits/GeospatialGeometryTrait.php">GeospatialGeometryTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">43</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Represents spatial relations in which two geometries (or the places they represent) are topologically disjoint: &quot;they have no point in common. They form a set of disconnected geometries.&quot; (A symmetric relationship, as defined in DE-9IM.)</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|<a href="classes/org-schema-GeospatialGeometry.html"><abbr title="\org\schema\GeospatialGeometry">GeospatialGeometry</abbr></a>|<a href="classes/org-schema-Place.html"><abbr title="\org\schema\Place">Place</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__name">$geoDisjoint</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_geoEquals">
+        $geoEquals
+        <a href="classes/org-schema-traits-GeospatialGeometryTrait.html#property_geoEquals" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/GeospatialGeometryTrait.php"><a href="files/src-org-schema-traits-geospatialgeometrytrait.html"><abbr title="src/org/schema/traits/GeospatialGeometryTrait.php">GeospatialGeometryTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">49</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Represents spatial relations in which two geometries (or the places they represent) are topologically equal, as defined in DE-9IM. &quot;Two geometries are topologically equal if their interiors intersect and no part of the interior or boundary of one geometry intersects the exterior of the other&quot; (a symmetric relationship).</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|<a href="classes/org-schema-GeospatialGeometry.html"><abbr title="\org\schema\GeospatialGeometry">GeospatialGeometry</abbr></a>|<a href="classes/org-schema-Place.html"><abbr title="\org\schema\Place">Place</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__name">$geoEquals</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_geoIntersects">
+        $geoIntersects
+        <a href="classes/org-schema-traits-GeospatialGeometryTrait.html#property_geoIntersects" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/GeospatialGeometryTrait.php"><a href="files/src-org-schema-traits-geospatialgeometrytrait.html"><abbr title="src/org/schema/traits/GeospatialGeometryTrait.php">GeospatialGeometryTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">55</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Represents spatial relations in which two geometries (or the places they represent) have at least one point in common. As defined in DE-9IM.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|<a href="classes/org-schema-GeospatialGeometry.html"><abbr title="\org\schema\GeospatialGeometry">GeospatialGeometry</abbr></a>|<a href="classes/org-schema-Place.html"><abbr title="\org\schema\Place">Place</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__name">$geoIntersects</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_geoOverlaps">
+        $geoOverlaps
+        <a href="classes/org-schema-traits-GeospatialGeometryTrait.html#property_geoOverlaps" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/GeospatialGeometryTrait.php"><a href="files/src-org-schema-traits-geospatialgeometrytrait.html"><abbr title="src/org/schema/traits/GeospatialGeometryTrait.php">GeospatialGeometryTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">61</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Represents a relationship between two geometries (or the places they represent), relating a geometry to another that geospatially overlaps it, i.e. they have some but not all points in common. As defined in DE-9IM.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|<a href="classes/org-schema-GeospatialGeometry.html"><abbr title="\org\schema\GeospatialGeometry">GeospatialGeometry</abbr></a>|<a href="classes/org-schema-Place.html"><abbr title="\org\schema\Place">Place</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__name">$geoOverlaps</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_geoTouches">
+        $geoTouches
+        <a href="classes/org-schema-traits-GeospatialGeometryTrait.html#property_geoTouches" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/GeospatialGeometryTrait.php"><a href="files/src-org-schema-traits-geospatialgeometrytrait.html"><abbr title="src/org/schema/traits/GeospatialGeometryTrait.php">GeospatialGeometryTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">67</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Represents spatial relations in which two geometries (or the places they represent) touch: &quot;they have at least one boundary point in common, but no interior points.&quot; (A symmetric relationship, as defined in DE-9IM.)</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|<a href="classes/org-schema-GeospatialGeometry.html"><abbr title="\org\schema\GeospatialGeometry">GeospatialGeometry</abbr></a>|<a href="classes/org-schema-Place.html"><abbr title="\org\schema\Place">Place</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__name">$geoTouches</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_geoWithin">
+        $geoWithin
+        <a href="classes/org-schema-traits-GeospatialGeometryTrait.html#property_geoWithin" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/GeospatialGeometryTrait.php"><a href="files/src-org-schema-traits-geospatialgeometrytrait.html"><abbr title="src/org/schema/traits/GeospatialGeometryTrait.php">GeospatialGeometryTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">73</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Represents a relationship between two geometries (or the places they represent), relating a geometry to one that contains it, i.e. it is inside (i.e. within) its interior. As defined in DE-9IM.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|<a href="classes/org-schema-GeospatialGeometry.html"><abbr title="\org\schema\GeospatialGeometry">GeospatialGeometry</abbr></a>|<a href="classes/org-schema-Place.html"><abbr title="\org\schema\Place">Place</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__name">$geoWithin</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+            </section>
+
+        
+        <div class="phpdocumentor-modal" id="source-view">
+    <div class="phpdocumentor-modal-bg" data-exit-button></div>
+    <div class="phpdocumentor-modal-container">
+        <div class="phpdocumentor-modal-content">
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/src/org/schema/traits/GeospatialGeometryTrait.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+        </div>
+        <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
+    </div>
+</div>
+
+    <script type="text/javascript">
+        (function () {
+            function loadExternalCodeSnippet(el, url, line) {
+                Array.prototype.slice.call(el.querySelectorAll('pre[data-src]')).forEach((pre) => {
+                    const src = url || pre.getAttribute('data-src').replace(/\\/g, '/');
+                    const language = 'php';
+
+                    const code = document.createElement('code');
+                    code.className = 'language-' + language;
+                    pre.textContent = '';
+                    pre.setAttribute('data-line', line)
+                    code.textContent = 'Loading…';
+                    pre.appendChild(code);
+
+                    var xhr = new XMLHttpRequest();
+
+                    xhr.open('GET', src, true);
+
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState !== 4) {
+                            return;
+                        }
+
+                        if (xhr.status < 400 && xhr.responseText) {
+                            code.textContent = xhr.responseText;
+                            Prism.highlightElement(code);
+                            d=document.getElementsByClassName("line-numbers");
+                            d[0].scrollTop = d[0].children[1].offsetTop;
+                            return;
+                        }
+
+                        if (xhr.status === 404) {
+                            code.textContent = '✖ Error: File could not be found';
+                            return;
+                        }
+
+                        if (xhr.status >= 400) {
+                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                            return;
+                        }
+
+                        code.textContent = '✖ Error: An unknown error occurred';
+                    };
+
+                    xhr.send(null);
+                });
+            }
+
+            const modalButtons = document.querySelectorAll("[data-modal]");
+            const openedAsLocalFile = window.location.protocol === 'file:';
+            if (modalButtons.length > 0 && openedAsLocalFile) {
+                console.warn(
+                    'Viewing the source code is unavailable because you are opening this page from the file:// scheme; ' +
+                    'browsers block XHR requests when a page is opened this way'
+                );
+            }
+
+            modalButtons.forEach(function (trigger) {
+                if (openedAsLocalFile) {
+                    trigger.setAttribute("hidden", "hidden");
+                }
+
+                trigger.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    const modal = document.getElementById(trigger.dataset.modal);
+                    if (!modal) {
+                        console.error(`Modal with id "${trigger.dataset.modal}" could not be found`);
+                        return;
+                    }
+                    modal.classList.add("phpdocumentor-modal__open");
+
+                    loadExternalCodeSnippet(modal, trigger.dataset.src || null, trigger.dataset.line)
+                    const exits = modal.querySelectorAll("[data-exit-button]");
+                    exits.forEach(function (exit) {
+                        exit.addEventListener("click", function (event) {
+                            event.preventDefault();
+                            modal.classList.remove("phpdocumentor-modal__open");
+                        });
+                    });
+                });
+            });
+        })();
+    </script>
+
+    </article>
+                                </section>
+                <section class="phpdocumentor-on-this-page__sidebar">
+                                
+    <section class="phpdocumentor-on-this-page__content">
+        <strong class="phpdocumentor-on-this-page__title">On this page</strong>
+
+        <ul class="phpdocumentor-list -clean">
+            <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                                            <li><a href="classes/org-schema-traits-GeospatialGeometryTrait.html#toc-properties">Properties</a></li>
+                                                        </ul>
+            </li>
+                                    <li class="phpdocumentor-on-this-page-section__title">Properties</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                            <li class=""><a href="classes/org-schema-traits-GeospatialGeometryTrait.html#property_geoContains">$geoContains</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-GeospatialGeometryTrait.html#property_geoCoveredBy">$geoCoveredBy</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-GeospatialGeometryTrait.html#property_geoCovers">$geoCovers</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-GeospatialGeometryTrait.html#property_geoCrosses">$geoCrosses</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-GeospatialGeometryTrait.html#property_geoDisjoint">$geoDisjoint</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-GeospatialGeometryTrait.html#property_geoEquals">$geoEquals</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-GeospatialGeometryTrait.html#property_geoIntersects">$geoIntersects</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-GeospatialGeometryTrait.html#property_geoOverlaps">$geoOverlaps</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-GeospatialGeometryTrait.html#property_geoTouches">$geoTouches</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-GeospatialGeometryTrait.html#property_geoWithin">$geoWithin</a></li>
+                                    </ul>
+            </li>
+                                </ul>
+    </section>
+
+                </section>
+                            </div>
+            <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+    <section class="phpdocumentor-search-results__dialog">
+        <header class="phpdocumentor-search-results__header">
+            <h2 class="phpdocumentor-search-results__title">Search results</h2>
+            <button class="phpdocumentor-search-results__close"><i class="fas fa-times"></i></button>
+        </header>
+        <section class="phpdocumentor-search-results__body">
+            <ul class="phpdocumentor-search-results__entries"></ul>
+        </section>
+    </section>
+</section>
+        </div>
+        <a href="classes/org-schema-traits-GeospatialGeometryTrait.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+
+    </main>
+
+    <script>
+        cssVars({});
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
+</body>
+</html>
