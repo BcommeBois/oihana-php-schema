@@ -38,16 +38,6 @@ class Thing implements JsonSerializable
      */
     public int|string|null $url ;
 
-    /**
-     * The name of the item.
-     * @var int|string|null
-     */
-    public int|string|null $name ;
-
-    /**
-     * An alias for the item.
-     */
-    public string|object|null $alternateName ;
 
     /**
      * The active flag.
@@ -63,6 +53,22 @@ class Thing implements JsonSerializable
      * Date of creation of the resource.
      */
     public null|string $created ;
+
+    /**
+     * Date on which the resource was changed.
+     */
+    public null|string $modified ;
+
+    /**
+     * The name of the item.
+     * @var int|string|null
+     */
+    public int|string|null $name ;
+
+    /**
+     * An alias for the item.
+     */
+    public string|object|null $alternateName ;
 
     /**
      * A short description of the item.
@@ -102,11 +108,6 @@ class Thing implements JsonSerializable
      * @var string|object|null
      */
     public string|object|null $license ;
-
-    /**
-     * Date on which the resource was changed.
-     */
-    public null|string $modified ;
 
     /**
      * The publisher of the resource.

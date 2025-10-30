@@ -259,6 +259,14 @@
 <dd>The additional description of the place.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-PlaceTrait.html#property_additionalProperty">$additionalProperty</a>
+    <span>
+                        &nbsp;: null|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-PropertyValue.html"><abbr title="\org\schema\PropertyValue">PropertyValue</abbr></a>            </span>
+</dt>
+<dd>A property-value pair representing an additional characteristic of the entity,
+e.g. a product feature or another characteristic for which there is no matching property in schema.org.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_additionalType">$additionalType</a>
     <span>
                         &nbsp;: array&lt;string|int, mixed&gt;|string|null|object            </span>
@@ -397,6 +405,13 @@
                         &nbsp;: bool|null            </span>
 </dt>
 <dd>Indicates whether some facility (e.g. FoodEstablishment, CovidTestingFacility) offers a service that can be used by driving through in a car. In the case of CovidTestingFacility such facilities could potentially help with social distancing from other potentially-infected users.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-PlaceTrait.html#property_hasGS1DigitalLink">$hasGS1DigitalLink</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>The GS1 digital link associated with the object.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-traits-PlaceTrait.html#property_hasMap">$hasMap</a>
@@ -1084,7 +1099,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">55</span>
+    <span class="phpdocumentor-element-found-in__line">45</span>
 
     </aside>
 
@@ -1123,7 +1138,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PlaceTrait.php"><a href="files/src-org-schema-traits-placetrait.html"><abbr title="src/org/schema/traits/PlaceTrait.php">PlaceTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">36</span>
+    <span class="phpdocumentor-element-found-in__line">37</span>
 
     </aside>
 
@@ -1154,6 +1169,60 @@
             -public
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_additionalProperty">
+        $additionalProperty
+        <a href="classes/org-schema-traits-PlaceTrait.html#property_additionalProperty" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PlaceTrait.php"><a href="files/src-org-schema-traits-placetrait.html"><abbr title="src/org/schema/traits/PlaceTrait.php">PlaceTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">43</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A property-value pair representing an additional characteristic of the entity,
+e.g. a product feature or another characteristic for which there is no matching property in schema.org.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">null|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-PropertyValue.html"><abbr title="\org\schema\PropertyValue">PropertyValue</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$additionalProperty</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+    
+    
+    
+
+    
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/org-schema-traits-PlaceTrait.html#property_additionalProperty#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\oihana\reflect\attributes\HydrateWith">HydrateWith</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        \org\schema\PropertyValue::class
+    </dd>
+    </dl>
+            </section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_additionalType">
         $additionalType
         <a href="classes/org-schema-Thing.html#property_additionalType" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1164,7 +1233,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">60</span>
+    <span class="phpdocumentor-element-found-in__line">50</span>
 
     </aside>
 
@@ -1203,7 +1272,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PlaceTrait.php"><a href="files/src-org-schema-traits-placetrait.html"><abbr title="src/org/schema/traits/PlaceTrait.php">PlaceTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">42</span>
+    <span class="phpdocumentor-element-found-in__line">50</span>
 
     </aside>
 
@@ -1242,7 +1311,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PlaceTrait.php"><a href="files/src-org-schema-traits-placetrait.html"><abbr title="src/org/schema/traits/PlaceTrait.php">PlaceTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">55</span>
+    <span class="phpdocumentor-element-found-in__line">56</span>
 
     </aside>
 
@@ -1260,6 +1329,20 @@
     
 
     
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/org-schema-traits-PlaceTrait.html#property_aggregateRating#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\oihana\reflect\attributes\HydrateWith">HydrateWith</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        \org\schema\AggregateRating::class
+    </dd>
+    </dl>
+            </section>
 
     
 
@@ -1281,7 +1364,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">50</span>
+    <span class="phpdocumentor-element-found-in__line">71</span>
 
     </aside>
 
@@ -1320,7 +1403,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PlaceTrait.php"><a href="files/src-org-schema-traits-placetrait.html"><abbr title="src/org/schema/traits/PlaceTrait.php">PlaceTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">49</span>
+    <span class="phpdocumentor-element-found-in__line">64</span>
 
     </aside>
 
@@ -1340,6 +1423,20 @@
     
 
     
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/org-schema-traits-PlaceTrait.html#property_amenityFeature#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\oihana\reflect\attributes\HydrateWith">HydrateWith</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        \org\schema\LocationFeatureSpecification::class
+    </dd>
+    </dl>
+            </section>
 
     
 
@@ -1400,7 +1497,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PlaceTrait.php"><a href="files/src-org-schema-traits-placetrait.html"><abbr title="src/org/schema/traits/PlaceTrait.php">PlaceTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">63</span>
+    <span class="phpdocumentor-element-found-in__line">73</span>
 
     </aside>
 
@@ -1442,7 +1539,7 @@ For example, in the URL http://www.starbucks.co.uk/store-locator/etc/detail/3047
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PlaceTrait.php"><a href="files/src-org-schema-traits-placetrait.html"><abbr title="src/org/schema/traits/PlaceTrait.php">PlaceTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">73</span>
+    <span class="phpdocumentor-element-found-in__line">83</span>
 
     </aside>
 
@@ -1481,7 +1578,7 @@ For example, in the URL http://www.starbucks.co.uk/store-locator/etc/detail/3047
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PlaceTrait.php"><a href="files/src-org-schema-traits-placetrait.html"><abbr title="src/org/schema/traits/PlaceTrait.php">PlaceTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">68</span>
+    <span class="phpdocumentor-element-found-in__line">78</span>
 
     </aside>
 
@@ -1520,7 +1617,7 @@ For example, in the URL http://www.starbucks.co.uk/store-locator/etc/detail/3047
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">65</span>
+    <span class="phpdocumentor-element-found-in__line">55</span>
 
     </aside>
 
@@ -1559,7 +1656,7 @@ For example, in the URL http://www.starbucks.co.uk/store-locator/etc/detail/3047
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">70</span>
+    <span class="phpdocumentor-element-found-in__line">76</span>
 
     </aside>
 
@@ -1598,7 +1695,7 @@ For example, in the URL http://www.starbucks.co.uk/store-locator/etc/detail/3047
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">81</span>
+    <span class="phpdocumentor-element-found-in__line">87</span>
 
     </aside>
 
@@ -1637,7 +1734,7 @@ For example, in the URL http://www.starbucks.co.uk/store-locator/etc/detail/3047
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PlaceTrait.php"><a href="files/src-org-schema-traits-placetrait.html"><abbr title="src/org/schema/traits/PlaceTrait.php">PlaceTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">79</span>
+    <span class="phpdocumentor-element-found-in__line">89</span>
 
     </aside>
 
@@ -1676,7 +1773,7 @@ For example, in the URL http://www.starbucks.co.uk/store-locator/etc/detail/3047
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PlaceTrait.php"><a href="files/src-org-schema-traits-placetrait.html"><abbr title="src/org/schema/traits/PlaceTrait.php">PlaceTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">85</span>
+    <span class="phpdocumentor-element-found-in__line">95</span>
 
     </aside>
 
@@ -1715,7 +1812,7 @@ For example, in the URL http://www.starbucks.co.uk/store-locator/etc/detail/3047
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PlaceTrait.php"><a href="files/src-org-schema-traits-placetrait.html"><abbr title="src/org/schema/traits/PlaceTrait.php">PlaceTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">91</span>
+    <span class="phpdocumentor-element-found-in__line">101</span>
 
     </aside>
 
@@ -1834,7 +1931,7 @@ For example, in the URL http://www.starbucks.co.uk/store-locator/etc/detail/3047
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PlaceTrait.php"><a href="files/src-org-schema-traits-placetrait.html"><abbr title="src/org/schema/traits/PlaceTrait.php">PlaceTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">97</span>
+    <span class="phpdocumentor-element-found-in__line">107</span>
 
     </aside>
 
@@ -1873,7 +1970,7 @@ For example, in the URL http://www.starbucks.co.uk/store-locator/etc/detail/3047
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PlaceTrait.php"><a href="files/src-org-schema-traits-placetrait.html"><abbr title="src/org/schema/traits/PlaceTrait.php">PlaceTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">105</span>
+    <span class="phpdocumentor-element-found-in__line">115</span>
 
     </aside>
 
@@ -1891,6 +1988,20 @@ For example, in the URL http://www.starbucks.co.uk/store-locator/etc/detail/3047
     
 
     
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/org-schema-traits-PlaceTrait.html#property_hasCertification#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\oihana\reflect\attributes\HydrateWith">HydrateWith</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        \org\schema\creativeWork\Certification::class
+    </dd>
+    </dl>
+            </section>
 
     
 
@@ -1912,7 +2023,7 @@ For example, in the URL http://www.starbucks.co.uk/store-locator/etc/detail/3047
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PlaceTrait.php"><a href="files/src-org-schema-traits-placetrait.html"><abbr title="src/org/schema/traits/PlaceTrait.php">PlaceTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">111</span>
+    <span class="phpdocumentor-element-found-in__line">122</span>
 
     </aside>
 
@@ -1941,6 +2052,72 @@ For example, in the URL http://www.starbucks.co.uk/store-locator/etc/detail/3047
             -public
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_hasGS1DigitalLink">
+        $hasGS1DigitalLink
+        <a href="classes/org-schema-traits-PlaceTrait.html#property_hasGS1DigitalLink" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PlaceTrait.php"><a href="files/src-org-schema-traits-placetrait.html"><abbr title="src/org/schema/traits/PlaceTrait.php">PlaceTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">143</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The GS1 digital link associated with the object.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$hasGS1DigitalLink</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>This URL should conform to the particular requirements of digital links.</p>
+<p>The link should only contain the Application Identifiers (AIs)
+that are relevant for the entity being annotated,</p>
+<p>for instance a Product or an Organization, and for the correct granularity.
+In particular, for products:</p>
+<ul>
+<li>A Digital Link that contains a serial number (AI 21) should only be present on instances of IndividualProduct</li>
+<li>A Digital Link that contains a lot number (AI 10) should be annotated as SomeProduct if only products from that lot are sold, or IndividualProduct if there is only a specific product.</li>
+<li>A Digital Link that contains a global model number (AI 8013) should be attached to a Product or a ProductModel.</li>
+</ul>
+<p>Other item types should be adapted similarly.</p>
+</section>
+
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/org-schema-traits-PlaceTrait.html#property_hasGS1DigitalLink#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                    <span class="phpdocumentor-tag-link"><a href="https://www.gs1.org/standards/gs1-digital-link">https://www.gs1.org/standards/gs1-digital-link</a></span>
+                                        
+                                             
+                                    </dd>
+                                            </dl>
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_hasMap">
         $hasMap
         <a href="classes/org-schema-traits-PlaceTrait.html#property_hasMap" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1951,7 +2128,7 @@ For example, in the URL http://www.starbucks.co.uk/store-locator/etc/detail/3047
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PlaceTrait.php"><a href="files/src-org-schema-traits-placetrait.html"><abbr title="src/org/schema/traits/PlaceTrait.php">PlaceTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">117</span>
+    <span class="phpdocumentor-element-found-in__line">149</span>
 
     </aside>
 
@@ -1990,7 +2167,7 @@ For example, in the URL http://www.starbucks.co.uk/store-locator/etc/detail/3047
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">76</span>
+    <span class="phpdocumentor-element-found-in__line">82</span>
 
     </aside>
 
@@ -2068,7 +2245,7 @@ For example, in the URL http://www.starbucks.co.uk/store-locator/etc/detail/3047
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">86</span>
+    <span class="phpdocumentor-element-found-in__line">92</span>
 
     </aside>
 
@@ -2107,7 +2284,7 @@ For example, in the URL http://www.starbucks.co.uk/store-locator/etc/detail/3047
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">92</span>
+    <span class="phpdocumentor-element-found-in__line">98</span>
 
     </aside>
 
@@ -2146,7 +2323,7 @@ For example, in the URL http://www.starbucks.co.uk/store-locator/etc/detail/3047
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PlaceTrait.php"><a href="files/src-org-schema-traits-placetrait.html"><abbr title="src/org/schema/traits/PlaceTrait.php">PlaceTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">122</span>
+    <span class="phpdocumentor-element-found-in__line">154</span>
 
     </aside>
 
@@ -2185,7 +2362,7 @@ For example, in the URL http://www.starbucks.co.uk/store-locator/etc/detail/3047
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PlaceTrait.php"><a href="files/src-org-schema-traits-placetrait.html"><abbr title="src/org/schema/traits/PlaceTrait.php">PlaceTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">128</span>
+    <span class="phpdocumentor-element-found-in__line">160</span>
 
     </aside>
 
@@ -2224,7 +2401,7 @@ For example, in the URL http://www.starbucks.co.uk/store-locator/etc/detail/3047
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PlaceTrait.php"><a href="files/src-org-schema-traits-placetrait.html"><abbr title="src/org/schema/traits/PlaceTrait.php">PlaceTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">134</span>
+    <span class="phpdocumentor-element-found-in__line">166</span>
 
     </aside>
 
@@ -2263,7 +2440,7 @@ For example, in the URL http://www.starbucks.co.uk/store-locator/etc/detail/3047
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">98</span>
+    <span class="phpdocumentor-element-found-in__line">104</span>
 
     </aside>
 
@@ -2302,7 +2479,7 @@ For example, in the URL http://www.starbucks.co.uk/store-locator/etc/detail/3047
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PlaceTrait.php"><a href="files/src-org-schema-traits-placetrait.html"><abbr title="src/org/schema/traits/PlaceTrait.php">PlaceTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">140</span>
+    <span class="phpdocumentor-element-found-in__line">172</span>
 
     </aside>
 
@@ -2341,7 +2518,7 @@ For example, in the URL http://www.starbucks.co.uk/store-locator/etc/detail/3047
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PlaceTrait.php"><a href="files/src-org-schema-traits-placetrait.html"><abbr title="src/org/schema/traits/PlaceTrait.php">PlaceTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">146</span>
+    <span class="phpdocumentor-element-found-in__line">178</span>
 
     </aside>
 
@@ -2434,7 +2611,7 @@ For example, in the URL http://www.starbucks.co.uk/store-locator/etc/detail/3047
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">104</span>
+    <span class="phpdocumentor-element-found-in__line">110</span>
 
     </aside>
 
@@ -2473,7 +2650,7 @@ For example, in the URL http://www.starbucks.co.uk/store-locator/etc/detail/3047
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PlaceTrait.php"><a href="files/src-org-schema-traits-placetrait.html"><abbr title="src/org/schema/traits/PlaceTrait.php">PlaceTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">151</span>
+    <span class="phpdocumentor-element-found-in__line">183</span>
 
     </aside>
 
@@ -2512,7 +2689,7 @@ For example, in the URL http://www.starbucks.co.uk/store-locator/etc/detail/3047
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PlaceTrait.php"><a href="files/src-org-schema-traits-placetrait.html"><abbr title="src/org/schema/traits/PlaceTrait.php">PlaceTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">157</span>
+    <span class="phpdocumentor-element-found-in__line">189</span>
 
     </aside>
 
@@ -2566,7 +2743,7 @@ For example, in the URL http://www.starbucks.co.uk/store-locator/etc/detail/3047
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PlaceTrait.php"><a href="files/src-org-schema-traits-placetrait.html"><abbr title="src/org/schema/traits/PlaceTrait.php">PlaceTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">164</span>
+    <span class="phpdocumentor-element-found-in__line">196</span>
 
     </aside>
 
@@ -2607,7 +2784,7 @@ For example, in the URL http://www.starbucks.co.uk/store-locator/etc/detail/3047
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">109</span>
+    <span class="phpdocumentor-element-found-in__line">60</span>
 
     </aside>
 
@@ -2646,7 +2823,7 @@ For example, in the URL http://www.starbucks.co.uk/store-locator/etc/detail/3047
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">45</span>
+    <span class="phpdocumentor-element-found-in__line">66</span>
 
     </aside>
 
@@ -2883,7 +3060,7 @@ Typical unit code(s): C62 for person.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PlaceTrait.php"><a href="files/src-org-schema-traits-placetrait.html"><abbr title="src/org/schema/traits/PlaceTrait.php">PlaceTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">170</span>
+    <span class="phpdocumentor-element-found-in__line">202</span>
 
     </aside>
 
@@ -2922,7 +3099,7 @@ Typical unit code(s): C62 for person.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PlaceTrait.php"><a href="files/src-org-schema-traits-placetrait.html"><abbr title="src/org/schema/traits/PlaceTrait.php">PlaceTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">175</span>
+    <span class="phpdocumentor-element-found-in__line">207</span>
 
     </aside>
 
@@ -2940,6 +3117,20 @@ Typical unit code(s): C62 for person.</p>
     
 
     
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/org-schema-traits-PlaceTrait.html#property_openingHoursSpecification#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\oihana\reflect\attributes\HydrateWith">HydrateWith</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        \org\schema\OpeningHoursSpecification::class
+    </dd>
+    </dl>
+            </section>
 
     
 
@@ -3039,7 +3230,7 @@ Typical unit code(s): C62 for person.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PlaceTrait.php"><a href="files/src-org-schema-traits-placetrait.html"><abbr title="src/org/schema/traits/PlaceTrait.php">PlaceTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">181</span>
+    <span class="phpdocumentor-element-found-in__line">214</span>
 
     </aside>
 
@@ -3080,7 +3271,7 @@ Typical unit code(s): C62 for person.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PlaceTrait.php"><a href="files/src-org-schema-traits-placetrait.html"><abbr title="src/org/schema/traits/PlaceTrait.php">PlaceTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">187</span>
+    <span class="phpdocumentor-element-found-in__line">220</span>
 
     </aside>
 
@@ -3119,7 +3310,7 @@ Typical unit code(s): C62 for person.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">115</span>
+    <span class="phpdocumentor-element-found-in__line">116</span>
 
     </aside>
 
@@ -3158,7 +3349,7 @@ Typical unit code(s): C62 for person.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PlaceTrait.php"><a href="files/src-org-schema-traits-placetrait.html"><abbr title="src/org/schema/traits/PlaceTrait.php">PlaceTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">193</span>
+    <span class="phpdocumentor-element-found-in__line">226</span>
 
     </aside>
 
@@ -3197,7 +3388,7 @@ Typical unit code(s): C62 for person.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PlaceTrait.php"><a href="files/src-org-schema-traits-placetrait.html"><abbr title="src/org/schema/traits/PlaceTrait.php">PlaceTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">199</span>
+    <span class="phpdocumentor-element-found-in__line">232</span>
 
     </aside>
 
@@ -3215,6 +3406,20 @@ Typical unit code(s): C62 for person.</p>
     
 
     
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/org-schema-traits-PlaceTrait.html#property_review#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\oihana\reflect\attributes\HydrateWith">HydrateWith</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        \org\schema\Review::class
+    </dd>
+    </dl>
+            </section>
 
     
 
@@ -3236,7 +3441,7 @@ Typical unit code(s): C62 for person.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PlaceTrait.php"><a href="files/src-org-schema-traits-placetrait.html"><abbr title="src/org/schema/traits/PlaceTrait.php">PlaceTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">204</span>
+    <span class="phpdocumentor-element-found-in__line">238</span>
 
     </aside>
 
@@ -3275,7 +3480,7 @@ Typical unit code(s): C62 for person.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PlaceTrait.php"><a href="files/src-org-schema-traits-placetrait.html"><abbr title="src/org/schema/traits/PlaceTrait.php">PlaceTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">210</span>
+    <span class="phpdocumentor-element-found-in__line">244</span>
 
     </aside>
 
@@ -3314,7 +3519,7 @@ Typical unit code(s): C62 for person.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PlaceTrait.php"><a href="files/src-org-schema-traits-placetrait.html"><abbr title="src/org/schema/traits/PlaceTrait.php">PlaceTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">216</span>
+    <span class="phpdocumentor-element-found-in__line">250</span>
 
     </aside>
 
@@ -3353,7 +3558,7 @@ Typical unit code(s): C62 for person.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PlaceTrait.php"><a href="files/src-org-schema-traits-placetrait.html"><abbr title="src/org/schema/traits/PlaceTrait.php">PlaceTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">222</span>
+    <span class="phpdocumentor-element-found-in__line">256</span>
 
     </aside>
 
@@ -3371,6 +3576,20 @@ Typical unit code(s): C62 for person.</p>
     
 
     
+    <section class="phpdocumentor-attributes">
+        <h5 class="phpdocumentor-elements__header" id="attributes">
+            Attributes <a href="classes/org-schema-traits-PlaceTrait.html#property_specialOpeningHoursSpecification#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h5>
+                    <dl class="phpdocumentor-argument-list">
+    <dt class="phpdocumentor-argument-list__entry">
+        #[<abbr title="\oihana\reflect\attributes\HydrateWith">HydrateWith</abbr>]
+    </dt>
+        <dd class="phpdocumentor-argument-list__entry">
+        \org\schema\OpeningHoursSpecification::class
+    </dd>
+    </dl>
+            </section>
 
     
 
@@ -3392,7 +3611,7 @@ Typical unit code(s): C62 for person.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PlaceTrait.php"><a href="files/src-org-schema-traits-placetrait.html"><abbr title="src/org/schema/traits/PlaceTrait.php">PlaceTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">228</span>
+    <span class="phpdocumentor-element-found-in__line">263</span>
 
     </aside>
 
@@ -3431,7 +3650,7 @@ Typical unit code(s): C62 for person.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PlaceTrait.php"><a href="files/src-org-schema-traits-placetrait.html"><abbr title="src/org/schema/traits/PlaceTrait.php">PlaceTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">234</span>
+    <span class="phpdocumentor-element-found-in__line">269</span>
 
     </aside>
 
@@ -3509,7 +3728,7 @@ Typical unit code(s): C62 for person.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/PlaceTrait.php"><a href="files/src-org-schema-traits-placetrait.html"><abbr title="src/org/schema/traits/PlaceTrait.php">PlaceTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">239</span>
+    <span class="phpdocumentor-element-found-in__line">274</span>
 
     </aside>
 
@@ -3587,7 +3806,7 @@ Typical unit code(s): C62 for person.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">92</span>
+    <span class="phpdocumentor-element-found-in__line">91</span>
 
     </aside>
 
@@ -3628,7 +3847,7 @@ Typical unit code(s): C62 for person.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">100</span>
+    <span class="phpdocumentor-element-found-in__line">99</span>
 
     </aside>
 
@@ -3674,7 +3893,7 @@ Typical unit code(s): C62 for person.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">48</span>
+    <span class="phpdocumentor-element-found-in__line">47</span>
 
     </aside>
 
@@ -3759,7 +3978,7 @@ echo $person-&gt;name; // Outputs: Jane Doe
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">135</span>
+    <span class="phpdocumentor-element-found-in__line">134</span>
 
     </aside>
 
@@ -3849,7 +4068,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">153</span>
+    <span class="phpdocumentor-element-found-in__line">152</span>
 
     </aside>
 
@@ -3900,7 +4119,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">183</span>
+    <span class="phpdocumentor-element-found-in__line">182</span>
 
     </aside>
 
@@ -3951,7 +4170,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">168</span>
+    <span class="phpdocumentor-element-found-in__line">167</span>
 
     </aside>
 
@@ -4130,6 +4349,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                                                     <li class=""><a href="classes/org-schema-places-Accommodation.html#property_accommodationFloorPlan">$accommodationFloorPlan</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_active">$active</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-PlaceTrait.html#property_additional">$additional</a></li>
+                                                    <li class=""><a href="classes/org-schema-traits-PlaceTrait.html#property_additionalProperty">$additionalProperty</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_additionalType">$additionalType</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-PlaceTrait.html#property_address">$address</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-PlaceTrait.html#property_aggregateRating">$aggregateRating</a></li>
@@ -4150,6 +4370,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                                                     <li class=""><a href="classes/org-schema-traits-PlaceTrait.html#property_geo">$geo</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-PlaceTrait.html#property_hasCertification">$hasCertification</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-PlaceTrait.html#property_hasDriveThroughService">$hasDriveThroughService</a></li>
+                                                    <li class=""><a href="classes/org-schema-traits-PlaceTrait.html#property_hasGS1DigitalLink">$hasGS1DigitalLink</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-PlaceTrait.html#property_hasMap">$hasMap</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_hasPart">$hasPart</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_id">$id</a></li>

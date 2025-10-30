@@ -8,7 +8,6 @@ use oihana\reflect\traits\JsonSchemaTrait;
 
 use org\schema\constants\Schema;
 
-
 /**
  * Provides common behavior for schema.org entities, including:
  * - Object hydration from array or object

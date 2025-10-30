@@ -2,6 +2,7 @@
 
 namespace org\schema\traits;
 
+use oihana\reflect\attributes\HydrateWith;
 use org\schema\AggregateRating;
 use org\schema\creativeWork\Certification;
 use org\schema\creativeWork\Map;
@@ -36,23 +37,32 @@ trait PlaceTrait
     public object|string|null $additional ;
 
     /**
+     * A property-value pair representing an additional characteristic of the entity,
+     * e.g. a product feature or another characteristic for which there is no matching property in schema.org.
+     */
+    #[HydrateWith( PropertyValue::class ) ]
+    public null|array|PropertyValue $additionalProperty = null ;
+
+    /**
      * Physical address of the item (PostalAddress or any object to describe it).
      * @var PostalAddress|string|array<PostalAddress|string>|null
      */
     public PostalAddress|string|array|null $address = null ;
 
     /**
+     * The overall rating, based on a collection of reviews or ratings, of the item.
+     * @var array|AggregateRating|null
+     */
+    #[HydrateWith( AggregateRating::class ) ]
+    public null|array|AggregateRating $aggregateRating ;
+
+    /**
      * An amenity feature (e.g. a characteristic or service) of the Accommodation.
      * This generic property does not make a statement about whether the feature is included in an offer for the main accommodation or available at extra costs.
      * @var array|LocationFeatureSpecification|null
      */
+    #[HydrateWith( LocationFeatureSpecification::class ) ]
     public null|array|LocationFeatureSpecification $amenityFeature ;
-
-    /**
-     * The overall rating, based on a collection of reviews or ratings, of the item.
-     * @var array|AggregateRating|null
-     */
-    public null|array|AggregateRating $aggregateRating ;
 
     /**
      * A short textual code (also called "store code") that uniquely identifies a place of business.
@@ -102,6 +112,7 @@ trait PlaceTrait
      * Certification information about a product, organization, service, place, or person.
      * @var array|Certification|null
      */
+    #[HydrateWith( Certification::class ) ]
     public null|array|Certification $hasCertification ;
 
     /**
@@ -109,6 +120,27 @@ trait PlaceTrait
      * @var bool|null
      */
     public ?bool $hasDriveThroughService ;
+
+    /**
+     * The GS1 digital link associated with the object.
+     * This URL should conform to the particular requirements of digital links.
+     *
+     * The link should only contain the Application Identifiers (AIs)
+     * that are relevant for the entity being annotated,
+     *
+     * for instance a Product or an Organization, and for the correct granularity.
+     * In particular, for products:
+     * - A Digital Link that contains a serial number (AI 21) should only be present on instances of IndividualProduct
+     * - A Digital Link that contains a lot number (AI 10) should be annotated as SomeProduct if only products from that lot are sold, or IndividualProduct if there is only a specific product.
+     * - A Digital Link that contains a global model number (AI 8013) should be attached to a Product or a ProductModel.
+     *
+     * Other item types should be adapted similarly.
+     *
+     * @var string|null
+     *
+     * @see https://www.gs1.org/standards/gs1-digital-link
+     */
+    public ?string $hasGS1DigitalLink ;
 
     /**
      * A URL to a map of the place.
@@ -172,6 +204,7 @@ trait PlaceTrait
     /**
      * The opening hours of a certain place.
      */
+    #[HydrateWith( OpeningHoursSpecification::class ) ]
     public null|array|OpeningHoursSpecification $openingHoursSpecification ;
 
     /**
@@ -196,6 +229,7 @@ trait PlaceTrait
      * A review of the item.
      * @var array|Review|null
      */
+    #[HydrateWith( Review::class ) ]
     public null|array|Review $review ;
 
     /**
@@ -219,6 +253,7 @@ trait PlaceTrait
      * The special opening hours of a certain place.
      * @var null|array<OpeningHoursSpecification>|OpeningHoursSpecification
      */
+    #[HydrateWith( OpeningHoursSpecification::class ) ]
     public null|array|OpeningHoursSpecification $specialOpeningHoursSpecification ;
 
     /**
