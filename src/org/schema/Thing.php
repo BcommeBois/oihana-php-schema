@@ -67,12 +67,12 @@ class Thing implements JsonSerializable
     /**
      * An alias for the item.
      */
-    public string|object|null $alternateName ;
+    public string|object|array|null $alternateName ;
 
     /**
      * A short description of the item.
      */
-    public ?string $description ;
+    public string|object|array|null $description ;
 
     /**
      * Indicates an item that this part of this item.
