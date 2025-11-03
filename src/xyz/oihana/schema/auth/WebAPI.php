@@ -2,10 +2,11 @@
 
 namespace xyz\oihana\schema\auth;
 
-use org\schema\WebAPI;
+use oihana\reflect\attributes\HydrateWith;
+use org\schema\WebAPI as SchemaWebAPI;
 use xyz\oihana\schema\constants\JWTAlgorithm;
 use xyz\oihana\schema\constants\Oihana;
-use xyz\oihana\schema\constants\traits\AuthWebAPITrait;
+use xyz\oihana\schema\constants\traits\auth\WebAPITrait;
 
 /**
  * Represents a Web API resource with OAuth2 authentication capabilities.
@@ -31,10 +32,10 @@ use xyz\oihana\schema\constants\traits\AuthWebAPITrait;
  *
  * Usage example:
  * ```php
- * use xyz\oihana\schema\auth\AuthWebAPI;
+ * use xyz\oihana\schema\auth\WebAPI;
  *
- * $api = new AuthWebAPI();
- * $api->algorithm = AuthWebAPI::DEFAULT_ALGORITHM;
+ * $api = new WebAPI();
+ * $api->algorithm = WebAPI::DEFAULT_ALGORITHM;
  * $api->allowOfflineAccess = true;
  * $api->implicitHybridTokenLifetime = 3600;
  * $api->permissions = ['read', 'write'];
@@ -42,24 +43,18 @@ use xyz\oihana\schema\constants\traits\AuthWebAPITrait;
  * $api->scopeHasPermission = true;
  * ```
  *
- * @see WebAPI
  * @see JWTAlgorithm
  *
  * @package xyz\oihana\schema\auth
- * @package xyz\oihana\schema
  * @author  Marc Alcaraz (ekameleon)
  * @since   1.0.2
  */
-class AuthWebAPI extends WebAPI
+class WebAPI extends SchemaWebAPI
 {
     /**
      * The @context of the json-ld representation of the thing.
      */
     public const string CONTEXT = Oihana::SCHEMA ;
-
-    // ------ Constants
-
-    use AuthWebAPITrait ;
 
     /**
      * The default JSON Web Token (JWT) Signing Algorithm.
@@ -112,8 +107,9 @@ class AuthWebAPI extends WebAPI
 
     /**
      * Define the permissions (scopes) that this API uses.
-     * @var array|null
+     * @var array<Permission>|null
      */
+    #[HydrateWith( Permission::class ) ]
     public array|null $permissions ;
 
     /**

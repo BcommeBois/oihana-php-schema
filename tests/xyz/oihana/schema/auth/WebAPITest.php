@@ -4,24 +4,25 @@ namespace tests\xyz\oihana\schema\auth ;
 
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
-use xyz\oihana\schema\auth\AuthWebAPI;
+
+use xyz\oihana\schema\auth\WebAPI;
 use xyz\oihana\schema\constants\JWTAlgorithm;
 
-class AuthWebAPITest extends TestCase
+class WebAPITest extends TestCase
 {
     public function testDefaults(): void
     {
-        $api = new AuthWebAPI();
+        $api = new WebAPI();
 
         // Constantes
-        $this->assertSame(JWTAlgorithm::RS256, AuthWebAPI::DEFAULT_ALGORITHM);
-        $this->assertSame(7200, AuthWebAPI::DEFAULT_IMPLICIT_HYBRID_TOKEN_LIFETIME);
-        $this->assertSame(86400, AuthWebAPI::DEFAULT_TOKEN_EXPIRATION);
+        $this->assertSame(JWTAlgorithm::RS256, WebAPI::DEFAULT_ALGORITHM);
+        $this->assertSame(7200, WebAPI::DEFAULT_IMPLICIT_HYBRID_TOKEN_LIFETIME);
+        $this->assertSame(86400, WebAPI::DEFAULT_TOKEN_EXPIRATION);
 
         // Propriétés par défaut
-        $this->assertSame(AuthWebAPI::DEFAULT_ALGORITHM, $api->algorithm);
-        $this->assertSame(AuthWebAPI::DEFAULT_IMPLICIT_HYBRID_TOKEN_LIFETIME, $api->implicitHybridTokenLifetime);
-        $this->assertSame(AuthWebAPI::DEFAULT_TOKEN_EXPIRATION, $api->maximumAccessTokenExpiration);
+        $this->assertSame(WebAPI::DEFAULT_ALGORITHM, $api->algorithm);
+        $this->assertSame(WebAPI::DEFAULT_IMPLICIT_HYBRID_TOKEN_LIFETIME, $api->implicitHybridTokenLifetime);
+        $this->assertSame(WebAPI::DEFAULT_TOKEN_EXPIRATION, $api->maximumAccessTokenExpiration);
 
         $this->assertNull( $api->allowOfflineAccess ?? null );
         $this->assertNull( $api->allowSkipUserConsent ?? null  );
@@ -34,7 +35,7 @@ class AuthWebAPITest extends TestCase
     #[DataProvider('booleanProvider')]
     public function testBooleanProperties(bool $value): void
     {
-        $api = new AuthWebAPI();
+        $api = new WebAPI();
 
         $api->allowOfflineAccess = $value;
         $api->allowSkipUserConsent = $value;
@@ -50,7 +51,7 @@ class AuthWebAPITest extends TestCase
     #[DataProvider('permissionsProvider')]
     public function testPermissions(array $permissions): void
     {
-        $api = new AuthWebAPI();
+        $api = new WebAPI();
         $api->permissions = $permissions;
         $api->permissionsCount = count($permissions);
 
@@ -61,7 +62,7 @@ class AuthWebAPITest extends TestCase
     #[DataProvider('jwtAlgorithmProvider')]
     public function testAlgorithm(string $algorithm): void
     {
-        $api = new AuthWebAPI();
+        $api = new WebAPI();
         $api->algorithm = $algorithm;
 
         $this->assertSame($algorithm, $api->algorithm);
@@ -75,7 +76,7 @@ class AuthWebAPITest extends TestCase
     #[DataProvider('tokenLifetimeProvider')]
     public function testTokenLifetimes(int $implicit, int $maximum): void
     {
-        $api = new AuthWebAPI();
+        $api = new WebAPI();
         $api->implicitHybridTokenLifetime = $implicit;
         $api->maximumAccessTokenExpiration = $maximum;
 

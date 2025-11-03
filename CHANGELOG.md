@@ -9,7 +9,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ### Added
 
 - Adds the xyz\oihana\schema\auth namespace
-  - Adds the AuthWebAPI class/schema
+  - Adds the WebApi (extends the schema.org definition), Permission, Role and User classes
 - Adds the JWTAlgorithm constant class
 
 ## [1.0.1] - 2025-10-30
