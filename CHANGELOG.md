@@ -6,7 +6,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+### Added
+
+- Adds the xyz\oihana\schema\auth namespace
+  - Adds the AuthWebAPI class/schema
+- Adds the JWTAlgorithm constant class
+
 ## [1.0.1] - 2025-10-30
+
+### Added
 
 - Adds xyz\oihana\schema (new package)
 - Adds xyz\oihana\schema\Log
