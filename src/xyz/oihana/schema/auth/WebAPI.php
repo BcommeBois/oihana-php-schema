@@ -6,7 +6,6 @@ use oihana\reflect\attributes\HydrateWith;
 use org\schema\WebAPI as SchemaWebAPI;
 use xyz\oihana\schema\constants\JWTAlgorithm;
 use xyz\oihana\schema\constants\Oihana;
-use xyz\oihana\schema\constants\traits\auth\WebAPITrait;
 
 /**
  * Represents a Web API resource with OAuth2 authentication capabilities.
