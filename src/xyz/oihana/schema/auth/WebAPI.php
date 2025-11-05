@@ -3,7 +3,9 @@
 namespace xyz\oihana\schema\auth;
 
 use oihana\reflect\attributes\HydrateWith;
+
 use org\schema\WebAPI as SchemaWebAPI;
+
 use xyz\oihana\schema\constants\JWTAlgorithm;
 use xyz\oihana\schema\constants\Oihana;
 
@@ -76,7 +78,7 @@ class WebAPI extends SchemaWebAPI
      * The JSON Web Token (JWT) Signing Algorithm (Default RS256).
      * @var string|null
      */
-    public null|string $algorithm = self::DEFAULT_ALGORITHM ;
+    public null|string $algorithm ;
 
     /**
      * If this setting is enabled, will allow applications to ask for Refresh Tokens for this API.
@@ -96,13 +98,13 @@ class WebAPI extends SchemaWebAPI
      * Time until an access token issued for this API, using either the implicit or hybrid flow, will expire.
      * Cannot exceed the maximum access token lifetime.
      */
-    public int|null $implicitHybridTokenLifetime = self::DEFAULT_IMPLICIT_HYBRID_TOKEN_LIFETIME ;
+    public int|null $implicitHybridTokenLifetime ;
 
     /**
      * The maximum Access Token lifetime in seconds.
      * Time until an access token issued for this API will expire.
      */
-    public int|null $maximumAccessTokenExpiration = self::DEFAULT_TOKEN_EXPIRATION ;
+    public int|null $maximumAccessTokenExpiration ;
 
     /**
      * Define the permissions (scopes) that this API uses.
