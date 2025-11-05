@@ -14,16 +14,13 @@ class WebAPITest extends TestCase
     {
         $api = new WebAPI();
 
-        // Constantes
         $this->assertSame(JWTAlgorithm::RS256, WebAPI::DEFAULT_ALGORITHM);
         $this->assertSame(7200, WebAPI::DEFAULT_IMPLICIT_HYBRID_TOKEN_LIFETIME);
         $this->assertSame(86400, WebAPI::DEFAULT_TOKEN_EXPIRATION);
 
-        // Propriétés par défaut
-        $this->assertSame(WebAPI::DEFAULT_ALGORITHM, $api->algorithm);
-        $this->assertSame(WebAPI::DEFAULT_IMPLICIT_HYBRID_TOKEN_LIFETIME, $api->implicitHybridTokenLifetime);
-        $this->assertSame(WebAPI::DEFAULT_TOKEN_EXPIRATION, $api->maximumAccessTokenExpiration);
-
+        $this->assertNull($api->algorithm ?? null );
+        $this->assertNull( $api->implicitHybridTokenLifetime ?? null );
+        $this->assertNull( $api->maximumAccessTokenExpiration ?? null );
         $this->assertNull( $api->allowOfflineAccess ?? null );
         $this->assertNull( $api->allowSkipUserConsent ?? null  );
         $this->assertNull( $api->permissions ?? null  );
