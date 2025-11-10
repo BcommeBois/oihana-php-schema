@@ -8,17 +8,44 @@ use xyz\oihana\schema\constants\Effect;
 use xyz\oihana\schema\constants\Oihana;
 
 /**
- * Represents a Casbin permission definition for Role-Based Access Control (RBAC).
+ * Represents a Casbin permission rule for Role-Based Access Control (RBAC).
  *
- * This class encapsulates the core components of a Casbin policy:
- * - `subject`: the user or role who performs the action
- * - `domain`: the resource or context where the action applies
- * - `action`: the operation allowed on the resource (e.g., 'read', 'write', 'delete')
+ * A `Permission` defines what a subject (user, role, or permission)
+ * is allowed or denied to do on a given resource within a specific domain.
+ * It is directly compatible with Casbin policy enforcement.
  *
- * It provides a simple array representation to be compatible with Casbin policy enforcement.
+ * ### Components
+ * - **subject**: The entity performing the action (`user:123`, `role:admin`, `perm:read:org`)
+ * - **domain**: The context or namespace for the permission (`api.my_domain.tld`, `my-app`)
+ * - **object**: The resource being accessed (`/organizations`, `/documents/:id`)
+ * - **action**: The allowed operations (`GET`, `POST`, `PATCH|PUT`, etc.)
+ * - **effect**: Whether access is granted or denied (`allow` or `deny`)
+ *
+ * ### Usage Example
+ * ```php
+ * use xyz\oihana\schema\auth\Permission;
+ * use xyz\oihana\schema\constants\Effect;
+ *
+ * $perm = new Permission
+ * ([
+ *     'subject' => 'role:admin' ,
+ *     'domain'  => 'api.my-domain.tld' ,
+ *     'object'  => '/documents/:id' ,
+ *     'action'  => 'GET|POST' ,
+ *     'effect'  => Effect::ALLOW ,
+ * ]);
+ * ```
+ *
+ * ### Notes
+ * - Multiple actions can be specified using the `|` character.
+ * - For REST APIs, consider normalizing objects with wildcards
+ *   (e.g., `/documents/*`) so that `keyMatch2` in Casbin matches correctly.
+ * - The effect is used to resolve conflicts when multiple rules match:
+ *   an `allow` can be overridden by a `deny` depending on your `policy_effect`.
  *
  * @package xyz\oihana\schema\auth
- * @author  Marc Alcaraz (ekameleon)
+ * @category Security / RBAC
+ * @author  Marc Alcaraz
  * @since   1.0.2
  */
 class Permission extends Intangible
@@ -29,10 +56,10 @@ class Permission extends Intangible
     public const string CONTEXT = Oihana::SCHEMA ;
 
     /**
-     * The action that the permission allows.
+     * The allowed action(s) for this permission.
      *
      * Examples:
-     * - Basic actions : `GET`, `DELETE`, `PATCH`, `POST`, `PUT`.
+     * - Basic actions : `GET`
      * - Multiple actions : `GET|PATCH|POST`
      *
      * @var string|null
@@ -40,12 +67,11 @@ class Permission extends Intangible
     public string|null $action = null ;
 
     /**
-     * The domain or resource on which the action is performed.
+     * The domain or namespace where this permission applies.
      *
      * Examples:
-     * - api      : `api.my_domain.tld`
-     * - app      : 'my-app'
-     * - document : `???`
+     * - API         : `api.my_domain.tld`
+     * - Application : 'my-app'
      *
      * @var string|null
      */
@@ -54,18 +80,26 @@ class Permission extends Intangible
     /**
      * The effect of this permission : 'allow' or 'deny'.
      *
-     * It determines whether the access request should be approved
-     * if multiple policy rules match the request.
-     * For example, one rule permits and the other denies.
+     * Used to determine whether the access request is approved
+     * when multiple policy rules match.
      *
-     * @var string|null
+     * @var string
      */
-    public string|null $effect = Effect::ALLOW ;
+    public string $effect
+    {
+        get => $this->_effect ;
+        set
+        {
+            $this->_effect = $value == Effect::DENY ? Effect::DENY : Effect::ALLOW ;
+        }
+    }
 
     /**
-     * The accessed resource definition of the permission.
+     * The resource object targeted by this permission.
      *
-     * Examples: `/organizations`, `/organizations/:id`
+     * Examples:
+     * - `/organizations`
+     * - `/documents/:id`
      *
      * @var string|null
      */
@@ -75,9 +109,9 @@ class Permission extends Intangible
      * The subject (permission or user or role) to whom the permission applies.
      *
      * Examples:
-     * - permission : `perm:organizations:read`
-     * - role       : `role:superadmin`
-     * - user       : `user:123`
+     * - Permission : `perm:organizations:read`
+     * - Role       : `role:superadmin`
+     * - User       : `user:123`
      *
      * @var string|null
      */
@@ -107,11 +141,16 @@ class Permission extends Intangible
     {
         return
         [
-            CasbinPolicy::SUBJECT => $this->subject,
-            CasbinPolicy::DOMAIN => $this->domain,
-            CasbinPolicy::OBJECT => $this->object,
-            CasbinPolicy::ACTION => $this->action,
-            CasbinPolicy::EFFECT => $this->effect,
+            CasbinPolicy::SUBJECT => $this->subject ,
+            CasbinPolicy::DOMAIN  => $this->domain  ,
+            CasbinPolicy::OBJECT  => $this->object  ,
+            CasbinPolicy::ACTION  => $this->action  ,
+            CasbinPolicy::EFFECT  => $this->effect  ,
         ];
     }
+
+    /**
+     * The effect of this permission: always 'allow' or 'deny'.
+     */
+    private string $_effect = Effect::ALLOW ;
 }

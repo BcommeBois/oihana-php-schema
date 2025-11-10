@@ -3,7 +3,10 @@
 namespace tests\xyz\oihana\schema\auth ;
 
 use PHPUnit\Framework\TestCase;
+use ReflectionException;
 use xyz\oihana\schema\auth\Permission;
+use xyz\oihana\schema\constants\CasbinPolicy;
+use xyz\oihana\schema\constants\Effect;
 use xyz\oihana\schema\constants\Oihana;
 
 class PermissionTest extends TestCase
@@ -12,66 +15,115 @@ class PermissionTest extends TestCase
     {
         $perm = new Permission();
 
-        $this->assertNull($perm->action, 'Default action should be null');
-        $this->assertNull($perm->domain, 'Default domain should be null');
-        $this->assertNull($perm->subject, 'Default subject should be null');
+        $this->assertEquals( Effect::ALLOW , $perm->effect ) ;
+
+        $this->assertNull( $perm->action  , 'Default action should be null'  );
+        $this->assertNull( $perm->domain  , 'Default domain should be null'  );
+        $this->assertNull( $perm->object  , 'Default object should be null'  );
+        $this->assertNull( $perm->subject , 'Default subject should be null' );
     }
 
+    /**
+     * @throws ReflectionException
+     */
     public function testSetAndGetProperties(): void
     {
-        $perm = new Permission();
-        $perm->action = 'read';
-        $perm->domain = 'project';
-        $perm->subject = 'admin';
+        $perm = new Permission
+        ([
+            Oihana::ACTION  => 'read' ,
+            Oihana::DOMAIN  => 'project' ,
+            Oihana::OBJECT  => 'places/:id' ,
+            Oihana::SUBJECT => 'role:admin' ,
+        ]);
 
-        $this->assertSame('read', $perm->action);
-        $this->assertSame('project', $perm->domain);
-        $this->assertSame('admin', $perm->subject);
+        $this->assertSame('read'       , $perm->action  ) ;
+        $this->assertSame('project'    , $perm->domain  ) ;
+        $this->assertSame('places/:id' , $perm->object  ) ;
+        $this->assertSame('role:admin' , $perm->subject ) ;
+
+        // test effect normalization
+        $perm->effect = 'allow';
+        $this->assertSame(Effect::ALLOW, $perm->effect);
+
+        $perm->effect = 'deny';
+        $this->assertSame(Effect::DENY, $perm->effect);
+
+        $perm->effect = 'invalid';
+        $this->assertSame(Effect::ALLOW, $perm->effect, 'Invalid effect should fallback to ALLOW');
     }
 
+    /**
+     * @throws ReflectionException
+     */
     public function testToArray(): void
     {
-        $perm = new Permission();
-        $perm->action = 'write';
-        $perm->domain = 'document';
-        $perm->subject = 'user:123';
+        $perm = new Permission
+        ([
+            Oihana::ACTION  => 'read' ,
+            Oihana::DOMAIN  => 'project' ,
+            Oihana::OBJECT  => 'places/:id' ,
+            Oihana::SUBJECT => 'role:admin' ,
+        ]);
 
         $expected = [
-            Oihana::SUBJECT => 'user:123',
-            Oihana::DOMAIN  => 'document',
-            Oihana::ACTION  => 'write',
+            Oihana::SUBJECT => 'role:admin',
+            Oihana::DOMAIN  => 'project',
+            Oihana::OBJECT  => 'places/:id',
+            Oihana::ACTION  => 'read',
+            Oihana::EFFECT  => 'allow',
         ];
 
         $this->assertSame($expected, $perm->toArray());
     }
 
-    public function provideValidPermissions(): array
+    /**
+     * @throws ReflectionException
+     */
+    public function testToPolicy(): void
     {
-        return [
-            ['read', 'project', 'admin'],
-            ['write', 'document', 'user:123'],
-            ['delete', 'api', 'role:editor'],
-            [null, null, null],
+        $perm = new Permission([
+            Oihana::ACTION  => 'GET|POST',
+            Oihana::DOMAIN  => 'api',
+            Oihana::OBJECT  => '/places/*',
+            Oihana::SUBJECT => 'role:admin',
+        ]);
+
+        $expected =
+        [
+            CasbinPolicy::SUBJECT => 'role:admin',
+            CasbinPolicy::DOMAIN  => 'api',
+            CasbinPolicy::OBJECT  => '/places/*',
+            CasbinPolicy::ACTION  => 'GET|POST',
+            CasbinPolicy::EFFECT  => Effect::ALLOW,
         ];
+
+        $this->assertSame($expected, $perm->toPolicy());
     }
 
-    public function testDataProviderPermissions(): void
+    /**
+     * @throws ReflectionException
+     */
+    public function testJsonSerialize(): void
     {
-        foreach ( $this->provideValidPermissions() as [$action, $domain, $subject] )
-        {
-            $perm = new Permission() ;
-            $perm->action  = $action;
-            $perm->domain  = $domain;
-            $perm->subject = $subject;
+        $perm = new Permission
+        ([
+            Oihana::ACTION  => 'GET|POST',
+            Oihana::DOMAIN  => 'api',
+            Oihana::OBJECT  => '/places/*',
+            Oihana::SUBJECT => 'role:admin',
+        ]);
 
-            $this->assertSame($action, $perm->action);
-            $this->assertSame($domain, $perm->domain);
-            $this->assertSame($subject, $perm->subject);
+        $expected =
+        [
+            '@type'   =>'Permission',
+            '@context'=>'https://schema.oihana.xyz',
+            'action'  =>'GET|POST',
+            'domain'  =>'api',
+            'effect'  =>'allow',
+            'object'  =>'/places/*',
+            'subject' =>'role:admin',
+        ];
 
-            $array = $perm->toArray();
-            $this->assertSame($subject, $array[Oihana::SUBJECT]);
-            $this->assertSame($domain, $array[Oihana::DOMAIN]);
-            $this->assertSame($action, $array[Oihana::ACTION]);
-        }
+        $this->assertSame($expected, $perm->jsonSerialize());
     }
 }
