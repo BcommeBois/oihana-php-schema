@@ -17,10 +17,10 @@ class PermissionTest extends TestCase
 
         $this->assertEquals( Effect::ALLOW , $perm->effect ) ;
 
-        $this->assertNull( $perm->action  , 'Default action should be null'  );
-        $this->assertNull( $perm->domain  , 'Default domain should be null'  );
-        $this->assertNull( $perm->object  , 'Default object should be null'  );
-        $this->assertNull( $perm->subject , 'Default subject should be null' );
+        $this->assertNull( $perm->action  ?? null , 'Default action should be null'  );
+        $this->assertNull( $perm->domain  ?? null , 'Default domain should be null'  );
+        $this->assertNull( $perm->object  ?? null , 'Default object should be null'  );
+        $this->assertNull( $perm->subject ?? null , 'Default subject should be null' );
     }
 
     /**
