@@ -64,7 +64,7 @@ class Permission extends Intangible
      *
      * @var string|null
      */
-    public string|null $action = null ;
+    public string|null $action ;
 
     /**
      * The domain or namespace where this permission applies.
@@ -75,7 +75,7 @@ class Permission extends Intangible
      *
      * @var string|null
      */
-    public string|null $domain = null ;
+    public string|null $domain ;
 
     /**
      * The effect of this permission : 'allow' or 'deny'.
@@ -103,7 +103,7 @@ class Permission extends Intangible
      *
      * @var string|null
      */
-    public string|null $object = null ;
+    public string|null $object ;
 
     /**
      * The subject (permission or user or role) to whom the permission applies.
@@ -115,7 +115,7 @@ class Permission extends Intangible
      *
      * @var string|null
      */
-    public string|null $subject = null ;
+    public string|null $subject ;
 
     /**
      * Returns an array representation of the permission suitable for Casbin policies.
@@ -126,10 +126,10 @@ class Permission extends Intangible
     {
         return
         [
-            Oihana::SUBJECT => $this->subject ,
-            Oihana::DOMAIN  => $this->domain  ,
-            Oihana::OBJECT  => $this->object  ,
-            Oihana::ACTION  => $this->action  ,
+            Oihana::SUBJECT => $this->subject ?? null ,
+            Oihana::DOMAIN  => $this->domain  ?? null ,
+            Oihana::OBJECT  => $this->object  ?? null ,
+            Oihana::ACTION  => $this->action  ?? null ,
             Oihana::EFFECT  => $this->effect  ,
         ];
     }
@@ -141,10 +141,10 @@ class Permission extends Intangible
     {
         return
         [
-            CasbinPolicy::SUBJECT => $this->subject ,
-            CasbinPolicy::DOMAIN  => $this->domain  ,
-            CasbinPolicy::OBJECT  => $this->object  ,
-            CasbinPolicy::ACTION  => $this->action  ,
+            CasbinPolicy::SUBJECT => $this->subject ?? null ,
+            CasbinPolicy::DOMAIN  => $this->domain  ?? null ,
+            CasbinPolicy::OBJECT  => $this->object  ?? null ,
+            CasbinPolicy::ACTION  => $this->action  ?? null ,
             CasbinPolicy::EFFECT  => $this->effect  ,
         ];
     }
