@@ -83,9 +83,9 @@ class Permission extends Intangible
      * Used to determine whether the access request is approved
      * when multiple policy rules match.
      *
-     * @var string
+     * @var ?string
      */
-    public string $effect
+    public ?string $effect
     {
         get => $this->_effect ;
         set
