@@ -3,7 +3,7 @@
 namespace xyz\oihana\schema\auth;
 
 use oihana\reflect\attributes\HydrateWith;
-use org\schema\WebAPI;
+
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\constants\traits\auth\RoleTrait;
 
@@ -83,4 +83,23 @@ class Role extends WebAPI
      * @var int|null
      */
     public int|null $usersCount ;
+
+    /**
+     * Returns an array of policies ready to inject dans Casbin
+     */
+    public function toPolicy(): array
+    {
+        if ( !$this->permissions )
+        {
+            return [];
+        }
+
+        $policies = [] ;
+        foreach ( $this->permissions as $permission )
+        {
+            $policies[] = $permission->toPolicy() ;
+        }
+
+        return $policies;
+    }
 }

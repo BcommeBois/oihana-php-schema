@@ -3,6 +3,8 @@
 namespace xyz\oihana\schema\auth;
 
 use org\schema\Intangible;
+use xyz\oihana\schema\constants\CasbinPolicy;
+use xyz\oihana\schema\constants\Effect;
 use xyz\oihana\schema\constants\Oihana;
 
 /**
@@ -29,7 +31,9 @@ class Permission extends Intangible
     /**
      * The action that the permission allows.
      *
-     * Examples: `'read'`, `'write'`, `'delete'`.
+     * Examples:
+     * - Basic actions : `GET`, `DELETE`, `PATCH`, `POST`, `PUT`.
+     * - Multiple actions : `GET|PATCH|POST`
      *
      * @var string|null
      */
@@ -38,16 +42,42 @@ class Permission extends Intangible
     /**
      * The domain or resource on which the action is performed.
      *
-     * Examples: `'project'`, `'document'`, `'api'`.
+     * Examples:
+     * - api      : `api.my_domain.tld`
+     * - app      : 'my-app'
+     * - document : `???`
      *
      * @var string|null
      */
     public string|null $domain = null ;
 
     /**
-     * The subject (user or role) to whom the permission applies.
+     * The effect of this permission : 'allow' or 'deny'.
      *
-     * Examples: `'admin'`, `'user:123'`.
+     * It determines whether the access request should be approved
+     * if multiple policy rules match the request.
+     * For example, one rule permits and the other denies.
+     *
+     * @var string|null
+     */
+    public string|null $effect = Effect::ALLOW ;
+
+    /**
+     * The accessed resource definition of the permission.
+     *
+     * Examples: `/organizations`, `/organizations/:id`
+     *
+     * @var string|null
+     */
+    public string|null $object = null ;
+
+    /**
+     * The subject (permission or user or role) to whom the permission applies.
+     *
+     * Examples:
+     * - permission : `perm:organizations:read`
+     * - role       : `role:superadmin`
+     * - user       : `user:123`
      *
      * @var string|null
      */
@@ -64,7 +94,24 @@ class Permission extends Intangible
         [
             Oihana::SUBJECT => $this->subject ,
             Oihana::DOMAIN  => $this->domain  ,
+            Oihana::OBJECT  => $this->object  ,
             Oihana::ACTION  => $this->action  ,
+            Oihana::EFFECT  => $this->effect  ,
+        ];
+    }
+
+    /**
+     * Returns an array ready for Casbin policies: [sub, dom, obj, act, eft]
+     */
+    public function toPolicy(): array
+    {
+        return
+        [
+            CasbinPolicy::SUBJECT => $this->subject,
+            CasbinPolicy::DOMAIN => $this->domain,
+            CasbinPolicy::OBJECT => $this->object,
+            CasbinPolicy::ACTION => $this->action,
+            CasbinPolicy::EFFECT => $this->effect,
         ];
     }
 }

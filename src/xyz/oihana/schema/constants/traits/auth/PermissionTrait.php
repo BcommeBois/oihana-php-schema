@@ -13,5 +13,7 @@ trait PermissionTrait
 {
     const string ACTION  = 'action'  ;
     const string DOMAIN  = 'domain'  ;
+    const string EFFECT  = 'effect'  ;
+    const string OBJECT  = 'object'  ;
     const string SUBJECT = 'subject' ;
 }

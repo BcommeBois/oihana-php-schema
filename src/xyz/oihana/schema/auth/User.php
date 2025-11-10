@@ -3,7 +3,9 @@
 namespace xyz\oihana\schema\auth;
 
 use oihana\reflect\attributes\HydrateWith;
+
 use org\schema\Person;
+
 use xyz\oihana\schema\constants\Oihana;
 
 /**
