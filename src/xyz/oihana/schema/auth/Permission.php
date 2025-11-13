@@ -93,7 +93,6 @@ class Permission extends Intangible
             $this->_effect = $value == Effect::DENY ? Effect::DENY : Effect::ALLOW ;
         }
     }
-    
 
     /**
      * The resource object targeted by this permission.

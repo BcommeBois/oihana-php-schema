@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - Adds the xyz\oihana\schema\auth namespace
   - Adds the WebApi (extends the schema.org definition), Permission, Role and User classes
 - Adds the JWTAlgorithm constant class
+- Adds ItemAvailability
 
 ## [1.0.1] - 2025-10-30
 
