@@ -146,7 +146,8 @@ trait ThingTrait
      *
      * Useful if you need a custom JSON-LD context.
      *
-     * @param string $context
+     * @param string $context Optional JSON-LD context.
+     *
      * @return $this
      */
     public function withAtContext( string $context ) :static
@@ -160,11 +161,16 @@ trait ThingTrait
      *
      * Can be called from constructor or later to override default values.
      *
-     * @param string|null $atType Optional JSON-LD type
+     * @param string|null $atType    Optional JSON-LD type
      * @param string|null $atContext Optional JSON-LD context
      * @return $this
      */
-    public function withJSONLDMeta( ?string $atType = null , ?string $atContext = null ) :static
+    public function withJSONLDMeta
+    (
+        ?string $atType    = null ,
+        ?string $atContext = null
+    )
+    :static
     {
         $this->atContext = $atContext ;
         $this->atType    = $atType ;
@@ -176,7 +182,8 @@ trait ThingTrait
      *
      * Allows overriding the default type inferred from the class.
      *
-     * @param string $type
+     * @param string $type Optional JSON-LD type
+     * 
      * @return $this
      */
     public function withAtType( string $type ) :static
