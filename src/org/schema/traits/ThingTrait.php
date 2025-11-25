@@ -183,7 +183,7 @@ trait ThingTrait
      * Allows overriding the default type inferred from the class.
      *
      * @param string $type Optional JSON-LD type
-     * 
+     *
      * @return $this
      */
     public function withAtType( string $type ) :static

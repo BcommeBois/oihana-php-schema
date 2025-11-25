@@ -2,6 +2,7 @@
 
 namespace org\schema;
 
+use oihana\reflect\attributes\HydrateAs;
 use org\schema\enumerations\AdultOrientedEnumeration;
 use org\schema\enumerations\BusinessEntityType;
 use org\schema\enumerations\BusinessFunction;
@@ -133,6 +134,7 @@ class Offer extends Intangible
      * This allows e.g. specifying that a certain freight charge is valid only for a certain quantity.
      * @var QuantitativeValue|null
      */
+    #[HydrateAs(QuantitativeValue::class)]
     public null|QuantitativeValue $eligibleQuantity ;
 
     /**
