@@ -2211,6 +2211,71 @@ Search.appendIndex(
             "summary": "Enumerates\u0020common\u0020financial\u0020incentives\u0020for\u0020products,\u0020including\u0020tax\u0020credits,\u0020tax\u0020deductions,\u0020rebates\u0020and\u0020subsidies,\u0020etc.",
             "url": "classes/org-schema-enumerations-IncentiveType.html"
         },                {
+            "fqsen": "\\org\\schema\\enumerations\\ItemAvailability",
+            "name": "ItemAvailability",
+            "summary": "A\u0020list\u0020of\u0020possible\u0020product\u0020availability\u0020options.",
+            "url": "classes/org-schema-enumerations-ItemAvailability.html"
+        },                {
+            "fqsen": "\\org\\schema\\enumerations\\ItemAvailability\u003A\u003ABACK_ORDER",
+            "name": "BACK_ORDER",
+            "summary": "Indicates\u0020that\u0020the\u0020item\u0020is\u0020available\u0020on\u0020back\u0020order.",
+            "url": "classes/org-schema-enumerations-ItemAvailability.html#constant_BACK_ORDER"
+        },                {
+            "fqsen": "\\org\\schema\\enumerations\\ItemAvailability\u003A\u003ADISCONTINUED",
+            "name": "DISCONTINUED",
+            "summary": "Indicates\u0020that\u0020the\u0020item\u0020has\u0020been\u0020discontinued.",
+            "url": "classes/org-schema-enumerations-ItemAvailability.html#constant_DISCONTINUED"
+        },                {
+            "fqsen": "\\org\\schema\\enumerations\\ItemAvailability\u003A\u003AIN_STOCK",
+            "name": "IN_STOCK",
+            "summary": "Indicates\u0020that\u0020the\u0020item\u0020is\u0020in\u0020stock.",
+            "url": "classes/org-schema-enumerations-ItemAvailability.html#constant_IN_STOCK"
+        },                {
+            "fqsen": "\\org\\schema\\enumerations\\ItemAvailability\u003A\u003AIN_STORE_ONLY",
+            "name": "IN_STORE_ONLY",
+            "summary": "Indicates\u0020that\u0020the\u0020item\u0020is\u0020available\u0020only\u0020at\u0020physical\u0020locations.",
+            "url": "classes/org-schema-enumerations-ItemAvailability.html#constant_IN_STORE_ONLY"
+        },                {
+            "fqsen": "\\org\\schema\\enumerations\\ItemAvailability\u003A\u003ALIMITED_AVAILABILITY",
+            "name": "LIMITED_AVAILABILITY",
+            "summary": "Indicates\u0020that\u0020the\u0020item\u0020has\u0020limited\u0020availability.",
+            "url": "classes/org-schema-enumerations-ItemAvailability.html#constant_LIMITED_AVAILABILITY"
+        },                {
+            "fqsen": "\\org\\schema\\enumerations\\ItemAvailability\u003A\u003AMADE_TO_ORDER",
+            "name": "MADE_TO_ORDER",
+            "summary": "Indicates\u0020that\u0020the\u0020item\u0020is\u0020made\u0020to\u0020order\u0020\u0028custom\u0020made\u0029.",
+            "url": "classes/org-schema-enumerations-ItemAvailability.html#constant_MADE_TO_ORDER"
+        },                {
+            "fqsen": "\\org\\schema\\enumerations\\ItemAvailability\u003A\u003AONLINE_ONLY",
+            "name": "ONLINE_ONLY",
+            "summary": "Indicates\u0020that\u0020the\u0020item\u0020is\u0020available\u0020only\u0020online.",
+            "url": "classes/org-schema-enumerations-ItemAvailability.html#constant_ONLINE_ONLY"
+        },                {
+            "fqsen": "\\org\\schema\\enumerations\\ItemAvailability\u003A\u003AOUT_OF_STOCK",
+            "name": "OUT_OF_STOCK",
+            "summary": "Indicates\u0020that\u0020the\u0020item\u0020is\u0020out\u0020of\u0020stock.",
+            "url": "classes/org-schema-enumerations-ItemAvailability.html#constant_OUT_OF_STOCK"
+        },                {
+            "fqsen": "\\org\\schema\\enumerations\\ItemAvailability\u003A\u003APRE_ORDER",
+            "name": "PRE_ORDER",
+            "summary": "Indicates\u0020that\u0020the\u0020item\u0020is\u0020available\u0020for\u0020pre\u002Dorder.",
+            "url": "classes/org-schema-enumerations-ItemAvailability.html#constant_PRE_ORDER"
+        },                {
+            "fqsen": "\\org\\schema\\enumerations\\ItemAvailability\u003A\u003APRE_SALE",
+            "name": "PRE_SALE",
+            "summary": "Indicates\u0020that\u0020the\u0020item\u0020is\u0020available\u0020for\u0020ordering\u0020and\u0020delivery\u0020before\u0020general\u0020availability.",
+            "url": "classes/org-schema-enumerations-ItemAvailability.html#constant_PRE_SALE"
+        },                {
+            "fqsen": "\\org\\schema\\enumerations\\ItemAvailability\u003A\u003ARESERVED",
+            "name": "RESERVED",
+            "summary": "Indicates\u0020that\u0020the\u0020item\u0020is\u0020reserved\u0020and\u0020therefore\u0020not\u0020available.",
+            "url": "classes/org-schema-enumerations-ItemAvailability.html#constant_RESERVED"
+        },                {
+            "fqsen": "\\org\\schema\\enumerations\\ItemAvailability\u003A\u003ASOLD_OUT",
+            "name": "SOLD_OUT",
+            "summary": "Indicates\u0020that\u0020the\u0020item\u0020has\u0020sold\u0020out.",
+            "url": "classes/org-schema-enumerations-ItemAvailability.html#constant_SOLD_OUT"
+        },                {
             "fqsen": "\\org\\schema\\enumerations\\MediaEnumeration",
             "name": "MediaEnumeration",
             "summary": "MediaEnumeration\u0020enumerations\u0020are\u0020lists\u0020of\u0020codes,\u0020labels\u0020etc.\u0020useful\u0020for\u0020describing\u0020media\u0020objects.",
@@ -7291,6 +7356,11 @@ Search.appendIndex(
             "summary": "The\u0020region\u0020in\u0020which\u0020the\u0020locality\u0020is,\u0020and\u0020which\u0020is\u0020in\u0020the\u0020country.",
             "url": "classes/org-schema-traits-PostalAddressTrait.html#property_addressRegion"
         },                {
+            "fqsen": "\\org\\schema\\traits\\PostalAddressTrait\u003A\u003A\u0024extendedAddress",
+            "name": "extendedAddress",
+            "summary": "An\u0020address\u0020extension\u0020such\u0020as\u0020an\u0020apartment\u0020number,\u0020C\/O\u0020or\u0020alternative\u0020name.",
+            "url": "classes/org-schema-traits-PostalAddressTrait.html#property_extendedAddress"
+        },                {
             "fqsen": "\\org\\schema\\traits\\PostalAddressTrait\u003A\u003A\u0024postOfficeBoxNumber",
             "name": "postOfficeBoxNumber",
             "summary": "The\u0020post\u0020office\u0020box\u0020number\u0020for\u0020PO\u0020box\u0020addresses.",
@@ -7488,13 +7558,18 @@ Search.appendIndex(
         },                {
             "fqsen": "\\xyz\\oihana\\schema\\auth\\Permission",
             "name": "Permission",
-            "summary": "Represents\u0020a\u0020Casbin\u0020permission\u0020definition\u0020for\u0020Role\u002DBased\u0020Access\u0020Control\u0020\u0028RBAC\u0029.",
+            "summary": "Represents\u0020a\u0020Casbin\u0020permission\u0020rule\u0020for\u0020Role\u002DBased\u0020Access\u0020Control\u0020\u0028RBAC\u0029.",
             "url": "classes/xyz-oihana-schema-auth-Permission.html"
         },                {
             "fqsen": "\\xyz\\oihana\\schema\\auth\\Permission\u003A\u003AtoArray\u0028\u0029",
             "name": "toArray",
             "summary": "Returns\u0020an\u0020array\u0020representation\u0020of\u0020the\u0020permission\u0020suitable\u0020for\u0020Casbin\u0020policies.",
             "url": "classes/xyz-oihana-schema-auth-Permission.html#method_toArray"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\auth\\Permission\u003A\u003AtoPolicy\u0028\u0029",
+            "name": "toPolicy",
+            "summary": "Returns\u0020an\u0020array\u0020ready\u0020for\u0020Casbin\u0020policies\u003A\u0020\u005Bsub,\u0020dom,\u0020obj,\u0020act,\u0020eft\u005D",
+            "url": "classes/xyz-oihana-schema-auth-Permission.html#method_toPolicy"
         },                {
             "fqsen": "\\xyz\\oihana\\schema\\auth\\Permission\u003A\u003ACONTEXT",
             "name": "CONTEXT",
@@ -7503,23 +7578,43 @@ Search.appendIndex(
         },                {
             "fqsen": "\\xyz\\oihana\\schema\\auth\\Permission\u003A\u003A\u0024action",
             "name": "action",
-            "summary": "The\u0020action\u0020that\u0020the\u0020permission\u0020allows.",
+            "summary": "The\u0020allowed\u0020action\u0028s\u0029\u0020for\u0020this\u0020permission.",
             "url": "classes/xyz-oihana-schema-auth-Permission.html#property_action"
         },                {
             "fqsen": "\\xyz\\oihana\\schema\\auth\\Permission\u003A\u003A\u0024domain",
             "name": "domain",
-            "summary": "The\u0020domain\u0020or\u0020resource\u0020on\u0020which\u0020the\u0020action\u0020is\u0020performed.",
+            "summary": "The\u0020domain\u0020or\u0020namespace\u0020where\u0020this\u0020permission\u0020applies.",
             "url": "classes/xyz-oihana-schema-auth-Permission.html#property_domain"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\auth\\Permission\u003A\u003A\u0024effect",
+            "name": "effect",
+            "summary": "The\u0020effect\u0020of\u0020this\u0020permission\u0020\u003A\u0020\u0027allow\u0027\u0020or\u0020\u0027deny\u0027.",
+            "url": "classes/xyz-oihana-schema-auth-Permission.html#property_effect"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\auth\\Permission\u003A\u003A\u0024object",
+            "name": "object",
+            "summary": "The\u0020resource\u0020object\u0020targeted\u0020by\u0020this\u0020permission.",
+            "url": "classes/xyz-oihana-schema-auth-Permission.html#property_object"
         },                {
             "fqsen": "\\xyz\\oihana\\schema\\auth\\Permission\u003A\u003A\u0024subject",
             "name": "subject",
-            "summary": "The\u0020subject\u0020\u0028user\u0020or\u0020role\u0029\u0020to\u0020whom\u0020the\u0020permission\u0020applies.",
+            "summary": "The\u0020subject\u0020\u0028permission\u0020or\u0020user\u0020or\u0020role\u0029\u0020to\u0020whom\u0020the\u0020permission\u0020applies.",
             "url": "classes/xyz-oihana-schema-auth-Permission.html#property_subject"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\auth\\Permission\u003A\u003A\u0024_effect",
+            "name": "_effect",
+            "summary": "The\u0020effect\u0020of\u0020this\u0020permission\u003A\u0020always\u0020\u0027allow\u0027\u0020or\u0020\u0027deny\u0027.",
+            "url": "classes/xyz-oihana-schema-auth-Permission.html#property__effect"
         },                {
             "fqsen": "\\xyz\\oihana\\schema\\auth\\Role",
             "name": "Role",
             "summary": "Represents\u0020a\u0020Role\u0020resource\u0020within\u0020an\u0020OAuth2\u0020and\u0020RBAC\u0020\u0028Role\u002DBased\u0020Access\u0020Control\u0029\u0020context.",
             "url": "classes/xyz-oihana-schema-auth-Role.html"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\auth\\Role\u003A\u003AtoPolicy\u0028\u0029",
+            "name": "toPolicy",
+            "summary": "Returns\u0020an\u0020array\u0020of\u0020policies\u0020ready\u0020to\u0020inject\u0020dans\u0020Casbin",
+            "url": "classes/xyz-oihana-schema-auth-Role.html#method_toPolicy"
         },                {
             "fqsen": "\\xyz\\oihana\\schema\\auth\\Role\u003A\u003ACONTEXT",
             "name": "CONTEXT",
@@ -7685,6 +7780,51 @@ Search.appendIndex(
             "name": "scopeHasPermission",
             "summary": "If\u0020this\u0020setting\u0020is\u0020enabled,\u0020the\u0020Permissions\u0020claim\u0020will\u0020be\u0020added\u0020to\u0020the\u0020access\u0020token.",
             "url": "classes/xyz-oihana-schema-auth-WebAPI.html#property_scopeHasPermission"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\constants\\CasbinPolicy",
+            "name": "CasbinPolicy",
+            "summary": "Defines\u0020the\u0020standard\u0020keys\u0020used\u0020in\u0020Casbin\u0020policy\u0020rules.",
+            "url": "classes/xyz-oihana-schema-constants-CasbinPolicy.html"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\constants\\CasbinPolicy\u003A\u003AACTION",
+            "name": "ACTION",
+            "summary": "The\u0020\u0027act\u0027\u0020policy\u0020key.",
+            "url": "classes/xyz-oihana-schema-constants-CasbinPolicy.html#constant_ACTION"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\constants\\CasbinPolicy\u003A\u003ADOMAIN",
+            "name": "DOMAIN",
+            "summary": "The\u0020\u0027dom\u0027\u0020policy\u0020key.",
+            "url": "classes/xyz-oihana-schema-constants-CasbinPolicy.html#constant_DOMAIN"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\constants\\CasbinPolicy\u003A\u003AEFFECT",
+            "name": "EFFECT",
+            "summary": "The\u0020\u0027eft\u0027\u0020policy\u0020key.",
+            "url": "classes/xyz-oihana-schema-constants-CasbinPolicy.html#constant_EFFECT"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\constants\\CasbinPolicy\u003A\u003AOBJECT",
+            "name": "OBJECT",
+            "summary": "The\u0020\u0027obj\u0027\u0020policy\u0020key.",
+            "url": "classes/xyz-oihana-schema-constants-CasbinPolicy.html#constant_OBJECT"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\constants\\CasbinPolicy\u003A\u003ASUBJECT",
+            "name": "SUBJECT",
+            "summary": "The\u0020\u0027sub\u0027\u0020policy\u0020key.",
+            "url": "classes/xyz-oihana-schema-constants-CasbinPolicy.html#constant_SUBJECT"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\constants\\Effect",
+            "name": "Effect",
+            "summary": "Defines\u0020the\u0020supported\u0020effects\u0020for\u0020Casbin\u0020permissions\u0020or\u0020RBAC\u0020rules.",
+            "url": "classes/xyz-oihana-schema-constants-Effect.html"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\constants\\Effect\u003A\u003AALLOW",
+            "name": "ALLOW",
+            "summary": "Grants\u0020access\u0020for\u0020the\u0020permission\u0020or\u0020policy.",
+            "url": "classes/xyz-oihana-schema-constants-Effect.html#constant_ALLOW"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\constants\\Effect\u003A\u003ADENY",
+            "name": "DENY",
+            "summary": "Denies\u0020access\u0020for\u0020the\u0020permission\u0020or\u0020policy.",
+            "url": "classes/xyz-oihana-schema-constants-Effect.html#constant_DENY"
         },                {
             "fqsen": "\\xyz\\oihana\\schema\\constants\\JWTAlgorithm",
             "name": "JWTAlgorithm",

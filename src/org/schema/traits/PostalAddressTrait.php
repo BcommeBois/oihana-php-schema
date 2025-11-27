@@ -26,6 +26,12 @@ trait PostalAddressTrait
     public ?string $addressRegion ;
 
     /**
+     * An address extension such as an apartment number, C/O or alternative name.
+     * @var null|string
+     */
+    public ?string $extendedAddress ;
+
+    /**
      * The post office box number for PO box addresses.
      * @var null|string
      */

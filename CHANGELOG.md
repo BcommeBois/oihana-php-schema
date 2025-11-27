@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   - Adds the WebApi (extends the schema.org definition), Permission, Role and User classes
 - Adds the JWTAlgorithm constant class
 - Adds ItemAvailability
+- Adds the PostalAddress::extendedAddress property (new standard property in https://schema.org/PostalAddress)
 
 ## [1.0.1] - 2025-10-30
 

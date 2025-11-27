@@ -131,20 +131,45 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/auth/Permission.php"><a href="files/src-xyz-oihana-schema-auth-permission.html"><abbr title="src/xyz/oihana/schema/auth/Permission.php">Permission.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">22</span>
+    <span class="phpdocumentor-element-found-in__line">51</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">Represents a Casbin permission definition for Role-Based Access Control (RBAC).</p>
+            <p class="phpdocumentor-summary">Represents a Casbin permission rule for Role-Based Access Control (RBAC).</p>
 
 
-    <section class="phpdocumentor-description"><p>This class encapsulates the core components of a Casbin policy:</p>
+    <section class="phpdocumentor-description"><p>A <code class="prettyprint">Permission</code> defines what a subject (user, role, or permission)
+is allowed or denied to do on a given resource within a specific domain.
+It is directly compatible with Casbin policy enforcement.</p>
+<h3>Components</h3>
 <ul>
-<li><code class="prettyprint">subject</code>: the user or role who performs the action</li>
-<li><code class="prettyprint">domain</code>: the resource or context where the action applies</li>
-<li><code class="prettyprint">action</code>: the operation allowed on the resource (e.g., 'read', 'write', 'delete')</li>
+<li><strong>subject</strong>: The entity performing the action (<code class="prettyprint">user:123</code>, <code class="prettyprint">role:admin</code>, <code class="prettyprint">perm:read:org</code>)</li>
+<li><strong>domain</strong>: The context or namespace for the permission (<code class="prettyprint">api.my_domain.tld</code>, <code class="prettyprint">my-app</code>)</li>
+<li><strong>object</strong>: The resource being accessed (<code class="prettyprint">/organizations</code>, <code class="prettyprint">/documents/:id</code>)</li>
+<li><strong>action</strong>: The allowed operations (<code class="prettyprint">GET</code>, <code class="prettyprint">POST</code>, <code class="prettyprint">PATCH|PUT</code>, etc.)</li>
+<li><strong>effect</strong>: Whether access is granted or denied (<code class="prettyprint">allow</code> or <code class="prettyprint">deny</code>)</li>
 </ul>
-<p>It provides a simple array representation to be compatible with Casbin policy enforcement.</p>
+<h3>Usage Example</h3>
+<pre class="prettyprint"><code class="language-php">use xyz\oihana\schema\auth\Permission;
+use xyz\oihana\schema\constants\Effect;
+
+$perm = new Permission
+([
+    'subject' =&gt; 'role:admin' ,
+    'domain'  =&gt; 'api.my-domain.tld' ,
+    'object'  =&gt; '/documents/:id' ,
+    'action'  =&gt; 'GET|POST' ,
+    'effect'  =&gt; Effect::ALLOW ,
+]);
+</code></pre>
+<h3>Notes</h3>
+<ul>
+<li>Multiple actions can be specified using the <code class="prettyprint">|</code> character.</li>
+<li>For REST APIs, consider normalizing objects with wildcards
+(e.g., <code class="prettyprint">/documents/*</code>) so that <code class="prettyprint">keyMatch2</code> in Casbin matches correctly.</li>
+<li>The effect is used to resolve conflicts when multiple rules match:
+an <code class="prettyprint">allow</code> can be overridden by a <code class="prettyprint">deny</code> depending on your <code class="prettyprint">policy_effect</code>.</li>
+</ul>
 </section>
 
 
@@ -155,11 +180,20 @@
     </h5>
     <dl class="phpdocumentor-tag-list">
                                     <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">category</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><p>Security / RBAC</p>
+</section>
+
+                                    </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
                     <span class="phpdocumentor-tag__name">author</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
                                                                                 
-                                                 <section class="phpdocumentor-description"><p>Marc Alcaraz (ekameleon)</p>
+                                                 <section class="phpdocumentor-description"><p>Marc Alcaraz</p>
 </section>
 
                                     </dd>
@@ -173,10 +207,8 @@
                                     </dd>
                                             </dl>
 
-
-
-
-
+    
+    
 <h3 id="toc">
     Table of Contents
     <a href="classes/xyz-oihana-schema-auth-Permission.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
@@ -251,7 +283,7 @@
     <span>
                         &nbsp;: string|null            </span>
 </dt>
-<dd>The action that the permission allows.</dd>
+<dd>The allowed action(s) for this permission.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_active">$active</a>
@@ -300,7 +332,14 @@
     <span>
                         &nbsp;: string|null            </span>
 </dt>
-<dd>The domain or resource on which the action is performed.</dd>
+<dd>The domain or namespace where this permission applies.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/xyz-oihana-schema-auth-Permission.html#property_effect">$effect</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>The effect of this permission : &#039;allow&#039; or &#039;deny&#039;.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_hasPart">$hasPart</a>
@@ -359,6 +398,13 @@
 <dd>The name of the item.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/xyz-oihana-schema-auth-Permission.html#property_object">$object</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>The resource object targeted by this permission.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_publisher">$publisher</a>
     <span>
                         &nbsp;: string|array&lt;string|int, string|<a href="classes/org-schema-Person.html"><abbr title="\org\schema\Person">Person</abbr></a>|<a href="classes/org-schema-Organization.html"><abbr title="\org\schema\Organization">Organization</abbr></a>&gt;|<a href="classes/org-schema-Person.html"><abbr title="\org\schema\Person">Person</abbr></a>|<a href="classes/org-schema-Organization.html"><abbr title="\org\schema\Organization">Organization</abbr></a>|null            </span>
@@ -370,7 +416,7 @@
     <span>
                         &nbsp;: string|null            </span>
 </dt>
-<dd>The subject (user or role) to whom the permission applies.</dd>
+<dd>The subject (permission or user or role) to whom the permission applies.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_url">$url</a>
@@ -378,6 +424,13 @@
                         &nbsp;: int|string|null            </span>
 </dt>
 <dd>URL of the item.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/xyz-oihana-schema-auth-Permission.html#property__effect">$_effect</a>
+    <span>
+                        &nbsp;: string            </span>
+</dt>
+<dd>The effect of this permission: always &#039;allow&#039; or &#039;deny&#039;.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/org-schema-traits-ThingTrait.html#property_atContext">$atContext</a>
@@ -423,6 +476,13 @@
 <dd>Returns an array representation of the permission suitable for Casbin policies.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/xyz-oihana-schema-auth-Permission.html#method_toPolicy">toPolicy()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
+</dt>
+<dd>Returns an array ready for Casbin policies: [sub, dom, obj, act, eft]</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/org-schema-traits-ThingTrait.html#method_withAtContext">withAtContext()</a>
     <span>
                                 &nbsp;: $this    </span>
@@ -464,7 +524,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/auth/Permission.php"><a href="files/src-xyz-oihana-schema-auth-permission.html"><abbr title="src/xyz/oihana/schema/auth/Permission.php">Permission.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">27</span>
+    <span class="phpdocumentor-element-found-in__line">56</span>
 
     </aside>
 
@@ -483,9 +543,8 @@
     
     
 
-    
-
-</article>
+        
+    </article>
             </section>
 
         
@@ -529,9 +588,8 @@
     
     
 
-    
-
-    
+        
+        
 
 </article>
                     <article
@@ -568,9 +626,8 @@
     
     
 
-    
-
-    
+        
+        
 
 </article>
                     <article
@@ -607,9 +664,8 @@
     
     
 
-    
-
-    
+        
+        
 
 </article>
                     <article
@@ -646,9 +702,8 @@
     
     
 
-    
-
-    
+        
+        
 
 </article>
                     <article
@@ -685,9 +740,8 @@
     
     
 
-    
-
-    
+        
+        
 
 </article>
                     <article
@@ -707,28 +761,31 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/auth/Permission.php"><a href="files/src-xyz-oihana-schema-auth-permission.html"><abbr title="src/xyz/oihana/schema/auth/Permission.php">Permission.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">36</span>
+    <span class="phpdocumentor-element-found-in__line">67</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">The action that the permission allows.</p>
+        <p class="phpdocumentor-summary">The allowed action(s) for this permission.</p>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__type">string|null</span>
     <span class="phpdocumentor-signature__name">$action</span>
-     = <span class="phpdocumentor-signature__default-value">null</span></code>
+    </code>
 
-        <section class="phpdocumentor-description"><p>Examples: <code class="prettyprint">'read'</code>, <code class="prettyprint">'write'</code>, <code class="prettyprint">'delete'</code>.</p>
+        <section class="phpdocumentor-description"><p>Examples:</p>
+<ul>
+<li>Basic actions : <code class="prettyprint">GET</code></li>
+<li>Multiple actions : <code class="prettyprint">GET|PATCH|POST</code></li>
+</ul>
 </section>
 
     
     
 
-    
-
-    
+        
+        
 
 </article>
                     <article
@@ -765,9 +822,8 @@
     
     
 
-    
-
-    
+        
+        
 
 </article>
                     <article
@@ -804,9 +860,8 @@
     
     
 
-    
-
-    
+        
+        
 
 </article>
                     <article
@@ -843,9 +898,8 @@
     
     
 
-    
-
-    
+        
+        
 
 </article>
                     <article
@@ -882,9 +936,8 @@
     
     
 
-    
-
-    
+        
+        
 
 </article>
                     <article
@@ -921,9 +974,8 @@
     
     
 
-    
-
-    
+        
+        
 
 </article>
                     <article
@@ -960,9 +1012,8 @@
     
     
 
-    
-
-    
+        
+        
 
 </article>
                     <article
@@ -982,26 +1033,100 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/auth/Permission.php"><a href="files/src-xyz-oihana-schema-auth-permission.html"><abbr title="src/xyz/oihana/schema/auth/Permission.php">Permission.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">45</span>
+    <span class="phpdocumentor-element-found-in__line">78</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">The domain or resource on which the action is performed.</p>
+        <p class="phpdocumentor-summary">The domain or namespace where this permission applies.</p>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__type">string|null</span>
     <span class="phpdocumentor-signature__name">$domain</span>
-     = <span class="phpdocumentor-signature__default-value">null</span></code>
+    </code>
 
-        <section class="phpdocumentor-description"><p>Examples: <code class="prettyprint">'project'</code>, <code class="prettyprint">'document'</code>, <code class="prettyprint">'api'</code>.</p>
+        <section class="phpdocumentor-description"><p>Examples:</p>
+<ul>
+<li>API         : <code class="prettyprint">api.my_domain.tld</code></li>
+<li>Application : 'my-app'</li>
+</ul>
 </section>
 
     
     
 
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                            -virtual        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_effect">
+        $effect
+        <a href="classes/xyz-oihana-schema-auth-Permission.html#property_effect" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                    <small class="phpdocumentor-element__modifier">virtual</small>        </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/auth/Permission.php"><a href="files/src-xyz-oihana-schema-auth-permission.html"><abbr title="src/xyz/oihana/schema/auth/Permission.php">Permission.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">88</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The effect of this permission : &#039;allow&#039; or &#039;deny&#039;.</p>
+
     
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$effect</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Used to determine whether the access request is approved
+when multiple policy rules match.</p>
+</section>
+
+    
+    
+
+        
+            <h5>Hooks</h5>
+            <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__type">string|null</span>
+        <span class="phpdocumentor-signature__name">get</span>
+</code>
+
+
+
+
+
+
+    
+    
+
+
+            <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__name">set</span>
+</code>
+
+
+
+
+
+
+    
+    
+
 
     
 
@@ -1040,9 +1165,8 @@
     
     
 
-    
-
-    
+        
+        
 
 </article>
                     <article
@@ -1079,9 +1203,8 @@
     
     
 
-    
-
-    
+        
+        
 
 </article>
                     <article
@@ -1118,9 +1241,8 @@
     
     
 
-    
-
-    
+        
+        
 
 </article>
                     <article
@@ -1157,9 +1279,8 @@
     
     
 
-    
-
-    
+        
+        
 
 </article>
                     <article
@@ -1196,9 +1317,8 @@
     
     
 
-    
-
-    
+        
+        
 
 </article>
                     <article
@@ -1235,9 +1355,8 @@
     
     
 
-    
-
-    
+        
+        
 
 </article>
                     <article
@@ -1274,9 +1393,8 @@
     
     
 
-    
-
-    
+        
+        
 
 </article>
                     <article
@@ -1313,9 +1431,52 @@
     
     
 
-    
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_object">
+        $object
+        <a href="classes/xyz-oihana-schema-auth-Permission.html#property_object" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/auth/Permission.php"><a href="files/src-xyz-oihana-schema-auth-permission.html"><abbr title="src/xyz/oihana/schema/auth/Permission.php">Permission.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">106</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The resource object targeted by this permission.</p>
 
     
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$object</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Examples:</p>
+<ul>
+<li><code class="prettyprint">/organizations</code></li>
+<li><code class="prettyprint">/documents/:id</code></li>
+</ul>
+</section>
+
+    
+    
+
+        
+        
 
 </article>
                     <article
@@ -1352,9 +1513,8 @@
     
     
 
-    
-
-    
+        
+        
 
 </article>
                     <article
@@ -1374,28 +1534,32 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/auth/Permission.php"><a href="files/src-xyz-oihana-schema-auth-permission.html"><abbr title="src/xyz/oihana/schema/auth/Permission.php">Permission.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">54</span>
+    <span class="phpdocumentor-element-found-in__line">118</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">The subject (user or role) to whom the permission applies.</p>
+        <p class="phpdocumentor-summary">The subject (permission or user or role) to whom the permission applies.</p>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__type">string|null</span>
     <span class="phpdocumentor-signature__name">$subject</span>
-     = <span class="phpdocumentor-signature__default-value">null</span></code>
+    </code>
 
-        <section class="phpdocumentor-description"><p>Examples: <code class="prettyprint">'admin'</code>, <code class="prettyprint">'user:123'</code>.</p>
+        <section class="phpdocumentor-description"><p>Examples:</p>
+<ul>
+<li>Permission : <code class="prettyprint">perm:organizations:read</code></li>
+<li>Role       : <code class="prettyprint">role:superadmin</code></li>
+<li>User       : <code class="prettyprint">user:123</code></li>
+</ul>
 </section>
 
     
     
 
-    
-
-    
+        
+        
 
 </article>
                     <article
@@ -1432,9 +1596,46 @@
     
     
 
-    
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property__effect">
+        $_effect
+        <a href="classes/xyz-oihana-schema-auth-Permission.html#property__effect" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/auth/Permission.php"><a href="files/src-xyz-oihana-schema-auth-permission.html"><abbr title="src/xyz/oihana/schema/auth/Permission.php">Permission.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">155</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The effect of this permission: always &#039;allow&#039; or &#039;deny&#039;.</p>
 
     
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">$_effect</span>
+     = <span class="phpdocumentor-signature__default-value">\xyz\oihana\schema\constants\Effect::ALLOW</span></code>
+
+    
+    
+    
+
+        
+        
 
 </article>
                     <article
@@ -1473,9 +1674,8 @@
     
     
 
-    
-
-    
+        
+        
 
 </article>
                     <article
@@ -1514,9 +1714,8 @@
     
     
 
-    
-
-    
+        
+        
 
 </article>
             </section>
@@ -1549,7 +1748,7 @@
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;|object|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$init</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__type">array&lt;string|int, mixed&gt;|object|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$init</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1561,9 +1760,9 @@ without manually setting each property.</p>
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$init</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;|object|null</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+                <span class="phpdocumentor-argument-list__argument__name">$init</span>
+                : <span class="phpdocumentor-argument-list__argument__type">array&lt;string|int, mixed&gt;|object|null</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">null</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>A data array or object used to initialize the instance.
 Keys must match public property names.</p>
@@ -1608,8 +1807,8 @@ echo $person-&gt;name; // Outputs: Jane Doe
                                     </dd>
                                             </dl>
 
+        
     
-
     
 </article>
                     <article
@@ -1690,8 +1889,8 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                                     </dd>
                                             </dl>
 
+        
     
-
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
@@ -1716,7 +1915,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/auth/Permission.php"><a href="files/src-xyz-oihana-schema-auth-permission.html"><abbr title="src/xyz/oihana/schema/auth/Permission.php">Permission.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">61</span>
+    <span class="phpdocumentor-element-found-in__line">125</span>
 
     </aside>
 
@@ -1733,11 +1932,50 @@ echo json_encode($person, JSON_PRETTY_PRINT);
     
     
 
+        
     
-
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">array{subject: string|null, domain: string|null, action: string|null}</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_toPolicy">
+        toPolicy()
+        <a href="classes/xyz-oihana-schema-auth-Permission.html#method_toPolicy" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/auth/Permission.php"><a href="files/src-xyz-oihana-schema-auth-permission.html"><abbr title="src/xyz/oihana/schema/auth/Permission.php">Permission.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">140</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns an array ready for Casbin policies: [sub, dom, obj, act, eft]</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">toPolicy</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
             </section>
 
 </article>
@@ -1755,7 +1993,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">152</span>
+    <span class="phpdocumentor-element-found-in__line">153</span>
 
     </aside>
 
@@ -1763,7 +2001,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">withAtContext</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$context</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">$this</span></code>
+                    <span class="phpdocumentor-signature__name">withAtContext</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$context</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">$this</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1774,18 +2012,20 @@ echo json_encode($person, JSON_PRETTY_PRINT);
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$context</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                <span class="phpdocumentor-argument-list__argument__name">$context</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Optional JSON-LD context.</p>
+</section>
+
             </dd>
             </dl>
 
     
 
+        
     
-
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">$this</span>
@@ -1806,7 +2046,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">182</span>
+    <span class="phpdocumentor-element-found-in__line">189</span>
 
     </aside>
 
@@ -1814,7 +2054,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">withAtType</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$type</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">$this</span></code>
+                    <span class="phpdocumentor-signature__name">withAtType</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$type</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">$this</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1825,18 +2065,20 @@ echo json_encode($person, JSON_PRETTY_PRINT);
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$type</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                <span class="phpdocumentor-argument-list__argument__name">$type</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Optional JSON-LD type</p>
+</section>
+
             </dd>
             </dl>
 
     
 
+        
     
-
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">$this</span>
@@ -1857,7 +2099,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">167</span>
+    <span class="phpdocumentor-element-found-in__line">168</span>
 
     </aside>
 
@@ -1865,7 +2107,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">withJSONLDMeta</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$atType</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$atContext</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">$this</span></code>
+                    <span class="phpdocumentor-signature__name">withJSONLDMeta</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$atType</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$atContext</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">$this</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1876,18 +2118,18 @@ echo json_encode($person, JSON_PRETTY_PRINT);
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$atType</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+                <span class="phpdocumentor-argument-list__argument__name">$atType</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string|null</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">null</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>Optional JSON-LD type</p>
 </section>
 
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$atContext</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+                <span class="phpdocumentor-argument-list__argument__name">$atContext</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string|null</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">null</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>Optional JSON-LD context</p>
 </section>
@@ -1897,8 +2139,8 @@ echo json_encode($person, JSON_PRETTY_PRINT);
 
     
 
+        
     
-
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">$this</span>
@@ -2040,6 +2282,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_description">$description</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_disambiguatingDescription">$disambiguatingDescription</a></li>
                                                     <li class=""><a href="classes/xyz-oihana-schema-auth-Permission.html#property_domain">$domain</a></li>
+                                                    <li class=""><a href="classes/xyz-oihana-schema-auth-Permission.html#property_effect">$effect</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_hasPart">$hasPart</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_id">$id</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_identifier">$identifier</a></li>
@@ -2048,9 +2291,11 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_license">$license</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_modified">$modified</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_name">$name</a></li>
+                                                    <li class=""><a href="classes/xyz-oihana-schema-auth-Permission.html#property_object">$object</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_publisher">$publisher</a></li>
                                                     <li class=""><a href="classes/xyz-oihana-schema-auth-Permission.html#property_subject">$subject</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_url">$url</a></li>
+                                                    <li class=""><a href="classes/xyz-oihana-schema-auth-Permission.html#property__effect">$_effect</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-ThingTrait.html#property_atContext">$atContext</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-ThingTrait.html#property_atType">$atType</a></li>
                                             </ul>
@@ -2062,6 +2307,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                                             <li class=""><a href="classes/org-schema-traits-ThingTrait.html#method___construct">__construct()</a></li>
                                             <li class=""><a href="classes/org-schema-traits-ThingTrait.html#method_jsonSerialize">jsonSerialize()</a></li>
                                             <li class=""><a href="classes/xyz-oihana-schema-auth-Permission.html#method_toArray">toArray()</a></li>
+                                            <li class=""><a href="classes/xyz-oihana-schema-auth-Permission.html#method_toPolicy">toPolicy()</a></li>
                                             <li class=""><a href="classes/org-schema-traits-ThingTrait.html#method_withAtContext">withAtContext()</a></li>
                                             <li class=""><a href="classes/org-schema-traits-ThingTrait.html#method_withAtType">withAtType()</a></li>
                                             <li class=""><a href="classes/org-schema-traits-ThingTrait.html#method_withJSONLDMeta">withJSONLDMeta()</a></li>
