@@ -361,6 +361,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/org-schema-constants-traits-Edge.html"
         },                {
+            "fqsen": "\\org\\schema\\constants\\traits\\EducationalOccupationCredential",
+            "name": "EducationalOccupationCredential",
+            "summary": "",
+            "url": "classes/org-schema-constants-traits-EducationalOccupationCredential.html"
+        },                {
             "fqsen": "\\org\\schema\\constants\\traits\\EndorsementRating",
             "name": "EndorsementRating",
             "summary": "",
@@ -950,6 +955,36 @@ Search.appendIndex(
             "name": "Drawing",
             "summary": "A\u0020picture\u0020or\u0020diagram\u0020made\u0020with\u0020a\u0020pencil,\u0020pen,\u0020or\u0020crayon\u0020rather\u0020than\u0020paint.",
             "url": "classes/org-schema-creativeWork-Drawing.html"
+        },                {
+            "fqsen": "\\org\\schema\\creativeWork\\EducationalOccupationalCredential",
+            "name": "EducationalOccupationalCredential",
+            "summary": "An\u0020educational\u0020or\u0020occupational\u0020credential.\u0020A\u0020diploma,\u0020academic\u0020degree,\u0020certification,\u0020qualification,\u0020badge,\u0020etc.,\nthat\u0020may\u0020be\u0020awarded\u0020to\u0020a\u0020person\u0020or\u0020other\u0020entity\u0020that\u0020meets\u0020the\u0020requirements\u0020defined\u0020by\u0020the\u0020credentialer.",
+            "url": "classes/org-schema-creativeWork-EducationalOccupationalCredential.html"
+        },                {
+            "fqsen": "\\org\\schema\\creativeWork\\EducationalOccupationalCredential\u003A\u003A\u0024competencyRequired",
+            "name": "competencyRequired",
+            "summary": "Knowledge,\u0020skill,\u0020ability\u0020or\u0020personal\u0020attribute\u0020that\u0020must\u0020be\u0020demonstrated\u0020by\u0020a\u0020person\u0020or\u0020other\u0020entity\u0020in\u0020order\nto\u0020do\u0020something\u0020such\u0020as\u0020earn\u0020an\u0020Educational\u0020Occupational\u0020Credential\u0020or\u0020understand\u0020a\u0020LearningResource.",
+            "url": "classes/org-schema-creativeWork-EducationalOccupationalCredential.html#property_competencyRequired"
+        },                {
+            "fqsen": "\\org\\schema\\creativeWork\\EducationalOccupationalCredential\u003A\u003A\u0024credentialCategory",
+            "name": "credentialCategory",
+            "summary": "The\u0020category\u0020or\u0020type\u0020of\u0020credential\u0020being\u0020described,\nfor\u0020example\u0020\u0022degree\u201D,\u0020\u201Ccertificate\u201D,\u0020\u201Cbadge\u201D,\u0020or\u0020more\u0020specific\u0020term.",
+            "url": "classes/org-schema-creativeWork-EducationalOccupationalCredential.html#property_credentialCategory"
+        },                {
+            "fqsen": "\\org\\schema\\creativeWork\\EducationalOccupationalCredential\u003A\u003A\u0024recognizedBy",
+            "name": "recognizedBy",
+            "summary": "An\u0020organization\u0020that\u0020acknowledges\u0020the\u0020validity,\u0020value\u0020or\u0020utility\u0020of\u0020a\u0020credential.",
+            "url": "classes/org-schema-creativeWork-EducationalOccupationalCredential.html#property_recognizedBy"
+        },                {
+            "fqsen": "\\org\\schema\\creativeWork\\EducationalOccupationalCredential\u003A\u003A\u0024validFor",
+            "name": "validFor",
+            "summary": "The\u0020duration\u0020of\u0020validity\u0020of\u0020a\u0020permit\u0020or\u0020similar\u0020thing.",
+            "url": "classes/org-schema-creativeWork-EducationalOccupationalCredential.html#property_validFor"
+        },                {
+            "fqsen": "\\org\\schema\\creativeWork\\EducationalOccupationalCredential\u003A\u003A\u0024validIn",
+            "name": "validIn",
+            "summary": "The\u0020geographic\u0020area\u0020where\u0020the\u0020item\u0020is\u0020valid.\u0020Applies\u0020for\u0020example\u0020to\u0020a\u0020Permit,\u0020a\u0020Certification,\u0020or\u0020an\u0020EducationalOccupationalCredential.",
+            "url": "classes/org-schema-creativeWork-EducationalOccupationalCredential.html#property_validIn"
         },                {
             "fqsen": "\\org\\schema\\creativeWork\\enumerations\\AudiobookFormat",
             "name": "AudiobookFormat",
@@ -3921,15 +3956,20 @@ Search.appendIndex(
             "summary": "The\u0020brand\u0028s\u0029\u0020associated\u0020with\u0020a\u0020product\u0020or\u0020service,\u0020or\u0020the\u0020brand\u0028s\u0029\u0020maintained\u0020by\u0020an\u0020organization\u0020or\u0020business\u0020person.",
             "url": "classes/org-schema-Organization.html#property_brand"
         },                {
-            "fqsen": "\\org\\schema\\Organization\u003A\u003A\u0024hasCertification",
-            "name": "hasCertification",
-            "summary": "Certification\u0020information\u0020about\u0020a\u0020product,\u0020organization,\u0020service,\u0020place,\u0020or\u0020person.",
-            "url": "classes/org-schema-Organization.html#property_hasCertification"
+            "fqsen": "\\org\\schema\\Organization\u003A\u003A\u0024companyRegistration",
+            "name": "companyRegistration",
+            "summary": "The\u0020official\u0020registration\u0020number\u0020of\u0020a\u0020business\u0020including\u0020the\u0020organization\u0020that\u0020issued\u0020it\u0020such\u0020as\u0020Company\u0020House\u0020or\u0020Chamber\u0020of\u0020Commerce.",
+            "url": "classes/org-schema-Organization.html#property_companyRegistration"
         },                {
             "fqsen": "\\org\\schema\\Organization\u003A\u003A\u0024contactPoint",
             "name": "contactPoint",
             "summary": "A\u0020contact\u0020point\u0020for\u0020a\u0020person\u0020or\u0020organization.",
             "url": "classes/org-schema-Organization.html#property_contactPoint"
+        },                {
+            "fqsen": "\\org\\schema\\Organization\u003A\u003A\u0024correctionsPolicy",
+            "name": "correctionsPolicy",
+            "summary": "For\u0020an\u0020Organization\u0020\u0028e.g.\u0020NewsMediaOrganization\u0029,\u0020a\u0020statement\u0020describing\u0020\u0028in\u0020news\u0020media,\u0020the\u0020newsroom\u2019s\u0029\ndisclosure\u0020and\u0020correction\u0020policy\u0020for\u0020errors.",
+            "url": "classes/org-schema-Organization.html#property_correctionsPolicy"
         },                {
             "fqsen": "\\org\\schema\\Organization\u003A\u003A\u0024department",
             "name": "department",
@@ -3941,6 +3981,16 @@ Search.appendIndex(
             "summary": "The\u0020date\u0020that\u0020this\u0020organization\u0020was\u0020dissolved.",
             "url": "classes/org-schema-Organization.html#property_dissolutionDate"
         },                {
+            "fqsen": "\\org\\schema\\Organization\u003A\u003A\u0024diversityPolicy",
+            "name": "diversityPolicy",
+            "summary": "Statement\u0020on\u0020diversity\u0020policy\u0020by\u0020an\u0020Organization\u0020e.g.\u0020a\u0020NewsMediaOrganization.",
+            "url": "classes/org-schema-Organization.html#property_diversityPolicy"
+        },                {
+            "fqsen": "\\org\\schema\\Organization\u003A\u003A\u0024diversityStaffingReport",
+            "name": "diversityStaffingReport",
+            "summary": "For\u0020an\u0020Organization\u0020\u0028often\u0020but\u0020not\u0020necessarily\u0020a\u0020NewsMediaOrganization\u0029,\u0020a\u0020report\u0020on\u0020staffing\u0020diversity\u0020issues.",
+            "url": "classes/org-schema-Organization.html#property_diversityStaffingReport"
+        },                {
             "fqsen": "\\org\\schema\\Organization\u003A\u003A\u0024duns",
             "name": "duns",
             "summary": "The\u0020Dun\u0020\u0026\u0020Bradstreet\u0020DUNS\u0020number\u0020for\u0020identifying\u0020an\u0020organization\u0020or\u0020business\u0020person.",
@@ -3951,10 +4001,15 @@ Search.appendIndex(
             "summary": "The\u0020Email\u0020address.",
             "url": "classes/org-schema-Organization.html#property_email"
         },                {
-            "fqsen": "\\org\\schema\\Organization\u003A\u003A\u0024employees",
-            "name": "employees",
-            "summary": "The\u0020employees\u0020of\u0020the\u0020organization",
-            "url": "classes/org-schema-Organization.html#property_employees"
+            "fqsen": "\\org\\schema\\Organization\u003A\u003A\u0024employee",
+            "name": "employee",
+            "summary": "Someone\u0020working\u0020for\u0020this\u0020organization.",
+            "url": "classes/org-schema-Organization.html#property_employee"
+        },                {
+            "fqsen": "\\org\\schema\\Organization\u003A\u003A\u0024ethicsPolicy",
+            "name": "ethicsPolicy",
+            "summary": "Statement\u0020about\u0020ethics\u0020policy,\u0020e.g.\u0020of\u0020a\u0020NewsMediaOrganization\u0020regarding\u0020journalistic\u0020and\u0020publishing\u0020practices,\nor\u0020of\u0020a\u0020Restaurant,\u0020a\u0020page\u0020describing\u0020food\u0020source\u0020policies.",
+            "url": "classes/org-schema-Organization.html#property_ethicsPolicy"
         },                {
             "fqsen": "\\org\\schema\\Organization\u003A\u003A\u0024event",
             "name": "event",
@@ -3981,6 +4036,46 @@ Search.appendIndex(
             "summary": "The\u0020place\u0020where\u0020the\u0020Organization\u0020was\u0020founded.",
             "url": "classes/org-schema-Organization.html#property_foundingLocation"
         },                {
+            "fqsen": "\\org\\schema\\Organization\u003A\u003A\u0024funder",
+            "name": "funder",
+            "summary": "A\u0020person\u0020or\u0020organization\u0020that\u0020supports\u0020\u0028sponsors\u0029\u0020something\u0020through\u0020some\u0020kind\u0020of\u0020financial\u0020contribution.",
+            "url": "classes/org-schema-Organization.html#property_funder"
+        },                {
+            "fqsen": "\\org\\schema\\Organization\u003A\u003A\u0024funding",
+            "name": "funding",
+            "summary": "A\u0020Grant\u0020that\u0020directly\u0020or\u0020indirectly\u0020provide\u0020funding\u0020or\u0020sponsorship\u0020for\u0020this\u0020item.",
+            "url": "classes/org-schema-Organization.html#property_funding"
+        },                {
+            "fqsen": "\\org\\schema\\Organization\u003A\u003A\u0024globalLocationNumber",
+            "name": "globalLocationNumber",
+            "summary": "The\u0020Global\u0020Location\u0020Number\u0020\u0028GLN,\u0020sometimes\u0020also\u0020referred\u0020to\u0020as\u0020International\u0020Location\u0020Number\u0020or\u0020ILN\u0029\nof\u0020the\u0020respective\u0020organization,\u0020person,\u0020or\u0020place.",
+            "url": "classes/org-schema-Organization.html#property_globalLocationNumber"
+        },                {
+            "fqsen": "\\org\\schema\\Organization\u003A\u003A\u0024hasCertification",
+            "name": "hasCertification",
+            "summary": "Certification\u0020information\u0020about\u0020a\u0020product,\u0020organization,\u0020service,\u0020place,\u0020or\u0020person.",
+            "url": "classes/org-schema-Organization.html#property_hasCertification"
+        },                {
+            "fqsen": "\\org\\schema\\Organization\u003A\u003A\u0024hasCredential",
+            "name": "hasCredential",
+            "summary": "A\u0020credential\u0020awarded\u0020to\u0020the\u0020Person\u0020or\u0020Organization.",
+            "url": "classes/org-schema-Organization.html#property_hasCredential"
+        },                {
+            "fqsen": "\\org\\schema\\Organization\u003A\u003A\u0024hasGS1DigitalLink",
+            "name": "hasGS1DigitalLink",
+            "summary": "The\u0020GS1\u0020digital\u0020link\u0020associated\u0020with\u0020the\u0020object.\u0020This\u0020URL\u0020should\u0020conform\nto\u0020the\u0020particular\u0020requirements\u0020of\u0020digital\u0020links.",
+            "url": "classes/org-schema-Organization.html#property_hasGS1DigitalLink"
+        },                {
+            "fqsen": "\\org\\schema\\Organization\u003A\u003A\u0024hasMemberProgram",
+            "name": "hasMemberProgram",
+            "summary": "MemberProgram\u0020offered\u0020by\u0020an\u0020Organization,\u0020for\u0020example\u0020an\u0020eCommerce\u0020merchant\u0020or\u0020an\u0020airline.",
+            "url": "classes/org-schema-Organization.html#property_hasMemberProgram"
+        },                {
+            "fqsen": "\\org\\schema\\Organization\u003A\u003A\u0024hasMerchantReturnPolicy",
+            "name": "hasMerchantReturnPolicy",
+            "summary": "Specifies\u0020a\u0020MerchantReturnPolicy\u0020that\u0020may\u0020be\u0020applicable.",
+            "url": "classes/org-schema-Organization.html#property_hasMerchantReturnPolicy"
+        },                {
             "fqsen": "\\org\\schema\\Organization\u003A\u003A\u0024hasOfferCatalog",
             "name": "hasOfferCatalog",
             "summary": "Indicates\u0020an\u0020OfferCatalog\u0020listing\u0020for\u0020this\u0020Organization,\u0020Person,\u0020or\u0020Service.",
@@ -4006,6 +4101,11 @@ Search.appendIndex(
             "summary": "The\u0020number\u0020of\u0020interactions\u0020for\u0020the\u0020CreativeWork\u0020using\u0020the\u0020WebSite\u0020or\u0020SoftwareApplication.",
             "url": "classes/org-schema-Organization.html#property_interactionStatistic"
         },                {
+            "fqsen": "\\org\\schema\\Organization\u003A\u003A\u0024isicV4",
+            "name": "isicV4",
+            "summary": "The\u0020International\u0020Standard\u0020of\u0020Industrial\u0020Classification\u0020of\u0020All\u0020Economic\u0020Activities\u0020\u0028ISIC\u0029,\u0020Revision\u00204\u0020code\nfor\u0020a\u0020particular\u0020organization,\u0020business\u0020person,\u0020or\u0020place.",
+            "url": "classes/org-schema-Organization.html#property_isicV4"
+        },                {
             "fqsen": "\\org\\schema\\Organization\u003A\u003A\u0024iso6523Code",
             "name": "iso6523Code",
             "summary": "An\u0020organization\u0020identifier\u0020as\u0020defined\u0020in\u0020ISO\u00206523\u0028\u002D1\u0029.\u0020The\u0020identifier\u0020should\u0020be\u0020in\u0020the\u0020XXXX\u003AYYYYYY\u003AZZZ\u0020or\u0020XXXX\u003AYYYYYYformat.",
@@ -4016,6 +4116,21 @@ Search.appendIndex(
             "summary": "Keywords\u0020or\u0020tags\u0020used\u0020to\u0020describe\u0020some\u0020item.\u0020Multiple\u0020textual\u0020entries\u0020in\u0020a\u0020keywords\u0020list\u0020are\u0020typically\u0020delimited\u0020by\u0020commas,\u0020or\u0020by\u0020repeating\u0020the\u0020property.",
             "url": "classes/org-schema-Organization.html#property_keywords"
         },                {
+            "fqsen": "\\org\\schema\\Organization\u003A\u003A\u0024knowsAbout",
+            "name": "knowsAbout",
+            "summary": "Of\u0020a\u0020Person,\u0020and\u0020less\u0020typically\u0020of\u0020an\u0020Organization,\u0020to\u0020indicate\u0020a\u0020topic\u0020that\u0020is\u0020known\nabout\u0020\u002D\u0020suggesting\u0020possible\u0020expertise\u0020but\u0020not\u0020implying\u0020it.",
+            "url": "classes/org-schema-Organization.html#property_knowsAbout"
+        },                {
+            "fqsen": "\\org\\schema\\Organization\u003A\u003A\u0024knowsLanguage",
+            "name": "knowsLanguage",
+            "summary": "Of\u0020a\u0020Person,\u0020and\u0020less\u0020typically\u0020of\u0020an\u0020Organization,\u0020to\u0020indicate\u0020a\u0020known\u0020language.",
+            "url": "classes/org-schema-Organization.html#property_knowsLanguage"
+        },                {
+            "fqsen": "\\org\\schema\\Organization\u003A\u003A\u0024legalAddress",
+            "name": "legalAddress",
+            "summary": "The\u0020legal\u0020address\u0020of\u0020an\u0020organization\u0020which\u0020acts\u0020as\u0020the\u0020officially\u0020registered\u0020address\nused\u0020for\u0020legal\u0020and\u0020tax\u0020purposes.",
+            "url": "classes/org-schema-Organization.html#property_legalAddress"
+        },                {
             "fqsen": "\\org\\schema\\Organization\u003A\u003A\u0024legalName",
             "name": "legalName",
             "summary": "The\u0020legal\u0020name\u0020of\u0020the\u0020organization",
@@ -4025,6 +4140,11 @@ Search.appendIndex(
             "name": "legalForm",
             "summary": "Legal\u0020form\u0020of\u0020the\u0020organization.",
             "url": "classes/org-schema-Organization.html#property_legalForm"
+        },                {
+            "fqsen": "\\org\\schema\\Organization\u003A\u003A\u0024legalRepresentative",
+            "name": "legalRepresentative",
+            "summary": "One\u0020or\u0020multiple\u0020persons\u0020who\u0020represent\u0020this\u0020organization\u0020legally\u0020such\u0020as\u0020CEO\u0020or\u0020sole\u0020administrator.",
+            "url": "classes/org-schema-Organization.html#property_legalRepresentative"
         },                {
             "fqsen": "\\org\\schema\\Organization\u003A\u003A\u0024leiCode",
             "name": "leiCode",
@@ -4135,6 +4255,11 @@ Search.appendIndex(
             "name": "telephone",
             "summary": "The\u0020telephone\u0020number.",
             "url": "classes/org-schema-Organization.html#property_telephone"
+        },                {
+            "fqsen": "\\org\\schema\\Organization\u003A\u003A\u0024unnamedSourcesPolicy",
+            "name": "unnamedSourcesPolicy",
+            "summary": "For\u0020an\u0020Organization\u0020\u0028typically\u0020a\u0020NewsMediaOrganization\u0029,\u0020a\u0020statement\u0020about\u0020policy\non\u0020use\u0020of\u0020unnamed\u0020sources\u0020and\u0020the\u0020decision\u0020process\u0020required.",
+            "url": "classes/org-schema-Organization.html#property_unnamedSourcesPolicy"
         },                {
             "fqsen": "\\org\\schema\\Organization\u003A\u003A\u0024vatID",
             "name": "vatID",
@@ -7936,6 +8061,51 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/xyz-oihana-schema-constants-traits-PaginationTrait.html"
         },                {
+            "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType",
+            "name": "ContactType",
+            "summary": "Types\u0020of\u0020contact\u0020points\u0020for\u0020an\u0020Organization\u0020or\u0020Person.",
+            "url": "classes/xyz-oihana-schema-enumerations-ContactType.html"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003ACUSTOMER_SERVICE",
+            "name": "CUSTOMER_SERVICE",
+            "summary": "Customer\u0020service\u0020contact.",
+            "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_CUSTOMER_SERVICE"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003ATECHNICAL_SUPPORT",
+            "name": "TECHNICAL_SUPPORT",
+            "summary": "Technical\u0020support\u0020contact.",
+            "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_TECHNICAL_SUPPORT"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003ABILLING",
+            "name": "BILLING",
+            "summary": "Billing\u0020\/\u0020invoice\u0020support\u0020contact.",
+            "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_BILLING"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003ASALES",
+            "name": "SALES",
+            "summary": "Sales\u0020contact.",
+            "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_SALES"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003AMOBILE",
+            "name": "MOBILE",
+            "summary": "Mobile\u0020phone\u0020contact.",
+            "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_MOBILE"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003ALANDLINE",
+            "name": "LANDLINE",
+            "summary": "Landline\u0020phone\u0020contact.",
+            "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_LANDLINE"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003AFAX",
+            "name": "FAX",
+            "summary": "Fax\u0020contact.",
+            "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_FAX"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003AOTHER",
+            "name": "OTHER",
+            "summary": "Other\u0020or\u0020miscellaneous\u0020contact.",
+            "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_OTHER"
+        },                {
             "fqsen": "\\xyz\\oihana\\schema\\Log",
             "name": "Log",
             "summary": "Represents\u0020a\u0020log\u0020entry.",
@@ -8165,6 +8335,11 @@ Search.appendIndex(
             "name": "traits",
             "summary": "",
             "url": "namespaces/xyz-oihana-schema-constants-traits.html"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\enumerations",
+            "name": "enumerations",
+            "summary": "",
+            "url": "namespaces/xyz-oihana-schema-enumerations.html"
         },                {
             "fqsen": "\\xyz\\oihana\\schema",
             "name": "schema",

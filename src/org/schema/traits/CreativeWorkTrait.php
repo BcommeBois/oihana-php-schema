@@ -325,9 +325,9 @@ trait CreativeWorkTrait
      *
      * Examples of educational levels include 'beginner', 'intermediate' or 'advanced', and formal sets of level indicators.
      *
-     * @var null|string|DefinedTerm
+     * @var null|string|array|DefinedTerm
      */
-    public null|string|DefinedTerm $educationalLevel;
+    public null|string|array|DefinedTerm $educationalLevel;
 
     /**
      * The purpose of a work in the context of education; for example, 'assignment', 'group work'.

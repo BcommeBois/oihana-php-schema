@@ -307,16 +307,31 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Organization.html#property_brand">$brand</a>
     <span>
-                        &nbsp;: null|<a href="classes/org-schema-Brand.html"><abbr title="\org\schema\Brand">Brand</abbr></a>|<a href="classes/org-schema-Organization.html"><abbr title="\org\schema\Organization">Organization</abbr></a>            </span>
+                        &nbsp;: null|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Brand.html"><abbr title="\org\schema\Brand">Brand</abbr></a>|<a href="classes/org-schema-Organization.html"><abbr title="\org\schema\Organization">Organization</abbr></a>|string            </span>
 </dt>
 <dd>The brand(s) associated with a product or service, or the brand(s) maintained by an organization or business person.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Organization.html#property_companyRegistration">$companyRegistration</a>
+    <span>
+                        &nbsp;: null|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-creativeWork-Certification.html"><abbr title="\org\schema\creativeWork\Certification">Certification</abbr></a>|string            </span>
+</dt>
+<dd>The official registration number of a business including the organization that issued it such as Company House or Chamber of Commerce.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Organization.html#property_contactPoint">$contactPoint</a>
     <span>
-                        &nbsp;: null|<a href="classes/org-schema-ContactPoint.html"><abbr title="\org\schema\ContactPoint">ContactPoint</abbr></a>|array&lt;string|int, mixed&gt;            </span>
+                        &nbsp;: null|<a href="classes/org-schema-ContactPoint.html"><abbr title="\org\schema\ContactPoint">ContactPoint</abbr></a>|array&lt;string|int, mixed&gt;|string            </span>
 </dt>
 <dd>A contact point for a person or organization.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Organization.html#property_correctionsPolicy">$correctionsPolicy</a>
+    <span>
+                        &nbsp;: string|<a href="classes/org-schema-CreativeWork.html"><abbr title="\org\schema\CreativeWork">CreativeWork</abbr></a>|array&lt;string|int, mixed&gt;|null            </span>
+</dt>
+<dd>For an Organization (e.g. NewsMediaOrganization), a statement describing (in news media, the newsroom’s)
+disclosure and correction policy for errors.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_created">$created</a>
@@ -355,6 +370,20 @@ also described as an organization (allowing different urls, logos, opening hours
 <dd>The date that this organization was dissolved.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Organization.html#property_diversityPolicy">$diversityPolicy</a>
+    <span>
+                        &nbsp;: string|<a href="classes/org-schema-CreativeWork.html"><abbr title="\org\schema\CreativeWork">CreativeWork</abbr></a>|array&lt;string|int, mixed&gt;|null            </span>
+</dt>
+<dd>Statement on diversity policy by an Organization e.g. a NewsMediaOrganization.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Organization.html#property_diversityStaffingReport">$diversityStaffingReport</a>
+    <span>
+                        &nbsp;: string|<a href="classes/org-schema-creativeWork-Article.html"><abbr title="\org\schema\creativeWork\Article">Article</abbr></a>|array&lt;string|int, mixed&gt;|null            </span>
+</dt>
+<dd>For an Organization (often but not necessarily a NewsMediaOrganization), a report on staffing diversity issues.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Organization.html#property_duns">$duns</a>
     <span>
                         &nbsp;: string|null            </span>
@@ -369,11 +398,19 @@ also described as an organization (allowing different urls, logos, opening hours
 <dd>The Email address.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a class="" href="classes/org-schema-Organization.html#property_employees">$employees</a>
+    <a class="" href="classes/org-schema-Organization.html#property_employee">$employee</a>
     <span>
                         &nbsp;: null|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Person.html"><abbr title="\org\schema\Person">Person</abbr></a>            </span>
 </dt>
-<dd>The employees of the organization</dd>
+<dd>Someone working for this organization.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Organization.html#property_ethicsPolicy">$ethicsPolicy</a>
+    <span>
+                        &nbsp;: string|<a href="classes/org-schema-CreativeWork.html"><abbr title="\org\schema\CreativeWork">CreativeWork</abbr></a>|array&lt;string|int, mixed&gt;|null            </span>
+</dt>
+<dd>Statement about ethics policy, e.g. of a NewsMediaOrganization regarding journalistic and publishing practices,
+or of a Restaurant, a page describing food source policies.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Organization.html#property_event">$event</a>
@@ -411,11 +448,62 @@ also described as an organization (allowing different urls, logos, opening hours
 <dd>The place where the Organization was founded.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Organization.html#property_funder">$funder</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;|null|<a href="classes/org-schema-Organization.html"><abbr title="\org\schema\Organization">Organization</abbr></a>|<a href="classes/org-schema-Person.html"><abbr title="\org\schema\Person">Person</abbr></a>|string            </span>
+</dt>
+<dd>A person or organization that supports (sponsors) something through some kind of financial contribution.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Organization.html#property_funding">$funding</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Grant.html"><abbr title="\org\schema\Grant">Grant</abbr></a>|string|null            </span>
+</dt>
+<dd>A Grant that directly or indirectly provide funding or sponsorship for this item.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Organization.html#property_globalLocationNumber">$globalLocationNumber</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>The Global Location Number (GLN, sometimes also referred to as International Location Number or ILN)
+of the respective organization, person, or place.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Organization.html#property_hasCertification">$hasCertification</a>
     <span>
                         &nbsp;: array&lt;string|int, mixed&gt;|<a href="classes/org-schema-creativeWork-Certification.html"><abbr title="\org\schema\creativeWork\Certification">Certification</abbr></a>|null            </span>
 </dt>
 <dd>Certification information about a product, organization, service, place, or person.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Organization.html#property_hasCredential">$hasCredential</a>
+    <span>
+                        &nbsp;: string|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-creativeWork-EducationalOccupationalCredential.html"><abbr title="\org\schema\creativeWork\EducationalOccupationalCredential">EducationalOccupationalCredential</abbr></a>|null            </span>
+</dt>
+<dd>A credential awarded to the Person or Organization.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Organization.html#property_hasGS1DigitalLink">$hasGS1DigitalLink</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>The GS1 digital link associated with the object. This URL should conform
+to the particular requirements of digital links.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Organization.html#property_hasMemberProgram">$hasMemberProgram</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;|string|<a href="classes/org-schema-MemberProgram.html"><abbr title="\org\schema\MemberProgram">MemberProgram</abbr></a>|null            </span>
+</dt>
+<dd>MemberProgram offered by an Organization, for example an eCommerce merchant or an airline.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Organization.html#property_hasMerchantReturnPolicy">$hasMerchantReturnPolicy</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;|<a href="classes/org-schema-MerchantReturnPolicy.html"><abbr title="\org\schema\MerchantReturnPolicy">MerchantReturnPolicy</abbr></a>|null            </span>
+</dt>
+<dd>Specifies a MerchantReturnPolicy that may be applicable.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Organization.html#property_hasOfferCatalog">$hasOfferCatalog</a>
@@ -441,7 +529,7 @@ also described as an organization (allowing different urls, logos, opening hours
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Organization.html#property_hasShippingService">$hasShippingService</a>
     <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;|object|null            </span>
+                        &nbsp;: null|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-ShippingService.html"><abbr title="\org\schema\ShippingService">ShippingService</abbr></a>|string            </span>
 </dt>
 <dd>Specification of a shipping service offered by the organization.</dd>
 
@@ -481,6 +569,14 @@ also described as an organization (allowing different urls, logos, opening hours
 <dd>The number of interactions for the CreativeWork using the WebSite or SoftwareApplication.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Organization.html#property_isicV4">$isicV4</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>The International Standard of Industrial Classification of All Economic Activities (ISIC), Revision 4 code
+for a particular organization, business person, or place.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Organization.html#property_iso6523Code">$iso6523Code</a>
     <span>
                         &nbsp;: string|null            </span>
@@ -502,6 +598,29 @@ also described as an organization (allowing different urls, logos, opening hours
 <dd>Keywords or tags used to describe some item. Multiple textual entries in a keywords list are typically delimited by commas, or by repeating the property.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Organization.html#property_knowsAbout">$knowsAbout</a>
+    <span>
+                        &nbsp;: null|string|<a href="classes/org-schema-Thing.html"><abbr title="\org\schema\Thing">Thing</abbr></a>|array&lt;string|int, mixed&gt;            </span>
+</dt>
+<dd>Of a Person, and less typically of an Organization, to indicate a topic that is known
+about - suggesting possible expertise but not implying it.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Organization.html#property_knowsLanguage">$knowsLanguage</a>
+    <span>
+                        &nbsp;: null|string|<a href="classes/org-schema-Language.html"><abbr title="\org\schema\Language">Language</abbr></a>|array&lt;string|int, mixed&gt;            </span>
+</dt>
+<dd>Of a Person, and less typically of an Organization, to indicate a known language.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Organization.html#property_legalAddress">$legalAddress</a>
+    <span>
+                        &nbsp;: null|string|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-PostalAddress.html"><abbr title="\org\schema\PostalAddress">PostalAddress</abbr></a>            </span>
+</dt>
+<dd>The legal address of an organization which acts as the officially registered address
+used for legal and tax purposes.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Organization.html#property_legalForm">$legalForm</a>
     <span>
                         &nbsp;: string|object|null            </span>
@@ -514,6 +633,13 @@ also described as an organization (allowing different urls, logos, opening hours
                         &nbsp;: string|null            </span>
 </dt>
 <dd>The legal name of the organization</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Organization.html#property_legalRepresentative">$legalRepresentative</a>
+    <span>
+                        &nbsp;: string|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Person.html"><abbr title="\org\schema\Person">Person</abbr></a>|null            </span>
+</dt>
+<dd>One or multiple persons who represent this organization legally such as CEO or sole administrator.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Organization.html#property_leiCode">$leiCode</a>
@@ -696,6 +822,14 @@ also described as an organization (allowing different urls, logos, opening hours
                         &nbsp;: string|null|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-PropertyValue.html"><abbr title="\org\schema\PropertyValue">PropertyValue</abbr></a>            </span>
 </dt>
 <dd>The telephone number.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Organization.html#property_unnamedSourcesPolicy">$unnamedSourcesPolicy</a>
+    <span>
+                        &nbsp;: string|<a href="classes/org-schema-CreativeWork.html"><abbr title="\org\schema\CreativeWork">CreativeWork</abbr></a>|array&lt;string|int, mixed&gt;|null            </span>
+</dt>
+<dd>For an Organization (typically a NewsMediaOrganization), a statement about policy
+on use of unnamed sources and the decision process required.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_url">$url</a>
@@ -1026,7 +1160,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">20</span>
+    <span class="phpdocumentor-element-found-in__line">22</span>
 
     </aside>
 
@@ -1064,7 +1198,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">26</span>
+    <span class="phpdocumentor-element-found-in__line">28</span>
 
     </aside>
 
@@ -1140,7 +1274,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">32</span>
+    <span class="phpdocumentor-element-found-in__line">34</span>
 
     </aside>
 
@@ -1218,7 +1352,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">37</span>
+    <span class="phpdocumentor-element-found-in__line">40</span>
 
     </aside>
 
@@ -1256,7 +1390,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">43</span>
+    <span class="phpdocumentor-element-found-in__line">46</span>
 
     </aside>
 
@@ -1294,7 +1428,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">49</span>
+    <span class="phpdocumentor-element-found-in__line">52</span>
 
     </aside>
 
@@ -1370,7 +1504,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">55</span>
+    <span class="phpdocumentor-element-found-in__line">58</span>
 
     </aside>
 
@@ -1408,7 +1542,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">61</span>
+    <span class="phpdocumentor-element-found-in__line">64</span>
 
     </aside>
 
@@ -1446,7 +1580,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">66</span>
+    <span class="phpdocumentor-element-found-in__line">69</span>
 
     </aside>
 
@@ -1484,7 +1618,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">72</span>
+    <span class="phpdocumentor-element-found-in__line">75</span>
 
     </aside>
 
@@ -1522,7 +1656,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">78</span>
+    <span class="phpdocumentor-element-found-in__line">81</span>
 
     </aside>
 
@@ -1531,8 +1665,46 @@ also described as an organization (allowing different urls, logos, opening hours
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">null|<a href="classes/org-schema-Brand.html"><abbr title="\org\schema\Brand">Brand</abbr></a>|<a href="classes/org-schema-Organization.html"><abbr title="\org\schema\Organization">Organization</abbr></a></span>
+            <span class="phpdocumentor-signature__type">null|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Brand.html"><abbr title="\org\schema\Brand">Brand</abbr></a>|<a href="classes/org-schema-Organization.html"><abbr title="\org\schema\Organization">Organization</abbr></a>|string</span>
     <span class="phpdocumentor-signature__name">$brand</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_companyRegistration">
+        $companyRegistration
+        <a href="classes/org-schema-Organization.html#property_companyRegistration" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">87</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The official registration number of a business including the organization that issued it such as Company House or Chamber of Commerce.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">null|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-creativeWork-Certification.html"><abbr title="\org\schema\creativeWork\Certification">Certification</abbr></a>|string</span>
+    <span class="phpdocumentor-signature__name">$companyRegistration</span>
     </code>
 
     
@@ -1560,7 +1732,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">89</span>
+    <span class="phpdocumentor-element-found-in__line">93</span>
 
     </aside>
 
@@ -1569,8 +1741,47 @@ also described as an organization (allowing different urls, logos, opening hours
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">null|<a href="classes/org-schema-ContactPoint.html"><abbr title="\org\schema\ContactPoint">ContactPoint</abbr></a>|array&lt;string|int, mixed&gt;</span>
+            <span class="phpdocumentor-signature__type">null|<a href="classes/org-schema-ContactPoint.html"><abbr title="\org\schema\ContactPoint">ContactPoint</abbr></a>|array&lt;string|int, mixed&gt;|string</span>
     <span class="phpdocumentor-signature__name">$contactPoint</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_correctionsPolicy">
+        $correctionsPolicy
+        <a href="classes/org-schema-Organization.html#property_correctionsPolicy" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">101</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">For an Organization (e.g. NewsMediaOrganization), a statement describing (in news media, the newsroom’s)
+disclosure and correction policy for errors.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|<a href="classes/org-schema-CreativeWork.html"><abbr title="\org\schema\CreativeWork">CreativeWork</abbr></a>|array&lt;string|int, mixed&gt;|null</span>
+    <span class="phpdocumentor-signature__name">$correctionsPolicy</span>
     </code>
 
     
@@ -1636,7 +1847,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">96</span>
+    <span class="phpdocumentor-element-found-in__line">108</span>
 
     </aside>
 
@@ -1753,7 +1964,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">102</span>
+    <span class="phpdocumentor-element-found-in__line">114</span>
 
     </aside>
 
@@ -1781,6 +1992,87 @@ also described as an organization (allowing different urls, logos, opening hours
             -public
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_diversityPolicy">
+        $diversityPolicy
+        <a href="classes/org-schema-Organization.html#property_diversityPolicy" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">124</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Statement on diversity policy by an Organization e.g. a NewsMediaOrganization.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|<a href="classes/org-schema-CreativeWork.html"><abbr title="\org\schema\CreativeWork">CreativeWork</abbr></a>|array&lt;string|int, mixed&gt;|null</span>
+    <span class="phpdocumentor-signature__name">$diversityPolicy</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>For a NewsMediaOrganization, a statement describing the newsroom’s diversity policy on both staffing and sources,
+typically providing staffing data.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_diversityStaffingReport">
+        $diversityStaffingReport
+        <a href="classes/org-schema-Organization.html#property_diversityStaffingReport" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">133</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">For an Organization (often but not necessarily a NewsMediaOrganization), a report on staffing diversity issues.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|<a href="classes/org-schema-creativeWork-Article.html"><abbr title="\org\schema\creativeWork\Article">Article</abbr></a>|array&lt;string|int, mixed&gt;|null</span>
+    <span class="phpdocumentor-signature__name">$diversityStaffingReport</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>In a news context this might be for example ASNE or RTDNA (US) reports, or self-reported.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_duns">
         $duns
         <a href="classes/org-schema-Organization.html#property_duns" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1791,7 +2083,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">108</span>
+    <span class="phpdocumentor-element-found-in__line">139</span>
 
     </aside>
 
@@ -1829,7 +2121,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">113</span>
+    <span class="phpdocumentor-element-found-in__line">144</span>
 
     </aside>
 
@@ -1857,9 +2149,9 @@ also described as an organization (allowing different urls, logos, opening hours
             -public
                                                                     "
 >
-    <h4 class="phpdocumentor-element__name" id="property_employees">
-        $employees
-        <a href="classes/org-schema-Organization.html#property_employees" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_employee">
+        $employee
+        <a href="classes/org-schema-Organization.html#property_employee" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                                             </span>
@@ -1867,20 +2159,62 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">119</span>
+    <span class="phpdocumentor-element-found-in__line">150</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">The employees of the organization</p>
+        <p class="phpdocumentor-summary">Someone working for this organization.</p>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__type">null|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Person.html"><abbr title="\org\schema\Person">Person</abbr></a></span>
-    <span class="phpdocumentor-signature__name">$employees</span>
+    <span class="phpdocumentor-signature__name">$employee</span>
     </code>
 
     
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_ethicsPolicy">
+        $ethicsPolicy
+        <a href="classes/org-schema-Organization.html#property_ethicsPolicy" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">161</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Statement about ethics policy, e.g. of a NewsMediaOrganization regarding journalistic and publishing practices,
+or of a Restaurant, a page describing food source policies.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|<a href="classes/org-schema-CreativeWork.html"><abbr title="\org\schema\CreativeWork">CreativeWork</abbr></a>|array&lt;string|int, mixed&gt;|null</span>
+    <span class="phpdocumentor-signature__name">$ethicsPolicy</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>In the case of a NewsMediaOrganization, an ethicsPolicy is typically a statement describing the personal,
+organizational, and corporate standards of behavior expected by the organization.</p>
+</section>
+
     
     
 
@@ -1905,7 +2239,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">125</span>
+    <span class="phpdocumentor-element-found-in__line">167</span>
 
     </aside>
 
@@ -1943,7 +2277,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">131</span>
+    <span class="phpdocumentor-element-found-in__line">173</span>
 
     </aside>
 
@@ -1981,7 +2315,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">137</span>
+    <span class="phpdocumentor-element-found-in__line">179</span>
 
     </aside>
 
@@ -2019,7 +2353,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">143</span>
+    <span class="phpdocumentor-element-found-in__line">185</span>
 
     </aside>
 
@@ -2057,7 +2391,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">149</span>
+    <span class="phpdocumentor-element-found-in__line">191</span>
 
     </aside>
 
@@ -2085,6 +2419,141 @@ also described as an organization (allowing different urls, logos, opening hours
             -public
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_funder">
+        $funder
+        <a href="classes/org-schema-Organization.html#property_funder" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">197</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A person or organization that supports (sponsors) something through some kind of financial contribution.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|null|<a href="classes/org-schema-Organization.html"><abbr title="\org\schema\Organization">Organization</abbr></a>|<a href="classes/org-schema-Person.html"><abbr title="\org\schema\Person">Person</abbr></a>|string</span>
+    <span class="phpdocumentor-signature__name">$funder</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_funding">
+        $funding
+        <a href="classes/org-schema-Organization.html#property_funding" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">207</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A Grant that directly or indirectly provide funding or sponsorship for this item.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Grant.html"><abbr title="\org\schema\Grant">Grant</abbr></a>|string|null</span>
+    <span class="phpdocumentor-signature__name">$funding</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>See also ownershipFundingInfo.
+Inverse property: fundedItem</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_globalLocationNumber">
+        $globalLocationNumber
+        <a href="classes/org-schema-Organization.html#property_globalLocationNumber" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">219</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The Global Location Number (GLN, sometimes also referred to as International Location Number or ILN)
+of the respective organization, person, or place.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$globalLocationNumber</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>The GLN is a 13-digit number used to identify parties and physical locations.</p>
+</section>
+
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/org-schema-Organization.html#property_globalLocationNumber#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                    <span class="phpdocumentor-tag-link"><a href="https://www.gs1.org/standards/id-keys/gln">https://www.gs1.org/standards/id-keys/gln</a></span>
+                                        
+                                             
+                                    </dd>
+                                            </dl>
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_hasCertification">
         $hasCertification
         <a href="classes/org-schema-Organization.html#property_hasCertification" class="headerlink"><i class="fas fa-link"></i></a>
@@ -2095,7 +2564,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">84</span>
+    <span class="phpdocumentor-element-found-in__line">225</span>
 
     </aside>
 
@@ -2123,6 +2592,172 @@ also described as an organization (allowing different urls, logos, opening hours
             -public
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_hasCredential">
+        $hasCredential
+        <a href="classes/org-schema-Organization.html#property_hasCredential" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">231</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A credential awarded to the Person or Organization.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-creativeWork-EducationalOccupationalCredential.html"><abbr title="\org\schema\creativeWork\EducationalOccupationalCredential">EducationalOccupationalCredential</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__name">$hasCredential</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_hasGS1DigitalLink">
+        $hasGS1DigitalLink
+        <a href="classes/org-schema-Organization.html#property_hasGS1DigitalLink" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">250</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The GS1 digital link associated with the object. This URL should conform
+to the particular requirements of digital links.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$hasGS1DigitalLink</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>The link should only contain the Application Identifiers (AIs) that are relevant for the entity being annotated,
+for instance a Product or an Organization, and for the correct granularity.</p>
+<p>In particular, for products:</p>
+<ul>
+<li>A Digital Link that contains a serial number (AI 21) should only be present on instances of IndividualProduct</li>
+<li>A Digital Link that contains a lot number (AI 10) should be annotated as SomeProduct if only products from that
+lot are sold, or IndividualProduct if there is only a specific product.</li>
+<li>A Digital Link that contains a global model number (AI 8013) should be attached to a Product or a ProductModel.</li>
+</ul>
+<p>Other item types should be adapted similarly.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_hasMemberProgram">
+        $hasMemberProgram
+        <a href="classes/org-schema-Organization.html#property_hasMemberProgram" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">256</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">MemberProgram offered by an Organization, for example an eCommerce merchant or an airline.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|string|<a href="classes/org-schema-MemberProgram.html"><abbr title="\org\schema\MemberProgram">MemberProgram</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__name">$hasMemberProgram</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_hasMerchantReturnPolicy">
+        $hasMerchantReturnPolicy
+        <a href="classes/org-schema-Organization.html#property_hasMerchantReturnPolicy" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">265</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Specifies a MerchantReturnPolicy that may be applicable.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|<a href="classes/org-schema-MerchantReturnPolicy.html"><abbr title="\org\schema\MerchantReturnPolicy">MerchantReturnPolicy</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__name">$hasMerchantReturnPolicy</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Supersedes hasProductReturnPolicy.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_hasOfferCatalog">
         $hasOfferCatalog
         <a href="classes/org-schema-Organization.html#property_hasOfferCatalog" class="headerlink"><i class="fas fa-link"></i></a>
@@ -2133,7 +2768,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">155</span>
+    <span class="phpdocumentor-element-found-in__line">271</span>
 
     </aside>
 
@@ -2209,7 +2844,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">161</span>
+    <span class="phpdocumentor-element-found-in__line">277</span>
 
     </aside>
 
@@ -2247,7 +2882,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">167</span>
+    <span class="phpdocumentor-element-found-in__line">283</span>
 
     </aside>
 
@@ -2256,7 +2891,7 @@ also described as an organization (allowing different urls, logos, opening hours
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|object|null</span>
+            <span class="phpdocumentor-signature__type">null|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-ShippingService.html"><abbr title="\org\schema\ShippingService">ShippingService</abbr></a>|string</span>
     <span class="phpdocumentor-signature__name">$hasShippingService</span>
     </code>
 
@@ -2399,7 +3034,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">172</span>
+    <span class="phpdocumentor-element-found-in__line">288</span>
 
     </aside>
 
@@ -2437,7 +3072,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">179</span>
+    <span class="phpdocumentor-element-found-in__line">295</span>
 
     </aside>
 
@@ -2467,6 +3102,45 @@ also described as an organization (allowing different urls, logos, opening hours
             -public
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_isicV4">
+        $isicV4
+        <a href="classes/org-schema-Organization.html#property_isicV4" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">302</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The International Standard of Industrial Classification of All Economic Activities (ISIC), Revision 4 code
+for a particular organization, business person, or place.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$isicV4</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_iso6523Code">
         $iso6523Code
         <a href="classes/org-schema-Organization.html#property_iso6523Code" class="headerlink"><i class="fas fa-link"></i></a>
@@ -2477,7 +3151,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">185</span>
+    <span class="phpdocumentor-element-found-in__line">308</span>
 
     </aside>
 
@@ -2553,7 +3227,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">191</span>
+    <span class="phpdocumentor-element-found-in__line">314</span>
 
     </aside>
 
@@ -2581,6 +3255,146 @@ also described as an organization (allowing different urls, logos, opening hours
             -public
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_knowsAbout">
+        $knowsAbout
+        <a href="classes/org-schema-Organization.html#property_knowsAbout" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">327</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Of a Person, and less typically of an Organization, to indicate a topic that is known
+about - suggesting possible expertise but not implying it.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">null|string|<a href="classes/org-schema-Thing.html"><abbr title="\org\schema\Thing">Thing</abbr></a>|array&lt;string|int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__name">$knowsAbout</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>We do not distinguish skill levels here, or relate this to educational content, events, objectives
+or JobPosting descriptions.</p>
+</section>
+
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/org-schema-Organization.html#property_knowsAbout#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                    <span class="phpdocumentor-tag-link"><a href="https://www.rfc-editor.org/info/bcp47">https://www.rfc-editor.org/info/bcp47</a></span>
+                                        
+                                             
+                                    </dd>
+                                            </dl>
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_knowsLanguage">
+        $knowsLanguage
+        <a href="classes/org-schema-Organization.html#property_knowsLanguage" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">338</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Of a Person, and less typically of an Organization, to indicate a known language.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">null|string|<a href="classes/org-schema-Language.html"><abbr title="\org\schema\Language">Language</abbr></a>|array&lt;string|int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__name">$knowsLanguage</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>We do not distinguish skill levels or reading/writing/speaking/signing here.</p>
+<p>Use language codes from the IETF BCP 47 standard.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_legalAddress">
+        $legalAddress
+        <a href="classes/org-schema-Organization.html#property_legalAddress" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">349</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The legal address of an organization which acts as the officially registered address
+used for legal and tax purposes.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">null|string|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-PostalAddress.html"><abbr title="\org\schema\PostalAddress">PostalAddress</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$legalAddress</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+        <section class="phpdocumentor-description"><p>The legal address can be different from the place of operations
+of a business and other addresses can be part of an organization.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_legalForm">
         $legalForm
         <a href="classes/org-schema-Organization.html#property_legalForm" class="headerlink"><i class="fas fa-link"></i></a>
@@ -2591,7 +3405,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">202</span>
+    <span class="phpdocumentor-element-found-in__line">360</span>
 
     </aside>
 
@@ -2629,7 +3443,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">196</span>
+    <span class="phpdocumentor-element-found-in__line">354</span>
 
     </aside>
 
@@ -2657,6 +3471,44 @@ also described as an organization (allowing different urls, logos, opening hours
             -public
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_legalRepresentative">
+        $legalRepresentative
+        <a href="classes/org-schema-Organization.html#property_legalRepresentative" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">366</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">One or multiple persons who represent this organization legally such as CEO or sole administrator.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Person.html"><abbr title="\org\schema\Person">Person</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__name">$legalRepresentative</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_leiCode">
         $leiCode
         <a href="classes/org-schema-Organization.html#property_leiCode" class="headerlink"><i class="fas fa-link"></i></a>
@@ -2667,7 +3519,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">208</span>
+    <span class="phpdocumentor-element-found-in__line">372</span>
 
     </aside>
 
@@ -2743,7 +3595,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">214</span>
+    <span class="phpdocumentor-element-found-in__line">378</span>
 
     </aside>
 
@@ -2781,7 +3633,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">219</span>
+    <span class="phpdocumentor-element-found-in__line">383</span>
 
     </aside>
 
@@ -2819,7 +3671,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">226</span>
+    <span class="phpdocumentor-element-found-in__line">390</span>
 
     </aside>
 
@@ -2859,7 +3711,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">232</span>
+    <span class="phpdocumentor-element-found-in__line">396</span>
 
     </aside>
 
@@ -2897,7 +3749,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">238</span>
+    <span class="phpdocumentor-element-found-in__line">402</span>
 
     </aside>
 
@@ -2973,7 +3825,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">244</span>
+    <span class="phpdocumentor-element-found-in__line">408</span>
 
     </aside>
 
@@ -3049,7 +3901,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">250</span>
+    <span class="phpdocumentor-element-found-in__line">414</span>
 
     </aside>
 
@@ -3087,7 +3939,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">256</span>
+    <span class="phpdocumentor-element-found-in__line">420</span>
 
     </aside>
 
@@ -3125,7 +3977,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">262</span>
+    <span class="phpdocumentor-element-found-in__line">426</span>
 
     </aside>
 
@@ -3163,7 +4015,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">269</span>
+    <span class="phpdocumentor-element-found-in__line">433</span>
 
     </aside>
 
@@ -3203,7 +4055,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">274</span>
+    <span class="phpdocumentor-element-found-in__line">438</span>
 
     </aside>
 
@@ -3241,7 +4093,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">279</span>
+    <span class="phpdocumentor-element-found-in__line">443</span>
 
     </aside>
 
@@ -3317,7 +4169,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">285</span>
+    <span class="phpdocumentor-element-found-in__line">449</span>
 
     </aside>
 
@@ -3355,7 +4207,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">291</span>
+    <span class="phpdocumentor-element-found-in__line">455</span>
 
     </aside>
 
@@ -3393,7 +4245,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">297</span>
+    <span class="phpdocumentor-element-found-in__line">461</span>
 
     </aside>
 
@@ -3431,7 +4283,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">303</span>
+    <span class="phpdocumentor-element-found-in__line">467</span>
 
     </aside>
 
@@ -3469,7 +4321,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">309</span>
+    <span class="phpdocumentor-element-found-in__line">473</span>
 
     </aside>
 
@@ -3507,7 +4359,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">314</span>
+    <span class="phpdocumentor-element-found-in__line">478</span>
 
     </aside>
 
@@ -3545,7 +4397,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">319</span>
+    <span class="phpdocumentor-element-found-in__line">483</span>
 
     </aside>
 
@@ -3583,7 +4435,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">325</span>
+    <span class="phpdocumentor-element-found-in__line">489</span>
 
     </aside>
 
@@ -3621,7 +4473,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">331</span>
+    <span class="phpdocumentor-element-found-in__line">495</span>
 
     </aside>
 
@@ -3632,6 +4484,45 @@ also described as an organization (allowing different urls, logos, opening hours
         <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__type">string|null|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-PropertyValue.html"><abbr title="\org\schema\PropertyValue">PropertyValue</abbr></a></span>
     <span class="phpdocumentor-signature__name">$telephone</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_unnamedSourcesPolicy">
+        $unnamedSourcesPolicy
+        <a href="classes/org-schema-Organization.html#property_unnamedSourcesPolicy" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">503</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">For an Organization (typically a NewsMediaOrganization), a statement about policy
+on use of unnamed sources and the decision process required.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|<a href="classes/org-schema-CreativeWork.html"><abbr title="\org\schema\CreativeWork">CreativeWork</abbr></a>|array&lt;string|int, mixed&gt;|null</span>
+    <span class="phpdocumentor-signature__name">$unnamedSourcesPolicy</span>
     </code>
 
     
@@ -3697,7 +4588,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Organization.php"><a href="files/src-org-schema-organization.html"><abbr title="src/org/schema/Organization.php">Organization.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">337</span>
+    <span class="phpdocumentor-element-found-in__line">509</span>
 
     </aside>
 
@@ -4290,21 +5181,33 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_areaServed">$areaServed</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_award">$award</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_brand">$brand</a></li>
+                                                    <li class=""><a href="classes/org-schema-Organization.html#property_companyRegistration">$companyRegistration</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_contactPoint">$contactPoint</a></li>
+                                                    <li class=""><a href="classes/org-schema-Organization.html#property_correctionsPolicy">$correctionsPolicy</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_created">$created</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_department">$department</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_description">$description</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_disambiguatingDescription">$disambiguatingDescription</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_dissolutionDate">$dissolutionDate</a></li>
+                                                    <li class=""><a href="classes/org-schema-Organization.html#property_diversityPolicy">$diversityPolicy</a></li>
+                                                    <li class=""><a href="classes/org-schema-Organization.html#property_diversityStaffingReport">$diversityStaffingReport</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_duns">$duns</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_email">$email</a></li>
-                                                    <li class=""><a href="classes/org-schema-Organization.html#property_employees">$employees</a></li>
+                                                    <li class=""><a href="classes/org-schema-Organization.html#property_employee">$employee</a></li>
+                                                    <li class=""><a href="classes/org-schema-Organization.html#property_ethicsPolicy">$ethicsPolicy</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_event">$event</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_faxNumber">$faxNumber</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_founder">$founder</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_foundingDate">$foundingDate</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_foundingLocation">$foundingLocation</a></li>
+                                                    <li class=""><a href="classes/org-schema-Organization.html#property_funder">$funder</a></li>
+                                                    <li class=""><a href="classes/org-schema-Organization.html#property_funding">$funding</a></li>
+                                                    <li class=""><a href="classes/org-schema-Organization.html#property_globalLocationNumber">$globalLocationNumber</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_hasCertification">$hasCertification</a></li>
+                                                    <li class=""><a href="classes/org-schema-Organization.html#property_hasCredential">$hasCredential</a></li>
+                                                    <li class=""><a href="classes/org-schema-Organization.html#property_hasGS1DigitalLink">$hasGS1DigitalLink</a></li>
+                                                    <li class=""><a href="classes/org-schema-Organization.html#property_hasMemberProgram">$hasMemberProgram</a></li>
+                                                    <li class=""><a href="classes/org-schema-Organization.html#property_hasMerchantReturnPolicy">$hasMerchantReturnPolicy</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_hasOfferCatalog">$hasOfferCatalog</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_hasPart">$hasPart</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_hasPOS">$hasPOS</a></li>
@@ -4314,11 +5217,16 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_image">$image</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_images">$images</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_interactionStatistic">$interactionStatistic</a></li>
+                                                    <li class=""><a href="classes/org-schema-Organization.html#property_isicV4">$isicV4</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_iso6523Code">$iso6523Code</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_isPartOf">$isPartOf</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_keywords">$keywords</a></li>
+                                                    <li class=""><a href="classes/org-schema-Organization.html#property_knowsAbout">$knowsAbout</a></li>
+                                                    <li class=""><a href="classes/org-schema-Organization.html#property_knowsLanguage">$knowsLanguage</a></li>
+                                                    <li class=""><a href="classes/org-schema-Organization.html#property_legalAddress">$legalAddress</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_legalForm">$legalForm</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_legalName">$legalName</a></li>
+                                                    <li class=""><a href="classes/org-schema-Organization.html#property_legalRepresentative">$legalRepresentative</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_leiCode">$leiCode</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_license">$license</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_location">$location</a></li>
@@ -4345,6 +5253,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_subOrganization">$subOrganization</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_taxID">$taxID</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_telephone">$telephone</a></li>
+                                                    <li class=""><a href="classes/org-schema-Organization.html#property_unnamedSourcesPolicy">$unnamedSourcesPolicy</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_url">$url</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_vatID">$vatID</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-ThingTrait.html#property_atContext">$atContext</a></li>

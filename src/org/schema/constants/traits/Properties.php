@@ -33,6 +33,7 @@ trait Properties
         EntryPoint ,
         Enumeration ,
         Edge ,
+        EducationalOccupationCredential ,
         Event ,
         FinancialIncentive ,
         GeoCircle ,
