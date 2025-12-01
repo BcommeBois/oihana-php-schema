@@ -20,6 +20,7 @@ trait Properties
         CompoundPriceSpecification ,
         ConstraintNode ,
         ContactPoint ,
+        ContactType ,
         CreativeWork ,
         DataFeedItem ,
         Dataset ,
