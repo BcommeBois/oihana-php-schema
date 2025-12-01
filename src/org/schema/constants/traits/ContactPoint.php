@@ -13,7 +13,4 @@ trait ContactPoint
     public const string HOURS_AVAILABLE    = 'hoursAvailable' ;
     public const string PRODUCT_SUPPORTED  = 'productSupported' ;
     public const string TELEPHONE          = 'telephone' ;
-
-    public const string CONTACT_LANDLINE  = 'contactLandline' ;
-    public const string CONTACT_MOBILE    = 'contactTelephone' ;
 }
