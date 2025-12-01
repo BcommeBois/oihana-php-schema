@@ -18,11 +18,13 @@ trait Organization
     const string AWARD                       = 'award' ;
     const string BRAND                       = 'brand' ;
     const string COMPANY_REGISTRATION        = 'companyRegistration' ;
+    const string CONTACT_POINT               = 'contactPoint' ;
     const string CORRECTIONS_POLICY          = 'correctionsPolicy' ;
     const string DEPARTMENT                  = 'department' ;
     const string DISSOLUTION_DATE            = 'dissolutionDate' ;
     const string DIVERSITY_POLICY            = 'diversityPolicy' ;
     const string DIVERSITY_STAFFING_REPORT   = 'diversityStaffingReport' ;
+    const string EMAIL                       = 'email' ;
     const string EMPLOYEE                    = 'employee' ;
     const string ETHICS_POLICY               = 'ethicsPolicy' ;
     const string FOUNDER                     = 'founder' ;

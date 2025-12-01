@@ -2,8 +2,12 @@
 
 namespace org\schema\traits ;
 
+use org\schema\enumerations\ContactPointOption;
 use org\schema\GeoShape;
+use org\schema\OpeningHoursSpecification;
 use org\schema\Place;
+use org\schema\Product;
+use org\schema\Service;
 
 /**
  * A contact point—for example, a Customer Complaints department.
@@ -25,9 +29,9 @@ trait ContactPointTrait
 
     /**
      * An option available on this contact point (e.g. a toll-free number or support for hearing-impaired callers).
-     * @var mixed
+     * @var null|string|array|ContactPointOption
      */
-    public mixed $contactOption ;
+    public null|string|array|ContactPointOption $contactOption ;
 
     /**
      * A person or organization can have different contact points, for different purposes.
@@ -50,15 +54,15 @@ trait ContactPointTrait
 
     /**
      * The hours during which this service or contact is available.
-     * @var array|null
+     * @var null|array|OpeningHoursSpecification|string
      */
-    public ?array $hoursAvailable ;
+    public null|array|OpeningHoursSpecification|string $hoursAvailable ;
 
     /**
      * The product or service this support contact point is related to (such as product support for a particular product line).
-     * @var string|null
+     * @var null|string|Product|Service|array
      */
-    public ?string $productSupported ;
+    public null|string|Product|Service|array $productSupported ;
 
     /**
      * The telephone number.
