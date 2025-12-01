@@ -17,6 +17,7 @@ trait Person
     const string JOB              = 'job' ;
     const string JOB_TITLE        = 'jobTitle' ;
     const string NATIONALITY      = 'nationality' ;
+    const string PRONOUNS         = 'pronouns' ;
     const string SPONSOR          = 'sponsor' ;
     const string SKILLS           = 'skills' ;
     const string TAX_ID           = 'taxID' ;

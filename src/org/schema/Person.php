@@ -287,6 +287,26 @@ class Person extends Thing
     public ?array $photos ;
 
     /**
+     * A short string listing or describing pronouns for a person.
+     *
+     * Typically the person concerned is the best authority as pronouns are
+     * a critical part of personal identity and expression.
+     *
+     * Publishers and consumers of this information are reminded to treat this data responsibly,
+     * take country-specific laws related to gender expression into account,
+     * and be wary of out-of-date data and drawing unwarranted inferences about the person being described.
+     *
+     * In English, formulations such as "they/them", "she/her", and "he/him" are commonly used online and can also be used here.
+     *
+     * We do not intend to enumerate all possible micro-syntaxes in all languages.
+     *
+     * More structured and well-defined external values for pronouns can be referenced using the StructuredValue or DefinedTerm values.
+     *
+     * @var array|DefinedTerm|string|null
+     */
+    public null|array|DefinedTerm|string $pronouns ;
+
+    /**
      * The publishingPrinciples property indicates (typically via URL) a document describing the editorial principles of an Organization (or individual, e.g. a Person writing a blog) that relate to their activities as a publisher, e.g. ethics or diversity policies. When applied to a CreativeWork (e.g. NewsArticle) the principles are those of the party primarily responsible for the creation of the CreativeWork.
      * @var array|CreativeWork|string|null
      */

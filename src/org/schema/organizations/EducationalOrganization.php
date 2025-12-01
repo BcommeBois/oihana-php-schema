@@ -8,7 +8,8 @@ use org\schema\traits\PlaceTrait;
 
 /**
  * An educational organization.
- * https://schema.org/EducationalOrganization
+ *
+ * @see https://schema.org/EducationalOrganization
  */
 class EducationalOrganization extends Organization
 {
