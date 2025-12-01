@@ -75,20 +75,26 @@ class Thing implements JsonSerializable
     public string|object|array|null $description ;
 
     /**
+     * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
+     */
+    public ?string $disambiguatingDescription ;
+
+    /**
      * Indicates an item that this part of this item.
      * @var string|Thing|array<Thing>|null
      */
     public null|string|Thing|array $hasPart ;
 
     /**
-     * A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
-     */
-    public ?string $disambiguatingDescription ;
-
-    /**
      * The identifier of the item.
      */
     public ?string $identifier ;
+
+    /**
+     * Indicates a page (or other CreativeWork) for which this thing is the main entity being described.
+     * @var string|null
+     */
+    public ?string $mainEntityOfPage ;
 
     /**
      * The image reference of this resource.
@@ -109,8 +115,28 @@ class Thing implements JsonSerializable
     public string|object|null $license ;
 
     /**
+     * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
+     * @var array|Action|null
+     */
+    public null|array|Action $potentialAction ;
+
+    /**
      * The publisher of the resource.
      * @var string|array<string|Person|Organization>|Person|Organization|null
      */
     public string|array|Person|Organization|null $publisher ;
+
+    /**
+     * URL of a reference Web page that unambiguously indicates the item's identity.
+     * E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+     * @var string|array|null
+     */
+    public string|array|null $sameAs ;
+
+    /**
+     * A CreativeWork or Event about this Thing.
+     *
+     * @var null|string|array|CreativeWork|Event
+     */
+    public null|string|array|CreativeWork|Event $subjectOf ;
 }

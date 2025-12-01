@@ -16,6 +16,7 @@ trait Thing
     const string IS_RELATED_OF              = 'isRelatedTo' ;
     const string IS_SIMILAR_TO              = 'isSimilarTo' ;
     const string HAS_PART                   = 'hasPart' ;
+    const string MAIN_ENTITY_OF_PAGE        = 'mainEntityOfPage' ;
     const string NAME                       = 'name' ;
     const string NUM_PART                   = 'numPart' ;
     const string POTENTIAL_ACTION           = 'potentialAction' ;
