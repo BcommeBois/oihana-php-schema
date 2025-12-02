@@ -3,6 +3,7 @@
 namespace org\schema;
 
 use org\schema\creativeWork\Certification;
+use org\schema\creativeWork\EducationalOccupationalCredential;
 use org\schema\creativeWork\medias\ImageObject;
 use org\schema\organizations\EducationalOrganization;
 use org\schema\places\Country;
@@ -24,9 +25,9 @@ class Person extends Thing
 
     /**
      * An organization that this person is affiliated with. For example, a school/university, a club, or a team.
-     * @var null|array|Organization
+     * @var null|array|Organization|string
      */
-    public null|array|Organization $affiliation ;
+    public null|array|Organization|string $affiliation ;
 
     /**
      * The number of completed interactions for this entity, in a particular role (the 'agent'), in a particular action (indicated in the statistic), and in a particular context (i.e. interactionService).
@@ -62,6 +63,13 @@ class Person extends Thing
     public null|Brand|Organization $brand ;
 
     /**
+     * A callsign, as used in broadcasting and radio communications to identify people,
+     * radio and TV stations, or vehicles.
+     * @var string|null
+     */
+    public ?string $callSign ;
+
+    /**
      * The children of the person.
      * @var array|Person|null
      */
@@ -75,9 +83,9 @@ class Person extends Thing
 
     /**
      * A contact point for a person or organization.
-     * @var array|ContactPoint|null
+     * @var array|ContactPoint|null|string
      */
-    public null|array|ContactPoint $contactPoint ;
+    public null|array|ContactPoint|string $contactPoint ;
 
     /**
      * The Date of death.
@@ -123,6 +131,12 @@ class Person extends Thing
     public null|string|array|Person|Organization $funder ;
 
     /**
+     * A Grant that directly or indirectly provide funding or sponsorship for this item.
+     * @var string|array|Grant|null
+     */
+    public null|string|array|Grant $funding ;
+
+    /**
      * The gender of the user.
      */
     public Enumeration|DefinedTerm|string|null $gender ;
@@ -146,10 +160,16 @@ class Person extends Thing
     public null|array|Certification $hasCertification ;
 
     /**
-     * The Person's occupation. For past professions, use Role for expressing dates.
-     * @var array|string|null
+     * A credential awarded to the Person or Organization.
+     * @var string|array|EducationalOccupationalCredential|null
      */
-    public null|array|string $hasOccupation ; // TODO https://schema.org/Occupation
+    public null|string|array|EducationalOccupationalCredential $hasCredential ;
+
+    /**
+     * The Person's occupation. For past professions, use Role for expressing dates.
+     * @var array|string|Occupation|null
+     */
+    public null|array|Occupation|string $hasOccupation ;
 
     /**
      * Indicates an OfferCatalog listing for this Organization, Person, or Service.
@@ -165,9 +185,9 @@ class Person extends Thing
 
     /**
      * The height of the item.
-     * @var Distance|QuantitativeValue|null
+     * @var Distance|QuantitativeValue|null|int|float
      */
-    public null|Distance|QuantitativeValue $height ;
+    public null|Distance|QuantitativeValue|int|float $height ;
 
     /**
      * A contact location for a person's residence.
@@ -271,9 +291,9 @@ class Person extends Thing
 
     /**
      * A parent of this person.
-     * @var array|Person|null
+     * @var array|Person|null|string
      */
-    public null|array|Person $parent ;
+    public null|array|Person|string $parent ;
 
     /**
      * Event that this person is a performer or participant in.
@@ -302,9 +322,9 @@ class Person extends Thing
      *
      * More structured and well-defined external values for pronouns can be referenced using the StructuredValue or DefinedTerm values.
      *
-     * @var array|DefinedTerm|string|null
+     * @var array|DefinedTerm|StructuredValue|string|null
      */
-    public null|array|DefinedTerm|string $pronouns ;
+    public null|array|DefinedTerm|StructuredValue|string $pronouns ;
 
     /**
      * The publishingPrinciples property indicates (typically via URL) a document describing the editorial principles of an Organization (or individual, e.g. a Person writing a blog) that relate to their activities as a publisher, e.g. ethics or diversity policies. When applied to a CreativeWork (e.g. NewsArticle) the principles are those of the party primarily responsible for the creation of the CreativeWork.
@@ -317,11 +337,6 @@ class Person extends Thing
      * @var array|Person|null
      */
     public null|array|Person $relatedTo ;
-
-    /**
-     * The remarks about the resource.
-     */
-    public ?array $remarks ;
 
     /**
      * A pointer to products or services sought by the organization or person (demand).
@@ -372,9 +387,9 @@ class Person extends Thing
 
     /**
      * The weight of the product or person.
-     * @var null|QuantitativeValue|Mass
+     * @var null|QuantitativeValue|Mass|int|float
      */
-    public null|QuantitativeValue|Mass $weight ;
+    public null|QuantitativeValue|Mass|int|float $weight ;
 
     /**
      * A contact location for a person's place of work.

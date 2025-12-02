@@ -55,6 +55,8 @@ trait Properties
         MediaObject ,
         Medias ,
         MediaSubscription ,
+        Occupation ,
+        OccupationExperienceRequirements ,
         Order ,
         Offer ,
         OfferShippingDetails ,
