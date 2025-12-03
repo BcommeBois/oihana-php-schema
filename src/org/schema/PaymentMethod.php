@@ -5,7 +5,11 @@ namespace org\schema;
 use org\schema\enumerations\PaymentMethodType;
 
 /**
- * An event happening at a certain time and location, such as a concert, lecture, or festival. Repeated events may be structured as separate Event objects.
+ * A payment method is a standardized procedure for transferring the monetary amount for a purchase.
+ *
+ * Payment methods are characterized by the legal and technical structures used, and by the organization or group carrying out the transaction.
+ *
+ * @see https://schema.org/PaymentMethod
  */
 class PaymentMethod extends Intangible
 {
