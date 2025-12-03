@@ -34,7 +34,7 @@ trait PlaceTrait
      * The additional description of the place.
      * Note : this property is a custom attribute of the original Place class defined in http://schema.org/Place.
      */
-    public object|string|null $additional ;
+    public object|array|string|null $additional ;
 
     /**
      * A property-value pair representing an additional characteristic of the entity,

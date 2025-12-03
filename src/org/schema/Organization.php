@@ -31,7 +31,7 @@ class Organization extends Thing
      * The additional description of the organization.
      * Note : this property is a custom attribute of the original Organization class defined in http://schema.org/Organization.
      */
-    public object|string|null $additional ;
+    public object|array|string|null $additional ;
 
     /**
      * Physical address of the item (PostalAddress or any object to describe it).

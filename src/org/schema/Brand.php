@@ -12,7 +12,7 @@ class Brand extends Thing
      * The additional description of the organization.
      * Note : this property is a custom attribute of the original Organization class defined in http://schema.org/Organization.
      */
-    public string|object|null $additional ;
+    public string|array|object|null $additional ;
 
     /**
      * The overall rating, based on a collection of reviews or ratings, of the item.
