@@ -491,6 +491,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/org-schema-constants-traits-MemberProgramTier.html"
         },                {
+            "fqsen": "\\org\\schema\\constants\\traits\\Occupation",
+            "name": "Occupation",
+            "summary": "",
+            "url": "classes/org-schema-constants-traits-Occupation.html"
+        },                {
+            "fqsen": "\\org\\schema\\constants\\traits\\OccupationExperienceRequirements",
+            "name": "OccupationExperienceRequirements",
+            "summary": "",
+            "url": "classes/org-schema-constants-traits-OccupationExperienceRequirements.html"
+        },                {
             "fqsen": "\\org\\schema\\constants\\traits\\Offer",
             "name": "Offer",
             "summary": "",
@@ -2106,6 +2116,11 @@ Search.appendIndex(
             "summary": "Indicates\u0020that\u0020the\u0020item\u0020is\u0020used.",
             "url": "classes/org-schema-enumerations-conditions-UsedCondition.html"
         },                {
+            "fqsen": "\\org\\schema\\enumerations\\ContactPointOption",
+            "name": "ContactPointOption",
+            "summary": "Enumerated\u0020options\u0020related\u0020to\u0020a\u0020ContactPoint.",
+            "url": "classes/org-schema-enumerations-ContactPointOption.html"
+        },                {
             "fqsen": "\\org\\schema\\enumerations\\DayOfWeek",
             "name": "DayOfWeek",
             "summary": "The\u0020day\u0020of\u0020the\u0020week,\u0020e.g.\u0020used\u0020to\u0020specify\u0020to\u0020which\u0020day\u0020the\u0020opening\u0020hours\u0020of\u0020an\u0020OpeningHoursSpecification\u0020refer.",
@@ -2240,6 +2255,11 @@ Search.appendIndex(
             "name": "OnlineEventAttendanceMode",
             "summary": "An\u0020event\u0020that\u0020is\u0020primarily\u0020conducted\u0020online.",
             "url": "classes/org-schema-enumerations-events-OnlineEventAttendanceMode.html"
+        },                {
+            "fqsen": "\\org\\schema\\enumerations\\HearingImpairedSupported",
+            "name": "HearingImpairedSupported",
+            "summary": "Uses\u0020devices\u0020to\u0020support\u0020users\u0020with\u0020hearing\u0020impairments.",
+            "url": "classes/org-schema-enumerations-HearingImpairedSupported.html"
         },                {
             "fqsen": "\\org\\schema\\enumerations\\IncentiveType",
             "name": "IncentiveType",
@@ -2405,6 +2425,11 @@ Search.appendIndex(
             "name": "VirtualRecordingDigitalSource",
             "summary": "Content\u0020coded\u0020as\u0020\u0027virtual\u0020recording\u0027\u0020using\u0020the\u0020IPTC\u0020digital\u0020source\u0020type\u0020vocabulary.",
             "url": "classes/org-schema-enumerations-medias-VirtualRecordingDigitalSource.html"
+        },                {
+            "fqsen": "\\org\\schema\\enumerations\\MedicalSpeciality",
+            "name": "MedicalSpeciality",
+            "summary": "Any\u0020specific\u0020branch\u0020of\u0020medical\u0020science\u0020or\u0020practice.",
+            "url": "classes/org-schema-enumerations-MedicalSpeciality.html"
         },                {
             "fqsen": "\\org\\schema\\enumerations\\NonprofitType",
             "name": "NonprofitType",
@@ -2635,6 +2660,11 @@ Search.appendIndex(
             "name": "StatusEnumeration",
             "summary": "Lists\u0020or\u0020enumerations\u0020dealing\u0020with\u0020status\u0020types.",
             "url": "classes/org-schema-enumerations-StatusEnumeration.html"
+        },                {
+            "fqsen": "\\org\\schema\\enumerations\\TollFree",
+            "name": "TollFree",
+            "summary": "The\u0020associated\u0020telephone\u0020number\u0020is\u0020toll\u0020free.",
+            "url": "classes/org-schema-enumerations-TollFree.html"
         },                {
             "fqsen": "\\org\\schema\\enumerations\\types\\IncentiveTypeLoan",
             "name": "IncentiveTypeLoan",
@@ -3390,6 +3420,56 @@ Search.appendIndex(
             "name": "value",
             "summary": "The\u0020value\u0020of\u0020a\u0020QuantitativeValue\u0020or\u0020property\u0020value\u0020node.",
             "url": "classes/org-schema-MonetaryAmount.html#property_value"
+        },                {
+            "fqsen": "\\org\\schema\\Occupation",
+            "name": "Occupation",
+            "summary": "A\u0020profession,\u0020may\u0020involve\u0020prolonged\u0020training\u0020and\/or\u0020a\u0020formal\u0020qualification.",
+            "url": "classes/org-schema-Occupation.html"
+        },                {
+            "fqsen": "\\org\\schema\\Occupation\u003A\u003A\u0024educationRequirements",
+            "name": "educationRequirements",
+            "summary": "Educational\u0020background\u0020needed\u0020for\u0020the\u0020position\u0020or\u0020Occupation.",
+            "url": "classes/org-schema-Occupation.html#property_educationRequirements"
+        },                {
+            "fqsen": "\\org\\schema\\Occupation\u003A\u003A\u0024estimatedSalary",
+            "name": "estimatedSalary",
+            "summary": "An\u0020estimated\u0020salary\u0020for\u0020a\u0020job\u0020posting\u0020or\u0020occupation,\u0020based\u0020on\u0020a\u0020variety\u0020of\u0020variables\u0020including,\nbut\u0020not\u0020limited\u0020to\u0020industry,\u0020job\u0020title,\u0020and\u0020location.",
+            "url": "classes/org-schema-Occupation.html#property_estimatedSalary"
+        },                {
+            "fqsen": "\\org\\schema\\Occupation\u003A\u003A\u0024experienceRequirements",
+            "name": "experienceRequirements",
+            "summary": "Description\u0020of\u0020skills\u0020and\u0020experience\u0020needed\u0020for\u0020the\u0020position\u0020or\u0020Occupation.",
+            "url": "classes/org-schema-Occupation.html#property_experienceRequirements"
+        },                {
+            "fqsen": "\\org\\schema\\Occupation\u003A\u003A\u0024occupationLocation",
+            "name": "occupationLocation",
+            "summary": "The\u0020region\/country\u0020for\u0020which\u0020this\u0020occupational\u0020description\u0020is\u0020appropriate.",
+            "url": "classes/org-schema-Occupation.html#property_occupationLocation"
+        },                {
+            "fqsen": "\\org\\schema\\Occupation\u003A\u003A\u0024qualifications",
+            "name": "qualifications",
+            "summary": "Specific\u0020qualifications\u0020required\u0020for\u0020this\u0020role\u0020or\u0020Occupation.",
+            "url": "classes/org-schema-Occupation.html#property_qualifications"
+        },                {
+            "fqsen": "\\org\\schema\\Occupation\u003A\u003A\u0024responsibilities",
+            "name": "responsibilities",
+            "summary": "Responsibilities\u0020associated\u0020with\u0020this\u0020role\u0020or\u0020Occupation.",
+            "url": "classes/org-schema-Occupation.html#property_responsibilities"
+        },                {
+            "fqsen": "\\org\\schema\\Occupation\u003A\u003A\u0024skills",
+            "name": "skills",
+            "summary": "A\u0020statement\u0020of\u0020knowledge,\u0020skill,\u0020ability,\u0020task\u0020or\u0020any\u0020other\u0020assertion\u0020expressing\u0020a\u0020competency\nthat\u0020is\u0020either\u0020claimed\u0020by\u0020a\u0020person,\u0020an\u0020organization\u0020or\u0020desired\u0020or\u0020required\nto\u0020fulfill\u0020a\u0020role\u0020or\u0020to\u0020work\u0020in\u0020an\u0020occupation.",
+            "url": "classes/org-schema-Occupation.html#property_skills"
+        },                {
+            "fqsen": "\\org\\schema\\OccupationExperienceRequirements",
+            "name": "OccupationExperienceRequirements",
+            "summary": "Indicates\u0020employment\u002Drelated\u0020experience\u0020requirements,\u0020e.g.\u0020monthsOfExperience.",
+            "url": "classes/org-schema-OccupationExperienceRequirements.html"
+        },                {
+            "fqsen": "\\org\\schema\\OccupationExperienceRequirements\u003A\u003A\u0024monthsOfExperience",
+            "name": "monthsOfExperience",
+            "summary": "Indicates\u0020the\u0020minimal\u0020number\u0020of\u0020months\u0020of\u0020experience\u0020required\u0020for\u0020a\u0020position.",
+            "url": "classes/org-schema-OccupationExperienceRequirements.html#property_monthsOfExperience"
         },                {
             "fqsen": "\\org\\schema\\Offer",
             "name": "Offer",
@@ -4266,6 +4346,26 @@ Search.appendIndex(
             "summary": "The\u0020Value\u002Dadded\u0020Tax\u0020ID\u0020of\u0020the\u0020organization\u0020or\u0020person.",
             "url": "classes/org-schema-Organization.html#property_vatID"
         },                {
+            "fqsen": "\\org\\schema\\organizations\\Consortium",
+            "name": "Consortium",
+            "summary": "A\u0020Consortium\u0020is\u0020a\u0020membership\u0020Organization\u0020whose\u0020members\u0020are\u0020typically\u0020Organizations.",
+            "url": "classes/org-schema-organizations-Consortium.html"
+        },                {
+            "fqsen": "\\org\\schema\\organizations\\Cooperative",
+            "name": "Cooperative",
+            "summary": "An\u0020organization\u0020that\u0020is\u0020a\u0020joint\u0020project\u0020of\u0020multiple\u0020organizations\u0020or\u0020persons.",
+            "url": "classes/org-schema-organizations-Cooperative.html"
+        },                {
+            "fqsen": "\\org\\schema\\organizations\\Corporation",
+            "name": "Corporation",
+            "summary": "Organization\u003A\u0020A\u0020business\u0020corporation.",
+            "url": "classes/org-schema-organizations-Corporation.html"
+        },                {
+            "fqsen": "\\org\\schema\\organizations\\Corporation\u003A\u003A\u0024tickerSymbol",
+            "name": "tickerSymbol",
+            "summary": "The\u0020exchange\u0020traded\u0020instrument\u0020associated\u0020with\u0020a\u0020Corporation\u0020object.",
+            "url": "classes/org-schema-organizations-Corporation.html#property_tickerSymbol"
+        },                {
             "fqsen": "\\org\\schema\\organizations\\EducationalOrganization",
             "name": "EducationalOrganization",
             "summary": "An\u0020educational\u0020organization.",
@@ -4281,10 +4381,115 @@ Search.appendIndex(
             "summary": "The\u0020general\u0020opening\u0020hours\u0020for\u0020a\u0020business.\u0020Opening\u0020hours\u0020can\u0020be\u0020specified\u0020as\u0020a\u0020weekly\u0020time\u0020range,\u0020starting\u0020with\u0020days,\u0020then\u0020times\u0020per\u0020day.\u0020Multiple\u0020days\u0020can\u0020be\u0020listed\u0020with\u0020commas\u0020\u0027,\u0027\u0020separating\u0020each\u0020day.\u0020Day\u0020or\u0020time\u0020ranges\u0020are\u0020specified\u0020using\u0020a\u0020hyphen\u0020\u0027\u002D\u0027.",
             "url": "classes/org-schema-organizations-EducationalOrganization.html#property_openingHours"
         },                {
+            "fqsen": "\\org\\schema\\organizations\\FundingScheme",
+            "name": "FundingScheme",
+            "summary": "A\u0020FundingScheme\u0020combines\u0020organizational,\u0020project\u0020and\u0020policy\u0020aspects\u0020of\u0020grant\u002Dbased\u0020funding\u0020that\u0020sets\u0020guidelines,\nprinciples\u0020and\u0020mechanisms\u0020to\u0020support\u0020other\u0020kinds\u0020of\u0020projects\u0020and\u0020activities.",
+            "url": "classes/org-schema-organizations-FundingScheme.html"
+        },                {
+            "fqsen": "\\org\\schema\\organizations\\GovernmentOrganization",
+            "name": "GovernmentOrganization",
+            "summary": "A\u0020governmental\u0020organization\u0020or\u0020agency.",
+            "url": "classes/org-schema-organizations-GovernmentOrganization.html"
+        },                {
+            "fqsen": "\\org\\schema\\organizations\\LibrarySystem",
+            "name": "LibrarySystem",
+            "summary": "A\u0020LibrarySystem\u0020is\u0020a\u0020collaborative\u0020system\u0020amongst\u0020several\u0020libraries.",
+            "url": "classes/org-schema-organizations-LibrarySystem.html"
+        },                {
+            "fqsen": "\\org\\schema\\organizations\\LocalBusiness",
+            "name": "LocalBusiness",
+            "summary": "A\u0020particular\u0020physical\u0020business\u0020or\u0020branch\u0020of\u0020an\u0020organization.\u0020Examples\u0020of\u0020LocalBusiness\u0020include\u0020a\u0020restaurant,\na\u0020particular\u0020branch\u0020of\u0020a\u0020restaurant\u0020chain,\u0020a\u0020branch\u0020of\u0020a\u0020bank,\u0020a\u0020medical\u0020practice,\u0020a\u0020club,\u0020a\u0020bowling\u0020alley,\u0020etc.",
+            "url": "classes/org-schema-organizations-LocalBusiness.html"
+        },                {
+            "fqsen": "\\org\\schema\\organizations\\LocalBusiness\u003A\u003A\u0024currencyAccepted",
+            "name": "currencyAccepted",
+            "summary": "The\u0020currency\u0020accepted.",
+            "url": "classes/org-schema-organizations-LocalBusiness.html#property_currencyAccepted"
+        },                {
+            "fqsen": "\\org\\schema\\organizations\\LocalBusiness\u003A\u003A\u0024openingHours",
+            "name": "openingHours",
+            "summary": "The\u0020general\u0020opening\u0020hours\u0020for\u0020a\u0020business.\u0020Opening\u0020hours\u0020can\u0020be\u0020specified\u0020as\u0020a\u0020weekly\u0020time\u0020range,\u0020starting\u0020with\u0020days,\u0020then\u0020times\u0020per\u0020day.",
+            "url": "classes/org-schema-organizations-LocalBusiness.html#property_openingHours"
+        },                {
+            "fqsen": "\\org\\schema\\organizations\\LocalBusiness\u003A\u003A\u0024paymentAccepted",
+            "name": "paymentAccepted",
+            "summary": "Cash,\u0020Credit\u0020Card,\u0020Cryptocurrency,\u0020Local\u0020Exchange\u0020Tradings\u0020System,\u0020etc.",
+            "url": "classes/org-schema-organizations-LocalBusiness.html#property_paymentAccepted"
+        },                {
+            "fqsen": "\\org\\schema\\organizations\\LocalBusiness\u003A\u003A\u0024priceRange",
+            "name": "priceRange",
+            "summary": "The\u0020price\u0020range\u0020of\u0020the\u0020business,\u0020for\u0020example\u0020\u0024\u0024\u0024.",
+            "url": "classes/org-schema-organizations-LocalBusiness.html#property_priceRange"
+        },                {
+            "fqsen": "\\org\\schema\\organizations\\MedicalOrganization",
+            "name": "MedicalOrganization",
+            "summary": "A\u0020medical\u0020organization\u0020\u0028physical\u0020or\u0020not\u0029,\u0020such\u0020as\u0020hospital,\u0020institution\u0020or\u0020clinic.",
+            "url": "classes/org-schema-organizations-MedicalOrganization.html"
+        },                {
+            "fqsen": "\\org\\schema\\organizations\\MedicalOrganization\u003A\u003A\u0024healthPlanNetworkId",
+            "name": "healthPlanNetworkId",
+            "summary": "Name\u0020or\u0020unique\u0020ID\u0020of\u0020network.\u0020\u0028Networks\u0020are\u0020often\u0020reused\u0020across\u0020different\u0020insurance\u0020plans.\u0029",
+            "url": "classes/org-schema-organizations-MedicalOrganization.html#property_healthPlanNetworkId"
+        },                {
+            "fqsen": "\\org\\schema\\organizations\\MedicalOrganization\u003A\u003A\u0024isAcceptingNewPatients",
+            "name": "isAcceptingNewPatients",
+            "summary": "Whether\u0020the\u0020provider\u0020is\u0020accepting\u0020new\u0020patients.",
+            "url": "classes/org-schema-organizations-MedicalOrganization.html#property_isAcceptingNewPatients"
+        },                {
+            "fqsen": "\\org\\schema\\organizations\\MedicalOrganization\u003A\u003A\u0024medicalSpecialty",
+            "name": "medicalSpecialty",
+            "summary": "A\u0020medical\u0020specialty\u0020of\u0020the\u0020provider.",
+            "url": "classes/org-schema-organizations-MedicalOrganization.html#property_medicalSpecialty"
+        },                {
+            "fqsen": "\\org\\schema\\organizations\\NGO",
+            "name": "NGO",
+            "summary": "Non\u002Dgovernmental\u0020Organization.",
+            "url": "classes/org-schema-organizations-NGO.html"
+        },                {
+            "fqsen": "\\org\\schema\\organizations\\OnlineBusiness",
+            "name": "OnlineBusiness",
+            "summary": "A\u0020particular\u0020online\u0020business,\u0020either\u0020standalone\u0020or\u0020the\u0020online\u0020part\u0020of\u0020a\u0020broader\u0020organization.",
+            "url": "classes/org-schema-organizations-OnlineBusiness.html"
+        },                {
             "fqsen": "\\org\\schema\\organizations\\PerformingGroup",
             "name": "PerformingGroup",
             "summary": "A\u0020performance\u0020group,\u0020such\u0020as\u0020a\u0020band,\u0020an\u0020orchestra,\u0020or\u0020a\u0020circus.",
             "url": "classes/org-schema-organizations-PerformingGroup.html"
+        },                {
+            "fqsen": "\\org\\schema\\organizations\\PoliticalParty",
+            "name": "PoliticalParty",
+            "summary": "Political\u0020Party.",
+            "url": "classes/org-schema-organizations-PoliticalParty.html"
+        },                {
+            "fqsen": "\\org\\schema\\organizations\\Project",
+            "name": "Project",
+            "summary": "An\u0020enterprise\u0020\u0028potentially\u0020individual\u0020but\u0020typically\u0020collaborative\u0029,\u0020planned\u0020to\u0020achieve\u0020a\u0020particular\u0020aim.",
+            "url": "classes/org-schema-organizations-Project.html"
+        },                {
+            "fqsen": "\\org\\schema\\organizations\\ResearchOrganisation",
+            "name": "ResearchOrganisation",
+            "summary": "A\u0020Research\u0020Organization\u0020\u0028e.g.\u0020scientific\u0020institute,\u0020research\u0020company\u0029.",
+            "url": "classes/org-schema-organizations-ResearchOrganisation.html"
+        },                {
+            "fqsen": "\\org\\schema\\organizations\\SearchRescueOrganization",
+            "name": "SearchRescueOrganization",
+            "summary": "A\u0020Search\u0020and\u0020Rescue\u0020organization\u0020of\u0020some\u0020kind.",
+            "url": "classes/org-schema-organizations-SearchRescueOrganization.html"
+        },                {
+            "fqsen": "\\org\\schema\\organizations\\SportsOrganization",
+            "name": "SportsOrganization",
+            "summary": "Represents\u0020the\u0020collection\u0020of\u0020all\u0020sports\u0020organizations,\u0020including\u0020sports\u0020teams,\u0020governing\u0020bodies,\u0020and\u0020sports\u0020associations.",
+            "url": "classes/org-schema-organizations-SportsOrganization.html"
+        },                {
+            "fqsen": "\\org\\schema\\organizations\\SportsOrganization\u003A\u003A\u0024sport",
+            "name": "sport",
+            "summary": "A\u0020type\u0020of\u0020sport\u0020\u0028e.g.\u0020Baseball\u0029.",
+            "url": "classes/org-schema-organizations-SportsOrganization.html#property_sport"
+        },                {
+            "fqsen": "\\org\\schema\\organizations\\WorkersUnion",
+            "name": "WorkersUnion",
+            "summary": "A\u0020Workers\u0020Union\u0020\u0028also\u0020known\u0020as\u0020a\u0020Labor\u0020Union,\u0020Labour\u0020Union,\u0020or\u0020Trade\u0020Union\u0029\u0020is\u0020an\u0020organization\u0020that\u0020promotes\nthe\u0020interests\u0020of\u0020its\u0020worker\u0020members\u0020by\u0020collectively\u0020bargaining\u0020with\u0020management,\u0020organizing,\u0020and\u0020political\u0020lobbying.",
+            "url": "classes/org-schema-organizations-WorkersUnion.html"
         },                {
             "fqsen": "\\org\\schema\\OwnershipInfo",
             "name": "OwnershipInfo",
@@ -4471,6 +4676,11 @@ Search.appendIndex(
             "summary": "The\u0020brand\u0028s\u0029\u0020associated\u0020with\u0020a\u0020product\u0020or\u0020service,\u0020or\u0020the\u0020brand\u0028s\u0029\u0020maintained\u0020by\u0020an\u0020organization\u0020or\u0020business\u0020person.",
             "url": "classes/org-schema-Person.html#property_brand"
         },                {
+            "fqsen": "\\org\\schema\\Person\u003A\u003A\u0024callSign",
+            "name": "callSign",
+            "summary": "A\u0020callsign,\u0020as\u0020used\u0020in\u0020broadcasting\u0020and\u0020radio\u0020communications\u0020to\u0020identify\u0020people,\nradio\u0020and\u0020TV\u0020stations,\u0020or\u0020vehicles.",
+            "url": "classes/org-schema-Person.html#property_callSign"
+        },                {
             "fqsen": "\\org\\schema\\Person\u003A\u003A\u0024children",
             "name": "children",
             "summary": "The\u0020children\u0020of\u0020the\u0020person.",
@@ -4526,6 +4736,11 @@ Search.appendIndex(
             "summary": "A\u0020person\u0020or\u0020organization\u0020that\u0020supports\u0020\u0028sponsors\u0029\u0020something\u0020through\u0020some\u0020kind\u0020of\u0020financial\u0020contribution.",
             "url": "classes/org-schema-Person.html#property_funder"
         },                {
+            "fqsen": "\\org\\schema\\Person\u003A\u003A\u0024funding",
+            "name": "funding",
+            "summary": "A\u0020Grant\u0020that\u0020directly\u0020or\u0020indirectly\u0020provide\u0020funding\u0020or\u0020sponsorship\u0020for\u0020this\u0020item.",
+            "url": "classes/org-schema-Person.html#property_funding"
+        },                {
             "fqsen": "\\org\\schema\\Person\u003A\u003A\u0024gender",
             "name": "gender",
             "summary": "The\u0020gender\u0020of\u0020the\u0020user.",
@@ -4545,6 +4760,11 @@ Search.appendIndex(
             "name": "hasCertification",
             "summary": "Certification\u0020information\u0020about\u0020a\u0020product,\u0020organization,\u0020service,\u0020place,\u0020or\u0020person.",
             "url": "classes/org-schema-Person.html#property_hasCertification"
+        },                {
+            "fqsen": "\\org\\schema\\Person\u003A\u003A\u0024hasCredential",
+            "name": "hasCredential",
+            "summary": "A\u0020credential\u0020awarded\u0020to\u0020the\u0020Person\u0020or\u0020Organization.",
+            "url": "classes/org-schema-Person.html#property_hasCredential"
         },                {
             "fqsen": "\\org\\schema\\Person\u003A\u003A\u0024hasOccupation",
             "name": "hasOccupation",
@@ -4666,6 +4886,11 @@ Search.appendIndex(
             "summary": "Photographs\u0020of\u0020this\u0020person\u0020\u0028legacy\u0020spelling\u003B\u0020see\u0020singular\u0020form,\u0020photo\u0029.",
             "url": "classes/org-schema-Person.html#property_photos"
         },                {
+            "fqsen": "\\org\\schema\\Person\u003A\u003A\u0024pronouns",
+            "name": "pronouns",
+            "summary": "A\u0020short\u0020string\u0020listing\u0020or\u0020describing\u0020pronouns\u0020for\u0020a\u0020person.",
+            "url": "classes/org-schema-Person.html#property_pronouns"
+        },                {
             "fqsen": "\\org\\schema\\Person\u003A\u003A\u0024publishingPrinciples",
             "name": "publishingPrinciples",
             "summary": "The\u0020publishingPrinciples\u0020property\u0020indicates\u0020\u0028typically\u0020via\u0020URL\u0029\u0020a\u0020document\u0020describing\u0020the\u0020editorial\u0020principles\u0020of\u0020an\u0020Organization\u0020\u0028or\u0020individual,\u0020e.g.\u0020a\u0020Person\u0020writing\u0020a\u0020blog\u0029\u0020that\u0020relate\u0020to\u0020their\u0020activities\u0020as\u0020a\u0020publisher,\u0020e.g.\u0020ethics\u0020or\u0020diversity\u0020policies.\u0020When\u0020applied\u0020to\u0020a\u0020CreativeWork\u0020\u0028e.g.\u0020NewsArticle\u0029\u0020the\u0020principles\u0020are\u0020those\u0020of\u0020the\u0020party\u0020primarily\u0020responsible\u0020for\u0020the\u0020creation\u0020of\u0020the\u0020CreativeWork.",
@@ -4675,11 +4900,6 @@ Search.appendIndex(
             "name": "relatedTo",
             "summary": "The\u0020most\u0020generic\u0020familial\u0020relation.",
             "url": "classes/org-schema-Person.html#property_relatedTo"
-        },                {
-            "fqsen": "\\org\\schema\\Person\u003A\u003A\u0024remarks",
-            "name": "remarks",
-            "summary": "The\u0020remarks\u0020about\u0020the\u0020resource.",
-            "url": "classes/org-schema-Person.html#property_remarks"
         },                {
             "fqsen": "\\org\\schema\\Person\u003A\u003A\u0024seeks",
             "name": "seeks",
@@ -6296,20 +6516,25 @@ Search.appendIndex(
             "summary": "A\u0020short\u0020description\u0020of\u0020the\u0020item.",
             "url": "classes/org-schema-Thing.html#property_description"
         },                {
-            "fqsen": "\\org\\schema\\Thing\u003A\u003A\u0024hasPart",
-            "name": "hasPart",
-            "summary": "Indicates\u0020an\u0020item\u0020that\u0020this\u0020part\u0020of\u0020this\u0020item.",
-            "url": "classes/org-schema-Thing.html#property_hasPart"
-        },                {
             "fqsen": "\\org\\schema\\Thing\u003A\u003A\u0024disambiguatingDescription",
             "name": "disambiguatingDescription",
             "summary": "A\u0020sub\u0020property\u0020of\u0020description.\u0020A\u0020short\u0020description\u0020of\u0020the\u0020item\u0020used\u0020to\u0020disambiguate\u0020from\u0020other,\u0020similar\u0020items.\u0020Information\u0020from\u0020other\u0020properties\u0020\u0028in\u0020particular,\u0020name\u0029\u0020may\u0020be\u0020necessary\u0020for\u0020the\u0020description\u0020to\u0020be\u0020useful\u0020for\u0020disambiguation.",
             "url": "classes/org-schema-Thing.html#property_disambiguatingDescription"
         },                {
+            "fqsen": "\\org\\schema\\Thing\u003A\u003A\u0024hasPart",
+            "name": "hasPart",
+            "summary": "Indicates\u0020an\u0020item\u0020that\u0020this\u0020part\u0020of\u0020this\u0020item.",
+            "url": "classes/org-schema-Thing.html#property_hasPart"
+        },                {
             "fqsen": "\\org\\schema\\Thing\u003A\u003A\u0024identifier",
             "name": "identifier",
             "summary": "The\u0020identifier\u0020of\u0020the\u0020item.",
             "url": "classes/org-schema-Thing.html#property_identifier"
+        },                {
+            "fqsen": "\\org\\schema\\Thing\u003A\u003A\u0024mainEntityOfPage",
+            "name": "mainEntityOfPage",
+            "summary": "Indicates\u0020a\u0020page\u0020\u0028or\u0020other\u0020CreativeWork\u0029\u0020for\u0020which\u0020this\u0020thing\u0020is\u0020the\u0020main\u0020entity\u0020being\u0020described.",
+            "url": "classes/org-schema-Thing.html#property_mainEntityOfPage"
         },                {
             "fqsen": "\\org\\schema\\Thing\u003A\u003A\u0024image",
             "name": "image",
@@ -6326,10 +6551,25 @@ Search.appendIndex(
             "summary": "A\u0020legal\u0020document\u0020giving\u0020official\u0020permission\u0020to\u0020do\u0020something\u0020with\u0020the\u0020resource.",
             "url": "classes/org-schema-Thing.html#property_license"
         },                {
+            "fqsen": "\\org\\schema\\Thing\u003A\u003A\u0024potentialAction",
+            "name": "potentialAction",
+            "summary": "Indicates\u0020a\u0020potential\u0020Action,\u0020which\u0020describes\u0020an\u0020idealized\u0020action\u0020in\u0020which\u0020this\u0020thing\u0020would\u0020play\u0020an\u0020\u0027object\u0027\u0020role.",
+            "url": "classes/org-schema-Thing.html#property_potentialAction"
+        },                {
             "fqsen": "\\org\\schema\\Thing\u003A\u003A\u0024publisher",
             "name": "publisher",
             "summary": "The\u0020publisher\u0020of\u0020the\u0020resource.",
             "url": "classes/org-schema-Thing.html#property_publisher"
+        },                {
+            "fqsen": "\\org\\schema\\Thing\u003A\u003A\u0024sameAs",
+            "name": "sameAs",
+            "summary": "URL\u0020of\u0020a\u0020reference\u0020Web\u0020page\u0020that\u0020unambiguously\u0020indicates\u0020the\u0020item\u0027s\u0020identity.",
+            "url": "classes/org-schema-Thing.html#property_sameAs"
+        },                {
+            "fqsen": "\\org\\schema\\Thing\u003A\u003A\u0024subjectOf",
+            "name": "subjectOf",
+            "summary": "A\u0020CreativeWork\u0020or\u0020Event\u0020about\u0020this\u0020Thing.",
+            "url": "classes/org-schema-Thing.html#property_subjectOf"
         },                {
             "fqsen": "\\org\\schema\\Ticket",
             "name": "Ticket",
@@ -8066,45 +8306,45 @@ Search.appendIndex(
             "summary": "Types\u0020of\u0020contact\u0020points\u0020for\u0020an\u0020Organization\u0020or\u0020Person.",
             "url": "classes/xyz-oihana-schema-enumerations-ContactType.html"
         },                {
-            "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003ACUSTOMER_SERVICE",
-            "name": "CUSTOMER_SERVICE",
-            "summary": "Customer\u0020service\u0020contact.",
-            "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_CUSTOMER_SERVICE"
-        },                {
-            "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003ATECHNICAL_SUPPORT",
-            "name": "TECHNICAL_SUPPORT",
-            "summary": "Technical\u0020support\u0020contact.",
-            "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_TECHNICAL_SUPPORT"
-        },                {
             "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003ABILLING",
             "name": "BILLING",
             "summary": "Billing\u0020\/\u0020invoice\u0020support\u0020contact.",
             "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_BILLING"
         },                {
-            "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003ASALES",
-            "name": "SALES",
-            "summary": "Sales\u0020contact.",
-            "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_SALES"
-        },                {
-            "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003AMOBILE",
-            "name": "MOBILE",
-            "summary": "Mobile\u0020phone\u0020contact.",
-            "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_MOBILE"
-        },                {
-            "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003ALANDLINE",
-            "name": "LANDLINE",
-            "summary": "Landline\u0020phone\u0020contact.",
-            "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_LANDLINE"
+            "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003ACUSTOMER_SERVICE",
+            "name": "CUSTOMER_SERVICE",
+            "summary": "Customer\u0020service\u0020contact.",
+            "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_CUSTOMER_SERVICE"
         },                {
             "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003AFAX",
             "name": "FAX",
             "summary": "Fax\u0020contact.",
             "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_FAX"
         },                {
+            "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003ALANDLINE",
+            "name": "LANDLINE",
+            "summary": "Landline\u0020phone\u0020contact.",
+            "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_LANDLINE"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003AMOBILE",
+            "name": "MOBILE",
+            "summary": "Mobile\u0020phone\u0020contact.",
+            "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_MOBILE"
+        },                {
             "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003AOTHER",
             "name": "OTHER",
             "summary": "Other\u0020or\u0020miscellaneous\u0020contact.",
             "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_OTHER"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003ASALES",
+            "name": "SALES",
+            "summary": "Sales\u0020contact.",
+            "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_SALES"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003ATECHNICAL_SUPPORT",
+            "name": "TECHNICAL_SUPPORT",
+            "summary": "Technical\u0020support\u0020contact.",
+            "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_TECHNICAL_SUPPORT"
         },                {
             "fqsen": "\\xyz\\oihana\\schema\\Log",
             "name": "Log",

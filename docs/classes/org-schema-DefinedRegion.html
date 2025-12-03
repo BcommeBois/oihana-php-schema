@@ -286,7 +286,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-traits-ContactPointTrait.html#property_contactOption">$contactOption</a>
     <span>
-                        &nbsp;: mixed            </span>
+                        &nbsp;: null|string|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-enumerations-ContactPointOption.html"><abbr title="\org\schema\enumerations\ContactPointOption">ContactPointOption</abbr></a>            </span>
 </dt>
 <dd>An option available on this contact point (e.g. a toll-free number or support for hearing-impaired callers).</dd>
 
@@ -342,7 +342,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-traits-ContactPointTrait.html#property_hoursAvailable">$hoursAvailable</a>
     <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;|null            </span>
+                        &nbsp;: null|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-OpeningHoursSpecification.html"><abbr title="\org\schema\OpeningHoursSpecification">OpeningHoursSpecification</abbr></a>|string            </span>
 </dt>
 <dd>The hours during which this service or contact is available.</dd>
 
@@ -382,6 +382,13 @@
 <dd>A legal document giving official permission to do something with the resource.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Thing.html#property_mainEntityOfPage">$mainEntityOfPage</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>Indicates a page (or other CreativeWork) for which this thing is the main entity being described.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_modified">$modified</a>
     <span>
                         &nbsp;: null|string            </span>
@@ -417,9 +424,16 @@
 <dd>A defined range of postal codes.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Thing.html#property_potentialAction">$potentialAction</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Action.html"><abbr title="\org\schema\Action">Action</abbr></a>|null            </span>
+</dt>
+<dd>Indicates a potential Action, which describes an idealized action in which this thing would play an &#039;object&#039; role.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-traits-ContactPointTrait.html#property_productSupported">$productSupported</a>
     <span>
-                        &nbsp;: string|null            </span>
+                        &nbsp;: null|string|<a href="classes/org-schema-Product.html"><abbr title="\org\schema\Product">Product</abbr></a>|<a href="classes/org-schema-Service.html"><abbr title="\org\schema\Service">Service</abbr></a>|array&lt;string|int, mixed&gt;            </span>
 </dt>
 <dd>The product or service this support contact point is related to (such as product support for a particular product line).</dd>
 
@@ -429,6 +443,20 @@
                         &nbsp;: string|array&lt;string|int, string|<a href="classes/org-schema-Person.html"><abbr title="\org\schema\Person">Person</abbr></a>|<a href="classes/org-schema-Organization.html"><abbr title="\org\schema\Organization">Organization</abbr></a>&gt;|<a href="classes/org-schema-Person.html"><abbr title="\org\schema\Person">Person</abbr></a>|<a href="classes/org-schema-Organization.html"><abbr title="\org\schema\Organization">Organization</abbr></a>|null            </span>
 </dt>
 <dd>The publisher of the resource.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Thing.html#property_sameAs">$sameAs</a>
+    <span>
+                        &nbsp;: string|array&lt;string|int, mixed&gt;|null            </span>
+</dt>
+<dd>URL of a reference Web page that unambiguously indicates the item&#039;s identity.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Thing.html#property_subjectOf">$subjectOf</a>
+    <span>
+                        &nbsp;: null|string|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-CreativeWork.html"><abbr title="\org\schema\CreativeWork">CreativeWork</abbr></a>|<a href="classes/org-schema-Event.html"><abbr title="\org\schema\Event">Event</abbr></a>            </span>
+</dt>
+<dd>A CreativeWork or Event about this Thing.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-traits-ContactPointTrait.html#property_telephone">$telephone</a>
@@ -992,7 +1020,7 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ContactPointTrait.php"><a href="files/src-org-schema-traits-contactpointtrait.html"><abbr title="src/org/schema/traits/ContactPointTrait.php">ContactPointTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">17</span>
+    <span class="phpdocumentor-element-found-in__line">21</span>
 
     </aside>
 
@@ -1030,7 +1058,7 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ContactPointTrait.php"><a href="files/src-org-schema-traits-contactpointtrait.html"><abbr title="src/org/schema/traits/ContactPointTrait.php">ContactPointTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">24</span>
+    <span class="phpdocumentor-element-found-in__line">28</span>
 
     </aside>
 
@@ -1070,7 +1098,7 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ContactPointTrait.php"><a href="files/src-org-schema-traits-contactpointtrait.html"><abbr title="src/org/schema/traits/ContactPointTrait.php">ContactPointTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">30</span>
+    <span class="phpdocumentor-element-found-in__line">34</span>
 
     </aside>
 
@@ -1079,7 +1107,7 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">mixed</span>
+            <span class="phpdocumentor-signature__type">null|string|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-enumerations-ContactPointOption.html"><abbr title="\org\schema\enumerations\ContactPointOption">ContactPointOption</abbr></a></span>
     <span class="phpdocumentor-signature__name">$contactOption</span>
     </code>
 
@@ -1108,7 +1136,7 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ContactPointTrait.php"><a href="files/src-org-schema-traits-contactpointtrait.html"><abbr title="src/org/schema/traits/ContactPointTrait.php">ContactPointTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">37</span>
+    <span class="phpdocumentor-element-found-in__line">41</span>
 
     </aside>
 
@@ -1224,7 +1252,7 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">86</span>
+    <span class="phpdocumentor-element-found-in__line">80</span>
 
     </aside>
 
@@ -1262,7 +1290,7 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ContactPointTrait.php"><a href="files/src-org-schema-traits-contactpointtrait.html"><abbr title="src/org/schema/traits/ContactPointTrait.php">ContactPointTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">43</span>
+    <span class="phpdocumentor-element-found-in__line">47</span>
 
     </aside>
 
@@ -1300,7 +1328,7 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ContactPointTrait.php"><a href="files/src-org-schema-traits-contactpointtrait.html"><abbr title="src/org/schema/traits/ContactPointTrait.php">ContactPointTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">49</span>
+    <span class="phpdocumentor-element-found-in__line">53</span>
 
     </aside>
 
@@ -1338,7 +1366,7 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">81</span>
+    <span class="phpdocumentor-element-found-in__line">86</span>
 
     </aside>
 
@@ -1376,7 +1404,7 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ContactPointTrait.php"><a href="files/src-org-schema-traits-contactpointtrait.html"><abbr title="src/org/schema/traits/ContactPointTrait.php">ContactPointTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">55</span>
+    <span class="phpdocumentor-element-found-in__line">59</span>
 
     </aside>
 
@@ -1385,7 +1413,7 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|null</span>
+            <span class="phpdocumentor-signature__type">null|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-OpeningHoursSpecification.html"><abbr title="\org\schema\OpeningHoursSpecification">OpeningHoursSpecification</abbr></a>|string</span>
     <span class="phpdocumentor-signature__name">$hoursAvailable</span>
     </code>
 
@@ -1490,7 +1518,7 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">97</span>
+    <span class="phpdocumentor-element-found-in__line">103</span>
 
     </aside>
 
@@ -1528,7 +1556,7 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">103</span>
+    <span class="phpdocumentor-element-found-in__line">109</span>
 
     </aside>
 
@@ -1566,7 +1594,7 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">109</span>
+    <span class="phpdocumentor-element-found-in__line">115</span>
 
     </aside>
 
@@ -1577,6 +1605,44 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
         <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__type">string|object|null</span>
     <span class="phpdocumentor-signature__name">$license</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_mainEntityOfPage">
+        $mainEntityOfPage
+        <a href="classes/org-schema-Thing.html#property_mainEntityOfPage" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">97</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Indicates a page (or other CreativeWork) for which this thing is the main entity being described.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$mainEntityOfPage</span>
     </code>
 
     
@@ -1784,6 +1850,44 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
             -public
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_potentialAction">
+        $potentialAction
+        <a href="classes/org-schema-Thing.html#property_potentialAction" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">121</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Indicates a potential Action, which describes an idealized action in which this thing would play an &#039;object&#039; role.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Action.html"><abbr title="\org\schema\Action">Action</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__name">$potentialAction</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_productSupported">
         $productSupported
         <a href="classes/org-schema-traits-ContactPointTrait.html#property_productSupported" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1794,7 +1898,7 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ContactPointTrait.php"><a href="files/src-org-schema-traits-contactpointtrait.html"><abbr title="src/org/schema/traits/ContactPointTrait.php">ContactPointTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">61</span>
+    <span class="phpdocumentor-element-found-in__line">65</span>
 
     </aside>
 
@@ -1803,7 +1907,7 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">string|null</span>
+            <span class="phpdocumentor-signature__type">null|string|<a href="classes/org-schema-Product.html"><abbr title="\org\schema\Product">Product</abbr></a>|<a href="classes/org-schema-Service.html"><abbr title="\org\schema\Service">Service</abbr></a>|array&lt;string|int, mixed&gt;</span>
     <span class="phpdocumentor-signature__name">$productSupported</span>
     </code>
 
@@ -1832,7 +1936,7 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">115</span>
+    <span class="phpdocumentor-element-found-in__line">127</span>
 
     </aside>
 
@@ -1860,6 +1964,84 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
             -public
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_sameAs">
+        $sameAs
+        <a href="classes/org-schema-Thing.html#property_sameAs" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">134</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">URL of a reference Web page that unambiguously indicates the item&#039;s identity.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|array&lt;string|int, mixed&gt;|null</span>
+    <span class="phpdocumentor-signature__name">$sameAs</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_subjectOf">
+        $subjectOf
+        <a href="classes/org-schema-Thing.html#property_subjectOf" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">141</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A CreativeWork or Event about this Thing.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">null|string|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-CreativeWork.html"><abbr title="\org\schema\CreativeWork">CreativeWork</abbr></a>|<a href="classes/org-schema-Event.html"><abbr title="\org\schema\Event">Event</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$subjectOf</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_telephone">
         $telephone
         <a href="classes/org-schema-traits-ContactPointTrait.html#property_telephone" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1870,7 +2052,7 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ContactPointTrait.php"><a href="files/src-org-schema-traits-contactpointtrait.html"><abbr title="src/org/schema/traits/ContactPointTrait.php">ContactPointTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">67</span>
+    <span class="phpdocumentor-element-found-in__line">71</span>
 
     </aside>
 
@@ -2509,13 +2691,17 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_image">$image</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_isPartOf">$isPartOf</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_license">$license</a></li>
+                                                    <li class=""><a href="classes/org-schema-Thing.html#property_mainEntityOfPage">$mainEntityOfPage</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_modified">$modified</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_name">$name</a></li>
                                                     <li class=""><a href="classes/org-schema-DefinedRegion.html#property_postalCode">$postalCode</a></li>
                                                     <li class=""><a href="classes/org-schema-DefinedRegion.html#property_postalCodePrefix">$postalCodePrefix</a></li>
                                                     <li class=""><a href="classes/org-schema-DefinedRegion.html#property_postalCodeRange">$postalCodeRange</a></li>
+                                                    <li class=""><a href="classes/org-schema-Thing.html#property_potentialAction">$potentialAction</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-ContactPointTrait.html#property_productSupported">$productSupported</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_publisher">$publisher</a></li>
+                                                    <li class=""><a href="classes/org-schema-Thing.html#property_sameAs">$sameAs</a></li>
+                                                    <li class=""><a href="classes/org-schema-Thing.html#property_subjectOf">$subjectOf</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-ContactPointTrait.html#property_telephone">$telephone</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_url">$url</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-ThingTrait.html#property_atContext">$atContext</a></li>

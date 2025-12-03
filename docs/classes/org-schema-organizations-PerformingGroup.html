@@ -130,17 +130,30 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/organizations/PerformingGroup.php"><a href="files/src-org-schema-organizations-performinggroup.html"><abbr title="src/org/schema/organizations/PerformingGroup.php">PerformingGroup.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">11</span>
+    <span class="phpdocumentor-element-found-in__line">12</span>
 
     </aside>
 
             <p class="phpdocumentor-summary">A performance group, such as a band, an orchestra, or a circus.</p>
 
 
-    <section class="phpdocumentor-description"><p>https://schema.org/PerformingGroup</p>
-</section>
 
 
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/org-schema-organizations-PerformingGroup.html#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                    <span class="phpdocumentor-tag-link"><a href="https://schema.org/PerformingGroup">https://schema.org/PerformingGroup</a></span>
+                                        
+                                             
+                                    </dd>
+                                            </dl>
 
     
     
@@ -670,6 +683,13 @@ used for legal and tax purposes.</dd>
 <dd>An associated logo.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Thing.html#property_mainEntityOfPage">$mainEntityOfPage</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>Indicates a page (or other CreativeWork) for which this thing is the main entity being described.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Organization.html#property_makesOffer">$makesOffer</a>
     <span>
                         &nbsp;: array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Offer.html"><abbr title="\org\schema\Offer">Offer</abbr></a>|null            </span>
@@ -747,6 +767,13 @@ used for legal and tax purposes.</dd>
 <dd>Photographs of this organization (legacy spelling; see singular form, photo).</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Thing.html#property_potentialAction">$potentialAction</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Action.html"><abbr title="\org\schema\Action">Action</abbr></a>|null            </span>
+</dt>
+<dd>Indicates a potential Action, which describes an idealized action in which this thing would play an &#039;object&#039; role.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Organization.html#property_providers">$providers</a>
     <span>
                         &nbsp;: array&lt;string|int, mixed&gt;|null            </span>
@@ -775,6 +802,13 @@ used for legal and tax purposes.</dd>
 <dd>A review of the item.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Thing.html#property_sameAs">$sameAs</a>
+    <span>
+                        &nbsp;: string|array&lt;string|int, mixed&gt;|null            </span>
+</dt>
+<dd>URL of a reference Web page that unambiguously indicates the item&#039;s identity.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Organization.html#property_seeks">$seeks</a>
     <span>
                         &nbsp;: array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Demand.html"><abbr title="\org\schema\Demand">Demand</abbr></a>|null            </span>
@@ -801,6 +835,13 @@ used for legal and tax purposes.</dd>
                         &nbsp;: array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Person.html"><abbr title="\org\schema\Person">Person</abbr></a>|<a href="classes/org-schema-Organization.html"><abbr title="\org\schema\Organization">Organization</abbr></a>|null            </span>
 </dt>
 <dd>A person or organization that supports a thing through a pledge, promise, or financial contribution. e.g. a sponsor of a Medical Study or a corporate sponsor of an event.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Thing.html#property_subjectOf">$subjectOf</a>
+    <span>
+                        &nbsp;: null|string|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-CreativeWork.html"><abbr title="\org\schema\CreativeWork">CreativeWork</abbr></a>|<a href="classes/org-schema-Event.html"><abbr title="\org\schema\Event">Event</abbr></a>            </span>
+</dt>
+<dd>A CreativeWork or Event about this Thing.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Organization.html#property_subOrganization">$subOrganization</a>
@@ -1926,7 +1967,7 @@ also described as an organization (allowing different urls, logos, opening hours
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">86</span>
+    <span class="phpdocumentor-element-found-in__line">80</span>
 
     </aside>
 
@@ -2806,7 +2847,7 @@ lot are sold, or IndividualProduct if there is only a specific product.</li>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">81</span>
+    <span class="phpdocumentor-element-found-in__line">86</span>
 
     </aside>
 
@@ -2996,7 +3037,7 @@ lot are sold, or IndividualProduct if there is only a specific product.</li>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">97</span>
+    <span class="phpdocumentor-element-found-in__line">103</span>
 
     </aside>
 
@@ -3189,7 +3230,7 @@ for a particular organization, business person, or place.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">103</span>
+    <span class="phpdocumentor-element-found-in__line">109</span>
 
     </aside>
 
@@ -3557,7 +3598,7 @@ of a business and other addresses can be part of an organization.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">109</span>
+    <span class="phpdocumentor-element-found-in__line">115</span>
 
     </aside>
 
@@ -3644,6 +3685,44 @@ of a business and other addresses can be part of an organization.</p>
         <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__type">null|string|<a href="classes/org-schema-creativeWork-medias-ImageObject.html"><abbr title="\org\schema\creativeWork\medias\ImageObject">ImageObject</abbr></a></span>
     <span class="phpdocumentor-signature__name">$logo</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_mainEntityOfPage">
+        $mainEntityOfPage
+        <a href="classes/org-schema-Thing.html#property_mainEntityOfPage" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">97</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Indicates a page (or other CreativeWork) for which this thing is the main entity being described.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$mainEntityOfPage</span>
     </code>
 
     
@@ -4083,6 +4162,44 @@ of a business and other addresses can be part of an organization.</p>
             -public
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_potentialAction">
+        $potentialAction
+        <a href="classes/org-schema-Thing.html#property_potentialAction" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">121</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Indicates a potential Action, which describes an idealized action in which this thing would play an &#039;object&#039; role.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Action.html"><abbr title="\org\schema\Action">Action</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__name">$potentialAction</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_providers">
         $providers
         <a href="classes/org-schema-Organization.html#property_providers" class="headerlink"><i class="fas fa-link"></i></a>
@@ -4131,7 +4248,7 @@ of a business and other addresses can be part of an organization.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">115</span>
+    <span class="phpdocumentor-element-found-in__line">127</span>
 
     </aside>
 
@@ -4221,6 +4338,46 @@ of a business and other addresses can be part of an organization.</p>
     </code>
 
     
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_sameAs">
+        $sameAs
+        <a href="classes/org-schema-Thing.html#property_sameAs" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">134</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">URL of a reference Web page that unambiguously indicates the item&#039;s identity.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|array&lt;string|int, mixed&gt;|null</span>
+    <span class="phpdocumentor-signature__name">$sameAs</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.</p>
+</section>
+
     
     
 
@@ -4370,6 +4527,44 @@ of a business and other addresses can be part of an organization.</p>
         <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Person.html"><abbr title="\org\schema\Person">Person</abbr></a>|<a href="classes/org-schema-Organization.html"><abbr title="\org\schema\Organization">Organization</abbr></a>|null</span>
     <span class="phpdocumentor-signature__name">$sponsor</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_subjectOf">
+        $subjectOf
+        <a href="classes/org-schema-Thing.html#property_subjectOf" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">141</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A CreativeWork or Event about this Thing.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">null|string|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-CreativeWork.html"><abbr title="\org\schema\CreativeWork">CreativeWork</abbr></a>|<a href="classes/org-schema-Event.html"><abbr title="\org\schema\Event">Event</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$subjectOf</span>
     </code>
 
     
@@ -5231,6 +5426,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_license">$license</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_location">$location</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_logo">$logo</a></li>
+                                                    <li class=""><a href="classes/org-schema-Thing.html#property_mainEntityOfPage">$mainEntityOfPage</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_makesOffer">$makesOffer</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_member">$member</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_memberOf">$memberOf</a></li>
@@ -5242,14 +5438,17 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_owns">$owns</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_parentOrganization">$parentOrganization</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_photos">$photos</a></li>
+                                                    <li class=""><a href="classes/org-schema-Thing.html#property_potentialAction">$potentialAction</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_providers">$providers</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_publisher">$publisher</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_publishingPrinciples">$publishingPrinciples</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_review">$review</a></li>
+                                                    <li class=""><a href="classes/org-schema-Thing.html#property_sameAs">$sameAs</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_seeks">$seeks</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_skills">$skills</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_slogan">$slogan</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_sponsor">$sponsor</a></li>
+                                                    <li class=""><a href="classes/org-schema-Thing.html#property_subjectOf">$subjectOf</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_subOrganization">$subOrganization</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_taxID">$taxID</a></li>
                                                     <li class=""><a href="classes/org-schema-Organization.html#property_telephone">$telephone</a></li>

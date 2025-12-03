@@ -831,6 +831,13 @@ e.g. a region where the transaction is not allowed.</dd>
 <dd>Indicates the primary entity described in some page or other CreativeWork.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Thing.html#property_mainEntityOfPage">$mainEntityOfPage</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>Indicates a page (or other CreativeWork) for which this thing is the main entity being described.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-traits-CreativeWorkTrait.html#property_material">$material</a>
     <span>
                         &nbsp;: array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Product.html"><abbr title="\org\schema\Product">Product</abbr></a>|string|null            </span>
@@ -892,6 +899,13 @@ e.g. a region where the transaction is not allowed.</dd>
                         &nbsp;: null|int|string            </span>
 </dt>
 <dd>The position of an item in a series or sequence of items.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Thing.html#property_potentialAction">$potentialAction</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Action.html"><abbr title="\org\schema\Action">Action</abbr></a>|null            </span>
+</dt>
+<dd>Indicates a potential Action, which describes an idealized action in which this thing would play an &#039;object&#039; role.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-creativeWork-MediaObject.html#property_primary">$primary</a>
@@ -964,6 +978,13 @@ e.g. a region where the transaction is not allowed.</dd>
 <dd>A review of the item.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Thing.html#property_sameAs">$sameAs</a>
+    <span>
+                        &nbsp;: string|array&lt;string|int, mixed&gt;|null            </span>
+</dt>
+<dd>URL of a reference Web page that unambiguously indicates the item&#039;s identity.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-creativeWork-MediaObject.html#property_sha256">$sha256</a>
     <span>
                         &nbsp;: string|null            </span>
@@ -991,6 +1012,13 @@ a zero-length input has value &#039;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b
                         &nbsp;: string|int|null            </span>
 </dt>
 <dd>The startTime of something.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Thing.html#property_subjectOf">$subjectOf</a>
+    <span>
+                        &nbsp;: null|string|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-CreativeWork.html"><abbr title="\org\schema\CreativeWork">CreativeWork</abbr></a>|<a href="classes/org-schema-Event.html"><abbr title="\org\schema\Event">Event</abbr></a>            </span>
+</dt>
+<dd>A CreativeWork or Event about this Thing.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-traits-CreativeWorkTrait.html#property_temporal">$temporal</a>
@@ -3320,7 +3348,7 @@ by context and product type, and cannot be fully enumerated here.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">86</span>
+    <span class="phpdocumentor-element-found-in__line">80</span>
 
     </aside>
 
@@ -4033,7 +4061,7 @@ or a ClaimReview fact check whose publisher wants to indicate that it may no lon
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">81</span>
+    <span class="phpdocumentor-element-found-in__line">86</span>
 
     </aside>
 
@@ -4223,7 +4251,7 @@ or a ClaimReview fact check whose publisher wants to indicate that it may no lon
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">97</span>
+    <span class="phpdocumentor-element-found-in__line">103</span>
 
     </aside>
 
@@ -4493,7 +4521,7 @@ e.g. a region where the transaction is not allowed.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">103</span>
+    <span class="phpdocumentor-element-found-in__line">109</span>
 
     </aside>
 
@@ -4569,7 +4597,7 @@ e.g. a region where the transaction is not allowed.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">109</span>
+    <span class="phpdocumentor-element-found-in__line">115</span>
 
     </aside>
 
@@ -4656,6 +4684,44 @@ e.g. a region where the transaction is not allowed.</p>
         <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__type">string|object|null</span>
     <span class="phpdocumentor-signature__name">$mainEntity</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_mainEntityOfPage">
+        $mainEntityOfPage
+        <a href="classes/org-schema-Thing.html#property_mainEntityOfPage" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">97</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Indicates a page (or other CreativeWork) for which this thing is the main entity being described.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$mainEntityOfPage</span>
     </code>
 
     
@@ -5017,6 +5083,44 @@ e.g. a region where the transaction is not allowed.</p>
             -public
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_potentialAction">
+        $potentialAction
+        <a href="classes/org-schema-Thing.html#property_potentialAction" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">121</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Indicates a potential Action, which describes an idealized action in which this thing would play an &#039;object&#039; role.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Action.html"><abbr title="\org\schema\Action">Action</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__name">$potentialAction</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_primary">
         $primary
         <a href="classes/org-schema-creativeWork-MediaObject.html#property_primary" class="headerlink"><i class="fas fa-link"></i></a>
@@ -5179,7 +5283,7 @@ e.g. a region where the transaction is not allowed.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">115</span>
+    <span class="phpdocumentor-element-found-in__line">127</span>
 
     </aside>
 
@@ -5402,6 +5506,46 @@ Specify the countries in ISO 3166 format.</p>
             -public
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_sameAs">
+        $sameAs
+        <a href="classes/org-schema-Thing.html#property_sameAs" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">134</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">URL of a reference Web page that unambiguously indicates the item&#039;s identity.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|array&lt;string|int, mixed&gt;|null</span>
+    <span class="phpdocumentor-signature__name">$sameAs</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_sha256">
         $sha256
         <a href="classes/org-schema-creativeWork-MediaObject.html#property_sha256" class="headerlink"><i class="fas fa-link"></i></a>
@@ -5547,6 +5691,44 @@ For media, including audio and video, it's the time offset of the start of a cli
 Note that Event uses startDate/endDate instead of startTime/endTime, even when describing dates with times. This situation may be clarified in future revisions.</p>
 </section>
 
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_subjectOf">
+        $subjectOf
+        <a href="classes/org-schema-Thing.html#property_subjectOf" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">141</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A CreativeWork or Event about this Thing.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">null|string|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-CreativeWork.html"><abbr title="\org\schema\CreativeWork">CreativeWork</abbr></a>|<a href="classes/org-schema-Event.html"><abbr title="\org\schema\Event">Event</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$subjectOf</span>
+    </code>
+
+    
     
     
 
@@ -6698,6 +6880,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_license">$license</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_locationCreated">$locationCreated</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_mainEntity">$mainEntity</a></li>
+                                                    <li class=""><a href="classes/org-schema-Thing.html#property_mainEntityOfPage">$mainEntityOfPage</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_material">$material</a></li>
                                                     <li class=""><a href="classes/org-schema-creativeWork-medias-DataDownload.html#property_measurementMethod">$measurementMethod</a></li>
                                                     <li class=""><a href="classes/org-schema-creativeWork-medias-DataDownload.html#property_measurementTechnique">$measurementTechnique</a></li>
@@ -6707,6 +6890,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_offers">$offers</a></li>
                                                     <li class=""><a href="classes/org-schema-creativeWork-MediaObject.html#property_playerType">$playerType</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_position">$position</a></li>
+                                                    <li class=""><a href="classes/org-schema-Thing.html#property_potentialAction">$potentialAction</a></li>
                                                     <li class=""><a href="classes/org-schema-creativeWork-MediaObject.html#property_primary">$primary</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_producer">$producer</a></li>
                                                     <li class=""><a href="classes/org-schema-creativeWork-MediaObject.html#property_productionCompany">$productionCompany</a></li>
@@ -6717,10 +6901,12 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_releaseEvent">$releaseEvent</a></li>
                                                     <li class=""><a href="classes/org-schema-creativeWork-MediaObject.html#property_requiresSubscription">$requiresSubscription</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_review">$review</a></li>
+                                                    <li class=""><a href="classes/org-schema-Thing.html#property_sameAs">$sameAs</a></li>
                                                     <li class=""><a href="classes/org-schema-creativeWork-MediaObject.html#property_sha256">$sha256</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_sourceOrganization">$sourceOrganization</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_sponsor">$sponsor</a></li>
                                                     <li class=""><a href="classes/org-schema-creativeWork-MediaObject.html#property_startTime">$startTime</a></li>
+                                                    <li class=""><a href="classes/org-schema-Thing.html#property_subjectOf">$subjectOf</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_temporal">$temporal</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_temporalCoverage">$temporalCoverage</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_text">$text</a></li>

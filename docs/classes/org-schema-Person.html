@@ -129,7 +129,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">13</span>
+    <span class="phpdocumentor-element-found-in__line">14</span>
 
     </aside>
 
@@ -241,7 +241,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Person.html#property_affiliation">$affiliation</a>
     <span>
-                        &nbsp;: null|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Organization.html"><abbr title="\org\schema\Organization">Organization</abbr></a>            </span>
+                        &nbsp;: null|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Organization.html"><abbr title="\org\schema\Organization">Organization</abbr></a>|string            </span>
 </dt>
 <dd>An organization that this person is affiliated with. For example, a school/university, a club, or a team.</dd>
 
@@ -295,6 +295,14 @@
 <dd>The brand(s) associated with a product or service, or the brand(s) maintained by an organization or business person.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Person.html#property_callSign">$callSign</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>A callsign, as used in broadcasting and radio communications to identify people,
+radio and TV stations, or vehicles.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Person.html#property_children">$children</a>
     <span>
                         &nbsp;: array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Person.html"><abbr title="\org\schema\Person">Person</abbr></a>|null            </span>
@@ -311,7 +319,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Person.html#property_contactPoint">$contactPoint</a>
     <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;|<a href="classes/org-schema-ContactPoint.html"><abbr title="\org\schema\ContactPoint">ContactPoint</abbr></a>|null            </span>
+                        &nbsp;: array&lt;string|int, mixed&gt;|<a href="classes/org-schema-ContactPoint.html"><abbr title="\org\schema\ContactPoint">ContactPoint</abbr></a>|null|string            </span>
 </dt>
 <dd>A contact point for a person or organization.</dd>
 
@@ -393,6 +401,13 @@
 <dd>A person or organization that supports (sponsors) something through some kind of financial contribution.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Person.html#property_funding">$funding</a>
+    <span>
+                        &nbsp;: string|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Grant.html"><abbr title="\org\schema\Grant">Grant</abbr></a>|null            </span>
+</dt>
+<dd>A Grant that directly or indirectly provide funding or sponsorship for this item.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Person.html#property_gender">$gender</a>
     <span>
                         &nbsp;: <a href="classes/org-schema-Enumeration.html"><abbr title="\org\schema\Enumeration">Enumeration</abbr></a>|<a href="classes/org-schema-DefinedTerm.html"><abbr title="\org\schema\DefinedTerm">DefinedTerm</abbr></a>|string|null            </span>
@@ -421,9 +436,16 @@
 <dd>Certification information about a product, organization, service, place, or person.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Person.html#property_hasCredential">$hasCredential</a>
+    <span>
+                        &nbsp;: string|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-creativeWork-EducationalOccupationalCredential.html"><abbr title="\org\schema\creativeWork\EducationalOccupationalCredential">EducationalOccupationalCredential</abbr></a>|null            </span>
+</dt>
+<dd>A credential awarded to the Person or Organization.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Person.html#property_hasOccupation">$hasOccupation</a>
     <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;|string|null            </span>
+                        &nbsp;: array&lt;string|int, mixed&gt;|string|<a href="classes/org-schema-Occupation.html"><abbr title="\org\schema\Occupation">Occupation</abbr></a>|null            </span>
 </dt>
 <dd>The Person&#039;s occupation. For past professions, use Role for expressing dates.</dd>
 
@@ -451,7 +473,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Person.html#property_height">$height</a>
     <span>
-                        &nbsp;: <a href="classes/org-schema-Distance.html"><abbr title="\org\schema\Distance">Distance</abbr></a>|<a href="classes/org-schema-QuantitativeValue.html"><abbr title="\org\schema\QuantitativeValue">QuantitativeValue</abbr></a>|null            </span>
+                        &nbsp;: <a href="classes/org-schema-Distance.html"><abbr title="\org\schema\Distance">Distance</abbr></a>|<a href="classes/org-schema-QuantitativeValue.html"><abbr title="\org\schema\QuantitativeValue">QuantitativeValue</abbr></a>|null|int|float            </span>
 </dt>
 <dd>The height of the item.</dd>
 
@@ -568,6 +590,13 @@
 <dd>The location of the organization</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Thing.html#property_mainEntityOfPage">$mainEntityOfPage</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>Indicates a page (or other CreativeWork) for which this thing is the main entity being described.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Person.html#property_makesOffer">$makesOffer</a>
     <span>
                         &nbsp;: array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Offer.html"><abbr title="\org\schema\Offer">Offer</abbr></a>|null            </span>
@@ -626,7 +655,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Person.html#property_parent">$parent</a>
     <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Person.html"><abbr title="\org\schema\Person">Person</abbr></a>|null            </span>
+                        &nbsp;: array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Person.html"><abbr title="\org\schema\Person">Person</abbr></a>|null|string            </span>
 </dt>
 <dd>A parent of this person.</dd>
 
@@ -643,6 +672,20 @@
                         &nbsp;: array&lt;string|int, mixed&gt;|null            </span>
 </dt>
 <dd>Photographs of this person (legacy spelling; see singular form, photo).</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Thing.html#property_potentialAction">$potentialAction</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Action.html"><abbr title="\org\schema\Action">Action</abbr></a>|null            </span>
+</dt>
+<dd>Indicates a potential Action, which describes an idealized action in which this thing would play an &#039;object&#039; role.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Person.html#property_pronouns">$pronouns</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;|<a href="classes/org-schema-DefinedTerm.html"><abbr title="\org\schema\DefinedTerm">DefinedTerm</abbr></a>|<a href="classes/org-schema-StructuredValue.html"><abbr title="\org\schema\StructuredValue">StructuredValue</abbr></a>|string|null            </span>
+</dt>
+<dd>A short string listing or describing pronouns for a person.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_publisher">$publisher</a>
@@ -666,11 +709,11 @@
 <dd>The most generic familial relation.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a class="" href="classes/org-schema-Person.html#property_remarks">$remarks</a>
+    <a class="" href="classes/org-schema-Thing.html#property_sameAs">$sameAs</a>
     <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;|null            </span>
+                        &nbsp;: string|array&lt;string|int, mixed&gt;|null            </span>
 </dt>
-<dd>The remarks about the resource.</dd>
+<dd>URL of a reference Web page that unambiguously indicates the item&#039;s identity.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Person.html#property_seeks">$seeks</a>
@@ -708,6 +751,13 @@
 <dd>The person&#039;s spouse.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Thing.html#property_subjectOf">$subjectOf</a>
+    <span>
+                        &nbsp;: null|string|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-CreativeWork.html"><abbr title="\org\schema\CreativeWork">CreativeWork</abbr></a>|<a href="classes/org-schema-Event.html"><abbr title="\org\schema\Event">Event</abbr></a>            </span>
+</dt>
+<dd>A CreativeWork or Event about this Thing.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Person.html#property_taxID">$taxID</a>
     <span>
                         &nbsp;: string|null            </span>
@@ -738,7 +788,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Person.html#property_weight">$weight</a>
     <span>
-                        &nbsp;: null|<a href="classes/org-schema-QuantitativeValue.html"><abbr title="\org\schema\QuantitativeValue">QuantitativeValue</abbr></a>|<a href="classes/org-schema-Mass.html"><abbr title="\org\schema\Mass">Mass</abbr></a>            </span>
+                        &nbsp;: null|<a href="classes/org-schema-QuantitativeValue.html"><abbr title="\org\schema\QuantitativeValue">QuantitativeValue</abbr></a>|<a href="classes/org-schema-Mass.html"><abbr title="\org\schema\Mass">Mass</abbr></a>|int|float            </span>
 </dt>
 <dd>The weight of the product or person.</dd>
 
@@ -1109,7 +1159,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">18</span>
+    <span class="phpdocumentor-element-found-in__line">19</span>
 
     </aside>
 
@@ -1185,7 +1235,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">23</span>
+    <span class="phpdocumentor-element-found-in__line">24</span>
 
     </aside>
 
@@ -1223,7 +1273,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">29</span>
+    <span class="phpdocumentor-element-found-in__line">30</span>
 
     </aside>
 
@@ -1232,7 +1282,7 @@
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">null|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Organization.html"><abbr title="\org\schema\Organization">Organization</abbr></a></span>
+            <span class="phpdocumentor-signature__type">null|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Organization.html"><abbr title="\org\schema\Organization">Organization</abbr></a>|string</span>
     <span class="phpdocumentor-signature__name">$affiliation</span>
     </code>
 
@@ -1261,7 +1311,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">35</span>
+    <span class="phpdocumentor-element-found-in__line">36</span>
 
     </aside>
 
@@ -1337,7 +1387,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">41</span>
+    <span class="phpdocumentor-element-found-in__line">42</span>
 
     </aside>
 
@@ -1375,7 +1425,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">46</span>
+    <span class="phpdocumentor-element-found-in__line">47</span>
 
     </aside>
 
@@ -1413,7 +1463,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">51</span>
+    <span class="phpdocumentor-element-found-in__line">52</span>
 
     </aside>
 
@@ -1451,7 +1501,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">56</span>
+    <span class="phpdocumentor-element-found-in__line">57</span>
 
     </aside>
 
@@ -1489,7 +1539,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">62</span>
+    <span class="phpdocumentor-element-found-in__line">63</span>
 
     </aside>
 
@@ -1517,6 +1567,45 @@
             -public
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_callSign">
+        $callSign
+        <a href="classes/org-schema-Person.html#property_callSign" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">70</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A callsign, as used in broadcasting and radio communications to identify people,
+radio and TV stations, or vehicles.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$callSign</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_children">
         $children
         <a href="classes/org-schema-Person.html#property_children" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1527,7 +1616,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">68</span>
+    <span class="phpdocumentor-element-found-in__line">76</span>
 
     </aside>
 
@@ -1565,7 +1654,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">74</span>
+    <span class="phpdocumentor-element-found-in__line">82</span>
 
     </aside>
 
@@ -1603,7 +1692,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">80</span>
+    <span class="phpdocumentor-element-found-in__line">88</span>
 
     </aside>
 
@@ -1612,7 +1701,7 @@
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|<a href="classes/org-schema-ContactPoint.html"><abbr title="\org\schema\ContactPoint">ContactPoint</abbr></a>|null</span>
+            <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|<a href="classes/org-schema-ContactPoint.html"><abbr title="\org\schema\ContactPoint">ContactPoint</abbr></a>|null|string</span>
     <span class="phpdocumentor-signature__name">$contactPoint</span>
     </code>
 
@@ -1679,7 +1768,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">85</span>
+    <span class="phpdocumentor-element-found-in__line">93</span>
 
     </aside>
 
@@ -1717,7 +1806,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">90</span>
+    <span class="phpdocumentor-element-found-in__line">98</span>
 
     </aside>
 
@@ -1793,7 +1882,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">86</span>
+    <span class="phpdocumentor-element-found-in__line">80</span>
 
     </aside>
 
@@ -1831,7 +1920,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">95</span>
+    <span class="phpdocumentor-element-found-in__line">103</span>
 
     </aside>
 
@@ -1869,7 +1958,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">100</span>
+    <span class="phpdocumentor-element-found-in__line">108</span>
 
     </aside>
 
@@ -1907,7 +1996,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">105</span>
+    <span class="phpdocumentor-element-found-in__line">113</span>
 
     </aside>
 
@@ -1945,7 +2034,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">111</span>
+    <span class="phpdocumentor-element-found-in__line">119</span>
 
     </aside>
 
@@ -1983,7 +2072,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">117</span>
+    <span class="phpdocumentor-element-found-in__line">125</span>
 
     </aside>
 
@@ -2021,7 +2110,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">123</span>
+    <span class="phpdocumentor-element-found-in__line">131</span>
 
     </aside>
 
@@ -2049,6 +2138,44 @@
             -public
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_funding">
+        $funding
+        <a href="classes/org-schema-Person.html#property_funding" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">137</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A Grant that directly or indirectly provide funding or sponsorship for this item.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Grant.html"><abbr title="\org\schema\Grant">Grant</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__name">$funding</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_gender">
         $gender
         <a href="classes/org-schema-Person.html#property_gender" class="headerlink"><i class="fas fa-link"></i></a>
@@ -2059,7 +2186,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">128</span>
+    <span class="phpdocumentor-element-found-in__line">142</span>
 
     </aside>
 
@@ -2097,7 +2224,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">133</span>
+    <span class="phpdocumentor-element-found-in__line">147</span>
 
     </aside>
 
@@ -2135,7 +2262,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">140</span>
+    <span class="phpdocumentor-element-found-in__line">154</span>
 
     </aside>
 
@@ -2175,7 +2302,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">146</span>
+    <span class="phpdocumentor-element-found-in__line">160</span>
 
     </aside>
 
@@ -2203,6 +2330,44 @@
             -public
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_hasCredential">
+        $hasCredential
+        <a href="classes/org-schema-Person.html#property_hasCredential" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">166</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A credential awarded to the Person or Organization.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-creativeWork-EducationalOccupationalCredential.html"><abbr title="\org\schema\creativeWork\EducationalOccupationalCredential">EducationalOccupationalCredential</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__name">$hasCredential</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_hasOccupation">
         $hasOccupation
         <a href="classes/org-schema-Person.html#property_hasOccupation" class="headerlink"><i class="fas fa-link"></i></a>
@@ -2213,7 +2378,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">152</span>
+    <span class="phpdocumentor-element-found-in__line">172</span>
 
     </aside>
 
@@ -2222,7 +2387,7 @@
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|string|null</span>
+            <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|string|<a href="classes/org-schema-Occupation.html"><abbr title="\org\schema\Occupation">Occupation</abbr></a>|null</span>
     <span class="phpdocumentor-signature__name">$hasOccupation</span>
     </code>
 
@@ -2251,7 +2416,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">158</span>
+    <span class="phpdocumentor-element-found-in__line">178</span>
 
     </aside>
 
@@ -2289,7 +2454,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">81</span>
+    <span class="phpdocumentor-element-found-in__line">86</span>
 
     </aside>
 
@@ -2327,7 +2492,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">164</span>
+    <span class="phpdocumentor-element-found-in__line">184</span>
 
     </aside>
 
@@ -2365,7 +2530,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">170</span>
+    <span class="phpdocumentor-element-found-in__line">190</span>
 
     </aside>
 
@@ -2374,7 +2539,7 @@
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type"><a href="classes/org-schema-Distance.html"><abbr title="\org\schema\Distance">Distance</abbr></a>|<a href="classes/org-schema-QuantitativeValue.html"><abbr title="\org\schema\QuantitativeValue">QuantitativeValue</abbr></a>|null</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/org-schema-Distance.html"><abbr title="\org\schema\Distance">Distance</abbr></a>|<a href="classes/org-schema-QuantitativeValue.html"><abbr title="\org\schema\QuantitativeValue">QuantitativeValue</abbr></a>|null|int|float</span>
     <span class="phpdocumentor-signature__name">$height</span>
     </code>
 
@@ -2403,7 +2568,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">176</span>
+    <span class="phpdocumentor-element-found-in__line">196</span>
 
     </aside>
 
@@ -2441,7 +2606,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">182</span>
+    <span class="phpdocumentor-element-found-in__line">202</span>
 
     </aside>
 
@@ -2479,7 +2644,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">188</span>
+    <span class="phpdocumentor-element-found-in__line">208</span>
 
     </aside>
 
@@ -2593,7 +2758,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">97</span>
+    <span class="phpdocumentor-element-found-in__line">103</span>
 
     </aside>
 
@@ -2631,7 +2796,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">195</span>
+    <span class="phpdocumentor-element-found-in__line">215</span>
 
     </aside>
 
@@ -2671,7 +2836,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">201</span>
+    <span class="phpdocumentor-element-found-in__line">221</span>
 
     </aside>
 
@@ -2709,7 +2874,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">103</span>
+    <span class="phpdocumentor-element-found-in__line">109</span>
 
     </aside>
 
@@ -2747,7 +2912,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">206</span>
+    <span class="phpdocumentor-element-found-in__line">226</span>
 
     </aside>
 
@@ -2785,7 +2950,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">230</span>
+    <span class="phpdocumentor-element-found-in__line">250</span>
 
     </aside>
 
@@ -2823,7 +2988,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">212</span>
+    <span class="phpdocumentor-element-found-in__line">232</span>
 
     </aside>
 
@@ -2861,7 +3026,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">218</span>
+    <span class="phpdocumentor-element-found-in__line">238</span>
 
     </aside>
 
@@ -2899,7 +3064,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">224</span>
+    <span class="phpdocumentor-element-found-in__line">244</span>
 
     </aside>
 
@@ -2937,7 +3102,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">109</span>
+    <span class="phpdocumentor-element-found-in__line">115</span>
 
     </aside>
 
@@ -2975,7 +3140,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">235</span>
+    <span class="phpdocumentor-element-found-in__line">255</span>
 
     </aside>
 
@@ -3003,6 +3168,44 @@
             -public
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_mainEntityOfPage">
+        $mainEntityOfPage
+        <a href="classes/org-schema-Thing.html#property_mainEntityOfPage" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">97</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Indicates a page (or other CreativeWork) for which this thing is the main entity being described.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$mainEntityOfPage</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_makesOffer">
         $makesOffer
         <a href="classes/org-schema-Person.html#property_makesOffer" class="headerlink"><i class="fas fa-link"></i></a>
@@ -3013,7 +3216,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">242</span>
+    <span class="phpdocumentor-element-found-in__line">262</span>
 
     </aside>
 
@@ -3053,7 +3256,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">247</span>
+    <span class="phpdocumentor-element-found-in__line">267</span>
 
     </aside>
 
@@ -3129,7 +3332,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">253</span>
+    <span class="phpdocumentor-element-found-in__line">273</span>
 
     </aside>
 
@@ -3205,7 +3408,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">258</span>
+    <span class="phpdocumentor-element-found-in__line">278</span>
 
     </aside>
 
@@ -3243,7 +3446,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">264</span>
+    <span class="phpdocumentor-element-found-in__line">284</span>
 
     </aside>
 
@@ -3281,7 +3484,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">270</span>
+    <span class="phpdocumentor-element-found-in__line">290</span>
 
     </aside>
 
@@ -3319,7 +3522,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">276</span>
+    <span class="phpdocumentor-element-found-in__line">296</span>
 
     </aside>
 
@@ -3328,7 +3531,7 @@
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Person.html"><abbr title="\org\schema\Person">Person</abbr></a>|null</span>
+            <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Person.html"><abbr title="\org\schema\Person">Person</abbr></a>|null|string</span>
     <span class="phpdocumentor-signature__name">$parent</span>
     </code>
 
@@ -3357,7 +3560,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">282</span>
+    <span class="phpdocumentor-element-found-in__line">302</span>
 
     </aside>
 
@@ -3395,7 +3598,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">287</span>
+    <span class="phpdocumentor-element-found-in__line">307</span>
 
     </aside>
 
@@ -3423,6 +3626,91 @@
             -public
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_potentialAction">
+        $potentialAction
+        <a href="classes/org-schema-Thing.html#property_potentialAction" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">121</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Indicates a potential Action, which describes an idealized action in which this thing would play an &#039;object&#039; role.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Action.html"><abbr title="\org\schema\Action">Action</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__name">$potentialAction</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_pronouns">
+        $pronouns
+        <a href="classes/org-schema-Person.html#property_pronouns" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">327</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A short string listing or describing pronouns for a person.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|<a href="classes/org-schema-DefinedTerm.html"><abbr title="\org\schema\DefinedTerm">DefinedTerm</abbr></a>|<a href="classes/org-schema-StructuredValue.html"><abbr title="\org\schema\StructuredValue">StructuredValue</abbr></a>|string|null</span>
+    <span class="phpdocumentor-signature__name">$pronouns</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Typically the person concerned is the best authority as pronouns are
+a critical part of personal identity and expression.</p>
+<p>Publishers and consumers of this information are reminded to treat this data responsibly,
+take country-specific laws related to gender expression into account,
+and be wary of out-of-date data and drawing unwarranted inferences about the person being described.</p>
+<p>In English, formulations such as &quot;they/them&quot;, &quot;she/her&quot;, and &quot;he/him&quot; are commonly used online and can also be used here.</p>
+<p>We do not intend to enumerate all possible micro-syntaxes in all languages.</p>
+<p>More structured and well-defined external values for pronouns can be referenced using the StructuredValue or DefinedTerm values.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_publisher">
         $publisher
         <a href="classes/org-schema-Thing.html#property_publisher" class="headerlink"><i class="fas fa-link"></i></a>
@@ -3433,7 +3721,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">115</span>
+    <span class="phpdocumentor-element-found-in__line">127</span>
 
     </aside>
 
@@ -3471,7 +3759,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">293</span>
+    <span class="phpdocumentor-element-found-in__line">333</span>
 
     </aside>
 
@@ -3509,7 +3797,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">299</span>
+    <span class="phpdocumentor-element-found-in__line">339</span>
 
     </aside>
 
@@ -3537,30 +3825,32 @@
             -public
                                                                     "
 >
-    <h4 class="phpdocumentor-element__name" id="property_remarks">
-        $remarks
-        <a href="classes/org-schema-Person.html#property_remarks" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_sameAs">
+        $sameAs
+        <a href="classes/org-schema-Thing.html#property_sameAs" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                                             </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">304</span>
+    <span class="phpdocumentor-element-found-in__line">134</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">The remarks about the resource.</p>
+        <p class="phpdocumentor-summary">URL of a reference Web page that unambiguously indicates the item&#039;s identity.</p>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|null</span>
-    <span class="phpdocumentor-signature__name">$remarks</span>
+            <span class="phpdocumentor-signature__type">string|array&lt;string|int, mixed&gt;|null</span>
+    <span class="phpdocumentor-signature__name">$sameAs</span>
     </code>
 
-    
+        <section class="phpdocumentor-description"><p>E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.</p>
+</section>
+
     
     
 
@@ -3585,7 +3875,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">310</span>
+    <span class="phpdocumentor-element-found-in__line">345</span>
 
     </aside>
 
@@ -3623,7 +3913,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">316</span>
+    <span class="phpdocumentor-element-found-in__line">351</span>
 
     </aside>
 
@@ -3661,7 +3951,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">322</span>
+    <span class="phpdocumentor-element-found-in__line">357</span>
 
     </aside>
 
@@ -3699,7 +3989,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">327</span>
+    <span class="phpdocumentor-element-found-in__line">362</span>
 
     </aside>
 
@@ -3737,7 +4027,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">333</span>
+    <span class="phpdocumentor-element-found-in__line">368</span>
 
     </aside>
 
@@ -3765,6 +4055,44 @@
             -public
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_subjectOf">
+        $subjectOf
+        <a href="classes/org-schema-Thing.html#property_subjectOf" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">141</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A CreativeWork or Event about this Thing.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">null|string|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-CreativeWork.html"><abbr title="\org\schema\CreativeWork">CreativeWork</abbr></a>|<a href="classes/org-schema-Event.html"><abbr title="\org\schema\Event">Event</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$subjectOf</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_taxID">
         $taxID
         <a href="classes/org-schema-Person.html#property_taxID" class="headerlink"><i class="fas fa-link"></i></a>
@@ -3775,7 +4103,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">339</span>
+    <span class="phpdocumentor-element-found-in__line">374</span>
 
     </aside>
 
@@ -3813,7 +4141,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">345</span>
+    <span class="phpdocumentor-element-found-in__line">380</span>
 
     </aside>
 
@@ -3889,7 +4217,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">351</span>
+    <span class="phpdocumentor-element-found-in__line">386</span>
 
     </aside>
 
@@ -3927,7 +4255,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">357</span>
+    <span class="phpdocumentor-element-found-in__line">392</span>
 
     </aside>
 
@@ -3936,7 +4264,7 @@
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">null|<a href="classes/org-schema-QuantitativeValue.html"><abbr title="\org\schema\QuantitativeValue">QuantitativeValue</abbr></a>|<a href="classes/org-schema-Mass.html"><abbr title="\org\schema\Mass">Mass</abbr></a></span>
+            <span class="phpdocumentor-signature__type">null|<a href="classes/org-schema-QuantitativeValue.html"><abbr title="\org\schema\QuantitativeValue">QuantitativeValue</abbr></a>|<a href="classes/org-schema-Mass.html"><abbr title="\org\schema\Mass">Mass</abbr></a>|int|float</span>
     <span class="phpdocumentor-signature__name">$weight</span>
     </code>
 
@@ -3965,7 +4293,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">369</span>
+    <span class="phpdocumentor-element-found-in__line">404</span>
 
     </aside>
 
@@ -4003,7 +4331,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Person.php"><a href="files/src-org-schema-person.html"><abbr title="src/org/schema/Person.php">Person.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">363</span>
+    <span class="phpdocumentor-element-found-in__line">398</span>
 
     </aside>
 
@@ -4594,6 +4922,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                                                     <li class=""><a href="classes/org-schema-Person.html#property_birthDate">$birthDate</a></li>
                                                     <li class=""><a href="classes/org-schema-Person.html#property_birthPlace">$birthPlace</a></li>
                                                     <li class=""><a href="classes/org-schema-Person.html#property_brand">$brand</a></li>
+                                                    <li class=""><a href="classes/org-schema-Person.html#property_callSign">$callSign</a></li>
                                                     <li class=""><a href="classes/org-schema-Person.html#property_children">$children</a></li>
                                                     <li class=""><a href="classes/org-schema-Person.html#property_colleague">$colleague</a></li>
                                                     <li class=""><a href="classes/org-schema-Person.html#property_contactPoint">$contactPoint</a></li>
@@ -4608,10 +4937,12 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                                                     <li class=""><a href="classes/org-schema-Person.html#property_faxNumber">$faxNumber</a></li>
                                                     <li class=""><a href="classes/org-schema-Person.html#property_follows">$follows</a></li>
                                                     <li class=""><a href="classes/org-schema-Person.html#property_funder">$funder</a></li>
+                                                    <li class=""><a href="classes/org-schema-Person.html#property_funding">$funding</a></li>
                                                     <li class=""><a href="classes/org-schema-Person.html#property_gender">$gender</a></li>
                                                     <li class=""><a href="classes/org-schema-Person.html#property_givenName">$givenName</a></li>
                                                     <li class=""><a href="classes/org-schema-Person.html#property_globalLocationNumber">$globalLocationNumber</a></li>
                                                     <li class=""><a href="classes/org-schema-Person.html#property_hasCertification">$hasCertification</a></li>
+                                                    <li class=""><a href="classes/org-schema-Person.html#property_hasCredential">$hasCredential</a></li>
                                                     <li class=""><a href="classes/org-schema-Person.html#property_hasOccupation">$hasOccupation</a></li>
                                                     <li class=""><a href="classes/org-schema-Person.html#property_hasOfferCatalog">$hasOfferCatalog</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_hasPart">$hasPart</a></li>
@@ -4633,6 +4964,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                                                     <li class=""><a href="classes/org-schema-Person.html#property_knowsLanguage">$knowsLanguage</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_license">$license</a></li>
                                                     <li class=""><a href="classes/org-schema-Person.html#property_logo">$logo</a></li>
+                                                    <li class=""><a href="classes/org-schema-Thing.html#property_mainEntityOfPage">$mainEntityOfPage</a></li>
                                                     <li class=""><a href="classes/org-schema-Person.html#property_makesOffer">$makesOffer</a></li>
                                                     <li class=""><a href="classes/org-schema-Person.html#property_memberOf">$memberOf</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_modified">$modified</a></li>
@@ -4644,15 +4976,18 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                                                     <li class=""><a href="classes/org-schema-Person.html#property_parent">$parent</a></li>
                                                     <li class=""><a href="classes/org-schema-Person.html#property_performerIn">$performerIn</a></li>
                                                     <li class=""><a href="classes/org-schema-Person.html#property_photos">$photos</a></li>
+                                                    <li class=""><a href="classes/org-schema-Thing.html#property_potentialAction">$potentialAction</a></li>
+                                                    <li class=""><a href="classes/org-schema-Person.html#property_pronouns">$pronouns</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_publisher">$publisher</a></li>
                                                     <li class=""><a href="classes/org-schema-Person.html#property_publishingPrinciples">$publishingPrinciples</a></li>
                                                     <li class=""><a href="classes/org-schema-Person.html#property_relatedTo">$relatedTo</a></li>
-                                                    <li class=""><a href="classes/org-schema-Person.html#property_remarks">$remarks</a></li>
+                                                    <li class=""><a href="classes/org-schema-Thing.html#property_sameAs">$sameAs</a></li>
                                                     <li class=""><a href="classes/org-schema-Person.html#property_seeks">$seeks</a></li>
                                                     <li class=""><a href="classes/org-schema-Person.html#property_sibling">$sibling</a></li>
                                                     <li class=""><a href="classes/org-schema-Person.html#property_skills">$skills</a></li>
                                                     <li class=""><a href="classes/org-schema-Person.html#property_sponsor">$sponsor</a></li>
                                                     <li class=""><a href="classes/org-schema-Person.html#property_spouse">$spouse</a></li>
+                                                    <li class=""><a href="classes/org-schema-Thing.html#property_subjectOf">$subjectOf</a></li>
                                                     <li class=""><a href="classes/org-schema-Person.html#property_taxID">$taxID</a></li>
                                                     <li class=""><a href="classes/org-schema-Person.html#property_telephone">$telephone</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_url">$url</a></li>

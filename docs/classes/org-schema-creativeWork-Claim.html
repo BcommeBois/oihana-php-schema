@@ -763,6 +763,13 @@ e.g. application/zip for a SoftwareApplication binary, audio/mpeg for .mp3 etc.)
 <dd>Indicates the primary entity described in some page or other CreativeWork.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Thing.html#property_mainEntityOfPage">$mainEntityOfPage</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>Indicates a page (or other CreativeWork) for which this thing is the main entity being described.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-traits-CreativeWorkTrait.html#property_material">$material</a>
     <span>
                         &nbsp;: array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Product.html"><abbr title="\org\schema\Product">Product</abbr></a>|string|null            </span>
@@ -803,6 +810,13 @@ e.g. application/zip for a SoftwareApplication binary, audio/mpeg for .mp3 etc.)
                         &nbsp;: null|int|string            </span>
 </dt>
 <dd>The position of an item in a series or sequence of items.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Thing.html#property_potentialAction">$potentialAction</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Action.html"><abbr title="\org\schema\Action">Action</abbr></a>|null            </span>
+</dt>
+<dd>Indicates a potential Action, which describes an idealized action in which this thing would play an &#039;object&#039; role.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-traits-CreativeWorkTrait.html#property_producer">$producer</a>
@@ -847,6 +861,13 @@ e.g. application/zip for a SoftwareApplication binary, audio/mpeg for .mp3 etc.)
 <dd>A review of the item.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Thing.html#property_sameAs">$sameAs</a>
+    <span>
+                        &nbsp;: string|array&lt;string|int, mixed&gt;|null            </span>
+</dt>
+<dd>URL of a reference Web page that unambiguously indicates the item&#039;s identity.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-traits-CreativeWorkTrait.html#property_sourceOrganization">$sourceOrganization</a>
     <span>
                         &nbsp;: object|null            </span>
@@ -859,6 +880,13 @@ e.g. application/zip for a SoftwareApplication binary, audio/mpeg for .mp3 etc.)
                         &nbsp;: array&lt;string|int, mixed&gt;|object|string|null            </span>
 </dt>
 <dd>A person or organization that supports a thing through a pledge, promise, or financial contribution. e.g. a sponsor of a Medical Study or a corporate sponsor of an event.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Thing.html#property_subjectOf">$subjectOf</a>
+    <span>
+                        &nbsp;: null|string|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-CreativeWork.html"><abbr title="\org\schema\CreativeWork">CreativeWork</abbr></a>|<a href="classes/org-schema-Event.html"><abbr title="\org\schema\Event">Event</abbr></a>            </span>
+</dt>
+<dd>A CreativeWork or Event about this Thing.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-traits-CreativeWorkTrait.html#property_temporal">$temporal</a>
@@ -3099,7 +3127,7 @@ by context and product type, and cannot be fully enumerated here.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">86</span>
+    <span class="phpdocumentor-element-found-in__line">80</span>
 
     </aside>
 
@@ -3696,7 +3724,7 @@ or a ClaimReview fact check whose publisher wants to indicate that it may no lon
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">81</span>
+    <span class="phpdocumentor-element-found-in__line">86</span>
 
     </aside>
 
@@ -3848,7 +3876,7 @@ or a ClaimReview fact check whose publisher wants to indicate that it may no lon
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">97</span>
+    <span class="phpdocumentor-element-found-in__line">103</span>
 
     </aside>
 
@@ -4040,7 +4068,7 @@ or a ClaimReview fact check whose publisher wants to indicate that it may no lon
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">103</span>
+    <span class="phpdocumentor-element-found-in__line">109</span>
 
     </aside>
 
@@ -4116,7 +4144,7 @@ or a ClaimReview fact check whose publisher wants to indicate that it may no lon
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">109</span>
+    <span class="phpdocumentor-element-found-in__line">115</span>
 
     </aside>
 
@@ -4203,6 +4231,44 @@ or a ClaimReview fact check whose publisher wants to indicate that it may no lon
         <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__type">string|object|null</span>
     <span class="phpdocumentor-signature__name">$mainEntity</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_mainEntityOfPage">
+        $mainEntityOfPage
+        <a href="classes/org-schema-Thing.html#property_mainEntityOfPage" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">97</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Indicates a page (or other CreativeWork) for which this thing is the main entity being described.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$mainEntityOfPage</span>
     </code>
 
     
@@ -4448,6 +4514,44 @@ or a ClaimReview fact check whose publisher wants to indicate that it may no lon
             -public
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_potentialAction">
+        $potentialAction
+        <a href="classes/org-schema-Thing.html#property_potentialAction" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">121</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Indicates a potential Action, which describes an idealized action in which this thing would play an &#039;object&#039; role.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Action.html"><abbr title="\org\schema\Action">Action</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__name">$potentialAction</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_producer">
         $producer
         <a href="classes/org-schema-traits-CreativeWorkTrait.html#property_producer" class="headerlink"><i class="fas fa-link"></i></a>
@@ -4534,7 +4638,7 @@ or a ClaimReview fact check whose publisher wants to indicate that it may no lon
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">115</span>
+    <span class="phpdocumentor-element-found-in__line">127</span>
 
     </aside>
 
@@ -4676,6 +4780,46 @@ or a ClaimReview fact check whose publisher wants to indicate that it may no lon
             -public
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_sameAs">
+        $sameAs
+        <a href="classes/org-schema-Thing.html#property_sameAs" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">134</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">URL of a reference Web page that unambiguously indicates the item&#039;s identity.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|array&lt;string|int, mixed&gt;|null</span>
+    <span class="phpdocumentor-signature__name">$sameAs</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_sourceOrganization">
         $sourceOrganization
         <a href="classes/org-schema-traits-CreativeWorkTrait.html#property_sourceOrganization" class="headerlink"><i class="fas fa-link"></i></a>
@@ -4735,6 +4879,44 @@ or a ClaimReview fact check whose publisher wants to indicate that it may no lon
         <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|object|string|null</span>
     <span class="phpdocumentor-signature__name">$sponsor</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_subjectOf">
+        $subjectOf
+        <a href="classes/org-schema-Thing.html#property_subjectOf" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Thing.php"><a href="files/src-org-schema-thing.html"><abbr title="src/org/schema/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">141</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A CreativeWork or Event about this Thing.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">null|string|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-CreativeWork.html"><abbr title="\org\schema\CreativeWork">CreativeWork</abbr></a>|<a href="classes/org-schema-Event.html"><abbr title="\org\schema\Event">Event</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$subjectOf</span>
     </code>
 
     
@@ -5805,20 +5987,24 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_license">$license</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_locationCreated">$locationCreated</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_mainEntity">$mainEntity</a></li>
+                                                    <li class=""><a href="classes/org-schema-Thing.html#property_mainEntityOfPage">$mainEntityOfPage</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_material">$material</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_mentions">$mentions</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_modified">$modified</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_name">$name</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_offers">$offers</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_position">$position</a></li>
+                                                    <li class=""><a href="classes/org-schema-Thing.html#property_potentialAction">$potentialAction</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_producer">$producer</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_provider">$provider</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_publisher">$publisher</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_recordedAt">$recordedAt</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_releaseEvent">$releaseEvent</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_review">$review</a></li>
+                                                    <li class=""><a href="classes/org-schema-Thing.html#property_sameAs">$sameAs</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_sourceOrganization">$sourceOrganization</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_sponsor">$sponsor</a></li>
+                                                    <li class=""><a href="classes/org-schema-Thing.html#property_subjectOf">$subjectOf</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_temporal">$temporal</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_temporalCoverage">$temporalCoverage</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-CreativeWorkTrait.html#property_text">$text</a></li>
