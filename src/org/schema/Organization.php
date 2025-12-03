@@ -355,9 +355,9 @@ class Organization extends Thing
 
     /**
      * Legal form of the organization.
-     * @var string|object|null
+     * @var string|array|object|null
      */
-    public string|object|null $legalForm ;
+    public string|object|array|null $legalForm ;
 
     /**
      * One or multiple persons who represent this organization legally such as CEO or sole administrator.
