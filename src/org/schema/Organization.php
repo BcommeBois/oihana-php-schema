@@ -10,7 +10,8 @@ use org\schema\enumerations\NonprofitType;
 use org\schema\services\LoanOrCredit;
 
 /**
- * Entities that have a somewhat fixed, physical extension.
+ * An organization such as a school, NGO, corporation, club, etc.
+ *
  * @see http://schema.org/Organization
  */
 class Organization extends Thing
