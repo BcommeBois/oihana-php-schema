@@ -402,7 +402,7 @@ class Person extends Thing
      * Organizations that the person works for.
      * @var null|string|array|Organization
      */
-    public null|string|array|Organization $workFor ;
+    public null|string|array|Organization $worksFor ;
 }
 
 
