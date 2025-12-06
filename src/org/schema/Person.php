@@ -222,8 +222,9 @@ class Person extends Thing
 
     /**
      * The job(s) title(s) of the person (for example, Painter, etc.).
+     * @var array|string|DefinedTerm|null
      */
-    public array|string|null $jobTitle ;
+    public array|string|DefinedTerm|null $jobTitle ;
 
     /**
      * The most generic bi-directional social/work relation.
