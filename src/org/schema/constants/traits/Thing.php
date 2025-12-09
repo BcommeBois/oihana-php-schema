@@ -19,6 +19,7 @@ trait Thing
     const string MAIN_ENTITY_OF_PAGE        = 'mainEntityOfPage' ;
     const string NAME                       = 'name' ;
     const string NUM_PART                   = 'numPart' ;
+    const string OWNER                      = 'owner' ;
     const string POTENTIAL_ACTION           = 'potentialAction' ;
     const string SAME_AS                    = 'sameAs' ;
     const string SUBJECT_OF                 = 'subjectOf' ;

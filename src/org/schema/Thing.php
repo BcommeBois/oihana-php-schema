@@ -33,6 +33,12 @@ class Thing implements JsonSerializable
     public null|int|string $id  ;
 
     /**
+     * The name of the item.
+     * @var int|string|null
+     */
+    public int|string|null $name ;
+
+    /**
      * URL of the item.
      * @var int|string|null
      */
@@ -57,12 +63,6 @@ class Thing implements JsonSerializable
      * Date on which the resource was changed.
      */
     public null|string $modified ;
-
-    /**
-     * The name of the item.
-     * @var int|string|null
-     */
-    public int|string|null $name ;
 
     /**
      * An alias for the item.
@@ -113,6 +113,16 @@ class Thing implements JsonSerializable
      * @var string|object|null
      */
     public string|object|null $license ;
+
+    /**
+     * The owner of this Thing.
+     *
+     * Represents any entity (person, organization, system, or other object)
+     * that can be considered the possessor of this Thing.
+     *
+     * @var null|string|Thing
+     */
+    public null|string|Thing $owner ;
 
     /**
      * Indicates a potential Action, which describes an idealized action in which this thing would play an 'object' role.
