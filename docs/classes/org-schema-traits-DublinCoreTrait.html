@@ -1,0 +1,2792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+            <title>Oihana Php Schema</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="../">
+    <link rel="icon" href="images/favicon.ico"/>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/base.css">
+            <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/template.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" integrity="sha256-ybRkN9dBjhcS2qrW1z+hfCxq+1aBdwyQM5wlQoQVt/0=" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism-okaidia.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.css">
+                <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
+        <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
+        <script src="js/template.js"></script>
+        <script src="js/search.js"></script>
+        <script defer src="js/searchIndex.js"></script>
+    </head>
+<body id="top">
+    <header class="phpdocumentor-header phpdocumentor-section">
+    <h1 class="phpdocumentor-title">
+    <a href="" class="phpdocumentor-title__link">
+        <img src="assets/images/oihana-php-schema-logo-inline-512x160.png" alt="Oihana PHP System" style="width: 128px; height: 40px;"/>
+    </a>
+</h1>    <input class="phpdocumentor-header__menu-button" type="checkbox" id="menu-button" name="menu-button" />
+    <label class="phpdocumentor-header__menu-icon" for="menu-button">
+        <i class="fas fa-bars"></i>
+    </label>
+    <section data-search-form class="phpdocumentor-search">
+    <label>
+        <span class="visually-hidden">Search for</span>
+        <svg class="phpdocumentor-search__icon" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="7.5" cy="7.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <line x1="12.4892" y1="12.2727" x2="19.1559" y2="18.9393" stroke="currentColor" stroke-width="3"/>
+        </svg>
+        <input type="search" class="phpdocumentor-field phpdocumentor-search__field" placeholder="Loading .." disabled />
+    </label>
+</section>
+
+    <nav class="phpdocumentor-topnav">
+    <ul class="phpdocumentor-topnav__menu">
+                        <li class="phpdocumentor-topnav__menu-item -social">
+                <a href="https://github.com/BcommeBois/oihana-php-system">
+                    <span>
+                                                                        <i class="fab fa-github"></i>
+                                                
+                    </span>
+                </a>
+            </li>
+                </ul>
+</nav>
+</header>
+
+    <main class="phpdocumentor">
+        <div class="phpdocumentor-section">
+            <input class="phpdocumentor-sidebar__menu-button" type="checkbox" id="sidebar-button" name="sidebar-button" />
+<label class="phpdocumentor-sidebar__menu-icon" for="sidebar-button">
+    Menu
+</label>
+<aside class="phpdocumentor-column -three phpdocumentor-sidebar">
+                    <section class="phpdocumentor-sidebar__category -namespaces">
+            <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/org.html" class="">org</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/org-schema.html" class="">schema</a>
+                
+            </li>
+            </ul>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/xyz.html" class="">xyz</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/xyz-oihana.html" class="">oihana</a>
+                
+            </li>
+            </ul>
+
+                        </section>
+            
+    <section class="phpdocumentor-sidebar__category -reports">
+        <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
+                <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/errors.html">Errors</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/markers.html">Markers</a></h3>
+    </section>
+
+    <section class="phpdocumentor-sidebar__category -indices">
+        <h2 class="phpdocumentor-sidebar__category-header">Indices</h2>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="indices/files.html">Files</a></h3>
+    </section>
+</aside>
+
+            <div class="phpdocumentor-column -nine phpdocumentor-content">
+                                <section>
+                                        <ul class="phpdocumentor-breadcrumbs">
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/org.html">org</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/org-schema.html">schema</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/org-schema-traits.html">traits</a></li>
+    </ul>
+
+    <article class="phpdocumentor-element -trait">
+        <h2 class="phpdocumentor-content__title">
+    DublinCoreTrait
+    </h2>
+
+        <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">10</span>
+
+    </aside>
+
+            <p class="phpdocumentor-summary">The DCMI Metadata Terms trait.</p>
+
+
+
+
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                    <span class="phpdocumentor-tag-link"><a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/">https://www.dublincore.org/specifications/dublin-core/dcmi-terms/</a></span>
+                                        
+                                             
+                                    </dd>
+                                            </dl>
+
+    
+    
+<h3 id="toc">
+    Table of Contents
+    <a href="classes/org-schema-traits-DublinCoreTrait.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h3>
+
+
+
+
+
+
+
+
+
+<h4 id="toc-properties">
+    Properties
+    <a href="classes/org-schema-traits-DublinCoreTrait.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_abstract">$abstract</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>A summary of the resource.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_accessRight">$accessRight</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>Information about who access the resource or an indication of its security status.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_accrualMethod">$accrualMethod</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>The method by which items are added to a collection.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_accrualPeriodicityMore">$accrualPeriodicityMore</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>The frequency with which items are added to a collection.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_accrualPolicy">$accrualPolicy</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>The policy governing the addition of items to a collection.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_alternative">$alternative</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>An alternative name for the resource.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_available">$available</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>Date that the resource became or will become available.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_bibliographicCitation">$bibliographicCitation</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>A bibliographic reference for the resource.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_conformsTo">$conformsTo</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>An established standard to which the described resource conforms.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_contributor">$contributor</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>An entity responsible for making contributions to the resource.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_coverage">$coverage</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>The spatial or temporal topic of the resource, spatial applicability of the resource, or jurisdiction under which the resource is relevant.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_created">$created</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>Date of creation of the resource.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_creator">$creator</a>
+    <span>
+                        &nbsp;: string|object|array&lt;string|int, mixed&gt;|null            </span>
+</dt>
+<dd>An entity responsible for making the resource.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_date">$date</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>A point or period of time associated with an event in the lifecycle of the resource.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_dateAccepted">$dateAccepted</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>Date of acceptance of the resource.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_dateCopyrighted">$dateCopyrighted</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>Date of copyright of the resource.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_dateSubmitted">$dateSubmitted</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>Date of submission of the resource.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_description">$description</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>An account of the resource.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_educationLevel">$educationLevel</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>Audience Education Level</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_extent">$extent</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>The size or duration of the resource.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_format">$format</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>The file format, physical medium, or dimensions of the resource.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_hasFormat">$hasFormat</a>
+    <span>
+                        &nbsp;: string|array&lt;string|int, mixed&gt;|object|null            </span>
+</dt>
+<dd>Has Format</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_hasVersion">$hasVersion</a>
+    <span>
+                        &nbsp;: string|array&lt;string|int, mixed&gt;|object|null            </span>
+</dt>
+<dd>A related resource that is a version, edition, or adaptation of the described resource.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_identifier">$identifier</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>An unambiguous reference to the resource within a given context.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_instructionalMethodMore">$instructionalMethodMore</a>
+    <span>
+                        &nbsp;: string|object|null            </span>
+</dt>
+<dd>A process, used to engender knowledge, attitudes and skills, that the described resource is designed to support.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_isFormatOf">$isFormatOf</a>
+    <span>
+                        &nbsp;: string|object|null            </span>
+</dt>
+<dd>A pre-existing related resource that is substantially the same as the described resource, but in another format.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_isPartOf">$isPartOf</a>
+    <span>
+                        &nbsp;: string|object|null            </span>
+</dt>
+<dd>A related resource in which the described resource is physically or logically included.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_isReferencedBy">$isReferencedBy</a>
+    <span>
+                        &nbsp;: string|object|null            </span>
+</dt>
+<dd>A related resource that references, cites, or otherwise points to the described resource.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_isReplacedBy">$isReplacedBy</a>
+    <span>
+                        &nbsp;: string|object|null            </span>
+</dt>
+<dd>A related resource that supplants, displaces, or supersedes the described resource.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_isRequiredBy">$isRequiredBy</a>
+    <span>
+                        &nbsp;: string|object|array&lt;string|int, mixed&gt;|null            </span>
+</dt>
+<dd>A related resource that requires the described resource to support its function, delivery, or coherence.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_issued">$issued</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>Date of formal issuance of the resource.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_isVersionOf">$isVersionOf</a>
+    <span>
+                        &nbsp;: string|object|null            </span>
+</dt>
+<dd>A related resource of which the described resource is a version, edition, or adaptation.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_language">$language</a>
+    <span>
+                        &nbsp;: string|array&lt;string|int, mixed&gt;|object|null            </span>
+</dt>
+<dd>A language of the resource.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_license">$license</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>A legal document giving official permission to do something with the resource.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_mediator">$mediator</a>
+    <span>
+                        &nbsp;: string|object|array&lt;string|int, mixed&gt;|null            </span>
+</dt>
+<dd>An entity that mediates access to the resource.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_medium">$medium</a>
+    <span>
+                        &nbsp;: string|object|array&lt;string|int, mixed&gt;|null            </span>
+</dt>
+<dd>The material or physical carrier of the resource.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_modified">$modified</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>Date on which the resource was changed.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_provenance">$provenance</a>
+    <span>
+                        &nbsp;: string|array&lt;string|int, mixed&gt;|object|null            </span>
+</dt>
+<dd>A statement of any changes in ownership and custody of the resource since its creation that are significant for its authenticity, integrity, and interpretation.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_publisher">$publisher</a>
+    <span>
+                        &nbsp;: string|object|array&lt;string|int, mixed&gt;|null            </span>
+</dt>
+<dd>An entity responsible for making the resource available.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_references">$references</a>
+    <span>
+                        &nbsp;: string|object|array&lt;string|int, mixed&gt;|null            </span>
+</dt>
+<dd>A related resource that is referenced, cited, or otherwise pointed to by the described resource.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_relation">$relation</a>
+    <span>
+                        &nbsp;: string|object|array&lt;string|int, mixed&gt;|null            </span>
+</dt>
+<dd>A related resource.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_replaces">$replaces</a>
+    <span>
+                        &nbsp;: string|object|array&lt;string|int, mixed&gt;|null            </span>
+</dt>
+<dd>A related resource that is supplanted, displaced, or superseded by the described resource.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_requires">$requires</a>
+    <span>
+                        &nbsp;: string|object|array&lt;string|int, mixed&gt;|null            </span>
+</dt>
+<dd>A related resource that is required by the described resource to support its function, delivery, or coherence.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_rights">$rights</a>
+    <span>
+                        &nbsp;: string|object|array&lt;string|int, mixed&gt;|null            </span>
+</dt>
+<dd>Information about rights held in and over the resource.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_rightsHolder">$rightsHolder</a>
+    <span>
+                        &nbsp;: string|object|array&lt;string|int, mixed&gt;|null            </span>
+</dt>
+<dd>A person or organization owning or managing rights over the resource.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_source">$source</a>
+    <span>
+                        &nbsp;: string|object|array&lt;string|int, mixed&gt;|null            </span>
+</dt>
+<dd>A related resource from which the described resource is derived.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_spatial">$spatial</a>
+    <span>
+                        &nbsp;: string|object|array&lt;string|int, mixed&gt;|null            </span>
+</dt>
+<dd>Spatial characteristics of the resource.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_subject">$subject</a>
+    <span>
+                        &nbsp;: string|object|array&lt;string|int, mixed&gt;|null            </span>
+</dt>
+<dd>A topic of the resource.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_tableOfContents">$tableOfContents</a>
+    <span>
+                        &nbsp;: string|array&lt;string|int, mixed&gt;|object|null            </span>
+</dt>
+<dd>A list of subunits of the resource.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_temporal">$temporal</a>
+    <span>
+                        &nbsp;: string|array&lt;string|int, mixed&gt;|object|null            </span>
+</dt>
+<dd>Temporal characteristics of the resource.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_title">$title</a>
+    <span>
+                        &nbsp;: string|object|array&lt;string|int, mixed&gt;|null            </span>
+</dt>
+<dd>The title of the ressource.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_type">$type</a>
+    <span>
+                        &nbsp;: string|object|null            </span>
+</dt>
+<dd>The nature or genre of the resource.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-traits-DublinCoreTrait.html#property_valid">$valid</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>Date (often a range) of validity of a resource.</dd>
+
+    </dl>
+
+
+
+
+
+        
+
+        
+    <section class="phpdocumentor-properties">
+        <h3 class="phpdocumentor-elements__header" id="properties">
+            Properties
+            <a href="classes/org-schema-traits-DublinCoreTrait.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_abstract">
+        $abstract
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_abstract" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">16</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A summary of the resource.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$abstract</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_accessRight">
+        $accessRight
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_accessRight" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">22</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Information about who access the resource or an indication of its security status.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$accessRight</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_accrualMethod">
+        $accrualMethod
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_accrualMethod" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">28</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The method by which items are added to a collection.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$accrualMethod</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_accrualPeriodicityMore">
+        $accrualPeriodicityMore
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_accrualPeriodicityMore" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">34</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The frequency with which items are added to a collection.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$accrualPeriodicityMore</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_accrualPolicy">
+        $accrualPolicy
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_accrualPolicy" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">40</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The policy governing the addition of items to a collection.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$accrualPolicy</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_alternative">
+        $alternative
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_alternative" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">46</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">An alternative name for the resource.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$alternative</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_available">
+        $available
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_available" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">52</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Date that the resource became or will become available.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$available</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_bibliographicCitation">
+        $bibliographicCitation
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_bibliographicCitation" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">57</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A bibliographic reference for the resource.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$bibliographicCitation</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_conformsTo">
+        $conformsTo
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_conformsTo" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">63</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">An established standard to which the described resource conforms.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$conformsTo</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_contributor">
+        $contributor
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_contributor" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">69</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">An entity responsible for making contributions to the resource.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$contributor</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_coverage">
+        $coverage
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_coverage" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">75</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The spatial or temporal topic of the resource, spatial applicability of the resource, or jurisdiction under which the resource is relevant.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$coverage</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_created">
+        $created
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_created" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">84</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Date of creation of the resource.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$created</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Recommended practice is to describe the date, date/time, or period of time as recommended for the property Date, of which this is a subproperty.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_creator">
+        $creator
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_creator" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">90</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">An entity responsible for making the resource.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|object|array&lt;string|int, mixed&gt;|null</span>
+    <span class="phpdocumentor-signature__name">$creator</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_date">
+        $date
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_date" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">96</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A point or period of time associated with an event in the lifecycle of the resource.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$date</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_dateAccepted">
+        $dateAccepted
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_dateAccepted" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">102</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Date of acceptance of the resource.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$dateAccepted</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_dateCopyrighted">
+        $dateCopyrighted
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_dateCopyrighted" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">108</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Date of copyright of the resource.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$dateCopyrighted</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_dateSubmitted">
+        $dateSubmitted
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_dateSubmitted" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">114</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Date of submission of the resource.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$dateSubmitted</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_description">
+        $description
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_description" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">120</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">An account of the resource.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$description</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_educationLevel">
+        $educationLevel
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_educationLevel" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">126</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Audience Education Level</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$educationLevel</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_extent">
+        $extent
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_extent" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">135</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The size or duration of the resource.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$extent</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Recommended practice is to specify the file size in megabytes and duration in ISO 8601 format</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_format">
+        $format
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_format" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">141</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The file format, physical medium, or dimensions of the resource.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$format</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_hasFormat">
+        $hasFormat
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_hasFormat" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">147</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Has Format</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|array&lt;string|int, mixed&gt;|object|null</span>
+    <span class="phpdocumentor-signature__name">$hasFormat</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_hasVersion">
+        $hasVersion
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_hasVersion" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">153</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A related resource that is a version, edition, or adaptation of the described resource.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|array&lt;string|int, mixed&gt;|object|null</span>
+    <span class="phpdocumentor-signature__name">$hasVersion</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_identifier">
+        $identifier
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_identifier" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">159</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">An unambiguous reference to the resource within a given context.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$identifier</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_instructionalMethodMore">
+        $instructionalMethodMore
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_instructionalMethodMore" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">165</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A process, used to engender knowledge, attitudes and skills, that the described resource is designed to support.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|object|null</span>
+    <span class="phpdocumentor-signature__name">$instructionalMethodMore</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_isFormatOf">
+        $isFormatOf
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_isFormatOf" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">171</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A pre-existing related resource that is substantially the same as the described resource, but in another format.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|object|null</span>
+    <span class="phpdocumentor-signature__name">$isFormatOf</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_isPartOf">
+        $isPartOf
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_isPartOf" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">177</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A related resource in which the described resource is physically or logically included.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|object|null</span>
+    <span class="phpdocumentor-signature__name">$isPartOf</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_isReferencedBy">
+        $isReferencedBy
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_isReferencedBy" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">183</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A related resource that references, cites, or otherwise points to the described resource.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|object|null</span>
+    <span class="phpdocumentor-signature__name">$isReferencedBy</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_isReplacedBy">
+        $isReplacedBy
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_isReplacedBy" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">189</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A related resource that supplants, displaces, or supersedes the described resource.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|object|null</span>
+    <span class="phpdocumentor-signature__name">$isReplacedBy</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_isRequiredBy">
+        $isRequiredBy
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_isRequiredBy" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">195</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A related resource that requires the described resource to support its function, delivery, or coherence.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|object|array&lt;string|int, mixed&gt;|null</span>
+    <span class="phpdocumentor-signature__name">$isRequiredBy</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_issued">
+        $issued
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_issued" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">204</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Date of formal issuance of the resource.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$issued</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Recommended practice is to describe the date, date/time, or period of time as recommended for the property Date, of which this is a subproperty.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_isVersionOf">
+        $isVersionOf
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_isVersionOf" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">210</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A related resource of which the described resource is a version, edition, or adaptation.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|object|null</span>
+    <span class="phpdocumentor-signature__name">$isVersionOf</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_language">
+        $language
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_language" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">216</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A language of the resource.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|array&lt;string|int, mixed&gt;|object|null</span>
+    <span class="phpdocumentor-signature__name">$language</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_license">
+        $license
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_license" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">222</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A legal document giving official permission to do something with the resource.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$license</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_mediator">
+        $mediator
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_mediator" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">228</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">An entity that mediates access to the resource.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|object|array&lt;string|int, mixed&gt;|null</span>
+    <span class="phpdocumentor-signature__name">$mediator</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_medium">
+        $medium
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_medium" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">234</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The material or physical carrier of the resource.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|object|array&lt;string|int, mixed&gt;|null</span>
+    <span class="phpdocumentor-signature__name">$medium</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_modified">
+        $modified
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_modified" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">243</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Date on which the resource was changed.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$modified</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Recommended practice is to describe the date, date/time, or period of time as recommended for the property Date, of which this is a subproperty.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_provenance">
+        $provenance
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_provenance" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">250</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A statement of any changes in ownership and custody of the resource since its creation that are significant for its authenticity, integrity, and interpretation.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|array&lt;string|int, mixed&gt;|object|null</span>
+    <span class="phpdocumentor-signature__name">$provenance</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_publisher">
+        $publisher
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_publisher" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">256</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">An entity responsible for making the resource available.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|object|array&lt;string|int, mixed&gt;|null</span>
+    <span class="phpdocumentor-signature__name">$publisher</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_references">
+        $references
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_references" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">276</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A related resource that is referenced, cited, or otherwise pointed to by the described resource.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|object|array&lt;string|int, mixed&gt;|null</span>
+    <span class="phpdocumentor-signature__name">$references</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>This property is intended to be used with non-literal values.
+This property is an inverse property of Is Referenced By.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_relation">
+        $relation
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_relation" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">266</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A related resource.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|object|array&lt;string|int, mixed&gt;|null</span>
+    <span class="phpdocumentor-signature__name">$relation</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>This property is intended to be used with non-literal values.
+This property is an inverse property of Is Replaced By.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_replaces">
+        $replaces
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_replaces" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">286</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A related resource that is supplanted, displaced, or superseded by the described resource.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|object|array&lt;string|int, mixed&gt;|null</span>
+    <span class="phpdocumentor-signature__name">$replaces</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Recommended practice is to identify the related resource by means of a URI.
+If this is not possible or feasible, a string conforming to a formal identification system may be provided.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_requires">
+        $requires
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_requires" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">296</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A related resource that is required by the described resource to support its function, delivery, or coherence.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|object|array&lt;string|int, mixed&gt;|null</span>
+    <span class="phpdocumentor-signature__name">$requires</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>This property is intended to be used with non-literal values.
+This property is an inverse property of Is Required By.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_rights">
+        $rights
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_rights" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">302</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Information about rights held in and over the resource.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|object|array&lt;string|int, mixed&gt;|null</span>
+    <span class="phpdocumentor-signature__name">$rights</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_rightsHolder">
+        $rightsHolder
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_rightsHolder" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">308</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A person or organization owning or managing rights over the resource.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|object|array&lt;string|int, mixed&gt;|null</span>
+    <span class="phpdocumentor-signature__name">$rightsHolder</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_source">
+        $source
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_source" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">314</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A related resource from which the described resource is derived.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|object|array&lt;string|int, mixed&gt;|null</span>
+    <span class="phpdocumentor-signature__name">$source</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_spatial">
+        $spatial
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_spatial" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">320</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Spatial characteristics of the resource.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|object|array&lt;string|int, mixed&gt;|null</span>
+    <span class="phpdocumentor-signature__name">$spatial</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_subject">
+        $subject
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_subject" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">332</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A topic of the resource.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|object|array&lt;string|int, mixed&gt;|null</span>
+    <span class="phpdocumentor-signature__name">$subject</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Recommended practice is to refer to the subject with a URI. If this is not possible or feasible,
+a literal value that identifies the subject may be provided.</p>
+<p>Both should preferably refer to a subject in a controlled vocabulary.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_tableOfContents">
+        $tableOfContents
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_tableOfContents" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">339</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A list of subunits of the resource.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|array&lt;string|int, mixed&gt;|object|null</span>
+    <span class="phpdocumentor-signature__name">$tableOfContents</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_temporal">
+        $temporal
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_temporal" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">346</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Temporal characteristics of the resource.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|array&lt;string|int, mixed&gt;|object|null</span>
+    <span class="phpdocumentor-signature__name">$temporal</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_title">
+        $title
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_title" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">352</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The title of the ressource.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|object|array&lt;string|int, mixed&gt;|null</span>
+    <span class="phpdocumentor-signature__name">$title</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_type">
+        $type
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_type" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">358</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The nature or genre of the resource.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|object|null</span>
+    <span class="phpdocumentor-signature__name">$type</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_valid">
+        $valid
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#property_valid" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/DublinCoreTrait.php"><a href="files/src-org-schema-traits-dublincoretrait.html"><abbr title="src/org/schema/traits/DublinCoreTrait.php">DublinCoreTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">367</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Date (often a range) of validity of a resource.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$valid</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>Recommended practice is to describe the date, date/time, or period of time as recommended for the property Date, of which this is a subproperty.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+            </section>
+
+        
+        <div class="phpdocumentor-modal" id="source-view">
+    <div class="phpdocumentor-modal-bg" data-exit-button></div>
+    <div class="phpdocumentor-modal-container">
+        <div class="phpdocumentor-modal-content">
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/src/org/schema/traits/DublinCoreTrait.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+        </div>
+        <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
+    </div>
+</div>
+
+    <script type="text/javascript">
+        (function () {
+            function loadExternalCodeSnippet(el, url, line) {
+                Array.prototype.slice.call(el.querySelectorAll('pre[data-src]')).forEach((pre) => {
+                    const src = url || pre.getAttribute('data-src').replace(/\\/g, '/');
+                    const language = 'php';
+
+                    const code = document.createElement('code');
+                    code.className = 'language-' + language;
+                    pre.textContent = '';
+                    pre.setAttribute('data-line', line)
+                    code.textContent = 'Loading…';
+                    pre.appendChild(code);
+
+                    var xhr = new XMLHttpRequest();
+
+                    xhr.open('GET', src, true);
+
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState !== 4) {
+                            return;
+                        }
+
+                        if (xhr.status < 400 && xhr.responseText) {
+                            code.textContent = xhr.responseText;
+                            Prism.highlightElement(code);
+                            d=document.getElementsByClassName("line-numbers");
+                            d[0].scrollTop = d[0].children[1].offsetTop;
+                            return;
+                        }
+
+                        if (xhr.status === 404) {
+                            code.textContent = '✖ Error: File could not be found';
+                            return;
+                        }
+
+                        if (xhr.status >= 400) {
+                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                            return;
+                        }
+
+                        code.textContent = '✖ Error: An unknown error occurred';
+                    };
+
+                    xhr.send(null);
+                });
+            }
+
+            const modalButtons = document.querySelectorAll("[data-modal]");
+            const openedAsLocalFile = window.location.protocol === 'file:';
+            if (modalButtons.length > 0 && openedAsLocalFile) {
+                console.warn(
+                    'Viewing the source code is unavailable because you are opening this page from the file:// scheme; ' +
+                    'browsers block XHR requests when a page is opened this way'
+                );
+            }
+
+            modalButtons.forEach(function (trigger) {
+                if (openedAsLocalFile) {
+                    trigger.setAttribute("hidden", "hidden");
+                }
+
+                trigger.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    const modal = document.getElementById(trigger.dataset.modal);
+                    if (!modal) {
+                        console.error(`Modal with id "${trigger.dataset.modal}" could not be found`);
+                        return;
+                    }
+                    modal.classList.add("phpdocumentor-modal__open");
+
+                    loadExternalCodeSnippet(modal, trigger.dataset.src || null, trigger.dataset.line)
+                    const exits = modal.querySelectorAll("[data-exit-button]");
+                    exits.forEach(function (exit) {
+                        exit.addEventListener("click", function (event) {
+                            event.preventDefault();
+                            modal.classList.remove("phpdocumentor-modal__open");
+                        });
+                    });
+                });
+            });
+        })();
+    </script>
+
+    </article>
+                                </section>
+                <section class="phpdocumentor-on-this-page__sidebar">
+                                
+    <section class="phpdocumentor-on-this-page__content">
+        <strong class="phpdocumentor-on-this-page__title">On this page</strong>
+
+        <ul class="phpdocumentor-list -clean">
+            <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                                            <li><a href="classes/org-schema-traits-DublinCoreTrait.html#toc-properties">Properties</a></li>
+                                                        </ul>
+            </li>
+                                    <li class="phpdocumentor-on-this-page-section__title">Properties</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_abstract">$abstract</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_accessRight">$accessRight</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_accrualMethod">$accrualMethod</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_accrualPeriodicityMore">$accrualPeriodicityMore</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_accrualPolicy">$accrualPolicy</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_alternative">$alternative</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_available">$available</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_bibliographicCitation">$bibliographicCitation</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_conformsTo">$conformsTo</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_contributor">$contributor</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_coverage">$coverage</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_created">$created</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_creator">$creator</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_date">$date</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_dateAccepted">$dateAccepted</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_dateCopyrighted">$dateCopyrighted</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_dateSubmitted">$dateSubmitted</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_description">$description</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_educationLevel">$educationLevel</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_extent">$extent</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_format">$format</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_hasFormat">$hasFormat</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_hasVersion">$hasVersion</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_identifier">$identifier</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_instructionalMethodMore">$instructionalMethodMore</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_isFormatOf">$isFormatOf</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_isPartOf">$isPartOf</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_isReferencedBy">$isReferencedBy</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_isReplacedBy">$isReplacedBy</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_isRequiredBy">$isRequiredBy</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_issued">$issued</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_isVersionOf">$isVersionOf</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_language">$language</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_license">$license</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_mediator">$mediator</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_medium">$medium</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_modified">$modified</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_provenance">$provenance</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_publisher">$publisher</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_references">$references</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_relation">$relation</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_replaces">$replaces</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_requires">$requires</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_rights">$rights</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_rightsHolder">$rightsHolder</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_source">$source</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_spatial">$spatial</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_subject">$subject</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_tableOfContents">$tableOfContents</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_temporal">$temporal</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_title">$title</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_type">$type</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-DublinCoreTrait.html#property_valid">$valid</a></li>
+                                    </ul>
+            </li>
+                                </ul>
+    </section>
+
+                </section>
+                            </div>
+            <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+    <section class="phpdocumentor-search-results__dialog">
+        <header class="phpdocumentor-search-results__header">
+            <h2 class="phpdocumentor-search-results__title">Search results</h2>
+            <button class="phpdocumentor-search-results__close"><i class="fas fa-times"></i></button>
+        </header>
+        <section class="phpdocumentor-search-results__body">
+            <ul class="phpdocumentor-search-results__entries"></ul>
+        </section>
+    </section>
+</section>
+        </div>
+        <a href="classes/org-schema-traits-DublinCoreTrait.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+
+    </main>
+
+    <script>
+        cssVars({});
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
+</body>
+</html>

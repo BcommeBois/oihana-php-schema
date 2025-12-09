@@ -1,0 +1,3439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+            <title>Oihana Php Schema</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="../">
+    <link rel="icon" href="images/favicon.ico"/>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/base.css">
+            <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/template.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" integrity="sha256-ybRkN9dBjhcS2qrW1z+hfCxq+1aBdwyQM5wlQoQVt/0=" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism-okaidia.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.css">
+                <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
+        <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
+        <script src="js/template.js"></script>
+        <script src="js/search.js"></script>
+        <script defer src="js/searchIndex.js"></script>
+    </head>
+<body id="top">
+    <header class="phpdocumentor-header phpdocumentor-section">
+    <h1 class="phpdocumentor-title">
+    <a href="" class="phpdocumentor-title__link">
+        <img src="assets/images/oihana-php-schema-logo-inline-512x160.png" alt="Oihana PHP System" style="width: 128px; height: 40px;"/>
+    </a>
+</h1>    <input class="phpdocumentor-header__menu-button" type="checkbox" id="menu-button" name="menu-button" />
+    <label class="phpdocumentor-header__menu-icon" for="menu-button">
+        <i class="fas fa-bars"></i>
+    </label>
+    <section data-search-form class="phpdocumentor-search">
+    <label>
+        <span class="visually-hidden">Search for</span>
+        <svg class="phpdocumentor-search__icon" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="7.5" cy="7.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <line x1="12.4892" y1="12.2727" x2="19.1559" y2="18.9393" stroke="currentColor" stroke-width="3"/>
+        </svg>
+        <input type="search" class="phpdocumentor-field phpdocumentor-search__field" placeholder="Loading .." disabled />
+    </label>
+</section>
+
+    <nav class="phpdocumentor-topnav">
+    <ul class="phpdocumentor-topnav__menu">
+                        <li class="phpdocumentor-topnav__menu-item -social">
+                <a href="https://github.com/BcommeBois/oihana-php-system">
+                    <span>
+                                                                        <i class="fab fa-github"></i>
+                                                
+                    </span>
+                </a>
+            </li>
+                </ul>
+</nav>
+</header>
+
+    <main class="phpdocumentor">
+        <div class="phpdocumentor-section">
+            <input class="phpdocumentor-sidebar__menu-button" type="checkbox" id="sidebar-button" name="sidebar-button" />
+<label class="phpdocumentor-sidebar__menu-icon" for="sidebar-button">
+    Menu
+</label>
+<aside class="phpdocumentor-column -three phpdocumentor-sidebar">
+                    <section class="phpdocumentor-sidebar__category -namespaces">
+            <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/org.html" class="">org</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/org-schema.html" class="">schema</a>
+                
+            </li>
+            </ul>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/xyz.html" class="">xyz</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/xyz-oihana.html" class="">oihana</a>
+                
+            </li>
+            </ul>
+
+                        </section>
+            
+    <section class="phpdocumentor-sidebar__category -reports">
+        <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
+                <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/errors.html">Errors</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/markers.html">Markers</a></h3>
+    </section>
+
+    <section class="phpdocumentor-sidebar__category -indices">
+        <h2 class="phpdocumentor-sidebar__category-header">Indices</h2>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="indices/files.html">Files</a></h3>
+    </section>
+</aside>
+
+            <div class="phpdocumentor-column -nine phpdocumentor-content">
+                                <section>
+                                        <ul class="phpdocumentor-breadcrumbs">
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/org.html">org</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/org-schema.html">schema</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/org-schema-constants.html">constants</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/org-schema-constants-traits.html">traits</a></li>
+    </ul>
+
+    <article class="phpdocumentor-element -trait">
+        <h2 class="phpdocumentor-content__title">
+    Thing
+            <span class="phpdocumentor-trait__extends">
+            uses
+                            <a href="classes/org-schema-constants-traits-ArangoDB.html"><abbr title="\org\schema\constants\traits\ArangoDB">trait:short</abbr></a>,                             <a href="classes/org-schema-constants-traits-DublinCore.html"><abbr title="\org\schema\constants\traits\DublinCore">trait:short</abbr></a>,                             <a href="classes/org-schema-constants-traits-JsonLD.html"><abbr title="\org\schema\constants\traits\JsonLD">trait:short</abbr></a>                    </span>
+    </h2>
+
+        <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/Thing.php"><a href="files/src-org-schema-constants-traits-thing.html"><abbr title="src/org/schema/constants/traits/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">5</span>
+
+    </aside>
+
+        
+
+
+
+
+    
+    
+<h3 id="toc">
+    Table of Contents
+    <a href="classes/org-schema-constants-traits-Thing.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h3>
+
+
+
+
+
+
+
+<h4 id="toc-constants">
+    Constants
+    <a href="classes/org-schema-constants-traits-Thing.html#toc-constants" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-ArangoDB.html#constant__FROM">_FROM</a>
+    <span>
+        &nbsp;= &#039;_from&#039;                            </span>
+</dt>
+<dd>The document identifier of the source vertex stored in the _from attribute.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-ArangoDB.html#constant__ID">_ID</a>
+    <span>
+        &nbsp;= &#039;_id&#039;                            </span>
+</dt>
+<dd>The document identifier is stored as a string in the _id attribute.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-ArangoDB.html#constant__KEY">_KEY</a>
+    <span>
+        &nbsp;= &#039;_key&#039;                            </span>
+</dt>
+<dd>The document key is stored as a string in the _key attribute.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-ArangoDB.html#constant__REV">_REV</a>
+    <span>
+        &nbsp;= &#039;_rev&#039;                            </span>
+</dt>
+<dd>Every document in ArangoDB has a revision, stored in the system attribute _rev.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-ArangoDB.html#constant__TO">_TO</a>
+    <span>
+        &nbsp;= &#039;_to&#039;                            </span>
+</dt>
+<dd>The document identifier of the target vertex stored in the _to attribute.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-Thing.html#constant_ABOUT">ABOUT</a>
+    <span>
+        &nbsp;= &#039;about&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_ABSTRACT">ABSTRACT</a>
+    <span>
+        &nbsp;= &#039;abstract&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_ACCESS_RIGHT">ACCESS_RIGHT</a>
+    <span>
+        &nbsp;= &#039;accessRight&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_ACCRUAL_METHOD">ACCRUAL_METHOD</a>
+    <span>
+        &nbsp;= &#039;accrualMethod&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_ACCRUAL_PERIODICITY_MORE">ACCRUAL_PERIODICITY_MORE</a>
+    <span>
+        &nbsp;= &#039;accrualPeriodicityMore&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_ACCRUAL_POLICY">ACCRUAL_POLICY</a>
+    <span>
+        &nbsp;= &#039;accrualPolicy&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-Thing.html#constant_ADDITIONAL_PROPERTY">ADDITIONAL_PROPERTY</a>
+    <span>
+        &nbsp;= &#039;additionalProperty&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-Thing.html#constant_ADDITIONAL_TYPE">ADDITIONAL_TYPE</a>
+    <span>
+        &nbsp;= &#039;additionalType&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-Thing.html#constant_ALTERNATE_NAME">ALTERNATE_NAME</a>
+    <span>
+        &nbsp;= &#039;alternateName&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_ALTERNATIVE">ALTERNATIVE</a>
+    <span>
+        &nbsp;= &#039;alternative&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-JsonLD.html#constant_AT_CONTEXT">AT_CONTEXT</a>
+    <span>
+        &nbsp;= &#039;@context&#039;                            </span>
+</dt>
+<dd>Any JSON object may carry a key @context, which indicates a context that is active
+at the scope of that object, and within to nested objects.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-JsonLD.html#constant_AT_ID">AT_ID</a>
+    <span>
+        &nbsp;= &#039;@id&#039;                            </span>
+</dt>
+<dd>JSON-LD supports references to objects with a reserved key @id which can be used either as an object identifier
+or a reference to an object identifier. The value of @id must be a string.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-JsonLD.html#constant_AT_TYPE">AT_TYPE</a>
+    <span>
+        &nbsp;= &#039;@type&#039;                            </span>
+</dt>
+<dd>The type of the object.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_AVAILABLE">AVAILABLE</a>
+    <span>
+        &nbsp;= &#039;available&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_BIBLIOGRAPHIC_CITATION">BIBLIOGRAPHIC_CITATION</a>
+    <span>
+        &nbsp;= &#039;bibliographicCitation&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_CONFORMS_TO">CONFORMS_TO</a>
+    <span>
+        &nbsp;= &#039;conformsTo&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_CONTRIBUTOR">CONTRIBUTOR</a>
+    <span>
+        &nbsp;= &#039;contributor&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_COVERAGE">COVERAGE</a>
+    <span>
+        &nbsp;= &#039;coverage&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_CREATED">CREATED</a>
+    <span>
+        &nbsp;= &#039;created&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_CREATOR">CREATOR</a>
+    <span>
+        &nbsp;= &#039;creator&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_DATE">DATE</a>
+    <span>
+        &nbsp;= &#039;date&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_DATE_ACCEPTED">DATE_ACCEPTED</a>
+    <span>
+        &nbsp;= &#039;dateAccepted&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_DATE_COPYRIGHTED">DATE_COPYRIGHTED</a>
+    <span>
+        &nbsp;= &#039;dateCopyrighted&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_DATE_SUBMITTED">DATE_SUBMITTED</a>
+    <span>
+        &nbsp;= &#039;dateSubmitted&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_DESCRIPTION">DESCRIPTION</a>
+    <span>
+        &nbsp;= &#039;description&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-Thing.html#constant_DISAMBIGUATING_DESCRIPTION">DISAMBIGUATING_DESCRIPTION</a>
+    <span>
+        &nbsp;= &#039;disambiguatingDescription&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_EDUCATION_LEVEL">EDUCATION_LEVEL</a>
+    <span>
+        &nbsp;= &#039;educationLevel&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_EXTENT">EXTENT</a>
+    <span>
+        &nbsp;= &#039;extent&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_FORMAT">FORMAT</a>
+    <span>
+        &nbsp;= &#039;format&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_HAS_FORMAT">HAS_FORMAT</a>
+    <span>
+        &nbsp;= &#039;hasFormat&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-Thing.html#constant_HAS_PART">HAS_PART</a>
+    <span>
+        &nbsp;= &#039;hasPart&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_HAS_VERSION">HAS_VERSION</a>
+    <span>
+        &nbsp;= &#039;hasVersion&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-Thing.html#constant_ID">ID</a>
+    <span>
+        &nbsp;= &#039;id&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_IDENTIFIER">IDENTIFIER</a>
+    <span>
+        &nbsp;= &#039;identifier&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-Thing.html#constant_IDS">IDS</a>
+    <span>
+        &nbsp;= &#039;ids&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-Thing.html#constant_IMAGE">IMAGE</a>
+    <span>
+        &nbsp;= &#039;image&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_INSTRUCTIONAL_METHOD_MORE">INSTRUCTIONAL_METHOD_MORE</a>
+    <span>
+        &nbsp;= &#039;instructionalMethodMore&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-Thing.html#constant_IS_BASED_ON">IS_BASED_ON</a>
+    <span>
+        &nbsp;= &#039;isBasedOn&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_IS_FORMAT_OF">IS_FORMAT_OF</a>
+    <span>
+        &nbsp;= &#039;isFormatOf&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-Thing.html#constant_IS_PART_OF">IS_PART_OF</a>
+    <span>
+        &nbsp;= &#039;isPartOf&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_IS_REFERENCED_BY">IS_REFERENCED_BY</a>
+    <span>
+        &nbsp;= &#039;isReferencedBy&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-Thing.html#constant_IS_RELATED_OF">IS_RELATED_OF</a>
+    <span>
+        &nbsp;= &#039;isRelatedTo&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_IS_REPLACED_BY">IS_REPLACED_BY</a>
+    <span>
+        &nbsp;= &#039;isReplacedBy&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_IS_REQUIRED_BY">IS_REQUIRED_BY</a>
+    <span>
+        &nbsp;= &#039;isRequiredBy&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-Thing.html#constant_IS_SIMILAR_TO">IS_SIMILAR_TO</a>
+    <span>
+        &nbsp;= &#039;isSimilarTo&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_IS_VERSION_OF">IS_VERSION_OF</a>
+    <span>
+        &nbsp;= &#039;isVersionOf&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_ISSUED">ISSUED</a>
+    <span>
+        &nbsp;= &#039;issued&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-Thing.html#constant_KEY">KEY</a>
+    <span>
+        &nbsp;= &#039;key&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_LANGUAGE">LANGUAGE</a>
+    <span>
+        &nbsp;= &#039;language&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_LICENSE">LICENSE</a>
+    <span>
+        &nbsp;= &#039;license&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-Thing.html#constant_MAIN_ENTITY_OF_PAGE">MAIN_ENTITY_OF_PAGE</a>
+    <span>
+        &nbsp;= &#039;mainEntityOfPage&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_MEDIATOR">MEDIATOR</a>
+    <span>
+        &nbsp;= &#039;mediator&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_MEDIUM">MEDIUM</a>
+    <span>
+        &nbsp;= &#039;medium&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_MODIFIED">MODIFIED</a>
+    <span>
+        &nbsp;= &#039;modified&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-Thing.html#constant_NAME">NAME</a>
+    <span>
+        &nbsp;= &#039;name&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-Thing.html#constant_NUM_PART">NUM_PART</a>
+    <span>
+        &nbsp;= &#039;numPart&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-Thing.html#constant_OWNER">OWNER</a>
+    <span>
+        &nbsp;= &#039;owner&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-Thing.html#constant_POTENTIAL_ACTION">POTENTIAL_ACTION</a>
+    <span>
+        &nbsp;= &#039;potentialAction&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_PROVENANCE">PROVENANCE</a>
+    <span>
+        &nbsp;= &#039;provenance&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_PUBLISHER">PUBLISHER</a>
+    <span>
+        &nbsp;= &#039;publisher&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_REFERENCES">REFERENCES</a>
+    <span>
+        &nbsp;= &#039;references&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_RELATION">RELATION</a>
+    <span>
+        &nbsp;= &#039;relation&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_REPLACES">REPLACES</a>
+    <span>
+        &nbsp;= &#039;replaces&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_REQUIRES">REQUIRES</a>
+    <span>
+        &nbsp;= &#039;requires&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_RIGHTS">RIGHTS</a>
+    <span>
+        &nbsp;= &#039;rights&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_RIGHTS_HOLDER">RIGHTS_HOLDER</a>
+    <span>
+        &nbsp;= &#039;rightsHolder&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-Thing.html#constant_SAME_AS">SAME_AS</a>
+    <span>
+        &nbsp;= &#039;sameAs&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_SOURCE">SOURCE</a>
+    <span>
+        &nbsp;= &#039;source&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_SPATIAL">SPATIAL</a>
+    <span>
+        &nbsp;= &#039;spatial&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_SUBJECT">SUBJECT</a>
+    <span>
+        &nbsp;= &#039;subject&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-Thing.html#constant_SUBJECT_OF">SUBJECT_OF</a>
+    <span>
+        &nbsp;= &#039;subjectOf&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_TABLE_OF_CONTENTS">TABLE_OF_CONTENTS</a>
+    <span>
+        &nbsp;= &#039;tableOfContents&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_TEMPORAL">TEMPORAL</a>
+    <span>
+        &nbsp;= &#039;temporal&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_TITLE">TITLE</a>
+    <span>
+        &nbsp;= &#039;title&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_TYPE">TYPE</a>
+    <span>
+        &nbsp;= &#039;type&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-Thing.html#constant_URL">URL</a>
+    <span>
+        &nbsp;= &#039;url&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-DublinCore.html#constant_VALID">VALID</a>
+    <span>
+        &nbsp;= &#039;valid&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-constants-traits-Thing.html#constant_WITH_STATUS">WITH_STATUS</a>
+    <span>
+        &nbsp;= &#039;withStatus&#039;                            </span>
+</dt>
+
+    </dl>
+
+
+
+
+
+
+
+        
+    <section class="phpdocumentor-constants">
+        <h3 class="phpdocumentor-elements__header" id="constants">
+            Constants
+            <a href="classes/org-schema-constants-traits-Thing.html#constants" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant__FROM">
+        _FROM
+        <a href="classes/org-schema-constants-traits-ArangoDB.html#constant__FROM" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/ArangoDB.php"><a href="files/src-org-schema-constants-traits-arangodb.html"><abbr title="src/org/schema/constants/traits/ArangoDB.php">ArangoDB.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">16</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The document identifier of the source vertex stored in the _from attribute.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">_FROM</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;_from&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant__ID">
+        _ID
+        <a href="classes/org-schema-constants-traits-ArangoDB.html#constant__ID" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/ArangoDB.php"><a href="files/src-org-schema-constants-traits-arangodb.html"><abbr title="src/org/schema/constants/traits/ArangoDB.php">ArangoDB.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">21</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The document identifier is stored as a string in the _id attribute.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">_ID</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;_id&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant__KEY">
+        _KEY
+        <a href="classes/org-schema-constants-traits-ArangoDB.html#constant__KEY" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/ArangoDB.php"><a href="files/src-org-schema-constants-traits-arangodb.html"><abbr title="src/org/schema/constants/traits/ArangoDB.php">ArangoDB.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">26</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The document key is stored as a string in the _key attribute.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">_KEY</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;_key&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant__REV">
+        _REV
+        <a href="classes/org-schema-constants-traits-ArangoDB.html#constant__REV" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/ArangoDB.php"><a href="files/src-org-schema-constants-traits-arangodb.html"><abbr title="src/org/schema/constants/traits/ArangoDB.php">ArangoDB.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">32</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Every document in ArangoDB has a revision, stored in the system attribute _rev.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">_REV</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;_rev&#039;</span>
+</code>
+
+
+        <section class="phpdocumentor-description"><p>It is fully managed by the server and read-only for the user.</p>
+</section>
+
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant__TO">
+        _TO
+        <a href="classes/org-schema-constants-traits-ArangoDB.html#constant__TO" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/ArangoDB.php"><a href="files/src-org-schema-constants-traits-arangodb.html"><abbr title="src/org/schema/constants/traits/ArangoDB.php">ArangoDB.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">37</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The document identifier of the target vertex stored in the _to attribute.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">_TO</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;_to&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_ABOUT">
+        ABOUT
+        <a href="classes/org-schema-constants-traits-Thing.html#constant_ABOUT" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/Thing.php"><a href="files/src-org-schema-constants-traits-thing.html"><abbr title="src/org/schema/constants/traits/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">7</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">ABOUT</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;about&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_ABSTRACT">
+        ABSTRACT
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_ABSTRACT" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">7</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">ABSTRACT</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;abstract&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_ACCESS_RIGHT">
+        ACCESS_RIGHT
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_ACCESS_RIGHT" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">8</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">ACCESS_RIGHT</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;accessRight&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_ACCRUAL_METHOD">
+        ACCRUAL_METHOD
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_ACCRUAL_METHOD" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">9</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">ACCRUAL_METHOD</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;accrualMethod&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_ACCRUAL_PERIODICITY_MORE">
+        ACCRUAL_PERIODICITY_MORE
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_ACCRUAL_PERIODICITY_MORE" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">10</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">ACCRUAL_PERIODICITY_MORE</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;accrualPeriodicityMore&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_ACCRUAL_POLICY">
+        ACCRUAL_POLICY
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_ACCRUAL_POLICY" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">11</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">ACCRUAL_POLICY</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;accrualPolicy&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_ADDITIONAL_PROPERTY">
+        ADDITIONAL_PROPERTY
+        <a href="classes/org-schema-constants-traits-Thing.html#constant_ADDITIONAL_PROPERTY" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/Thing.php"><a href="files/src-org-schema-constants-traits-thing.html"><abbr title="src/org/schema/constants/traits/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">8</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">ADDITIONAL_PROPERTY</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;additionalProperty&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_ADDITIONAL_TYPE">
+        ADDITIONAL_TYPE
+        <a href="classes/org-schema-constants-traits-Thing.html#constant_ADDITIONAL_TYPE" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/Thing.php"><a href="files/src-org-schema-constants-traits-thing.html"><abbr title="src/org/schema/constants/traits/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">9</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">ADDITIONAL_TYPE</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;additionalType&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_ALTERNATE_NAME">
+        ALTERNATE_NAME
+        <a href="classes/org-schema-constants-traits-Thing.html#constant_ALTERNATE_NAME" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/Thing.php"><a href="files/src-org-schema-constants-traits-thing.html"><abbr title="src/org/schema/constants/traits/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">10</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">ALTERNATE_NAME</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;alternateName&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_ALTERNATIVE">
+        ALTERNATIVE
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_ALTERNATIVE" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">12</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">ALTERNATIVE</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;alternative&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_AT_CONTEXT">
+        AT_CONTEXT
+        <a href="classes/org-schema-constants-traits-JsonLD.html#constant_AT_CONTEXT" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/JsonLD.php"><a href="files/src-org-schema-constants-traits-jsonld.html"><abbr title="src/org/schema/constants/traits/JsonLD.php">JsonLD.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">18</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Any JSON object may carry a key @context, which indicates a context that is active
+at the scope of that object, and within to nested objects.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">AT_CONTEXT</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;@context&#039;</span>
+</code>
+
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/org-schema-constants-traits-JsonLD.html#constant_AT_CONTEXT#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                    <span class="phpdocumentor-tag-link"><a href="https://niem.github.io/json/reference/json-ld/context">https://niem.github.io/json/reference/json-ld/context</a></span>
+                                        
+                                             
+                                    </dd>
+                        </dl>
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_AT_ID">
+        AT_ID
+        <a href="classes/org-schema-constants-traits-JsonLD.html#constant_AT_ID" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/JsonLD.php"><a href="files/src-org-schema-constants-traits-jsonld.html"><abbr title="src/org/schema/constants/traits/JsonLD.php">JsonLD.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">26</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">JSON-LD supports references to objects with a reserved key @id which can be used either as an object identifier
+or a reference to an object identifier. The value of @id must be a string.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">AT_ID</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;@id&#039;</span>
+</code>
+
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/org-schema-constants-traits-JsonLD.html#constant_AT_ID#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                    <span class="phpdocumentor-tag-link"><a href="https://niem.github.io/json/reference/json-ld/identifiers/">https://niem.github.io/json/reference/json-ld/identifiers/</a></span>
+                                        
+                                             
+                                    </dd>
+                        </dl>
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_AT_TYPE">
+        AT_TYPE
+        <a href="classes/org-schema-constants-traits-JsonLD.html#constant_AT_TYPE" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/JsonLD.php"><a href="files/src-org-schema-constants-traits-jsonld.html"><abbr title="src/org/schema/constants/traits/JsonLD.php">JsonLD.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">31</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The type of the object.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">AT_TYPE</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;@type&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_AVAILABLE">
+        AVAILABLE
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_AVAILABLE" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">13</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">AVAILABLE</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;available&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_BIBLIOGRAPHIC_CITATION">
+        BIBLIOGRAPHIC_CITATION
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_BIBLIOGRAPHIC_CITATION" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">14</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">BIBLIOGRAPHIC_CITATION</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;bibliographicCitation&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_CONFORMS_TO">
+        CONFORMS_TO
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_CONFORMS_TO" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">15</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">CONFORMS_TO</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;conformsTo&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_CONTRIBUTOR">
+        CONTRIBUTOR
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_CONTRIBUTOR" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">16</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">CONTRIBUTOR</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;contributor&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_COVERAGE">
+        COVERAGE
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_COVERAGE" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">17</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">COVERAGE</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;coverage&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_CREATED">
+        CREATED
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_CREATED" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">18</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">CREATED</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;created&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_CREATOR">
+        CREATOR
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_CREATOR" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">19</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">CREATOR</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;creator&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_DATE">
+        DATE
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_DATE" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">20</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">DATE</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;date&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_DATE_ACCEPTED">
+        DATE_ACCEPTED
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_DATE_ACCEPTED" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">21</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">DATE_ACCEPTED</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;dateAccepted&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_DATE_COPYRIGHTED">
+        DATE_COPYRIGHTED
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_DATE_COPYRIGHTED" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">22</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">DATE_COPYRIGHTED</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;dateCopyrighted&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_DATE_SUBMITTED">
+        DATE_SUBMITTED
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_DATE_SUBMITTED" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">23</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">DATE_SUBMITTED</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;dateSubmitted&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_DESCRIPTION">
+        DESCRIPTION
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_DESCRIPTION" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">24</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">DESCRIPTION</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;description&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_DISAMBIGUATING_DESCRIPTION">
+        DISAMBIGUATING_DESCRIPTION
+        <a href="classes/org-schema-constants-traits-Thing.html#constant_DISAMBIGUATING_DESCRIPTION" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/Thing.php"><a href="files/src-org-schema-constants-traits-thing.html"><abbr title="src/org/schema/constants/traits/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">11</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">DISAMBIGUATING_DESCRIPTION</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;disambiguatingDescription&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_EDUCATION_LEVEL">
+        EDUCATION_LEVEL
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_EDUCATION_LEVEL" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">25</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">EDUCATION_LEVEL</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;educationLevel&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_EXTENT">
+        EXTENT
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_EXTENT" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">26</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">EXTENT</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;extent&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_FORMAT">
+        FORMAT
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_FORMAT" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">27</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">FORMAT</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;format&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_HAS_FORMAT">
+        HAS_FORMAT
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_HAS_FORMAT" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">28</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">HAS_FORMAT</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;hasFormat&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_HAS_PART">
+        HAS_PART
+        <a href="classes/org-schema-constants-traits-Thing.html#constant_HAS_PART" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/Thing.php"><a href="files/src-org-schema-constants-traits-thing.html"><abbr title="src/org/schema/constants/traits/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">18</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">HAS_PART</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;hasPart&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_HAS_VERSION">
+        HAS_VERSION
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_HAS_VERSION" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">29</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">HAS_VERSION</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;hasVersion&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_ID">
+        ID
+        <a href="classes/org-schema-constants-traits-Thing.html#constant_ID" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/Thing.php"><a href="files/src-org-schema-constants-traits-thing.html"><abbr title="src/org/schema/constants/traits/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">12</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">ID</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;id&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_IDENTIFIER">
+        IDENTIFIER
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_IDENTIFIER" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">30</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">IDENTIFIER</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;identifier&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_IDS">
+        IDS
+        <a href="classes/org-schema-constants-traits-Thing.html#constant_IDS" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/Thing.php"><a href="files/src-org-schema-constants-traits-thing.html"><abbr title="src/org/schema/constants/traits/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">37</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">IDS</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;ids&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_IMAGE">
+        IMAGE
+        <a href="classes/org-schema-constants-traits-Thing.html#constant_IMAGE" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/Thing.php"><a href="files/src-org-schema-constants-traits-thing.html"><abbr title="src/org/schema/constants/traits/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">13</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">IMAGE</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;image&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_INSTRUCTIONAL_METHOD_MORE">
+        INSTRUCTIONAL_METHOD_MORE
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_INSTRUCTIONAL_METHOD_MORE" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">31</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">INSTRUCTIONAL_METHOD_MORE</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;instructionalMethodMore&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_IS_BASED_ON">
+        IS_BASED_ON
+        <a href="classes/org-schema-constants-traits-Thing.html#constant_IS_BASED_ON" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/Thing.php"><a href="files/src-org-schema-constants-traits-thing.html"><abbr title="src/org/schema/constants/traits/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">14</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">IS_BASED_ON</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;isBasedOn&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_IS_FORMAT_OF">
+        IS_FORMAT_OF
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_IS_FORMAT_OF" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">32</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">IS_FORMAT_OF</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;isFormatOf&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_IS_PART_OF">
+        IS_PART_OF
+        <a href="classes/org-schema-constants-traits-Thing.html#constant_IS_PART_OF" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/Thing.php"><a href="files/src-org-schema-constants-traits-thing.html"><abbr title="src/org/schema/constants/traits/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">15</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">IS_PART_OF</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;isPartOf&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_IS_REFERENCED_BY">
+        IS_REFERENCED_BY
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_IS_REFERENCED_BY" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">34</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">IS_REFERENCED_BY</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;isReferencedBy&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_IS_RELATED_OF">
+        IS_RELATED_OF
+        <a href="classes/org-schema-constants-traits-Thing.html#constant_IS_RELATED_OF" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/Thing.php"><a href="files/src-org-schema-constants-traits-thing.html"><abbr title="src/org/schema/constants/traits/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">16</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">IS_RELATED_OF</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;isRelatedTo&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_IS_REPLACED_BY">
+        IS_REPLACED_BY
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_IS_REPLACED_BY" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">35</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">IS_REPLACED_BY</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;isReplacedBy&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_IS_REQUIRED_BY">
+        IS_REQUIRED_BY
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_IS_REQUIRED_BY" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">36</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">IS_REQUIRED_BY</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;isRequiredBy&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_IS_SIMILAR_TO">
+        IS_SIMILAR_TO
+        <a href="classes/org-schema-constants-traits-Thing.html#constant_IS_SIMILAR_TO" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/Thing.php"><a href="files/src-org-schema-constants-traits-thing.html"><abbr title="src/org/schema/constants/traits/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">17</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">IS_SIMILAR_TO</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;isSimilarTo&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_IS_VERSION_OF">
+        IS_VERSION_OF
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_IS_VERSION_OF" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">38</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">IS_VERSION_OF</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;isVersionOf&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_ISSUED">
+        ISSUED
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_ISSUED" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">37</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">ISSUED</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;issued&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_KEY">
+        KEY
+        <a href="classes/org-schema-constants-traits-Thing.html#constant_KEY" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/Thing.php"><a href="files/src-org-schema-constants-traits-thing.html"><abbr title="src/org/schema/constants/traits/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">36</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">KEY</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;key&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_LANGUAGE">
+        LANGUAGE
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_LANGUAGE" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">39</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">LANGUAGE</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;language&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_LICENSE">
+        LICENSE
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_LICENSE" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">40</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">LICENSE</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;license&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_MAIN_ENTITY_OF_PAGE">
+        MAIN_ENTITY_OF_PAGE
+        <a href="classes/org-schema-constants-traits-Thing.html#constant_MAIN_ENTITY_OF_PAGE" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/Thing.php"><a href="files/src-org-schema-constants-traits-thing.html"><abbr title="src/org/schema/constants/traits/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">19</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">MAIN_ENTITY_OF_PAGE</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;mainEntityOfPage&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_MEDIATOR">
+        MEDIATOR
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_MEDIATOR" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">41</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">MEDIATOR</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;mediator&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_MEDIUM">
+        MEDIUM
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_MEDIUM" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">42</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">MEDIUM</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;medium&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_MODIFIED">
+        MODIFIED
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_MODIFIED" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">43</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">MODIFIED</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;modified&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_NAME">
+        NAME
+        <a href="classes/org-schema-constants-traits-Thing.html#constant_NAME" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/Thing.php"><a href="files/src-org-schema-constants-traits-thing.html"><abbr title="src/org/schema/constants/traits/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">20</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">NAME</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;name&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_NUM_PART">
+        NUM_PART
+        <a href="classes/org-schema-constants-traits-Thing.html#constant_NUM_PART" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/Thing.php"><a href="files/src-org-schema-constants-traits-thing.html"><abbr title="src/org/schema/constants/traits/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">21</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">NUM_PART</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;numPart&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_OWNER">
+        OWNER
+        <a href="classes/org-schema-constants-traits-Thing.html#constant_OWNER" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/Thing.php"><a href="files/src-org-schema-constants-traits-thing.html"><abbr title="src/org/schema/constants/traits/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">22</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">OWNER</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;owner&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_POTENTIAL_ACTION">
+        POTENTIAL_ACTION
+        <a href="classes/org-schema-constants-traits-Thing.html#constant_POTENTIAL_ACTION" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/Thing.php"><a href="files/src-org-schema-constants-traits-thing.html"><abbr title="src/org/schema/constants/traits/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">23</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">POTENTIAL_ACTION</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;potentialAction&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_PROVENANCE">
+        PROVENANCE
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_PROVENANCE" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">44</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">PROVENANCE</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;provenance&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_PUBLISHER">
+        PUBLISHER
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_PUBLISHER" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">45</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">PUBLISHER</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;publisher&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_REFERENCES">
+        REFERENCES
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_REFERENCES" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">47</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">REFERENCES</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;references&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_RELATION">
+        RELATION
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_RELATION" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">46</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">RELATION</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;relation&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_REPLACES">
+        REPLACES
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_REPLACES" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">48</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">REPLACES</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;replaces&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_REQUIRES">
+        REQUIRES
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_REQUIRES" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">49</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">REQUIRES</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;requires&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_RIGHTS">
+        RIGHTS
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_RIGHTS" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">50</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">RIGHTS</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;rights&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_RIGHTS_HOLDER">
+        RIGHTS_HOLDER
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_RIGHTS_HOLDER" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">51</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">RIGHTS_HOLDER</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;rightsHolder&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_SAME_AS">
+        SAME_AS
+        <a href="classes/org-schema-constants-traits-Thing.html#constant_SAME_AS" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/Thing.php"><a href="files/src-org-schema-constants-traits-thing.html"><abbr title="src/org/schema/constants/traits/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">24</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">SAME_AS</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;sameAs&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_SOURCE">
+        SOURCE
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_SOURCE" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">52</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">SOURCE</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;source&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_SPATIAL">
+        SPATIAL
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_SPATIAL" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">53</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">SPATIAL</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;spatial&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_SUBJECT">
+        SUBJECT
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_SUBJECT" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">54</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">SUBJECT</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;subject&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_SUBJECT_OF">
+        SUBJECT_OF
+        <a href="classes/org-schema-constants-traits-Thing.html#constant_SUBJECT_OF" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/Thing.php"><a href="files/src-org-schema-constants-traits-thing.html"><abbr title="src/org/schema/constants/traits/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">25</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">SUBJECT_OF</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;subjectOf&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_TABLE_OF_CONTENTS">
+        TABLE_OF_CONTENTS
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_TABLE_OF_CONTENTS" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">55</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">TABLE_OF_CONTENTS</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;tableOfContents&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_TEMPORAL">
+        TEMPORAL
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_TEMPORAL" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">56</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">TEMPORAL</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;temporal&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_TITLE">
+        TITLE
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_TITLE" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">57</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">TITLE</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;title&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_TYPE">
+        TYPE
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_TYPE" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">58</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">TYPE</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;type&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_URL">
+        URL
+        <a href="classes/org-schema-constants-traits-Thing.html#constant_URL" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/Thing.php"><a href="files/src-org-schema-constants-traits-thing.html"><abbr title="src/org/schema/constants/traits/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">26</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">URL</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;url&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_VALID">
+        VALID
+        <a href="classes/org-schema-constants-traits-DublinCore.html#constant_VALID" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/DublinCore.php"><a href="files/src-org-schema-constants-traits-dublincore.html"><abbr title="src/org/schema/constants/traits/DublinCore.php">DublinCore.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">59</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">VALID</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;valid&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_WITH_STATUS">
+        WITH_STATUS
+        <a href="classes/org-schema-constants-traits-Thing.html#constant_WITH_STATUS" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/constants/traits/Thing.php"><a href="files/src-org-schema-constants-traits-thing.html"><abbr title="src/org/schema/constants/traits/Thing.php">Thing.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">38</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">WITH_STATUS</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;withStatus&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+            </section>
+
+        
+
+        
+        <div class="phpdocumentor-modal" id="source-view">
+    <div class="phpdocumentor-modal-bg" data-exit-button></div>
+    <div class="phpdocumentor-modal-container">
+        <div class="phpdocumentor-modal-content">
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/src/org/schema/constants/traits/Thing.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+        </div>
+        <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
+    </div>
+</div>
+
+    <script type="text/javascript">
+        (function () {
+            function loadExternalCodeSnippet(el, url, line) {
+                Array.prototype.slice.call(el.querySelectorAll('pre[data-src]')).forEach((pre) => {
+                    const src = url || pre.getAttribute('data-src').replace(/\\/g, '/');
+                    const language = 'php';
+
+                    const code = document.createElement('code');
+                    code.className = 'language-' + language;
+                    pre.textContent = '';
+                    pre.setAttribute('data-line', line)
+                    code.textContent = 'Loading…';
+                    pre.appendChild(code);
+
+                    var xhr = new XMLHttpRequest();
+
+                    xhr.open('GET', src, true);
+
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState !== 4) {
+                            return;
+                        }
+
+                        if (xhr.status < 400 && xhr.responseText) {
+                            code.textContent = xhr.responseText;
+                            Prism.highlightElement(code);
+                            d=document.getElementsByClassName("line-numbers");
+                            d[0].scrollTop = d[0].children[1].offsetTop;
+                            return;
+                        }
+
+                        if (xhr.status === 404) {
+                            code.textContent = '✖ Error: File could not be found';
+                            return;
+                        }
+
+                        if (xhr.status >= 400) {
+                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                            return;
+                        }
+
+                        code.textContent = '✖ Error: An unknown error occurred';
+                    };
+
+                    xhr.send(null);
+                });
+            }
+
+            const modalButtons = document.querySelectorAll("[data-modal]");
+            const openedAsLocalFile = window.location.protocol === 'file:';
+            if (modalButtons.length > 0 && openedAsLocalFile) {
+                console.warn(
+                    'Viewing the source code is unavailable because you are opening this page from the file:// scheme; ' +
+                    'browsers block XHR requests when a page is opened this way'
+                );
+            }
+
+            modalButtons.forEach(function (trigger) {
+                if (openedAsLocalFile) {
+                    trigger.setAttribute("hidden", "hidden");
+                }
+
+                trigger.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    const modal = document.getElementById(trigger.dataset.modal);
+                    if (!modal) {
+                        console.error(`Modal with id "${trigger.dataset.modal}" could not be found`);
+                        return;
+                    }
+                    modal.classList.add("phpdocumentor-modal__open");
+
+                    loadExternalCodeSnippet(modal, trigger.dataset.src || null, trigger.dataset.line)
+                    const exits = modal.querySelectorAll("[data-exit-button]");
+                    exits.forEach(function (exit) {
+                        exit.addEventListener("click", function (event) {
+                            event.preventDefault();
+                            modal.classList.remove("phpdocumentor-modal__open");
+                        });
+                    });
+                });
+            });
+        })();
+    </script>
+
+    </article>
+                                </section>
+                <section class="phpdocumentor-on-this-page__sidebar">
+                                
+    <section class="phpdocumentor-on-this-page__content">
+        <strong class="phpdocumentor-on-this-page__title">On this page</strong>
+
+        <ul class="phpdocumentor-list -clean">
+            <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                        <li><a href="classes/org-schema-constants-traits-Thing.html#toc-constants">Constants</a></li>
+                                                                            </ul>
+            </li>
+                        <li class="phpdocumentor-on-this-page-section__title">Constants</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                            <li class=""><a href="classes/org-schema-constants-traits-ArangoDB.html#constant__FROM">_FROM</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-ArangoDB.html#constant__ID">_ID</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-ArangoDB.html#constant__KEY">_KEY</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-ArangoDB.html#constant__REV">_REV</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-ArangoDB.html#constant__TO">_TO</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-Thing.html#constant_ABOUT">ABOUT</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_ABSTRACT">ABSTRACT</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_ACCESS_RIGHT">ACCESS_RIGHT</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_ACCRUAL_METHOD">ACCRUAL_METHOD</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_ACCRUAL_PERIODICITY_MORE">ACCRUAL_PERIODICITY_MORE</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_ACCRUAL_POLICY">ACCRUAL_POLICY</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-Thing.html#constant_ADDITIONAL_PROPERTY">ADDITIONAL_PROPERTY</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-Thing.html#constant_ADDITIONAL_TYPE">ADDITIONAL_TYPE</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-Thing.html#constant_ALTERNATE_NAME">ALTERNATE_NAME</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_ALTERNATIVE">ALTERNATIVE</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-JsonLD.html#constant_AT_CONTEXT">AT_CONTEXT</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-JsonLD.html#constant_AT_ID">AT_ID</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-JsonLD.html#constant_AT_TYPE">AT_TYPE</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_AVAILABLE">AVAILABLE</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_BIBLIOGRAPHIC_CITATION">BIBLIOGRAPHIC_CITATION</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_CONFORMS_TO">CONFORMS_TO</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_CONTRIBUTOR">CONTRIBUTOR</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_COVERAGE">COVERAGE</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_CREATED">CREATED</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_CREATOR">CREATOR</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_DATE">DATE</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_DATE_ACCEPTED">DATE_ACCEPTED</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_DATE_COPYRIGHTED">DATE_COPYRIGHTED</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_DATE_SUBMITTED">DATE_SUBMITTED</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_DESCRIPTION">DESCRIPTION</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-Thing.html#constant_DISAMBIGUATING_DESCRIPTION">DISAMBIGUATING_DESCRIPTION</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_EDUCATION_LEVEL">EDUCATION_LEVEL</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_EXTENT">EXTENT</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_FORMAT">FORMAT</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_HAS_FORMAT">HAS_FORMAT</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-Thing.html#constant_HAS_PART">HAS_PART</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_HAS_VERSION">HAS_VERSION</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-Thing.html#constant_ID">ID</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_IDENTIFIER">IDENTIFIER</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-Thing.html#constant_IDS">IDS</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-Thing.html#constant_IMAGE">IMAGE</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_INSTRUCTIONAL_METHOD_MORE">INSTRUCTIONAL_METHOD_MORE</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-Thing.html#constant_IS_BASED_ON">IS_BASED_ON</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_IS_FORMAT_OF">IS_FORMAT_OF</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-Thing.html#constant_IS_PART_OF">IS_PART_OF</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_IS_REFERENCED_BY">IS_REFERENCED_BY</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-Thing.html#constant_IS_RELATED_OF">IS_RELATED_OF</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_IS_REPLACED_BY">IS_REPLACED_BY</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_IS_REQUIRED_BY">IS_REQUIRED_BY</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-Thing.html#constant_IS_SIMILAR_TO">IS_SIMILAR_TO</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_IS_VERSION_OF">IS_VERSION_OF</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_ISSUED">ISSUED</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-Thing.html#constant_KEY">KEY</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_LANGUAGE">LANGUAGE</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_LICENSE">LICENSE</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-Thing.html#constant_MAIN_ENTITY_OF_PAGE">MAIN_ENTITY_OF_PAGE</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_MEDIATOR">MEDIATOR</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_MEDIUM">MEDIUM</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_MODIFIED">MODIFIED</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-Thing.html#constant_NAME">NAME</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-Thing.html#constant_NUM_PART">NUM_PART</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-Thing.html#constant_OWNER">OWNER</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-Thing.html#constant_POTENTIAL_ACTION">POTENTIAL_ACTION</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_PROVENANCE">PROVENANCE</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_PUBLISHER">PUBLISHER</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_REFERENCES">REFERENCES</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_RELATION">RELATION</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_REPLACES">REPLACES</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_REQUIRES">REQUIRES</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_RIGHTS">RIGHTS</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_RIGHTS_HOLDER">RIGHTS_HOLDER</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-Thing.html#constant_SAME_AS">SAME_AS</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_SOURCE">SOURCE</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_SPATIAL">SPATIAL</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_SUBJECT">SUBJECT</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-Thing.html#constant_SUBJECT_OF">SUBJECT_OF</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_TABLE_OF_CONTENTS">TABLE_OF_CONTENTS</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_TEMPORAL">TEMPORAL</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_TITLE">TITLE</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_TYPE">TYPE</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-Thing.html#constant_URL">URL</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-DublinCore.html#constant_VALID">VALID</a></li>
+                                            <li class=""><a href="classes/org-schema-constants-traits-Thing.html#constant_WITH_STATUS">WITH_STATUS</a></li>
+                                    </ul>
+            </li>
+                                            </ul>
+    </section>
+
+                </section>
+                            </div>
+            <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+    <section class="phpdocumentor-search-results__dialog">
+        <header class="phpdocumentor-search-results__header">
+            <h2 class="phpdocumentor-search-results__title">Search results</h2>
+            <button class="phpdocumentor-search-results__close"><i class="fas fa-times"></i></button>
+        </header>
+        <section class="phpdocumentor-search-results__body">
+            <ul class="phpdocumentor-search-results__entries"></ul>
+        </section>
+    </section>
+</section>
+        </div>
+        <a href="classes/org-schema-constants-traits-Thing.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+
+    </main>
+
+    <script>
+        cssVars({});
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
+</body>
+</html>
