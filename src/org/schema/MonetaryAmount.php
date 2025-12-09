@@ -18,15 +18,15 @@ class MonetaryAmount extends StructuredValue
 
     /**
      * The upper value of some characteristic or property.
-     * @var int|null
+     * @var null|float|int
      */
-    public ?int $maxValue ;
+    public null|float|int $maxValue ;
 
     /**
      * The lower value of some characteristic or property.
-     * @var int|null
+     * @var null|float|int
      */
-    public ?int $minValue ;
+    public null|float|int $minValue ;
 
     /**
      * The date when the item becomes valid.
