@@ -6,6 +6,9 @@ use oihana\reflect\attributes\HydrateWith;
 
 use org\schema\creativeWork\Certification;
 use org\schema\creativeWork\medias\ImageObject;
+use org\schema\creativeWork\WebContent;
+use org\schema\enumerations\OfferItemCondition;
+use org\schema\places\Country;
 
 /**
  * Any offered product or service. For example: a pair of shoes; a concert ticket;
@@ -63,16 +66,54 @@ class Product extends Thing
     public ?string $color ;
 
     /**
-     * A color swatch image, visualizing the color of a Product
+     * A color swatch image, visualizing the color of a Product.
+     *
+     * Should match the textual description specified in the color property. This can be a URL or a fully described ImageObject.
+     *
      * @var string|object|null
      */
     public string|object|null $colorSwatch ;
+
+    /**
+     * The place where the product was assembled.
+     * @var string|null
+     */
+    public string|null $countryOfAssembly ;
+
+    /**
+     * The place where the item (typically Product) was last processed and tested before importation.
+     * @var string|null
+     */
+    public string|null $countryOfLastProcessing ;
+
+    /**
+     * The country of origin of something, including products as well as creative works such as movie and TV content.
+     *
+     * In the case of TV and movie, this would be the country of the principle offices of the production company or individual responsible for the movie. For other kinds of CreativeWork it is difficult to provide fully general guidance, and properties such as contentLocation and locationCreated may be more applicable.
+     *
+     * In the case of products, the country of origin of the product. The exact interpretation of this may vary by context and product type, and cannot be fully enumerated here.
+     *
+     * @var Country|null
+     */
+    public null|Country $countryOfOrigin ;
 
     /**
      * The depth of the item.
      * @var float|null
      */
     public ?float $depth ;
+
+    /**
+     * The location at which an item can be viewed or experienced in-person.
+     * @var null|Place|array|string
+     */
+    public null|Place|array|string $displayLocation ;
+
+    /**
+     * A Grant that directly or indirectly provide funding or sponsorship for this item.
+     * @var string|array|Grant|null
+     */
+    public null|string|array|Grant $funding ;
 
     /**
      * A correct gtin value should be a valid GTIN, which means that it should be an all-numeric string of either 8, 12, 13 or 14 digits, or a "GS1 Digital Link" URL based on such a string.
@@ -131,11 +172,24 @@ class Product extends Thing
     public null|array|string|Certification $hasCertification ;
 
     /**
+     * The GS1 digital link associated with the object.
+     * This URL should conform to the particular requirements of digital links. The link should only contain the Application Identifiers (AIs) that are relevant for the entity being annotated, for instance a Product or an Organization, and for the correct granularity.
+     * @var string|null
+     */
+    public ?string $hasGS1DigitalLink ;
+
+    /**
      * A measurement of an item, For example, the inseam of pants, the wheel size of a bicycle, the gauge of a screw, or the carbon footprint measured for certification by an authority.
      * Usually an exact measurement, but can also be a range of measurements for adjustable products, for example belts and ski bindings.
      */
     #[HydrateWith( QuantitativeValue::class ) ]
     public null|array|QuantitativeValue $hasMeasurement ;
+
+    /**
+     * Specifies a MerchantReturnPolicy that may be applicable.
+     * @var null|array|MerchantReturnPolicy
+     */
+    public null|array|MerchantReturnPolicy $hasMerchantReturnPolicy ;
 
     /**
      * The height of the item.
@@ -193,9 +247,9 @@ class Product extends Thing
      * - NewCondition
      * - RefurbishedCondition
      * - UsedCondition
-     * @var DefinedTerm|string|Enumeration|null
+     * @var DefinedTerm|string|OfferItemCondition|array|null
      */
-    public null|DefinedTerm|string|Enumeration $itemCondition ;
+    public null|array|DefinedTerm|string|OfferItemCondition $itemCondition ;
 
     /**
      * Keywords or tags used to describe some item. Multiple textual entries in a keywords list are typically delimited by commas, or by repeating the property.
@@ -240,6 +294,17 @@ class Product extends Thing
     public ?string $mpn ;
 
     /**
+     * Provides negative considerations regarding something, most typically in pro/con lists for reviews (alongside positiveNotes). For symmetry
+     *
+     * In the case of a Review, the property describes the itemReviewed from the perspective of the review; in the case of a Product, the product itself is being described. Since product descriptions tend to emphasise positive claims, it may be relatively unusual to find negativeNotes used in this way. Nevertheless for the sake of symmetry, negativeNotes can be used on Product.
+     *
+     * The property values can be expressed either as unstructured text (repeated as necessary), or if ordered, as a list (in which case the most negative is at the beginning of the list).
+     *
+     * @var array|ItemList|ListItem|string|WebContent|null
+     */
+    public null|array|ItemList|ListItem|string|WebContent $negativeNotes ;
+
+    /**
      * Indicates the NATO stock number (nsn) of a Product.
      * @var string|null
      * @see https://en.wikipedia.org/wiki/NATO_Stock_Number
@@ -257,6 +322,17 @@ class Product extends Thing
      * @var string|DefinedTerm|null
      */
     public null|string|DefinedTerm $pattern ;
+
+    /**
+     * Provides positive considerations regarding something, for example product highlights or (alongside negativeNotes) pro/con lists for reviews.
+     *
+     * In the case of a Review, the property describes the itemReviewed from the perspective of the review; in the case of a Product, the product itself is being described.
+     *
+     * The property values can be expressed either as unstructured text (repeated as necessary), or if ordered, as a list (in which case the most positive is at the beginning of the list).
+     *
+     * @var array|ItemList|ListItem|string|WebContent|null
+     */
+    public null|array|ItemList|ListItem|string|WebContent $positiveNotes ;
 
     /**
      * The product identifier, such as ISBN. For example: meta itemprop="productID" content="isbn:123-456-789".

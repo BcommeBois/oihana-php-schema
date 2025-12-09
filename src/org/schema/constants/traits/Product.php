@@ -18,6 +18,9 @@ trait Product
     const string CATEGORY                        = 'category'                  ;
     const string COLOR                           = 'color'                     ;
     const string COLOR_SWATCH                    = 'colorSwatch'               ;
+    const string COUNTRY_OF_ASSEMBLY             = 'countryOfAssembly'         ;
+    const string COUNTRY_OF_LAST_PROCESSING      = 'countryOfLastProcessing'   ;
+    const string COUNTRY_OF_ORIGIN               = 'countryOfOrigin'           ;
     const string DEPTH                           = 'depth'                     ;
     const string GTIN                            = 'gtin'                      ;
     const string GTIN12                          = 'gtin12'                    ;
@@ -43,9 +46,11 @@ trait Product
     const string MOBILE_URL                      = 'mobileUrl'                 ;
     const string MODEL                           = 'model'                     ;
     const string MPN                             = 'mpn'                       ;
+    const string NEGATIVE_NOTES                  = 'negativeNotes'             ;
     const string NSN                             = 'nsn'                       ;
     const string OFFERS                          = 'offers'                    ;
     const string PATTERN                         = 'pattern'                   ;
+    const string POSITIVE_NOTES                  = 'positiveNotes'             ;
     const string PRODUCT_ID                      = 'productID'                 ;
     const string PRODUCTION_DATE                 = 'productionDate'            ;
     const string PURCHASE_DATE                   = 'purchaseDate'              ;
