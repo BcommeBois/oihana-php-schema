@@ -3,7 +3,13 @@
 namespace org\schema;
 
 /**
- * A structured value representing a price or price range. Typically, only the subclasses of this type are used for markup. It is recommended to use MonetaryAmount to describe independent amounts of money such as a salary, credit
+ * A structured value representing a price or price range.
+ *
+ * Typically, only the subclasses of this type are used for markup.
+ *
+ * It is recommended to use {@see MonetaryAmount} to describe independent amounts of money such as a salary,
+ * credit card limits, etc.
+ *
  * @see https://schema.org/PriceSpecification
  */
 class PriceSpecification extends StructuredValue

@@ -3,8 +3,11 @@
 namespace org\schema;
 
 /**
- * A DefinedRegion is a geographic area defined by potentially arbitrary (rather than political, administrative or natural geographical) criteria.
+ * A DefinedRegion is a geographic area defined by potentially arbitrary
+ * (rather than political, administrative or natural geographical) criteria.
+ *
  * Properties are provided for defining a region by reference to sets of postal codes.
+ *
  * @see https://schema.org/DefinedRegion
  */
 class DefinedRegion extends ContactPoint

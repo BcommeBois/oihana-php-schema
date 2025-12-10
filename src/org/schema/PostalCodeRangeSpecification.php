@@ -3,7 +3,8 @@
 namespace org\schema;
 
 /**
- * Indicates a range of postal codes, usually defined as the set of valid codes between postalCodeBegin and postalCodeEnd, inclusively
+ * Indicates a range of postal codes, usually defined as the set of valid codes
+ * between postalCodeBegin and postalCodeEnd, inclusively.
  */
 class PostalCodeRangeSpecification extends StructuredValue
 {

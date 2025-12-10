@@ -6,7 +6,9 @@ use org\schema\traits\CollectionTrait;
 use org\schema\traits\CreativeWorkTrait;
 
 /**
- * Any offered product or service. For example: a pair of shoes; a concert ticket; the rental of a car; a haircut; or an episode of a TV show streamed online.
+ * Any offered product or service. For example: a pair of shoes; a concert ticket;
+ * the rental of a car; a haircut; or an episode of a TV show streamed online.
+ *
  * @see https://schema.org/Product
  */
 class ProductCollection extends Product
