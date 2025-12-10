@@ -32,6 +32,7 @@ trait Product
     const string HAS_MEASUREMENT                 = 'hasMeasurement'            ;
     const string HEIGHT                          = 'height'                    ;
     const string IN_PRODUCT_GROUP_WITH_ID        = 'inProductGroupWithID'      ;
+    const string INVENTORY_LEVEL                 = 'inventoryLevel'            ;
     const string IS_ACCESSORY_OR_SPARE_PART_FOR  = 'isAccessoryOrSparePartFor' ;
     const string IS_CONSUMABLE_FOR               = 'isConsumableFor'           ;
     const string IS_FAMILY_FRIENDLY              = 'isFamilyFriendly'          ;
