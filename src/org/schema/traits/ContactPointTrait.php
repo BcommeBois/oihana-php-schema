@@ -6,6 +6,7 @@ use org\schema\enumerations\ContactPointOption;
 use org\schema\GeoShape;
 use org\schema\OpeningHoursSpecification;
 use org\schema\Place;
+use org\schema\places\AdministrativeArea;
 use org\schema\Product;
 use org\schema\Service;
 
@@ -17,8 +18,9 @@ trait ContactPointTrait
 {
     /**
      * The geographic area where a service or offered item is provided.
+     * @var null|string|Place|GeoShape|AdministrativeArea|array
      */
-    public null|string|Place|GeoShape $areaServed ;
+    public null|string|Place|GeoShape|AdministrativeArea|array $areaServed ;
     
     /**
      * A language someone may use with or at the item, service or place.

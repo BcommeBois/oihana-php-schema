@@ -4,6 +4,7 @@ namespace org\schema;
 
 use org\schema\creativeWork\Certification;
 use org\schema\creativeWork\medias\ImageObject;
+use org\schema\places\AdministrativeArea;
 
 /**
  * A service provided by an organization, e.g. delivery service, print services, etc.
@@ -19,8 +20,9 @@ class Service extends Intangible
 
     /**
      * The geographic area where a service or offered item is provided.
+     * @var null|string|Place|GeoShape|AdministrativeArea|array
      */
-    public null|string|Place|GeoShape $areaServed ;
+    public null|string|Place|GeoShape|AdministrativeArea|array $areaServed ;
 
     /**
      * An intended audience, i.e. a group for whom something was created. Supersedes serviceAudience.

@@ -7,6 +7,7 @@ use org\schema\creativeWork\Certification;
 use org\schema\creativeWork\EducationalOccupationalCredential;
 use org\schema\creativeWork\medias\ImageObject;
 use org\schema\enumerations\NonprofitType;
+use org\schema\places\AdministrativeArea;
 use org\schema\services\LoanOrCredit;
 
 /**
@@ -66,8 +67,9 @@ class Organization extends Thing
 
     /**
      * The geographic area where a service or offered item is provided.
+     * @var null|string|Place|GeoShape|AdministrativeArea|array
      */
-    public null|string|Place|GeoShape $areaServed ;
+    public null|string|Place|GeoShape|AdministrativeArea|array $areaServed ;
 
     /**
      * An award won by or for this item.
