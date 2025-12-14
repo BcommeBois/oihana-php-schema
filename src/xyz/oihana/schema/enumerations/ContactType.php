@@ -29,9 +29,9 @@ use org\schema\Enumeration;
  * | MANAGER                        | Contact of a manager or executive.                       | https://schema.oihana.xyz/ContactType#Manager            |
  * | MEDIA                          | Media contact.                                           | https://schema.oihana.xyz/ContactType#Media              |
  * | MOBILE                         | Mobile phone contact.                                    | https://schema.oihana.xyz/ContactType#Mobile             |
+ * | MOBILE_PROFESSIONAL            | Professional Mobile contact.                             | https://schema.oihana.xyz/ContactType#ProfessionalMobile |
  * | OTHER                          | Other or miscellaneous contact.                          | https://schema.oihana.xyz/ContactType#Other              |
  * | PRESS                          | Press / media inquiries.                                 | https://schema.oihana.xyz/ContactType#Press              |
- * | PROFESSIONAL_MOBILE            | Professional Mobile contact.                             | https://schema.oihana.xyz/ContactType#ProfessionalMobile |
  * | PUBLIC_RELATIONS               | Public relations contact.                                | https://schema.oihana.xyz/ContactType#PublicRelations    |
  * | SALES                          | Sales contact for commercial inquiries.                  | https://schema.oihana.xyz/ContactType#Sales              |
  * | SOCIAL_MEDIAS                  | Social media contact.                                    | https://schema.oihana.xyz/ContactType#SocialMedias       |
@@ -109,6 +109,11 @@ class ContactType extends Enumeration
     public const string MOBILE = 'https://schema.oihana.xyz/ContactType#mobile';
 
     /**
+     * Professional / work mobile phone contact.
+     */
+    public const string MOBILE_PROFESSIONAL = 'https://schema.oihana.xyz/ContactType#ProfessionalMobile';
+
+    /**
      * Other or miscellaneous contact.
      */
     public const string OTHER = 'https://schema.oihana.xyz/ContactType#Other';
@@ -117,11 +122,6 @@ class ContactType extends Enumeration
      * Press contact.
      */
     public const string PRESS = 'https://schema.oihana.xyz/ContactType#Press';
-
-    /**
-     * Professional / work mobile phone contact.
-     */
-    public const string MOBILE_PROFESSIONAL = 'https://schema.oihana.xyz/ContactType#ProfessionalMobile';
 
     /**
      * Public relations contact.
