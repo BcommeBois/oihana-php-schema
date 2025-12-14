@@ -14,28 +14,30 @@ use org\schema\Enumeration;
  * the purpose or role of a contact point (phone, email, etc.) for an
  * Organization or Person.
  *
- * | Constant            | Description                                              | Value                                                    |
- * |---------------------|----------------------------------------------------------|----------------------------------------------------------|
- * | ASSISTANT           | Contact of an assistant or secretary.                    | https://schema.oihana.xyz/ContactType#Assistant          |
- * | BILLING             | Billing / invoice support contact.                       | https://schema.oihana.xyz/ContactType#BillingSupport     |
- * | CUSTOMER_SERVICE    | Customer service / support for general inquiries.        | https://schema.oihana.xyz/ContactType#CustomerService    |
- * | DEFAULT             | Default contact.                                         | https://schema.oihana.xyz/ContactType#Default            |
- * | EMERGENCY           | Emergency contact.                                       | https://schema.oihana.xyz/ContactType#Emergency          |
- * | FAX                 | Fax contact.                                             | https://schema.oihana.xyz/ContactType#Fax                |
- * | HOME                | Home / personal contact.                                 | https://schema.oihana.xyz/ContactType#Home               |
- * | LANDLINE            | Landline phone contact.                                  | https://schema.oihana.xyz/ContactType#Landline           |
- * | LEGAL               | Legal contact.                                           | https://schema.oihana.xyz/ContactType#Legal              |
- * | MANAGER             | Contact of a manager or executive.                       | https://schema.oihana.xyz/ContactType#Manager            |
- * | MEDIA               | Media contact.                                           | https://schema.oihana.xyz/ContactType#Media              |
- * | MOBILE              | Mobile phone contact.                                    | https://schema.oihana.xyz/ContactType#Mobile             |
- * | OTHER               | Other or miscellaneous contact.                          | https://schema.oihana.xyz/ContactType#Other              |
- * | PRESS               | Press / media inquiries.                                 | https://schema.oihana.xyz/ContactType#Press              |
- * | PUBLIC_RELATIONS    | Public relations contact.                                | https://schema.oihana.xyz/ContactType#PublicRelations    |
- * | SALES               | Sales contact for commercial inquiries.                  | https://schema.oihana.xyz/ContactType#Sales              |
- * | SOCIAL_MEDIAS       | Social media contact.                                    | https://schema.oihana.xyz/ContactType#SocialMedias       |
- * | SUPPORT             | Assistance / customer support / help desk contact (SAV). | https://schema.oihana.xyz/ContactType#Support            |
- * | TECHNICAL_SUPPORT   | Technical support contact, e.g., troubleshooting.        | https://schema.oihana.xyz/ContactType#TechnicalSupport   |
- * | WORK                | Work / business contact.                                 | https://schema.oihana.xyz/ContactType#Work               |
+ * | Constant                       | Description                                              | Value                                                    |
+ * |--------------------------------|----------------------------------------------------------|----------------------------------------------------------|
+ * | ASSISTANT                      | Contact of an assistant or secretary.                    | https://schema.oihana.xyz/ContactType#Assistant          |
+ * | BILLING                        | Billing / invoice support contact.                       | https://schema.oihana.xyz/ContactType#BillingSupport     |
+ * | CUSTOMER_COMPLAINTS_DEPARTMENT | Customer Complaints Department.                          | https://schema.oihana.xyz/ContactType#CCD                |
+ * | CUSTOMER_SERVICE               | Customer service / support for general inquiries.        | https://schema.oihana.xyz/ContactType#CustomerService    |
+ * | DEFAULT                        | Default contact.                                         | https://schema.oihana.xyz/ContactType#Default            |
+ * | EMERGENCY                      | Emergency contact.                                       | https://schema.oihana.xyz/ContactType#Emergency          |
+ * | FAX                            | Fax contact.                                             | https://schema.oihana.xyz/ContactType#Fax                |
+ * | HOME                           | Home / personal contact.                                 | https://schema.oihana.xyz/ContactType#Home               |
+ * | LANDLINE                       | Landline phone contact.                                  | https://schema.oihana.xyz/ContactType#Landline           |
+ * | LEGAL                          | Legal contact.                                           | https://schema.oihana.xyz/ContactType#Legal              |
+ * | MANAGER                        | Contact of a manager or executive.                       | https://schema.oihana.xyz/ContactType#Manager            |
+ * | MEDIA                          | Media contact.                                           | https://schema.oihana.xyz/ContactType#Media              |
+ * | MOBILE                         | Mobile phone contact.                                    | https://schema.oihana.xyz/ContactType#Mobile             |
+ * | OTHER                          | Other or miscellaneous contact.                          | https://schema.oihana.xyz/ContactType#Other              |
+ * | PRESS                          | Press / media inquiries.                                 | https://schema.oihana.xyz/ContactType#Press              |
+ * | PROFESSIONAL_MOBILE            | Professional Mobile contact.                             | https://schema.oihana.xyz/ContactType#ProfessionalMobile |
+ * | PUBLIC_RELATIONS               | Public relations contact.                                | https://schema.oihana.xyz/ContactType#PublicRelations    |
+ * | SALES                          | Sales contact for commercial inquiries.                  | https://schema.oihana.xyz/ContactType#Sales              |
+ * | SOCIAL_MEDIAS                  | Social media contact.                                    | https://schema.oihana.xyz/ContactType#SocialMedias       |
+ * | SUPPORT                        | Assistance / customer support / help desk contact (SAV). | https://schema.oihana.xyz/ContactType#Support            |
+ * | TECHNICAL_SUPPORT              | Technical support contact, e.g., troubleshooting.        | https://schema.oihana.xyz/ContactType#TechnicalSupport   |
+ * | WORK                           | Work / business contact.                                 | https://schema.oihana.xyz/ContactType#Work               |
  *
  * @see ContactPoint
  */
@@ -50,6 +52,11 @@ class ContactType extends Enumeration
      * Billing / invoice support contact.
      */
     public const string BILLING = 'https://schema.oihana.xyz/ContactType#BillingSupport';
+
+    /**
+     * Customer Complaints Department.
+     */
+    public const string CUSTOMER_COMPLAINTS_DEPARTMENT = 'https://schema.oihana.xyz/ContactType#CCD';
 
     /**
      * Customer service contact.
@@ -110,6 +117,11 @@ class ContactType extends Enumeration
      * Press contact.
      */
     public const string PRESS = 'https://schema.oihana.xyz/ContactType#Press';
+
+    /**
+     * Professional / work mobile phone contact.
+     */
+    public const string MOBILE_PROFESSIONAL = 'https://schema.oihana.xyz/ContactType#ProfessionalMobile';
 
     /**
      * Public relations contact.
