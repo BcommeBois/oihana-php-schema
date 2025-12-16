@@ -131,14 +131,138 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/enumerations/ContactType.php"><a href="files/src-xyz-oihana-schema-enumerations-contacttype.html"><abbr title="src/xyz/oihana/schema/enumerations/ContactType.php">ContactType.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">15</span>
+    <span class="phpdocumentor-element-found-in__line">44</span>
 
     </aside>
 
             <p class="phpdocumentor-summary">Types of contact points for an Organization or Person.</p>
 
 
-    <section class="phpdocumentor-description"><p>Used for the <code class="prettyprint">contactPoint.contactType</code> property.</p>
+    <section class="phpdocumentor-description"><p>Used for the <code class="prettyprint">contactPoint.contactType</code> property in Schema.org.</p>
+<p>Each constant represents a type of contact that can be used to describe
+the purpose or role of a contact point (phone, email, etc.) for an
+Organization or Person.</p>
+<table>
+<thead>
+<tr>
+<th>Constant</th>
+<th>Description</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ASSISTANT</td>
+<td>Contact of an assistant or secretary.</td>
+<td>https://schema.oihana.xyz/ContactType#Assistant</td>
+</tr>
+<tr>
+<td>BILLING</td>
+<td>Billing / invoice support contact.</td>
+<td>https://schema.oihana.xyz/ContactType#BillingSupport</td>
+</tr>
+<tr>
+<td>CUSTOMER_COMPLAINTS_DEPARTMENT</td>
+<td>Customer Complaints Department.</td>
+<td>https://schema.oihana.xyz/ContactType#CCD</td>
+</tr>
+<tr>
+<td>CUSTOMER_SERVICE</td>
+<td>Customer service / support for general inquiries.</td>
+<td>https://schema.oihana.xyz/ContactType#CustomerService</td>
+</tr>
+<tr>
+<td>DEFAULT</td>
+<td>Default contact.</td>
+<td>https://schema.oihana.xyz/ContactType#Default</td>
+</tr>
+<tr>
+<td>EMERGENCY</td>
+<td>Emergency contact.</td>
+<td>https://schema.oihana.xyz/ContactType#Emergency</td>
+</tr>
+<tr>
+<td>FAX</td>
+<td>Fax contact.</td>
+<td>https://schema.oihana.xyz/ContactType#Fax</td>
+</tr>
+<tr>
+<td>HOME</td>
+<td>Home / personal contact.</td>
+<td>https://schema.oihana.xyz/ContactType#Home</td>
+</tr>
+<tr>
+<td>LANDLINE</td>
+<td>Landline phone contact.</td>
+<td>https://schema.oihana.xyz/ContactType#Landline</td>
+</tr>
+<tr>
+<td>LEGAL</td>
+<td>Legal contact.</td>
+<td>https://schema.oihana.xyz/ContactType#Legal</td>
+</tr>
+<tr>
+<td>MANAGER</td>
+<td>Contact of a manager or executive.</td>
+<td>https://schema.oihana.xyz/ContactType#Manager</td>
+</tr>
+<tr>
+<td>MEDIA</td>
+<td>Media contact.</td>
+<td>https://schema.oihana.xyz/ContactType#Media</td>
+</tr>
+<tr>
+<td>MOBILE</td>
+<td>Mobile phone contact.</td>
+<td>https://schema.oihana.xyz/ContactType#Mobile</td>
+</tr>
+<tr>
+<td>MOBILE_PROFESSIONAL</td>
+<td>Professional Mobile contact.</td>
+<td>https://schema.oihana.xyz/ContactType#ProfessionalMobile</td>
+</tr>
+<tr>
+<td>OTHER</td>
+<td>Other or miscellaneous contact.</td>
+<td>https://schema.oihana.xyz/ContactType#Other</td>
+</tr>
+<tr>
+<td>PRESS</td>
+<td>Press / media inquiries.</td>
+<td>https://schema.oihana.xyz/ContactType#Press</td>
+</tr>
+<tr>
+<td>PUBLIC_RELATIONS</td>
+<td>Public relations contact.</td>
+<td>https://schema.oihana.xyz/ContactType#PublicRelations</td>
+</tr>
+<tr>
+<td>SALES</td>
+<td>Sales contact for commercial inquiries.</td>
+<td>https://schema.oihana.xyz/ContactType#Sales</td>
+</tr>
+<tr>
+<td>SOCIAL_MEDIAS</td>
+<td>Social media contact.</td>
+<td>https://schema.oihana.xyz/ContactType#SocialMedias</td>
+</tr>
+<tr>
+<td>SUPPORT</td>
+<td>Assistance / customer support / help desk contact (SAV).</td>
+<td>https://schema.oihana.xyz/ContactType#Support</td>
+</tr>
+<tr>
+<td>TECHNICAL_SUPPORT</td>
+<td>Technical support contact, e.g., troubleshooting.</td>
+<td>https://schema.oihana.xyz/ContactType#TechnicalSupport</td>
+</tr>
+<tr>
+<td>WORK</td>
+<td>Work / business contact.</td>
+<td>https://schema.oihana.xyz/ContactType#Work</td>
+</tr>
+</tbody>
+</table>
 </section>
 
 
@@ -179,6 +303,13 @@
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_ASSISTANT">ASSISTANT</a>
+    <span>
+        &nbsp;= &#039;https://schema.oihana.xyz/ContactType#Assistant&#039;                            </span>
+</dt>
+<dd>Assistant contact.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_BILLING">BILLING</a>
     <span>
         &nbsp;= &#039;https://schema.oihana.xyz/ContactType#BillingSupport&#039;                            </span>
@@ -193,11 +324,32 @@
 <dd>JSON-LD @context declaration for Schema.org.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_CUSTOMER_COMPLAINTS_DEPARTMENT">CUSTOMER_COMPLAINTS_DEPARTMENT</a>
+    <span>
+        &nbsp;= &#039;https://schema.oihana.xyz/ContactType#CCD&#039;                            </span>
+</dt>
+<dd>Customer Complaints Department.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_CUSTOMER_SERVICE">CUSTOMER_SERVICE</a>
     <span>
         &nbsp;= &#039;https://schema.oihana.xyz/ContactType#CustomerService&#039;                            </span>
 </dt>
 <dd>Customer service contact.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_DEFAULT">DEFAULT</a>
+    <span>
+        &nbsp;= &#039;https://schema.oihana.xyz/ContactType#Default&#039;                            </span>
+</dt>
+<dd>Default contact.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_EMERGENCY">EMERGENCY</a>
+    <span>
+        &nbsp;= &#039;https://schema.oihana.xyz/ContactType#Emergency&#039;                            </span>
+</dt>
+<dd>Emergency contact.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_FAX">FAX</a>
@@ -207,11 +359,46 @@
 <dd>Fax contact.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_HOME">HOME</a>
+    <span>
+        &nbsp;= &#039;https://schema.oihana.xyz/ContactType#Home&#039;                            </span>
+</dt>
+<dd>Home / personal contact.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-traits-ThingTrait.html#constant_JSON_PRIORITY_KEYS">JSON_PRIORITY_KEYS</a>
+    <span>
+        &nbsp;= [\org\schema\constants\Schema::AT_TYPE, \org\schema\constants\Schema::AT_CONTEXT, \org\schema\constants\Schema::_KEY, \org\schema\constants\Schema::_FROM, \org\schema\constants\Schema::_TO, \org\schema\constants\Schema::ID, \org\schema\constants\Schema::NAME, \org\schema\constants\Schema::URL, \org\schema\constants\Schema::CREATED, \org\schema\constants\Schema::MODIFIED]                            </span>
+</dt>
+<dd>Defines the priority order of keys when serializing the object to JSON-LD.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_LANDLINE">LANDLINE</a>
     <span>
         &nbsp;= &#039;https://schema.oihana.xyz/ContactType#landline&#039;                            </span>
 </dt>
 <dd>Landline phone contact.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_LEGAL">LEGAL</a>
+    <span>
+        &nbsp;= &#039;https://schema.oihana.xyz/ContactType#Legal&#039;                            </span>
+</dt>
+<dd>Legal contact.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_MANAGER">MANAGER</a>
+    <span>
+        &nbsp;= &#039;https://schema.oihana.xyz/ContactType#Manager&#039;                            </span>
+</dt>
+<dd>Manager / executive contact.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_MEDIA">MEDIA</a>
+    <span>
+        &nbsp;= &#039;https://schema.oihana.xyz/ContactType#Media&#039;                            </span>
+</dt>
+<dd>Media contact.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_MOBILE">MOBILE</a>
@@ -221,11 +408,32 @@
 <dd>Mobile phone contact.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_MOBILE_PROFESSIONAL">MOBILE_PROFESSIONAL</a>
+    <span>
+        &nbsp;= &#039;https://schema.oihana.xyz/ContactType#ProfessionalMobile&#039;                            </span>
+</dt>
+<dd>Professional / work mobile phone contact.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_OTHER">OTHER</a>
     <span>
         &nbsp;= &#039;https://schema.oihana.xyz/ContactType#Other&#039;                            </span>
 </dt>
 <dd>Other or miscellaneous contact.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_PRESS">PRESS</a>
+    <span>
+        &nbsp;= &#039;https://schema.oihana.xyz/ContactType#Press&#039;                            </span>
+</dt>
+<dd>Press contact.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_PUBLIC_RELATIONS">PUBLIC_RELATIONS</a>
+    <span>
+        &nbsp;= &#039;https://schema.oihana.xyz/ContactType#PublicRelations&#039;                            </span>
+</dt>
+<dd>Public relations contact.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_SALES">SALES</a>
@@ -235,11 +443,32 @@
 <dd>Sales contact.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_SOCIAL_MEDIAS">SOCIAL_MEDIAS</a>
+    <span>
+        &nbsp;= &#039;https://schema.oihana.xyz/ContactType#SocialMedias&#039;                            </span>
+</dt>
+<dd>Social Medias contact.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_SUPPORT">SUPPORT</a>
+    <span>
+        &nbsp;= &#039;https://schema.oihana.xyz/ContactType#Support&#039;                            </span>
+</dt>
+<dd>Support contact.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_TECHNICAL_SUPPORT">TECHNICAL_SUPPORT</a>
     <span>
         &nbsp;= &#039;https://schema.oihana.xyz/ContactType#TechnicalSupport&#039;                            </span>
 </dt>
 <dd>Technical support contact.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_WORK">WORK</a>
+    <span>
+        &nbsp;= &#039;https://schema.oihana.xyz/ContactType#Work&#039;                            </span>
+</dt>
+<dd>Work / business contact.</dd>
 
     </dl>
 
@@ -507,6 +736,37 @@
 
         </h3>
                     <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_ASSISTANT">
+        ASSISTANT
+        <a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_ASSISTANT" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/enumerations/ContactType.php"><a href="files/src-xyz-oihana-schema-enumerations-contacttype.html"><abbr title="src/xyz/oihana/schema/enumerations/ContactType.php">ContactType.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">49</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Assistant contact.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">ASSISTANT</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;https://schema.oihana.xyz/ContactType#Assistant&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
     <h4 class="phpdocumentor-element__name" id="constant_BILLING">
         BILLING
         <a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_BILLING" class="headerlink"><i class="fas fa-link"></i></a>
@@ -516,7 +776,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/enumerations/ContactType.php"><a href="files/src-xyz-oihana-schema-enumerations-contacttype.html"><abbr title="src/xyz/oihana/schema/enumerations/ContactType.php">ContactType.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">20</span>
+    <span class="phpdocumentor-element-found-in__line">54</span>
 
     </aside>
 
@@ -569,6 +829,37 @@
         
     </article>
                     <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_CUSTOMER_COMPLAINTS_DEPARTMENT">
+        CUSTOMER_COMPLAINTS_DEPARTMENT
+        <a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_CUSTOMER_COMPLAINTS_DEPARTMENT" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/enumerations/ContactType.php"><a href="files/src-xyz-oihana-schema-enumerations-contacttype.html"><abbr title="src/xyz/oihana/schema/enumerations/ContactType.php">ContactType.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">59</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Customer Complaints Department.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">CUSTOMER_COMPLAINTS_DEPARTMENT</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;https://schema.oihana.xyz/ContactType#CCD&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
     <h4 class="phpdocumentor-element__name" id="constant_CUSTOMER_SERVICE">
         CUSTOMER_SERVICE
         <a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_CUSTOMER_SERVICE" class="headerlink"><i class="fas fa-link"></i></a>
@@ -578,7 +869,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/enumerations/ContactType.php"><a href="files/src-xyz-oihana-schema-enumerations-contacttype.html"><abbr title="src/xyz/oihana/schema/enumerations/ContactType.php">ContactType.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">25</span>
+    <span class="phpdocumentor-element-found-in__line">64</span>
 
     </aside>
 
@@ -600,6 +891,68 @@
         
     </article>
                     <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_DEFAULT">
+        DEFAULT
+        <a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_DEFAULT" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/enumerations/ContactType.php"><a href="files/src-xyz-oihana-schema-enumerations-contacttype.html"><abbr title="src/xyz/oihana/schema/enumerations/ContactType.php">ContactType.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">69</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Default contact.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">DEFAULT</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;https://schema.oihana.xyz/ContactType#Default&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_EMERGENCY">
+        EMERGENCY
+        <a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_EMERGENCY" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/enumerations/ContactType.php"><a href="files/src-xyz-oihana-schema-enumerations-contacttype.html"><abbr title="src/xyz/oihana/schema/enumerations/ContactType.php">ContactType.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">74</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Emergency contact.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">EMERGENCY</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;https://schema.oihana.xyz/ContactType#Emergency&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
     <h4 class="phpdocumentor-element__name" id="constant_FAX">
         FAX
         <a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_FAX" class="headerlink"><i class="fas fa-link"></i></a>
@@ -609,7 +962,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/enumerations/ContactType.php"><a href="files/src-xyz-oihana-schema-enumerations-contacttype.html"><abbr title="src/xyz/oihana/schema/enumerations/ContactType.php">ContactType.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">30</span>
+    <span class="phpdocumentor-element-found-in__line">79</span>
 
     </aside>
 
@@ -631,6 +984,86 @@
         
     </article>
                     <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_HOME">
+        HOME
+        <a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_HOME" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/enumerations/ContactType.php"><a href="files/src-xyz-oihana-schema-enumerations-contacttype.html"><abbr title="src/xyz/oihana/schema/enumerations/ContactType.php">ContactType.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">84</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Home / personal contact.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">HOME</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;https://schema.oihana.xyz/ContactType#Home&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_JSON_PRIORITY_KEYS">
+        JSON_PRIORITY_KEYS
+        <a href="classes/org-schema-traits-ThingTrait.html#constant_JSON_PRIORITY_KEYS" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">124</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Defines the priority order of keys when serializing the object to JSON-LD.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">array&lt;string|int, string&gt;</span>
+    <span class="phpdocumentor-signature__name">JSON_PRIORITY_KEYS</span>
+    = <span class="phpdocumentor-signature__default-value">[\org\schema\constants\Schema::AT_TYPE, \org\schema\constants\Schema::AT_CONTEXT, \org\schema\constants\Schema::_KEY, \org\schema\constants\Schema::_FROM, \org\schema\constants\Schema::_TO, \org\schema\constants\Schema::ID, \org\schema\constants\Schema::NAME, \org\schema\constants\Schema::URL, \org\schema\constants\Schema::CREATED, \org\schema\constants\Schema::MODIFIED]</span>
+</code>
+
+
+        <section class="phpdocumentor-description"><p>Keys listed here will always appear first in the serialized array,
+in the order specified. All remaining public properties will be
+sorted alphabetically after these priority keys.</p>
+<p>This ensures that important JSON-LD metadata and system fields
+(like <code class="prettyprint">@type</code>, <code class="prettyprint">@context</code>, <code class="prettyprint">_key</code>, <code class="prettyprint">id</code>, <code class="prettyprint">url</code>, <code class="prettyprint">created</code>, <code class="prettyprint">modified</code>, etc.)
+appear at the top of the output for consistency and readability.</p>
+<p>Usage:</p>
+<pre class="prettyprint"><code class="language-php">$orderedKeys = self::JSON_PRIORITY_KEYS;
+</code></pre>
+<p>Notes:</p>
+<ul>
+<li>Can be overridden in a subclass by redefining the constant.</li>
+<li>Late static binding (<code class="prettyprint">static::JSON_PRIORITY_KEYS</code>) allows
+child classes to modify the serialization order.</li>
+</ul>
+</section>
+
+        <section class="phpdocumentor-description"><p>List of JSON-LD keys in priority order.</p>
+</section>
+
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
     <h4 class="phpdocumentor-element__name" id="constant_LANDLINE">
         LANDLINE
         <a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_LANDLINE" class="headerlink"><i class="fas fa-link"></i></a>
@@ -640,7 +1073,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/enumerations/ContactType.php"><a href="files/src-xyz-oihana-schema-enumerations-contacttype.html"><abbr title="src/xyz/oihana/schema/enumerations/ContactType.php">ContactType.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">35</span>
+    <span class="phpdocumentor-element-found-in__line">89</span>
 
     </aside>
 
@@ -662,6 +1095,99 @@
         
     </article>
                     <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_LEGAL">
+        LEGAL
+        <a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_LEGAL" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/enumerations/ContactType.php"><a href="files/src-xyz-oihana-schema-enumerations-contacttype.html"><abbr title="src/xyz/oihana/schema/enumerations/ContactType.php">ContactType.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">94</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Legal contact.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">LEGAL</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;https://schema.oihana.xyz/ContactType#Legal&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_MANAGER">
+        MANAGER
+        <a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_MANAGER" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/enumerations/ContactType.php"><a href="files/src-xyz-oihana-schema-enumerations-contacttype.html"><abbr title="src/xyz/oihana/schema/enumerations/ContactType.php">ContactType.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">99</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Manager / executive contact.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">MANAGER</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;https://schema.oihana.xyz/ContactType#Manager&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_MEDIA">
+        MEDIA
+        <a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_MEDIA" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/enumerations/ContactType.php"><a href="files/src-xyz-oihana-schema-enumerations-contacttype.html"><abbr title="src/xyz/oihana/schema/enumerations/ContactType.php">ContactType.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">104</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Media contact.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">MEDIA</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;https://schema.oihana.xyz/ContactType#Media&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
     <h4 class="phpdocumentor-element__name" id="constant_MOBILE">
         MOBILE
         <a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_MOBILE" class="headerlink"><i class="fas fa-link"></i></a>
@@ -671,7 +1197,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/enumerations/ContactType.php"><a href="files/src-xyz-oihana-schema-enumerations-contacttype.html"><abbr title="src/xyz/oihana/schema/enumerations/ContactType.php">ContactType.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">40</span>
+    <span class="phpdocumentor-element-found-in__line">109</span>
 
     </aside>
 
@@ -693,6 +1219,37 @@
         
     </article>
                     <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_MOBILE_PROFESSIONAL">
+        MOBILE_PROFESSIONAL
+        <a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_MOBILE_PROFESSIONAL" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/enumerations/ContactType.php"><a href="files/src-xyz-oihana-schema-enumerations-contacttype.html"><abbr title="src/xyz/oihana/schema/enumerations/ContactType.php">ContactType.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">114</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Professional / work mobile phone contact.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">MOBILE_PROFESSIONAL</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;https://schema.oihana.xyz/ContactType#ProfessionalMobile&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
     <h4 class="phpdocumentor-element__name" id="constant_OTHER">
         OTHER
         <a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_OTHER" class="headerlink"><i class="fas fa-link"></i></a>
@@ -702,7 +1259,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/enumerations/ContactType.php"><a href="files/src-xyz-oihana-schema-enumerations-contacttype.html"><abbr title="src/xyz/oihana/schema/enumerations/ContactType.php">ContactType.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">45</span>
+    <span class="phpdocumentor-element-found-in__line">119</span>
 
     </aside>
 
@@ -724,6 +1281,68 @@
         
     </article>
                     <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_PRESS">
+        PRESS
+        <a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_PRESS" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/enumerations/ContactType.php"><a href="files/src-xyz-oihana-schema-enumerations-contacttype.html"><abbr title="src/xyz/oihana/schema/enumerations/ContactType.php">ContactType.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">124</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Press contact.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">PRESS</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;https://schema.oihana.xyz/ContactType#Press&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_PUBLIC_RELATIONS">
+        PUBLIC_RELATIONS
+        <a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_PUBLIC_RELATIONS" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/enumerations/ContactType.php"><a href="files/src-xyz-oihana-schema-enumerations-contacttype.html"><abbr title="src/xyz/oihana/schema/enumerations/ContactType.php">ContactType.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">129</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Public relations contact.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">PUBLIC_RELATIONS</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;https://schema.oihana.xyz/ContactType#PublicRelations&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
     <h4 class="phpdocumentor-element__name" id="constant_SALES">
         SALES
         <a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_SALES" class="headerlink"><i class="fas fa-link"></i></a>
@@ -733,7 +1352,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/enumerations/ContactType.php"><a href="files/src-xyz-oihana-schema-enumerations-contacttype.html"><abbr title="src/xyz/oihana/schema/enumerations/ContactType.php">ContactType.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">50</span>
+    <span class="phpdocumentor-element-found-in__line">134</span>
 
     </aside>
 
@@ -755,6 +1374,68 @@
         
     </article>
                     <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_SOCIAL_MEDIAS">
+        SOCIAL_MEDIAS
+        <a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_SOCIAL_MEDIAS" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/enumerations/ContactType.php"><a href="files/src-xyz-oihana-schema-enumerations-contacttype.html"><abbr title="src/xyz/oihana/schema/enumerations/ContactType.php">ContactType.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">139</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Social Medias contact.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">SOCIAL_MEDIAS</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;https://schema.oihana.xyz/ContactType#SocialMedias&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_SUPPORT">
+        SUPPORT
+        <a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_SUPPORT" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/enumerations/ContactType.php"><a href="files/src-xyz-oihana-schema-enumerations-contacttype.html"><abbr title="src/xyz/oihana/schema/enumerations/ContactType.php">ContactType.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">144</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Support contact.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">SUPPORT</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;https://schema.oihana.xyz/ContactType#Support&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
     <h4 class="phpdocumentor-element__name" id="constant_TECHNICAL_SUPPORT">
         TECHNICAL_SUPPORT
         <a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_TECHNICAL_SUPPORT" class="headerlink"><i class="fas fa-link"></i></a>
@@ -764,7 +1445,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/enumerations/ContactType.php"><a href="files/src-xyz-oihana-schema-enumerations-contacttype.html"><abbr title="src/xyz/oihana/schema/enumerations/ContactType.php">ContactType.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">55</span>
+    <span class="phpdocumentor-element-found-in__line">149</span>
 
     </aside>
 
@@ -776,6 +1457,37 @@
         <span class="phpdocumentor-signature__type">mixed</span>
     <span class="phpdocumentor-signature__name">TECHNICAL_SUPPORT</span>
     = <span class="phpdocumentor-signature__default-value">&#039;https://schema.oihana.xyz/ContactType#TechnicalSupport&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_WORK">
+        WORK
+        <a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_WORK" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/enumerations/ContactType.php"><a href="files/src-xyz-oihana-schema-enumerations-contacttype.html"><abbr title="src/xyz/oihana/schema/enumerations/ContactType.php">ContactType.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">154</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Work / business contact.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">WORK</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;https://schema.oihana.xyz/ContactType#Work&#039;</span>
 </code>
 
 
@@ -2011,7 +2723,7 @@ echo $person-&gt;name; // Outputs: Jane Doe
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">134</span>
+    <span class="phpdocumentor-element-found-in__line">171</span>
 
     </aside>
 
@@ -2101,7 +2813,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">153</span>
+    <span class="phpdocumentor-element-found-in__line">205</span>
 
     </aside>
 
@@ -2154,7 +2866,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">189</span>
+    <span class="phpdocumentor-element-found-in__line">241</span>
 
     </aside>
 
@@ -2207,7 +2919,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">168</span>
+    <span class="phpdocumentor-element-found-in__line">220</span>
 
     </aside>
 
@@ -2370,15 +3082,30 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                             <li class="phpdocumentor-on-this-page-section__title">Constants</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
+                                                    <li class=""><a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_ASSISTANT">ASSISTANT</a></li>
                                                     <li class=""><a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_BILLING">BILLING</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#constant_CONTEXT">CONTEXT</a></li>
+                                                    <li class=""><a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_CUSTOMER_COMPLAINTS_DEPARTMENT">CUSTOMER_COMPLAINTS_DEPARTMENT</a></li>
                                                     <li class=""><a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_CUSTOMER_SERVICE">CUSTOMER_SERVICE</a></li>
+                                                    <li class=""><a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_DEFAULT">DEFAULT</a></li>
+                                                    <li class=""><a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_EMERGENCY">EMERGENCY</a></li>
                                                     <li class=""><a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_FAX">FAX</a></li>
+                                                    <li class=""><a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_HOME">HOME</a></li>
+                                                    <li class=""><a href="classes/org-schema-traits-ThingTrait.html#constant_JSON_PRIORITY_KEYS">JSON_PRIORITY_KEYS</a></li>
                                                     <li class=""><a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_LANDLINE">LANDLINE</a></li>
+                                                    <li class=""><a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_LEGAL">LEGAL</a></li>
+                                                    <li class=""><a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_MANAGER">MANAGER</a></li>
+                                                    <li class=""><a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_MEDIA">MEDIA</a></li>
                                                     <li class=""><a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_MOBILE">MOBILE</a></li>
+                                                    <li class=""><a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_MOBILE_PROFESSIONAL">MOBILE_PROFESSIONAL</a></li>
                                                     <li class=""><a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_OTHER">OTHER</a></li>
+                                                    <li class=""><a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_PRESS">PRESS</a></li>
+                                                    <li class=""><a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_PUBLIC_RELATIONS">PUBLIC_RELATIONS</a></li>
                                                     <li class=""><a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_SALES">SALES</a></li>
+                                                    <li class=""><a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_SOCIAL_MEDIAS">SOCIAL_MEDIAS</a></li>
+                                                    <li class=""><a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_SUPPORT">SUPPORT</a></li>
                                                     <li class=""><a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_TECHNICAL_SUPPORT">TECHNICAL_SUPPORT</a></li>
+                                                    <li class=""><a href="classes/xyz-oihana-schema-enumerations-ContactType.html#constant_WORK">WORK</a></li>
                                             </ul>
                 </li>
             

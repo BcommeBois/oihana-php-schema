@@ -129,16 +129,40 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/ProductGroup.php"><a href="files/src-org-schema-productgroup.html"><abbr title="src/org/schema/ProductGroup.php">ProductGroup.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">5</span>
+    <span class="phpdocumentor-element-found-in__line">22</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">Any offered product or service. For example: a pair of shoes; a concert ticket;
-the rental of a car; a haircut; or an episode of a TV show streamed online.</p>
+            <p class="phpdocumentor-summary">A ProductGroup represents a group of Products that vary only in certain well-described ways,
+such as by size, color, material etc.</p>
 
 
+    <section class="phpdocumentor-description"><p>While a ProductGroup itself is not directly offered for sale,
+the various varying products that it represents can be.</p>
+<p>The ProductGroup serves as a prototype or template, standing in for all of the products
+who have an isVariantOf relationship to it. As such, properties (including additional types)
+can be applied to the ProductGroup to represent characteristics shared
+by each of the (possibly very many) variants.</p>
+<p>Properties that reference a ProductGroup are not included in this mechanism;
+neither are the following specific properties variesBy, hasVariant, url.</p>
+</section>
 
 
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/org-schema-ProductGroup.html#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                    <span class="phpdocumentor-tag-link"><a href="https://schema.org/ProductGroup">https://schema.org/ProductGroup</a></span>
+                                        
+                                             
+                                    </dd>
+                                            </dl>
 
     
     
@@ -166,6 +190,13 @@ the rental of a car; a haircut; or an episode of a TV show streamed online.</p>
         &nbsp;= &#039;https://schema.org&#039;                            </span>
 </dt>
 <dd>JSON-LD @context declaration for Schema.org.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-traits-ThingTrait.html#constant_JSON_PRIORITY_KEYS">JSON_PRIORITY_KEYS</a>
+    <span>
+        &nbsp;= [\org\schema\constants\Schema::AT_TYPE, \org\schema\constants\Schema::AT_CONTEXT, \org\schema\constants\Schema::_KEY, \org\schema\constants\Schema::_FROM, \org\schema\constants\Schema::_TO, \org\schema\constants\Schema::ID, \org\schema\constants\Schema::NAME, \org\schema\constants\Schema::URL, \org\schema\constants\Schema::CREATED, \org\schema\constants\Schema::MODIFIED]                            </span>
+</dt>
+<dd>Defines the priority order of keys when serializing the object to JSON-LD.</dd>
 
     </dl>
 
@@ -294,7 +325,28 @@ e.g. a product feature or another characteristic for which there is no matching 
     <span>
                         &nbsp;: string|object|null            </span>
 </dt>
-<dd>A color swatch image, visualizing the color of a Product</dd>
+<dd>A color swatch image, visualizing the color of a Product.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Product.html#property_countryOfAssembly">$countryOfAssembly</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>The place where the product was assembled.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Product.html#property_countryOfLastProcessing">$countryOfLastProcessing</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>The place where the item (typically Product) was last processed and tested before importation.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Product.html#property_countryOfOrigin">$countryOfOrigin</a>
+    <span>
+                        &nbsp;: <a href="classes/org-schema-places-Country.html"><abbr title="\org\schema\places\Country">Country</abbr></a>|null            </span>
+</dt>
+<dd>The country of origin of something, including products as well as creative works such as movie and TV content.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_created">$created</a>
@@ -323,6 +375,20 @@ e.g. a product feature or another characteristic for which there is no matching 
                         &nbsp;: string|null            </span>
 </dt>
 <dd>A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Product.html#property_displayLocation">$displayLocation</a>
+    <span>
+                        &nbsp;: null|<a href="classes/org-schema-Place.html"><abbr title="\org\schema\Place">Place</abbr></a>|array&lt;string|int, mixed&gt;|string            </span>
+</dt>
+<dd>The location at which an item can be viewed or experienced in-person.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Product.html#property_funding">$funding</a>
+    <span>
+                        &nbsp;: string|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Grant.html"><abbr title="\org\schema\Grant">Grant</abbr></a>|null            </span>
+</dt>
+<dd>A Grant that directly or indirectly provide funding or sponsorship for this item.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Product.html#property_gtin">$gtin</a>
@@ -374,11 +440,25 @@ e.g. a product feature or another characteristic for which there is no matching 
 <dd>Certification information about a product, organization, service, place, or person.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Product.html#property_hasGS1DigitalLink">$hasGS1DigitalLink</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>The GS1 digital link associated with the object.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Product.html#property_hasMeasurement">$hasMeasurement</a>
     <span>
                         &nbsp;: null|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-QuantitativeValue.html"><abbr title="\org\schema\QuantitativeValue">QuantitativeValue</abbr></a>            </span>
 </dt>
 <dd>A measurement of an item, For example, the inseam of pants, the wheel size of a bicycle, the gauge of a screw, or the carbon footprint measured for certification by an authority.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Product.html#property_hasMerchantReturnPolicy">$hasMerchantReturnPolicy</a>
+    <span>
+                        &nbsp;: null|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-MerchantReturnPolicy.html"><abbr title="\org\schema\MerchantReturnPolicy">MerchantReturnPolicy</abbr></a>            </span>
+</dt>
+<dd>Specifies a MerchantReturnPolicy that may be applicable.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_hasPart">$hasPart</a>
@@ -481,7 +561,7 @@ e.g. a product feature or another characteristic for which there is no matching 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Product.html#property_itemCondition">$itemCondition</a>
     <span>
-                        &nbsp;: <a href="classes/org-schema-DefinedTerm.html"><abbr title="\org\schema\DefinedTerm">DefinedTerm</abbr></a>|string|<a href="classes/org-schema-Enumeration.html"><abbr title="\org\schema\Enumeration">Enumeration</abbr></a>|null            </span>
+                        &nbsp;: <a href="classes/org-schema-DefinedTerm.html"><abbr title="\org\schema\DefinedTerm">DefinedTerm</abbr></a>|string|<a href="classes/org-schema-enumerations-OfferItemCondition.html"><abbr title="\org\schema\enumerations\OfferItemCondition">OfferItemCondition</abbr></a>|array&lt;string|int, mixed&gt;|null            </span>
 </dt>
 <dd>A predefined value from OfferItemCondition specifying the condition of the product or service, or the products or services included in the offer.</dd>
 
@@ -563,6 +643,13 @@ e.g. a product feature or another characteristic for which there is no matching 
 <dd>The name of the item.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Product.html#property_negativeNotes">$negativeNotes</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;|<a href="classes/org-schema-ItemList.html"><abbr title="\org\schema\ItemList">ItemList</abbr></a>|<a href="classes/org-schema-ListItem.html"><abbr title="\org\schema\ListItem">ListItem</abbr></a>|string|<a href="classes/org-schema-creativeWork-WebContent.html"><abbr title="\org\schema\creativeWork\WebContent">WebContent</abbr></a>|null            </span>
+</dt>
+<dd>Provides negative considerations regarding something, most typically in pro/con lists for reviews (alongside positiveNotes). For symmetry</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Product.html#property_nsn">$nsn</a>
     <span>
                         &nbsp;: string|null            </span>
@@ -589,6 +676,13 @@ e.g. a product feature or another characteristic for which there is no matching 
                         &nbsp;: string|<a href="classes/org-schema-DefinedTerm.html"><abbr title="\org\schema\DefinedTerm">DefinedTerm</abbr></a>|null            </span>
 </dt>
 <dd>A pattern that something has, for example &#039;polka dot&#039;, &#039;striped&#039;, &#039;Canadian flag&#039;. Values are typically expressed as text, although links to controlled value schemes are also supported.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/org-schema-Product.html#property_positiveNotes">$positiveNotes</a>
+    <span>
+                        &nbsp;: array&lt;string|int, mixed&gt;|<a href="classes/org-schema-ItemList.html"><abbr title="\org\schema\ItemList">ItemList</abbr></a>|<a href="classes/org-schema-ListItem.html"><abbr title="\org\schema\ListItem">ListItem</abbr></a>|string|<a href="classes/org-schema-creativeWork-WebContent.html"><abbr title="\org\schema\creativeWork\WebContent">WebContent</abbr></a>|null            </span>
+</dt>
+<dd>Provides positive considerations regarding something, for example product highlights or (alongside negativeNotes) pro/con lists for reviews.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_potentialAction">$potentialAction</a>
@@ -695,7 +789,7 @@ in other cases, the width, height, depth and weight properties may be more appli
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-ProductGroup.html#property_variesBy">$variesBy</a>
     <span>
-                        &nbsp;: null|string|<a href="classes/org-schema-DefinedTerm.html"><abbr title="\org\schema\DefinedTerm">DefinedTerm</abbr></a>            </span>
+                        &nbsp;: null|string|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-DefinedTerm.html"><abbr title="\org\schema\DefinedTerm">DefinedTerm</abbr></a>            </span>
 </dt>
 <dd>Indicates the property or properties by which the variants in a ProductGroup vary, e.g. their size, color etc. Schema.org properties can be referenced by their short name e.g. &quot;color&quot;; terms defined elsewhere can be referenced with their URIs.</dd>
 
@@ -808,6 +902,55 @@ in other cases, the width, height, depth and weight properties may be more appli
 
     
     
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_JSON_PRIORITY_KEYS">
+        JSON_PRIORITY_KEYS
+        <a href="classes/org-schema-traits-ThingTrait.html#constant_JSON_PRIORITY_KEYS" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">124</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Defines the priority order of keys when serializing the object to JSON-LD.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">array&lt;string|int, string&gt;</span>
+    <span class="phpdocumentor-signature__name">JSON_PRIORITY_KEYS</span>
+    = <span class="phpdocumentor-signature__default-value">[\org\schema\constants\Schema::AT_TYPE, \org\schema\constants\Schema::AT_CONTEXT, \org\schema\constants\Schema::_KEY, \org\schema\constants\Schema::_FROM, \org\schema\constants\Schema::_TO, \org\schema\constants\Schema::ID, \org\schema\constants\Schema::NAME, \org\schema\constants\Schema::URL, \org\schema\constants\Schema::CREATED, \org\schema\constants\Schema::MODIFIED]</span>
+</code>
+
+
+        <section class="phpdocumentor-description"><p>Keys listed here will always appear first in the serialized array,
+in the order specified. All remaining public properties will be
+sorted alphabetically after these priority keys.</p>
+<p>This ensures that important JSON-LD metadata and system fields
+(like <code class="prettyprint">@type</code>, <code class="prettyprint">@context</code>, <code class="prettyprint">_key</code>, <code class="prettyprint">id</code>, <code class="prettyprint">url</code>, <code class="prettyprint">created</code>, <code class="prettyprint">modified</code>, etc.)
+appear at the top of the output for consistency and readability.</p>
+<p>Usage:</p>
+<pre class="prettyprint"><code class="language-php">$orderedKeys = self::JSON_PRIORITY_KEYS;
+</code></pre>
+<p>Notes:</p>
+<ul>
+<li>Can be overridden in a subclass by redefining the constant.</li>
+<li>Late static binding (<code class="prettyprint">static::JSON_PRIORITY_KEYS</code>) allows
+child classes to modify the serialization order.</li>
+</ul>
+</section>
+
+        <section class="phpdocumentor-description"><p>List of JSON-LD keys in priority order.</p>
+</section>
+
     
 
         
@@ -1066,7 +1209,7 @@ in other cases, the width, height, depth and weight properties may be more appli
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">21</span>
+    <span class="phpdocumentor-element-found-in__line">25</span>
 
     </aside>
 
@@ -1157,7 +1300,7 @@ e.g. a product feature or another characteristic for which there is no matching 
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">27</span>
+    <span class="phpdocumentor-element-found-in__line">31</span>
 
     </aside>
 
@@ -1247,7 +1390,7 @@ e.g. a product feature or another characteristic for which there is no matching 
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">33</span>
+    <span class="phpdocumentor-element-found-in__line">37</span>
 
     </aside>
 
@@ -1285,7 +1428,7 @@ e.g. a product feature or another characteristic for which there is no matching 
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">38</span>
+    <span class="phpdocumentor-element-found-in__line">42</span>
 
     </aside>
 
@@ -1337,7 +1480,7 @@ e.g. a product feature or another characteristic for which there is no matching 
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">45</span>
+    <span class="phpdocumentor-element-found-in__line">49</span>
 
     </aside>
 
@@ -1375,7 +1518,7 @@ e.g. a product feature or another characteristic for which there is no matching 
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">51</span>
+    <span class="phpdocumentor-element-found-in__line">55</span>
 
     </aside>
 
@@ -1413,7 +1556,7 @@ e.g. a product feature or another characteristic for which there is no matching 
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">57</span>
+    <span class="phpdocumentor-element-found-in__line">61</span>
 
     </aside>
 
@@ -1451,7 +1594,7 @@ e.g. a product feature or another characteristic for which there is no matching 
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">63</span>
+    <span class="phpdocumentor-element-found-in__line">67</span>
 
     </aside>
 
@@ -1489,11 +1632,11 @@ e.g. a product feature or another characteristic for which there is no matching 
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">69</span>
+    <span class="phpdocumentor-element-found-in__line">76</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">A color swatch image, visualizing the color of a Product</p>
+        <p class="phpdocumentor-summary">A color swatch image, visualizing the color of a Product.</p>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
@@ -1502,7 +1645,126 @@ e.g. a product feature or another characteristic for which there is no matching 
     <span class="phpdocumentor-signature__name">$colorSwatch</span>
     </code>
 
+        <section class="phpdocumentor-description"><p>Should match the textual description specified in the color property. This can be a URL or a fully described ImageObject.</p>
+</section>
+
     
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_countryOfAssembly">
+        $countryOfAssembly
+        <a href="classes/org-schema-Product.html#property_countryOfAssembly" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">82</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The place where the product was assembled.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$countryOfAssembly</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_countryOfLastProcessing">
+        $countryOfLastProcessing
+        <a href="classes/org-schema-Product.html#property_countryOfLastProcessing" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">88</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The place where the item (typically Product) was last processed and tested before importation.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$countryOfLastProcessing</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_countryOfOrigin">
+        $countryOfOrigin
+        <a href="classes/org-schema-Product.html#property_countryOfOrigin" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">99</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The country of origin of something, including products as well as creative works such as movie and TV content.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/org-schema-places-Country.html"><abbr title="\org\schema\places\Country">Country</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__name">$countryOfOrigin</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>In the case of TV and movie, this would be the country of the principle offices of the production company or individual responsible for the movie. For other kinds of CreativeWork it is difficult to provide fully general guidance, and properties such as contentLocation and locationCreated may be more applicable.</p>
+<p>In the case of products, the country of origin of the product. The exact interpretation of this may vary by context and product type, and cannot be fully enumerated here.</p>
+</section>
+
     
     
 
@@ -1565,7 +1827,7 @@ e.g. a product feature or another characteristic for which there is no matching 
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">75</span>
+    <span class="phpdocumentor-element-found-in__line">105</span>
 
     </aside>
 
@@ -1669,6 +1931,82 @@ e.g. a product feature or another characteristic for which there is no matching 
             -public
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_displayLocation">
+        $displayLocation
+        <a href="classes/org-schema-Product.html#property_displayLocation" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">111</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The location at which an item can be viewed or experienced in-person.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">null|<a href="classes/org-schema-Place.html"><abbr title="\org\schema\Place">Place</abbr></a>|array&lt;string|int, mixed&gt;|string</span>
+    <span class="phpdocumentor-signature__name">$displayLocation</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_funding">
+        $funding
+        <a href="classes/org-schema-Product.html#property_funding" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">117</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A Grant that directly or indirectly provide funding or sponsorship for this item.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Grant.html"><abbr title="\org\schema\Grant">Grant</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__name">$funding</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_gtin">
         $gtin
         <a href="classes/org-schema-Product.html#property_gtin" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1679,7 +2017,7 @@ e.g. a product feature or another characteristic for which there is no matching 
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">82</span>
+    <span class="phpdocumentor-element-found-in__line">124</span>
 
     </aside>
 
@@ -1719,7 +2057,7 @@ e.g. a product feature or another characteristic for which there is no matching 
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">89</span>
+    <span class="phpdocumentor-element-found-in__line">131</span>
 
     </aside>
 
@@ -1759,7 +2097,7 @@ e.g. a product feature or another characteristic for which there is no matching 
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">96</span>
+    <span class="phpdocumentor-element-found-in__line">138</span>
 
     </aside>
 
@@ -1799,7 +2137,7 @@ e.g. a product feature or another characteristic for which there is no matching 
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">102</span>
+    <span class="phpdocumentor-element-found-in__line">144</span>
 
     </aside>
 
@@ -1837,7 +2175,7 @@ e.g. a product feature or another characteristic for which there is no matching 
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">108</span>
+    <span class="phpdocumentor-element-found-in__line">150</span>
 
     </aside>
 
@@ -1875,7 +2213,7 @@ e.g. a product feature or another characteristic for which there is no matching 
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">125</span>
+    <span class="phpdocumentor-element-found-in__line">167</span>
 
     </aside>
 
@@ -1927,7 +2265,7 @@ e.g. a product feature or another characteristic for which there is no matching 
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">130</span>
+    <span class="phpdocumentor-element-found-in__line">172</span>
 
     </aside>
 
@@ -1969,6 +2307,46 @@ e.g. a product feature or another characteristic for which there is no matching 
             -public
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_hasGS1DigitalLink">
+        $hasGS1DigitalLink
+        <a href="classes/org-schema-Product.html#property_hasGS1DigitalLink" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">180</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The GS1 digital link associated with the object.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$hasGS1DigitalLink</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>This URL should conform to the particular requirements of digital links. The link should only contain the Application Identifiers (AIs) that are relevant for the entity being annotated, for instance a Product or an Organization, and for the correct granularity.</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_hasMeasurement">
         $hasMeasurement
         <a href="classes/org-schema-Product.html#property_hasMeasurement" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1979,7 +2357,7 @@ e.g. a product feature or another characteristic for which there is no matching 
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">137</span>
+    <span class="phpdocumentor-element-found-in__line">186</span>
 
     </aside>
 
@@ -2013,6 +2391,44 @@ e.g. a product feature or another characteristic for which there is no matching 
     </dd>
     </dl>
                     </section>
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_hasMerchantReturnPolicy">
+        $hasMerchantReturnPolicy
+        <a href="classes/org-schema-Product.html#property_hasMerchantReturnPolicy" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">193</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Specifies a MerchantReturnPolicy that may be applicable.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">null|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-MerchantReturnPolicy.html"><abbr title="\org\schema\MerchantReturnPolicy">MerchantReturnPolicy</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$hasMerchantReturnPolicy</span>
+    </code>
+
+    
+    
+    
+
+        
         
 
 </article>
@@ -2071,7 +2487,7 @@ e.g. a product feature or another characteristic for which there is no matching 
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/ProductGroup.php"><a href="files/src-org-schema-productgroup.html"><abbr title="src/org/schema/ProductGroup.php">ProductGroup.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">12</span>
+    <span class="phpdocumentor-element-found-in__line">29</span>
 
     </aside>
 
@@ -2111,7 +2527,7 @@ e.g. a product feature or another characteristic for which there is no matching 
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">144</span>
+    <span class="phpdocumentor-element-found-in__line">199</span>
 
     </aside>
 
@@ -2263,7 +2679,7 @@ e.g. a product feature or another characteristic for which there is no matching 
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">150</span>
+    <span class="phpdocumentor-element-found-in__line">205</span>
 
     </aside>
 
@@ -2301,7 +2717,7 @@ e.g. a product feature or another characteristic for which there is no matching 
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">155</span>
+    <span class="phpdocumentor-element-found-in__line">210</span>
 
     </aside>
 
@@ -2353,7 +2769,7 @@ e.g. a product feature or another characteristic for which there is no matching 
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">161</span>
+    <span class="phpdocumentor-element-found-in__line">216</span>
 
     </aside>
 
@@ -2405,7 +2821,7 @@ e.g. a product feature or another characteristic for which there is no matching 
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">168</span>
+    <span class="phpdocumentor-element-found-in__line">223</span>
 
     </aside>
 
@@ -2481,7 +2897,7 @@ e.g. a product feature or another characteristic for which there is no matching 
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">174</span>
+    <span class="phpdocumentor-element-found-in__line">229</span>
 
     </aside>
 
@@ -2519,7 +2935,7 @@ e.g. a product feature or another characteristic for which there is no matching 
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">180</span>
+    <span class="phpdocumentor-element-found-in__line">235</span>
 
     </aside>
 
@@ -2557,7 +2973,7 @@ e.g. a product feature or another characteristic for which there is no matching 
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">185</span>
+    <span class="phpdocumentor-element-found-in__line">240</span>
 
     </aside>
 
@@ -2612,7 +3028,7 @@ e.g. a product feature or another characteristic for which there is no matching 
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">198</span>
+    <span class="phpdocumentor-element-found-in__line">253</span>
 
     </aside>
 
@@ -2621,7 +3037,7 @@ e.g. a product feature or another characteristic for which there is no matching 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type"><a href="classes/org-schema-DefinedTerm.html"><abbr title="\org\schema\DefinedTerm">DefinedTerm</abbr></a>|string|<a href="classes/org-schema-Enumeration.html"><abbr title="\org\schema\Enumeration">Enumeration</abbr></a>|null</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/org-schema-DefinedTerm.html"><abbr title="\org\schema\DefinedTerm">DefinedTerm</abbr></a>|string|<a href="classes/org-schema-enumerations-OfferItemCondition.html"><abbr title="\org\schema\enumerations\OfferItemCondition">OfferItemCondition</abbr></a>|array&lt;string|int, mixed&gt;|null</span>
     <span class="phpdocumentor-signature__name">$itemCondition</span>
     </code>
 
@@ -2659,7 +3075,7 @@ Example:</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">204</span>
+    <span class="phpdocumentor-element-found-in__line">259</span>
 
     </aside>
 
@@ -2735,7 +3151,7 @@ Example:</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">210</span>
+    <span class="phpdocumentor-element-found-in__line">265</span>
 
     </aside>
 
@@ -2811,7 +3227,7 @@ Example:</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">216</span>
+    <span class="phpdocumentor-element-found-in__line">271</span>
 
     </aside>
 
@@ -2849,7 +3265,7 @@ Example:</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">222</span>
+    <span class="phpdocumentor-element-found-in__line">277</span>
 
     </aside>
 
@@ -2887,7 +3303,7 @@ Example:</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">228</span>
+    <span class="phpdocumentor-element-found-in__line">283</span>
 
     </aside>
 
@@ -2925,7 +3341,7 @@ Example:</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">234</span>
+    <span class="phpdocumentor-element-found-in__line">289</span>
 
     </aside>
 
@@ -3001,7 +3417,7 @@ Example:</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">240</span>
+    <span class="phpdocumentor-element-found-in__line">295</span>
 
     </aside>
 
@@ -3067,6 +3483,47 @@ Example:</p>
             -public
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_negativeNotes">
+        $negativeNotes
+        <a href="classes/org-schema-Product.html#property_negativeNotes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">306</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Provides negative considerations regarding something, most typically in pro/con lists for reviews (alongside positiveNotes). For symmetry</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|<a href="classes/org-schema-ItemList.html"><abbr title="\org\schema\ItemList">ItemList</abbr></a>|<a href="classes/org-schema-ListItem.html"><abbr title="\org\schema\ListItem">ListItem</abbr></a>|string|<a href="classes/org-schema-creativeWork-WebContent.html"><abbr title="\org\schema\creativeWork\WebContent">WebContent</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__name">$negativeNotes</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>In the case of a Review, the property describes the itemReviewed from the perspective of the review; in the case of a Product, the product itself is being described. Since product descriptions tend to emphasise positive claims, it may be relatively unusual to find negativeNotes used in this way. Nevertheless for the sake of symmetry, negativeNotes can be used on Product.</p>
+<p>The property values can be expressed either as unstructured text (repeated as necessary), or if ordered, as a list (in which case the most negative is at the beginning of the list).</p>
+</section>
+
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_nsn">
         $nsn
         <a href="classes/org-schema-Product.html#property_nsn" class="headerlink"><i class="fas fa-link"></i></a>
@@ -3077,7 +3534,7 @@ Example:</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">247</span>
+    <span class="phpdocumentor-element-found-in__line">313</span>
 
     </aside>
 
@@ -3130,7 +3587,7 @@ Example:</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">252</span>
+    <span class="phpdocumentor-element-found-in__line">318</span>
 
     </aside>
 
@@ -3226,7 +3683,7 @@ that can be considered the possessor of this Thing.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">259</span>
+    <span class="phpdocumentor-element-found-in__line">325</span>
 
     </aside>
 
@@ -3240,6 +3697,47 @@ that can be considered the possessor of this Thing.</p>
     </code>
 
     
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_positiveNotes">
+        $positiveNotes
+        <a href="classes/org-schema-Product.html#property_positiveNotes" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">336</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Provides positive considerations regarding something, for example product highlights or (alongside negativeNotes) pro/con lists for reviews.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|<a href="classes/org-schema-ItemList.html"><abbr title="\org\schema\ItemList">ItemList</abbr></a>|<a href="classes/org-schema-ListItem.html"><abbr title="\org\schema\ListItem">ListItem</abbr></a>|string|<a href="classes/org-schema-creativeWork-WebContent.html"><abbr title="\org\schema\creativeWork\WebContent">WebContent</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__name">$positiveNotes</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>In the case of a Review, the property describes the itemReviewed from the perspective of the review; in the case of a Product, the product itself is being described.</p>
+<p>The property values can be expressed either as unstructured text (repeated as necessary), or if ordered, as a list (in which case the most positive is at the beginning of the list).</p>
+</section>
+
     
     
 
@@ -3302,7 +3800,7 @@ that can be considered the possessor of this Thing.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/ProductGroup.php"><a href="files/src-org-schema-productgroup.html"><abbr title="src/org/schema/ProductGroup.php">ProductGroup.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">18</span>
+    <span class="phpdocumentor-element-found-in__line">35</span>
 
     </aside>
 
@@ -3340,7 +3838,7 @@ that can be considered the possessor of this Thing.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">265</span>
+    <span class="phpdocumentor-element-found-in__line">342</span>
 
     </aside>
 
@@ -3378,7 +3876,7 @@ that can be considered the possessor of this Thing.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">271</span>
+    <span class="phpdocumentor-element-found-in__line">348</span>
 
     </aside>
 
@@ -3454,7 +3952,7 @@ that can be considered the possessor of this Thing.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">277</span>
+    <span class="phpdocumentor-element-found-in__line">354</span>
 
     </aside>
 
@@ -3492,7 +3990,7 @@ that can be considered the possessor of this Thing.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">284</span>
+    <span class="phpdocumentor-element-found-in__line">361</span>
 
     </aside>
 
@@ -3532,7 +4030,7 @@ that can be considered the possessor of this Thing.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">289</span>
+    <span class="phpdocumentor-element-found-in__line">366</span>
 
     </aside>
 
@@ -3624,7 +4122,7 @@ that can be considered the possessor of this Thing.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">299</span>
+    <span class="phpdocumentor-element-found-in__line">376</span>
 
     </aside>
 
@@ -3686,7 +4184,7 @@ in other cases, the width, height, depth and weight properties may be more appli
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">305</span>
+    <span class="phpdocumentor-element-found-in__line">382</span>
 
     </aside>
 
@@ -3724,7 +4222,7 @@ in other cases, the width, height, depth and weight properties may be more appli
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">311</span>
+    <span class="phpdocumentor-element-found-in__line">388</span>
 
     </aside>
 
@@ -3838,7 +4336,7 @@ in other cases, the width, height, depth and weight properties may be more appli
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/ProductGroup.php"><a href="files/src-org-schema-productgroup.html"><abbr title="src/org/schema/ProductGroup.php">ProductGroup.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">24</span>
+    <span class="phpdocumentor-element-found-in__line">41</span>
 
     </aside>
 
@@ -3847,7 +4345,7 @@ in other cases, the width, height, depth and weight properties may be more appli
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">null|string|<a href="classes/org-schema-DefinedTerm.html"><abbr title="\org\schema\DefinedTerm">DefinedTerm</abbr></a></span>
+            <span class="phpdocumentor-signature__type">null|string|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-DefinedTerm.html"><abbr title="\org\schema\DefinedTerm">DefinedTerm</abbr></a></span>
     <span class="phpdocumentor-signature__name">$variesBy</span>
     </code>
 
@@ -3876,7 +4374,7 @@ in other cases, the width, height, depth and weight properties may be more appli
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">317</span>
+    <span class="phpdocumentor-element-found-in__line">394</span>
 
     </aside>
 
@@ -3914,7 +4412,7 @@ in other cases, the width, height, depth and weight properties may be more appli
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/Product.php"><a href="files/src-org-schema-product.html"><abbr title="src/org/schema/Product.php">Product.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">323</span>
+    <span class="phpdocumentor-element-found-in__line">400</span>
 
     </aside>
 
@@ -4122,7 +4620,7 @@ echo $person-&gt;name; // Outputs: Jane Doe
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">134</span>
+    <span class="phpdocumentor-element-found-in__line">171</span>
 
     </aside>
 
@@ -4212,7 +4710,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">153</span>
+    <span class="phpdocumentor-element-found-in__line">205</span>
 
     </aside>
 
@@ -4265,7 +4763,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">189</span>
+    <span class="phpdocumentor-element-found-in__line">241</span>
 
     </aside>
 
@@ -4318,7 +4816,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">168</span>
+    <span class="phpdocumentor-element-found-in__line">220</span>
 
     </aside>
 
@@ -4482,6 +4980,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                 <li>
                     <ul class="phpdocumentor-list -clean">
                                                     <li class=""><a href="classes/org-schema-Thing.html#constant_CONTEXT">CONTEXT</a></li>
+                                                    <li class=""><a href="classes/org-schema-traits-ThingTrait.html#constant_JSON_PRIORITY_KEYS">JSON_PRIORITY_KEYS</a></li>
                                             </ul>
                 </li>
             
@@ -4505,10 +5004,15 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                                                     <li class=""><a href="classes/org-schema-Product.html#property_category">$category</a></li>
                                                     <li class=""><a href="classes/org-schema-Product.html#property_color">$color</a></li>
                                                     <li class=""><a href="classes/org-schema-Product.html#property_colorSwatch">$colorSwatch</a></li>
+                                                    <li class=""><a href="classes/org-schema-Product.html#property_countryOfAssembly">$countryOfAssembly</a></li>
+                                                    <li class=""><a href="classes/org-schema-Product.html#property_countryOfLastProcessing">$countryOfLastProcessing</a></li>
+                                                    <li class=""><a href="classes/org-schema-Product.html#property_countryOfOrigin">$countryOfOrigin</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_created">$created</a></li>
                                                     <li class=""><a href="classes/org-schema-Product.html#property_depth">$depth</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_description">$description</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_disambiguatingDescription">$disambiguatingDescription</a></li>
+                                                    <li class=""><a href="classes/org-schema-Product.html#property_displayLocation">$displayLocation</a></li>
+                                                    <li class=""><a href="classes/org-schema-Product.html#property_funding">$funding</a></li>
                                                     <li class=""><a href="classes/org-schema-Product.html#property_gtin">$gtin</a></li>
                                                     <li class=""><a href="classes/org-schema-Product.html#property_gtin12">$gtin12</a></li>
                                                     <li class=""><a href="classes/org-schema-Product.html#property_gtin13">$gtin13</a></li>
@@ -4516,7 +5020,9 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                                                     <li class=""><a href="classes/org-schema-Product.html#property_gtin8">$gtin8</a></li>
                                                     <li class=""><a href="classes/org-schema-Product.html#property_hasAdultConsideration">$hasAdultConsideration</a></li>
                                                     <li class=""><a href="classes/org-schema-Product.html#property_hasCertification">$hasCertification</a></li>
+                                                    <li class=""><a href="classes/org-schema-Product.html#property_hasGS1DigitalLink">$hasGS1DigitalLink</a></li>
                                                     <li class=""><a href="classes/org-schema-Product.html#property_hasMeasurement">$hasMeasurement</a></li>
+                                                    <li class=""><a href="classes/org-schema-Product.html#property_hasMerchantReturnPolicy">$hasMerchantReturnPolicy</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_hasPart">$hasPart</a></li>
                                                     <li class=""><a href="classes/org-schema-ProductGroup.html#property_hasVariant">$hasVariant</a></li>
                                                     <li class=""><a href="classes/org-schema-Product.html#property_height">$height</a></li>
@@ -4543,10 +5049,12 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_modified">$modified</a></li>
                                                     <li class=""><a href="classes/org-schema-Product.html#property_mpn">$mpn</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_name">$name</a></li>
+                                                    <li class=""><a href="classes/org-schema-Product.html#property_negativeNotes">$negativeNotes</a></li>
                                                     <li class=""><a href="classes/org-schema-Product.html#property_nsn">$nsn</a></li>
                                                     <li class=""><a href="classes/org-schema-Product.html#property_offers">$offers</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_owner">$owner</a></li>
                                                     <li class=""><a href="classes/org-schema-Product.html#property_pattern">$pattern</a></li>
+                                                    <li class=""><a href="classes/org-schema-Product.html#property_positiveNotes">$positiveNotes</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_potentialAction">$potentialAction</a></li>
                                                     <li class=""><a href="classes/org-schema-ProductGroup.html#property_productGroupID">$productGroupID</a></li>
                                                     <li class=""><a href="classes/org-schema-Product.html#property_productID">$productID</a></li>

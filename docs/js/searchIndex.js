@@ -1683,7 +1683,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\org\\schema\\DefinedRegion",
             "name": "DefinedRegion",
-            "summary": "A\u0020DefinedRegion\u0020is\u0020a\u0020geographic\u0020area\u0020defined\u0020by\u0020potentially\u0020arbitrary\u0020\u0028rather\u0020than\u0020political,\u0020administrative\u0020or\u0020natural\u0020geographical\u0029\u0020criteria.",
+            "summary": "A\u0020DefinedRegion\u0020is\u0020a\u0020geographic\u0020area\u0020defined\u0020by\u0020potentially\u0020arbitrary\n\u0028rather\u0020than\u0020political,\u0020administrative\u0020or\u0020natural\u0020geographical\u0029\u0020criteria.",
             "url": "classes/org-schema-DefinedRegion.html"
         },                {
             "fqsen": "\\org\\schema\\DefinedRegion\u003A\u003A\u0024addressCountry",
@@ -5258,7 +5258,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\org\\schema\\PostalCodeRangeSpecification",
             "name": "PostalCodeRangeSpecification",
-            "summary": "Indicates\u0020a\u0020range\u0020of\u0020postal\u0020codes,\u0020usually\u0020defined\u0020as\u0020the\u0020set\u0020of\u0020valid\u0020codes\u0020between\u0020postalCodeBegin\u0020and\u0020postalCodeEnd,\u0020inclusively",
+            "summary": "Indicates\u0020a\u0020range\u0020of\u0020postal\u0020codes,\u0020usually\u0020defined\u0020as\u0020the\u0020set\u0020of\u0020valid\u0020codes\nbetween\u0020postalCodeBegin\u0020and\u0020postalCodeEnd,\u0020inclusively.",
             "url": "classes/org-schema-PostalCodeRangeSpecification.html"
         },                {
             "fqsen": "\\org\\schema\\PostalCodeRangeSpecification\u003A\u003A\u0024postalCodeBegin",
@@ -5273,7 +5273,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\org\\schema\\PriceSpecification",
             "name": "PriceSpecification",
-            "summary": "A\u0020structured\u0020value\u0020representing\u0020a\u0020price\u0020or\u0020price\u0020range.\u0020Typically,\u0020only\u0020the\u0020subclasses\u0020of\u0020this\u0020type\u0020are\u0020used\u0020for\u0020markup.\u0020It\u0020is\u0020recommended\u0020to\u0020use\u0020MonetaryAmount\u0020to\u0020describe\u0020independent\u0020amounts\u0020of\u0020money\u0020such\u0020as\u0020a\u0020salary,\u0020credit",
+            "summary": "A\u0020structured\u0020value\u0020representing\u0020a\u0020price\u0020or\u0020price\u0020range.",
             "url": "classes/org-schema-PriceSpecification.html"
         },                {
             "fqsen": "\\org\\schema\\PriceSpecification\u003A\u003A\u0024eligibleQuantity",
@@ -5378,13 +5378,38 @@ Search.appendIndex(
         },                {
             "fqsen": "\\org\\schema\\Product\u003A\u003A\u0024colorSwatch",
             "name": "colorSwatch",
-            "summary": "A\u0020color\u0020swatch\u0020image,\u0020visualizing\u0020the\u0020color\u0020of\u0020a\u0020Product",
+            "summary": "A\u0020color\u0020swatch\u0020image,\u0020visualizing\u0020the\u0020color\u0020of\u0020a\u0020Product.",
             "url": "classes/org-schema-Product.html#property_colorSwatch"
+        },                {
+            "fqsen": "\\org\\schema\\Product\u003A\u003A\u0024countryOfAssembly",
+            "name": "countryOfAssembly",
+            "summary": "The\u0020place\u0020where\u0020the\u0020product\u0020was\u0020assembled.",
+            "url": "classes/org-schema-Product.html#property_countryOfAssembly"
+        },                {
+            "fqsen": "\\org\\schema\\Product\u003A\u003A\u0024countryOfLastProcessing",
+            "name": "countryOfLastProcessing",
+            "summary": "The\u0020place\u0020where\u0020the\u0020item\u0020\u0028typically\u0020Product\u0029\u0020was\u0020last\u0020processed\u0020and\u0020tested\u0020before\u0020importation.",
+            "url": "classes/org-schema-Product.html#property_countryOfLastProcessing"
+        },                {
+            "fqsen": "\\org\\schema\\Product\u003A\u003A\u0024countryOfOrigin",
+            "name": "countryOfOrigin",
+            "summary": "The\u0020country\u0020of\u0020origin\u0020of\u0020something,\u0020including\u0020products\u0020as\u0020well\u0020as\u0020creative\u0020works\u0020such\u0020as\u0020movie\u0020and\u0020TV\u0020content.",
+            "url": "classes/org-schema-Product.html#property_countryOfOrigin"
         },                {
             "fqsen": "\\org\\schema\\Product\u003A\u003A\u0024depth",
             "name": "depth",
             "summary": "The\u0020depth\u0020of\u0020the\u0020item.",
             "url": "classes/org-schema-Product.html#property_depth"
+        },                {
+            "fqsen": "\\org\\schema\\Product\u003A\u003A\u0024displayLocation",
+            "name": "displayLocation",
+            "summary": "The\u0020location\u0020at\u0020which\u0020an\u0020item\u0020can\u0020be\u0020viewed\u0020or\u0020experienced\u0020in\u002Dperson.",
+            "url": "classes/org-schema-Product.html#property_displayLocation"
+        },                {
+            "fqsen": "\\org\\schema\\Product\u003A\u003A\u0024funding",
+            "name": "funding",
+            "summary": "A\u0020Grant\u0020that\u0020directly\u0020or\u0020indirectly\u0020provide\u0020funding\u0020or\u0020sponsorship\u0020for\u0020this\u0020item.",
+            "url": "classes/org-schema-Product.html#property_funding"
         },                {
             "fqsen": "\\org\\schema\\Product\u003A\u003A\u0024gtin",
             "name": "gtin",
@@ -5421,10 +5446,20 @@ Search.appendIndex(
             "summary": "Certification\u0020information\u0020about\u0020a\u0020product,\u0020organization,\u0020service,\u0020place,\u0020or\u0020person.",
             "url": "classes/org-schema-Product.html#property_hasCertification"
         },                {
+            "fqsen": "\\org\\schema\\Product\u003A\u003A\u0024hasGS1DigitalLink",
+            "name": "hasGS1DigitalLink",
+            "summary": "The\u0020GS1\u0020digital\u0020link\u0020associated\u0020with\u0020the\u0020object.",
+            "url": "classes/org-schema-Product.html#property_hasGS1DigitalLink"
+        },                {
             "fqsen": "\\org\\schema\\Product\u003A\u003A\u0024hasMeasurement",
             "name": "hasMeasurement",
             "summary": "A\u0020measurement\u0020of\u0020an\u0020item,\u0020For\u0020example,\u0020the\u0020inseam\u0020of\u0020pants,\u0020the\u0020wheel\u0020size\u0020of\u0020a\u0020bicycle,\u0020the\u0020gauge\u0020of\u0020a\u0020screw,\u0020or\u0020the\u0020carbon\u0020footprint\u0020measured\u0020for\u0020certification\u0020by\u0020an\u0020authority.",
             "url": "classes/org-schema-Product.html#property_hasMeasurement"
+        },                {
+            "fqsen": "\\org\\schema\\Product\u003A\u003A\u0024hasMerchantReturnPolicy",
+            "name": "hasMerchantReturnPolicy",
+            "summary": "Specifies\u0020a\u0020MerchantReturnPolicy\u0020that\u0020may\u0020be\u0020applicable.",
+            "url": "classes/org-schema-Product.html#property_hasMerchantReturnPolicy"
         },                {
             "fqsen": "\\org\\schema\\Product\u003A\u003A\u0024height",
             "name": "height",
@@ -5506,6 +5541,11 @@ Search.appendIndex(
             "summary": "The\u0020Manufacturer\u0020Part\u0020Number\u0020\u0028MPN\u0029\u0020of\u0020the\u0020product,\u0020or\u0020the\u0020product\u0020to\u0020which\u0020the\u0020offer\u0020refers.",
             "url": "classes/org-schema-Product.html#property_mpn"
         },                {
+            "fqsen": "\\org\\schema\\Product\u003A\u003A\u0024negativeNotes",
+            "name": "negativeNotes",
+            "summary": "Provides\u0020negative\u0020considerations\u0020regarding\u0020something,\u0020most\u0020typically\u0020in\u0020pro\/con\u0020lists\u0020for\u0020reviews\u0020\u0028alongside\u0020positiveNotes\u0029.\u0020For\u0020symmetry",
+            "url": "classes/org-schema-Product.html#property_negativeNotes"
+        },                {
             "fqsen": "\\org\\schema\\Product\u003A\u003A\u0024nsn",
             "name": "nsn",
             "summary": "Indicates\u0020the\u0020NATO\u0020stock\u0020number\u0020\u0028nsn\u0029\u0020of\u0020a\u0020Product.",
@@ -5520,6 +5560,11 @@ Search.appendIndex(
             "name": "pattern",
             "summary": "A\u0020pattern\u0020that\u0020something\u0020has,\u0020for\u0020example\u0020\u0027polka\u0020dot\u0027,\u0020\u0027striped\u0027,\u0020\u0027Canadian\u0020flag\u0027.\u0020Values\u0020are\u0020typically\u0020expressed\u0020as\u0020text,\u0020although\u0020links\u0020to\u0020controlled\u0020value\u0020schemes\u0020are\u0020also\u0020supported.",
             "url": "classes/org-schema-Product.html#property_pattern"
+        },                {
+            "fqsen": "\\org\\schema\\Product\u003A\u003A\u0024positiveNotes",
+            "name": "positiveNotes",
+            "summary": "Provides\u0020positive\u0020considerations\u0020regarding\u0020something,\u0020for\u0020example\u0020product\u0020highlights\u0020or\u0020\u0028alongside\u0020negativeNotes\u0029\u0020pro\/con\u0020lists\u0020for\u0020reviews.",
+            "url": "classes/org-schema-Product.html#property_positiveNotes"
         },                {
             "fqsen": "\\org\\schema\\Product\u003A\u003A\u0024productID",
             "name": "productID",
@@ -5573,7 +5618,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\org\\schema\\ProductCollection",
             "name": "ProductCollection",
-            "summary": "Any\u0020offered\u0020product\u0020or\u0020service.\u0020For\u0020example\u003A\u0020a\u0020pair\u0020of\u0020shoes\u003B\u0020a\u0020concert\u0020ticket\u003B\u0020the\u0020rental\u0020of\u0020a\u0020car\u003B\u0020a\u0020haircut\u003B\u0020or\u0020an\u0020episode\u0020of\u0020a\u0020TV\u0020show\u0020streamed\u0020online.",
+            "summary": "Any\u0020offered\u0020product\u0020or\u0020service.\u0020For\u0020example\u003A\u0020a\u0020pair\u0020of\u0020shoes\u003B\u0020a\u0020concert\u0020ticket\u003B\nthe\u0020rental\u0020of\u0020a\u0020car\u003B\u0020a\u0020haircut\u003B\u0020or\u0020an\u0020episode\u0020of\u0020a\u0020TV\u0020show\u0020streamed\u0020online.",
             "url": "classes/org-schema-ProductCollection.html"
         },                {
             "fqsen": "\\org\\schema\\ProductCollection\u003A\u003A\u0024includesObject",
@@ -5583,7 +5628,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\org\\schema\\ProductGroup",
             "name": "ProductGroup",
-            "summary": "Any\u0020offered\u0020product\u0020or\u0020service.\u0020For\u0020example\u003A\u0020a\u0020pair\u0020of\u0020shoes\u003B\u0020a\u0020concert\u0020ticket\u003B\nthe\u0020rental\u0020of\u0020a\u0020car\u003B\u0020a\u0020haircut\u003B\u0020or\u0020an\u0020episode\u0020of\u0020a\u0020TV\u0020show\u0020streamed\u0020online.",
+            "summary": "A\u0020ProductGroup\u0020represents\u0020a\u0020group\u0020of\u0020Products\u0020that\u0020vary\u0020only\u0020in\u0020certain\u0020well\u002Ddescribed\u0020ways,\nsuch\u0020as\u0020by\u0020size,\u0020color,\u0020material\u0020etc.",
             "url": "classes/org-schema-ProductGroup.html"
         },                {
             "fqsen": "\\org\\schema\\ProductGroup\u003A\u003A\u0024hasVariant",
@@ -6435,6 +6480,16 @@ Search.appendIndex(
             "name": "suggestedMeasurement",
             "summary": "A\u0020suggested\u0020range\u0020of\u0020body\u0020measurements\u0020for\u0020the\u0020intended\u0020audience\u0020or\u0020person,\u0020for\u0020example\u0020inseam\u0020between\u002032\u0020and\u002034\u0020inches\u0020or\u0020height\u0020between\u0020170\u0020and\u0020190\u0020cm.\u0020Typically\u0020found\u0020on\u0020a\u0020size\u0020chart\u0020for\u0020wearable\u0020products.",
             "url": "classes/org-schema-SizeSpecification.html#property_suggestedMeasurement"
+        },                {
+            "fqsen": "\\org\\schema\\SomeProducts",
+            "name": "SomeProducts",
+            "summary": "A\u0020placeholder\u0020for\u0020multiple\u0020similar\u0020products\u0020of\u0020the\u0020same\u0020kind.",
+            "url": "classes/org-schema-SomeProducts.html"
+        },                {
+            "fqsen": "\\org\\schema\\SomeProducts\u003A\u003A\u0024inventoryLevel",
+            "name": "inventoryLevel",
+            "summary": "The\u0020current\u0020approximate\u0020inventory\u0020level\u0020for\u0020the\u0020item\u0020or\u0020items.",
+            "url": "classes/org-schema-SomeProducts.html#property_inventoryLevel"
         },                {
             "fqsen": "\\org\\schema\\StatisticalVariable",
             "name": "StatisticalVariable",
@@ -8356,45 +8411,115 @@ Search.appendIndex(
             "summary": "Types\u0020of\u0020contact\u0020points\u0020for\u0020an\u0020Organization\u0020or\u0020Person.",
             "url": "classes/xyz-oihana-schema-enumerations-ContactType.html"
         },                {
+            "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003AASSISTANT",
+            "name": "ASSISTANT",
+            "summary": "Assistant\u0020contact.",
+            "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_ASSISTANT"
+        },                {
             "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003ABILLING",
             "name": "BILLING",
             "summary": "Billing\u0020\/\u0020invoice\u0020support\u0020contact.",
             "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_BILLING"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003ACUSTOMER_COMPLAINTS_DEPARTMENT",
+            "name": "CUSTOMER_COMPLAINTS_DEPARTMENT",
+            "summary": "Customer\u0020Complaints\u0020Department.",
+            "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_CUSTOMER_COMPLAINTS_DEPARTMENT"
         },                {
             "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003ACUSTOMER_SERVICE",
             "name": "CUSTOMER_SERVICE",
             "summary": "Customer\u0020service\u0020contact.",
             "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_CUSTOMER_SERVICE"
         },                {
+            "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003ADEFAULT",
+            "name": "DEFAULT",
+            "summary": "Default\u0020contact.",
+            "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_DEFAULT"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003AEMERGENCY",
+            "name": "EMERGENCY",
+            "summary": "Emergency\u0020contact.",
+            "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_EMERGENCY"
+        },                {
             "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003AFAX",
             "name": "FAX",
             "summary": "Fax\u0020contact.",
             "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_FAX"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003AHOME",
+            "name": "HOME",
+            "summary": "Home\u0020\/\u0020personal\u0020contact.",
+            "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_HOME"
         },                {
             "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003ALANDLINE",
             "name": "LANDLINE",
             "summary": "Landline\u0020phone\u0020contact.",
             "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_LANDLINE"
         },                {
+            "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003ALEGAL",
+            "name": "LEGAL",
+            "summary": "Legal\u0020contact.",
+            "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_LEGAL"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003AMANAGER",
+            "name": "MANAGER",
+            "summary": "Manager\u0020\/\u0020executive\u0020contact.",
+            "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_MANAGER"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003AMEDIA",
+            "name": "MEDIA",
+            "summary": "Media\u0020contact.",
+            "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_MEDIA"
+        },                {
             "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003AMOBILE",
             "name": "MOBILE",
             "summary": "Mobile\u0020phone\u0020contact.",
             "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_MOBILE"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003AMOBILE_PROFESSIONAL",
+            "name": "MOBILE_PROFESSIONAL",
+            "summary": "Professional\u0020\/\u0020work\u0020mobile\u0020phone\u0020contact.",
+            "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_MOBILE_PROFESSIONAL"
         },                {
             "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003AOTHER",
             "name": "OTHER",
             "summary": "Other\u0020or\u0020miscellaneous\u0020contact.",
             "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_OTHER"
         },                {
+            "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003APRESS",
+            "name": "PRESS",
+            "summary": "Press\u0020contact.",
+            "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_PRESS"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003APUBLIC_RELATIONS",
+            "name": "PUBLIC_RELATIONS",
+            "summary": "Public\u0020relations\u0020contact.",
+            "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_PUBLIC_RELATIONS"
+        },                {
             "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003ASALES",
             "name": "SALES",
             "summary": "Sales\u0020contact.",
             "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_SALES"
         },                {
+            "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003ASOCIAL_MEDIAS",
+            "name": "SOCIAL_MEDIAS",
+            "summary": "Social\u0020Medias\u0020contact.",
+            "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_SOCIAL_MEDIAS"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003ASUPPORT",
+            "name": "SUPPORT",
+            "summary": "Support\u0020contact.",
+            "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_SUPPORT"
+        },                {
             "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003ATECHNICAL_SUPPORT",
             "name": "TECHNICAL_SUPPORT",
             "summary": "Technical\u0020support\u0020contact.",
             "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_TECHNICAL_SUPPORT"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType\u003A\u003AWORK",
+            "name": "WORK",
+            "summary": "Work\u0020\/\u0020business\u0020contact.",
+            "url": "classes/xyz-oihana-schema-enumerations-ContactType.html#constant_WORK"
         },                {
             "fqsen": "\\xyz\\oihana\\schema\\Log",
             "name": "Log",

@@ -129,11 +129,12 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/DefinedRegion.php"><a href="files/src-org-schema-definedregion.html"><abbr title="src/org/schema/DefinedRegion.php">DefinedRegion.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">10</span>
+    <span class="phpdocumentor-element-found-in__line">13</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">A DefinedRegion is a geographic area defined by potentially arbitrary (rather than political, administrative or natural geographical) criteria.</p>
+            <p class="phpdocumentor-summary">A DefinedRegion is a geographic area defined by potentially arbitrary
+(rather than political, administrative or natural geographical) criteria.</p>
 
 
     <section class="phpdocumentor-description"><p>Properties are provided for defining a region by reference to sets of postal codes.</p>
@@ -182,6 +183,13 @@
         &nbsp;= &#039;https://schema.org&#039;                            </span>
 </dt>
 <dd>JSON-LD @context declaration for Schema.org.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/org-schema-traits-ThingTrait.html#constant_JSON_PRIORITY_KEYS">JSON_PRIORITY_KEYS</a>
+    <span>
+        &nbsp;= [\org\schema\constants\Schema::AT_TYPE, \org\schema\constants\Schema::AT_CONTEXT, \org\schema\constants\Schema::_KEY, \org\schema\constants\Schema::_FROM, \org\schema\constants\Schema::_TO, \org\schema\constants\Schema::ID, \org\schema\constants\Schema::NAME, \org\schema\constants\Schema::URL, \org\schema\constants\Schema::CREATED, \org\schema\constants\Schema::MODIFIED]                            </span>
+</dt>
+<dd>Defines the priority order of keys when serializing the object to JSON-LD.</dd>
 
     </dl>
 
@@ -272,7 +280,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-traits-ContactPointTrait.html#property_areaServed">$areaServed</a>
     <span>
-                        &nbsp;: null|string|<a href="classes/org-schema-Place.html"><abbr title="\org\schema\Place">Place</abbr></a>|<a href="classes/org-schema-GeoShape.html"><abbr title="\org\schema\GeoShape">GeoShape</abbr></a>            </span>
+                        &nbsp;: null|string|<a href="classes/org-schema-Place.html"><abbr title="\org\schema\Place">Place</abbr></a>|<a href="classes/org-schema-GeoShape.html"><abbr title="\org\schema\GeoShape">GeoShape</abbr></a>|<a href="classes/org-schema-places-AdministrativeArea.html"><abbr title="\org\schema\places\AdministrativeArea">AdministrativeArea</abbr></a>|array&lt;string|int, mixed&gt;            </span>
 </dt>
 <dd>The geographic area where a service or offered item is provided.</dd>
 
@@ -578,6 +586,55 @@
 
         
     </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_JSON_PRIORITY_KEYS">
+        JSON_PRIORITY_KEYS
+        <a href="classes/org-schema-traits-ThingTrait.html#constant_JSON_PRIORITY_KEYS" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">124</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Defines the priority order of keys when serializing the object to JSON-LD.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">array&lt;string|int, string&gt;</span>
+    <span class="phpdocumentor-signature__name">JSON_PRIORITY_KEYS</span>
+    = <span class="phpdocumentor-signature__default-value">[\org\schema\constants\Schema::AT_TYPE, \org\schema\constants\Schema::AT_CONTEXT, \org\schema\constants\Schema::_KEY, \org\schema\constants\Schema::_FROM, \org\schema\constants\Schema::_TO, \org\schema\constants\Schema::ID, \org\schema\constants\Schema::NAME, \org\schema\constants\Schema::URL, \org\schema\constants\Schema::CREATED, \org\schema\constants\Schema::MODIFIED]</span>
+</code>
+
+
+        <section class="phpdocumentor-description"><p>Keys listed here will always appear first in the serialized array,
+in the order specified. All remaining public properties will be
+sorted alphabetically after these priority keys.</p>
+<p>This ensures that important JSON-LD metadata and system fields
+(like <code class="prettyprint">@type</code>, <code class="prettyprint">@context</code>, <code class="prettyprint">_key</code>, <code class="prettyprint">id</code>, <code class="prettyprint">url</code>, <code class="prettyprint">created</code>, <code class="prettyprint">modified</code>, etc.)
+appear at the top of the output for consistency and readability.</p>
+<p>Usage:</p>
+<pre class="prettyprint"><code class="language-php">$orderedKeys = self::JSON_PRIORITY_KEYS;
+</code></pre>
+<p>Notes:</p>
+<ul>
+<li>Can be overridden in a subclass by redefining the constant.</li>
+<li>Late static binding (<code class="prettyprint">static::JSON_PRIORITY_KEYS</code>) allows
+child classes to modify the serialization order.</li>
+</ul>
+</section>
+
+        <section class="phpdocumentor-description"><p>List of JSON-LD keys in priority order.</p>
+</section>
+
+    
+
+        
+    </article>
             </section>
 
         
@@ -870,7 +927,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/DefinedRegion.php"><a href="files/src-org-schema-definedregion.html"><abbr title="src/org/schema/DefinedRegion.php">DefinedRegion.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">18</span>
+    <span class="phpdocumentor-element-found-in__line">21</span>
 
     </aside>
 
@@ -911,7 +968,7 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/DefinedRegion.php"><a href="files/src-org-schema-definedregion.html"><abbr title="src/org/schema/DefinedRegion.php">DefinedRegion.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">24</span>
+    <span class="phpdocumentor-element-found-in__line">27</span>
 
     </aside>
 
@@ -949,7 +1006,7 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/DefinedRegion.php"><a href="files/src-org-schema-definedregion.html"><abbr title="src/org/schema/DefinedRegion.php">DefinedRegion.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">31</span>
+    <span class="phpdocumentor-element-found-in__line">34</span>
 
     </aside>
 
@@ -1027,7 +1084,7 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ContactPointTrait.php"><a href="files/src-org-schema-traits-contactpointtrait.html"><abbr title="src/org/schema/traits/ContactPointTrait.php">ContactPointTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">21</span>
+    <span class="phpdocumentor-element-found-in__line">23</span>
 
     </aside>
 
@@ -1036,7 +1093,7 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">null|string|<a href="classes/org-schema-Place.html"><abbr title="\org\schema\Place">Place</abbr></a>|<a href="classes/org-schema-GeoShape.html"><abbr title="\org\schema\GeoShape">GeoShape</abbr></a></span>
+            <span class="phpdocumentor-signature__type">null|string|<a href="classes/org-schema-Place.html"><abbr title="\org\schema\Place">Place</abbr></a>|<a href="classes/org-schema-GeoShape.html"><abbr title="\org\schema\GeoShape">GeoShape</abbr></a>|<a href="classes/org-schema-places-AdministrativeArea.html"><abbr title="\org\schema\places\AdministrativeArea">AdministrativeArea</abbr></a>|array&lt;string|int, mixed&gt;</span>
     <span class="phpdocumentor-signature__name">$areaServed</span>
     </code>
 
@@ -1065,7 +1122,7 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ContactPointTrait.php"><a href="files/src-org-schema-traits-contactpointtrait.html"><abbr title="src/org/schema/traits/ContactPointTrait.php">ContactPointTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">28</span>
+    <span class="phpdocumentor-element-found-in__line">30</span>
 
     </aside>
 
@@ -1105,7 +1162,7 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ContactPointTrait.php"><a href="files/src-org-schema-traits-contactpointtrait.html"><abbr title="src/org/schema/traits/ContactPointTrait.php">ContactPointTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">34</span>
+    <span class="phpdocumentor-element-found-in__line">36</span>
 
     </aside>
 
@@ -1143,7 +1200,7 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ContactPointTrait.php"><a href="files/src-org-schema-traits-contactpointtrait.html"><abbr title="src/org/schema/traits/ContactPointTrait.php">ContactPointTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">41</span>
+    <span class="phpdocumentor-element-found-in__line">43</span>
 
     </aside>
 
@@ -1297,7 +1354,7 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ContactPointTrait.php"><a href="files/src-org-schema-traits-contactpointtrait.html"><abbr title="src/org/schema/traits/ContactPointTrait.php">ContactPointTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">47</span>
+    <span class="phpdocumentor-element-found-in__line">49</span>
 
     </aside>
 
@@ -1335,7 +1392,7 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ContactPointTrait.php"><a href="files/src-org-schema-traits-contactpointtrait.html"><abbr title="src/org/schema/traits/ContactPointTrait.php">ContactPointTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">53</span>
+    <span class="phpdocumentor-element-found-in__line">55</span>
 
     </aside>
 
@@ -1411,7 +1468,7 @@ For backward compatibility, a 3-letter ISO 3166-1 alpha-3 country code such as &
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ContactPointTrait.php"><a href="files/src-org-schema-traits-contactpointtrait.html"><abbr title="src/org/schema/traits/ContactPointTrait.php">ContactPointTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">59</span>
+    <span class="phpdocumentor-element-found-in__line">61</span>
 
     </aside>
 
@@ -1794,7 +1851,7 @@ that can be considered the possessor of this Thing.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/DefinedRegion.php"><a href="files/src-org-schema-definedregion.html"><abbr title="src/org/schema/DefinedRegion.php">DefinedRegion.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">37</span>
+    <span class="phpdocumentor-element-found-in__line">40</span>
 
     </aside>
 
@@ -1832,7 +1889,7 @@ that can be considered the possessor of this Thing.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/DefinedRegion.php"><a href="files/src-org-schema-definedregion.html"><abbr title="src/org/schema/DefinedRegion.php">DefinedRegion.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">43</span>
+    <span class="phpdocumentor-element-found-in__line">46</span>
 
     </aside>
 
@@ -1870,7 +1927,7 @@ that can be considered the possessor of this Thing.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/DefinedRegion.php"><a href="files/src-org-schema-definedregion.html"><abbr title="src/org/schema/DefinedRegion.php">DefinedRegion.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">49</span>
+    <span class="phpdocumentor-element-found-in__line">52</span>
 
     </aside>
 
@@ -1946,7 +2003,7 @@ that can be considered the possessor of this Thing.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ContactPointTrait.php"><a href="files/src-org-schema-traits-contactpointtrait.html"><abbr title="src/org/schema/traits/ContactPointTrait.php">ContactPointTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">65</span>
+    <span class="phpdocumentor-element-found-in__line">67</span>
 
     </aside>
 
@@ -2100,7 +2157,7 @@ that can be considered the possessor of this Thing.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ContactPointTrait.php"><a href="files/src-org-schema-traits-contactpointtrait.html"><abbr title="src/org/schema/traits/ContactPointTrait.php">ContactPointTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">71</span>
+    <span class="phpdocumentor-element-found-in__line">73</span>
 
     </aside>
 
@@ -2346,7 +2403,7 @@ echo $person-&gt;name; // Outputs: Jane Doe
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">134</span>
+    <span class="phpdocumentor-element-found-in__line">171</span>
 
     </aside>
 
@@ -2436,7 +2493,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">153</span>
+    <span class="phpdocumentor-element-found-in__line">205</span>
 
     </aside>
 
@@ -2489,7 +2546,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">189</span>
+    <span class="phpdocumentor-element-found-in__line">241</span>
 
     </aside>
 
@@ -2542,7 +2599,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">168</span>
+    <span class="phpdocumentor-element-found-in__line">220</span>
 
     </aside>
 
@@ -2706,6 +2763,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                 <li>
                     <ul class="phpdocumentor-list -clean">
                                                     <li class=""><a href="classes/org-schema-Thing.html#constant_CONTEXT">CONTEXT</a></li>
+                                                    <li class=""><a href="classes/org-schema-traits-ThingTrait.html#constant_JSON_PRIORITY_KEYS">JSON_PRIORITY_KEYS</a></li>
                                             </ul>
                 </li>
             

@@ -99,6 +99,43 @@ trait ThingTrait
     private ?string $atType = null;
 
     /**
+     * Defines the priority order of keys when serializing the object to JSON-LD.
+     *
+     * Keys listed here will always appear first in the serialized array,
+     * in the order specified. All remaining public properties will be
+     * sorted alphabetically after these priority keys.
+     *
+     * This ensures that important JSON-LD metadata and system fields
+     * (like `@type`, `@context`, `_key`, `id`, `url`, `created`, `modified`, etc.)
+     * appear at the top of the output for consistency and readability.
+     *
+     * Usage:
+     * ```php
+     * $orderedKeys = self::JSON_PRIORITY_KEYS;
+     * ```
+     *
+     * Notes:
+     * - Can be overridden in a subclass by redefining the constant.
+     * - Late static binding (`static::JSON_PRIORITY_KEYS`) allows
+     *   child classes to modify the serialization order.
+     *
+     * @var array<string> List of JSON-LD keys in priority order.
+     */
+    public const array JSON_PRIORITY_KEYS =
+    [
+        Schema::AT_TYPE ,
+        Schema::AT_CONTEXT ,
+        Schema::_KEY ,
+        Schema::_FROM ,
+        Schema::_TO ,
+        Schema::ID ,
+        Schema::NAME ,
+        Schema::URL ,
+        Schema::CREATED ,
+        Schema::MODIFIED ,
+    ];
+
+    /**
      * Serializes the current object into a JSON-LD array.
      *
      * Includes public properties, the JSON-LD `@context` and `@type`.
@@ -133,12 +170,27 @@ trait ThingTrait
      */
     public function jsonSerialize() : array
     {
-        return
+        $data =
         [
-            Schema::AT_TYPE    => $this->atType    ?? $this->getShortName( $this ) ,
-            Schema::AT_CONTEXT => $this->atContext ?? static::CONTEXT ,
+            Schema::AT_TYPE    => $this->atType    ?? $this->getShortName( $this ),
+            Schema::AT_CONTEXT => $this->atContext ?? static::CONTEXT,
             ... $this->jsonSerializeFromPublicProperties( $this , true )
         ];
+
+        $ordered = [] ;
+
+        foreach( static::JSON_PRIORITY_KEYS as $key )
+        {
+            if ( array_key_exists( $key , $data ) )
+            {
+                $ordered[ $key ] = $data[ $key ] ;
+                unset( $data[ $key ] ) ;
+            }
+        }
+
+        ksort( $data , SORT_STRING );
+
+        return $ordered + $data ;
     }
 
     /**

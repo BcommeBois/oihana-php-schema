@@ -23,10 +23,10 @@ trait JsonLD
      *
      * @see https://niem.github.io/json/reference/json-ld/identifiers/
      */
-    const string AT_ID = '@id'      ;
+    const string AT_ID = '@id' ;
 
     /**
      * The type of the object.
      */
-    const string AT_TYPE = '@type'    ;
+    const string AT_TYPE = '@type' ;
 }

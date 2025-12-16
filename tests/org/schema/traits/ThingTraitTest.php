@@ -24,6 +24,7 @@ class MockThing implements JsonSerializable
     public int       $age         = 0  ;
     public ?string   $description = null;
     protected string $secret      = 'hidden';
+    public ?string   $url ;
 }
 
 class MockEmptyThing implements JsonSerializable
@@ -31,6 +32,16 @@ class MockEmptyThing implements JsonSerializable
     use ThingTrait;
 
     public const string CONTEXT = 'https://schema.org' ;
+}
+
+class SuperMockThing extends MockThing
+{
+    public const array JSON_PRIORITY_KEYS =
+    [
+        'age',
+        Schema::AT_TYPE,
+        Schema::AT_CONTEXT,
+    ];
 }
 
 class ThingTraitTest extends TestCase
@@ -292,6 +303,14 @@ class ThingTraitTest extends TestCase
                         [ 'type' => 'string' ] ,
                     ]
                 ] ,
+                'url' =>
+                [
+                    "oneOf"  =>
+                    [
+                        [ 'type' => 'null'   ] ,
+                        [ 'type' => 'string' ] ,
+                    ]
+                ] ,
             ]
         ];
 
@@ -322,6 +341,14 @@ class ThingTraitTest extends TestCase
                 [
                     "default" => 'A complete test' ,
                     "oneOf"   =>
+                    [
+                        [ 'type' => 'null'   ] ,
+                        [ 'type' => 'string' ] ,
+                    ]
+                ] ,
+                'url' =>
+                [
+                    "oneOf"  =>
                     [
                         [ 'type' => 'null'   ] ,
                         [ 'type' => 'string' ] ,
@@ -368,10 +395,54 @@ class ThingTraitTest extends TestCase
                         [ 'type' => 'string' ] ,
                     ]
                 ] ,
+                'url' =>
+                [
+                    "oneOf" =>
+                    [
+                        [ 'type' => 'null'   ] ,
+                        [ 'type' => 'string' ] ,
+                    ]
+                ] ,
             ]
         ];
 
         $this->assertEquals( $expected , $schema ) ;
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testJsonSerializeRespectsPriorityKeysOrder()
+    {
+        $thing = new MockThing
+        ([
+            'name'        => 'Alice',
+            'age'         => 30,
+            'description' => 'Test',
+            'url'         => 'https://example.com',
+        ]);
+
+        $data = $thing->jsonSerialize();
+        $keys = array_keys( $data );
+
+        $expectedKeys = [ '@type', '@context', 'name' , 'url', 'age' , 'description' ];
+        $this->assertSame( $expectedKeys , $keys );
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testJsonSerializePriorityKeysOverrideInSubclass()
+    {
+        $mock = new SuperMockThing() ;
+
+        $mock->name = 'Bob';
+        $mock->age  = 99;
+
+        $data = $mock->jsonSerialize();
+
+        $expectedKeys = [ 'age', '@type', '@context', 'name'];
+        $this->assertSame($expectedKeys, array_keys($data));
     }
 }
 
