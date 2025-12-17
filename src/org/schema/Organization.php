@@ -376,9 +376,9 @@ class Organization extends Thing
 
     /**
      * The location of, for example, where an event is happening, where an organization is located, or where an action takes place.
-     * @var null|string|Place|PostalAddress|VirtualLocation
+     * @var array|null|string|Place|PostalAddress|VirtualLocation
      */
-    public null|string|Place|PostalAddress|VirtualLocation $location ;
+    public array|null|string|Place|PostalAddress|VirtualLocation $location ;
 
     /**
      * An associated logo.
