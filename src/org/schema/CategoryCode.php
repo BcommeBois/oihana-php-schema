@@ -12,9 +12,9 @@ class CategoryCode extends DefinedTerm
 {
     /**
      * A short textual code that uniquely identifies the value.
-     * @var string|null
+     * @var null|string|int
      */
-    public null|string $codeValue ;
+    public null|string|int $codeValue ;
 
     /**
      * A DefinedTermSet that contains this term.
