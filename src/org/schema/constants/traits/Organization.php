@@ -4,6 +4,8 @@ namespace org\schema\constants\traits;
 
 trait Organization
 {
+    use Corporation ;
+
     const string ORGANIZATIONS = 'organizations' ;
 
     const string ACCEPTED_PAYMENT_METHOD     = 'acceptedPaymentMethod' ;
