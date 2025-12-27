@@ -60,6 +60,11 @@ class AggregateOfferTest extends TestCase
         $this->assertEquals('[{"@type":"AggregateOffer","@context":"https://schema.org","name":"Prix public"}]' , $json ) ;
     }
 
+    public function testGetSchemaTypeReturnsRootUri()
+    {
+        $this->assertEquals('https://schema.org/AggregateOffer', AggregateOffer::getSchemaType());
+    }
+
     // /**
     //  * @throws ReflectionException
     //  */

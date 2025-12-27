@@ -2,6 +2,7 @@
 
 namespace org\schema\traits ;
 
+use ReflectionClass;
 use ReflectionException;
 
 use oihana\reflect\traits\JsonSchemaTrait;
@@ -99,6 +100,12 @@ trait ThingTrait
     private ?string $atType = null;
 
     /**
+     * Internal cache for resolved schema types.
+     * @var array<string, string>
+     */
+    private static array $schemaTypeCache = [] ;
+
+    /**
      * Defines the priority order of keys when serializing the object to JSON-LD.
      *
      * Keys listed here will always appear first in the serialized array,
@@ -134,6 +141,37 @@ trait ThingTrait
         Schema::CREATED ,
         Schema::MODIFIED ,
     ];
+
+    /**
+     * Returns the fully qualified URI of the schema type.
+     *
+     * This method combines the class's `CONTEXT` constant with its short name
+     * to produce a globally unique identifier for the entity type.
+     * * It uses Late Static Binding to ensure the correct context is retrieved
+     * even when called from an inherited class (e.g., Corporation vs. Affiliate).
+     * * Performance Optimization:
+     * Results are stored in a static cache (`$schemaTypeCache`) to avoid
+     * redundant Reflection calls during the same execution lifecycle.
+     *
+     * @return string The absolute URI of the type (e.g., "https://schema.org/Thing").
+     * * @example
+     * ```php
+     * echo Thing::getSchemaType();      // https://schema.org/Thing
+     * echo Affiliate::getSchemaType();  // https://schema.oihana.xyz/Pagination
+     * ```
+     */
+    public static function getSchemaType(): string
+    {
+        $class = static::class ;
+
+        if ( !isset( self::$schemaTypeCache[ $class ] ) )
+        {
+            $reflection = new ReflectionClass( $class );
+            self::$schemaTypeCache[ $class ] = rtrim( static::CONTEXT, '/' ) . '/' . $reflection->getShortName() ;
+        }
+
+        return self::$schemaTypeCache[ $class ] ;
+    }
 
     /**
      * Serializes the current object into a JSON-LD array.

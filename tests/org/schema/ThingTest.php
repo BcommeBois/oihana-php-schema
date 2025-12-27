@@ -17,6 +17,9 @@ class ThingTest extends TestCase
         $this->assertNull( $thing->name ?? null , 'The name property must be null by default');
     }
 
+    /**
+     * @throws ReflectionException
+     */
     public function testConstructorInitializesProperties()
     {
         $thing = new Thing( ['name' => 'Alice'  ] );
@@ -41,6 +44,11 @@ class ThingTest extends TestCase
 
         $this->assertEquals('Thing', $data[ Prop::AT_TYPE ] ) ;
         $this->assertEquals(Thing::CONTEXT , $data[ Prop::AT_CONTEXT ] ) ;
+    }
+
+    public function testGetSchemaTypeReturnsRootUri()
+    {
+        $this->assertEquals('https://schema.org/Thing', Thing::getSchemaType());
     }
 }
 

@@ -98,5 +98,10 @@ class DublinCoreTest extends TestCase
         $this->assertArrayNotHasKey('title', $json);
         $this->assertArrayNotHasKey('creator', $json);
     }
+
+    public function testGetSchemaTypeReturnsRootUri()
+    {
+        $this->assertEquals('http://purl.org/dc/DublinCore', DublinCore::getSchemaType());
+    }
 }
 

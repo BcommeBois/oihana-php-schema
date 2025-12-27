@@ -750,7 +750,7 @@ used for legal and tax purposes.</dd>
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Organization.html#property_location">$location</a>
     <span>
-                        &nbsp;: null|string|<a href="classes/org-schema-Place.html"><abbr title="\org\schema\Place">Place</abbr></a>|<a href="classes/org-schema-PostalAddress.html"><abbr title="\org\schema\PostalAddress">PostalAddress</abbr></a>|<a href="classes/org-schema-VirtualLocation.html"><abbr title="\org\schema\VirtualLocation">VirtualLocation</abbr></a>            </span>
+                        &nbsp;: array&lt;string|int, mixed&gt;|null|string|<a href="classes/org-schema-Place.html"><abbr title="\org\schema\Place">Place</abbr></a>|<a href="classes/org-schema-PostalAddress.html"><abbr title="\org\schema\PostalAddress">PostalAddress</abbr></a>|<a href="classes/org-schema-VirtualLocation.html"><abbr title="\org\schema\VirtualLocation">VirtualLocation</abbr></a>            </span>
 </dt>
 <dd>The location of, for example, where an event is happening, where an organization is located, or where an action takes place.</dd>
 
@@ -1077,6 +1077,13 @@ on use of unnamed sources and the decision process required.</dd>
 </dt>
 <dd>The JSON-LD `@type` value.</dd>
 
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/org-schema-traits-ThingTrait.html#property_schemaTypeCache">$schemaTypeCache</a>
+    <span>
+                        &nbsp;: array&lt;string, string&gt;            </span>
+</dt>
+<dd>Internal cache for resolved schema types.</dd>
+
     </dl>
 
 <h4 id="toc-methods">
@@ -1091,6 +1098,13 @@ on use of unnamed sources and the decision process required.</dd>
                                 &nbsp;: mixed    </span>
 </dt>
 <dd>Constructor to hydrate public properties from an array or stdClass.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/org-schema-traits-ThingTrait.html#method_getSchemaType">getSchemaType()</a>
+    <span>
+                                &nbsp;: string    </span>
+</dt>
+<dd>Returns the fully qualified URI of the schema type.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/org-schema-traits-ThingTrait.html#method_jsonSerialize">jsonSerialize()</a>
@@ -1172,7 +1186,7 @@ on use of unnamed sources and the decision process required.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">124</span>
+    <span class="phpdocumentor-element-found-in__line">131</span>
 
     </aside>
 
@@ -4342,7 +4356,7 @@ of a business and other addresses can be part of an organization.</p>
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__type">null|string|<a href="classes/org-schema-Place.html"><abbr title="\org\schema\Place">Place</abbr></a>|<a href="classes/org-schema-PostalAddress.html"><abbr title="\org\schema\PostalAddress">PostalAddress</abbr></a>|<a href="classes/org-schema-VirtualLocation.html"><abbr title="\org\schema\VirtualLocation">VirtualLocation</abbr></a></span>
+            <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|null|string|<a href="classes/org-schema-Place.html"><abbr title="\org\schema\Place">Place</abbr></a>|<a href="classes/org-schema-PostalAddress.html"><abbr title="\org\schema\PostalAddress">PostalAddress</abbr></a>|<a href="classes/org-schema-VirtualLocation.html"><abbr title="\org\schema\VirtualLocation">VirtualLocation</abbr></a></span>
     <span class="phpdocumentor-signature__name">$location</span>
     </code>
 
@@ -6114,7 +6128,7 @@ on use of unnamed sources and the decision process required.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">91</span>
+    <span class="phpdocumentor-element-found-in__line">92</span>
 
     </aside>
 
@@ -6154,7 +6168,7 @@ on use of unnamed sources and the decision process required.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">99</span>
+    <span class="phpdocumentor-element-found-in__line">100</span>
 
     </aside>
 
@@ -6170,6 +6184,44 @@ on use of unnamed sources and the decision process required.</p>
         <section class="phpdocumentor-description"><p>This can be manually set or automatically inferred from the class name.</p>
 </section>
 
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+            -static                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_schemaTypeCache">
+        $schemaTypeCache
+        <a href="classes/org-schema-traits-ThingTrait.html#property_schemaTypeCache" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">106</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Internal cache for resolved schema types.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+        <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__type">array&lt;string, string&gt;</span>
+    <span class="phpdocumentor-signature__name">$schemaTypeCache</span>
+     = <span class="phpdocumentor-signature__default-value">[]</span></code>
+
+    
     
     
 
@@ -6199,7 +6251,7 @@ on use of unnamed sources and the decision process required.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">47</span>
+    <span class="phpdocumentor-element-found-in__line">48</span>
 
     </aside>
 
@@ -6274,6 +6326,63 @@ echo $person-&gt;name; // Outputs: Jane Doe
         class="phpdocumentor-element
             -method
             -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getSchemaType">
+        getSchemaType()
+        <a href="classes/org-schema-traits-ThingTrait.html#method_getSchemaType" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">163</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns the fully qualified URI of the schema type.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getSchemaType</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>This method combines the class's <code class="prettyprint">CONTEXT</code> constant with its short name
+to produce a globally unique identifier for the entity type.</p>
+<ul>
+<li>It uses Late Static Binding to ensure the correct context is retrieved
+even when called from an inherited class (e.g., Corporation vs. Affiliate).</li>
+<li>Performance Optimization:
+Results are stored in a static cache (<code class="prettyprint">$schemaTypeCache</code>) to avoid
+redundant Reflection calls during the same execution lifecycle.</li>
+</ul>
+</section>
+
+    
+    
+
+        
+    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>The absolute URI of the type (e.g., &quot;https://schema.org/Thing&quot;).
+** @example</p>
+<pre class="prettyprint"><code class="language-php">echo Thing::getSchemaType();      // https://schema.org/Thing
+echo Affiliate::getSchemaType();  // https://schema.oihana.xyz/Pagination
+</code></pre>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
                                                         "
 >
     <h4 class="phpdocumentor-element__name" id="method_jsonSerialize">
@@ -6284,7 +6393,7 @@ echo $person-&gt;name; // Outputs: Jane Doe
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">171</span>
+    <span class="phpdocumentor-element-found-in__line">209</span>
 
     </aside>
 
@@ -6374,7 +6483,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">205</span>
+    <span class="phpdocumentor-element-found-in__line">243</span>
 
     </aside>
 
@@ -6427,7 +6536,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">241</span>
+    <span class="phpdocumentor-element-found-in__line">279</span>
 
     </aside>
 
@@ -6480,7 +6589,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">220</span>
+    <span class="phpdocumentor-element-found-in__line">258</span>
 
     </aside>
 
@@ -6775,6 +6884,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                                                     <li class=""><a href="classes/org-schema-traits-PlaceTrait.html#property_website">$website</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-ThingTrait.html#property_atContext">$atContext</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-ThingTrait.html#property_atType">$atType</a></li>
+                                                    <li class=""><a href="classes/org-schema-traits-ThingTrait.html#property_schemaTypeCache">$schemaTypeCache</a></li>
                                             </ul>
                 </li>
             
@@ -6782,6 +6892,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
             <li>
                 <ul class="phpdocumentor-list -clean">
                                             <li class=""><a href="classes/org-schema-traits-ThingTrait.html#method___construct">__construct()</a></li>
+                                            <li class=""><a href="classes/org-schema-traits-ThingTrait.html#method_getSchemaType">getSchemaType()</a></li>
                                             <li class=""><a href="classes/org-schema-traits-ThingTrait.html#method_jsonSerialize">jsonSerialize()</a></li>
                                             <li class=""><a href="classes/org-schema-traits-ThingTrait.html#method_withAtContext">withAtContext()</a></li>
                                             <li class=""><a href="classes/org-schema-traits-ThingTrait.html#method_withAtType">withAtType()</a></li>

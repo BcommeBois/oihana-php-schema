@@ -7,6 +7,7 @@ use org\schema\constants\Prop;
 use org\schema\constants\Schema;
 use org\schema\traits\ThingTrait;
 use PHPUnit\Framework\TestCase;
+use ReflectionClass;
 use ReflectionException;
 use ReflectionProperty;
 use stdClass;
@@ -44,8 +45,52 @@ class SuperMockThing extends MockThing
     ];
 }
 
+class MockCustomThing implements JsonSerializable
+{
+    use ThingTrait;
+
+    /**
+     * Custom context for Proginov.
+     */
+    public const string CONTEXT = 'https://schema.custom.com' ;
+}
+
 class ThingTraitTest extends TestCase
 {
+    /// -------------- getSchemaType()
+
+    public function testGetSchemaTypeReturnsCorrectUri()
+    {
+        // Test avec le contexte standard Schema.org
+        $this->assertEquals('https://schema.org/MockThing', MockThing::getSchemaType());
+        $this->assertEquals('https://schema.org/MockEmptyThing', MockEmptyThing::getSchemaType());
+
+        // Test avec un contexte personnalisé (Late Static Binding)
+        $this->assertEquals('https://schema.custom.com/MockCustomThing', MockCustomThing::getSchemaType());
+    }
+
+    public function testGetSchemaTypeHandlesTrailingSlashInContext()
+    {
+        $anonymous = new class implements JsonSerializable {
+            use ThingTrait;
+            public const string CONTEXT = 'https://example.com/';
+        };
+
+        $this->assertEquals('https://example.com/' . new ReflectionClass($anonymous)->getShortName(), $anonymous::getSchemaType());
+    }
+
+    public function testGetSchemaTypeCacheIsIsolatedBetweenClasses()
+    {
+        $uriThing = MockThing::getSchemaType();
+        $uriEmpty = MockEmptyThing::getSchemaType();
+
+        $this->assertNotEquals($uriThing, $uriEmpty);
+        $this->assertStringContainsString('MockThing', $uriThing);
+        $this->assertStringContainsString('MockEmptyThing', $uriEmpty);
+    }
+
+    // -------------- Constructor
+
     public function testConstructorWithNoArguments()
     {
         $thing = new MockThing();

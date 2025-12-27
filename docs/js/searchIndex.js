@@ -311,6 +311,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/org-schema-constants-traits-ContactPoint.html"
         },                {
+            "fqsen": "\\org\\schema\\constants\\traits\\Corporation",
+            "name": "Corporation",
+            "summary": "",
+            "url": "classes/org-schema-constants-traits-Corporation.html"
+        },                {
             "fqsen": "\\org\\schema\\constants\\traits\\CreativeWork",
             "name": "CreativeWork",
             "summary": "",
@@ -7856,6 +7861,11 @@ Search.appendIndex(
             "summary": "Constructor\u0020to\u0020hydrate\u0020public\u0020properties\u0020from\u0020an\u0020array\u0020or\u0020stdClass.",
             "url": "classes/org-schema-traits-ThingTrait.html#method___construct"
         },                {
+            "fqsen": "\\org\\schema\\traits\\ThingTrait\u003A\u003AgetSchemaType\u0028\u0029",
+            "name": "getSchemaType",
+            "summary": "Returns\u0020the\u0020fully\u0020qualified\u0020URI\u0020of\u0020the\u0020schema\u0020type.",
+            "url": "classes/org-schema-traits-ThingTrait.html#method_getSchemaType"
+        },                {
             "fqsen": "\\org\\schema\\traits\\ThingTrait\u003A\u003AjsonSerialize\u0028\u0029",
             "name": "jsonSerialize",
             "summary": "Serializes\u0020the\u0020current\u0020object\u0020into\u0020a\u0020JSON\u002DLD\u0020array.",
@@ -7885,6 +7895,11 @@ Search.appendIndex(
             "name": "atType",
             "summary": "The\u0020JSON\u002DLD\u0020\u0060\u0040type\u0060\u0020value.",
             "url": "classes/org-schema-traits-ThingTrait.html#property_atType"
+        },                {
+            "fqsen": "\\org\\schema\\traits\\ThingTrait\u003A\u003A\u0024schemaTypeCache",
+            "name": "schemaTypeCache",
+            "summary": "Internal\u0020cache\u0020for\u0020resolved\u0020schema\u0020types.",
+            "url": "classes/org-schema-traits-ThingTrait.html#property_schemaTypeCache"
         },                {
             "fqsen": "\\org\\schema\\traits\\ValueTrait",
             "name": "ValueTrait",
