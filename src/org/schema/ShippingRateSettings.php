@@ -2,6 +2,8 @@
 
 namespace org\schema;
 
+use org\schema\places\DefinedRegion;
+
 /**
  * ShippingService represents the criteria used to determine if and how an offer could be shipped to a customer.
  */

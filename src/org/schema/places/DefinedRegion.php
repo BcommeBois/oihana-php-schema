@@ -1,6 +1,9 @@
 <?php
 
-namespace org\schema;
+namespace org\schema\places;
+
+use org\schema\Place;
+use org\schema\PostalCodeRangeSpecification;
 
 /**
  * A DefinedRegion is a geographic area defined by potentially arbitrary
@@ -9,8 +12,12 @@ namespace org\schema;
  * Properties are provided for defining a region by reference to sets of postal codes.
  *
  * @see https://schema.org/DefinedRegion
+ *
+ * @author  Marc Alcaraz (eKameleon)
+ * @package org\schema\places
+ * @since   1.0.2
  */
-class DefinedRegion extends ContactPoint
+class DefinedRegion extends Place
 {
     /**
      * The country.

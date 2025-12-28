@@ -2,6 +2,8 @@
 
 namespace org\schema;
 
+use org\schema\places\DefinedRegion;
+
 /**
  * OfferShippingDetails represents information about shipping destinations.
  * @see https://schema.org/OfferShippingDetails

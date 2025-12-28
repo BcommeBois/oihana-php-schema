@@ -15,7 +15,9 @@ use org\schema\traits\ThingTrait;
  *
  * @see https://schema.org/Thing
  *
+ * @author  Marc Alcaraz (eKameleon)
  * @package org\schema
+ * @since 1.0.0
  */
 class Thing implements JsonSerializable
 {

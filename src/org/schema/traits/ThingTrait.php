@@ -17,6 +17,10 @@ use org\schema\constants\Schema;
  * - Integration with internal reflection tools
  *
  * Used by all entities extending `org\schema\Thing`.
+ *
+ * @author  Marc Alcaraz (eKameleon)
+ * @package org\schema\traits
+ * @since   1.0.2
  */
 trait ThingTrait
 {

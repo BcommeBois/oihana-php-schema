@@ -1686,41 +1686,6 @@ Search.appendIndex(
             "summary": "An\u0020entity\u0020represented\u0020by\u0020an\u0020entry\u0020in\u0020a\u0020list\u0020or\u0020data\u0020feed\u0020\u0028e.g.\u0020an\u0020\u0027artist\u0027\u0020in\u0020a\u0020list\u0020of\u0020\u0027artists\u0027\u0029.",
             "url": "classes/org-schema-DataFeedItem.html#property_item"
         },                {
-            "fqsen": "\\org\\schema\\DefinedRegion",
-            "name": "DefinedRegion",
-            "summary": "A\u0020DefinedRegion\u0020is\u0020a\u0020geographic\u0020area\u0020defined\u0020by\u0020potentially\u0020arbitrary\n\u0028rather\u0020than\u0020political,\u0020administrative\u0020or\u0020natural\u0020geographical\u0029\u0020criteria.",
-            "url": "classes/org-schema-DefinedRegion.html"
-        },                {
-            "fqsen": "\\org\\schema\\DefinedRegion\u003A\u003A\u0024addressCountry",
-            "name": "addressCountry",
-            "summary": "The\u0020country.",
-            "url": "classes/org-schema-DefinedRegion.html#property_addressCountry"
-        },                {
-            "fqsen": "\\org\\schema\\DefinedRegion\u003A\u003A\u0024addressLocality",
-            "name": "addressLocality",
-            "summary": "The\u0020locality\u0020in\u0020which\u0020the\u0020street\u0020address\u0020is,\u0020and\u0020which\u0020is\u0020in\u0020the\u0020region.\u0020For\u0020example,\u0020Mountain\u0020View.",
-            "url": "classes/org-schema-DefinedRegion.html#property_addressLocality"
-        },                {
-            "fqsen": "\\org\\schema\\DefinedRegion\u003A\u003A\u0024addressRegion",
-            "name": "addressRegion",
-            "summary": "The\u0020region\u0020in\u0020which\u0020the\u0020locality\u0020is,\u0020and\u0020which\u0020is\u0020in\u0020the\u0020country.",
-            "url": "classes/org-schema-DefinedRegion.html#property_addressRegion"
-        },                {
-            "fqsen": "\\org\\schema\\DefinedRegion\u003A\u003A\u0024postalCode",
-            "name": "postalCode",
-            "summary": "The\u0020postal\u0020code.\u0020For\u0020example,\u002094043.",
-            "url": "classes/org-schema-DefinedRegion.html#property_postalCode"
-        },                {
-            "fqsen": "\\org\\schema\\DefinedRegion\u003A\u003A\u0024postalCodePrefix",
-            "name": "postalCodePrefix",
-            "summary": "A\u0020defined\u0020range\u0020of\u0020postal\u0020codes\u0020indicated\u0020by\u0020a\u0020common\u0020textual\u0020prefix.\u0020Used\u0020for\u0020non\u002Dnumeric\u0020systems\u0020such\u0020as\u0020UK.",
-            "url": "classes/org-schema-DefinedRegion.html#property_postalCodePrefix"
-        },                {
-            "fqsen": "\\org\\schema\\DefinedRegion\u003A\u003A\u0024postalCodeRange",
-            "name": "postalCodeRange",
-            "summary": "A\u0020defined\u0020range\u0020of\u0020postal\u0020codes.",
-            "url": "classes/org-schema-DefinedRegion.html#property_postalCodeRange"
-        },                {
             "fqsen": "\\org\\schema\\DefinedTerm",
             "name": "DefinedTerm",
             "summary": "A\u0020word,\u0020name,\u0020acronym,\u0020phrase,\u0020etc.\u0020with\u0020a\u0020formal\u0020definition.\u0020Often\u0020used\u0020in\u0020the\u0020context\u0020of\u0020category\u0020or\u0020subject\u0020classification,\u0020glossaries\u0020or\u0020dictionaries,\u0020product\u0020or\u0020creative\u0020work\u0020types,\u0020etc.",
@@ -5125,6 +5090,41 @@ Search.appendIndex(
             "name": "Country",
             "summary": "A\u0020country.",
             "url": "classes/org-schema-places-Country.html"
+        },                {
+            "fqsen": "\\org\\schema\\places\\DefinedRegion",
+            "name": "DefinedRegion",
+            "summary": "A\u0020DefinedRegion\u0020is\u0020a\u0020geographic\u0020area\u0020defined\u0020by\u0020potentially\u0020arbitrary\n\u0028rather\u0020than\u0020political,\u0020administrative\u0020or\u0020natural\u0020geographical\u0029\u0020criteria.",
+            "url": "classes/org-schema-places-DefinedRegion.html"
+        },                {
+            "fqsen": "\\org\\schema\\places\\DefinedRegion\u003A\u003A\u0024addressCountry",
+            "name": "addressCountry",
+            "summary": "The\u0020country.",
+            "url": "classes/org-schema-places-DefinedRegion.html#property_addressCountry"
+        },                {
+            "fqsen": "\\org\\schema\\places\\DefinedRegion\u003A\u003A\u0024addressLocality",
+            "name": "addressLocality",
+            "summary": "The\u0020locality\u0020in\u0020which\u0020the\u0020street\u0020address\u0020is,\u0020and\u0020which\u0020is\u0020in\u0020the\u0020region.\u0020For\u0020example,\u0020Mountain\u0020View.",
+            "url": "classes/org-schema-places-DefinedRegion.html#property_addressLocality"
+        },                {
+            "fqsen": "\\org\\schema\\places\\DefinedRegion\u003A\u003A\u0024addressRegion",
+            "name": "addressRegion",
+            "summary": "The\u0020region\u0020in\u0020which\u0020the\u0020locality\u0020is,\u0020and\u0020which\u0020is\u0020in\u0020the\u0020country.",
+            "url": "classes/org-schema-places-DefinedRegion.html#property_addressRegion"
+        },                {
+            "fqsen": "\\org\\schema\\places\\DefinedRegion\u003A\u003A\u0024postalCode",
+            "name": "postalCode",
+            "summary": "The\u0020postal\u0020code.\u0020For\u0020example,\u002094043.",
+            "url": "classes/org-schema-places-DefinedRegion.html#property_postalCode"
+        },                {
+            "fqsen": "\\org\\schema\\places\\DefinedRegion\u003A\u003A\u0024postalCodePrefix",
+            "name": "postalCodePrefix",
+            "summary": "A\u0020defined\u0020range\u0020of\u0020postal\u0020codes\u0020indicated\u0020by\u0020a\u0020common\u0020textual\u0020prefix.\u0020Used\u0020for\u0020non\u002Dnumeric\u0020systems\u0020such\u0020as\u0020UK.",
+            "url": "classes/org-schema-places-DefinedRegion.html#property_postalCodePrefix"
+        },                {
+            "fqsen": "\\org\\schema\\places\\DefinedRegion\u003A\u003A\u0024postalCodeRange",
+            "name": "postalCodeRange",
+            "summary": "A\u0020defined\u0020range\u0020of\u0020postal\u0020codes.",
+            "url": "classes/org-schema-places-DefinedRegion.html#property_postalCodeRange"
         },                {
             "fqsen": "\\org\\schema\\places\\LakeBodyOfWater",
             "name": "LakeBodyOfWater",
@@ -8616,6 +8616,56 @@ Search.appendIndex(
             "summary": "The\u0020current\u0020page\u0020number\u0020in\u0020the\u0020paginated\u0020collection.",
             "url": "classes/xyz-oihana-schema-Pagination.html#property_page"
         },                {
+            "fqsen": "\\xyz\\oihana\\schema\\places\\CustomerSite",
+            "name": "CustomerSite",
+            "summary": "Represents\u0020a\u0020physical\u0020location\u0020or\u0020operational\u0020site\u0020specifically\u0020associated\u0020with\u0020a\u0020Customer.",
+            "url": "classes/xyz-oihana-schema-places-CustomerSite.html"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\places\\JobSite",
+            "name": "JobSite",
+            "summary": "Represents\u0020a\u0020physical\u0020location\u0020where\u0020a\u0020specific\u0020project\u0020or\u0020construction\u0020work\u0020is\u0020executed.",
+            "url": "classes/xyz-oihana-schema-places-JobSite.html"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\places\\Office",
+            "name": "Office",
+            "summary": "Represents\u0020an\u0020administrative\u0020or\u0020corporate\u0020workspace\u0020within\u0020an\u0020organization.",
+            "url": "classes/xyz-oihana-schema-places-Office.html"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\places\\ProviderSite",
+            "name": "ProviderSite",
+            "summary": "Represents\u0020a\u0020physical\u0020location\u0020or\u0020operational\u0020site\u0020specifically\u0020associated\u0020with\u0020a\u0020Provider\u0020\u0028Supplier\u0029.",
+            "url": "classes/xyz-oihana-schema-places-ProviderSite.html"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\places\\Site",
+            "name": "Site",
+            "summary": "Represents\u0020a\u0020multi\u002Dfunctional\u0020operational\u0020site\u0020for\u0020an\u0020organization.",
+            "url": "classes/xyz-oihana-schema-places-Site.html"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\places\\Site\u003A\u003ACONTEXT",
+            "name": "CONTEXT",
+            "summary": "The\u0020\u0040context\u0020of\u0020the\u0020json\u002Dld\u0020representation\u0020of\u0020the\u0020thing.",
+            "url": "classes/xyz-oihana-schema-places-Site.html#constant_CONTEXT"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\places\\Site\u003A\u003A\u0024deliveryMethod",
+            "name": "deliveryMethod",
+            "summary": "The\u0020standardized\u0020procedure\u0020used\u0020to\u0020transfer\u0020a\u0020product\u0020or\u0020service\nto\u0020its\u0020destination.",
+            "url": "classes/xyz-oihana-schema-places-Site.html#property_deliveryMethod"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\places\\Site\u003A\u003A\u0024ownedBy",
+            "name": "ownedBy",
+            "summary": "The\u0020organization\u0020or\u0020person\u0020that\u0020owns\u0020or\u0020operates\u0020this\u0020site.",
+            "url": "classes/xyz-oihana-schema-places-Site.html#property_ownedBy"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\places\\Site\u003A\u003A\u0024position",
+            "name": "position",
+            "summary": "The\u0020position\u0020of\u0020this\u0020site\u0020within\u0020a\u0020sequence\u0020or\u0020ordered\u0020collection\nof\u0020related\u0020sites.",
+            "url": "classes/xyz-oihana-schema-places-Site.html#property_position"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\places\\Warehouse",
+            "name": "Warehouse",
+            "summary": "Represents\u0020a\u0020warehouse\u0020site\u0020used\u0020for\u0020storage\u0020and\u0020logistics\u0020operations.",
+            "url": "classes/xyz-oihana-schema-places-Warehouse.html"
+        },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",
@@ -8785,5 +8835,10 @@ Search.appendIndex(
             "name": "xyz",
             "summary": "",
             "url": "namespaces/xyz.html"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\places",
+            "name": "places",
+            "summary": "",
+            "url": "namespaces/xyz-oihana-schema-places.html"
         }            ]
 );
