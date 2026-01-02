@@ -3126,6 +3126,36 @@ Search.appendIndex(
             "summary": "The\u0020start\u0020date\u0020and\u0020time\u0020of\u0020the\u0020item\u0020\u0028in\u0020ISO\u00208601\u0020date\u0020format\u0029.",
             "url": "classes/org-schema-Grant.html#property_startDate"
         },                {
+            "fqsen": "\\org\\schema\\helpers\\SchemaResolver",
+            "name": "SchemaResolver",
+            "summary": "Resolves\u0020a\u0020schema\u0020class\u0020name\u0020from\u0020a\u0020target\u0020object\u0020or\u0020array.",
+            "url": "classes/org-schema-helpers-SchemaResolver.html"
+        },                {
+            "fqsen": "\\org\\schema\\helpers\\SchemaResolver\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Creates\u0020a\u0020new\u0020SchemaResolver\u0020instance.",
+            "url": "classes/org-schema-helpers-SchemaResolver.html#method___construct"
+        },                {
+            "fqsen": "\\org\\schema\\helpers\\SchemaResolver\u003A\u003A__invoke\u0028\u0029",
+            "name": "__invoke",
+            "summary": "Resolves\u0020the\u0020schema\u0020class\u0020name\u0020for\u0020the\u0020given\u0020target.",
+            "url": "classes/org-schema-helpers-SchemaResolver.html#method___invoke"
+        },                {
+            "fqsen": "\\org\\schema\\helpers\\SchemaResolver\u003A\u003A\u0024key",
+            "name": "key",
+            "summary": "",
+            "url": "classes/org-schema-helpers-SchemaResolver.html#property_key"
+        },                {
+            "fqsen": "\\org\\schema\\helpers\\SchemaResolver\u003A\u003A\u0024map",
+            "name": "map",
+            "summary": "",
+            "url": "classes/org-schema-helpers-SchemaResolver.html#property_map"
+        },                {
+            "fqsen": "\\org\\schema\\helpers\\SchemaResolver\u003A\u003A\u0024default",
+            "name": "default",
+            "summary": "",
+            "url": "classes/org-schema-helpers-SchemaResolver.html#property_default"
+        },                {
             "fqsen": "\\org\\schema\\Intangible",
             "name": "Intangible",
             "summary": "A\u0020utility\u0020class\u0020that\u0020serves\u0020as\u0020the\u0020umbrella\u0020for\u0020a\u0020number\u0020of\u0020\u0027intangible\u0027\u0020things\u0020such\u0020as\u0020quantities,\u0020structured\u0020values,\u0020etc.",
@@ -8421,6 +8451,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/xyz-oihana-schema-constants-traits-PaginationTrait.html"
         },                {
+            "fqsen": "\\xyz\\oihana\\schema\\constants\\traits\\places\\SiteTrait",
+            "name": "SiteTrait",
+            "summary": "",
+            "url": "classes/xyz-oihana-schema-constants-traits-places-SiteTrait.html"
+        },                {
             "fqsen": "\\xyz\\oihana\\schema\\enumerations\\ContactType",
             "name": "ContactType",
             "summary": "Types\u0020of\u0020contact\u0020points\u0020for\u0020an\u0020Organization\u0020or\u0020Person.",
@@ -8616,11 +8651,6 @@ Search.appendIndex(
             "summary": "The\u0020current\u0020page\u0020number\u0020in\u0020the\u0020paginated\u0020collection.",
             "url": "classes/xyz-oihana-schema-Pagination.html#property_page"
         },                {
-            "fqsen": "\\xyz\\oihana\\schema\\places\\CustomerSite",
-            "name": "CustomerSite",
-            "summary": "Represents\u0020a\u0020physical\u0020location\u0020or\u0020operational\u0020site\u0020specifically\u0020associated\u0020with\u0020a\u0020Customer.",
-            "url": "classes/xyz-oihana-schema-places-CustomerSite.html"
-        },                {
             "fqsen": "\\xyz\\oihana\\schema\\places\\JobSite",
             "name": "JobSite",
             "summary": "Represents\u0020a\u0020physical\u0020location\u0020where\u0020a\u0020specific\u0020project\u0020or\u0020construction\u0020work\u0020is\u0020executed.",
@@ -8630,11 +8660,6 @@ Search.appendIndex(
             "name": "Office",
             "summary": "Represents\u0020an\u0020administrative\u0020or\u0020corporate\u0020workspace\u0020within\u0020an\u0020organization.",
             "url": "classes/xyz-oihana-schema-places-Office.html"
-        },                {
-            "fqsen": "\\xyz\\oihana\\schema\\places\\ProviderSite",
-            "name": "ProviderSite",
-            "summary": "Represents\u0020a\u0020physical\u0020location\u0020or\u0020operational\u0020site\u0020specifically\u0020associated\u0020with\u0020a\u0020Provider\u0020\u0028Supplier\u0029.",
-            "url": "classes/xyz-oihana-schema-places-ProviderSite.html"
         },                {
             "fqsen": "\\xyz\\oihana\\schema\\places\\Site",
             "name": "Site",
@@ -8766,6 +8791,11 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/org-schema-events-enumerations.html"
         },                {
+            "fqsen": "\\org\\schema\\helpers",
+            "name": "helpers",
+            "summary": "",
+            "url": "namespaces/org-schema-helpers.html"
+        },                {
             "fqsen": "\\org\\schema\\items",
             "name": "items",
             "summary": "",
@@ -8815,6 +8845,11 @@ Search.appendIndex(
             "name": "traits",
             "summary": "",
             "url": "namespaces/xyz-oihana-schema-constants-traits.html"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\constants\\traits\\places",
+            "name": "places",
+            "summary": "",
+            "url": "namespaces/xyz-oihana-schema-constants-traits-places.html"
         },                {
             "fqsen": "\\xyz\\oihana\\schema\\enumerations",
             "name": "enumerations",
