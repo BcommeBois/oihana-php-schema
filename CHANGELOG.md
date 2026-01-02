@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds the SchemaResolver helper class.
 - Adds the xyz\oihana\schema\auth namespace
   - Adds the WebApi (extends the schema.org definition), Permission, Role and User classes
 - Adds the JWTAlgorithm constant class
