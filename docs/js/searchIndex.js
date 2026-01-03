@@ -7891,6 +7891,11 @@ Search.appendIndex(
             "summary": "Constructor\u0020to\u0020hydrate\u0020public\u0020properties\u0020from\u0020an\u0020array\u0020or\u0020stdClass.",
             "url": "classes/org-schema-traits-ThingTrait.html#method___construct"
         },                {
+            "fqsen": "\\org\\schema\\traits\\ThingTrait\u003A\u003AgetReduceOptions\u0028\u0029",
+            "name": "getReduceOptions",
+            "summary": "Returns\u0020the\u0020default\u0020compression\u0020options\u0020for\u0020JSON\u0020serialization.",
+            "url": "classes/org-schema-traits-ThingTrait.html#method_getReduceOptions"
+        },                {
             "fqsen": "\\org\\schema\\traits\\ThingTrait\u003A\u003AgetSchemaType\u0028\u0029",
             "name": "getSchemaType",
             "summary": "Returns\u0020the\u0020fully\u0020qualified\u0020URI\u0020of\u0020the\u0020schema\u0020type.",

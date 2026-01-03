@@ -5,6 +5,7 @@ namespace tests\org\schema\traits;
 use JsonSerializable;
 use org\schema\constants\Prop;
 use org\schema\constants\Schema;
+use org\schema\Thing;
 use org\schema\traits\ThingTrait;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
@@ -488,6 +489,95 @@ class ThingTraitTest extends TestCase
 
         $expectedKeys = [ 'age', '@type', '@context', 'name'];
         $this->assertSame($expectedKeys, array_keys($data));
+    }
+
+    /**
+     * Test REDUCE_OPTIONS avec false (pas de compression)
+     * @throws ReflectionException
+     */
+    public function testJsonSerializeWithReduceOptionsFalse()
+    {
+        $mock = new class extends Thing {
+
+            public const string CONTEXT = 'https://schema.org';
+            public function getReduceOptions(): bool|array
+            {
+                return false ;
+            }
+
+            public int $age = 0;
+        };
+
+        $data = $mock->jsonSerialize();
+
+        // Avec REDUCE_OPTIONS = false, les null ne sont PAS supprimés
+        $this->assertArrayHasKey('name', $data);
+        $this->assertNull($data['name']);
+        $this->assertArrayHasKey('description', $data);
+        $this->assertNull($data['description']);
+        $this->assertEquals(0, $data['age']);
+    }
+
+    /**
+     * Test REDUCE_OPTIONS avec array d'options avancées
+     * @throws ReflectionException
+     */
+    public function testJsonSerializeWithReduceOptionsAdvanced()
+    {
+        $mock = new class extends Thing {
+
+            public const string CONTEXT = 'https://schema.org';
+
+            /**
+             * Override the default method
+             * @return bool|array
+             */
+            public function getReduceOptions(): bool|array
+            {
+                return
+                [
+                    'conditions' => [
+                        fn($v) => is_null($v),
+                        fn($v) => is_string($v) && trim($v) === '',
+                    ],
+                    'excludes' => ['description', 'name'],
+                ];
+            }
+
+            public ?string $email = '';
+            public int $age = 0;
+        };
+
+        // Initialisation des propriétés héritées de Thing
+        $mock->name = '';  // Chaîne vide mais dans excludes
+        $mock->description = null;  // null mais dans excludes
+        $mock->url = null;  // null et pas dans excludes
+        $mock->email = '';  // Chaîne vide et pas dans excludes
+        $mock->age = 0;
+
+        $data = $mock->jsonSerialize();
+
+        // 'name' est une chaîne vide MAIS dans excludes, donc gardée
+        $this->assertArrayHasKey('name', $data);
+        $this->assertEquals('', $data['name']);
+
+        // 'description' est null MAIS dans excludes, donc gardée
+        $this->assertArrayHasKey('description', $data);
+        $this->assertNull($data['description']);
+
+        // 'url' est null ET pas dans excludes, donc supprimée
+        $this->assertArrayNotHasKey('url', $data);
+
+        // 'email' est une chaîne vide ET pas dans excludes, donc supprimée
+        $this->assertArrayNotHasKey('email', $data);
+
+        // 'age' à 0 est gardé (pas de condition pour supprimer les 0)
+        $this->assertArrayHasKey('age', $data);
+        $this->assertEquals(0, $data['age']);
+
+        // Vérifier la présence de @type et @context
+        $this->assertArrayHasKey('@type', $data);
+        $this->assertArrayHasKey('@context', $data);
     }
 }
 

@@ -147,6 +147,22 @@ trait ThingTrait
     ];
 
     /**
+     * Returns the default compression options for JSON serialization.
+     *
+     * Override this method in child classes to customize serialization behavior.
+     * Can returns:
+     * - `true`: remove null values only (default)
+     * - `false`: no compression
+     * - `array`: full compression options - {@see CompressOption}
+     *
+     * @return bool|array
+     */
+    public function getReduceOptions(): bool|array
+    {
+        return true ;
+    }
+
+    /**
      * Returns the fully qualified URI of the schema type.
      *
      * This method combines the class's `CONTEXT` constant with its short name
@@ -212,11 +228,16 @@ trait ThingTrait
      */
     public function jsonSerialize() : array
     {
+        $reduceOptions = $this->getReduceOptions() ;
+
+        $reduce  = !( $reduceOptions === false ) ;
+        $options = is_array( $reduceOptions ) ? $reduceOptions : [] ;
+
         $data =
         [
             Schema::AT_TYPE    => $this->atType    ?? $this->getShortName( $this ),
-            Schema::AT_CONTEXT => $this->atContext ?? static::CONTEXT,
-            ... $this->jsonSerializeFromPublicProperties( $this , true )
+            Schema::AT_CONTEXT => $this->atContext ?? static::CONTEXT ,
+            ...$this->jsonSerializeFromPublicProperties( $this , $reduce , $options )
         ];
 
         $ordered = [] ;
