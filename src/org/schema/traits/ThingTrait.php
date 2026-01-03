@@ -93,7 +93,7 @@ trait ThingTrait
      * Default is `https://schema.org`.
      * @var string|null
      */
-    private ?string $atContext = null;
+    protected ?string $atContext = null;
 
     /**
      * The JSON-LD `@type` value.
@@ -101,7 +101,7 @@ trait ThingTrait
      * This can be manually set or automatically inferred from the class name.
      * @var string|null
      */
-    private ?string $atType = null;
+    protected ?string $atType = null;
 
     /**
      * Internal cache for resolved schema types.
