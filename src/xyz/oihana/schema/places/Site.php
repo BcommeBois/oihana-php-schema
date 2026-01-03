@@ -52,9 +52,9 @@ class Site extends Place
      * This typically represents the legal or operational owner
      * of the location.
      *
-     * @var int|string|Organization|Person|null
+     * @var int|array|string|Organization|Person|null
      */
-    public null|int|string|Organization|Person $ownedBy ;
+    public null|array|int|string|Organization|Person $ownedBy ;
 
     /**
      * The position of this site within a sequence or ordered collection
