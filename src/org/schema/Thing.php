@@ -29,8 +29,6 @@ class Thing implements JsonSerializable
      */
     public const string CONTEXT = 'https://schema.org' ;
 
-
-
     /**
      * The unique identifier of the item.
      */
