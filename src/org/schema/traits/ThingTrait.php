@@ -147,6 +147,11 @@ trait ThingTrait
     ];
 
     /**
+     * Default compression options (class-level configuration).
+     */
+    protected const bool|array REDUCE_OPTIONS = true ;
+
+    /**
      * Returns the default compression options for JSON serialization.
      *
      * Override this method in child classes to customize serialization behavior.
@@ -159,7 +164,7 @@ trait ThingTrait
      */
     public function getReduceOptions(): bool|array
     {
-        return true ;
+        return static::REDUCE_OPTIONS ;
     }
 
     /**
