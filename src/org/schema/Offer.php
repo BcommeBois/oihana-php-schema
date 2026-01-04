@@ -133,10 +133,10 @@ class Offer extends Intangible
     /**
      * The interval and unit of measurement of ordering quantities for which the offer or price specification is valid.
      * This allows e.g. specifying that a certain freight charge is valid only for a certain quantity.
-     * @var QuantitativeValue|null
+     * @var QuantitativeValue|array|null
      */
     #[HydrateAs(QuantitativeValue::class)]
-    public null|QuantitativeValue $eligibleQuantity ;
+    public null|array|QuantitativeValue $eligibleQuantity ;
 
     /**
      * The ISO 3166-1 (ISO 3166-1 alpha-2) or ISO 3166-2 code, the place, or the GeoShape for the geo-political region(s) for which the offer or delivery charge specification is valid.
