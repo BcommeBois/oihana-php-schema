@@ -20,9 +20,9 @@ class Service extends Intangible
 
     /**
      * The geographic area where a service or offered item is provided.
-     * @var null|string|Place|GeoShape|AdministrativeArea|array
+     * @var null|int|string|Place|GeoShape|AdministrativeArea|array
      */
-    public null|string|Place|GeoShape|AdministrativeArea|array $areaServed ;
+    public null|int|string|Place|GeoShape|AdministrativeArea|array $areaServed ;
 
     /**
      * An intended audience, i.e. a group for whom something was created. Supersedes serviceAudience.

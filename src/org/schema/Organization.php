@@ -67,9 +67,9 @@ class Organization extends Thing
 
     /**
      * The geographic area where a service or offered item is provided.
-     * @var null|string|Place|GeoShape|AdministrativeArea|array
+     * @var null|int|string|Place|GeoShape|AdministrativeArea|array
      */
-    public null|string|Place|GeoShape|AdministrativeArea|array $areaServed ;
+    public null|int|string|Place|GeoShape|AdministrativeArea|array $areaServed ;
 
     /**
      * An award won by or for this item.

@@ -49,9 +49,9 @@ class Offer extends Intangible
 
     /**
      * The geographic area where a service or offered item is provided.
-     * @var null|string|Place|GeoShape|AdministrativeArea|array
+     * @var null|int|string|Place|GeoShape|AdministrativeArea|array
      */
-    public null|string|Place|GeoShape|AdministrativeArea|array $areaServed ;
+    public null|int|string|Place|GeoShape|AdministrativeArea|array $areaServed ;
 
     /**
      * An Amazon Standard Identification Number (ASIN) is a 10-character alphanumeric unique identifier assigned by Amazon.com and its partners for product identification within the Amazon organization.

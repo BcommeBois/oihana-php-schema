@@ -15,9 +15,9 @@ class FinancialIncentive extends Intangible
 {
     /**
      * The geographic area where a service or offered item is provided.
-     * @var null|string|Place|GeoShape|AdministrativeArea|array
+     * @var null|int|string|Place|GeoShape|AdministrativeArea|array
      */
-    public null|string|Place|GeoShape|AdministrativeArea|array $areaServed ;
+    public null|int|string|Place|GeoShape|AdministrativeArea|array $areaServed ;
 
     /**
      * The supplier of the incentivized item/service for which the incentive is valid for such as a utility company, merchant, or contractor.

@@ -18,9 +18,9 @@ trait ContactPointTrait
 {
     /**
      * The geographic area where a service or offered item is provided.
-     * @var null|string|Place|GeoShape|AdministrativeArea|array
+     * @var null|int|string|Place|GeoShape|AdministrativeArea|array
      */
-    public null|string|Place|GeoShape|AdministrativeArea|array $areaServed ;
+    public null|int|string|Place|GeoShape|AdministrativeArea|array $areaServed ;
     
     /**
      * A language someone may use with or at the item, service or place.
