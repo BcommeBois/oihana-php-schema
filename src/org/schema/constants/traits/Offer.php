@@ -48,6 +48,7 @@ trait Offer
     const string PRICE_CURRENCY              = 'priceCurrency' ;
     const string PRICE_SPECIFICATION         = 'priceSpecification' ;
     const string PRICE_VALID_UNTIL           = 'priceValidUntil' ;
+    const string PROVIDER                    = 'provider' ;
     const string REVIEW                      = 'review' ;
     const string SELLER                      = 'seller' ;
     const string SERIAL_NUMBER               = 'serialNumber' ;
