@@ -304,6 +304,16 @@ class Offer extends Intangible
     public null|string|int $priceValidUntil ;
 
     /**
+     * An entity which actually provides the product or service that this offer is based on.
+     * This is distinct from the seller, who may be the distributor or platform offering the product.
+     *
+     * Example: a supplier or manufacturer providing the product behind the scenes.
+     *
+     * @var null|Organization|Person|Thing|array|string|int
+     */
+    public null|Organization|Person|Thing|array|string|int $provider ;
+
+    /**
      * A review of the item.
      * @var array|Review|null
      */
@@ -312,8 +322,10 @@ class Offer extends Intangible
     /**
      * An entity which offers (sells / leases / lends / loans) the services / goods.
      * A seller may also be a provider.
+     *
+     * @var null|Organization|Person|Thing|array|string|int
      */
-    public null|Organization|Person|Thing|string|int|array $seller ;
+    public null|Organization|Person|Thing|array|string|int $seller ;
 
     /**
      * The serial number or any alphanumeric identifier of a particular product.

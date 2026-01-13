@@ -273,5 +273,3 @@ trait PlaceTrait
      */
     public array|null|string|WebSite $website ;
 }
-
-

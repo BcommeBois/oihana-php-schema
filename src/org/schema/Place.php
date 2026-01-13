@@ -12,5 +12,3 @@ class Place extends Thing
 {
     use PlaceTrait ;
 }
-
-
