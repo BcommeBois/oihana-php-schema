@@ -394,15 +394,15 @@ class Person extends Thing
 
     /**
      * A contact location for a person's place of work.
-     * @var null|string|array|ContactPoint|Place
+     * @var null|int|string|array|ContactPoint|Place
      */
-    public null|string|array|ContactPoint|Place $workLocation ;
+    public null|int|string|array|ContactPoint|Place $workLocation ;
 
     /**
      * Organizations that the person works for.
-     * @var null|string|array|Organization
+     * @var null|int|string|array|Organization
      */
-    public null|string|array|Organization $worksFor ;
+    public null|int|string|array|Organization $worksFor ;
 }
 
 
