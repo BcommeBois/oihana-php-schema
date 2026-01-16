@@ -289,7 +289,7 @@ trait ThingTrait
     /**
      * @var bool
      */
-    protected static bool $keepNulls = true;
+    protected static bool $keepNulls = false;
 
     /**
      * Temporarily locks JSON serialization to preserve null properties.
