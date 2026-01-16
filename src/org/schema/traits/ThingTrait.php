@@ -286,7 +286,10 @@ trait ThingTrait
         return $ordered + $data ;
     }
 
-    protected static bool $keepNulls = false;
+    /**
+     * @var bool
+     */
+    protected static bool $keepNulls = true;
 
     /**
      * Temporarily locks JSON serialization to preserve null properties.
