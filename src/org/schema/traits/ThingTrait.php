@@ -154,16 +154,41 @@ trait ThingTrait
     /**
      * Returns the default compression options for JSON serialization.
      *
-     * Override this method in child classes to customize serialization behavior.
-     * Can returns:
-     * - `true`: remove null values only (default)
-     * - `false`: no compression
-     * - `array`: full compression options - {@see CompressOption}
+     * This method determines how the `jsonSerialize()` output is reduced or compressed.
+     * It can be overridden in child classes to customize serialization behavior.
      *
-     * @return bool|array
+     * Behavior:
+     * - If the static lock `Thing::keepNulls(true)` is active, null values are **always preserved**
+     *   and no compression is applied (`false` is returned).
+     * - Otherwise, the class-level `REDUCE_OPTIONS` constant is used.
+     *
+     * Possible return values:
+     * - `true`  : remove null values only (default behavior, respects REDUCE_OPTIONS)
+     * - `false` : no compression; all properties including nulls are included
+     * - `array` : full compression options array - see {@see CompressOption} for configuration
+     *
+     * Usage:
+     * ```php
+     * $thing = new Thing();
+     * $options = $thing->getReduceOptions();
+     * ```
+     *
+     * Global override:
+     * ```php
+     * // Temporarily preserve all null values in JSON serialization
+     * Thing::keepNulls(true);
+     * json_encode($thing); // null values included
+     * Thing::keepNulls(false); // restore normal behavior
+     * ```
+     *
+     * @return bool|array Returns the reduction/compression options for JSON serialization.
      */
     public function getReduceOptions(): bool|array
     {
+        if ( self::$keepNulls )
+        {
+            return false ;
+        }
         return static::REDUCE_OPTIONS ;
     }
 
@@ -259,6 +284,47 @@ trait ThingTrait
         ksort( $data , SORT_STRING );
 
         return $ordered + $data ;
+    }
+
+    protected static bool $keepNulls = false;
+
+    /**
+     * Temporarily locks JSON serialization to preserve null properties.
+     *
+     * This method sets a flag that controls whether `jsonSerialize()` should
+     * include properties with null values, overriding the default reduction/compression
+     * behavior defined by `REDUCE_OPTIONS`.
+     *
+     * Behavior:
+     * - When `$enable` is `true`, null properties will **always be included** in the output
+     *   of `jsonSerialize()`.
+     * - When `$enable` is `false`, the class will revert to its normal compression behavior.
+     *
+     * Scope:
+     * - Using `self::$keepNulls` (as currently written) affects **all instances of this class
+     *   and its subclasses**, because it is a static property shared across the inheritance tree.
+     * - If you want the behavior to be class-specific (per subclass), consider using `static::$keepNulls`
+     *   instead (late static binding).
+     *
+     * Usage:
+     * ```php
+     * // Preserve nulls globally for this class
+     * Thing::keepNulls(true);
+     *
+     * $thing = new Thing();
+     * json_encode($thing); // All properties, including nulls, will appear
+     *
+     * // Restore normal behavior
+     * Thing::keepNulls(false);
+     * ```
+     *
+     * @param bool $enable True to preserve null properties, false to revert to default compression.
+     *
+     * @return void
+     */
+    public static function keepNulls( bool $enable = true ) :void
+    {
+        self::$keepNulls = $enable ;
     }
 
     /**
