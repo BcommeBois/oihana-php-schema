@@ -298,8 +298,7 @@ class ThingTraitTest extends TestCase
             Schema::AT_CONTEXT => 'https://schema.org',
             'name' => 'Integration Test',
             'age' => 42,
-            'description' => 'A complete test' ,
-            'url' => null
+            'description' => 'A complete test'
         ];
 
         $this->assertEquals($expected, $json);
@@ -490,7 +489,7 @@ class ThingTraitTest extends TestCase
 
         $data = $mock->jsonSerialize();
 
-        $expectedKeys = [ 'age', '@type', '@context' , 'description', 'name' , 'url'];
+        $expectedKeys = [ 'age', '@type', '@context' , 'description', 'name' ];
         $this->assertSame($expectedKeys, array_keys($data));
     }
 
@@ -504,7 +503,7 @@ class ThingTraitTest extends TestCase
 
             public const string CONTEXT = 'https://schema.org';
 
-            public function getJsonOptions(): array
+            public function getJsonSerializeOptions(): array
             {
                 return
                 [

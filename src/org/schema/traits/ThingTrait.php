@@ -161,7 +161,7 @@ trait ThingTrait
      *
      * @return array Returns the reduction/compression options for JSON serialization.
      */
-    public function getJsonOptions(): array
+    public function getJsonSerializeOptions(): array
     {
         return static::JSON_OPTIONS ;
     }
@@ -232,8 +232,8 @@ trait ThingTrait
      */
     public function jsonSerialize() : array
     {
-        return $this->toArray( $this ,
-        [
+        return $this->toArray
+        ([
             PrepareOption::BEFORE =>
             [
                 Schema::AT_TYPE    => $this->atType    ?? $this->getShortName( $this ),
@@ -241,7 +241,7 @@ trait ThingTrait
             ] ,
             PrepareOption::FIRST_KEYS => static::JSON_PRIORITY_KEYS ,
             PrepareOption::SORT       => true ,
-            ...$this->getJsonOptions()
+            ...$this->getJsonSerializeOptions()
         ]) ;
     }
 

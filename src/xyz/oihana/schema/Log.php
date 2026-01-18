@@ -76,14 +76,6 @@ class Log extends Thing
     public ?string $time ;
 
     /**
-     * @inheritDoc
-     */
-    public function toArray( null|object|string $class = null , ?array $options = [] ) : array
-    {
-        return parent::toArray($value ?? $this, [ PrepareOption::REDUCE => true , ...$options ] );
-    }
-
-    /**
      * Returns the string representation of the thing.
      * @return string
      */

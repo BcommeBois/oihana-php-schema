@@ -120,14 +120,6 @@ class Permission extends Intangible
     public string|null $subject ;
 
     /**
-     * @inheritDoc
-     */
-    public function toArray( null|object|string $class = null , ?array $options = [] ) : array
-    {
-        return parent::toArray($value ?? $this, [ PrepareOption::REDUCE => true , ...$options ] );
-    }
-
-    /**
      * Returns an array ready for Casbin policies: [sub, dom, obj, act, eft]
      */
     public function toPolicy(): array

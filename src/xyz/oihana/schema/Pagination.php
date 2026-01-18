@@ -107,12 +107,4 @@ class Pagination extends Intangible
      * @var int|null
      */
     public null|int $page ;
-
-    /**
-     * @inheritDoc
-     */
-    public function toArray( null|object|string $class = null , ?array $options = [] ) : array
-    {
-        return parent::toArray($value ?? $this, [ PrepareOption::REDUCE => true , ...$options ] );
-    }
 }
