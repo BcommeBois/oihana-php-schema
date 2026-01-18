@@ -57,7 +57,11 @@ class AggregateOfferTest extends TestCase
 
         $json = json_encode( $thing , JSON_UNESCAPED_SLASHES );
 
-        $this->assertEquals('[{"@type":"AggregateOffer","@context":"https://schema.org","name":"Prix public"}]' , $json ) ;
+        $this->assertEquals
+        (
+            '[{"@type":"AggregateOffer","@context":"https://schema.org","_key":null,"_from":null,"_to":null,"id":null,"name":"Prix public","url":null,"created":null,"modified":null,"_id":null,"_rev":null,"acceptedPaymentMethod":null,"active":null,"additionalProperty":null,"additionalType":null,"addon":null,"advanceBookingRequirement":null,"aggregateRating":null,"alternateName":null,"areaServed":null,"asin":null,"availability":null,"availabilityEnds":null,"availabilityStarts":null,"availableAtOrFrom":null,"availableDeliveryMethod":null,"businessFunction":null,"category":null,"checkoutPageURLTemplate":null,"deliveryLeadTime":null,"description":null,"disambiguatingDescription":null,"eligibleCustomerType":null,"eligibleDuration":null,"eligibleQuantity":null,"eligibleRegion":null,"eligibleTransactionVolume":null,"gtin":null,"gtin12":null,"gtin13":null,"gtin14":null,"gtin8":null,"hasAdultConsideration":null,"hasGS1DigitalLink":null,"hasMeasurement":null,"hasMerchantReturnPolicy":null,"hasPart":null,"highPrice":null,"identifier":null,"image":null,"includesObject":null,"ineligibleRegion":null,"inventoryLevel":null,"isFamilyFriendly":null,"isPartOf":null,"itemCondition":null,"itemOffered":null,"leaseLength":null,"license":null,"lowPrice":null,"mainEntityOfPage":null,"mobileUrl":null,"mpn":null,"offerCount":null,"offeredBy":null,"offers":null,"owner":null,"potentialAction":null,"price":null,"priceCurrency":null,"priceSpecification":null,"priceValidUntil":null,"provider":null,"publisher":null,"review":null,"sameAs":null,"seller":null,"serialNumber":null,"shippingDetails":null,"sku":null,"subjectOf":null,"validForMemberTier":null,"validFrom":null,"validThrough":null,"warranty":null}]' ,
+            $json
+        ) ;
     }
 
     public function testGetSchemaTypeReturnsRootUri()

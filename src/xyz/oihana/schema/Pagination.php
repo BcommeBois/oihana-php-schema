@@ -2,6 +2,7 @@
 
 namespace xyz\oihana\schema;
 
+use oihana\core\options\PrepareOption;
 use org\schema\Intangible;
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\constants\traits\PaginationTrait;
@@ -106,4 +107,12 @@ class Pagination extends Intangible
      * @var int|null
      */
     public null|int $page ;
+
+    /**
+     * @inheritDoc
+     */
+    public function toArray( null|object|string $class = null , ?array $options = [] ) : array
+    {
+        return parent::toArray($value ?? $this, [ PrepareOption::REDUCE => true , ...$options ] );
+    }
 }

@@ -66,11 +66,11 @@ class PermissionTest extends TestCase
         ]);
 
         $expected = [
-            Oihana::SUBJECT => 'role:admin',
-            Oihana::DOMAIN  => 'project',
-            Oihana::OBJECT  => 'places/:id',
             Oihana::ACTION  => 'read',
+            Oihana::DOMAIN  => 'project',
             Oihana::EFFECT  => 'allow',
+            Oihana::OBJECT  => 'places/:id',
+            Oihana::SUBJECT => 'role:admin',
         ];
 
         $this->assertSame($expected, $perm->toArray());

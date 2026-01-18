@@ -2,7 +2,9 @@
 
 namespace xyz\oihana\schema\auth;
 
+use oihana\core\options\PrepareOption;
 use org\schema\Intangible;
+use ReflectionException;
 use xyz\oihana\schema\constants\CasbinPolicy;
 use xyz\oihana\schema\constants\Effect;
 use xyz\oihana\schema\constants\Oihana;
@@ -118,20 +120,11 @@ class Permission extends Intangible
     public string|null $subject ;
 
     /**
-     * Returns an array representation of the permission suitable for Casbin policies.
-     *
-     * @return array{subject: string|null, domain: string|null, action: string|null}
+     * @inheritDoc
      */
-    public function toArray(): array
+    public function toArray( null|object|string $class = null , ?array $options = [] ) : array
     {
-        return
-        [
-            Oihana::SUBJECT => $this->subject ?? null ,
-            Oihana::DOMAIN  => $this->domain  ?? null ,
-            Oihana::OBJECT  => $this->object  ?? null ,
-            Oihana::ACTION  => $this->action  ?? null ,
-            Oihana::EFFECT  => $this->effect  ,
-        ];
+        return parent::toArray($value ?? $this, [ PrepareOption::REDUCE => true , ...$options ] );
     }
 
     /**

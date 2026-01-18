@@ -2,6 +2,7 @@
 
 namespace xyz\oihana\schema;
 
+use oihana\core\options\PrepareOption;
 use org\schema\Thing;
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\constants\traits\LogTrait;
@@ -75,18 +76,11 @@ class Log extends Thing
     public ?string $time ;
 
     /**
-     * Returns the array representation of the log definition.
-     * @return array
+     * @inheritDoc
      */
-    public function toArray() : array
+    public function toArray( null|object|string $class = null , ?array $options = [] ) : array
     {
-        return
-        [
-            self::DATE    => $this->date    ?? null ,
-            self::TIME    => $this->time    ?? null ,
-            self::LEVEL   => $this->level   ?? null ,
-            self::MESSAGE => $this->message ?? null ,
-        ];
+        return parent::toArray($value ?? $this, [ PrepareOption::REDUCE => true , ...$options ] );
     }
 
     /**

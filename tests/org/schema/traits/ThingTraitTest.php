@@ -3,6 +3,8 @@
 namespace tests\org\schema\traits;
 
 use JsonSerializable;
+use oihana\core\options\CompressOption;
+use oihana\core\options\PrepareOption;
 use org\schema\constants\Prop;
 use org\schema\constants\Schema;
 use org\schema\Thing;
@@ -180,7 +182,7 @@ class ThingTraitTest extends TestCase
 
         $data = $thing->jsonSerialize();
 
-        $this->assertArrayNotHasKey('name' , $data ) ;
+        $this->assertNull( $data['name'] ) ;
         $this->assertEquals(40 , $data['age'] );
     }
 
@@ -296,7 +298,8 @@ class ThingTraitTest extends TestCase
             Schema::AT_CONTEXT => 'https://schema.org',
             'name' => 'Integration Test',
             'age' => 42,
-            'description' => 'A complete test'
+            'description' => 'A complete test' ,
+            'url' => null
         ];
 
         $this->assertEquals($expected, $json);
@@ -487,35 +490,8 @@ class ThingTraitTest extends TestCase
 
         $data = $mock->jsonSerialize();
 
-        $expectedKeys = [ 'age', '@type', '@context', 'name'];
+        $expectedKeys = [ 'age', '@type', '@context' , 'description', 'name' , 'url'];
         $this->assertSame($expectedKeys, array_keys($data));
-    }
-
-    /**
-     * Test REDUCE_OPTIONS avec false (pas de compression)
-     * @throws ReflectionException
-     */
-    public function testJsonSerializeWithReduceOptionsFalse()
-    {
-        $mock = new class extends Thing {
-
-            public const string CONTEXT = 'https://schema.org';
-            public function getReduceOptions(): bool|array
-            {
-                return false ;
-            }
-
-            public int $age = 0;
-        };
-
-        $data = $mock->jsonSerialize();
-
-        // Avec REDUCE_OPTIONS = false, les null ne sont PAS supprimés
-        $this->assertArrayHasKey('name', $data);
-        $this->assertNull($data['name']);
-        $this->assertArrayHasKey('description', $data);
-        $this->assertNull($data['description']);
-        $this->assertEquals(0, $data['age']);
     }
 
     /**
@@ -528,19 +504,19 @@ class ThingTraitTest extends TestCase
 
             public const string CONTEXT = 'https://schema.org';
 
-            /**
-             * Override the default method
-             * @return bool|array
-             */
-            public function getReduceOptions(): bool|array
+            public function getJsonOptions(): array
             {
                 return
                 [
-                    'conditions' => [
-                        fn($v) => is_null($v),
-                        fn($v) => is_string($v) && trim($v) === '',
-                    ],
-                    'excludes' => ['description', 'name'],
+                    PrepareOption::REDUCE =>
+                    [
+                        CompressOption::CONDITIONS =>
+                        [
+                            fn($v) => is_null($v),
+                            fn($v) => is_string($v) && trim($v) === '',
+                        ],
+                        CompressOption::EXCLUDES => ['description', 'name'],
+                    ]
                 ];
             }
 

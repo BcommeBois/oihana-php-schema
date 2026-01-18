@@ -4,6 +4,7 @@ namespace org\schema;
 
 use JsonSerializable;
 
+use oihana\core\options\PrepareOption;
 use org\schema\traits\DublinCoreTrait;
 use org\schema\traits\ThingTrait;
 
@@ -19,6 +20,14 @@ class DublinCore implements JsonSerializable
     use ThingTrait ,
         DublinCoreTrait ,
         DublinCoreSchema ;
+
+    /**
+     * @inheritdoc
+     */
+    public function getJsonOptions(): array
+    {
+        return [ PrepareOption::REDUCE => true ] ;
+    }
 
     /**
      * JSON-LD @context declaration for Schema.org.
