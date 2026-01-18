@@ -148,10 +148,9 @@ trait ThingTrait
     ];
 
     /**
-     * Default jsonSerialize options (class-level configuration).
-     * Based on the PrepareOption enumeration
+     * The default jsonSerialize options (class-level configuration).
      */
-    protected const array JSON_OPTIONS = [] ;
+    protected static array $DEFAULT_JSON_SERIALIZE_OPTIONS = [] ;
 
     /**
      * Returns the default JSON serialization options.
@@ -163,7 +162,7 @@ trait ThingTrait
      */
     public function getJsonSerializeOptions(): array
     {
-        return static::JSON_OPTIONS ;
+        return static::$DEFAULT_JSON_SERIALIZE_OPTIONS ;
     }
 
     /**
