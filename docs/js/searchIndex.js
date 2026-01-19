@@ -3741,6 +3741,11 @@ Search.appendIndex(
             "summary": "The\u0020date\u0020after\u0020which\u0020the\u0020price\u0020is\u0020no\u0020longer\u0020available.",
             "url": "classes/org-schema-Offer.html#property_priceValidUntil"
         },                {
+            "fqsen": "\\org\\schema\\Offer\u003A\u003A\u0024provider",
+            "name": "provider",
+            "summary": "An\u0020entity\u0020which\u0020actually\u0020provides\u0020the\u0020product\u0020or\u0020service\u0020that\u0020this\u0020offer\u0020is\u0020based\u0020on.",
+            "url": "classes/org-schema-Offer.html#property_provider"
+        },                {
             "fqsen": "\\org\\schema\\Offer\u003A\u003A\u0024review",
             "name": "review",
             "summary": "A\u0020review\u0020of\u0020the\u0020item.",
@@ -7891,10 +7896,10 @@ Search.appendIndex(
             "summary": "Constructor\u0020to\u0020hydrate\u0020public\u0020properties\u0020from\u0020an\u0020array\u0020or\u0020stdClass.",
             "url": "classes/org-schema-traits-ThingTrait.html#method___construct"
         },                {
-            "fqsen": "\\org\\schema\\traits\\ThingTrait\u003A\u003AgetReduceOptions\u0028\u0029",
-            "name": "getReduceOptions",
-            "summary": "Returns\u0020the\u0020default\u0020compression\u0020options\u0020for\u0020JSON\u0020serialization.",
-            "url": "classes/org-schema-traits-ThingTrait.html#method_getReduceOptions"
+            "fqsen": "\\org\\schema\\traits\\ThingTrait\u003A\u003AgetJsonSerializeOptions\u0028\u0029",
+            "name": "getJsonSerializeOptions",
+            "summary": "Returns\u0020the\u0020default\u0020JSON\u0020serialization\u0020options.",
+            "url": "classes/org-schema-traits-ThingTrait.html#method_getJsonSerializeOptions"
         },                {
             "fqsen": "\\org\\schema\\traits\\ThingTrait\u003A\u003AgetSchemaType\u0028\u0029",
             "name": "getSchemaType",
@@ -7935,6 +7940,11 @@ Search.appendIndex(
             "name": "schemaTypeCache",
             "summary": "Internal\u0020cache\u0020for\u0020resolved\u0020schema\u0020types.",
             "url": "classes/org-schema-traits-ThingTrait.html#property_schemaTypeCache"
+        },                {
+            "fqsen": "\\org\\schema\\traits\\ThingTrait\u003A\u003A\u0024JSON_SERIALIZE_OPTIONS",
+            "name": "JSON_SERIALIZE_OPTIONS",
+            "summary": "The\u0020default\u0020jsonSerialize\u0020options\u0020\u0028class\u002Dlevel\u0020configuration\u0029.",
+            "url": "classes/org-schema-traits-ThingTrait.html#property_JSON_SERIALIZE_OPTIONS"
         },                {
             "fqsen": "\\org\\schema\\traits\\ValueTrait",
             "name": "ValueTrait",
@@ -8080,11 +8090,6 @@ Search.appendIndex(
             "name": "Permission",
             "summary": "Represents\u0020a\u0020Casbin\u0020permission\u0020rule\u0020for\u0020Role\u002DBased\u0020Access\u0020Control\u0020\u0028RBAC\u0029.",
             "url": "classes/xyz-oihana-schema-auth-Permission.html"
-        },                {
-            "fqsen": "\\xyz\\oihana\\schema\\auth\\Permission\u003A\u003AtoArray\u0028\u0029",
-            "name": "toArray",
-            "summary": "Returns\u0020an\u0020array\u0020representation\u0020of\u0020the\u0020permission\u0020suitable\u0020for\u0020Casbin\u0020policies.",
-            "url": "classes/xyz-oihana-schema-auth-Permission.html#method_toArray"
         },                {
             "fqsen": "\\xyz\\oihana\\schema\\auth\\Permission\u003A\u003AtoPolicy\u0028\u0029",
             "name": "toPolicy",
@@ -8580,11 +8585,6 @@ Search.appendIndex(
             "name": "Log",
             "summary": "Represents\u0020a\u0020log\u0020entry.",
             "url": "classes/xyz-oihana-schema-Log.html"
-        },                {
-            "fqsen": "\\xyz\\oihana\\schema\\Log\u003A\u003AtoArray\u0028\u0029",
-            "name": "toArray",
-            "summary": "Returns\u0020the\u0020array\u0020representation\u0020of\u0020the\u0020log\u0020definition.",
-            "url": "classes/xyz-oihana-schema-Log.html#method_toArray"
         },                {
             "fqsen": "\\xyz\\oihana\\schema\\Log\u003A\u003A__toString\u0028\u0029",
             "name": "__toString",
