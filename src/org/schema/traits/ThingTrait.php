@@ -2,6 +2,7 @@
 
 namespace org\schema\traits ;
 
+use org\schema\helpers\JsonSerializer;
 use ReflectionClass;
 use ReflectionException;
 
@@ -148,9 +149,9 @@ trait ThingTrait
     ];
 
     /**
-     * The default jsonSerialize options (class-level configuration).
+     * The default static jsonSerialize options (class-level configuration).
      */
-    protected static array $JSON_SERIALIZE_OPTIONS = [] ;
+    protected static array $DEFAULT_JSON_SERIALIZE_OPTIONS = [] ;
 
     /**
      * Returns the default JSON serialization options.
@@ -162,7 +163,7 @@ trait ThingTrait
      */
     public function getJsonSerializeOptions(): array
     {
-        return static::$JSON_SERIALIZE_OPTIONS ;
+        return array_merge( static::$DEFAULT_JSON_SERIALIZE_OPTIONS , JsonSerializer::getOptions() ) ;
     }
 
     /**
@@ -243,7 +244,6 @@ trait ThingTrait
             ...$this->getJsonSerializeOptions()
         ]) ;
     }
-
 
     /**
      * Sets the internal JSON-LD `@context` attribute.
