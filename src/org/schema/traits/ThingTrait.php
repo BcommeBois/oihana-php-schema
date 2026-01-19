@@ -2,12 +2,12 @@
 
 namespace org\schema\traits ;
 
-use org\schema\helpers\JsonSerializer;
 use ReflectionClass;
 use ReflectionException;
 
 use oihana\core\options\ArrayOption;
 use oihana\reflect\traits\JsonSchemaTrait;
+use oihana\reflect\utils\JsonSerializer;
 
 use org\schema\constants\Schema;
 

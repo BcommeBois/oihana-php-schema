@@ -3,6 +3,9 @@
 namespace tests\org\schema\traits;
 
 use JsonSerializable;
+use oihana\reflect\utils\JsonSerializer;
+use org\schema\Person;
+use org\schema\PostalAddress;
 use ReflectionClass;
 use ReflectionException;
 use ReflectionProperty;
@@ -555,6 +558,400 @@ class ThingTraitTest extends TestCase
         // Vérifier la présence de @type et @context
         $this->assertArrayHasKey('@type', $data);
         $this->assertArrayHasKey('@context', $data);
+    }
+
+    /**
+     * Test JsonSerializer::encode() avec Thing
+     * @throws ReflectionException
+     */
+    public function testJsonSerializerEncodeSimpleThing()
+    {
+        $thing = new Thing([
+            'name' => 'Test Thing',
+            'id' => 'thing-123',
+            'url' => 'https://example.com'
+        ]);
+
+        $json = JsonSerializer::encode($thing);
+
+        $this->assertJson($json);
+
+        $decoded = json_decode($json, true);
+        $this->assertEquals('Test Thing', $decoded['name']);
+        $this->assertEquals('thing-123', $decoded['id']);
+        $this->assertEquals('https://example.com', $decoded['url']);
+        $this->assertEquals('Thing', $decoded['@type']);
+        $this->assertEquals('https://schema.org', $decoded['@context']);
+    }
+
+    /**
+     * Test JsonSerializer::encode() avec Person
+     * @throws ReflectionException
+     */
+    public function testJsonSerializerEncodeSimplePerson()
+    {
+        $person = new Person([
+            'name' => 'Alice Dupont',
+            'email' => 'alice@example.com',
+            'givenName' => 'Alice',
+            'familyName' => 'Dupont'
+        ]);
+
+        $json = JsonSerializer::encode($person);
+
+        $this->assertJson($json);
+
+        $decoded = json_decode($json, true);
+        $this->assertEquals('Alice Dupont', $decoded['name']);
+        $this->assertEquals('alice@example.com', $decoded['email']);
+        $this->assertEquals('Alice', $decoded['givenName']);
+        $this->assertEquals('Dupont', $decoded['familyName']);
+        $this->assertEquals('Person', $decoded['@type']);
+    }
+
+    /**
+     * Test JsonSerializer::encode() avec tableau de Things
+     * @throws ReflectionException
+     */
+    public function testJsonSerializerEncodeArrayOfThings()
+    {
+        $things = [
+            new Thing(['name' => 'Thing 1', 'id' => '1']),
+            new Thing(['name' => 'Thing 2', 'id' => '2']),
+            new Thing(['name' => 'Thing 3', 'id' => '3'])
+        ];
+
+        $json = JsonSerializer::encode($things);
+
+        $this->assertJson($json);
+
+        $decoded = json_decode($json, true);
+        $this->assertCount(3, $decoded);
+        $this->assertEquals('Thing 1', $decoded[0]['name']);
+        $this->assertEquals('Thing 2', $decoded[1]['name']);
+        $this->assertEquals('Thing 3', $decoded[2]['name']);
+    }
+
+    /**
+     * Test JsonSerializer::encode() avec ArrayOption::REDUCE pour supprimer les nulls
+     * @throws ReflectionException
+     */
+    public function testJsonSerializerWithReduceOptionRemovesNulls()
+    {
+        $person = new Person([
+            'name' => 'Alice',
+            'email' => 'alice@example.com',
+            'familyName' => null,
+            'givenName' => null
+        ]);
+
+        $json = JsonSerializer::encode($person, options:[
+            ArrayOption::REDUCE => true
+        ]);
+
+        $decoded = json_decode($json, true);
+
+        // Les propriétés avec valeurs non-null doivent être présentes
+        $this->assertArrayHasKey('name', $decoded);
+        $this->assertArrayHasKey('email', $decoded);
+
+        // Les propriétés nulles ne doivent pas être présentes
+        $this->assertArrayNotHasKey('familyName', $decoded);
+        $this->assertArrayNotHasKey('givenName', $decoded);
+    }
+
+    /**
+     * Test JsonSerializer::encode() avec REDUCE préserve les chaînes vides
+     * @throws ReflectionException
+     */
+    public function testJsonSerializerWithReduceOptionPreservesEmptyStrings()
+    {
+        $thing = new Thing([
+            'name' => '',
+            'description' => null,
+            'url' => 'https://example.com'
+        ]);
+
+        $json = JsonSerializer::encode($thing, options:[
+            ArrayOption::REDUCE => true
+        ]);
+
+        $decoded = json_decode($json, true);
+
+        // Les chaînes vides sont préservées
+        $this->assertArrayHasKey('name', $decoded);
+        $this->assertEquals('', $decoded['name']);
+
+        // Les null sont supprimés
+        $this->assertArrayNotHasKey('description', $decoded);
+
+        // Les valeurs normales sont présentes
+        $this->assertArrayHasKey('url', $decoded);
+    }
+
+    /**
+     * Test JsonSerializer::encode() avec options REDUCE avancées
+     * @throws ReflectionException
+     */
+    public function testJsonSerializerWithReduceAdvancedOptions()
+    {
+        $person = new Person([
+            'name' => '',
+            'email' => 'test@example.com',
+            'givenName' => null,
+            'familyName' => '   ',
+            'telephone' => ''
+        ]);
+
+        $json = JsonSerializer::encode($person, options: [
+            ArrayOption::REDUCE => [
+                CompressOption::CONDITIONS => [
+                    fn($v) => is_null($v),
+                    fn($v) => is_string($v) && trim($v) === '',
+                ],
+                CompressOption::EXCLUDES => ['name']
+            ]
+        ]);
+
+        $decoded = json_decode($json, true);
+
+        // 'name' est vide mais dans excludes, donc gardée
+        $this->assertArrayHasKey('name', $decoded);
+        $this->assertEquals('', $decoded['name']);
+
+        // 'email' a une valeur, donc gardée
+        $this->assertArrayHasKey('email', $decoded);
+
+        // 'givenName' est null, donc supprimée
+        $this->assertArrayNotHasKey('givenName', $decoded);
+
+        // 'familyName' est une chaîne vide (après trim), donc supprimée
+        $this->assertArrayNotHasKey('familyName', $decoded);
+
+        // 'telephone' est vide et pas dans excludes, donc supprimée
+        $this->assertArrayNotHasKey('telephone', $decoded);
+    }
+
+    /**
+     * Test que les options JsonSerializer sont reset après encode
+     * @throws ReflectionException
+     */
+    public function testJsonSerializerOptionsAreResetAfterEncode()
+    {
+        $thing = new Thing(['name' => 'Test']);
+
+        // Encoder avec des options
+        JsonSerializer::encode( $thing, options: [
+            ArrayOption::REDUCE => true
+        ]);
+
+        // Les options doivent être vides après encode
+        $this->assertEmpty( JsonSerializer::getOptions());
+
+        // Un nouvel encode sans options ne devrait pas avoir les anciennes options
+        $thing2 = new Thing(['name' => 'Test 2', 'description' => null]);
+        $json = JsonSerializer::encode($thing2);
+
+        $decoded = json_decode($json, true);
+        // Sans REDUCE, les null sont présents
+        $this->assertArrayHasKey('description', $decoded);
+    }
+
+    /**
+     * Test JsonSerializer::encode() avec objets Thing imbriqués
+     * @throws ReflectionException
+     */
+    public function testJsonSerializerNestedThingObjects()
+    {
+        $address = new PostalAddress
+        ([
+            'streetAddress' => '123 Main St',
+            'addressLocality' => 'Paris',
+            'postalCode' => '75001'
+        ]);
+
+        $person = new Person([
+            'name' => 'Alice',
+            'address' => $address
+        ]);
+
+        $json = JsonSerializer::encode($person);
+        $decoded = json_decode($json, true);
+
+        $this->assertArrayHasKey('address', $decoded);
+        $this->assertIsArray($decoded['address']);
+        $this->assertEquals('123 Main St', $decoded['address']['streetAddress']);
+        $this->assertEquals('Paris', $decoded['address']['addressLocality']);
+        $this->assertEquals('PostalAddress', $decoded['address']['@type']);
+    }
+
+    /**
+     * Test JsonSerializer::encode() avec JSON_PRETTY_PRINT
+     * @throws ReflectionException
+     */
+    public function testJsonSerializerWithPrettyPrintFlag()
+    {
+        $thing = new Thing([
+            'name' => 'Test Thing',
+            'id' => 'thing-123'
+        ]);
+
+        $json = JsonSerializer::encode($thing,  JSON_PRETTY_PRINT);
+
+        $this->assertStringContainsString("\n", $json);
+        $this->assertStringContainsString('    ', $json);
+    }
+
+    /**
+     * Test JsonSerializer::encode() avec JSON_UNESCAPED_SLASHES
+     * @throws ReflectionException
+     */
+    public function testJsonSerializerWithUnescapedSlashesFlag()
+    {
+        $thing = new Thing([
+            'url' => 'https://example.com/path/to/resource'
+        ]);
+
+        $json = JsonSerializer::encode($thing, JSON_UNESCAPED_SLASHES);
+
+        $this->assertStringContainsString('https://example.com/path/to/resource', $json);
+        $this->assertStringNotContainsString('\/', $json);
+    }
+
+    /**
+     * Test JsonSerializer::encode() avec options et flags combinés
+     * @throws ReflectionException
+     */
+    public function testJsonSerializerCombinedOptionsAndFlags()
+    {
+        $person = new Person([
+            'name' => 'Alice',
+            'email' => 'alice@example.com',
+            'telephone' => null,
+            'url' => 'https://example.com/alice'
+        ]);
+
+        $json = JsonSerializer::encode(
+            $person,
+            JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES ,
+            [ArrayOption::REDUCE => true],
+        );
+
+        $decoded = json_decode($json, true);
+
+        // REDUCE option: null supprimé
+        $this->assertArrayNotHasKey('telephone', $decoded);
+
+        // JSON_PRETTY_PRINT: formaté
+        $this->assertStringContainsString("\n", $json);
+
+        // JSON_UNESCAPED_SLASHES: slashes non échappés
+        $this->assertStringContainsString('https://example.com/alice', $json);
+    }
+
+    /**
+     * Test que plusieurs appels JsonSerializer::encode() sont indépendants
+     * @throws ReflectionException
+     */
+    public function testJsonSerializerMultipleEncodeCallsAreIndependent()
+    {
+        $thing1 = new Thing(['name' => 'Thing 1', 'description' => null]);
+        $thing2 = new Thing(['name' => 'Thing 2', 'url' => null]);
+
+        // Premier encode avec REDUCE
+        $json1 = JsonSerializer::encode($thing1, options: [ArrayOption::REDUCE => true]);
+        $decoded1 = json_decode($json1, true);
+
+        // Deuxième encode sans REDUCE
+        $json2 = JsonSerializer::encode($thing2);
+        $decoded2 = json_decode($json2, true);
+
+        // Premier: description null supprimée
+        $this->assertArrayNotHasKey('description', $decoded1);
+
+        // Deuxième: url null présente (pas de REDUCE)
+        $this->assertArrayHasKey('url', $decoded2);
+        $this->assertNull($decoded2['url']);
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testJsonSerializerHandlesComplexPersonStructure()
+    {
+        $person = new Person([
+            'name' => 'Dr. Alice Dupont',
+            'givenName' => 'Alice',
+            'familyName' => 'Dupont',
+            'honorificPrefix' => 'Dr.',
+            'email' => 'alice.dupont@example.com',
+            'telephone' => '+33 1 23 45 67 89',
+            'jobTitle' => 'Software Engineer',
+            'url' => 'https://example.com/alice',
+            'birthDate' => '1990-01-15',
+            'nationality' => 'French',
+            'gender' => 'Female'
+        ]);
+
+        $json = JsonSerializer::encode($person, JSON_PRETTY_PRINT);
+        $decoded = json_decode($json, true);
+
+        $this->assertEquals('Person', $decoded['@type']);
+        $this->assertEquals('Dr. Alice Dupont', $decoded['name']);
+        $this->assertEquals('Alice', $decoded['givenName']);
+        $this->assertEquals('Dupont', $decoded['familyName']);
+        $this->assertEquals('Dr.', $decoded['honorificPrefix']);
+        $this->assertEquals('alice.dupont@example.com', $decoded['email']);
+        $this->assertEquals('Software Engineer', $decoded['jobTitle']);
+        $this->assertEquals('1990-01-15', $decoded['birthDate']);
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testJsonSerializerWithCustomContext()
+    {
+        $thing = new Thing(['name' => 'Custom Thing']);
+        $thing->withAtContext('https://custom-schema.org');
+
+        $json = JsonSerializer::encode($thing);
+        $decoded = json_decode($json, true);
+
+        $this->assertEquals('https://custom-schema.org', $decoded['@context']);
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testJsonSerializerWithCustomType()
+    {
+        $thing = new Thing(['name' => 'Custom Thing']);
+        $thing->withAtType('CustomThing');
+
+        $json = JsonSerializer::encode($thing);
+        $decoded = json_decode($json, true);
+
+        $this->assertEquals('CustomThing', $decoded['@type']);
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testJsonSerializerArrayOfMixedThingTypes()
+    {
+        $items = [
+            new Thing(['name' => 'Generic Thing']),
+            new Person(['name' => 'Alice', 'email' => 'alice@example.com']),
+            new Thing(['name' => 'Another Thing'])
+        ];
+
+        $json = JsonSerializer::encode($items);
+        $decoded = json_decode($json, true);
+
+        $this->assertCount(3, $decoded);
+        $this->assertEquals('Thing', $decoded[0]['@type']);
+        $this->assertEquals('Person', $decoded[1]['@type']);
+        $this->assertEquals('Thing', $decoded[2]['@type']);
     }
 }
 
