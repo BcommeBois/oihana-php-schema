@@ -2,9 +2,8 @@
 
 namespace xyz\oihana\schema\auth;
 
-use oihana\core\options\PrepareOption;
 use org\schema\Intangible;
-use ReflectionException;
+
 use xyz\oihana\schema\constants\CasbinPolicy;
 use xyz\oihana\schema\constants\Effect;
 use xyz\oihana\schema\constants\Oihana;

@@ -2,10 +2,10 @@
 
 namespace org\schema\traits ;
 
-use oihana\core\options\PrepareOption;
 use ReflectionClass;
 use ReflectionException;
 
+use oihana\core\options\ArrayOption;
 use oihana\reflect\traits\JsonSchemaTrait;
 
 use org\schema\constants\Schema;
@@ -150,7 +150,7 @@ trait ThingTrait
     /**
      * The default jsonSerialize options (class-level configuration).
      */
-    protected static array $DEFAULT_JSON_SERIALIZE_OPTIONS = [] ;
+    protected static array $JSON_SERIALIZE_OPTIONS = [] ;
 
     /**
      * Returns the default JSON serialization options.
@@ -162,7 +162,7 @@ trait ThingTrait
      */
     public function getJsonSerializeOptions(): array
     {
-        return static::$DEFAULT_JSON_SERIALIZE_OPTIONS ;
+        return static::$JSON_SERIALIZE_OPTIONS ;
     }
 
     /**
@@ -233,13 +233,13 @@ trait ThingTrait
     {
         return $this->toArray
         ([
-            PrepareOption::BEFORE =>
+            ArrayOption::BEFORE =>
             [
                 Schema::AT_TYPE    => $this->atType    ?? $this->getShortName( $this ),
                 Schema::AT_CONTEXT => $this->atContext ?? static::CONTEXT ,
             ] ,
-            PrepareOption::FIRST_KEYS => static::JSON_PRIORITY_KEYS ,
-            PrepareOption::SORT       => true ,
+            ArrayOption::FIRST_KEYS => static::JSON_PRIORITY_KEYS ,
+            ArrayOption::SORT       => true ,
             ...$this->getJsonSerializeOptions()
         ]) ;
     }

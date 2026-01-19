@@ -3,17 +3,19 @@
 namespace tests\org\schema\traits;
 
 use JsonSerializable;
-use oihana\core\options\CompressOption;
-use oihana\core\options\PrepareOption;
-use org\schema\constants\Prop;
-use org\schema\constants\Schema;
-use org\schema\Thing;
-use org\schema\traits\ThingTrait;
-use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use ReflectionException;
 use ReflectionProperty;
 use stdClass;
+
+use PHPUnit\Framework\TestCase;
+
+use oihana\core\options\CompressOption;
+use oihana\core\options\ArrayOption;
+use org\schema\constants\Prop;
+use org\schema\constants\Schema;
+use org\schema\Thing;
+use org\schema\traits\ThingTrait;
 
 class MockThing implements JsonSerializable
 {
@@ -507,7 +509,7 @@ class ThingTraitTest extends TestCase
             {
                 return
                 [
-                    PrepareOption::REDUCE =>
+                    ArrayOption::REDUCE =>
                     [
                         CompressOption::CONDITIONS =>
                         [

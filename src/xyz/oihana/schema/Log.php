@@ -2,7 +2,6 @@
 
 namespace xyz\oihana\schema;
 
-use oihana\core\options\PrepareOption;
 use org\schema\Thing;
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\constants\traits\LogTrait;
