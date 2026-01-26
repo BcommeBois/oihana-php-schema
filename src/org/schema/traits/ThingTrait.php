@@ -7,7 +7,7 @@ use ReflectionException;
 
 use oihana\core\options\ArrayOption;
 use oihana\reflect\traits\JsonSchemaTrait;
-use oihana\reflect\utils\JsonSerializer;
+use oihana\reflect\utils\SerializationContext;
 
 use org\schema\constants\Schema;
 
@@ -136,16 +136,16 @@ trait ThingTrait
      */
     public const array JSON_PRIORITY_KEYS =
     [
-        Schema::AT_TYPE ,
+        Schema::AT_TYPE    ,
         Schema::AT_CONTEXT ,
-        Schema::_KEY ,
-        Schema::_FROM ,
-        Schema::_TO ,
-        Schema::ID ,
-        Schema::NAME ,
-        Schema::URL ,
-        Schema::CREATED ,
-        Schema::MODIFIED ,
+        Schema::_KEY       ,
+        Schema::_FROM      ,
+        Schema::_TO        ,
+        Schema::ID         ,
+        Schema::NAME       ,
+        Schema::URL        ,
+        Schema::CREATED    ,
+        Schema::MODIFIED   ,
     ];
 
     /**
@@ -163,7 +163,7 @@ trait ThingTrait
      */
     public function getJsonSerializeOptions(): array
     {
-        return array_merge( static::$DEFAULT_JSON_SERIALIZE_OPTIONS , JsonSerializer::getOptions() ) ;
+        return array_merge( static::$DEFAULT_JSON_SERIALIZE_OPTIONS , SerializationContext::getOptions() ) ;
     }
 
     /**
