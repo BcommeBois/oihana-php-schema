@@ -20,22 +20,10 @@ class WebApplication extends SoftwareApplication
     public const string CONTEXT = Oihana::SCHEMA ;
 
     /**
-     * The OAuth2/OIDC client ID (from Zitadel).
-     * @var string|null
+     * Indicates if the application is active.
+     * @var bool|null
      */
-    public string|null $clientId ;
-
-    /**
-     * The type of application: 'spa', 'native', 'm2m', 'web'.
-     * @var string|null
-     */
-    public string|null $applicationType ;
-
-    /**
-     * The OAuth2 redirect URIs for this application.
-     * @var array|null
-     */
-    public array|null $redirectUris ;
+    public bool|null $active ;
 
     /**
      * The API domain identifier this application accesses (ex: 'commerce-api').
@@ -45,14 +33,26 @@ class WebApplication extends SoftwareApplication
     public string|null $apiIdentifier ;
 
     /**
+     * The type of application: 'spa', 'native', 'm2m', 'web'.
+     * @var string|null
+     */
+    public string|null $applicationType ;
+
+    /**
+     * The OAuth2/OIDC client ID (from Zitadel).
+     * @var string|null
+     */
+    public string|null $clientId ;
+
+    /**
      * The post-logout redirect URIs.
      * @var array|null
      */
     public array|null $postLogoutRedirectUris ;
 
     /**
-     * Indicates if the application is active.
-     * @var bool|null
+     * The OAuth2 redirect URIs for this application.
+     * @var array|null
      */
-    public bool|null $active ;
+    public array|null $redirectUris ;
 }

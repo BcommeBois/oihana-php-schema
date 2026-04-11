@@ -13,6 +13,8 @@ trait RoleTrait
 {
     const string PERMISSIONS       = 'permissions' ;
     const string PERMISSIONS_COUNT = 'permissionsCount' ;
+    const string PROTECTED         = 'protected' ;
+    const string SYSTEM            = 'system' ;
     const string USERS             = 'users' ;
     const string USERS_COUNT       = 'usersCount' ;
 }

@@ -5,6 +5,7 @@ namespace xyz\oihana\schema\constants\traits;
 use xyz\oihana\schema\constants\traits\auth\PermissionTrait;
 use xyz\oihana\schema\constants\traits\auth\RoleTrait;
 use xyz\oihana\schema\constants\traits\auth\UserTrait;
+use xyz\oihana\schema\constants\traits\auth\WebApplicationTrait;
 use xyz\oihana\schema\constants\traits\auth\WebAPITrait;
 
 trait AuthTrait
@@ -12,5 +13,6 @@ trait AuthTrait
     use PermissionTrait ,
         RoleTrait ,
         UserTrait ,
+        WebApplicationTrait ,
         WebAPITrait ;
 }

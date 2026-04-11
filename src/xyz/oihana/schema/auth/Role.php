@@ -59,6 +59,18 @@ class Role extends WebAPI
     public const string CONTEXT = Oihana::SCHEMA ;
 
     /**
+     * The display color for this role in admin interfaces.
+     * @var string|null
+     */
+    public string|null $color ;
+
+    /**
+     * The hierarchy level of this role (higher = more privileges).
+     * @var int|null
+     */
+    public int|null $level ;
+
+    /**
      * Define the permissions (scopes) that this Role uses.
      * @var array<Permission>|null
      */
@@ -70,6 +82,18 @@ class Role extends WebAPI
      * @var int|null
      */
     public int|null $permissionsCount ;
+
+    /**
+     * Indicates if this role is protected (cannot be assigned via REST API).
+     * @var bool|null
+     */
+    public bool|null $protected ;
+
+    /**
+     * Indicates if this role is a system role (cannot be deleted via REST API).
+     * @var bool|null
+     */
+    public bool|null $system ;
 
     /**
      * Define the users that this Role is attached.
