@@ -11,9 +11,11 @@ namespace xyz\oihana\schema\constants\traits\auth;
  */
 trait PermissionTrait
 {
-    const string ACTION  = 'action'  ;
-    const string DOMAIN  = 'domain'  ;
-    const string EFFECT  = 'effect'  ;
-    const string OBJECT  = 'object'  ;
-    const string SUBJECT = 'subject' ;
+    const string ACTION       = 'action'  ;
+    const string DESCRIPTION  = 'description'  ;
+    const string NAME         = 'name'  ;
+    const string DOMAIN       = 'domain'  ;
+    const string EFFECT       = 'effect'  ;
+    const string OBJECT       = 'object'  ;
+    const string SUBJECT      = 'subject' ;
 }
