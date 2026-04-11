@@ -7941,10 +7941,10 @@ Search.appendIndex(
             "summary": "Internal\u0020cache\u0020for\u0020resolved\u0020schema\u0020types.",
             "url": "classes/org-schema-traits-ThingTrait.html#property_schemaTypeCache"
         },                {
-            "fqsen": "\\org\\schema\\traits\\ThingTrait\u003A\u003A\u0024JSON_SERIALIZE_OPTIONS",
-            "name": "JSON_SERIALIZE_OPTIONS",
-            "summary": "The\u0020default\u0020jsonSerialize\u0020options\u0020\u0028class\u002Dlevel\u0020configuration\u0029.",
-            "url": "classes/org-schema-traits-ThingTrait.html#property_JSON_SERIALIZE_OPTIONS"
+            "fqsen": "\\org\\schema\\traits\\ThingTrait\u003A\u003A\u0024DEFAULT_JSON_SERIALIZE_OPTIONS",
+            "name": "DEFAULT_JSON_SERIALIZE_OPTIONS",
+            "summary": "The\u0020default\u0020static\u0020jsonSerialize\u0020options\u0020\u0028class\u002Dlevel\u0020configuration\u0029.",
+            "url": "classes/org-schema-traits-ThingTrait.html#property_DEFAULT_JSON_SERIALIZE_OPTIONS"
         },                {
             "fqsen": "\\org\\schema\\traits\\ValueTrait",
             "name": "ValueTrait",
@@ -8146,6 +8146,16 @@ Search.appendIndex(
             "summary": "The\u0020\u0040context\u0020of\u0020the\u0020json\u002Dld\u0020representation\u0020of\u0020the\u0020thing.",
             "url": "classes/xyz-oihana-schema-auth-Role.html#constant_CONTEXT"
         },                {
+            "fqsen": "\\xyz\\oihana\\schema\\auth\\Role\u003A\u003A\u0024color",
+            "name": "color",
+            "summary": "The\u0020display\u0020color\u0020for\u0020this\u0020role\u0020in\u0020admin\u0020interfaces.",
+            "url": "classes/xyz-oihana-schema-auth-Role.html#property_color"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\auth\\Role\u003A\u003A\u0024level",
+            "name": "level",
+            "summary": "The\u0020hierarchy\u0020level\u0020of\u0020this\u0020role\u0020\u0028higher\u0020\u003D\u0020more\u0020privileges\u0029.",
+            "url": "classes/xyz-oihana-schema-auth-Role.html#property_level"
+        },                {
             "fqsen": "\\xyz\\oihana\\schema\\auth\\Role\u003A\u003A\u0024permissions",
             "name": "permissions",
             "summary": "Define\u0020the\u0020permissions\u0020\u0028scopes\u0029\u0020that\u0020this\u0020Role\u0020uses.",
@@ -8155,6 +8165,16 @@ Search.appendIndex(
             "name": "permissionsCount",
             "summary": "The\u0020number\u0020of\u0020permissions\u0020attached\u0020on\u0020this\u0020Role.",
             "url": "classes/xyz-oihana-schema-auth-Role.html#property_permissionsCount"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\auth\\Role\u003A\u003A\u0024protected",
+            "name": "protected",
+            "summary": "Indicates\u0020if\u0020this\u0020role\u0020is\u0020protected\u0020\u0028cannot\u0020be\u0020assigned\u0020via\u0020REST\u0020API\u0029.",
+            "url": "classes/xyz-oihana-schema-auth-Role.html#property_protected"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\auth\\Role\u003A\u003A\u0024system",
+            "name": "system",
+            "summary": "Indicates\u0020if\u0020this\u0020role\u0020is\u0020a\u0020system\u0020role\u0020\u0028cannot\u0020be\u0020deleted\u0020via\u0020REST\u0020API\u0029.",
+            "url": "classes/xyz-oihana-schema-auth-Role.html#property_system"
         },                {
             "fqsen": "\\xyz\\oihana\\schema\\auth\\Role\u003A\u003A\u0024users",
             "name": "users",
@@ -8306,6 +8326,71 @@ Search.appendIndex(
             "summary": "If\u0020this\u0020setting\u0020is\u0020enabled,\u0020the\u0020Permissions\u0020claim\u0020will\u0020be\u0020added\u0020to\u0020the\u0020access\u0020token.",
             "url": "classes/xyz-oihana-schema-auth-WebAPI.html#property_scopeHasPermission"
         },                {
+            "fqsen": "\\xyz\\oihana\\schema\\auth\\WebApplication",
+            "name": "WebApplication",
+            "summary": "Represents\u0020a\u0020client\u0020application\u0020\u0028SPA,\u0020native,\u0020M2M,\u0020web\u0029\u0020that\u0020connects\u0020to\u0020a\u0020WebAPI.",
+            "url": "classes/xyz-oihana-schema-auth-WebApplication.html"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\auth\\WebApplication\u003A\u003ACONTEXT",
+            "name": "CONTEXT",
+            "summary": "",
+            "url": "classes/xyz-oihana-schema-auth-WebApplication.html#constant_CONTEXT"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\auth\\WebApplication\u003A\u003A\u0024active",
+            "name": "active",
+            "summary": "Indicates\u0020if\u0020the\u0020application\u0020is\u0020active.",
+            "url": "classes/xyz-oihana-schema-auth-WebApplication.html#property_active"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\auth\\WebApplication\u003A\u003A\u0024apiIdentifier",
+            "name": "apiIdentifier",
+            "summary": "The\u0020API\u0020domain\u0020identifier\u0020this\u0020application\u0020accesses\u0020\u0028ex\u003A\u0020\u0027commerce\u002Dapi\u0027\u0029.",
+            "url": "classes/xyz-oihana-schema-auth-WebApplication.html#property_apiIdentifier"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\auth\\WebApplication\u003A\u003A\u0024applicationType",
+            "name": "applicationType",
+            "summary": "The\u0020type\u0020of\u0020application\u003A\u0020\u0027spa\u0027,\u0020\u0027native\u0027,\u0020\u0027m2m\u0027,\u0020\u0027web\u0027.",
+            "url": "classes/xyz-oihana-schema-auth-WebApplication.html#property_applicationType"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\auth\\WebApplication\u003A\u003A\u0024clientId",
+            "name": "clientId",
+            "summary": "The\u0020OAuth2\/OIDC\u0020client\u0020ID\u0020\u0028from\u0020Zitadel\u0029.",
+            "url": "classes/xyz-oihana-schema-auth-WebApplication.html#property_clientId"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\auth\\WebApplication\u003A\u003A\u0024postLogoutRedirectUris",
+            "name": "postLogoutRedirectUris",
+            "summary": "The\u0020post\u002Dlogout\u0020redirect\u0020URIs.",
+            "url": "classes/xyz-oihana-schema-auth-WebApplication.html#property_postLogoutRedirectUris"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\auth\\WebApplication\u003A\u003A\u0024redirectUris",
+            "name": "redirectUris",
+            "summary": "The\u0020OAuth2\u0020redirect\u0020URIs\u0020for\u0020this\u0020application.",
+            "url": "classes/xyz-oihana-schema-auth-WebApplication.html#property_redirectUris"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\constants\\ApplicationType",
+            "name": "ApplicationType",
+            "summary": "OAuth2\u0020application\u0020types\u0020supported.",
+            "url": "classes/xyz-oihana-schema-constants-ApplicationType.html"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\constants\\ApplicationType\u003A\u003ASPA",
+            "name": "SPA",
+            "summary": "",
+            "url": "classes/xyz-oihana-schema-constants-ApplicationType.html#constant_SPA"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\constants\\ApplicationType\u003A\u003ANATIVE",
+            "name": "NATIVE",
+            "summary": "",
+            "url": "classes/xyz-oihana-schema-constants-ApplicationType.html#constant_NATIVE"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\constants\\ApplicationType\u003A\u003AM2M",
+            "name": "M2M",
+            "summary": "",
+            "url": "classes/xyz-oihana-schema-constants-ApplicationType.html#constant_M2M"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\constants\\ApplicationType\u003A\u003AWEB",
+            "name": "WEB",
+            "summary": "",
+            "url": "classes/xyz-oihana-schema-constants-ApplicationType.html#constant_WEB"
+        },                {
             "fqsen": "\\xyz\\oihana\\schema\\constants\\CasbinPolicy",
             "name": "CasbinPolicy",
             "summary": "Defines\u0020the\u0020standard\u0020keys\u0020used\u0020in\u0020Casbin\u0020policy\u0020rules.",
@@ -8445,6 +8530,11 @@ Search.appendIndex(
             "name": "WebAPITrait",
             "summary": "The\u0020enumeration\u0020of\u0020all\u0020WebAPI\u0020properties.",
             "url": "classes/xyz-oihana-schema-constants-traits-auth-WebAPITrait.html"
+        },                {
+            "fqsen": "\\xyz\\oihana\\schema\\constants\\traits\\auth\\WebApplicationTrait",
+            "name": "WebApplicationTrait",
+            "summary": "The\u0020enumeration\u0020of\u0020all\u0020WebApplication\u0020properties.",
+            "url": "classes/xyz-oihana-schema-constants-traits-auth-WebApplicationTrait.html"
         },                {
             "fqsen": "\\xyz\\oihana\\schema\\constants\\traits\\AuthTrait",
             "name": "AuthTrait",

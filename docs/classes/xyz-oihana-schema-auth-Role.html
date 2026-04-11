@@ -436,6 +436,13 @@ using reflection when deserializing from structured data.</li>
 <dd>A category for the item. Greater signs or slashes can be used to informally indicate a category hierarchy.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/xyz-oihana-schema-auth-Role.html#property_color">$color</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>The display color for this role in admin interfaces.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_created">$created</a>
     <span>
                         &nbsp;: null|string            </span>
@@ -541,6 +548,13 @@ using reflection when deserializing from structured data.</li>
 <dd>A pointer to another, functionally similar product (or multiple products).</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/xyz-oihana-schema-auth-Role.html#property_level">$level</a>
+    <span>
+                        &nbsp;: int|null            </span>
+</dt>
+<dd>The hierarchy level of this role (higher = more privileges).</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_license">$license</a>
     <span>
                         &nbsp;: string|object|null            </span>
@@ -616,6 +630,13 @@ using reflection when deserializing from structured data.</li>
                         &nbsp;: array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Action.html"><abbr title="\org\schema\Action">Action</abbr></a>|null            </span>
 </dt>
 <dd>Indicates a potential Action, which describes an idealized action in which this thing would play an &#039;object&#039; role.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/xyz-oihana-schema-auth-Role.html#property_protected">$protected</a>
+    <span>
+                        &nbsp;: bool|null            </span>
+</dt>
+<dd>Indicates if this role is protected (cannot be assigned via REST API).</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Service.html#property_provider">$provider</a>
@@ -695,6 +716,13 @@ using reflection when deserializing from structured data.</li>
 <dd>A CreativeWork or Event about this Thing.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/xyz-oihana-schema-auth-Role.html#property_system">$system</a>
+    <span>
+                        &nbsp;: bool|null            </span>
+</dt>
+<dd>Indicates if this role is a system role (cannot be deleted via REST API).</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Service.html#property_termsOfService">$termsOfService</a>
     <span>
                         &nbsp;: string|null|object            </span>
@@ -737,11 +765,11 @@ using reflection when deserializing from structured data.</li>
 <dd>The JSON-LD `@type` value.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a class="" href="classes/org-schema-traits-ThingTrait.html#property_JSON_SERIALIZE_OPTIONS">$JSON_SERIALIZE_OPTIONS</a>
+    <a class="" href="classes/org-schema-traits-ThingTrait.html#property_DEFAULT_JSON_SERIALIZE_OPTIONS">$DEFAULT_JSON_SERIALIZE_OPTIONS</a>
     <span>
                         &nbsp;: array&lt;string|int, mixed&gt;            </span>
 </dt>
-<dd>The default jsonSerialize options (class-level configuration).</dd>
+<dd>The default static jsonSerialize options (class-level configuration).</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a class="" href="classes/org-schema-traits-ThingTrait.html#property_schemaTypeCache">$schemaTypeCache</a>
@@ -959,7 +987,7 @@ using reflection when deserializing from structured data.</li>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">136</span>
+    <span class="phpdocumentor-element-found-in__line">137</span>
 
     </aside>
 
@@ -1739,6 +1767,44 @@ If it is not clear whether an entity is a broker, seller, or buyer, the latter t
             -public
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_color">
+        $color
+        <a href="classes/xyz-oihana-schema-auth-Role.html#property_color" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/auth/Role.php"><a href="files/src-xyz-oihana-schema-auth-role.html"><abbr title="src/xyz/oihana/schema/auth/Role.php">Role.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">65</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The display color for this role in admin interfaces.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$color</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_created">
         $created
         <a href="classes/org-schema-Thing.html#property_created" class="headerlink"><i class="fas fa-link"></i></a>
@@ -2312,6 +2378,44 @@ Cannot exceed the maximum access token lifetime.</p>
             -public
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_level">
+        $level
+        <a href="classes/xyz-oihana-schema-auth-Role.html#property_level" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/auth/Role.php"><a href="files/src-xyz-oihana-schema-auth-role.html"><abbr title="src/xyz/oihana/schema/auth/Role.php">Role.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">71</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The hierarchy level of this role (higher = more privileges).</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">int|null</span>
+    <span class="phpdocumentor-signature__name">$level</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_license">
         $license
         <a href="classes/org-schema-Thing.html#property_license" class="headerlink"><i class="fas fa-link"></i></a>
@@ -2631,7 +2735,7 @@ that can be considered the possessor of this Thing.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/auth/Role.php"><a href="files/src-xyz-oihana-schema-auth-role.html"><abbr title="src/xyz/oihana/schema/auth/Role.php">Role.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">65</span>
+    <span class="phpdocumentor-element-found-in__line">77</span>
 
     </aside>
 
@@ -2683,7 +2787,7 @@ that can be considered the possessor of this Thing.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/auth/Role.php"><a href="files/src-xyz-oihana-schema-auth-role.html"><abbr title="src/xyz/oihana/schema/auth/Role.php">Role.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">72</span>
+    <span class="phpdocumentor-element-found-in__line">84</span>
 
     </aside>
 
@@ -2732,6 +2836,44 @@ that can be considered the possessor of this Thing.</p>
         <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;|<a href="classes/org-schema-Action.html"><abbr title="\org\schema\Action">Action</abbr></a>|null</span>
     <span class="phpdocumentor-signature__name">$potentialAction</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_protected">
+        $protected
+        <a href="classes/xyz-oihana-schema-auth-Role.html#property_protected" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/auth/Role.php"><a href="files/src-xyz-oihana-schema-auth-role.html"><abbr title="src/xyz/oihana/schema/auth/Role.php">Role.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">90</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Indicates if this role is protected (cannot be assigned via REST API).</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">bool|null</span>
+    <span class="phpdocumentor-signature__name">$protected</span>
     </code>
 
     
@@ -3174,6 +3316,44 @@ A provider may also serve as the seller.</p>
             -public
                                                                     "
 >
+    <h4 class="phpdocumentor-element__name" id="property_system">
+        $system
+        <a href="classes/xyz-oihana-schema-auth-Role.html#property_system" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/auth/Role.php"><a href="files/src-xyz-oihana-schema-auth-role.html"><abbr title="src/xyz/oihana/schema/auth/Role.php">Role.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">96</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Indicates if this role is a system role (cannot be deleted via REST API).</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">bool|null</span>
+    <span class="phpdocumentor-signature__name">$system</span>
+    </code>
+
+    
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
     <h4 class="phpdocumentor-element__name" id="property_termsOfService">
         $termsOfService
         <a href="classes/org-schema-Service.html#property_termsOfService" class="headerlink"><i class="fas fa-link"></i></a>
@@ -3260,7 +3440,7 @@ A provider may also serve as the seller.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/auth/Role.php"><a href="files/src-xyz-oihana-schema-auth-role.html"><abbr title="src/xyz/oihana/schema/auth/Role.php">Role.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">78</span>
+    <span class="phpdocumentor-element-found-in__line">102</span>
 
     </aside>
 
@@ -3312,7 +3492,7 @@ A provider may also serve as the seller.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/auth/Role.php"><a href="files/src-xyz-oihana-schema-auth-role.html"><abbr title="src/xyz/oihana/schema/auth/Role.php">Role.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">85</span>
+    <span class="phpdocumentor-element-found-in__line">109</span>
 
     </aside>
 
@@ -3350,7 +3530,7 @@ A provider may also serve as the seller.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">97</span>
+    <span class="phpdocumentor-element-found-in__line">98</span>
 
     </aside>
 
@@ -3390,7 +3570,7 @@ A provider may also serve as the seller.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">105</span>
+    <span class="phpdocumentor-element-found-in__line">106</span>
 
     </aside>
 
@@ -3420,9 +3600,9 @@ A provider may also serve as the seller.</p>
             -protected
             -static                                                        "
 >
-    <h4 class="phpdocumentor-element__name" id="property_JSON_SERIALIZE_OPTIONS">
-        $JSON_SERIALIZE_OPTIONS
-        <a href="classes/org-schema-traits-ThingTrait.html#property_JSON_SERIALIZE_OPTIONS" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_DEFAULT_JSON_SERIALIZE_OPTIONS">
+        $DEFAULT_JSON_SERIALIZE_OPTIONS
+        <a href="classes/org-schema-traits-ThingTrait.html#property_DEFAULT_JSON_SERIALIZE_OPTIONS" class="headerlink"><i class="fas fa-link"></i></a>
 
         <span class="phpdocumentor-element__modifiers">
                                             </span>
@@ -3430,17 +3610,17 @@ A provider may also serve as the seller.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">153</span>
+    <span class="phpdocumentor-element-found-in__line">154</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">The default jsonSerialize options (class-level configuration).</p>
+        <p class="phpdocumentor-summary">The default static jsonSerialize options (class-level configuration).</p>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
         <span class="phpdocumentor-signature__visibility">protected</span>
         <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
-    <span class="phpdocumentor-signature__name">$JSON_SERIALIZE_OPTIONS</span>
+    <span class="phpdocumentor-signature__name">$DEFAULT_JSON_SERIALIZE_OPTIONS</span>
      = <span class="phpdocumentor-signature__default-value">[]</span></code>
 
     
@@ -3468,7 +3648,7 @@ A provider may also serve as the seller.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">111</span>
+    <span class="phpdocumentor-element-found-in__line">112</span>
 
     </aside>
 
@@ -3511,7 +3691,7 @@ A provider may also serve as the seller.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">53</span>
+    <span class="phpdocumentor-element-found-in__line">54</span>
 
     </aside>
 
@@ -3596,7 +3776,7 @@ echo $person-&gt;name; // Outputs: Jane Doe
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">163</span>
+    <span class="phpdocumentor-element-found-in__line">164</span>
 
     </aside>
 
@@ -3642,7 +3822,7 @@ It can be overridden in child classes to customize serialization behavior.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">186</span>
+    <span class="phpdocumentor-element-found-in__line">187</span>
 
     </aside>
 
@@ -3699,7 +3879,7 @@ echo Affiliate::getSchemaType();  // https://schema.oihana.xyz/Pagination
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/org/schema/traits/ThingTrait.php"><a href="files/src-org-schema-traits-thingtrait.html"><abbr title="src/org/schema/traits/ThingTrait.php">ThingTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">232</span>
+    <span class="phpdocumentor-element-found-in__line">233</span>
 
     </aside>
 
@@ -3789,7 +3969,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/auth/Role.php"><a href="files/src-xyz-oihana-schema-auth-role.html"><abbr title="src/xyz/oihana/schema/auth/Role.php">Role.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">90</span>
+    <span class="phpdocumentor-element-found-in__line">114</span>
 
     </aside>
 
@@ -4127,6 +4307,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                                                     <li class=""><a href="classes/org-schema-Service.html#property_brand">$brand</a></li>
                                                     <li class=""><a href="classes/org-schema-Service.html#property_broker">$broker</a></li>
                                                     <li class=""><a href="classes/org-schema-Service.html#property_category">$category</a></li>
+                                                    <li class=""><a href="classes/xyz-oihana-schema-auth-Role.html#property_color">$color</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_created">$created</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_description">$description</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_disambiguatingDescription">$disambiguatingDescription</a></li>
@@ -4142,6 +4323,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_isPartOf">$isPartOf</a></li>
                                                     <li class=""><a href="classes/org-schema-Service.html#property_isRelatedTo">$isRelatedTo</a></li>
                                                     <li class=""><a href="classes/org-schema-Service.html#property_isSimilarTo">$isSimilarTo</a></li>
+                                                    <li class=""><a href="classes/xyz-oihana-schema-auth-Role.html#property_level">$level</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_license">$license</a></li>
                                                     <li class=""><a href="classes/org-schema-Service.html#property_logo">$logo</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_mainEntityOfPage">$mainEntityOfPage</a></li>
@@ -4153,6 +4335,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                                                     <li class=""><a href="classes/xyz-oihana-schema-auth-Role.html#property_permissions">$permissions</a></li>
                                                     <li class=""><a href="classes/xyz-oihana-schema-auth-Role.html#property_permissionsCount">$permissionsCount</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_potentialAction">$potentialAction</a></li>
+                                                    <li class=""><a href="classes/xyz-oihana-schema-auth-Role.html#property_protected">$protected</a></li>
                                                     <li class=""><a href="classes/org-schema-Service.html#property_provider">$provider</a></li>
                                                     <li class=""><a href="classes/org-schema-Service.html#property_providerMobility">$providerMobility</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_publisher">$publisher</a></li>
@@ -4164,13 +4347,14 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                                                     <li class=""><a href="classes/org-schema-Service.html#property_serviceType">$serviceType</a></li>
                                                     <li class=""><a href="classes/org-schema-Service.html#property_slogan">$slogan</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_subjectOf">$subjectOf</a></li>
+                                                    <li class=""><a href="classes/xyz-oihana-schema-auth-Role.html#property_system">$system</a></li>
                                                     <li class=""><a href="classes/org-schema-Service.html#property_termsOfService">$termsOfService</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_url">$url</a></li>
                                                     <li class=""><a href="classes/xyz-oihana-schema-auth-Role.html#property_users">$users</a></li>
                                                     <li class=""><a href="classes/xyz-oihana-schema-auth-Role.html#property_usersCount">$usersCount</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-ThingTrait.html#property_atContext">$atContext</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-ThingTrait.html#property_atType">$atType</a></li>
-                                                    <li class=""><a href="classes/org-schema-traits-ThingTrait.html#property_JSON_SERIALIZE_OPTIONS">$JSON_SERIALIZE_OPTIONS</a></li>
+                                                    <li class=""><a href="classes/org-schema-traits-ThingTrait.html#property_DEFAULT_JSON_SERIALIZE_OPTIONS">$DEFAULT_JSON_SERIALIZE_OPTIONS</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-ThingTrait.html#property_schemaTypeCache">$schemaTypeCache</a></li>
                                             </ul>
                 </li>
