@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - Adds the PostalAddress::extendedAddress property (new standard property in https://schema.org/PostalAddress)
 - Adds the xyz\oihana\schema\places namespace
   - Adds the Site, JobSite, Office, Warehouse classes
+- Adds the xyz\oihana\schema\auth\WebApplication class
 
 ## [1.0.1] - 2025-10-30
 
