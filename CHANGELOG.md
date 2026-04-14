@@ -17,6 +17,20 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - Adds the xyz\oihana\schema\places namespace
   - Adds the Site, JobSite, Office, Warehouse classes
 - Adds the xyz\oihana\schema\auth\WebApplication class
+- Adds the org\schema\actions namespace with the full Schema.org Action type hierarchy (~115 action classes)
+- Adds the JSONSerializer tool and integrates it in ThingTrait::jsonSerialize
+- Adds the ThingTrait::getReduceOptions method
+- Adds the Offer::provider property
+- Adds role fields and WebApplication trait in the auth namespace
+
+### Changed
+
+- ThingTrait::jsonSerialize now returns all null properties by default (no compression)
+- Refactors the ThingTrait::toArray implementation (removes the $class parameter)
+
+### Fixed
+
+- Fixes the areaServed property type to accept integer values
 
 ## [1.0.1] - 2025-10-30
 
