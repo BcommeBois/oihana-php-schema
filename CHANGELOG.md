@@ -22,6 +22,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - Adds the ThingTrait::getReduceOptions method
 - Adds the Offer::provider property
 - Adds role fields and WebApplication trait in the auth namespace
+- Adds the xyz\oihana\schema\AuditAction class (auditable action with request tracking and RGPD-compliant logging)
+- Adds the xyz\oihana\schema\enumerations\AuditActionType enumeration (CREATE, UPDATE, DELETE, ADD, LOGIN, LOGOUT, REJECT)
+- Adds the xyz\oihana\schema\constants\traits\AuditTrait with AuditAction property constants
+- Adds the AuditTrait in the Oihana constants class
 
 ### Changed
 
