@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   - Adds the Invitation class (extends Schema.org InviteAction, tracks email invitation lifecycle)
   - Adds the OAuthClient class (Zitadel client mirror, resolves opaque clientId to human-readable label)
   - Adds the Scope class (groups permissions for OAuth2 application assignment)
+  - Extends Scope with applications, applicationsCount, applicationTemplates, applicationTemplatesCount inbound properties
   - Adds the Session class (tracks active connections with IP, user-agent, token hash, expiration)
   - Extends Role with applicationTemplates, applicationTemplatesCount, color, level, protected, system properties
   - Extends User with activated, appMetadata, applications, blockedFor, devices, firstLoginAt, signedUp and metadata properties
@@ -33,6 +34,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - Adds the xyz\oihana\schema\constants\traits\auth namespace with property-name traits:
   - ApplicationTrait, ApplicationTemplateTrait, InvitationTrait, OAuthClientTrait, ScopeTrait, SessionTrait
   - Extends RoleTrait with applicationTemplates, applicationTemplatesCount, color, level, protected, system constants
+  - Extends ScopeTrait with applications, applicationsCount, applicationTemplates, applicationTemplatesCount constants
   - Extends UserTrait with activated, appMetadata, applications, blockedFor, devices, firstLoginAt, metadata, signedUp constants
 - Composes the new auth traits into the AuthTrait aggregator
 - Adds the xyz\oihana\schema\AuditAction class (auditable action with request tracking and RGPD-compliant logging)

@@ -14,8 +14,12 @@ class ScopeTraitTest extends TestCase
 
         $expected =
         [
-            'SCOPES'       => 'scopes' ,
-            'SCOPES_COUNT' => 'scopesCount' ,
+            'APPLICATIONS'                => 'applications' ,
+            'APPLICATIONS_COUNT'          => 'applicationsCount' ,
+            'APPLICATION_TEMPLATES'       => 'applicationTemplates' ,
+            'APPLICATION_TEMPLATES_COUNT' => 'applicationTemplatesCount' ,
+            'SCOPES'                      => 'scopes' ,
+            'SCOPES_COUNT'                => 'scopesCount' ,
         ];
 
         foreach ( $expected as $name => $value )

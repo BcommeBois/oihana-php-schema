@@ -10,6 +10,10 @@ namespace xyz\oihana\schema\constants\traits\auth;
  */
 trait ScopeTrait
 {
-    const string SCOPES       = 'scopes' ;
-    const string SCOPES_COUNT = 'scopesCount' ;
+    const string APPLICATIONS                = 'applications' ;
+    const string APPLICATIONS_COUNT          = 'applicationsCount' ;
+    const string APPLICATION_TEMPLATES       = 'applicationTemplates';
+    const string APPLICATION_TEMPLATES_COUNT = 'applicationTemplatesCount';
+    const string SCOPES                      = 'scopes' ;
+    const string SCOPES_COUNT                = 'scopesCount' ;
 }

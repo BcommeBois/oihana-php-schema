@@ -31,6 +31,32 @@ class Scope extends WebAPI
     public const string CONTEXT = Oihana::SCHEMA ;
 
     /**
+     * The applications that reference this scope (inbound).
+     * @var array<Application>|null
+     */
+    #[HydrateWith( Application::class ) ]
+    public array|null $applications ;
+
+    /**
+     * The number of applications referencing this scope.
+     * @var int|null
+     */
+    public int|null $applicationsCount ;
+
+    /**
+     * The application templates that reference this scope (inbound).
+     * @var array<ApplicationTemplate>|null
+     */
+    #[HydrateWith( ApplicationTemplate::class ) ]
+    public array|null $applicationTemplates ;
+
+    /**
+     * The number of templates referencing this scope.
+     * @var int|null
+     */
+    public int|null $applicationTemplatesCount ;
+
+    /**
      * The display color for this scope in admin interfaces.
      * @var string|null
      */
