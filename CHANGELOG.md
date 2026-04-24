@@ -11,6 +11,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - Adds the SchemaResolver helper class.
 - Adds the xyz\oihana\schema\auth namespace
   - Adds the WebApi (extends the schema.org definition), Permission, Role and User classes
+  - Adds the Application class (OAuth2/PKCE/M2M client with scopes, permissions, IP whitelist, expiration)
+  - Adds the ApplicationTemplate class (admin-defined preset of scopes for self-service M2M app creation)
+  - Adds the Invitation class (extends Schema.org InviteAction, tracks email invitation lifecycle)
+  - Adds the OAuthClient class (Zitadel client mirror, resolves opaque clientId to human-readable label)
+  - Adds the Scope class (groups permissions for OAuth2 application assignment)
+  - Adds the Session class (tracks active connections with IP, user-agent, token hash, expiration)
+  - Extends Role with applicationTemplates, applicationTemplatesCount, color, level, protected, system properties
+  - Extends User with activated, appMetadata, applications, blockedFor, devices, firstLoginAt, signedUp and metadata properties
 - Adds the JWTAlgorithm constant class
 - Adds ItemAvailability
 - Adds the PostalAddress::extendedAddress property (new standard property in https://schema.org/PostalAddress)
@@ -22,6 +30,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - Adds the ThingTrait::getReduceOptions method
 - Adds the Offer::provider property
 - Adds role fields and WebApplication trait in the auth namespace
+- Adds the xyz\oihana\schema\constants\traits\auth namespace with property-name traits:
+  - ApplicationTrait, ApplicationTemplateTrait, InvitationTrait, OAuthClientTrait, ScopeTrait, SessionTrait
+  - Extends RoleTrait with applicationTemplates, applicationTemplatesCount, color, level, protected, system constants
+  - Extends UserTrait with activated, appMetadata, applications, blockedFor, devices, firstLoginAt, metadata, signedUp constants
+- Composes the new auth traits into the AuthTrait aggregator
 - Adds the xyz\oihana\schema\AuditAction class (auditable action with request tracking and RGPD-compliant logging)
 - Adds the xyz\oihana\schema\enumerations\AuditActionType enumeration (CREATE, UPDATE, DELETE, ADD, LOGIN, LOGOUT, REJECT)
 - Adds the xyz\oihana\schema\constants\traits\AuditTrait with AuditAction property constants
@@ -35,6 +48,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ### Fixed
 
 - Fixes the areaServed property type to accept integer values
+- Fixes Role::toPolicy() crashing when the permissions property is uninitialized
 
 ## [1.0.1] - 2025-10-30
 

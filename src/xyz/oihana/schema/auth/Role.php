@@ -59,6 +59,19 @@ class Role extends WebAPI
     public const string CONTEXT = Oihana::SCHEMA ;
 
     /**
+     * The application templates assigned to this Role.
+     * @var array<ApplicationTemplate>|null
+     */
+    #[HydrateWith( ApplicationTemplate::class ) ]
+    public array|null $applicationTemplates ;
+
+    /**
+     * The number of application templates attached to this Role.
+     * @var int|null
+     */
+    public int|null $applicationTemplatesCount ;
+
+    /**
      * The display color for this role in admin interfaces.
      * @var string|null
      */
@@ -113,7 +126,7 @@ class Role extends WebAPI
      */
     public function toPolicy(): array
     {
-        if ( !$this->permissions )
+        if ( empty( $this->permissions ?? null ) )
         {
             return [];
         }

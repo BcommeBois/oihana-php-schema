@@ -7,6 +7,7 @@ use oihana\reflect\attributes\HydrateWith;
 use org\schema\Person;
 
 use xyz\oihana\schema\constants\Oihana;
+use xyz\oihana\schema\constants\traits\auth\UserTrait;
 
 /**
  * Represents a User resource within an OAuth2 and RBAC (Role-Based Access Control) context.
@@ -19,6 +20,8 @@ use xyz\oihana\schema\constants\Oihana;
  */
 class User extends Person
 {
+    use UserTrait ;
+
     /**
      * The @context of the json-ld representation of the thing.
      */
@@ -29,6 +32,14 @@ class User extends Person
      * @var array|object|null
      */
     public array|object|null $appMetadata ;
+
+    /**
+     * Whether the user has completed their first successful login.
+     * Defaults to false on creation; set to true by CallbackController
+     * on the first OIDC callback (password init or external IdP).
+     * @var bool|null
+     */
+    public bool|null $activated ;
 
     /**
      * The authorized applications of this particular user.
@@ -48,6 +59,14 @@ class User extends Person
      * @var array|null
      */
     public array|null $devices ;
+
+    /**
+     * The timestamp of the first successful login (ISO 8601).
+     * Immutable once set. Audit/analytics value only — do not use for
+     * "last seen" checks (use vendor lastLogin instead).
+     * @var string|null
+     */
+    public string|null $firstLoginAt ;
 
     /**
      * Date of the latest login.

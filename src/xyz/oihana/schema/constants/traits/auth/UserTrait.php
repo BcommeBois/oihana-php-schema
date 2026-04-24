@@ -3,7 +3,7 @@
 namespace xyz\oihana\schema\constants\traits\auth;
 
 /**
- * The enumeration of all Permission properties.
+ * The enumeration of all User custom properties added by this project.
  *
  * @package xyz\oihana\schema\constants\traits
  * @author  Marc Alcaraz (ekameleon)
@@ -11,10 +11,12 @@ namespace xyz\oihana\schema\constants\traits\auth;
  */
 trait UserTrait
 {
+    const string ACTIVATED         = 'activated'     ;
     const string APP_META_DATA     = 'appMetadata'  ;
     const string APPLICATIONS      = 'applications'  ;
     const string BLOCKED_FOR       = 'blockedFor' ;
     const string DEVICES           = 'devices' ;
+    const string FIRST_LOGIN_AT    = 'firstLoginAt'  ;
     const string LAST_LOGIN        = 'lastLogin' ;
     const string LOGINS_COUNT      = 'loginsCount' ;
     const string METADATA          = 'metadata' ;
