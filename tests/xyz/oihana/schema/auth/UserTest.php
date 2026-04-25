@@ -17,20 +17,22 @@ class UserTest extends TestCase
     {
         $user = new User();
 
-        $this->assertNull( $user->activated        ?? null );
-        $this->assertNull( $user->appMetadata      ?? null );
-        $this->assertNull( $user->applications     ?? null );
-        $this->assertNull( $user->blockedFor       ?? null );
-        $this->assertNull( $user->devices          ?? null );
-        $this->assertNull( $user->firstLoginAt     ?? null );
-        $this->assertNull( $user->lastLogin        ?? null );
-        $this->assertNull( $user->loginsCount      ?? null );
-        $this->assertNull( $user->metadata         ?? null );
-        $this->assertNull( $user->permissions      ?? null );
-        $this->assertNull( $user->permissionsCount ?? null );
-        $this->assertNull( $user->roles            ?? null );
-        $this->assertNull( $user->rolesCount       ?? null );
-        $this->assertNull( $user->signedUp         ?? null );
+        $this->assertNull( $user->activated         ?? null );
+        $this->assertNull( $user->appMetadata       ?? null );
+        $this->assertNull( $user->applications      ?? null );
+        $this->assertNull( $user->blockedFor        ?? null );
+        $this->assertNull( $user->devices           ?? null );
+        $this->assertNull( $user->firstLoginAt      ?? null );
+        $this->assertNull( $user->lastLogin         ?? null );
+        $this->assertNull( $user->loginsCount       ?? null );
+        $this->assertNull( $user->metadata          ?? null );
+        $this->assertNull( $user->pendingEmail      ?? null );
+        $this->assertNull( $user->pendingEmailSince ?? null );
+        $this->assertNull( $user->permissions       ?? null );
+        $this->assertNull( $user->permissionsCount  ?? null );
+        $this->assertNull( $user->roles             ?? null );
+        $this->assertNull( $user->rolesCount        ?? null );
+        $this->assertNull( $user->signedUp          ?? null );
     }
 
     public function testIsPerson(): void
@@ -50,24 +52,28 @@ class UserTest extends TestCase
     {
         $user = new User
         ([
-            'activated'        => true ,
-            'firstLoginAt'     => '2026-04-20T08:00:00Z' ,
-            'lastLogin'        => '2026-04-24T09:00:00Z' ,
-            'loginsCount'      => '5' ,
-            'signedUp'         => '2026-01-01T00:00:00Z' ,
-            'appMetadata'      => [ 'roles' => [ 'admin' ] ] ,
-            'metadata'         => [ 'theme' => 'dark' ] ,
-            'applications'     => [ 'app:1' , 'app:2' ] ,
-            'blockedFor'       => [ 'api:legacy' ] ,
-            'devices'          => [ 'device-uuid-a' ] ,
-            'permissionsCount' => 1 ,
-            'rolesCount'       => 2 ,
+            'activated'         => true ,
+            'firstLoginAt'      => '2026-04-20T08:00:00Z' ,
+            'lastLogin'         => '2026-04-24T09:00:00Z' ,
+            'loginsCount'       => '5' ,
+            'pendingEmail'      => '2026-01-01T00:00:00Z' ,
+            'pendingEmailSince' => '2026-01-01T00:00:00Z' ,
+            'signedUp'          => '2026-01-01T00:00:00Z' ,
+            'appMetadata'       => [ 'roles' => [ 'admin' ] ] ,
+            'metadata'          => [ 'theme' => 'dark' ] ,
+            'applications'      => [ 'app:1' , 'app:2' ] ,
+            'blockedFor'        => [ 'api:legacy' ] ,
+            'devices'           => [ 'device-uuid-a' ] ,
+            'permissionsCount'  => 1 ,
+            'rolesCount'        => 2 ,
         ]);
 
         $this->assertTrue ( $user->activated );
         $this->assertSame( '2026-04-20T08:00:00Z' , $user->firstLoginAt );
         $this->assertSame( '2026-04-24T09:00:00Z' , $user->lastLogin );
         $this->assertSame( '5' , $user->loginsCount );
+        $this->assertSame( '2026-01-01T00:00:00Z' , $user->pendingEmail );
+        $this->assertSame( '2026-01-01T00:00:00Z' , $user->pendingEmailSince );
         $this->assertSame( '2026-01-01T00:00:00Z' , $user->signedUp );
         $this->assertSame( [ 'roles' => [ 'admin' ] ] , $user->appMetadata );
         $this->assertSame( [ 'theme' => 'dark' ] , $user->metadata );

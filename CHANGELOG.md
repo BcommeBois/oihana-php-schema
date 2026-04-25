@@ -19,7 +19,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   - Extends Scope with applications, applicationsCount, applicationTemplates, applicationTemplatesCount inbound properties
   - Adds the Session class (tracks active connections with IP, user-agent, token hash, expiration)
   - Extends Role with applicationTemplates, applicationTemplatesCount, color, level, protected, system properties
-  - Extends User with activated, appMetadata, applications, blockedFor, devices, firstLoginAt, signedUp and metadata properties
+  - Extends User with activated, appMetadata, applications, blockedFor, devices, firstLoginAt, pendingEmail, pendingEmailSince, signedUp and metadata properties
 - Adds the JWTAlgorithm constant class
 - Adds ItemAvailability
 - Adds the PostalAddress::extendedAddress property (new standard property in https://schema.org/PostalAddress)

@@ -87,6 +87,22 @@ class User extends Person
     public array|object|null $metadata ;
 
     /**
+     * Email address pending verification (Zitadel-side).
+     * Set when the user requested an email change; cleared once Zitadel
+     * confirms verification (claim email_verified=true on next login or webhook).
+     * The official `email` remains the previously verified address until then.
+     * @var string|null
+     */
+    public string|null $pendingEmail ;
+
+    /**
+     * Timestamp (ISO 8601) when `pendingEmail` was requested.
+     * Used by the UI to display "verification pending since …".
+     * @var string|null
+     */
+    public string|null $pendingEmailSince ;
+
+    /**
      * Define the permissions (scopes) that this particular User.
      * @var array<Permission>|null
      */
