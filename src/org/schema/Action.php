@@ -20,9 +20,9 @@ class Action extends Thing
 
     /**
      * Indicates the current disposition of the Action.
-     * @var ActionStatusType|DefinedTerm|null
+     * @var ActionStatusType|DefinedTerm|null|string
      */
-    public null|ActionStatusType|DefinedTerm $actionStatus;
+    public null|ActionStatusType|DefinedTerm|string $actionStatus;
 
     /**
      * The direct performer or driver of the action (animate or inanimate). E.g. John wrote a book.
