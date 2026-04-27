@@ -78,6 +78,18 @@ class Role extends WebAPI
     public string|null $color ;
 
     /**
+     * Indicates whether this role is the default role.
+     *
+     * When set to `true`, this role is automatically assigned to new users
+     * or used as a fallback role when no explicit role is provided.
+     *
+     * Only one role should typically be marked as default within a given context.
+     *
+     * @var bool|null
+     */
+    public bool|null $default ;
+
+    /**
      * The hierarchy level of this role (higher = more privileges).
      * @var int|null
      */
