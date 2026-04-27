@@ -69,6 +69,17 @@ class User extends Person
     public string|null $firstLoginAt ;
 
     /**
+     * The materialized status of the latest invitation associated with this
+     * user. Used by the admin UI to filter and display lifecycle state
+     * without querying the `invitations` collection. Maintained by the
+     * controllers at every transition (create, resend, cancel, accept, expire).
+     *
+     * @see \xyz\oihana\schema\constants\InvitationStatus
+     * @var string|null
+     */
+    public string|null $invitationStatus ;
+
+    /**
      * Date of the latest login.
      * @var string|null
      */
@@ -133,4 +144,15 @@ class User extends Person
      * @var string|null
      */
     public string|null $signedUp ;
+
+    /**
+     * The lifecycle status of this user account, gating authentication.
+     * Distinct from `activated` (which is the immutable record of the first
+     * successful login). Defaults to `active` on creation, can be set to
+     * `disabled` by an administrator to refuse further logins.
+     *
+     * @see \xyz\oihana\schema\constants\UserStatus
+     * @var string|null
+     */
+    public string|null $status ;
 }

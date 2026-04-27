@@ -17,6 +17,7 @@ trait UserTrait
     const string BLOCKED_FOR         = 'blockedFor' ;
     const string DEVICES             = 'devices' ;
     const string FIRST_LOGIN_AT      = 'firstLoginAt'  ;
+    const string INVITATION_STATUS   = 'invitationStatus' ;
     const string LAST_LOGIN          = 'lastLogin' ;
     const string LOGINS_COUNT        = 'loginsCount' ;
     const string METADATA            = 'metadata' ;
@@ -27,4 +28,5 @@ trait UserTrait
     const string ROLES               = 'roles' ;
     const string ROLES_COUNT         = 'rolesCount' ;
     const string SIGNED_UP           = 'signedUp' ;
+    const string STATUS              = 'status' ;
 }
