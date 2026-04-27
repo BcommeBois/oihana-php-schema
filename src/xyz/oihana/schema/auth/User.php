@@ -86,10 +86,10 @@ class User extends Person
     public string|null $lastLogin ;
 
     /**
-     * The numbers of logins of the User.
-     * @var string|null
+     * The number of logins of the User.
+     * @var int|null
      */
-    public string|null $loginsCount ;
+    public int|null $loginsCount ;
 
     /**
      * Data that the user has read/write access to (e.g. color_preference, blog_url, etc.)
