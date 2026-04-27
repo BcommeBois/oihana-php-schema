@@ -22,7 +22,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   - Extends User with activated, appMetadata, applications, blockedFor, devices, firstLoginAt, pendingEmail, pendingEmailSince, signedUp and metadata properties
   - Extends User with invitationStatus and status properties (admin lifecycle gating and invitation projection)
 - Adds the JWTAlgorithm constant class
-- Adds the InvitationStatus constant class (none, pending, accepted, expired, cancelled — user-side projection of the latest invitation lifecycle)
+- Adds the InvitationStatus constant class (none, pending, accepted, expired, canceled — user-side projection of the latest invitation lifecycle)
 - Adds the UserStatus constant class (active, disabled — admin-controlled login gating, distinct from the immutable activated flag)
 - Adds ItemAvailability
 - Adds the PostalAddress::extendedAddress property (new standard property in https://schema.org/PostalAddress)
