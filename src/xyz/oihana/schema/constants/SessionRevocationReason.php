@@ -22,6 +22,11 @@ class SessionRevocationReason
     public const string LOGOUT = 'logout' ;
 
     /**
+     * Session was revoked because the user account was deleted.
+     */
+    public const string USER_DELETED = 'user_disabled' ;
+
+    /**
      * Session was revoked because the user account was disabled
      * (`user.status` flipped from `'active'` to `'disabled'`).
      */
