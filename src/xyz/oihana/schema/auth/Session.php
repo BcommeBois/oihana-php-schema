@@ -71,6 +71,19 @@ class Session extends Thing
     public string|null $revokedAt ;
 
     /**
+     * Why this session was revoked.
+     *
+     * Free-form string; recommended values: `'user_disabled'` (admin flipped
+     * `user.status` to `disabled`), `'admin_revoked'` (manual revoke by an
+     * admin), `'logout'` (explicit user logout). `null` means the session
+     * was not revoked, or was revoked for an unspecified reason (legacy
+     * data before this field was introduced).
+     *
+     * @var string|null
+     */
+    public string|null $revocationReason ;
+
+    /**
      * The SHA-256 hash of the access token.
      * @var string|null
      */

@@ -17,7 +17,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   - Adds the OAuthClient class (Zitadel client mirror, resolves opaque clientId to human-readable label)
   - Adds the Scope class (groups permissions for OAuth2 application assignment)
   - Extends Scope with applications, applicationsCount, applicationTemplates, applicationTemplatesCount inbound properties
-  - Adds the Session class (tracks active connections with IP, user-agent, token hash, expiration)
+  - Adds the Session class (tracks active connections with IP, user-agent, token hash, expiration, revocation) + the SessionRevocationReason constants
   - Extends Role with applicationTemplates, applicationTemplatesCount, color, level, protected, system properties
   - Extends User with activated, appMetadata, applications, blockedFor, devices, firstLoginAt, pendingEmail, pendingEmailSince, signedUp and metadata properties
   - Extends User with invitationStatus and status properties (admin lifecycle gating and invitation projection)

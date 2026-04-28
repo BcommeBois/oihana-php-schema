@@ -17,12 +17,13 @@ namespace xyz\oihana\schema\constants\traits\auth;
  */
 trait SessionTrait
 {
-    const string CLIENT_ID  = 'clientId' ;
-    const string CURRENT    = 'current' ;
-    const string EXPIRES_AT = 'expiresAt' ;
-    const string IP         = 'ip' ;
-    const string REVOKED_AT = 'revokedAt' ;
-    const string TOKEN_HASH = 'tokenHash' ;
-    const string USER_AGENT = 'userAgent' ;
-    const string USER_ID    = 'userId' ;
+    const string CLIENT_ID         = 'clientId' ;
+    const string CURRENT           = 'current' ;
+    const string EXPIRES_AT        = 'expiresAt' ;
+    const string IP                = 'ip' ;
+    const string REVOKED_AT        = 'revokedAt' ;
+    const string REVOCATION_REASON = 'revocationReason' ;
+    const string TOKEN_HASH        = 'tokenHash' ;
+    const string USER_AGENT        = 'userAgent' ;
+    const string USER_ID           = 'userId' ;
 }
