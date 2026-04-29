@@ -19,7 +19,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   - Extends Scope with applications, applicationsCount, applicationTemplates, applicationTemplatesCount inbound properties
   - Adds the Session class (tracks active connections with IP, user-agent, token hash, expiration, revocation) + the SessionRevocationReason constants
   - Extends Role with applicationTemplates, applicationTemplatesCount, color, level, protected, system properties
-  - Extends User with activated, appMetadata, applications, blockedFor, devices, firstLoginAt, pendingEmail, pendingEmailSince, signedUp and metadata properties
+  - Extends User with activated, appMetadata, applications, blockedFor, devices, firstLoginAt,maxLevel, pendingEmail, pendingEmailSince, signedUp and metadata properties
   - Extends User with invitationStatus and status properties (admin lifecycle gating and invitation projection)
 - Adds the JWTAlgorithm constant class
 - Adds the InvitationStatus constant class (none, pending, accepted, expired, canceled — user-side projection of the latest invitation lifecycle)

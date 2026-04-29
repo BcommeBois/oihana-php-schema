@@ -92,6 +92,20 @@ class User extends Person
     public int|null $loginsCount ;
 
     /**
+     * The maximum role level held by this user across all of their roles.
+     * Materialized field used by the admin UI to enforce client-side
+     * level-hierarchy hints (e.g. disable destructive actions on users
+     * whose level is greater than or equal to the current actor's level).
+     * The authoritative check is always performed server-side; this value
+     * is provided for UX only.
+     *
+     * Defaults to 0 when the user has no role.
+     *
+     * @var int|null
+     */
+    public int|null $maxLevel ;
+
+    /**
      * Data that the user has read/write access to (e.g. color_preference, blog_url, etc.)
      * @var array|object|null
      */

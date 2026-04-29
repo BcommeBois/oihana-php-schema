@@ -20,6 +20,7 @@ trait UserTrait
     const string INVITATION_STATUS   = 'invitationStatus' ;
     const string LAST_LOGIN          = 'lastLogin' ;
     const string LOGINS_COUNT        = 'loginsCount' ;
+    const string MAX_LEVEL           = 'maxLevel' ;
     const string METADATA            = 'metadata' ;
     const string PENDING_EMAIL       = 'pendingEmail' ;
     const string PENDING_EMAIL_SINCE = 'pendingEmailSince' ;

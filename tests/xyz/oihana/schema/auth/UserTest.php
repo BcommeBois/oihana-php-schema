@@ -25,6 +25,7 @@ class UserTest extends TestCase
         $this->assertNull( $user->firstLoginAt      ?? null );
         $this->assertNull( $user->lastLogin         ?? null );
         $this->assertNull( $user->loginsCount       ?? null );
+        $this->assertNull( $user->maxLevel          ?? null );
         $this->assertNull( $user->metadata          ?? null );
         $this->assertNull( $user->pendingEmail      ?? null );
         $this->assertNull( $user->pendingEmailSince ?? null );
@@ -55,7 +56,8 @@ class UserTest extends TestCase
             'activated'         => true ,
             'firstLoginAt'      => '2026-04-20T08:00:00Z' ,
             'lastLogin'         => '2026-04-24T09:00:00Z' ,
-            'loginsCount'       => '5' ,
+            'loginsCount'       => 5 ,
+            'maxLevel'          => 50 ,
             'pendingEmail'      => '2026-01-01T00:00:00Z' ,
             'pendingEmailSince' => '2026-01-01T00:00:00Z' ,
             'signedUp'          => '2026-01-01T00:00:00Z' ,
@@ -71,7 +73,8 @@ class UserTest extends TestCase
         $this->assertTrue ( $user->activated );
         $this->assertSame( '2026-04-20T08:00:00Z' , $user->firstLoginAt );
         $this->assertSame( '2026-04-24T09:00:00Z' , $user->lastLogin );
-        $this->assertSame( '5' , $user->loginsCount );
+        $this->assertSame( 5 , $user->loginsCount );
+        $this->assertSame( 50 , $user->maxLevel );
         $this->assertSame( '2026-01-01T00:00:00Z' , $user->pendingEmail );
         $this->assertSame( '2026-01-01T00:00:00Z' , $user->pendingEmailSince );
         $this->assertSame( '2026-01-01T00:00:00Z' , $user->signedUp );
