@@ -6,6 +6,7 @@ use xyz\oihana\schema\constants\traits\auth\ApplicationTemplateTrait;
 use xyz\oihana\schema\constants\traits\auth\ApplicationTrait;
 use xyz\oihana\schema\constants\traits\auth\InvitationTrait;
 use xyz\oihana\schema\constants\traits\auth\PermissionTrait;
+use xyz\oihana\schema\constants\traits\auth\PolicyTrait;
 use xyz\oihana\schema\constants\traits\auth\RoleTrait;
 use xyz\oihana\schema\constants\traits\auth\ScopeTrait;
 use xyz\oihana\schema\constants\traits\auth\SessionTrait;
@@ -19,6 +20,7 @@ trait AuthTrait
         ApplicationTrait ,
         InvitationTrait ,
         PermissionTrait ,
+        PolicyTrait ,
         RoleTrait ,
         ScopeTrait ,
         SessionTrait ,

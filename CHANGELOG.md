@@ -17,6 +17,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   - Adds the OAuthClient class (Zitadel client mirror, resolves opaque clientId to human-readable label)
   - Adds the Scope class (groups permissions for OAuth2 application assignment)
   - Extends Scope with applications, applicationsCount, applicationTemplates, applicationTemplatesCount inbound properties
+  - Adds the Policy class (RBAC authorization bundle for M2M applications, with applications, color, permissions, protected, roles and system properties)
+  - Extends Application with createdBy, disabledAt, disabledBy, disabledReason, lastSeenIP, policies and policiesCount properties
   - Adds the Session class (tracks active connections with IP, user-agent, token hash, expiration, revocation) + the SessionRevocationReason constants
   - Extends Role with applicationTemplates, applicationTemplatesCount, color, level, protected, system properties
   - Extends User with activated, appMetadata, applications, blockedFor, devices, firstLoginAt,maxLevel, pendingEmail, pendingEmailSince, signedUp and metadata properties
@@ -35,7 +37,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - Adds the Offer::provider property
 - Adds role fields and WebApplication trait in the auth namespace
 - Adds the xyz\oihana\schema\constants\traits\auth namespace with property-name traits:
-  - ApplicationTrait, ApplicationTemplateTrait, InvitationTrait, OAuthClientTrait, ScopeTrait, SessionTrait
+  - ApplicationTrait, ApplicationTemplateTrait, InvitationTrait, OAuthClientTrait, PolicyTrait, ScopeTrait, SessionTrait
   - Extends RoleTrait with applicationTemplates, applicationTemplatesCount, color, level, protected, system constants
   - Extends ScopeTrait with applications, applicationsCount, applicationTemplates, applicationTemplatesCount constants
   - Extends UserTrait with activated, appMetadata, applications, blockedFor, devices, firstLoginAt, metadata, signedUp constants

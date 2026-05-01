@@ -19,6 +19,7 @@ use xyz\oihana\schema\constants\Oihana;
  * url, created, modified.
  *
  * @see Permission
+ * @see Policy
  * @see Scope
  *
  * @package oihana\schema\auth
@@ -32,10 +33,22 @@ class Application extends Thing
     public const string CONTEXT = Oihana::SCHEMA ;
 
     /**
+     * IP whitelist using glob patterns (fnmatch).
+     * @var array|null
+     */
+    public array|null $allowedIPs ;
+
+    /**
      * The OAuth2/OIDC client ID (from Zitadel).
      * @var string|null
      */
     public string|null $clientId ;
+
+    /**
+     * The user (or system) who created this application.
+     * @var string|Thing|null
+     */
+    public string|null|Thing $createdBy ;
 
     /**
      * Whether this is the default application for the API.
@@ -44,16 +57,34 @@ class Application extends Thing
     public bool|null $default ;
 
     /**
+     * The date this application was disabled (ISO 8601).
+     * @var string|null
+     */
+    public string|null $disabledAt ;
+
+    /**
+     * The user (or system) who disabled this application.
+     * @var string|Thing|null
+     */
+    public string|null|Thing $disabledBy ;
+
+    /**
+     * The reason why this application was disabled.
+     * @var string|null
+     */
+    public string|null $disabledReason ;
+
+    /**
      * The expiration date of this application (ISO 8601).
      * @var string|null
      */
     public string|null $expiresAt ;
 
     /**
-     * IP whitelist using glob patterns (fnmatch).
-     * @var array|null
+     * The last IP address from which this application was seen.
+     * @var string|null
      */
-    public array|null $allowedIPs ;
+    public string|null $lastSeenIP ;
 
     /**
      * The last time this application was used (ISO 8601).
@@ -68,19 +99,6 @@ class Application extends Thing
     public object|array|null $metadata ;
 
     /**
-     * The scopes assigned to this application.
-     * @var array<Scope>|null
-     */
-    #[HydrateWith( Scope::class ) ]
-    public array|null $scopes ;
-
-    /**
-     * The number of scopes attached on this Application.
-     * @var int|null
-     */
-    public int|null $scopesCount ;
-
-    /**
      * The direct permissions assigned to this application.
      * @var array<Permission>|null
      */
@@ -92,4 +110,30 @@ class Application extends Thing
      * @var int|null
      */
     public int|null $permissionsCount ;
+
+    /**
+     * The policies assigned to this application (M2M authorization bundles).
+     * @var array<Policy>|null
+     */
+    #[HydrateWith( Policy::class ) ]
+    public array|null $policies ;
+
+    /**
+     * The number of policies attached on this Application.
+     * @var int|null
+     */
+    public int|null $policiesCount ;
+
+    /**
+     * The scopes assigned to this application.
+     * @var array<Scope>|null
+     */
+    #[HydrateWith( Scope::class ) ]
+    public array|null $scopes ;
+
+    /**
+     * The number of scopes attached on this Application.
+     * @var int|null
+     */
+    public int|null $scopesCount ;
 }
