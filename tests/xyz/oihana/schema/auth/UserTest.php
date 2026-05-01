@@ -27,8 +27,10 @@ class UserTest extends TestCase
         $this->assertNull( $user->loginsCount       ?? null );
         $this->assertNull( $user->maxLevel          ?? null );
         $this->assertNull( $user->metadata          ?? null );
-        $this->assertNull( $user->pendingEmail      ?? null );
-        $this->assertNull( $user->pendingEmailSince ?? null );
+        $this->assertNull( $user->pendingEmail              ?? null );
+        $this->assertNull( $user->pendingEmailCodeExpiresAt ?? null );
+        $this->assertNull( $user->pendingEmailCodeHash      ?? null );
+        $this->assertNull( $user->pendingEmailSince         ?? null );
         $this->assertNull( $user->permissions       ?? null );
         $this->assertNull( $user->permissionsCount  ?? null );
         $this->assertNull( $user->roles             ?? null );
@@ -53,14 +55,16 @@ class UserTest extends TestCase
     {
         $user = new User
         ([
-            'activated'         => true ,
-            'firstLoginAt'      => '2026-04-20T08:00:00Z' ,
-            'lastLogin'         => '2026-04-24T09:00:00Z' ,
-            'loginsCount'       => 5 ,
-            'maxLevel'          => 50 ,
-            'pendingEmail'      => '2026-01-01T00:00:00Z' ,
-            'pendingEmailSince' => '2026-01-01T00:00:00Z' ,
-            'signedUp'          => '2026-01-01T00:00:00Z' ,
+            'activated'                 => true ,
+            'firstLoginAt'              => '2026-04-20T08:00:00Z' ,
+            'lastLogin'                 => '2026-04-24T09:00:00Z' ,
+            'loginsCount'               => 5 ,
+            'maxLevel'                  => 50 ,
+            'pendingEmail'              => '2026-01-01T00:00:00Z' ,
+            'pendingEmailCodeExpiresAt' => '2026-01-01T00:30:00Z' ,
+            'pendingEmailCodeHash'      => 'hashed-code-xyz' ,
+            'pendingEmailSince'         => '2026-01-01T00:00:00Z' ,
+            'signedUp'                  => '2026-01-01T00:00:00Z' ,
             'appMetadata'       => [ 'roles' => [ 'admin' ] ] ,
             'metadata'          => [ 'theme' => 'dark' ] ,
             'applications'      => [ 'app:1' , 'app:2' ] ,
@@ -76,6 +80,8 @@ class UserTest extends TestCase
         $this->assertSame( 5 , $user->loginsCount );
         $this->assertSame( 50 , $user->maxLevel );
         $this->assertSame( '2026-01-01T00:00:00Z' , $user->pendingEmail );
+        $this->assertSame( '2026-01-01T00:30:00Z' , $user->pendingEmailCodeExpiresAt );
+        $this->assertSame( 'hashed-code-xyz'      , $user->pendingEmailCodeHash );
         $this->assertSame( '2026-01-01T00:00:00Z' , $user->pendingEmailSince );
         $this->assertSame( '2026-01-01T00:00:00Z' , $user->signedUp );
         $this->assertSame( [ 'roles' => [ 'admin' ] ] , $user->appMetadata );

@@ -11,23 +11,25 @@ namespace xyz\oihana\schema\constants\traits\auth;
  */
 trait UserTrait
 {
-    const string ACTIVATED           = 'activated'     ;
-    const string APP_META_DATA       = 'appMetadata'  ;
-    const string APPLICATIONS        = 'applications'  ;
-    const string BLOCKED_FOR         = 'blockedFor' ;
-    const string DEVICES             = 'devices' ;
-    const string FIRST_LOGIN_AT      = 'firstLoginAt'  ;
-    const string INVITATION_STATUS   = 'invitationStatus' ;
-    const string LAST_LOGIN          = 'lastLogin' ;
-    const string LOGINS_COUNT        = 'loginsCount' ;
-    const string MAX_LEVEL           = 'maxLevel' ;
-    const string METADATA            = 'metadata' ;
-    const string PENDING_EMAIL       = 'pendingEmail' ;
-    const string PENDING_EMAIL_SINCE = 'pendingEmailSince' ;
-    const string PERMISSIONS         = 'permissions' ;
-    const string PERMISSIONS_COUNT   = 'permissionsCount' ;
-    const string ROLES               = 'roles' ;
-    const string ROLES_COUNT         = 'rolesCount' ;
-    const string SIGNED_UP           = 'signedUp' ;
-    const string STATUS              = 'status' ;
+    const string ACTIVATED                      = 'activated'     ;
+    const string APP_META_DATA                  = 'appMetadata'  ;
+    const string APPLICATIONS                   = 'applications'  ;
+    const string BLOCKED_FOR                    = 'blockedFor' ;
+    const string DEVICES                        = 'devices' ;
+    const string FIRST_LOGIN_AT                 = 'firstLoginAt'  ;
+    const string INVITATION_STATUS              = 'invitationStatus' ;
+    const string LAST_LOGIN                     = 'lastLogin' ;
+    const string LOGINS_COUNT                   = 'loginsCount' ;
+    const string MAX_LEVEL                      = 'maxLevel' ;
+    const string METADATA                       = 'metadata' ;
+    const string PENDING_EMAIL                  = 'pendingEmail' ;
+    const string PENDING_EMAIL_CODE_EXPIRES_AT  = 'pendingEmailCodeExpiresAt' ;
+    const string PENDING_EMAIL_CODE_HASH        = 'pendingEmailCodeHash' ;
+    const string PENDING_EMAIL_SINCE            = 'pendingEmailSince' ;
+    const string PERMISSIONS                    = 'permissions' ;
+    const string PERMISSIONS_COUNT              = 'permissionsCount' ;
+    const string ROLES                          = 'roles' ;
+    const string ROLES_COUNT                    = 'rolesCount' ;
+    const string SIGNED_UP                      = 'signedUp' ;
+    const string STATUS                         = 'status' ;
 }

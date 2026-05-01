@@ -121,6 +121,22 @@ class User extends Person
     public string|null $pendingEmail ;
 
     /**
+     * Expiration timestamp (ISO 8601) of the verification code sent to
+     * `pendingEmail`. Used to refuse stale codes and to drive UI countdowns.
+     * Cleared once the email change is verified or cancelled.
+     * @var string|null
+     */
+    public string|null $pendingEmailCodeExpiresAt ;
+
+    /**
+     * Hash of the verification code sent to `pendingEmail`. The plaintext
+     * code is never persisted; verification compares the user-supplied code
+     * against this hash. Cleared once the email change is verified or cancelled.
+     * @var string|null
+     */
+    public string|null $pendingEmailCodeHash ;
+
+    /**
      * Timestamp (ISO 8601) when `pendingEmail` was requested.
      * Used by the UI to display "verification pending since …".
      * @var string|null

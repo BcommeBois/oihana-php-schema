@@ -23,6 +23,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   - Extends Role with applicationTemplates, applicationTemplatesCount, color, level, protected, system properties
   - Extends User with activated, appMetadata, applications, blockedFor, devices, firstLoginAt,maxLevel, pendingEmail, pendingEmailSince, signedUp and metadata properties
   - Extends User with invitationStatus and status properties (admin lifecycle gating and invitation projection)
+  - Extends User with pendingEmailCodeExpiresAt and pendingEmailCodeHash properties (verification code lifecycle for email change flow)
 - Adds the JWTAlgorithm constant class
 - Adds the InvitationStatus constant class (none, pending, accepted, expired, canceled — user-side projection of the latest invitation lifecycle)
 - Adds the UserStatus constant class (active, disabled — admin-controlled login gating, distinct from the immutable activated flag)
@@ -42,6 +43,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   - Extends ScopeTrait with applications, applicationsCount, applicationTemplates, applicationTemplatesCount constants
   - Extends UserTrait with activated, appMetadata, applications, blockedFor, devices, firstLoginAt, metadata, signedUp constants
   - Extends UserTrait with invitationStatus and status constants
+  - Extends UserTrait with pendingEmailCodeExpiresAt and pendingEmailCodeHash constants
 - Composes the new auth traits into the AuthTrait aggregator
 - Adds the xyz\oihana\schema\AuditAction class (auditable action with request tracking and RGPD-compliant logging)
 - Adds the xyz\oihana\schema\enumerations\AuditActionType enumeration (CREATE, UPDATE, DELETE, ADD, LOGIN, LOGOUT, REJECT)
