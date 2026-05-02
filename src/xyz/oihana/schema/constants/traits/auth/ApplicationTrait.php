@@ -7,18 +7,26 @@ namespace xyz\oihana\schema\constants\traits\auth;
  *
  * Properties already available via other traits:
  * - ACTIVE, OWNER, ADDITIONAL_TYPE, IDENTIFIER (Schema.org Properties)
- * - CLIENT_ID (WebApplicationTrait)
- * - SCOPES, SCOPES_COUNT (ScopeTrait)
- * - PERMISSIONS, PERMISSIONS_COUNT (RoleTrait)
+ * - CLIENT_ID (ClientIdTrait)
+ * - PERMISSIONS, PERMISSIONS_COUNT (PermissionsTrait)
+ * - POLICIES, POLICIES_COUNT (PoliciesTrait)
  *
  * @package oihana\schema\constants\traits\auth
  * @author  Marc Alcaraz
  */
 trait ApplicationTrait
 {
-    const string ALLOWED_IPS  = 'allowedIPs' ;
-    const string DEFAULT      = 'default' ;
-    const string EXPIRES_AT   = 'expiresAt' ;
-    const string LAST_USED_AT = 'lastUsedAt' ;
-    const string METADATA     = 'metadata' ;
+    use ClientIdTrait    ,
+        PermissionsTrait ,
+        PoliciesTrait    ;
+
+    const string ALLOWED_IPS     = 'allowedIPs'     ;
+    const string CREATED_BY      = 'createdBy'      ;
+    const string DEFAULT         = 'default'        ;
+    const string DISABLED_BY     = 'disabledBy'     ;
+    const string DISABLED_REASON = 'disabledReason' ;
+    const string EXPIRES_AT      = 'expiresAt'      ;
+    const string LAST_SEEN_IP    = 'lastSeenIP'     ;
+    const string LAST_USED_AT    = 'lastUsedAt'     ;
+    const string METADATA        = 'metadata'       ;
 }

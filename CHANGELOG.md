@@ -11,16 +11,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - Adds the SchemaResolver helper class.
 - Adds the xyz\oihana\schema\auth namespace
   - Adds the WebApi (extends the schema.org definition), Permission, Role and User classes
-  - Adds the Application class (OAuth2/PKCE/M2M client with scopes, permissions, IP whitelist, expiration)
-  - Adds the ApplicationTemplate class (admin-defined preset of scopes for self-service M2M app creation)
+  - Adds the Application class (OAuth2/PKCE/M2M client with permissions, IP whitelist, expiration)
   - Adds the Invitation class (extends Schema.org InviteAction, tracks email invitation lifecycle)
   - Adds the OAuthClient class (Zitadel client mirror, resolves opaque clientId to human-readable label)
-  - Adds the Scope class (groups permissions for OAuth2 application assignment)
-  - Extends Scope with applications, applicationsCount, applicationTemplates, applicationTemplatesCount inbound properties
   - Adds the Policy class (RBAC authorization bundle for M2M applications, with applications, color, permissions, protected, roles and system properties)
+  - Adds the Policy::toPolicy() and Policy::toCasbinPolicy() methods (Casbin-ready policy entries from attached permissions)
+  - Adds the Role::toCasbinPolicy() and Permission::toCasbinPolicy() aliases of the existing toPolicy() methods
   - Extends Application with createdBy, disabledAt, disabledBy, disabledReason, lastSeenIP, policies and policiesCount properties
   - Adds the Session class (tracks active connections with IP, user-agent, token hash, expiration, revocation) + the SessionRevocationReason constants
-  - Extends Role with applicationTemplates, applicationTemplatesCount, color, level, protected, system properties
+  - Extends Role with color, default, level, policies, policiesCount, protected, system properties
   - Extends User with activated, appMetadata, applications, blockedFor, devices, firstLoginAt,maxLevel, pendingEmail, pendingEmailSince, signedUp and metadata properties
   - Extends User with invitationStatus and status properties (admin lifecycle gating and invitation projection)
   - Extends User with pendingEmailCodeExpiresAt and pendingEmailCodeHash properties (verification code lifecycle for email change flow)
@@ -38,9 +37,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - Adds the Offer::provider property
 - Adds role fields and WebApplication trait in the auth namespace
 - Adds the xyz\oihana\schema\constants\traits\auth namespace with property-name traits:
-  - ApplicationTrait, ApplicationTemplateTrait, InvitationTrait, OAuthClientTrait, PolicyTrait, ScopeTrait, SessionTrait
-  - Extends RoleTrait with applicationTemplates, applicationTemplatesCount, color, level, protected, system constants
-  - Extends ScopeTrait with applications, applicationsCount, applicationTemplates, applicationTemplatesCount constants
+  - ApplicationTrait, InvitationTrait, OAuthClientTrait, PolicyTrait, SessionTrait
+  - Adds the shared property traits: ClientIdTrait (clientId), ProtectedResourceTrait (color, protected, system)
+  - Adds the plural collection traits: ApplicationsTrait, PermissionsTrait, PoliciesTrait, RolesTrait, UsersTrait
+  - Extends RoleTrait with default, level, policies, policiesCount constants (color, protected, system now provided by ProtectedResourceTrait)
   - Extends UserTrait with activated, appMetadata, applications, blockedFor, devices, firstLoginAt, metadata, signedUp constants
   - Extends UserTrait with invitationStatus and status constants
   - Extends UserTrait with pendingEmailCodeExpiresAt and pendingEmailCodeHash constants
@@ -54,11 +54,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - ThingTrait::jsonSerialize now returns all null properties by default (no compression)
 - Refactors the ThingTrait::toArray implementation (removes the $class parameter)
+- Refactors ApplicationTrait, OAuthClientTrait, SessionTrait and WebApplicationTrait to consume the shared ClientIdTrait
+- Refactors PolicyTrait and RoleTrait to consume the shared ProtectedResourceTrait
 
 ### Fixed
 
 - Fixes the areaServed property type to accept integer values
 - Fixes Role::toPolicy() crashing when the permissions property is uninitialized
+- Fixes PermissionTrait::NAME constant value (was incorrectly set to 'domain' instead of 'name')
+
+### Removed
+
+- Removes the Scope class and ScopeTrait (replaced by Policy)
+- Removes the ApplicationTemplate class and ApplicationTemplateTrait (Application lifecycle simplified)
 
 ## [1.0.1] - 2025-10-30
 

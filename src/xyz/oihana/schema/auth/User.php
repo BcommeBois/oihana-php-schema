@@ -48,6 +48,12 @@ class User extends Person
     public array|null $applications ;
 
     /**
+     * The number of applications referencing this policy.
+     * @var int|null
+     */
+    public int|null $applicationsCount ;
+
+    /**
      * Indicates if the User is blocked for specific API, Applications, etc.
      * @var array|string|null
      */

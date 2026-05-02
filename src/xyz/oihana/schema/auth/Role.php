@@ -59,19 +59,6 @@ class Role extends WebAPI
     public const string CONTEXT = Oihana::SCHEMA ;
 
     /**
-     * The application templates assigned to this Role.
-     * @var array<ApplicationTemplate>|null
-     */
-    #[HydrateWith( ApplicationTemplate::class ) ]
-    public array|null $applicationTemplates ;
-
-    /**
-     * The number of application templates attached to this Role.
-     * @var int|null
-     */
-    public int|null $applicationTemplatesCount ;
-
-    /**
      * The display color for this role in admin interfaces.
      * @var string|null
      */
@@ -109,6 +96,19 @@ class Role extends WebAPI
     public int|null $permissionsCount ;
 
     /**
+     * The policies assigned to this application (M2M authorization bundles).
+     * @var array<Policy>|null
+     */
+    #[HydrateWith( Policy::class ) ]
+    public array|null $policies ;
+
+    /**
+     * The number of policies attached on this Application.
+     * @var int|null
+     */
+    public int|null $policiesCount ;
+
+    /**
      * Indicates if this role is protected (cannot be assigned via REST API).
      * @var bool|null
      */
@@ -134,7 +134,9 @@ class Role extends WebAPI
     public int|null $usersCount ;
 
     /**
-     * Returns an array of policies ready to inject dans Casbin
+     * Returns an array of Casbin-ready policy entries built from the
+     * permissions attached to this role. Returns an empty array when
+     * no permissions are attached.
      */
     public function toPolicy(): array
     {
@@ -150,5 +152,13 @@ class Role extends WebAPI
         }
 
         return $policies;
+    }
+
+    /**
+     * Alias of {@see Role::toPolicy()} with an explicit Casbin-oriented name.
+     */
+    public function toCasbinPolicy(): array
+    {
+        return $this->toPolicy();
     }
 }

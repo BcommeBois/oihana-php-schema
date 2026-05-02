@@ -10,7 +10,6 @@ use org\schema\Thing;
 use xyz\oihana\schema\auth\Application;
 use xyz\oihana\schema\auth\Permission;
 use xyz\oihana\schema\auth\Policy;
-use xyz\oihana\schema\auth\Scope;
 
 class ApplicationTest extends TestCase
 {
@@ -33,8 +32,6 @@ class ApplicationTest extends TestCase
         $this->assertNull( $app->permissionsCount ?? null );
         $this->assertNull( $app->policies         ?? null );
         $this->assertNull( $app->policiesCount    ?? null );
-        $this->assertNull( $app->scopes           ?? null );
-        $this->assertNull( $app->scopesCount      ?? null );
     }
 
     public function testContextConstant(): void
@@ -93,22 +90,16 @@ class ApplicationTest extends TestCase
         $this->assertSame( $disabler , $app->disabledBy );
     }
 
-    public function testScopesAndPermissionsAssignment(): void
+    public function testPermissionsAssignment(): void
     {
         $app = new Application();
 
-        $app->scopes = [ new Scope() , new Scope() ];
         $app->permissions = [ new Permission() ];
-        $app->scopesCount = 2;
         $app->permissionsCount = 1;
-
-        $this->assertCount( 2 , $app->scopes );
-        $this->assertContainsOnlyInstancesOf( Scope::class , $app->scopes );
 
         $this->assertCount( 1 , $app->permissions );
         $this->assertContainsOnlyInstancesOf( Permission::class , $app->permissions );
 
-        $this->assertSame( 2 , $app->scopesCount );
         $this->assertSame( 1 , $app->permissionsCount );
     }
 

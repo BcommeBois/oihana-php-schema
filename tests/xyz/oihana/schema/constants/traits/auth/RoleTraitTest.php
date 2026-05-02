@@ -14,16 +14,20 @@ class RoleTraitTest extends TestCase
 
         $expected =
         [
-            'APPLICATION_TEMPLATES'       => 'applicationTemplates' ,
-            'APPLICATION_TEMPLATES_COUNT' => 'applicationTemplatesCount' ,
-            'COLOR'                       => 'color' ,
-            'LEVEL'                       => 'level' ,
-            'PERMISSIONS'                 => 'permissions' ,
-            'PERMISSIONS_COUNT'           => 'permissionsCount' ,
-            'PROTECTED'                   => 'protected' ,
-            'SYSTEM'                      => 'system' ,
-            'USERS'                       => 'users' ,
-            'USERS_COUNT'                 => 'usersCount' ,
+            'DEFAULT'           => 'default' ,
+            'LEVEL'             => 'level' ,
+
+            // ---- traits
+
+            'COLOR'             => 'color' ,
+            'PROTECTED'         => 'protected' ,
+            'SYSTEM'            => 'system' ,
+            'PERMISSIONS'       => 'permissions' ,
+            'PERMISSIONS_COUNT' => 'permissionsCount' ,
+            'POLICIES'          => 'policies' ,
+            'POLICIES_COUNT'    => 'policiesCount' ,
+            'USERS'             => 'users' ,
+            'USERS_COUNT'       => 'usersCount' ,
         ];
 
         foreach ( $expected as $name => $value )

@@ -5,8 +5,8 @@ namespace tests\xyz\oihana\schema\auth ;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
 
-use xyz\oihana\schema\auth\ApplicationTemplate;
 use xyz\oihana\schema\auth\Permission;
+use xyz\oihana\schema\auth\Policy;
 use xyz\oihana\schema\auth\Role;
 use xyz\oihana\schema\auth\User;
 use xyz\oihana\schema\auth\WebAPI;
@@ -19,16 +19,17 @@ class RoleTest extends TestCase
     {
         $role = new Role();
 
-        $this->assertNull( $role->applicationTemplates      ?? null );
-        $this->assertNull( $role->applicationTemplatesCount ?? null );
-        $this->assertNull( $role->color                     ?? null );
-        $this->assertNull( $role->level                     ?? null );
-        $this->assertNull( $role->permissions               ?? null );
-        $this->assertNull( $role->permissionsCount          ?? null );
-        $this->assertNull( $role->protected                 ?? null );
-        $this->assertNull( $role->system                    ?? null );
-        $this->assertNull( $role->users                     ?? null );
-        $this->assertNull( $role->usersCount                ?? null );
+        $this->assertNull( $role->color            ?? null );
+        $this->assertNull( $role->default          ?? null );
+        $this->assertNull( $role->level            ?? null );
+        $this->assertNull( $role->permissions      ?? null );
+        $this->assertNull( $role->permissionsCount ?? null );
+        $this->assertNull( $role->policies         ?? null );
+        $this->assertNull( $role->policiesCount    ?? null );
+        $this->assertNull( $role->protected        ?? null );
+        $this->assertNull( $role->system           ?? null );
+        $this->assertNull( $role->users            ?? null );
+        $this->assertNull( $role->usersCount       ?? null );
     }
 
     public function testIsWebAPI(): void
@@ -48,40 +49,42 @@ class RoleTest extends TestCase
     {
         $role = new Role
         ([
-            'color'                     => '#0000ff' ,
-            'level'                     => 100 ,
-            'protected'                 => true ,
-            'system'                    => true ,
-            'permissionsCount'          => 1 ,
-            'usersCount'                => 2 ,
-            'applicationTemplatesCount' => 3 ,
+            'color'            => '#0000ff' ,
+            'default'          => true ,
+            'level'            => 100 ,
+            'protected'        => true ,
+            'system'           => true ,
+            'permissionsCount' => 1 ,
+            'policiesCount'    => 4 ,
+            'usersCount'       => 2 ,
         ]);
 
         $this->assertSame( '#0000ff' , $role->color );
+        $this->assertTrue( $role->default );
         $this->assertSame( 100 , $role->level );
         $this->assertTrue( $role->protected );
         $this->assertTrue( $role->system );
         $this->assertSame( 1 , $role->permissionsCount );
+        $this->assertSame( 4 , $role->policiesCount );
         $this->assertSame( 2 , $role->usersCount );
-        $this->assertSame( 3 , $role->applicationTemplatesCount );
     }
 
     public function testCollectionsAssignment(): void
     {
         $role = new Role();
 
-        $role->permissions          = [ new Permission() ];
-        $role->users                = [ new User() , new User() ];
-        $role->applicationTemplates = [ new ApplicationTemplate() , new ApplicationTemplate() , new ApplicationTemplate() ];
+        $role->permissions = [ new Permission() ];
+        $role->policies    = [ new Policy() , new Policy() ];
+        $role->users       = [ new User() , new User() ];
 
-        $this->assertContainsOnlyInstancesOf( Permission::class          , $role->permissions          );
-        $this->assertContainsOnlyInstancesOf( User::class                , $role->users                );
-        $this->assertContainsOnlyInstancesOf( ApplicationTemplate::class , $role->applicationTemplates );
+        $this->assertContainsOnlyInstancesOf( Permission::class , $role->permissions );
+        $this->assertContainsOnlyInstancesOf( Policy::class     , $role->policies    );
+        $this->assertContainsOnlyInstancesOf( User::class       , $role->users       );
     }
 
     public function testToPolicyEmpty(): void
     {
-        $this->assertSame( [] , ( new Role() )->toPolicy() );
+        $this->assertSame( [] , new Role()->toPolicy() );
 
         $role = new Role();
         $role->permissions = null;
@@ -127,5 +130,19 @@ class RoleTest extends TestCase
         ];
 
         $this->assertSame( $expected , $role->toPolicy() );
+    }
+
+    public function testToCasbinPolicyAlias(): void
+    {
+        $p = new Permission();
+        $p->subject = 'role:admin';
+        $p->domain  = 'api';
+        $p->object  = '/a';
+        $p->action  = 'GET';
+
+        $role = new Role();
+        $role->permissions = [ $p ];
+
+        $this->assertSame( $role->toPolicy() , $role->toCasbinPolicy() );
     }
 }

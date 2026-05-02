@@ -10,6 +10,8 @@ use xyz\oihana\schema\auth\Permission;
 use xyz\oihana\schema\auth\Policy;
 use xyz\oihana\schema\auth\Role;
 use xyz\oihana\schema\auth\WebAPI;
+use xyz\oihana\schema\constants\CasbinPolicy;
+use xyz\oihana\schema\constants\Effect;
 
 class PolicyTest extends TestCase
 {
@@ -89,5 +91,69 @@ class PolicyTest extends TestCase
 
         $this->assertCount( 3 , $policy->roles );
         $this->assertContainsOnlyInstancesOf( Role::class , $policy->roles );
+    }
+
+    public function testToPolicyEmpty(): void
+    {
+        $this->assertSame( [] , new Policy()->toPolicy() );
+
+        $policy = new Policy();
+        $policy->permissions = null;
+        $this->assertSame( [] , $policy->toPolicy() );
+
+        $policy->permissions = [];
+        $this->assertSame( [] , $policy->toPolicy() );
+    }
+
+    public function testToPolicyWithPermissions(): void
+    {
+        $p1 = new Permission();
+        $p1->subject = 'app:billing';
+        $p1->domain  = 'api';
+        $p1->object  = '/invoices';
+        $p1->action  = 'GET';
+
+        $p2 = new Permission();
+        $p2->subject = 'app:billing';
+        $p2->domain  = 'api';
+        $p2->object  = '/invoices';
+        $p2->action  = 'POST';
+
+        $policy = new Policy();
+        $policy->permissions = [ $p1 , $p2 ];
+
+        $expected =
+        [
+            [
+                CasbinPolicy::SUBJECT => 'app:billing' ,
+                CasbinPolicy::DOMAIN  => 'api' ,
+                CasbinPolicy::OBJECT  => '/invoices' ,
+                CasbinPolicy::ACTION  => 'GET' ,
+                CasbinPolicy::EFFECT  => Effect::ALLOW ,
+            ],
+            [
+                CasbinPolicy::SUBJECT => 'app:billing' ,
+                CasbinPolicy::DOMAIN  => 'api' ,
+                CasbinPolicy::OBJECT  => '/invoices' ,
+                CasbinPolicy::ACTION  => 'POST' ,
+                CasbinPolicy::EFFECT  => Effect::ALLOW ,
+            ],
+        ];
+
+        $this->assertSame( $expected , $policy->toPolicy() );
+    }
+
+    public function testToCasbinPolicyAlias(): void
+    {
+        $p = new Permission();
+        $p->subject = 'app:billing';
+        $p->domain  = 'api';
+        $p->object  = '/invoices';
+        $p->action  = 'GET';
+
+        $policy = new Policy();
+        $policy->permissions = [ $p ];
+
+        $this->assertSame( $policy->toPolicy() , $policy->toCasbinPolicy() );
     }
 }

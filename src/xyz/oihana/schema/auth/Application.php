@@ -7,6 +7,7 @@ use oihana\reflect\attributes\HydrateWith;
 use org\schema\Thing;
 
 use xyz\oihana\schema\constants\Oihana;
+use xyz\oihana\schema\constants\traits\auth\ApplicationsTrait;
 
 /**
  * Represents a client application (PKCE, M2M, public) that connects to a WebAPI.
@@ -15,18 +16,16 @@ use xyz\oihana\schema\constants\Oihana;
  * Each application has an owner (user), one or more scopes (permission groups),
  * and optional direct permissions.
  *
- * Thing provides: name, description, identifier, additionalType, active, owner,
- * url, created, modified.
- *
  * @see Permission
  * @see Policy
- * @see Scope
  *
  * @package oihana\schema\auth
  * @author  Marc Alcaraz
  */
 class Application extends Thing
 {
+    use ApplicationsTrait ;
+
     /**
      * The @context of the json-ld representation of the thing.
      */
@@ -123,17 +122,4 @@ class Application extends Thing
      * @var int|null
      */
     public int|null $policiesCount ;
-
-    /**
-     * The scopes assigned to this application.
-     * @var array<Scope>|null
-     */
-    #[HydrateWith( Scope::class ) ]
-    public array|null $scopes ;
-
-    /**
-     * The number of scopes attached on this Application.
-     * @var int|null
-     */
-    public int|null $scopesCount ;
 }

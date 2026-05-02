@@ -134,6 +134,14 @@ class Permission extends Intangible
     }
 
     /**
+     * Alias of {@see Permission::toPolicy()} with an explicit Casbin-oriented name.
+     */
+    public function toCasbinPolicy(): array
+    {
+        return $this->toPolicy();
+    }
+
+    /**
      * The effect of this permission: always 'allow' or 'deny'.
      */
     private string $_effect = Effect::ALLOW ;

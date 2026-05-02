@@ -5,6 +5,7 @@ namespace xyz\oihana\schema\auth;
 use oihana\reflect\attributes\HydrateWith;
 
 use xyz\oihana\schema\constants\Oihana;
+use xyz\oihana\schema\constants\traits\auth\PolicyTrait;
 
 /**
  * Represents a Policy resource within an RBAC context for M2M applications.
@@ -25,6 +26,8 @@ use xyz\oihana\schema\constants\Oihana;
  */
 class Policy extends WebAPI
 {
+    use PolicyTrait ;
+
     /**
      * The @context of the json-ld representation of the thing.
      */
@@ -86,4 +89,33 @@ class Policy extends WebAPI
      * @var bool|null
      */
     public bool|null $system ;
+
+    /**
+     * Returns an array of Casbin-ready policy entries built from the
+     * permissions attached to this Policy. Returns an empty array when
+     * no permissions are attached.
+     */
+    public function toPolicy(): array
+    {
+        if ( empty( $this->permissions ?? null ) )
+        {
+            return [];
+        }
+
+        $policies = [] ;
+        foreach ( $this->permissions as $permission )
+        {
+            $policies[] = $permission->toPolicy() ;
+        }
+
+        return $policies;
+    }
+
+    /**
+     * Alias of {@see Policy::toPolicy()} with an explicit Casbin-oriented name.
+     */
+    public function toCasbinPolicy(): array
+    {
+        return $this->toPolicy();
+    }
 }

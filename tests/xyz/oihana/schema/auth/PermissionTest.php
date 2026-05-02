@@ -98,6 +98,7 @@ class PermissionTest extends TestCase
         ];
 
         $this->assertSame($expected, $perm->toPolicy());
+        $this->assertSame($perm->toPolicy(), $perm->toCasbinPolicy());
     }
 
     /**

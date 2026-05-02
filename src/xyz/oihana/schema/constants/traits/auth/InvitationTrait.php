@@ -24,6 +24,7 @@ namespace xyz\oihana\schema\constants\traits\auth;
  */
 trait InvitationTrait
 {
+    const string EMAIL        = 'email' ;
     const string REDIRECT_URL = 'redirectUrl' ;
     const string SENT_AT      = 'sentAt'      ;
     const string SENT_COUNT   = 'sentCount'   ;
