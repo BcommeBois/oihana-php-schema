@@ -23,6 +23,7 @@ trait ApplicationTrait
     const string ALLOWED_IPS     = 'allowedIPs'     ;
     const string CREATED_BY      = 'createdBy'      ;
     const string DEFAULT         = 'default'        ;
+    const string DISABLED_AT     = 'disabledAt'     ;
     const string DISABLED_BY     = 'disabledBy'     ;
     const string DISABLED_REASON = 'disabledReason' ;
     const string EXPIRES_AT      = 'expiresAt'      ;
