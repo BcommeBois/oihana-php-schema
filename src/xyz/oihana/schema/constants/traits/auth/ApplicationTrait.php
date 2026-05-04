@@ -29,4 +29,5 @@ trait ApplicationTrait
     const string LAST_SEEN_IP    = 'lastSeenIP'     ;
     const string LAST_USED_AT    = 'lastUsedAt'     ;
     const string METADATA        = 'metadata'       ;
+    const string PROTECTED       = 'protected' ;
 }

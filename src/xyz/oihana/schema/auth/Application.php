@@ -122,4 +122,19 @@ class Application extends Thing
      * @var int|null
      */
     public int|null $policiesCount ;
+
+    /**
+     * Whether this application is protected from deletion and deactivation.
+     *
+     * When true, neither admin nor owner can DELETE the document or PATCH
+     * `active=false`. Server-written : the field is excluded from POST and
+     * PATCH whitelists and can only be toggled via the dedicated CLI command
+     * (`auth:applications:protect` / `unprotect`) or the seed file.
+     *
+     * Distinct from `default` (which marks the singleton API-default app) :
+     * `protected` is a broader, multi-instance flag for system-critical M2M
+     * apps (cron sync, monitoring, integrations) that must survive any UI
+     * mishandling.
+     */
+    public ?bool $protected = null ;
 }
