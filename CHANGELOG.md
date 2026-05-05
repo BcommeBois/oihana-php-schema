@@ -12,6 +12,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - Adds the xyz\oihana\schema\auth namespace
   - Adds the WebApi (extends the schema.org definition), Permission, Role and User classes
   - Adds the Application class (OAuth2/PKCE/M2M client with permissions, IP whitelist, expiration)
+  - Adds the Keyfile class (Zitadel keyfile JSON for PRIVATE_KEY_JWT API apps — appId, clientId, key, keyId, type)
+  - Extends Application with keyId and keyfile properties (active key id and one-shot keyfile payload returned on creation/rotation)
   - Adds the Invitation class (extends Schema.org InviteAction, tracks email invitation lifecycle)
   - Adds the OAuthClient class (Zitadel client mirror, resolves opaque clientId to human-readable label)
   - Adds the Policy class (RBAC authorization bundle for M2M applications, with applications, color, permissions, protected, roles and system properties)
@@ -26,6 +28,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - Adds the JWTAlgorithm constant class
 - Adds the InvitationStatus constant class (none, pending, accepted, expired, canceled — user-side projection of the latest invitation lifecycle)
 - Adds the UserStatus constant class (active, disabled — admin-controlled login gating, distinct from the immutable activated flag)
+- Adds the xyz\oihana\schema\constants\auth namespace
+  - Adds the KeyfileType enumeration (application — Zitadel keyfile type for API apps)
 - Adds ItemAvailability
 - Adds the PostalAddress::extendedAddress property (new standard property in https://schema.org/PostalAddress)
 - Adds the xyz\oihana\schema\places namespace
@@ -37,7 +41,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - Adds the Offer::provider property
 - Adds role fields and WebApplication trait in the auth namespace
 - Adds the xyz\oihana\schema\constants\traits\auth namespace with property-name traits:
-  - ApplicationTrait, InvitationTrait, OAuthClientTrait, PolicyTrait, SessionTrait
+  - ApplicationTrait, InvitationTrait, KeyfileTrait, OAuthClientTrait, PolicyTrait, SessionTrait
+  - Extends ApplicationTrait with keyId and keyfile constants
   - Adds the shared property traits: ClientIdTrait (clientId), ProtectedResourceTrait (color, protected, system)
   - Adds the plural collection traits: ApplicationsTrait, PermissionsTrait, PoliciesTrait, RolesTrait, UsersTrait
   - Extends RoleTrait with default, level, policies, policiesCount constants (color, protected, system now provided by ProtectedResourceTrait)

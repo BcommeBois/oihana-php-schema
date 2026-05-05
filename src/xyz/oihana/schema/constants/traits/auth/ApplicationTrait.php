@@ -27,8 +27,10 @@ trait ApplicationTrait
     const string DISABLED_BY     = 'disabledBy'     ;
     const string DISABLED_REASON = 'disabledReason' ;
     const string EXPIRES_AT      = 'expiresAt'      ;
+    const string KEY_ID          = 'keyId'          ;
+    const string KEYFILE         = 'keyfile'        ;
     const string LAST_SEEN_IP    = 'lastSeenIP'     ;
     const string LAST_USED_AT    = 'lastUsedAt'     ;
     const string METADATA        = 'metadata'       ;
-    const string PROTECTED       = 'protected' ;
+    const string PROTECTED       = 'protected'      ;
 }

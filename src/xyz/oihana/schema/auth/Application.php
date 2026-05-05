@@ -16,11 +16,13 @@ use xyz\oihana\schema\constants\traits\auth\ApplicationsTrait;
  * Each application has an owner (user), one or more scopes (permission groups),
  * and optional direct permissions.
  *
+ * @see Keyfile
  * @see Permission
  * @see Policy
  *
  * @package oihana\schema\auth
  * @author  Marc Alcaraz
+ * @since   1.0.2
  */
 class Application extends Thing
 {
@@ -78,6 +80,23 @@ class Application extends Thing
      * @var string|null
      */
     public string|null $expiresAt ;
+
+    /**
+     * The keyId of the currently active key for this M2M application.
+     * Server-written — set on creation and rotated through the
+     * `/applications/{id}/rotate-key` endpoint. Persisted in Arango.
+     */
+    public ?string $keyId = null ;
+
+    /**
+     * The full keyfile (RSA private key + metadata).
+     *
+     * Populated **only** in the response of POST /applications,
+     * POST /me/applications, POST /applications/{id}/rotate-key and
+     * POST /me/applications/{id}/rotate-key. Never persisted server-side
+     * and never returned by GET endpoints.
+     */
+    public ?Keyfile $keyfile = null ;
 
     /**
      * The last IP address from which this application was seen.
