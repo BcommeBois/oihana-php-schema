@@ -12,7 +12,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - Adds the xyz\oihana\schema\auth namespace
   - Adds the WebApi (extends the schema.org definition), Permission, Role and User classes
   - Adds the Application class (OAuth2/PKCE/M2M client with permissions, IP whitelist, expiration)
-  - Adds the Keyfile class (Zitadel keyfile JSON for PRIVATE_KEY_JWT API apps — appId, clientId, key, keyId, type)
+  - Adds the Keyfile class (self-sufficient PRIVATE_KEY_JWT keyfile for M2M clients — IdP material `key`, `keyId`, `userId`, `clientId`, `type` plus connection metadata `issuer`, `audience`, `scope`, `apiBaseUrl`)
   - Extends Application with keyId and keyfile properties (active key id and one-shot keyfile payload returned on creation/rotation)
   - Adds the Invitation class (extends Schema.org InviteAction, tracks email invitation lifecycle)
   - Adds the OAuthClient class (Zitadel client mirror, resolves opaque clientId to human-readable label)
@@ -29,7 +29,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - Adds the InvitationStatus constant class (none, pending, accepted, expired, canceled — user-side projection of the latest invitation lifecycle)
 - Adds the UserStatus constant class (active, disabled — admin-controlled login gating, distinct from the immutable activated flag)
 - Adds the xyz\oihana\schema\constants\auth namespace
-  - Adds the KeyfileType enumeration (application — Zitadel keyfile type for API apps)
+  - Adds the KeyfileType constant class (application, serviceaccount — IdP-emitted keyfile types, backed by ConstantsTrait)
 - Adds ItemAvailability
 - Adds the PostalAddress::extendedAddress property (new standard property in https://schema.org/PostalAddress)
 - Adds the xyz\oihana\schema\places namespace
@@ -49,6 +49,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   - Extends UserTrait with activated, appMetadata, applications, blockedFor, devices, firstLoginAt, metadata, signedUp constants
   - Extends UserTrait with invitationStatus and status constants
   - Extends UserTrait with pendingEmailCodeExpiresAt and pendingEmailCodeHash constants
+  - Extends KeyfileTrait with apiBaseUrl, audience, issuer, scope and userId constants (removes the now-redundant APP_ID — the Keyfile property still exists, but the constant is provided by OAuthClientTrait)
 - Composes the new auth traits into the AuthTrait aggregator
 - Adds the xyz\oihana\schema\AuditAction class (auditable action with request tracking and RGPD-compliant logging)
 - Adds the xyz\oihana\schema\enumerations\AuditActionType enumeration (CREATE, UPDATE, DELETE, ADD, LOGIN, LOGOUT, REJECT)
