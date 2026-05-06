@@ -33,6 +33,8 @@ class UserTraitTest extends TestCase
             'PERMISSIONS_COUNT'             => 'permissionsCount' ,
             'ROLES'                         => 'roles' ,
             'ROLES_COUNT'                   => 'rolesCount' ,
+            'SERVICES'                      => 'services' ,
+            'SERVICES_COUNT'                => 'servicesCount' ,
             'SIGNED_UP'                     => 'signedUp' ,
             'STATUS'                        => 'status' ,
         ];

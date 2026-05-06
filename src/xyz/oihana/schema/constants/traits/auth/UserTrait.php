@@ -13,7 +13,8 @@ trait UserTrait
 {
     use ApplicationsTrait ,
         PermissionsTrait  ,
-        RolesTrait        ;
+        RolesTrait        ,
+        ServicesTrait     ;
 
     const string ACTIVATED                      = 'activated'     ;
     const string APP_META_DATA                  = 'appMetadata'  ;

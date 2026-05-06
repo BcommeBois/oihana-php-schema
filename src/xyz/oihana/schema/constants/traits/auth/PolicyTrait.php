@@ -19,5 +19,6 @@ trait PolicyTrait
     use ApplicationsTrait      ,
         PermissionsTrait       ,
         ProtectedResourceTrait ,
-        RolesTrait             ;
+        RolesTrait             ,
+        ServicesTrait          ;
 }

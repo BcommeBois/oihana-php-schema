@@ -20,6 +20,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   - Adds the Policy::toPolicy() and Policy::toCasbinPolicy() methods (Casbin-ready policy entries from attached permissions)
   - Adds the Role::toCasbinPolicy() and Permission::toCasbinPolicy() aliases of the existing toPolicy() methods
   - Extends Application with createdBy, disabledAt, disabledBy, disabledReason, lastSeenIP, policies and policiesCount properties
+  - Adds the Service class (machine identity / Service Account backed by a Zitadel Machine User — JWT private_key_jwt RFC 7523 ; clientId, keyId, keyfile, allowedIPs, expiresAt, lastSeenIP, lastUsedAt, permissions, policies, protected and disabled* audit fields)
   - Adds the Session class (tracks active connections with IP, user-agent, token hash, expiration, revocation) + the SessionRevocationReason constants
   - Extends Role with color, default, level, policies, policiesCount, protected, system properties
   - Extends User with activated, appMetadata, applications, blockedFor, devices, firstLoginAt,maxLevel, pendingEmail, pendingEmailSince, signedUp and metadata properties
@@ -45,10 +46,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - Adds the Offer::provider property
 - Adds role fields and WebApplication trait in the auth namespace
 - Adds the xyz\oihana\schema\constants\traits\auth namespace with property-name traits:
-  - ApplicationTrait, InvitationTrait, KeyfileTrait, OAuthClientTrait, PolicyTrait, SessionTrait
+  - ApplicationTrait, InvitationTrait, KeyfileTrait, OAuthClientTrait, PolicyTrait, ServiceTrait, SessionTrait
   - Extends ApplicationTrait with keyId and keyfile constants
   - Adds the shared property traits: ClientIdTrait (clientId), ProtectedResourceTrait (color, protected, system)
-  - Adds the plural collection traits: ApplicationsTrait, PermissionsTrait, PoliciesTrait, RolesTrait, UsersTrait
+  - Adds the plural collection traits: ApplicationsTrait, PermissionsTrait, PoliciesTrait, RolesTrait, ServicesTrait, UsersTrait
+  - Composes ServicesTrait into PolicyTrait and UserTrait (services and servicesCount constants now reachable through Policy and User)
   - Extends RoleTrait with default, level, policies, policiesCount constants (color, protected, system now provided by ProtectedResourceTrait)
   - Extends UserTrait with activated, appMetadata, applications, blockedFor, devices, firstLoginAt, metadata, signedUp constants
   - Extends UserTrait with invitationStatus and status constants
@@ -72,6 +74,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - Fixes the areaServed property type to accept integer values
 - Fixes Role::toPolicy() crashing when the permissions property is uninitialized
 - Fixes PermissionTrait::NAME constant value (was incorrectly set to 'domain' instead of 'name')
+- Fixes Application using the plural ApplicationsTrait (collection constants APPLICATIONS, APPLICATIONS_COUNT) instead of the singular ApplicationTrait — Application::ALLOWED_IPS, KEY_ID, KEYFILE, etc. now resolve correctly
 
 ### Removed
 

@@ -22,6 +22,8 @@ class PolicyTraitTest extends TestCase
             'PROTECTED'          => 'protected' ,
             'ROLES'              => 'roles' ,
             'ROLES_COUNT'        => 'rolesCount' ,
+            'SERVICES'           => 'services' ,
+            'SERVICES_COUNT'     => 'servicesCount' ,
             'SYSTEM'             => 'system' ,
         ];
 
