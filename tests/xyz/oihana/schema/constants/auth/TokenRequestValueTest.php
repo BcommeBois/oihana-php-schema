@@ -15,6 +15,7 @@ class TokenRequestValueTest extends TestCase
         [
             'DEFAULT_SCOPE'             => 'openid'                                                       ,
             'GRANT_CLIENT_CREDENTIALS'  => 'client_credentials'                                           ,
+            'GRANT_JWT_BEARER'          => 'urn:ietf:params:oauth:grant-type:jwt-bearer'                  ,
             'JWT_BEARER_ASSERTION_TYPE' => 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer'       ,
         ];
 
@@ -31,6 +32,7 @@ class TokenRequestValueTest extends TestCase
         [
             TokenRequestValue::DEFAULT_SCOPE             ,
             TokenRequestValue::GRANT_CLIENT_CREDENTIALS  ,
+            TokenRequestValue::GRANT_JWT_BEARER          ,
             TokenRequestValue::JWT_BEARER_ASSERTION_TYPE ,
         ]);
     }
@@ -41,6 +43,7 @@ class TokenRequestValueTest extends TestCase
         [
             [ TokenRequestValue::DEFAULT_SCOPE             ] ,
             [ TokenRequestValue::GRANT_CLIENT_CREDENTIALS  ] ,
+            [ TokenRequestValue::GRANT_JWT_BEARER          ] ,
             [ TokenRequestValue::JWT_BEARER_ASSERTION_TYPE ] ,
         ];
     }
@@ -49,6 +52,7 @@ class TokenRequestValueTest extends TestCase
     {
         $this->assertTrue ( TokenRequestValue::includes( 'openid'             ) );
         $this->assertTrue ( TokenRequestValue::includes( 'client_credentials' ) );
+        $this->assertTrue ( TokenRequestValue::includes( 'urn:ietf:params:oauth:grant-type:jwt-bearer'            ) );
         $this->assertTrue ( TokenRequestValue::includes( 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer' ) );
         $this->assertFalse( TokenRequestValue::includes( 'unknown'            ) );
     }
@@ -59,6 +63,7 @@ class TokenRequestValueTest extends TestCase
 
         $this->assertContains( 'openid'             , $values );
         $this->assertContains( 'client_credentials' , $values );
+        $this->assertContains( 'urn:ietf:params:oauth:grant-type:jwt-bearer'            , $values );
         $this->assertContains( 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer' , $values );
     }
 }

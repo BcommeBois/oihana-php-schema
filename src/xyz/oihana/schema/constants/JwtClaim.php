@@ -50,4 +50,21 @@ class JwtClaim
      * application (same value as {@see self::ISSUER}).
      */
     public const string SUBJECT = 'sub' ;
+
+    /**
+     * `jti` — unique identifier for the JWT (JWT ID).
+     *
+     * Used to prevent replay attacks by ensuring each assertion
+     * is only used once. The authorization server may store and
+     * reject already seen identifiers.
+     */
+    public const string JWT_ID = 'jti' ;
+
+    /**
+     * `nbf` — "not before" timestamp.
+     *
+     * Defines the earliest time at which the JWT becomes valid.
+     * Helps mitigate clock skew between client and server.
+     */
+    public const string NOT_BEFORE = 'nbf' ;
 }

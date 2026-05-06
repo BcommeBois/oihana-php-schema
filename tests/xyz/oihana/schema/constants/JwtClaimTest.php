@@ -17,6 +17,8 @@ class JwtClaimTest extends TestCase
             'EXPIRES_AT' => 'exp' ,
             'ISSUED_AT'  => 'iat' ,
             'ISSUER'     => 'iss' ,
+            'JWT_ID'     => 'jti' ,
+            'NOT_BEFORE' => 'nbf' ,
             'SUBJECT'    => 'sub' ,
         ];
 
@@ -35,6 +37,8 @@ class JwtClaimTest extends TestCase
             JwtClaim::EXPIRES_AT ,
             JwtClaim::ISSUED_AT  ,
             JwtClaim::ISSUER     ,
+            JwtClaim::JWT_ID     ,
+            JwtClaim::NOT_BEFORE ,
             JwtClaim::SUBJECT    ,
         ]);
     }
@@ -47,6 +51,8 @@ class JwtClaimTest extends TestCase
             [ JwtClaim::EXPIRES_AT ] ,
             [ JwtClaim::ISSUED_AT  ] ,
             [ JwtClaim::ISSUER     ] ,
+            [ JwtClaim::JWT_ID     ] ,
+            [ JwtClaim::NOT_BEFORE ] ,
             [ JwtClaim::SUBJECT    ] ,
         ];
     }
@@ -57,6 +63,8 @@ class JwtClaimTest extends TestCase
         $this->assertTrue ( JwtClaim::includes( 'exp'     ) );
         $this->assertTrue ( JwtClaim::includes( 'iat'     ) );
         $this->assertTrue ( JwtClaim::includes( 'iss'     ) );
+        $this->assertTrue ( JwtClaim::includes( 'jti'     ) );
+        $this->assertTrue ( JwtClaim::includes( 'nbf'     ) );
         $this->assertTrue ( JwtClaim::includes( 'sub'     ) );
         $this->assertFalse( JwtClaim::includes( 'unknown' ) );
     }
@@ -69,6 +77,8 @@ class JwtClaimTest extends TestCase
         $this->assertContains( 'exp' , $values );
         $this->assertContains( 'iat' , $values );
         $this->assertContains( 'iss' , $values );
+        $this->assertContains( 'jti' , $values );
+        $this->assertContains( 'nbf' , $values );
         $this->assertContains( 'sub' , $values );
     }
 }

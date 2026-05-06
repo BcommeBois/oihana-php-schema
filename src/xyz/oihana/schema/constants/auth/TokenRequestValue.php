@@ -32,6 +32,19 @@ class TokenRequestValue
     public const string GRANT_CLIENT_CREDENTIALS = 'client_credentials' ;
 
     /**
+     * RFC 7523 grant_type for the JWT-bearer authorization grant.
+     *
+     * Distinct from the `client_credentials` grant + `client_assertion`
+     * pair, which authenticates an OAuth-registered client. The
+     * `jwt-bearer` grant treats the JWT itself as the identity proof —
+     * the canonical pattern for Service Users authenticating with a
+     * private key on Zitadel.
+     *
+     * @see https://datatracker.ietf.org/doc/html/rfc7523 RFC 7523
+     */
+    public const string GRANT_JWT_BEARER = 'urn:ietf:params:oauth:grant-type:jwt-bearer' ;
+
+    /**
      * RFC 7521 client_assertion_type identifying a JWT bearer
      * assertion as the client authentication mechanism.
      */

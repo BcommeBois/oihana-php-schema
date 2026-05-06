@@ -26,14 +26,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   - Extends User with invitationStatus and status properties (admin lifecycle gating and invitation projection)
   - Extends User with pendingEmailCodeExpiresAt and pendingEmailCodeHash properties (verification code lifecycle for email change flow)
 - Adds the JWTAlgorithm constant class
-- Adds the JwtClaim constant class (RFC 7519 §4.1 registered claims used by the M2M `jwt-bearer` flow — aud, exp, iat, iss, sub)
+- Adds the JwtClaim constant class (RFC 7519 §4.1 registered claims used by the M2M `jwt-bearer` flow — aud, exp, iat, iss, jti, nbf, sub)
 - Adds the InvitationStatus constant class (none, pending, accepted, expired, canceled — user-side projection of the latest invitation lifecycle)
 - Adds the UserStatus constant class (active, disabled — admin-controlled login gating, distinct from the immutable activated flag)
 - Adds the xyz\oihana\schema\constants\auth namespace
   - Adds the KeyfileType constant class (application, serviceaccount — IdP-emitted keyfile types, backed by ConstantsTrait)
   - Adds the TokenRequestField constant class (OAuth2 token endpoint form fields — client_assertion, client_assertion_type, grant_type, scope)
-  - Adds the TokenRequestValue constant class (canonical values paired with TokenRequestField — DEFAULT_SCOPE, GRANT_CLIENT_CREDENTIALS, JWT_BEARER_ASSERTION_TYPE)
-  - Adds the TokenResponseField constant class (RFC 6749 §5.1 successful response fields — access_token, expires_in, scope, token_type)
+  - Adds the TokenRequestValue constant class (canonical values paired with TokenRequestField — DEFAULT_SCOPE, GRANT_CLIENT_CREDENTIALS, GRANT_JWT_BEARER, JWT_BEARER_ASSERTION_TYPE)
+  - Adds the TokenResponseField constant class (RFC 6749 §5.1 successful response fields, plus OIDC and vendor extensions — access_token, assertion, expires_at, expires_in, id_token, refresh_token, scope, token_type)
 - Adds ItemAvailability
 - Adds the PostalAddress::extendedAddress property (new standard property in https://schema.org/PostalAddress)
 - Adds the xyz\oihana\schema\places namespace

@@ -13,10 +13,14 @@ class TokenResponseFieldTest extends TestCase
     {
         $expected =
         [
-            'ACCESS_TOKEN' => 'access_token' ,
-            'EXPIRES_IN'   => 'expires_in'   ,
-            'SCOPE'        => 'scope'        ,
-            'TOKEN_TYPE'   => 'token_type'   ,
+            'ACCESS_TOKEN'  => 'access_token'  ,
+            'ASSERTION'     => 'assertion'     ,
+            'EXPIRES_AT'    => 'expires_at'    ,
+            'EXPIRES_IN'    => 'expires_in'    ,
+            'ID_TOKEN'      => 'id_token'      ,
+            'REFRESH_TOKEN' => 'refresh_token' ,
+            'SCOPE'         => 'scope'         ,
+            'TOKEN_TYPE'    => 'token_type'    ,
         ];
 
         foreach ( $expected as $name => $value )
@@ -30,10 +34,14 @@ class TokenResponseFieldTest extends TestCase
     {
         $this->assertContains( $field ,
         [
-            TokenResponseField::ACCESS_TOKEN ,
-            TokenResponseField::EXPIRES_IN   ,
-            TokenResponseField::SCOPE        ,
-            TokenResponseField::TOKEN_TYPE   ,
+            TokenResponseField::ACCESS_TOKEN  ,
+            TokenResponseField::ASSERTION     ,
+            TokenResponseField::EXPIRES_AT    ,
+            TokenResponseField::EXPIRES_IN    ,
+            TokenResponseField::ID_TOKEN      ,
+            TokenResponseField::REFRESH_TOKEN ,
+            TokenResponseField::SCOPE         ,
+            TokenResponseField::TOKEN_TYPE    ,
         ]);
     }
 
@@ -41,29 +49,41 @@ class TokenResponseFieldTest extends TestCase
     {
         return
         [
-            [ TokenResponseField::ACCESS_TOKEN ] ,
-            [ TokenResponseField::EXPIRES_IN   ] ,
-            [ TokenResponseField::SCOPE        ] ,
-            [ TokenResponseField::TOKEN_TYPE   ] ,
+            [ TokenResponseField::ACCESS_TOKEN  ] ,
+            [ TokenResponseField::ASSERTION     ] ,
+            [ TokenResponseField::EXPIRES_AT    ] ,
+            [ TokenResponseField::EXPIRES_IN    ] ,
+            [ TokenResponseField::ID_TOKEN      ] ,
+            [ TokenResponseField::REFRESH_TOKEN ] ,
+            [ TokenResponseField::SCOPE         ] ,
+            [ TokenResponseField::TOKEN_TYPE    ] ,
         ];
     }
 
     public function testIncludesViaConstantsTrait(): void
     {
-        $this->assertTrue ( TokenResponseField::includes( 'access_token' ) );
-        $this->assertTrue ( TokenResponseField::includes( 'expires_in'   ) );
-        $this->assertTrue ( TokenResponseField::includes( 'scope'        ) );
-        $this->assertTrue ( TokenResponseField::includes( 'token_type'   ) );
-        $this->assertFalse( TokenResponseField::includes( 'unknown'      ) );
+        $this->assertTrue ( TokenResponseField::includes( 'access_token'  ) );
+        $this->assertTrue ( TokenResponseField::includes( 'assertion'     ) );
+        $this->assertTrue ( TokenResponseField::includes( 'expires_at'    ) );
+        $this->assertTrue ( TokenResponseField::includes( 'expires_in'    ) );
+        $this->assertTrue ( TokenResponseField::includes( 'id_token'      ) );
+        $this->assertTrue ( TokenResponseField::includes( 'refresh_token' ) );
+        $this->assertTrue ( TokenResponseField::includes( 'scope'         ) );
+        $this->assertTrue ( TokenResponseField::includes( 'token_type'    ) );
+        $this->assertFalse( TokenResponseField::includes( 'unknown'       ) );
     }
 
     public function testGetConstantValuesViaConstantsTrait(): void
     {
         $values = TokenResponseField::getConstantValues();
 
-        $this->assertContains( 'access_token' , $values );
-        $this->assertContains( 'expires_in'   , $values );
-        $this->assertContains( 'scope'        , $values );
-        $this->assertContains( 'token_type'   , $values );
+        $this->assertContains( 'access_token'  , $values );
+        $this->assertContains( 'assertion'     , $values );
+        $this->assertContains( 'expires_at'    , $values );
+        $this->assertContains( 'expires_in'    , $values );
+        $this->assertContains( 'id_token'      , $values );
+        $this->assertContains( 'refresh_token' , $values );
+        $this->assertContains( 'scope'         , $values );
+        $this->assertContains( 'token_type'    , $values );
     }
 }
