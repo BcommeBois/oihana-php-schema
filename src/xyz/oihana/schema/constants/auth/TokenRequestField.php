@@ -20,6 +20,19 @@ class TokenRequestField
     use ConstantsTrait ;
 
     /**
+     * `assertion` — a JWT or token assertion returned by certain
+     * authorization servers (or used in extension flows such as
+     * JWT Bearer Token Grant, RFC 7523).
+     *
+     * This field may contain the original client assertion or a
+     * derived token used for downstream validation, delegation,
+     * or token exchange scenarios. It is not part of the core
+     * RFC 6749 §5.1 response but may appear in extended or
+     * vendor-specific implementations.
+     */
+    public const string ASSERTION = 'assertion' ;
+
+    /**
      * `client_assertion` — the signed JWT (RS256) carrying the
      * application's identity claims, signed with the keyfile's
      * private key.

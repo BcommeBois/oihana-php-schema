@@ -13,6 +13,7 @@ class TokenRequestFieldTest extends TestCase
     {
         $expected =
         [
+            'ASSERTION'             => 'assertion'             ,
             'CLIENT_ASSERTION'      => 'client_assertion'      ,
             'CLIENT_ASSERTION_TYPE' => 'client_assertion_type' ,
             'GRANT_TYPE'            => 'grant_type'            ,
@@ -30,6 +31,7 @@ class TokenRequestFieldTest extends TestCase
     {
         $this->assertContains( $field ,
         [
+            TokenRequestField::ASSERTION             ,
             TokenRequestField::CLIENT_ASSERTION      ,
             TokenRequestField::CLIENT_ASSERTION_TYPE ,
             TokenRequestField::GRANT_TYPE            ,
@@ -41,6 +43,7 @@ class TokenRequestFieldTest extends TestCase
     {
         return
         [
+            [ TokenRequestField::ASSERTION             ] ,
             [ TokenRequestField::CLIENT_ASSERTION      ] ,
             [ TokenRequestField::CLIENT_ASSERTION_TYPE ] ,
             [ TokenRequestField::GRANT_TYPE            ] ,
@@ -50,6 +53,7 @@ class TokenRequestFieldTest extends TestCase
 
     public function testIncludesViaConstantsTrait(): void
     {
+        $this->assertTrue ( TokenRequestField::includes( 'assertion'             ) );
         $this->assertTrue ( TokenRequestField::includes( 'client_assertion'      ) );
         $this->assertTrue ( TokenRequestField::includes( 'client_assertion_type' ) );
         $this->assertTrue ( TokenRequestField::includes( 'grant_type'            ) );
@@ -61,6 +65,7 @@ class TokenRequestFieldTest extends TestCase
     {
         $values = TokenRequestField::getConstantValues();
 
+        $this->assertContains( 'assertion'             , $values );
         $this->assertContains( 'client_assertion'      , $values );
         $this->assertContains( 'client_assertion_type' , $values );
         $this->assertContains( 'grant_type'            , $values );

@@ -14,7 +14,6 @@ class TokenResponseFieldTest extends TestCase
         $expected =
         [
             'ACCESS_TOKEN'  => 'access_token'  ,
-            'ASSERTION'     => 'assertion'     ,
             'EXPIRES_AT'    => 'expires_at'    ,
             'EXPIRES_IN'    => 'expires_in'    ,
             'ID_TOKEN'      => 'id_token'      ,
@@ -35,7 +34,6 @@ class TokenResponseFieldTest extends TestCase
         $this->assertContains( $field ,
         [
             TokenResponseField::ACCESS_TOKEN  ,
-            TokenResponseField::ASSERTION     ,
             TokenResponseField::EXPIRES_AT    ,
             TokenResponseField::EXPIRES_IN    ,
             TokenResponseField::ID_TOKEN      ,
@@ -50,7 +48,6 @@ class TokenResponseFieldTest extends TestCase
         return
         [
             [ TokenResponseField::ACCESS_TOKEN  ] ,
-            [ TokenResponseField::ASSERTION     ] ,
             [ TokenResponseField::EXPIRES_AT    ] ,
             [ TokenResponseField::EXPIRES_IN    ] ,
             [ TokenResponseField::ID_TOKEN      ] ,
@@ -63,7 +60,6 @@ class TokenResponseFieldTest extends TestCase
     public function testIncludesViaConstantsTrait(): void
     {
         $this->assertTrue ( TokenResponseField::includes( 'access_token'  ) );
-        $this->assertTrue ( TokenResponseField::includes( 'assertion'     ) );
         $this->assertTrue ( TokenResponseField::includes( 'expires_at'    ) );
         $this->assertTrue ( TokenResponseField::includes( 'expires_in'    ) );
         $this->assertTrue ( TokenResponseField::includes( 'id_token'      ) );
@@ -78,7 +74,6 @@ class TokenResponseFieldTest extends TestCase
         $values = TokenResponseField::getConstantValues();
 
         $this->assertContains( 'access_token'  , $values );
-        $this->assertContains( 'assertion'     , $values );
         $this->assertContains( 'expires_at'    , $values );
         $this->assertContains( 'expires_in'    , $values );
         $this->assertContains( 'id_token'      , $values );

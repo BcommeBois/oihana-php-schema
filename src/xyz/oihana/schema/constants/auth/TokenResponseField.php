@@ -26,19 +26,6 @@ class TokenResponseField
     public const string ACCESS_TOKEN = 'access_token' ;
 
     /**
-     * `assertion` — a JWT or token assertion returned by certain
-     * authorization servers (or used in extension flows such as
-     * JWT Bearer Token Grant, RFC 7523).
-     *
-     * This field may contain the original client assertion or a
-     * derived token used for downstream validation, delegation,
-     * or token exchange scenarios. It is not part of the core
-     * RFC 6749 §5.1 response but may appear in extended or
-     * vendor-specific implementations.
-     */
-    public const string ASSERTION = 'assertion' ;
-
-    /**
      * `expires_at` — absolute expiration timestamp (epoch seconds)
      * of the access_token.
      *
