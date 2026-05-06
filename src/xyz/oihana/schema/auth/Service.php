@@ -39,7 +39,7 @@ class Service extends Thing
 
     /**
      * OAuth2 `client_id` exposed to the service for token requests.
-     * With Zitadel Machine Users, equals `keyId` of the active User Key — surfaced as a separate field for symmetry with Application and to allow rotation.
+     * With Zitadel Machine Users, equals `keyId` of the active User Key — surfaced as a separate field for symmetry with Service and to allow rotation.
      * @var string|null
      */
     public string|null $clientId ;

@@ -3,7 +3,7 @@
 namespace xyz\oihana\schema\constants\traits\auth;
 
 /**
- * The enumeration of all Application properties.
+ * The enumeration of all Service properties.
  *
  * Properties already available via other traits:
  * - ACTIVE, OWNER, ADDITIONAL_TYPE, IDENTIFIER (Schema.org Properties)
