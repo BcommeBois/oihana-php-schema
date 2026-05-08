@@ -5,6 +5,7 @@ namespace xyz\oihana\schema\constants\traits;
 use xyz\oihana\schema\constants\traits\auth\ApplicationTrait;
 use xyz\oihana\schema\constants\traits\auth\InvitationTrait;
 use xyz\oihana\schema\constants\traits\auth\KeyfileTrait;
+use xyz\oihana\schema\constants\traits\auth\OAuthClientTrait;
 use xyz\oihana\schema\constants\traits\auth\PermissionTrait;
 use xyz\oihana\schema\constants\traits\auth\PolicyTrait;
 use xyz\oihana\schema\constants\traits\auth\RoleTrait;
@@ -19,12 +20,13 @@ trait AuthTrait
     use ApplicationTrait ,
         KeyfileTrait ,
         InvitationTrait ,
+        OAuthClientTrait ,
         PermissionTrait ,
         PolicyTrait ,
         RoleTrait ,
         ServiceTrait ,
         SessionTrait ,
         UserTrait ,
-        WebApplicationTrait ,
-        WebAPITrait ;
+        WebAPITrait ,
+        WebApplicationTrait ;
 }
