@@ -21,6 +21,7 @@ class UserTest extends TestCase
         $this->assertNull( $user->appMetadata       ?? null );
         $this->assertNull( $user->applications      ?? null );
         $this->assertNull( $user->blockedFor        ?? null );
+        $this->assertNull( $user->color             ?? null );
         $this->assertNull( $user->devices           ?? null );
         $this->assertNull( $user->firstLoginAt      ?? null );
         $this->assertNull( $user->lastLogin         ?? null );
@@ -33,9 +34,11 @@ class UserTest extends TestCase
         $this->assertNull( $user->pendingEmailSince         ?? null );
         $this->assertNull( $user->permissions       ?? null );
         $this->assertNull( $user->permissionsCount  ?? null );
+        $this->assertNull( $user->protected         ?? null );
         $this->assertNull( $user->roles             ?? null );
         $this->assertNull( $user->rolesCount        ?? null );
         $this->assertNull( $user->signedUp          ?? null );
+        $this->assertNull( $user->system            ?? null );
     }
 
     public function testIsPerson(): void
@@ -69,9 +72,12 @@ class UserTest extends TestCase
             'metadata'          => [ 'theme' => 'dark' ] ,
             'applications'      => [ 'app:1' , 'app:2' ] ,
             'blockedFor'        => [ 'api:legacy' ] ,
+            'color'             => '#ff8800' ,
             'devices'           => [ 'device-uuid-a' ] ,
             'permissionsCount'  => 1 ,
+            'protected'         => true ,
             'rolesCount'        => 2 ,
+            'system'            => false ,
         ]);
 
         $this->assertTrue ( $user->activated );
@@ -88,9 +94,12 @@ class UserTest extends TestCase
         $this->assertSame( [ 'theme' => 'dark' ] , $user->metadata );
         $this->assertSame( [ 'app:1' , 'app:2' ] , $user->applications );
         $this->assertSame( [ 'api:legacy' ] , $user->blockedFor );
+        $this->assertSame( '#ff8800' , $user->color );
         $this->assertSame( [ 'device-uuid-a' ] , $user->devices );
         $this->assertSame( 1 , $user->permissionsCount );
+        $this->assertTrue( $user->protected );
         $this->assertSame( 2 , $user->rolesCount );
+        $this->assertFalse( $user->system );
     }
 
     public function testPermissionsAndRolesAssignment(): void

@@ -18,6 +18,7 @@ class UserTraitTest extends TestCase
             'APP_META_DATA'                 => 'appMetadata' ,
             'APPLICATIONS'                  => 'applications' ,
             'BLOCKED_FOR'                   => 'blockedFor' ,
+            'COLOR'                         => 'color' ,
             'DEVICES'                       => 'devices' ,
             'FIRST_LOGIN_AT'                => 'firstLoginAt' ,
             'INVITATION_STATUS'             => 'invitationStatus' ,
@@ -31,12 +32,14 @@ class UserTraitTest extends TestCase
             'PENDING_EMAIL_SINCE'           => 'pendingEmailSince' ,
             'PERMISSIONS'                   => 'permissions' ,
             'PERMISSIONS_COUNT'             => 'permissionsCount' ,
+            'PROTECTED'                     => 'protected' ,
             'ROLES'                         => 'roles' ,
             'ROLES_COUNT'                   => 'rolesCount' ,
             'SERVICES'                      => 'services' ,
             'SERVICES_COUNT'                => 'servicesCount' ,
             'SIGNED_UP'                     => 'signedUp' ,
             'STATUS'                        => 'status' ,
+            'SYSTEM'                        => 'system' ,
         ];
 
         foreach ( $expected as $name => $value )

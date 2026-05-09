@@ -11,10 +11,11 @@ namespace xyz\oihana\schema\constants\traits\auth;
  */
 trait UserTrait
 {
-    use ApplicationsTrait ,
-        PermissionsTrait  ,
-        RolesTrait        ,
-        ServicesTrait     ;
+    use ApplicationsTrait      ,
+        PermissionsTrait       ,
+        ProtectedResourceTrait ,
+        RolesTrait             ,
+        ServicesTrait          ;
 
     const string ACTIVATED                      = 'activated'     ;
     const string APP_META_DATA                  = 'appMetadata'  ;

@@ -60,6 +60,12 @@ class User extends Person
     public array|null|string $blockedFor ;
 
     /**
+     * The display color for this role in admin interfaces.
+     * @var string|null
+     */
+    public string|null $color ;
+
+    /**
      * The devices being used by this particular user.
      * This list is used to unlink the User, the refresh token will be revoked, forcing the user to re-login on the application.
      * @var array|null
@@ -163,6 +169,12 @@ class User extends Person
     public int|null $permissionsCount ;
 
     /**
+     * Indicates if this user is protected (cannot be assigned via REST API).
+     * @var bool|null
+     */
+    public bool|null $protected ;
+
+    /**
      * Define the roles (scopes) that this particular User.
      * @var array<Role>|null
      */
@@ -191,4 +203,10 @@ class User extends Person
      * @var string|null
      */
     public string|null $status ;
+
+    /**
+     * Indicates if this user is a system user (cannot be deleted via REST API).
+     * @var bool|null
+     */
+    public bool|null $system ;
 }

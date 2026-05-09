@@ -26,6 +26,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   - Extends User with activated, appMetadata, applications, blockedFor, devices, firstLoginAt,maxLevel, pendingEmail, pendingEmailSince, signedUp and metadata properties
   - Extends User with invitationStatus and status properties (admin lifecycle gating and invitation projection)
   - Extends User with pendingEmailCodeExpiresAt and pendingEmailCodeHash properties (verification code lifecycle for email change flow)
+  - Extends User with color, protected and system properties (admin display color and write/delete protection flags, provided by ProtectedResourceTrait)
 - Adds the JWTAlgorithm constant class
 - Adds the JwtClaim constant class (RFC 7519 §4.1 registered claims used by the M2M `jwt-bearer` flow — aud, exp, iat, iss, jti, nbf, sub)
 - Adds the InvitationStatus constant class (none, pending, accepted, expired, canceled — user-side projection of the latest invitation lifecycle)
@@ -67,7 +68,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - ThingTrait::jsonSerialize now returns all null properties by default (no compression)
 - Refactors the ThingTrait::toArray implementation (removes the $class parameter)
 - Refactors ApplicationTrait, OAuthClientTrait, SessionTrait and WebApplicationTrait to consume the shared ClientIdTrait
-- Refactors PolicyTrait and RoleTrait to consume the shared ProtectedResourceTrait
+- Refactors PolicyTrait, RoleTrait and UserTrait to consume the shared ProtectedResourceTrait
 
 ### Fixed
 
