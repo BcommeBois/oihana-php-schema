@@ -6,6 +6,7 @@ use xyz\oihana\schema\constants\traits\auth\ApplicationTrait;
 use xyz\oihana\schema\constants\traits\auth\InvitationTrait;
 use xyz\oihana\schema\constants\traits\auth\KeyfileTrait;
 use xyz\oihana\schema\constants\traits\auth\OAuthClientTrait;
+use xyz\oihana\schema\constants\traits\auth\PasswordResetTrait;
 use xyz\oihana\schema\constants\traits\auth\PermissionTrait;
 use xyz\oihana\schema\constants\traits\auth\PolicyTrait;
 use xyz\oihana\schema\constants\traits\auth\RoleTrait;
@@ -21,6 +22,7 @@ trait AuthTrait
         KeyfileTrait ,
         InvitationTrait ,
         OAuthClientTrait ,
+        PasswordResetTrait ,
         PermissionTrait ,
         PolicyTrait ,
         RoleTrait ,
