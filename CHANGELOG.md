@@ -60,8 +60,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   - Extends KeyfileTrait with apiBaseUrl, audience, issuer, scope and userId constants (removes the now-redundant APP_ID — the Keyfile property still exists, but the constant is provided by OAuthClientTrait)
 - Composes the new auth traits into the AuthTrait aggregator
 - Adds the xyz\oihana\schema\AuditAction class (auditable action with request tracking and RGPD-compliant logging)
+- Extends AuditAction with event and outcome properties (business event tag and machine-readable result of the action)
 - Adds the xyz\oihana\schema\enumerations\AuditActionType enumeration (CREATE, UPDATE, DELETE, ADD, LOGIN, LOGOUT, REJECT)
 - Adds the xyz\oihana\schema\constants\traits\AuditTrait with AuditAction property constants
+- Extends AuditTrait with event and outcome constants
 - Adds the AuditTrait in the Oihana constants class
 
 ### Changed

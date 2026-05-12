@@ -53,6 +53,14 @@ class AuditAction extends Action
     public const string CONTEXT = Oihana::SCHEMA ;
 
     /**
+     * The audit event tag, identifying the business action performed
+     * (e.g. `role.created`, `user.deleted`, `auth.login`).
+     *
+     * @var string|null
+     */
+    public string|null $event ;
+
+    /**
      * The IP address of the client that performed the action.
      *
      * @var string|null
@@ -65,6 +73,14 @@ class AuditAction extends Action
      * @var string|null
      */
     public string|null $method ;
+
+    /**
+     * The machine-readable outcome of the action
+     * (e.g. `success`, `denied`, `error`, `not_found`).
+     *
+     * @var string|null
+     */
+    public string|null $outcome ;
 
     /**
      * The full request path (e.g. /roles/42).
