@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   - Extends Application with keyId and keyfile properties (active key id and one-shot keyfile payload returned on creation/rotation)
   - Adds the Invitation class (extends Schema.org InviteAction, tracks email invitation lifecycle)
   - Adds the PasswordReset class (extends Schema.org UpdateAction — password-reset request lifecycle: token hash, email, redirectUrl, sentAt ; action-status pending / consumed / expired / cancelled)
+  - Adds the PendingRevocation class (provider-agnostic deferred revocation queue — attempts, lastAttemptAt, lastError, provider, reason, targetId, targetType, userIdentifier, userKey) for retrying failed IdP revocations (Zitadel, Magento, Auth0)
   - Adds the OAuthClient class (Zitadel client mirror, resolves opaque clientId to human-readable label)
   - Adds the Policy class (RBAC authorization bundle for M2M applications, with applications, color, permissions, protected, roles and system properties)
   - Adds the Policy::toPolicy() and Policy::toCasbinPolicy() methods (Casbin-ready policy entries from attached permissions)
@@ -48,7 +49,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - Adds the Offer::provider property
 - Adds role fields and WebApplication trait in the auth namespace
 - Adds the xyz\oihana\schema\constants\traits\auth namespace with property-name traits:
-  - ApplicationTrait, InvitationTrait, KeyfileTrait, OAuthClientTrait, PasswordResetTrait, PolicyTrait, ServiceTrait, SessionTrait
+  - ApplicationTrait, InvitationTrait, KeyfileTrait, OAuthClientTrait, PasswordResetTrait, PendingRevocationTrait, PolicyTrait, ServiceTrait, SessionTrait
   - Extends ApplicationTrait with keyId and keyfile constants
   - Adds the shared property traits: ClientIdTrait (clientId), ProtectedResourceTrait (color, protected, system)
   - Adds the plural collection traits: ApplicationsTrait, PermissionsTrait, PoliciesTrait, RolesTrait, ServicesTrait, UsersTrait
