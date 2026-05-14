@@ -28,8 +28,6 @@ use oihana\reflect\traits\ConstantsTrait;
  * the row directly; this enum is for the user-side projection only.
  *
  * @package xyz\oihana\schema\constants
- * @category Security
- * @see \org\schema\enumerations\status\ActionStatusType
  * @author  Marc Alcaraz (ekameleon)
  * @since   1.0.2
  */

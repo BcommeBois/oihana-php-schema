@@ -13,8 +13,6 @@ use xyz\oihana\schema\constants\traits\auth\UserTrait;
  * Represents a User resource within an OAuth2 and RBAC (Role-Based Access Control) context.
  *
  * @package xyz\oihana\schema\auth
- * @category Security
- * @subcategory OAuth2 / RBAC
  * @since 1.0.2
  * @author Marc Alcaraz
  */
@@ -199,7 +197,7 @@ class User extends Person
      * successful login). Defaults to `active` on creation, can be set to
      * `disabled` by an administrator to refuse further logins.
      *
-     * @see \xyz\oihana\schema\constants\UserStatus
+     * @see UserStatus
      * @var string|null
      */
     public string|null $status ;
@@ -209,4 +207,25 @@ class User extends Person
      * @var bool|null
      */
     public bool|null $system ;
+
+    /**
+     * Epoch-seconds timestamp marking the cut-off below which any access
+     * token issued for this user is considered invalid by the API.
+     *
+     * Stamped by the bulk session revocation flow (admin "revoke all"
+     * or self-service "log me out everywhere"). Compared against the
+     * JWT `iat` claim by the authentication middleware : a token whose
+     * `iat < tokensInvalidBefore` is rejected with `401` and the
+     * `tokens_revoked` reason, even if it is still cryptographically
+     * valid.
+     *
+     * Stored as **epoch seconds (int)** rather than ISO 8601 so the
+     * middleware comparison against the JWT `iat` claim is a direct
+     * integer compare, with no parsing on every authenticated request.
+     *
+     * `null` means no revocation in effect — every cryptographically valid access token is accepted.
+     *
+     * @var int|null|string
+     */
+    public int|null|string $tokensInvalidBefore ;
 }

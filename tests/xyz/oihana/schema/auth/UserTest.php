@@ -39,6 +39,7 @@ class UserTest extends TestCase
         $this->assertNull( $user->rolesCount        ?? null );
         $this->assertNull( $user->signedUp          ?? null );
         $this->assertNull( $user->system            ?? null );
+        $this->assertNull( $user->tokensInvalidBefore ?? null );
     }
 
     public function testIsPerson(): void
@@ -78,6 +79,7 @@ class UserTest extends TestCase
             'protected'         => true ,
             'rolesCount'        => 2 ,
             'system'            => false ,
+            'tokensInvalidBefore' => 1747200000 ,
         ]);
 
         $this->assertTrue ( $user->activated );
@@ -100,6 +102,16 @@ class UserTest extends TestCase
         $this->assertTrue( $user->protected );
         $this->assertSame( 2 , $user->rolesCount );
         $this->assertFalse( $user->system );
+        $this->assertSame( 1747200000 , $user->tokensInvalidBefore );
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testTokensInvalidBeforeAcceptsString(): void
+    {
+        $user = new User([ 'tokensInvalidBefore' => '2026-05-14T12:00:00Z' ]);
+        $this->assertSame( '2026-05-14T12:00:00Z' , $user->tokensInvalidBefore );
     }
 
     public function testPermissionsAndRolesAssignment(): void

@@ -1,0 +1,74 @@
+<?php
+
+namespace tests\xyz\oihana\schema\constants ;
+
+use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
+
+use xyz\oihana\schema\constants\SessionRevocationReason;
+
+class SessionRevocationReasonTest extends TestCase
+{
+    public function testConstantsValues(): void
+    {
+        $expected =
+        [
+            'ADMIN_REVOKED'  => 'admin_revoked'  ,
+            'LOGOUT'         => 'logout'         ,
+            'TOKENS_REVOKED' => 'tokens_revoked' ,
+            'USER_DELETED'   => 'user_deleted'   ,
+            'USER_DISABLED'  => 'user_disabled'  ,
+        ];
+
+        foreach ( $expected as $name => $value )
+        {
+            $this->assertSame( $value , constant( SessionRevocationReason::class . "::$name" ) );
+        }
+    }
+
+    #[DataProvider('reasonProvider')]
+    public function testValidReasons( string $reason ): void
+    {
+        $this->assertContains( $reason ,
+        [
+            SessionRevocationReason::ADMIN_REVOKED  ,
+            SessionRevocationReason::LOGOUT         ,
+            SessionRevocationReason::TOKENS_REVOKED ,
+            SessionRevocationReason::USER_DELETED   ,
+            SessionRevocationReason::USER_DISABLED  ,
+        ]);
+    }
+
+    public static function reasonProvider(): array
+    {
+        return
+        [
+            [ SessionRevocationReason::ADMIN_REVOKED  ] ,
+            [ SessionRevocationReason::LOGOUT         ] ,
+            [ SessionRevocationReason::TOKENS_REVOKED ] ,
+            [ SessionRevocationReason::USER_DELETED   ] ,
+            [ SessionRevocationReason::USER_DISABLED  ] ,
+        ];
+    }
+
+    public function testIncludesViaConstantsTrait(): void
+    {
+        $this->assertTrue ( SessionRevocationReason::includes( 'admin_revoked'  ) );
+        $this->assertTrue ( SessionRevocationReason::includes( 'logout'         ) );
+        $this->assertTrue ( SessionRevocationReason::includes( 'tokens_revoked' ) );
+        $this->assertTrue ( SessionRevocationReason::includes( 'user_deleted'   ) );
+        $this->assertTrue ( SessionRevocationReason::includes( 'user_disabled'  ) );
+        $this->assertFalse( SessionRevocationReason::includes( 'unknown'        ) );
+    }
+
+    public function testGetConstantValuesViaConstantsTrait(): void
+    {
+        $values = SessionRevocationReason::getConstantValues();
+
+        $this->assertContains( 'admin_revoked'  , $values );
+        $this->assertContains( 'logout'         , $values );
+        $this->assertContains( 'tokens_revoked' , $values );
+        $this->assertContains( 'user_deleted'   , $values );
+        $this->assertContains( 'user_disabled'  , $values );
+    }
+}

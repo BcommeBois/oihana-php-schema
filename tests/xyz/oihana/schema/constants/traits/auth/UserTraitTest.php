@@ -40,6 +40,7 @@ class UserTraitTest extends TestCase
             'SIGNED_UP'                     => 'signedUp' ,
             'STATUS'                        => 'status' ,
             'SYSTEM'                        => 'system' ,
+            'TOKENS_INVALID_BEFORE'         => 'tokensInvalidBefore' ,
         ];
 
         foreach ( $expected as $name => $value )

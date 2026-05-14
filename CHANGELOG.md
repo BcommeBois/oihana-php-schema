@@ -24,11 +24,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   - Extends Application with createdBy, disabledAt, disabledBy, disabledReason, lastSeenIP, policies and policiesCount properties
   - Adds the Service class (machine identity / Service Account backed by a Zitadel Machine User — JWT private_key_jwt RFC 7523 ; clientId, keyId, keyfile, allowedIPs, expiresAt, lastSeenIP, lastUsedAt, permissions, policies, protected and disabled* audit fields)
   - Adds the Session class (tracks active connections with IP, user-agent, token hash, expiration, revocation) + the SessionRevocationReason constants
+  - Extends SessionRevocationReason with the TOKENS_REVOKED constant (surfaced by the auth middleware when a token `iat` predates User::$tokensInvalidBefore)
   - Extends Role with color, default, level, policies, policiesCount, protected, system properties
   - Extends User with activated, appMetadata, applications, blockedFor, devices, firstLoginAt,maxLevel, pendingEmail, pendingEmailSince, signedUp and metadata properties
   - Extends User with invitationStatus and status properties (admin lifecycle gating and invitation projection)
   - Extends User with pendingEmailCodeExpiresAt and pendingEmailCodeHash properties (verification code lifecycle for email change flow)
   - Extends User with color, protected and system properties (admin display color and write/delete protection flags, provided by ProtectedResourceTrait)
+  - Extends User with tokensInvalidBefore property (epoch-seconds cutoff used by the auth middleware to reject access tokens whose `iat` predates a bulk session revocation)
 - Adds the JWTAlgorithm constant class
 - Adds the JwtClaim constant class (RFC 7519 §4.1 registered claims used by the M2M `jwt-bearer` flow — aud, exp, iat, iss, jti, nbf, sub)
 - Adds the InvitationStatus constant class (none, pending, accepted, expired, canceled — user-side projection of the latest invitation lifecycle)
@@ -58,6 +60,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   - Extends UserTrait with activated, appMetadata, applications, blockedFor, devices, firstLoginAt, metadata, signedUp constants
   - Extends UserTrait with invitationStatus and status constants
   - Extends UserTrait with pendingEmailCodeExpiresAt and pendingEmailCodeHash constants
+  - Extends UserTrait with tokensInvalidBefore constant (paired with the new User::$tokensInvalidBefore property)
   - Extends KeyfileTrait with apiBaseUrl, audience, issuer, scope and userId constants (removes the now-redundant APP_ID — the Keyfile property still exists, but the constant is provided by OAuthClientTrait)
 - Composes the new auth traits into the AuthTrait aggregator
 - Adds the xyz\oihana\schema\AuditAction class (auditable action with request tracking and RGPD-compliant logging)
@@ -80,6 +83,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - Fixes Role::toPolicy() crashing when the permissions property is uninitialized
 - Fixes PermissionTrait::NAME constant value (was incorrectly set to 'domain' instead of 'name')
 - Fixes Application using the plural ApplicationsTrait (collection constants APPLICATIONS, APPLICATIONS_COUNT) instead of the singular ApplicationTrait — Application::ALLOWED_IPS, KEY_ID, KEYFILE, etc. now resolve correctly
+- Fixes SessionRevocationReason::USER_DELETED value (was incorrectly set to 'user_disabled', now resolves to 'user_deleted')
 
 ### Removed
 
