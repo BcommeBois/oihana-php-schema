@@ -32,7 +32,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   - Extends User with color, protected and system properties (admin display color and write/delete protection flags, provided by ProtectedResourceTrait)
   - Extends User with tokensInvalidBefore property (epoch-seconds cutoff used by the auth middleware to reject access tokens whose `iat` predates a bulk session revocation)
 - Adds the JWTAlgorithm constant class
-- Adds the JwtClaim constant class (RFC 7519 §4.1 registered claims used by the M2M `jwt-bearer` flow — aud, exp, iat, iss, jti, nbf, sub)
+- Adds the JwtClaim constant class — full IANA JSON Web Token Claims registry coverage:
+  - RFC 7519 §4.1 registered claims exposed under both short and long aliases (`ISS`/`ISSUER`, `SUB`/`SUBJECT`, `AUD`/`AUDIENCE`, `EXP`/`EXPIRES_AT`, `NBF`/`NOT_BEFORE`, `IAT`/`ISSUED_AT`, `JTI`/`JWT_ID`)
+  - OAuth 2.0 / OIDC common claims (`azp`, `nonce`, `auth_time`, `acr`, `amr`, `scope`, `scp`, `client_id`)
+  - OIDC Session Management (`sid` / `SESSION_ID` — Front-Channel / Back-Channel Logout)
+  - OIDC ID Token validation hashes (`at_hash`, `c_hash`)
+  - OIDC Core §5.1 standard profile claims (`name`, `given_name`, `family_name`, `middle_name`, `nickname`, `preferred_username`, `profile`, `picture`, `website`, `email`, `email_verified`, `gender`, `birthdate`, `zoneinfo`, `locale`, `phone_number`, `phone_number_verified`, `address`, `updated_at`)
+  - RFC 8693 Token Exchange (`act`, `may_act`)
+  - RFC 7800 Proof-of-Possession (`cnf`)
+  - Provider-specific / non-standard (`groups`, `roles`, `entitlements`, `tid`, `oid`)
 - Adds the InvitationStatus constant class (none, pending, accepted, expired, canceled — user-side projection of the latest invitation lifecycle)
 - Adds the UserStatus constant class (active, disabled — admin-controlled login gating, distinct from the immutable activated flag)
 - Adds the xyz\oihana\schema\constants\auth namespace
