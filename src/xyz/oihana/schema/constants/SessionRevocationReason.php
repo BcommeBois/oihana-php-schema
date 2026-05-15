@@ -84,4 +84,19 @@ class SessionRevocationReason
      * access until the account is restored.
      */
     public const string USER_DISABLED = 'user_disabled' ;
+
+    /**
+     * Indicates that the session was revoked directly by the user
+     * outside of a standard logout flow.
+     *
+     * This reason is typically used when a user explicitly invalidates
+     * one or more active sessions from an account security interface,
+     * such as a "Sign out from other devices" or "Revoke session"
+     * action.
+     *
+     * Unlike Logout, this revocation may target remote or
+     * previously established sessions without terminating the current
+     * authenticated context.
+     */
+    public const string USER_REVOKED = 'user_revoked' ;
 }

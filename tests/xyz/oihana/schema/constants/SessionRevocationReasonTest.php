@@ -18,6 +18,7 @@ class SessionRevocationReasonTest extends TestCase
             'TOKENS_REVOKED' => 'tokens_revoked' ,
             'USER_DELETED'   => 'user_deleted'   ,
             'USER_DISABLED'  => 'user_disabled'  ,
+            'USER_REVOKED'   => 'user_revoked'   ,
         ];
 
         foreach ( $expected as $name => $value )
@@ -36,6 +37,7 @@ class SessionRevocationReasonTest extends TestCase
             SessionRevocationReason::TOKENS_REVOKED ,
             SessionRevocationReason::USER_DELETED   ,
             SessionRevocationReason::USER_DISABLED  ,
+            SessionRevocationReason::USER_REVOKED   ,
         ]);
     }
 
@@ -48,6 +50,7 @@ class SessionRevocationReasonTest extends TestCase
             [ SessionRevocationReason::TOKENS_REVOKED ] ,
             [ SessionRevocationReason::USER_DELETED   ] ,
             [ SessionRevocationReason::USER_DISABLED  ] ,
+            [ SessionRevocationReason::USER_REVOKED   ] ,
         ];
     }
 
@@ -58,6 +61,7 @@ class SessionRevocationReasonTest extends TestCase
         $this->assertTrue ( SessionRevocationReason::includes( 'tokens_revoked' ) );
         $this->assertTrue ( SessionRevocationReason::includes( 'user_deleted'   ) );
         $this->assertTrue ( SessionRevocationReason::includes( 'user_disabled'  ) );
+        $this->assertTrue ( SessionRevocationReason::includes( 'user_revoked'   ) );
         $this->assertFalse( SessionRevocationReason::includes( 'unknown'        ) );
     }
 
@@ -70,5 +74,6 @@ class SessionRevocationReasonTest extends TestCase
         $this->assertContains( 'tokens_revoked' , $values );
         $this->assertContains( 'user_deleted'   , $values );
         $this->assertContains( 'user_disabled'  , $values );
+        $this->assertContains( 'user_revoked'   , $values );
     }
 }

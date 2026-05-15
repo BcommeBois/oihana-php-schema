@@ -25,6 +25,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   - Adds the Service class (machine identity / Service Account backed by a Zitadel Machine User — JWT private_key_jwt RFC 7523 ; clientId, keyId, keyfile, allowedIPs, expiresAt, lastSeenIP, lastUsedAt, permissions, policies, protected and disabled* audit fields)
   - Adds the Session class (tracks active connections with IP, user-agent, token hash, expiration, revocation) + the SessionRevocationReason constants
   - Extends SessionRevocationReason with the TOKENS_REVOKED constant (surfaced by the auth middleware when a token `iat` predates User::$tokensInvalidBefore)
+  - Extends SessionRevocationReason with the USER_REVOKED constant (session explicitly invalidated by the user, e.g. "Sign out from other devices" — distinct from LOGOUT which terminates the current authenticated context)
   - Extends Role with color, default, level, policies, policiesCount, protected, system properties
   - Extends User with activated, appMetadata, applications, blockedFor, devices, firstLoginAt,maxLevel, pendingEmail, pendingEmailSince, signedUp and metadata properties
   - Extends User with invitationStatus and status properties (admin lifecycle gating and invitation projection)
