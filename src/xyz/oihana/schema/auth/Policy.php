@@ -47,31 +47,6 @@ class Policy extends WebAPI
     public int|null $applicationsCount ;
 
     /**
-     * The display color for this policy in admin interfaces.
-     * @var string|null
-     */
-    public string|null $color ;
-
-    /**
-     * Define the permissions that this Policy groups.
-     * @var array<Permission>|null
-     */
-    #[HydrateWith( Permission::class ) ]
-    public array|null $permissions ;
-
-    /**
-     * The number of permissions attached on this Policy.
-     * @var int|null
-     */
-    public int|null $permissionsCount ;
-
-    /**
-     * Indicates if this policy is protected (cannot be deleted via REST API).
-     * @var bool|null
-     */
-    public bool|null $protected ;
-
-    /**
      * Reverse: roles that grant this policy to their users.
      * @var array<Role>|null
      */
@@ -85,10 +60,17 @@ class Policy extends WebAPI
     public int|null $rolesCount ;
 
     /**
-     * Indicates if this policy is a system policy (cannot be deleted or renamed via REST API).
-     * @var bool|null
+     * The services that reference this policy (inbound).
+     * @var array<Service>|null
      */
-    public bool|null $system ;
+    #[HydrateWith( Service::class ) ]
+    public array|null $services ;
+
+    /**
+     * The number of services referencing this policy.
+     * @var int|null
+     */
+    public int|null $servicesCount ;
 
     /**
      * Returns an array of Casbin-ready policy entries built from the

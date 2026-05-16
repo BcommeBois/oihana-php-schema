@@ -6,6 +6,7 @@ use oihana\reflect\attributes\HydrateWith;
 
 use org\schema\Person;
 
+use xyz\oihana\schema\auth\traits\HasProtectedResource;
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\constants\traits\auth\UserTrait;
 
@@ -18,7 +19,8 @@ use xyz\oihana\schema\constants\traits\auth\UserTrait;
  */
 class User extends Person
 {
-    use UserTrait ;
+    use HasProtectedResource ,
+        UserTrait ;
 
     /**
      * The @context of the json-ld representation of the thing.
@@ -56,12 +58,6 @@ class User extends Person
      * @var array|string|null
      */
     public array|null|string $blockedFor ;
-
-    /**
-     * The display color for this role in admin interfaces.
-     * @var string|null
-     */
-    public string|null $color ;
 
     /**
      * The devices being used by this particular user.
@@ -167,12 +163,6 @@ class User extends Person
     public int|null $permissionsCount ;
 
     /**
-     * Indicates if this user is protected (cannot be assigned via REST API).
-     * @var bool|null
-     */
-    public bool|null $protected ;
-
-    /**
      * Define the roles (scopes) that this particular User.
      * @var array<Role>|null
      */
@@ -201,12 +191,6 @@ class User extends Person
      * @var string|null
      */
     public string|null $status ;
-
-    /**
-     * Indicates if this user is a system user (cannot be deleted via REST API).
-     * @var bool|null
-     */
-    public bool|null $system ;
 
     /**
      * Epoch-seconds timestamp marking the cut-off below which any access

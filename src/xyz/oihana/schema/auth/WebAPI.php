@@ -6,8 +6,10 @@ use oihana\reflect\attributes\HydrateWith;
 
 use org\schema\WebAPI as SchemaWebAPI;
 
+use xyz\oihana\schema\auth\traits\HasProtectedResource;
 use xyz\oihana\schema\constants\JWTAlgorithm;
 use xyz\oihana\schema\constants\Oihana;
+use xyz\oihana\schema\constants\traits\auth\WebAPITrait;
 
 /**
  * Represents a Web API resource with OAuth2 authentication capabilities.
@@ -52,6 +54,9 @@ use xyz\oihana\schema\constants\Oihana;
  */
 class WebAPI extends SchemaWebAPI
 {
+    use HasProtectedResource ,
+        WebAPITrait          ;
+
     /**
      * The @context of the json-ld representation of the thing.
      */

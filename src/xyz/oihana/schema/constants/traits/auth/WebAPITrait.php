@@ -11,7 +11,8 @@ namespace xyz\oihana\schema\constants\traits\auth;
  */
 trait WebAPITrait
 {
-    use PermissionsTrait ;
+    use PermissionsTrait       ,
+        ProtectedResourceTrait ;
 
     const string ALGORITHM                       = 'algorithm' ;
     const string ALLOW_OFFLINE_ACCESS            = 'allowOfflineAccess' ;

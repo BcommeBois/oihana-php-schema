@@ -53,16 +53,12 @@ use xyz\oihana\schema\constants\traits\auth\RoleTrait;
  */
 class Role extends WebAPI
 {
+    use RoleTrait ;
+
     /**
      * The @context of the json-ld representation of the thing.
      */
     public const string CONTEXT = Oihana::SCHEMA ;
-
-    /**
-     * The display color for this role in admin interfaces.
-     * @var string|null
-     */
-    public string|null $color ;
 
     /**
      * Indicates whether this role is the default role.
@@ -83,19 +79,6 @@ class Role extends WebAPI
     public int|null $level ;
 
     /**
-     * Define the permissions (scopes) that this Role uses.
-     * @var array<Permission>|null
-     */
-    #[HydrateWith( Permission::class ) ]
-    public array|null $permissions ;
-
-    /**
-     * The number of permissions attached on this Role.
-     * @var int|null
-     */
-    public int|null $permissionsCount ;
-
-    /**
      * The policies assigned to this application (M2M authorization bundles).
      * @var array<Policy>|null
      */
@@ -107,18 +90,6 @@ class Role extends WebAPI
      * @var int|null
      */
     public int|null $policiesCount ;
-
-    /**
-     * Indicates if this role is protected (cannot be assigned via REST API).
-     * @var bool|null
-     */
-    public bool|null $protected ;
-
-    /**
-     * Indicates if this role is a system role (cannot be deleted via REST API).
-     * @var bool|null
-     */
-    public bool|null $system ;
 
     /**
      * Define the users that this Role is attached.

@@ -4,9 +4,11 @@ namespace xyz\oihana\schema\auth;
 
 use org\schema\Intangible;
 
+use xyz\oihana\schema\auth\traits\HasProtectedResource;
 use xyz\oihana\schema\constants\CasbinPolicy;
 use xyz\oihana\schema\constants\Effect;
 use xyz\oihana\schema\constants\Oihana;
+use xyz\oihana\schema\constants\traits\auth\PermissionTrait;
 
 /**
  * Represents a Casbin permission rule for Role-Based Access Control (RBAC).
@@ -45,12 +47,14 @@ use xyz\oihana\schema\constants\Oihana;
  *   an `allow` can be overridden by a `deny` depending on your `policy_effect`.
  *
  * @package xyz\oihana\schema\auth
- * @category Security / RBAC
  * @author  Marc Alcaraz
  * @since   1.0.2
  */
 class Permission extends Intangible
 {
+    use HasProtectedResource ,
+        PermissionTrait      ;
+
     /**
      * The @context of the json-ld representation of the thing.
      */

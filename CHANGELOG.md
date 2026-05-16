@@ -85,6 +85,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - Refactors the ThingTrait::toArray implementation (removes the $class parameter)
 - Refactors ApplicationTrait, OAuthClientTrait, SessionTrait and WebApplicationTrait to consume the shared ClientIdTrait
 - Refactors PolicyTrait, RoleTrait and UserTrait to consume the shared ProtectedResourceTrait
+- Extracts the `$color`, `$protected` and `$system` properties into the new HasProtectedResource property trait (xyz\oihana\schema\auth\traits) — applied to Permission, User and WebAPI (inherited by Policy and Role), removing the duplicated inline declarations
+- Refactors PermissionTrait and WebAPITrait to consume the shared ProtectedResourceTrait (exposes COLOR, PROTECTED, SYSTEM constants for consistency with PolicyTrait, RoleTrait and UserTrait)
+- Extends Permission with color, protected and system properties (admin display color and write/delete protection flags, provided by HasProtectedResource)
+- Extends Policy with services and servicesCount properties (inbound services referencing this policy)
 
 ### Fixed
 

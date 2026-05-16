@@ -11,6 +11,8 @@ namespace xyz\oihana\schema\constants\traits\auth;
  */
 trait PermissionTrait
 {
+    use ProtectedResourceTrait ;
+
     const string ACTION      = 'action'      ;
     const string DESCRIPTION = 'description' ;
     const string DOMAIN      = 'domain'      ;
