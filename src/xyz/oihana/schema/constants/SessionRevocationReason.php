@@ -46,6 +46,29 @@ class SessionRevocationReason
     public const string ADMIN_REVOKED = 'admin_revoked' ;
 
     /**
+     * Indicates that the session was revoked as part of an emergency
+     * security response, typically triggered by an incident, a confirmed
+     * compromise, or an automated threat-mitigation workflow.
+     *
+     * This reason is reserved for high-severity events where sessions
+     * must be terminated immediately, independently of the standard
+     * user-driven or administrative revocation flows.
+     *
+     * Typical use cases include:
+     *
+     * - Suspected or confirmed account takeover
+     * - Credential leak or token exposure detected by monitoring
+     * - Automated revocation initiated by an intrusion-detection system
+     * - Forced global sign-out following a security breach
+     * - Incident-response playbooks requiring immediate session kill
+     *
+     * Unlike ADMIN_REVOKED, this revocation is not a routine moderation
+     * action but an exceptional measure, and should be surfaced
+     * accordingly in audit trails and security dashboards.
+     */
+    public const string EMERGENCY_REVOKE = 'emergency_revoke' ;
+
+    /**
      * Indicates that the session was revoked after an explicit logout
      * action initiated by the authenticated user.
      *
