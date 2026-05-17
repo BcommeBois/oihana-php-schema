@@ -16,6 +16,7 @@ class SessionRevocationReasonTest extends TestCase
             'ADMIN_REVOKED'    => 'admin_revoked'    ,
             'EMERGENCY_REVOKE' => 'emergency_revoke' ,
             'LOGOUT'           => 'logout'           ,
+            'ORPHANED'         => 'orphaned'         ,
             'TOKENS_REVOKED'   => 'tokens_revoked'   ,
             'USER_DELETED'     => 'user_deleted'     ,
             'USER_DISABLED'    => 'user_disabled'    ,
@@ -36,6 +37,7 @@ class SessionRevocationReasonTest extends TestCase
             SessionRevocationReason::ADMIN_REVOKED    ,
             SessionRevocationReason::EMERGENCY_REVOKE ,
             SessionRevocationReason::LOGOUT           ,
+            SessionRevocationReason::ORPHANED         ,
             SessionRevocationReason::TOKENS_REVOKED   ,
             SessionRevocationReason::USER_DELETED     ,
             SessionRevocationReason::USER_DISABLED    ,
@@ -50,6 +52,7 @@ class SessionRevocationReasonTest extends TestCase
             [ SessionRevocationReason::ADMIN_REVOKED    ] ,
             [ SessionRevocationReason::EMERGENCY_REVOKE ] ,
             [ SessionRevocationReason::LOGOUT           ] ,
+            [ SessionRevocationReason::ORPHANED         ] ,
             [ SessionRevocationReason::TOKENS_REVOKED   ] ,
             [ SessionRevocationReason::USER_DELETED     ] ,
             [ SessionRevocationReason::USER_DISABLED    ] ,
@@ -62,6 +65,7 @@ class SessionRevocationReasonTest extends TestCase
         $this->assertTrue ( SessionRevocationReason::includes( 'admin_revoked'    ) );
         $this->assertTrue ( SessionRevocationReason::includes( 'emergency_revoke' ) );
         $this->assertTrue ( SessionRevocationReason::includes( 'logout'           ) );
+        $this->assertTrue ( SessionRevocationReason::includes( 'orphaned'         ) );
         $this->assertTrue ( SessionRevocationReason::includes( 'tokens_revoked'   ) );
         $this->assertTrue ( SessionRevocationReason::includes( 'user_deleted'     ) );
         $this->assertTrue ( SessionRevocationReason::includes( 'user_disabled'    ) );
@@ -76,6 +80,7 @@ class SessionRevocationReasonTest extends TestCase
         $this->assertContains( 'admin_revoked'    , $values );
         $this->assertContains( 'emergency_revoke' , $values );
         $this->assertContains( 'logout'           , $values );
+        $this->assertContains( 'orphaned'         , $values );
         $this->assertContains( 'tokens_revoked'   , $values );
         $this->assertContains( 'user_deleted'     , $values );
         $this->assertContains( 'user_disabled'    , $values );

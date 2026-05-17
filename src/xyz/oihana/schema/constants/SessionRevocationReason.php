@@ -93,6 +93,32 @@ class SessionRevocationReason
     public const string TOKENS_REVOKED = 'tokens_revoked' ;
 
     /**
+     * Indicates that the session was revoked because it became orphaned,
+     * meaning it no longer references a valid owning entity (user,
+     * application, device, or originating authentication context).
+     *
+     * This reason is typically surfaced by background cleanup jobs or
+     * integrity checks that detect sessions whose referential links are
+     * broken — for example a session whose owner record was removed
+     * outside of the standard deletion flow, or whose originating client
+     * or device entry no longer exists.
+     *
+     * Typical use cases include:
+     *
+     * - Scheduled garbage-collection of dangling sessions
+     * - Referential-integrity sweeps after a hard delete or data import
+     * - Reconciliation between the IdP and the local session store
+     * - Detection of sessions whose owning application was decommissioned
+     * - Cleanup of sessions left behind by an interrupted deletion flow
+     *
+     * Unlike USER_DELETED, which records an intentional user-deletion
+     * event, ORPHANED describes a detected dangling state without a
+     * known triggering event, and is primarily used for audit and
+     * cleanup purposes.
+     */
+    public const string ORPHANED = 'orphaned' ;
+
+    /**
      * Indicates that the session was revoked because the associated
      * user account was permanently removed from the system.
      */
