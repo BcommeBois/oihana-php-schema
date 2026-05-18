@@ -68,6 +68,26 @@ JSON-LD output
 }
 ```
 
+## 🗂️ Schemas overview
+
+The library exposes three top-level namespaces. Each row below links to a dedicated wiki guide (English / Français) that lists the classes, gives a code example and points to the source.
+
+| Namespace | What it covers | Classes | Wiki guide |
+|-----------|----------------|---------|------------|
+| `org\schema` | Full Schema.org vocabulary — typed value objects for `Thing`, `Person`, `Place`, `Event`, `Product`, `Offer`, the complete `Action` hierarchy, creative works, organizations, services, enumerations. | ~400 | [🇬🇧 EN](wiki/en/schema-org/README.md) · [🇫🇷 FR](wiki/fr/schema-org/README.md) |
+| `xyz\oihana\schema\auth` | OAuth2/OIDC clients, sessions, keyfiles, users, roles, permissions, RBAC policies, Casbin helpers, JWT claims registry. | 15 | [🇬🇧 EN](wiki/en/oihana-auth.md) · [🇫🇷 FR](wiki/fr/oihana-auth.md) |
+| `xyz\oihana\schema\places` | Operational locations: `Site`, `Office`, `Warehouse`, `JobSite`. | 4 | [🇬🇧 EN](wiki/en/oihana-places.md) · [🇫🇷 FR](wiki/fr/oihana-places.md) |
+| `xyz\oihana\schema` | Cross-cutting Oihana types: `Pagination`, `Log`, `AuditAction`, audit enumerations. | 3 + enums | [🇬🇧 EN](wiki/en/oihana-core.md) · [🇫🇷 FR](wiki/fr/oihana-core.md) |
+| `com\progress\schema` | OpenEdge Progress SQL `SYS%` system catalog: tables, columns, indexes, views, users, privileges, constraints, sequences, triggers, procedures, data types. | 16 | [🇬🇧 EN](wiki/en/openedge-progress.md) · [🇫🇷 FR](wiki/fr/openedge-progress.md) |
+
+Every entity extends `org\schema\Thing`, so they all share the same JSON-LD serialization, hydration and ArangoDB metadata. Sub-namespaces override the `CONTEXT` constant so downstream consumers can tell them apart:
+
+| Namespace                | JSON-LD `@context`                |
+|--------------------------|-----------------------------------|
+| `org\schema`             | `https://schema.org`              |
+| `xyz\oihana\schema*`     | `https://schema.oihana.xyz`       |
+| `com\progress\schema`    | `https://schema.progress.com`     |
+
 ## 🧠 Internal Architecture
 
 ### Base class: Thing
@@ -120,47 +140,17 @@ trait Thing
 
 ## 📚 Documentation
 
-Full project documentation is available at:  
-👉 https://bcommebois.github.io/oihana-php-schema
+Two complementary sets of documentation are available:
 
-A complete developer guide will be available soon, including:
-- UML diagrams
-- Object maps and relationships
-- Auto-generated property references
+- 📖 **Auto-generated API reference** (every class, property and method) — published at https://bcommebois.github.io/oihana-php-schema. Regenerate it locally with `composer doc`.
+- ✍️ **Hand-written wiki** (concepts, guides, walkthroughs) — bilingual EN/FR under [`wiki/`](wiki/README.md):
+  - 🇬🇧 [`wiki/en/README.md`](wiki/en/README.md) — English guides ([Getting started](wiki/en/getting-started.md))
+  - 🇫🇷 [`wiki/fr/README.md`](wiki/fr/README.md) — Guides en français ([Démarrage rapide](wiki/fr/demarrage.md))
 
-In the meantime, explore the following namespaces:	
-- org\schema\ for value objects
-- org\schema\traits for logic traits
-- org\schema\constants for property constants
-
-## 🇫🇷 xyz\\oihana Namespace (oihana.xyz extensions)
-
-In addition to the Schema.org core under `org\\schema`, this library provides an extension namespace for Oihana-specific needs used in the ecosystem: `xyz\\oihana\\schema`.
-
-What you will find there:
-- Value objects for domain-specific concepts (e.g., `xyz\\oihana\\schema\\Pagination`).
-- A constants container `xyz\\oihana\\schema\\constants\\Oihana` exposing safe property names via traits (e.g., `Pagination` constants).
-
-Example: model pagination parameters with JSON-LD support
-```php
-use xyz\oihana\schema\Pagination;
-use xyz\oihana\schema\constants\Oihana;
-
-$pagination = new Pagination
-([
-    Oihana::LIMIT => 50,
-    Oihana::PAGE  => 2,
-]);
-
-// JSON-LD with a dedicated context for Oihana extensions
-echo json_encode($pagination, JSON_UNESCAPED_SLASHES);
-// {"@type":"Pagination","@context":"https://schema.oihana.xyz","limit":50,"page":2}
-```
-
-Key points:
-- `Pagination` extends `org\schema\Intangible` and integrates seamlessly with the rest of the model.
-- `Pagination::CONTEXT` defaults to `https://schema.oihana.xyz` to distinguish Oihana extensions.
-- Use `xyz\oihana\schema\constants\Oihana` to reference property names safely: `Oihana::LIMIT`, `Oihana::OFFSET`, `Oihana::MAX_LIMIT`, `Oihana::MIN_LIMIT`, `Oihana::NUMBER_OF_PAGES`, `Oihana::PAGE`.
+While the wiki grows, you can also explore the following namespaces directly:
+- `org\schema\` for value objects
+- `org\schema\traits` for logic traits
+- `org\schema\constants` for property constants
 
 ## ✅ Running Unit Tests
 

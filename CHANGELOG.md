@@ -23,6 +23,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   - Adds 13 specialized constant traits (Authorization, Column, Common, Constraint, DataType, Index, Procedure, Sequence, Synonym, Table, Trigger, User, View) composed into a single Properties trait
   - Registers the PSR-4 autoload entry `com\progress\\` → `src/com/progress`
   - Adds the tests/com/progress unit-test suite (17 test classes, ~80 tests, 317 assertions) covering every system class and the Progress constants aggregator
+- Adds a hand-written bilingual EN/FR wiki under `wiki/` complementing the phpDocumentor API reference
+  - Adds wiki/en and wiki/fr language folders with reciprocal cross-links, getting-started guides (`getting-started.md` / `demarrage.md`) and per-namespace guides for `xyz\oihana\schema\auth`, `xyz\oihana\schema\places`, `xyz\oihana\schema` (cross-cutting types) and `com\progress\schema`
+  - Splits the `org\schema` guide under `schema-org/` into one sub-page per sub-namespace (`core`, `actions`, `creative-work`, `events`, `places`, `organizations`, `services`, `items`, `enumerations`)
+- Adds a `🗂️ Schemas overview` section in README.md with a summary table of all top-level namespaces and `@context` URIs, each row linking to the corresponding bilingual wiki guide
 - Adds the SchemaResolver helper class.
 - Adds the xyz\oihana\schema\auth namespace
   - Adds the WebApi (extends the schema.org definition), Permission, Role and User classes
