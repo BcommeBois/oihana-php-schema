@@ -6,7 +6,10 @@
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="../">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png"/>
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png"/>
     <link rel="icon" href="images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png"/>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/base.css">
             <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -68,6 +71,16 @@
                     <section class="phpdocumentor-sidebar__category -namespaces">
             <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/com.html" class="">com</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/com-progress.html" class="">progress</a>
+                
+            </li>
+            </ul>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="namespaces/org.html" class="">org</a>
 </h4>
     <ul class="phpdocumentor-list">
@@ -116,18 +129,29 @@
     <article class="phpdocumentor-element -trait">
         <h2 class="phpdocumentor-content__title">
     RoleTrait
+            <span class="phpdocumentor-trait__extends">
+            uses
+                            <a href="classes/xyz-oihana-schema-constants-traits-auth-PermissionsTrait.html"><abbr title="\xyz\oihana\schema\constants\traits\auth\PermissionsTrait">trait:short</abbr></a>,                             <a href="classes/xyz-oihana-schema-constants-traits-auth-PoliciesTrait.html"><abbr title="\xyz\oihana\schema\constants\traits\auth\PoliciesTrait">trait:short</abbr></a>,                             <a href="classes/xyz-oihana-schema-constants-traits-auth-ProtectedResourceTrait.html"><abbr title="\xyz\oihana\schema\constants\traits\auth\ProtectedResourceTrait">trait:short</abbr></a>,                             <a href="classes/xyz-oihana-schema-constants-traits-auth-UsersTrait.html"><abbr title="\xyz\oihana\schema\constants\traits\auth\UsersTrait">trait:short</abbr></a>                    </span>
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/RoleTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-roletrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/RoleTrait.php">RoleTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">12</span>
+    <span class="phpdocumentor-element-found-in__line">18</span>
 
     </aside>
 
             <p class="phpdocumentor-summary">The enumeration of all Roles properties.</p>
 
 
+    <section class="phpdocumentor-description"><p>Properties already available via other traits:</p>
+<ul>
+<li>PERMISSIONS, PERMISSIONS_COUNT (PermissionsTrait)</li>
+<li>POLICIES, POLICIES_COUNT       (PoliciesTrait)</li>
+<li>USERS, USERS_COUNT             (UsersTrait)</li>
+<li>COLOR, PROTECTED, SYSTEM       (ProtectedResourceTrait)</li>
+</ul>
+</section>
 
 
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
@@ -136,24 +160,22 @@
 
     </h5>
     <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">author</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                                
-                                                 <section class="phpdocumentor-description"><p>Marc Alcaraz (ekameleon)</p>
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">author</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                                                                                            <section class="phpdocumentor-description"><p>Marc Alcaraz (ekameleon)</p>
 </section>
 
                                     </dd>
-                                                <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">since</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
+                                <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
                                             <span class="phpdocumentor-tag-link">1.0.2</span>
-                                                                                
-                                             
+                                                                                                        
                                     </dd>
-                                            </dl>
+                        </dl>
 
     
     
@@ -176,39 +198,69 @@
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-RoleTrait.html#constant_PERMISSIONS">PERMISSIONS</a>
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-ProtectedResourceTrait.html#constant_COLOR">COLOR</a>
     <span>
-        &nbsp;= &#039;permissions&#039;                            </span>
+        &nbsp;: string&nbsp;= &#039;color&#039;                            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-RoleTrait.html#constant_PERMISSIONS_COUNT">PERMISSIONS_COUNT</a>
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-RoleTrait.html#constant_DEFAULT">DEFAULT</a>
     <span>
-        &nbsp;= &#039;permissionsCount&#039;                            </span>
+        &nbsp;: string&nbsp;= &#039;default&#039;                            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-RoleTrait.html#constant_PROTECTED">PROTECTED</a>
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-RoleTrait.html#constant_LEVEL">LEVEL</a>
     <span>
-        &nbsp;= &#039;protected&#039;                            </span>
+        &nbsp;: string&nbsp;= &#039;level&#039;                            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-RoleTrait.html#constant_SYSTEM">SYSTEM</a>
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-PermissionsTrait.html#constant_PERMISSIONS">PERMISSIONS</a>
     <span>
-        &nbsp;= &#039;system&#039;                            </span>
+        &nbsp;: string&nbsp;= &#039;permissions&#039;                            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-RoleTrait.html#constant_USERS">USERS</a>
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-PermissionsTrait.html#constant_PERMISSIONS_COUNT">PERMISSIONS_COUNT</a>
     <span>
-        &nbsp;= &#039;users&#039;                            </span>
+        &nbsp;: string&nbsp;= &#039;permissionsCount&#039;                            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-RoleTrait.html#constant_USERS_COUNT">USERS_COUNT</a>
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-PoliciesTrait.html#constant_POLICIES">POLICIES</a>
     <span>
-        &nbsp;= &#039;usersCount&#039;                            </span>
+        &nbsp;: string&nbsp;= &#039;policies&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-PoliciesTrait.html#constant_POLICIES_COUNT">POLICIES_COUNT</a>
+    <span>
+        &nbsp;: string&nbsp;= &#039;policiesCount&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-ProtectedResourceTrait.html#constant_PROTECTED">PROTECTED</a>
+    <span>
+        &nbsp;: string&nbsp;= &#039;protected&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-ProtectedResourceTrait.html#constant_SYSTEM">SYSTEM</a>
+    <span>
+        &nbsp;: string&nbsp;= &#039;system&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-UsersTrait.html#constant_USERS">USERS</a>
+    <span>
+        &nbsp;: string&nbsp;= &#039;users&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-UsersTrait.html#constant_USERS_COUNT">USERS_COUNT</a>
+    <span>
+        &nbsp;: string&nbsp;= &#039;usersCount&#039;                            </span>
 </dt>
 
     </dl>
@@ -227,14 +279,14 @@
 
         </h3>
                     <article class="phpdocumentor-element -constant -public ">
-    <h4 class="phpdocumentor-element__name" id="constant_PERMISSIONS">
-        PERMISSIONS
-        <a href="classes/xyz-oihana-schema-constants-traits-auth-RoleTrait.html#constant_PERMISSIONS" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="constant_COLOR">
+        COLOR
+        <a href="classes/xyz-oihana-schema-constants-traits-auth-ProtectedResourceTrait.html#constant_COLOR" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
 
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/RoleTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-roletrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/RoleTrait.php">RoleTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/ProtectedResourceTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-protectedresourcetrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/ProtectedResourceTrait.php">ProtectedResourceTrait.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">14</span>
 
@@ -244,7 +296,97 @@
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">COLOR</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;color&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_DEFAULT">
+        DEFAULT
+        <a href="classes/xyz-oihana-schema-constants-traits-auth-RoleTrait.html#constant_DEFAULT" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/RoleTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-roletrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/RoleTrait.php">RoleTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">25</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">DEFAULT</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;default&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_LEVEL">
+        LEVEL
+        <a href="classes/xyz-oihana-schema-constants-traits-auth-RoleTrait.html#constant_LEVEL" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/RoleTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-roletrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/RoleTrait.php">RoleTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">26</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">LEVEL</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;level&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_PERMISSIONS">
+        PERMISSIONS
+        <a href="classes/xyz-oihana-schema-constants-traits-auth-PermissionsTrait.html#constant_PERMISSIONS" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/PermissionsTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-permissionstrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/PermissionsTrait.php">PermissionsTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">13</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">PERMISSIONS</span>
     = <span class="phpdocumentor-signature__default-value">&#039;permissions&#039;</span>
 </code>
@@ -259,14 +401,14 @@
                     <article class="phpdocumentor-element -constant -public ">
     <h4 class="phpdocumentor-element__name" id="constant_PERMISSIONS_COUNT">
         PERMISSIONS_COUNT
-        <a href="classes/xyz-oihana-schema-constants-traits-auth-RoleTrait.html#constant_PERMISSIONS_COUNT" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/xyz-oihana-schema-constants-traits-auth-PermissionsTrait.html#constant_PERMISSIONS_COUNT" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
 
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/RoleTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-roletrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/RoleTrait.php">RoleTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/PermissionsTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-permissionstrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/PermissionsTrait.php">PermissionsTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">15</span>
+    <span class="phpdocumentor-element-found-in__line">14</span>
 
     </aside>
 
@@ -274,7 +416,7 @@
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">PERMISSIONS_COUNT</span>
     = <span class="phpdocumentor-signature__default-value">&#039;permissionsCount&#039;</span>
 </code>
@@ -287,16 +429,16 @@
         
     </article>
                     <article class="phpdocumentor-element -constant -public ">
-    <h4 class="phpdocumentor-element__name" id="constant_PROTECTED">
-        PROTECTED
-        <a href="classes/xyz-oihana-schema-constants-traits-auth-RoleTrait.html#constant_PROTECTED" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="constant_POLICIES">
+        POLICIES
+        <a href="classes/xyz-oihana-schema-constants-traits-auth-PoliciesTrait.html#constant_POLICIES" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
 
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/RoleTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-roletrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/RoleTrait.php">RoleTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/PoliciesTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-policiestrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/PoliciesTrait.php">PoliciesTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">16</span>
+    <span class="phpdocumentor-element-found-in__line">13</span>
 
     </aside>
 
@@ -304,7 +446,67 @@
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">POLICIES</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;policies&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_POLICIES_COUNT">
+        POLICIES_COUNT
+        <a href="classes/xyz-oihana-schema-constants-traits-auth-PoliciesTrait.html#constant_POLICIES_COUNT" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/PoliciesTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-policiestrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/PoliciesTrait.php">PoliciesTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">14</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">POLICIES_COUNT</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;policiesCount&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_PROTECTED">
+        PROTECTED
+        <a href="classes/xyz-oihana-schema-constants-traits-auth-ProtectedResourceTrait.html#constant_PROTECTED" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/ProtectedResourceTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-protectedresourcetrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/ProtectedResourceTrait.php">ProtectedResourceTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">15</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">PROTECTED</span>
     = <span class="phpdocumentor-signature__default-value">&#039;protected&#039;</span>
 </code>
@@ -319,14 +521,14 @@
                     <article class="phpdocumentor-element -constant -public ">
     <h4 class="phpdocumentor-element__name" id="constant_SYSTEM">
         SYSTEM
-        <a href="classes/xyz-oihana-schema-constants-traits-auth-RoleTrait.html#constant_SYSTEM" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/xyz-oihana-schema-constants-traits-auth-ProtectedResourceTrait.html#constant_SYSTEM" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
 
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/RoleTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-roletrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/RoleTrait.php">RoleTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/ProtectedResourceTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-protectedresourcetrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/ProtectedResourceTrait.php">ProtectedResourceTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">17</span>
+    <span class="phpdocumentor-element-found-in__line">16</span>
 
     </aside>
 
@@ -334,7 +536,7 @@
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">SYSTEM</span>
     = <span class="phpdocumentor-signature__default-value">&#039;system&#039;</span>
 </code>
@@ -349,14 +551,14 @@
                     <article class="phpdocumentor-element -constant -public ">
     <h4 class="phpdocumentor-element__name" id="constant_USERS">
         USERS
-        <a href="classes/xyz-oihana-schema-constants-traits-auth-RoleTrait.html#constant_USERS" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/xyz-oihana-schema-constants-traits-auth-UsersTrait.html#constant_USERS" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
 
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/RoleTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-roletrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/RoleTrait.php">RoleTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/UsersTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-userstrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/UsersTrait.php">UsersTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">18</span>
+    <span class="phpdocumentor-element-found-in__line">13</span>
 
     </aside>
 
@@ -364,7 +566,7 @@
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">USERS</span>
     = <span class="phpdocumentor-signature__default-value">&#039;users&#039;</span>
 </code>
@@ -379,14 +581,14 @@
                     <article class="phpdocumentor-element -constant -public ">
     <h4 class="phpdocumentor-element__name" id="constant_USERS_COUNT">
         USERS_COUNT
-        <a href="classes/xyz-oihana-schema-constants-traits-auth-RoleTrait.html#constant_USERS_COUNT" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/xyz-oihana-schema-constants-traits-auth-UsersTrait.html#constant_USERS_COUNT" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
 
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/RoleTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-roletrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/RoleTrait.php">RoleTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/UsersTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-userstrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/UsersTrait.php">UsersTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">19</span>
+    <span class="phpdocumentor-element-found-in__line">14</span>
 
     </aside>
 
@@ -394,7 +596,7 @@
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">USERS_COUNT</span>
     = <span class="phpdocumentor-signature__default-value">&#039;usersCount&#039;</span>
 </code>
@@ -411,100 +613,7 @@
         
 
         
-        <div class="phpdocumentor-modal" id="source-view">
-    <div class="phpdocumentor-modal-bg" data-exit-button></div>
-    <div class="phpdocumentor-modal-container">
-        <div class="phpdocumentor-modal-content">
-            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/src/xyz/oihana/schema/constants/traits/auth/RoleTrait.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
-        </div>
-        <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
-    </div>
-</div>
-
-    <script type="text/javascript">
-        (function () {
-            function loadExternalCodeSnippet(el, url, line) {
-                Array.prototype.slice.call(el.querySelectorAll('pre[data-src]')).forEach((pre) => {
-                    const src = url || pre.getAttribute('data-src').replace(/\\/g, '/');
-                    const language = 'php';
-
-                    const code = document.createElement('code');
-                    code.className = 'language-' + language;
-                    pre.textContent = '';
-                    pre.setAttribute('data-line', line)
-                    code.textContent = 'Loading…';
-                    pre.appendChild(code);
-
-                    var xhr = new XMLHttpRequest();
-
-                    xhr.open('GET', src, true);
-
-                    xhr.onreadystatechange = function () {
-                        if (xhr.readyState !== 4) {
-                            return;
-                        }
-
-                        if (xhr.status < 400 && xhr.responseText) {
-                            code.textContent = xhr.responseText;
-                            Prism.highlightElement(code);
-                            d=document.getElementsByClassName("line-numbers");
-                            d[0].scrollTop = d[0].children[1].offsetTop;
-                            return;
-                        }
-
-                        if (xhr.status === 404) {
-                            code.textContent = '✖ Error: File could not be found';
-                            return;
-                        }
-
-                        if (xhr.status >= 400) {
-                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
-                            return;
-                        }
-
-                        code.textContent = '✖ Error: An unknown error occurred';
-                    };
-
-                    xhr.send(null);
-                });
-            }
-
-            const modalButtons = document.querySelectorAll("[data-modal]");
-            const openedAsLocalFile = window.location.protocol === 'file:';
-            if (modalButtons.length > 0 && openedAsLocalFile) {
-                console.warn(
-                    'Viewing the source code is unavailable because you are opening this page from the file:// scheme; ' +
-                    'browsers block XHR requests when a page is opened this way'
-                );
-            }
-
-            modalButtons.forEach(function (trigger) {
-                if (openedAsLocalFile) {
-                    trigger.setAttribute("hidden", "hidden");
-                }
-
-                trigger.addEventListener("click", function (event) {
-                    event.preventDefault();
-                    const modal = document.getElementById(trigger.dataset.modal);
-                    if (!modal) {
-                        console.error(`Modal with id "${trigger.dataset.modal}" could not be found`);
-                        return;
-                    }
-                    modal.classList.add("phpdocumentor-modal__open");
-
-                    loadExternalCodeSnippet(modal, trigger.dataset.src || null, trigger.dataset.line)
-                    const exits = modal.querySelectorAll("[data-exit-button]");
-                    exits.forEach(function (exit) {
-                        exit.addEventListener("click", function (event) {
-                            event.preventDefault();
-                            modal.classList.remove("phpdocumentor-modal__open");
-                        });
-                    });
-                });
-            });
-        })();
-    </script>
-
+        
     </article>
                                 </section>
                 <section class="phpdocumentor-on-this-page__sidebar">
@@ -522,12 +631,17 @@
                         <li class="phpdocumentor-on-this-page-section__title">Constants</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-RoleTrait.html#constant_PERMISSIONS">PERMISSIONS</a></li>
-                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-RoleTrait.html#constant_PERMISSIONS_COUNT">PERMISSIONS_COUNT</a></li>
-                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-RoleTrait.html#constant_PROTECTED">PROTECTED</a></li>
-                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-RoleTrait.html#constant_SYSTEM">SYSTEM</a></li>
-                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-RoleTrait.html#constant_USERS">USERS</a></li>
-                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-RoleTrait.html#constant_USERS_COUNT">USERS_COUNT</a></li>
+                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-ProtectedResourceTrait.html#constant_COLOR">COLOR</a></li>
+                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-RoleTrait.html#constant_DEFAULT">DEFAULT</a></li>
+                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-RoleTrait.html#constant_LEVEL">LEVEL</a></li>
+                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-PermissionsTrait.html#constant_PERMISSIONS">PERMISSIONS</a></li>
+                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-PermissionsTrait.html#constant_PERMISSIONS_COUNT">PERMISSIONS_COUNT</a></li>
+                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-PoliciesTrait.html#constant_POLICIES">POLICIES</a></li>
+                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-PoliciesTrait.html#constant_POLICIES_COUNT">POLICIES_COUNT</a></li>
+                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-ProtectedResourceTrait.html#constant_PROTECTED">PROTECTED</a></li>
+                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-ProtectedResourceTrait.html#constant_SYSTEM">SYSTEM</a></li>
+                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-UsersTrait.html#constant_USERS">USERS</a></li>
+                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-UsersTrait.html#constant_USERS_COUNT">USERS_COUNT</a></li>
                                     </ul>
             </li>
                                             </ul>

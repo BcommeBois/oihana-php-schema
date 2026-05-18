@@ -6,7 +6,10 @@
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="../">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png"/>
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png"/>
     <link rel="icon" href="images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png"/>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/base.css">
             <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -68,6 +71,16 @@
                     <section class="phpdocumentor-sidebar__category -namespaces">
             <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/com.html" class="">com</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/com-progress.html" class="">progress</a>
+                
+            </li>
+            </ul>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="namespaces/org.html" class="">org</a>
 </h4>
     <ul class="phpdocumentor-list">
@@ -116,18 +129,46 @@
     <article class="phpdocumentor-element -trait">
         <h2 class="phpdocumentor-content__title">
     UserTrait
+            <span class="phpdocumentor-trait__extends">
+            uses
+                            <a href="classes/xyz-oihana-schema-constants-traits-auth-ApplicationsTrait.html"><abbr title="\xyz\oihana\schema\constants\traits\auth\ApplicationsTrait">trait:short</abbr></a>,                             <a href="classes/xyz-oihana-schema-constants-traits-auth-PermissionsTrait.html"><abbr title="\xyz\oihana\schema\constants\traits\auth\PermissionsTrait">trait:short</abbr></a>,                             <a href="classes/xyz-oihana-schema-constants-traits-auth-ProtectedResourceTrait.html"><abbr title="\xyz\oihana\schema\constants\traits\auth\ProtectedResourceTrait">trait:short</abbr></a>,                             <a href="classes/xyz-oihana-schema-constants-traits-auth-RolesTrait.html"><abbr title="\xyz\oihana\schema\constants\traits\auth\RolesTrait">trait:short</abbr></a>,                             <a href="classes/xyz-oihana-schema-constants-traits-auth-ServicesTrait.html"><abbr title="\xyz\oihana\schema\constants\traits\auth\ServicesTrait">trait:short</abbr></a>                    </span>
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-usertrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php">UserTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">12</span>
+    <span class="phpdocumentor-element-found-in__line">41</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">The enumeration of all Permission properties.</p>
+            <p class="phpdocumentor-summary">Defines the complete set of custom property names associated with
+authenticated user entities in the application domain.</p>
 
 
+    <section class="phpdocumentor-description"><p>This trait centralizes all user-related schema keys used by the
+authentication, authorization, identity, session-management,
+invitation, and RBAC layers of the project.</p>
+<p>The constants declared here are intended to:</p>
+<ul>
+<li>Normalize property naming across the codebase</li>
+<li>Avoid hardcoded string literals</li>
+<li>Improve IDE auto-completion and refactoring safety</li>
+<li>Provide a single source of truth for custom user attributes</li>
+<li>Facilitate schema serialization and hydration</li>
+<li>Ensure consistency between models, DTOs, APIs, and persistence layers</li>
+</ul>
+<p>This trait aggregates several specialized traits related to:</p>
+<ul>
+<li>Applications</li>
+<li>Permissions</li>
+<li>Protected resources</li>
+<li>Roles</li>
+<li>External or internal services</li>
+</ul>
+<p>Typical usage:</p>
+<pre class="prettyprint"><code class="language-php">$user[ UserTrait::STATUS ] = 'active' ;
+</code></pre>
+</section>
 
 
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
@@ -136,24 +177,22 @@
 
     </h5>
     <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">author</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                                
-                                                 <section class="phpdocumentor-description"><p>Marc Alcaraz (ekameleon)</p>
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">author</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                                                                                            <section class="phpdocumentor-description"><p>Marc Alcaraz (ekameleon)</p>
 </section>
 
                                     </dd>
-                                                <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">since</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
+                                <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
                                             <span class="phpdocumentor-tag-link">1.0.2</span>
-                                                                                
-                                             
+                                                                                                        
                                     </dd>
-                                            </dl>
+                        </dl>
 
     
     
@@ -176,76 +215,193 @@
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_ACTIVATED">ACTIVATED</a>
+    <span>
+        &nbsp;: string&nbsp;= &#039;activated&#039;                            </span>
+</dt>
+<dd>Indicates whether the user account has completed its activation flow.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_APP_META_DATA">APP_META_DATA</a>
     <span>
-        &nbsp;= &#039;appMetadata&#039;                            </span>
+        &nbsp;: string&nbsp;= &#039;appMetadata&#039;                            </span>
+</dt>
+<dd>Read-only metadata associated with the user.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-ApplicationsTrait.html#constant_APPLICATIONS">APPLICATIONS</a>
+    <span>
+        &nbsp;: string&nbsp;= &#039;applications&#039;                            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_APPLICATIONS">APPLICATIONS</a>
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-ApplicationsTrait.html#constant_APPLICATIONS_COUNT">APPLICATIONS_COUNT</a>
     <span>
-        &nbsp;= &#039;applications&#039;                            </span>
+        &nbsp;: string&nbsp;= &#039;applicationsCount&#039;                            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_BLOCKED_FOR">BLOCKED_FOR</a>
     <span>
-        &nbsp;= &#039;blockedFor&#039;                            </span>
+        &nbsp;: string&nbsp;= &#039;blockedFor&#039;                            </span>
+</dt>
+<dd>Indicates why or for which scope the user is blocked.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-ProtectedResourceTrait.html#constant_COLOR">COLOR</a>
+    <span>
+        &nbsp;: string&nbsp;= &#039;color&#039;                            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_DEVICES">DEVICES</a>
     <span>
-        &nbsp;= &#039;devices&#039;                            </span>
+        &nbsp;: string&nbsp;= &#039;devices&#039;                            </span>
 </dt>
+<dd>Collection of known or trusted user devices.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_FIRST_LOGIN_AT">FIRST_LOGIN_AT</a>
+    <span>
+        &nbsp;: string&nbsp;= &#039;firstLoginAt&#039;                            </span>
+</dt>
+<dd>Timestamp of the user&#039;s first successful login.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_INVITATION_STATUS">INVITATION_STATUS</a>
+    <span>
+        &nbsp;: string&nbsp;= &#039;invitationStatus&#039;                            </span>
+</dt>
+<dd>Materialized lifecycle status of the latest invitation associated
+with the user.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_LAST_LOGIN">LAST_LOGIN</a>
     <span>
-        &nbsp;= &#039;lastLogin&#039;                            </span>
+        &nbsp;: string&nbsp;= &#039;lastLogin&#039;                            </span>
 </dt>
+<dd>Timestamp of the user&#039;s most recent successful authentication.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_LOGINS_COUNT">LOGINS_COUNT</a>
     <span>
-        &nbsp;= &#039;loginsCount&#039;                            </span>
+        &nbsp;: string&nbsp;= &#039;loginsCount&#039;                            </span>
 </dt>
+<dd>Total number of successful user authentications.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_MAX_LEVEL">MAX_LEVEL</a>
+    <span>
+        &nbsp;: string&nbsp;= &#039;maxLevel&#039;                            </span>
+</dt>
+<dd>Maximum role level assigned to the user across all associated roles.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_METADATA">METADATA</a>
     <span>
-        &nbsp;= &#039;metadata&#039;                            </span>
+        &nbsp;: string&nbsp;= &#039;metadata&#039;                            </span>
+</dt>
+<dd>Read/write metadata associated with the user.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_PENDING_EMAIL">PENDING_EMAIL</a>
+    <span>
+        &nbsp;: string&nbsp;= &#039;pendingEmail&#039;                            </span>
+</dt>
+<dd>Email address currently awaiting verification.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_PENDING_EMAIL_CODE_EXPIRES_AT">PENDING_EMAIL_CODE_EXPIRES_AT</a>
+    <span>
+        &nbsp;: string&nbsp;= &#039;pendingEmailCodeExpiresAt&#039;                            </span>
+</dt>
+<dd>Expiration timestamp of the verification code associated with
+the pending email workflow.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_PENDING_EMAIL_CODE_HASH">PENDING_EMAIL_CODE_HASH</a>
+    <span>
+        &nbsp;: string&nbsp;= &#039;pendingEmailCodeHash&#039;                            </span>
+</dt>
+<dd>Secure hash of the verification code associated with the
+pending email verification workflow.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_PENDING_EMAIL_SINCE">PENDING_EMAIL_SINCE</a>
+    <span>
+        &nbsp;: string&nbsp;= &#039;pendingEmailSince&#039;                            </span>
+</dt>
+<dd>Timestamp indicating when the pending email workflow started.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-PermissionsTrait.html#constant_PERMISSIONS">PERMISSIONS</a>
+    <span>
+        &nbsp;: string&nbsp;= &#039;permissions&#039;                            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_PERMISSIONS">PERMISSIONS</a>
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-PermissionsTrait.html#constant_PERMISSIONS_COUNT">PERMISSIONS_COUNT</a>
     <span>
-        &nbsp;= &#039;permissions&#039;                            </span>
+        &nbsp;: string&nbsp;= &#039;permissionsCount&#039;                            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_PERMISSIONS_COUNT">PERMISSIONS_COUNT</a>
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-ProtectedResourceTrait.html#constant_PROTECTED">PROTECTED</a>
     <span>
-        &nbsp;= &#039;permissionsCount&#039;                            </span>
+        &nbsp;: string&nbsp;= &#039;protected&#039;                            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_ROLES">ROLES</a>
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-RolesTrait.html#constant_ROLES">ROLES</a>
     <span>
-        &nbsp;= &#039;roles&#039;                            </span>
+        &nbsp;: string&nbsp;= &#039;roles&#039;                            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_ROLES_COUNT">ROLES_COUNT</a>
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-RolesTrait.html#constant_ROLES_COUNT">ROLES_COUNT</a>
     <span>
-        &nbsp;= &#039;rolesCount&#039;                            </span>
+        &nbsp;: string&nbsp;= &#039;rolesCount&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-ServicesTrait.html#constant_SERVICES">SERVICES</a>
+    <span>
+        &nbsp;: string&nbsp;= &#039;services&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-ServicesTrait.html#constant_SERVICES_COUNT">SERVICES_COUNT</a>
+    <span>
+        &nbsp;: string&nbsp;= &#039;servicesCount&#039;                            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_SIGNED_UP">SIGNED_UP</a>
     <span>
-        &nbsp;= &#039;signedUp&#039;                            </span>
+        &nbsp;: string&nbsp;= &#039;signedUp&#039;                            </span>
 </dt>
+<dd>Indicates whether the user completed the signup workflow.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_STATUS">STATUS</a>
+    <span>
+        &nbsp;: string&nbsp;= &#039;status&#039;                            </span>
+</dt>
+<dd>Lifecycle status of the user account.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-ProtectedResourceTrait.html#constant_SYSTEM">SYSTEM</a>
+    <span>
+        &nbsp;: string&nbsp;= &#039;system&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_TOKENS_INVALID_BEFORE">TOKENS_INVALID_BEFORE</a>
+    <span>
+        &nbsp;: string&nbsp;= &#039;tokensInvalidBefore&#039;                            </span>
+</dt>
+<dd>Epoch-seconds timestamp defining the authentication revocation
+cutoff for all access tokens issued to the user.</dd>
 
     </dl>
 
@@ -263,6 +419,43 @@
 
         </h3>
                     <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_ACTIVATED">
+        ACTIVATED
+        <a href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_ACTIVATED" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-usertrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php">UserTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">61</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Indicates whether the user account has completed its activation flow.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">ACTIVATED</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;activated&#039;</span>
+</code>
+
+
+        <section class="phpdocumentor-description"><p>This flag is generally set after the first successful authentication
+or after an email/account verification workflow.</p>
+<p>Related model property:</p>
+<pre class="prettyprint"><code class="language-php">public bool|null $activated ;
+</code></pre>
+</section>
+
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
     <h4 class="phpdocumentor-element__name" id="constant_APP_META_DATA">
         APP_META_DATA
         <a href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_APP_META_DATA" class="headerlink"><i class="fas fa-link"></i></a>
@@ -272,7 +465,50 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-usertrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php">UserTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">14</span>
+    <span class="phpdocumentor-element-found-in__line">80</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Read-only metadata associated with the user.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">APP_META_DATA</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;appMetadata&#039;</span>
+</code>
+
+
+        <section class="phpdocumentor-description"><p>Commonly used for:</p>
+<ul>
+<li>Roles</li>
+<li>Permission snapshots</li>
+<li>VIP flags</li>
+<li>Internal application configuration</li>
+<li>Derived authorization information</li>
+</ul>
+<p>Related model property:</p>
+<pre class="prettyprint"><code class="language-php">public array|object|null $appMetadata ;
+</code></pre>
+</section>
+
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_APPLICATIONS">
+        APPLICATIONS
+        <a href="classes/xyz-oihana-schema-constants-traits-auth-ApplicationsTrait.html#constant_APPLICATIONS" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/ApplicationsTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-applicationstrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/ApplicationsTrait.php">ApplicationsTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">13</span>
 
     </aside>
 
@@ -280,9 +516,9 @@
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">APP_META_DATA</span>
-    = <span class="phpdocumentor-signature__default-value">&#039;appMetadata&#039;</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">APPLICATIONS</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;applications&#039;</span>
 </code>
 
 
@@ -293,16 +529,16 @@
         
     </article>
                     <article class="phpdocumentor-element -constant -public ">
-    <h4 class="phpdocumentor-element__name" id="constant_APPLICATIONS">
-        APPLICATIONS
-        <a href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_APPLICATIONS" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="constant_APPLICATIONS_COUNT">
+        APPLICATIONS_COUNT
+        <a href="classes/xyz-oihana-schema-constants-traits-auth-ApplicationsTrait.html#constant_APPLICATIONS_COUNT" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
 
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-usertrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php">UserTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/ApplicationsTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-applicationstrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/ApplicationsTrait.php">ApplicationsTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">15</span>
+    <span class="phpdocumentor-element-found-in__line">14</span>
 
     </aside>
 
@@ -310,9 +546,9 @@
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">APPLICATIONS</span>
-    = <span class="phpdocumentor-signature__default-value">&#039;applications&#039;</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">APPLICATIONS_COUNT</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;applicationsCount&#039;</span>
 </code>
 
 
@@ -332,7 +568,49 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-usertrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php">UserTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">16</span>
+    <span class="phpdocumentor-element-found-in__line">98</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Indicates why or for which scope the user is blocked.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">BLOCKED_FOR</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;blockedFor&#039;</span>
+</code>
+
+
+        <section class="phpdocumentor-description"><p>This field may contain:</p>
+<ul>
+<li>API restrictions</li>
+<li>Application-specific bans</li>
+<li>Temporary suspension reasons</li>
+<li>Security mitigation contexts</li>
+</ul>
+<p>Related model property:</p>
+<pre class="prettyprint"><code class="language-php">public array|string|null $blockedFor ;
+</code></pre>
+</section>
+
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_COLOR">
+        COLOR
+        <a href="classes/xyz-oihana-schema-constants-traits-auth-ProtectedResourceTrait.html#constant_COLOR" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/ProtectedResourceTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-protectedresourcetrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/ProtectedResourceTrait.php">ProtectedResourceTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">14</span>
 
     </aside>
 
@@ -340,9 +618,9 @@
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">BLOCKED_FOR</span>
-    = <span class="phpdocumentor-signature__default-value">&#039;blockedFor&#039;</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">COLOR</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;color&#039;</span>
 </code>
 
 
@@ -362,21 +640,115 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-usertrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php">UserTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">17</span>
+    <span class="phpdocumentor-element-found-in__line">116</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Collection of known or trusted user devices.</p>
+
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">DEVICES</span>
     = <span class="phpdocumentor-signature__default-value">&#039;devices&#039;</span>
 </code>
 
 
+        <section class="phpdocumentor-description"><p>Used to:</p>
+<ul>
+<li>Manage refresh-token associations</li>
+<li>Revoke sessions per device</li>
+<li>Force reauthentication</li>
+<li>Track authenticated environments</li>
+</ul>
+<p>Related model property:</p>
+<pre class="prettyprint"><code class="language-php">public array|null $devices ;
+</code></pre>
+</section>
+
     
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_FIRST_LOGIN_AT">
+        FIRST_LOGIN_AT
+        <a href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_FIRST_LOGIN_AT" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-usertrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php">UserTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">129</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Timestamp of the user&#039;s first successful login.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">FIRST_LOGIN_AT</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;firstLoginAt&#039;</span>
+</code>
+
+
+        <section class="phpdocumentor-description"><p>Immutable audit-oriented field generally stored in ISO 8601 format.</p>
+<p>Related model property:</p>
+<pre class="prettyprint"><code class="language-php">public string|null $firstLoginAt ;
+</code></pre>
+</section>
+
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_INVITATION_STATUS">
+        INVITATION_STATUS
+        <a href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_INVITATION_STATUS" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-usertrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php">UserTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">152</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Materialized lifecycle status of the latest invitation associated
+with the user.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">INVITATION_STATUS</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;invitationStatus&#039;</span>
+</code>
+
+
+        <section class="phpdocumentor-description"><p>Used by administrative interfaces to expose invitation state
+without requiring additional collection lookups.</p>
+<p>Typical values include:</p>
+<ul>
+<li>pending</li>
+<li>accepted</li>
+<li>cancelled</li>
+<li>expired</li>
+<li>revoked</li>
+</ul>
+<p>Related model property:</p>
+<pre class="prettyprint"><code class="language-php">public string|null $invitationStatus ;
+</code></pre>
+</section>
+
     
     
 
@@ -392,21 +764,26 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-usertrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php">UserTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">18</span>
+    <span class="phpdocumentor-element-found-in__line">163</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Timestamp of the user&#039;s most recent successful authentication.</p>
+
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">LAST_LOGIN</span>
     = <span class="phpdocumentor-signature__default-value">&#039;lastLogin&#039;</span>
 </code>
 
 
-    
+        <section class="phpdocumentor-description"><p>Related model property:</p>
+<pre class="prettyprint"><code class="language-php">public string|null $lastLogin ;
+</code></pre>
+</section>
+
     
     
 
@@ -422,21 +799,70 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-usertrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php">UserTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">19</span>
+    <span class="phpdocumentor-element-found-in__line">181</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Total number of successful user authentications.</p>
+
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">LOGINS_COUNT</span>
     = <span class="phpdocumentor-signature__default-value">&#039;loginsCount&#039;</span>
 </code>
 
 
+        <section class="phpdocumentor-description"><p>Commonly used for:</p>
+<ul>
+<li>Analytics</li>
+<li>User activity indicators</li>
+<li>Security heuristics</li>
+<li>Administrative dashboards</li>
+</ul>
+<p>Related model property:</p>
+<pre class="prettyprint"><code class="language-php">public int|null $loginsCount ;
+</code></pre>
+</section>
+
     
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_MAX_LEVEL">
+        MAX_LEVEL
+        <a href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_MAX_LEVEL" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-usertrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php">UserTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">195</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Maximum role level assigned to the user across all associated roles.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">MAX_LEVEL</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;maxLevel&#039;</span>
+</code>
+
+
+        <section class="phpdocumentor-description"><p>Materialized helper field mainly used by administrative interfaces
+to expose hierarchy hints and UX restrictions.</p>
+<p>Related model property:</p>
+<pre class="prettyprint"><code class="language-php">public int|null $maxLevel ;
+</code></pre>
+</section>
+
     
     
 
@@ -452,21 +878,180 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-usertrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php">UserTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">20</span>
+    <span class="phpdocumentor-element-found-in__line">213</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Read/write metadata associated with the user.</p>
+
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">METADATA</span>
     = <span class="phpdocumentor-signature__default-value">&#039;metadata&#039;</span>
 </code>
 
 
+        <section class="phpdocumentor-description"><p>Typically contains:</p>
+<ul>
+<li>User preferences</li>
+<li>UI customization</li>
+<li>Profile extensions</li>
+<li>Domain-specific settings</li>
+</ul>
+<p>Related model property:</p>
+<pre class="prettyprint"><code class="language-php">public array|object|null $metadata ;
+</code></pre>
+</section>
+
     
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_PENDING_EMAIL">
+        PENDING_EMAIL
+        <a href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_PENDING_EMAIL" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-usertrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php">UserTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">227</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Email address currently awaiting verification.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">PENDING_EMAIL</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;pendingEmail&#039;</span>
+</code>
+
+
+        <section class="phpdocumentor-description"><p>Used during email-change workflows where the previously verified
+email remains authoritative until confirmation succeeds.</p>
+<p>Related model property:</p>
+<pre class="prettyprint"><code class="language-php">public string|null $pendingEmail ;
+</code></pre>
+</section>
+
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_PENDING_EMAIL_CODE_EXPIRES_AT">
+        PENDING_EMAIL_CODE_EXPIRES_AT
+        <a href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_PENDING_EMAIL_CODE_EXPIRES_AT" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-usertrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php">UserTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">241</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Expiration timestamp of the verification code associated with
+the pending email workflow.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">PENDING_EMAIL_CODE_EXPIRES_AT</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;pendingEmailCodeExpiresAt&#039;</span>
+</code>
+
+
+        <section class="phpdocumentor-description"><p>Usually stored as an ISO 8601 string.</p>
+<p>Related model property:</p>
+<pre class="prettyprint"><code class="language-php">public string|null $pendingEmailCodeExpiresAt ;
+</code></pre>
+</section>
+
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_PENDING_EMAIL_CODE_HASH">
+        PENDING_EMAIL_CODE_HASH
+        <a href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_PENDING_EMAIL_CODE_HASH" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-usertrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php">UserTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">255</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Secure hash of the verification code associated with the
+pending email verification workflow.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">PENDING_EMAIL_CODE_HASH</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;pendingEmailCodeHash&#039;</span>
+</code>
+
+
+        <section class="phpdocumentor-description"><p>The raw verification code must never be persisted.</p>
+<p>Related model property:</p>
+<pre class="prettyprint"><code class="language-php">public string|null $pendingEmailCodeHash ;
+</code></pre>
+</section>
+
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_PENDING_EMAIL_SINCE">
+        PENDING_EMAIL_SINCE
+        <a href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_PENDING_EMAIL_SINCE" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-usertrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php">UserTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">268</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Timestamp indicating when the pending email workflow started.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">PENDING_EMAIL_SINCE</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;pendingEmailSince&#039;</span>
+</code>
+
+
+        <section class="phpdocumentor-description"><p>Usually stored as an ISO 8601 string.</p>
+<p>Related model property:</p>
+<pre class="prettyprint"><code class="language-php">public string|null $pendingEmailSince ;
+</code></pre>
+</section>
+
     
     
 
@@ -475,14 +1060,14 @@
                     <article class="phpdocumentor-element -constant -public ">
     <h4 class="phpdocumentor-element__name" id="constant_PERMISSIONS">
         PERMISSIONS
-        <a href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_PERMISSIONS" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/xyz-oihana-schema-constants-traits-auth-PermissionsTrait.html#constant_PERMISSIONS" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
 
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-usertrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php">UserTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/PermissionsTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-permissionstrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/PermissionsTrait.php">PermissionsTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">21</span>
+    <span class="phpdocumentor-element-found-in__line">13</span>
 
     </aside>
 
@@ -490,7 +1075,7 @@
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">PERMISSIONS</span>
     = <span class="phpdocumentor-signature__default-value">&#039;permissions&#039;</span>
 </code>
@@ -505,14 +1090,14 @@
                     <article class="phpdocumentor-element -constant -public ">
     <h4 class="phpdocumentor-element__name" id="constant_PERMISSIONS_COUNT">
         PERMISSIONS_COUNT
-        <a href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_PERMISSIONS_COUNT" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/xyz-oihana-schema-constants-traits-auth-PermissionsTrait.html#constant_PERMISSIONS_COUNT" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
 
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-usertrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php">UserTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/PermissionsTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-permissionstrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/PermissionsTrait.php">PermissionsTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">22</span>
+    <span class="phpdocumentor-element-found-in__line">14</span>
 
     </aside>
 
@@ -520,7 +1105,7 @@
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">PERMISSIONS_COUNT</span>
     = <span class="phpdocumentor-signature__default-value">&#039;permissionsCount&#039;</span>
 </code>
@@ -533,16 +1118,16 @@
         
     </article>
                     <article class="phpdocumentor-element -constant -public ">
-    <h4 class="phpdocumentor-element__name" id="constant_ROLES">
-        ROLES
-        <a href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_ROLES" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="constant_PROTECTED">
+        PROTECTED
+        <a href="classes/xyz-oihana-schema-constants-traits-auth-ProtectedResourceTrait.html#constant_PROTECTED" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
 
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-usertrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php">UserTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/ProtectedResourceTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-protectedresourcetrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/ProtectedResourceTrait.php">ProtectedResourceTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">23</span>
+    <span class="phpdocumentor-element-found-in__line">15</span>
 
     </aside>
 
@@ -550,7 +1135,37 @@
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">PROTECTED</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;protected&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_ROLES">
+        ROLES
+        <a href="classes/xyz-oihana-schema-constants-traits-auth-RolesTrait.html#constant_ROLES" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/RolesTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-rolestrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/RolesTrait.php">RolesTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">13</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">ROLES</span>
     = <span class="phpdocumentor-signature__default-value">&#039;roles&#039;</span>
 </code>
@@ -565,14 +1180,14 @@
                     <article class="phpdocumentor-element -constant -public ">
     <h4 class="phpdocumentor-element__name" id="constant_ROLES_COUNT">
         ROLES_COUNT
-        <a href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_ROLES_COUNT" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/xyz-oihana-schema-constants-traits-auth-RolesTrait.html#constant_ROLES_COUNT" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
 
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-usertrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php">UserTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/RolesTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-rolestrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/RolesTrait.php">RolesTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">24</span>
+    <span class="phpdocumentor-element-found-in__line">14</span>
 
     </aside>
 
@@ -580,9 +1195,69 @@
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">ROLES_COUNT</span>
     = <span class="phpdocumentor-signature__default-value">&#039;rolesCount&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_SERVICES">
+        SERVICES
+        <a href="classes/xyz-oihana-schema-constants-traits-auth-ServicesTrait.html#constant_SERVICES" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/ServicesTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-servicestrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/ServicesTrait.php">ServicesTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">13</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">SERVICES</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;services&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_SERVICES_COUNT">
+        SERVICES_COUNT
+        <a href="classes/xyz-oihana-schema-constants-traits-auth-ServicesTrait.html#constant_SERVICES_COUNT" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/ServicesTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-servicestrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/ServicesTrait.php">ServicesTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">14</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">SERVICES_COUNT</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;servicesCount&#039;</span>
 </code>
 
 
@@ -602,7 +1277,85 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-usertrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php">UserTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">25</span>
+    <span class="phpdocumentor-element-found-in__line">279</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Indicates whether the user completed the signup workflow.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">SIGNED_UP</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;signedUp&#039;</span>
+</code>
+
+
+        <section class="phpdocumentor-description"><p>Related model property:</p>
+<pre class="prettyprint"><code class="language-php">public string|null $signedUp ;
+</code></pre>
+</section>
+
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_STATUS">
+        STATUS
+        <a href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_STATUS" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-usertrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php">UserTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">299</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Lifecycle status of the user account.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">STATUS</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;status&#039;</span>
+</code>
+
+
+        <section class="phpdocumentor-description"><p>This status controls whether authentication and access are allowed.</p>
+<p>Typical values include:</p>
+<ul>
+<li>active</li>
+<li>disabled</li>
+<li>suspended</li>
+<li>pending</li>
+</ul>
+<p>Related model property:</p>
+<pre class="prettyprint"><code class="language-php">public string|null $status ;
+</code></pre>
+</section>
+
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_SYSTEM">
+        SYSTEM
+        <a href="classes/xyz-oihana-schema-constants-traits-auth-ProtectedResourceTrait.html#constant_SYSTEM" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/ProtectedResourceTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-protectedresourcetrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/ProtectedResourceTrait.php">ProtectedResourceTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">16</span>
 
     </aside>
 
@@ -610,13 +1363,71 @@
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">SIGNED_UP</span>
-    = <span class="phpdocumentor-signature__default-value">&#039;signedUp&#039;</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">SYSTEM</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;system&#039;</span>
 </code>
 
 
     
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_TOKENS_INVALID_BEFORE">
+        TOKENS_INVALID_BEFORE
+        <a href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_TOKENS_INVALID_BEFORE" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-usertrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/UserTrait.php">UserTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">339</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Epoch-seconds timestamp defining the authentication revocation
+cutoff for all access tokens issued to the user.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">TOKENS_INVALID_BEFORE</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;tokensInvalidBefore&#039;</span>
+</code>
+
+
+        <section class="phpdocumentor-description"><p>This property is updated during bulk session revocation flows,
+including:</p>
+<ul>
+<li>Administrative &quot;revoke all sessions&quot; actions</li>
+<li>Self-service &quot;log out everywhere&quot; operations</li>
+<li>Security incident mitigation procedures</li>
+</ul>
+<p>During authentication, the middleware compares this value against
+the JWT <code class="prettyprint">iat</code> (issued-at) claim:</p>
+<pre class="prettyprint"><code class="language-text">token.iat &lt; tokensInvalidBefore
+</code></pre>
+<p>If true, the token is rejected with:</p>
+<ul>
+<li>HTTP status <code class="prettyprint">401 Unauthorized</code></li>
+<li>revocation reason <code class="prettyprint">tokens_revoked</code></li>
+</ul>
+<p>even when the token signature and expiration are still valid.</p>
+<p>The value is intentionally stored as an integer epoch timestamp
+rather than ISO 8601 for extremely fast integer comparisons during
+authenticated API requests.</p>
+<p>A <code class="prettyprint">null</code> value means no global token revocation cutoff currently
+applies to the user.</p>
+<p>Related model property:</p>
+<pre class="prettyprint"><code class="language-php">public int|null $tokensInvalidBefore ;
+</code></pre>
+</section>
+
     
     
 
@@ -627,100 +1438,7 @@
         
 
         
-        <div class="phpdocumentor-modal" id="source-view">
-    <div class="phpdocumentor-modal-bg" data-exit-button></div>
-    <div class="phpdocumentor-modal-container">
-        <div class="phpdocumentor-modal-content">
-            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/src/xyz/oihana/schema/constants/traits/auth/UserTrait.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
-        </div>
-        <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
-    </div>
-</div>
-
-    <script type="text/javascript">
-        (function () {
-            function loadExternalCodeSnippet(el, url, line) {
-                Array.prototype.slice.call(el.querySelectorAll('pre[data-src]')).forEach((pre) => {
-                    const src = url || pre.getAttribute('data-src').replace(/\\/g, '/');
-                    const language = 'php';
-
-                    const code = document.createElement('code');
-                    code.className = 'language-' + language;
-                    pre.textContent = '';
-                    pre.setAttribute('data-line', line)
-                    code.textContent = 'Loading…';
-                    pre.appendChild(code);
-
-                    var xhr = new XMLHttpRequest();
-
-                    xhr.open('GET', src, true);
-
-                    xhr.onreadystatechange = function () {
-                        if (xhr.readyState !== 4) {
-                            return;
-                        }
-
-                        if (xhr.status < 400 && xhr.responseText) {
-                            code.textContent = xhr.responseText;
-                            Prism.highlightElement(code);
-                            d=document.getElementsByClassName("line-numbers");
-                            d[0].scrollTop = d[0].children[1].offsetTop;
-                            return;
-                        }
-
-                        if (xhr.status === 404) {
-                            code.textContent = '✖ Error: File could not be found';
-                            return;
-                        }
-
-                        if (xhr.status >= 400) {
-                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
-                            return;
-                        }
-
-                        code.textContent = '✖ Error: An unknown error occurred';
-                    };
-
-                    xhr.send(null);
-                });
-            }
-
-            const modalButtons = document.querySelectorAll("[data-modal]");
-            const openedAsLocalFile = window.location.protocol === 'file:';
-            if (modalButtons.length > 0 && openedAsLocalFile) {
-                console.warn(
-                    'Viewing the source code is unavailable because you are opening this page from the file:// scheme; ' +
-                    'browsers block XHR requests when a page is opened this way'
-                );
-            }
-
-            modalButtons.forEach(function (trigger) {
-                if (openedAsLocalFile) {
-                    trigger.setAttribute("hidden", "hidden");
-                }
-
-                trigger.addEventListener("click", function (event) {
-                    event.preventDefault();
-                    const modal = document.getElementById(trigger.dataset.modal);
-                    if (!modal) {
-                        console.error(`Modal with id "${trigger.dataset.modal}" could not be found`);
-                        return;
-                    }
-                    modal.classList.add("phpdocumentor-modal__open");
-
-                    loadExternalCodeSnippet(modal, trigger.dataset.src || null, trigger.dataset.line)
-                    const exits = modal.querySelectorAll("[data-exit-button]");
-                    exits.forEach(function (exit) {
-                        exit.addEventListener("click", function (event) {
-                            event.preventDefault();
-                            modal.classList.remove("phpdocumentor-modal__open");
-                        });
-                    });
-                });
-            });
-        })();
-    </script>
-
+        
     </article>
                                 </section>
                 <section class="phpdocumentor-on-this-page__sidebar">
@@ -738,18 +1456,34 @@
                         <li class="phpdocumentor-on-this-page-section__title">Constants</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
+                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_ACTIVATED">ACTIVATED</a></li>
                                             <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_APP_META_DATA">APP_META_DATA</a></li>
-                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_APPLICATIONS">APPLICATIONS</a></li>
+                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-ApplicationsTrait.html#constant_APPLICATIONS">APPLICATIONS</a></li>
+                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-ApplicationsTrait.html#constant_APPLICATIONS_COUNT">APPLICATIONS_COUNT</a></li>
                                             <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_BLOCKED_FOR">BLOCKED_FOR</a></li>
+                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-ProtectedResourceTrait.html#constant_COLOR">COLOR</a></li>
                                             <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_DEVICES">DEVICES</a></li>
+                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_FIRST_LOGIN_AT">FIRST_LOGIN_AT</a></li>
+                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_INVITATION_STATUS">INVITATION_STATUS</a></li>
                                             <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_LAST_LOGIN">LAST_LOGIN</a></li>
                                             <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_LOGINS_COUNT">LOGINS_COUNT</a></li>
+                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_MAX_LEVEL">MAX_LEVEL</a></li>
                                             <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_METADATA">METADATA</a></li>
-                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_PERMISSIONS">PERMISSIONS</a></li>
-                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_PERMISSIONS_COUNT">PERMISSIONS_COUNT</a></li>
-                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_ROLES">ROLES</a></li>
-                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_ROLES_COUNT">ROLES_COUNT</a></li>
+                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_PENDING_EMAIL">PENDING_EMAIL</a></li>
+                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_PENDING_EMAIL_CODE_EXPIRES_AT">PENDING_EMAIL_CODE_EXPIRES_AT</a></li>
+                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_PENDING_EMAIL_CODE_HASH">PENDING_EMAIL_CODE_HASH</a></li>
+                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_PENDING_EMAIL_SINCE">PENDING_EMAIL_SINCE</a></li>
+                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-PermissionsTrait.html#constant_PERMISSIONS">PERMISSIONS</a></li>
+                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-PermissionsTrait.html#constant_PERMISSIONS_COUNT">PERMISSIONS_COUNT</a></li>
+                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-ProtectedResourceTrait.html#constant_PROTECTED">PROTECTED</a></li>
+                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-RolesTrait.html#constant_ROLES">ROLES</a></li>
+                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-RolesTrait.html#constant_ROLES_COUNT">ROLES_COUNT</a></li>
+                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-ServicesTrait.html#constant_SERVICES">SERVICES</a></li>
+                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-ServicesTrait.html#constant_SERVICES_COUNT">SERVICES_COUNT</a></li>
                                             <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_SIGNED_UP">SIGNED_UP</a></li>
+                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_STATUS">STATUS</a></li>
+                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-ProtectedResourceTrait.html#constant_SYSTEM">SYSTEM</a></li>
+                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-UserTrait.html#constant_TOKENS_INVALID_BEFORE">TOKENS_INVALID_BEFORE</a></li>
                                     </ul>
             </li>
                                             </ul>

@@ -6,7 +6,10 @@
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="../">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png"/>
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png"/>
     <link rel="icon" href="images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png"/>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/base.css">
             <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -68,6 +71,16 @@
                     <section class="phpdocumentor-sidebar__category -namespaces">
             <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/com.html" class="">com</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/com-progress.html" class="">progress</a>
+                
+            </li>
+            </ul>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="namespaces/org.html" class="">org</a>
 </h4>
     <ul class="phpdocumentor-list">
@@ -120,7 +133,7 @@
     
             <span class="phpdocumentor-element__extends">
             uses
-                            <a href="classes/xyz-oihana-schema-constants-traits-AuthTrait.html"><abbr title="\xyz\oihana\schema\constants\traits\AuthTrait">AuthTrait</abbr></a>,                             <a href="classes/xyz-oihana-schema-constants-traits-LogTrait.html"><abbr title="\xyz\oihana\schema\constants\traits\LogTrait">LogTrait</abbr></a>,                             <a href="classes/xyz-oihana-schema-constants-traits-PaginationTrait.html"><abbr title="\xyz\oihana\schema\constants\traits\PaginationTrait">PaginationTrait</abbr></a>,                             <a href="classes/xyz-oihana-schema-constants-traits-places-SiteTrait.html"><abbr title="\xyz\oihana\schema\constants\traits\places\SiteTrait">SiteTrait</abbr></a>                    </span>
+                            <a href="classes/xyz-oihana-schema-constants-traits-AuditTrait.html"><abbr title="\xyz\oihana\schema\constants\traits\AuditTrait">AuditTrait</abbr></a>,                             <a href="classes/xyz-oihana-schema-constants-traits-AuthTrait.html"><abbr title="\xyz\oihana\schema\constants\traits\AuthTrait">AuthTrait</abbr></a>,                             <a href="classes/xyz-oihana-schema-constants-traits-LogTrait.html"><abbr title="\xyz\oihana\schema\constants\traits\LogTrait">LogTrait</abbr></a>,                             <a href="classes/xyz-oihana-schema-constants-traits-PaginationTrait.html"><abbr title="\xyz\oihana\schema\constants\traits\PaginationTrait">PaginationTrait</abbr></a>,                             <a href="classes/xyz-oihana-schema-constants-traits-places-SiteTrait.html"><abbr title="\xyz\oihana\schema\constants\traits\places\SiteTrait">SiteTrait</abbr></a>                    </span>
     </h2>
 
 <div class="phpdocumentor-label-line">
@@ -131,7 +144,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/Oihana.php"><a href="files/src-xyz-oihana-schema-constants-oihana.html"><abbr title="src/xyz/oihana/schema/constants/Oihana.php">Oihana.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">10</span>
+    <span class="phpdocumentor-element-found-in__line">11</span>
 
     </aside>
 
@@ -163,95 +176,151 @@
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/xyz-oihana-schema-constants-traits-LogTrait.html#constant_DATE">DATE</a>
     <span>
-        &nbsp;= &#039;date&#039;                            </span>
+        &nbsp;: string&nbsp;= &#039;date&#039;                            </span>
 </dt>
 <dd>The attribute key of the &#039;date&#039; property.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/xyz-oihana-schema-constants-traits-places-SiteTrait.html#constant_DELIVERY_METHOD">DELIVERY_METHOD</a>
     <span>
-        &nbsp;= &#039;deliveryMethod&#039;                            </span>
+        &nbsp;: string&nbsp;= &#039;deliveryMethod&#039;                            </span>
 </dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-AuditTrait.html#constant_EVENT">EVENT</a>
+    <span>
+        &nbsp;: string&nbsp;= &#039;event&#039;                            </span>
+</dt>
+<dd>The audit event tag (e.g. `role.created`, `user.deleted`).</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-AuditTrait.html#constant_IP">IP</a>
+    <span>
+        &nbsp;: string&nbsp;= &#039;ip&#039;                            </span>
+</dt>
+<dd>The IP address of the client that performed the action.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/xyz-oihana-schema-constants-traits-LogTrait.html#constant_LEVEL">LEVEL</a>
     <span>
-        &nbsp;= &#039;level&#039;                            </span>
+        &nbsp;: string&nbsp;= &#039;level&#039;                            </span>
 </dt>
 <dd>The attribute key of the &#039;level&#039; property.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/xyz-oihana-schema-constants-traits-PaginationTrait.html#constant_LIMIT">LIMIT</a>
     <span>
-        &nbsp;= &#039;limit&#039;                            </span>
+        &nbsp;: string&nbsp;= &#039;limit&#039;                            </span>
 </dt>
 <dd>The attribute key for the &#039;limit&#039; property.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/xyz-oihana-schema-constants-traits-PaginationTrait.html#constant_MAX_LIMIT">MAX_LIMIT</a>
     <span>
-        &nbsp;= &#039;maxLimit&#039;                            </span>
+        &nbsp;: string&nbsp;= &#039;maxLimit&#039;                            </span>
 </dt>
 <dd>The attribute key for the &#039;maxLimit&#039; property.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/xyz-oihana-schema-constants-traits-LogTrait.html#constant_MESSAGE">MESSAGE</a>
     <span>
-        &nbsp;= &#039;message&#039;                            </span>
+        &nbsp;: string&nbsp;= &#039;message&#039;                            </span>
 </dt>
 <dd>The attribute key of the &#039;message&#039; property.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-AuditTrait.html#constant_METHOD">METHOD</a>
+    <span>
+        &nbsp;: string&nbsp;= &#039;method&#039;                            </span>
+</dt>
+<dd>The HTTP method used (POST, PATCH, PUT, DELETE).</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/xyz-oihana-schema-constants-traits-PaginationTrait.html#constant_MIN_LIMIT">MIN_LIMIT</a>
     <span>
-        &nbsp;= &#039;minLimit&#039;                            </span>
+        &nbsp;: string&nbsp;= &#039;minLimit&#039;                            </span>
 </dt>
 <dd>The attribute key for the &#039;minLimit&#039; property.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/xyz-oihana-schema-constants-traits-PaginationTrait.html#constant_NUMBER_OF_PAGES">NUMBER_OF_PAGES</a>
     <span>
-        &nbsp;= &#039;numberOfPages&#039;                            </span>
+        &nbsp;: string&nbsp;= &#039;numberOfPages&#039;                            </span>
 </dt>
 <dd>The attribute key for the &#039;numberOfPages&#039; property.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/xyz-oihana-schema-constants-traits-PaginationTrait.html#constant_OFFSET">OFFSET</a>
     <span>
-        &nbsp;= &#039;offset&#039;                            </span>
+        &nbsp;: string&nbsp;= &#039;offset&#039;                            </span>
 </dt>
 <dd>The attribute key for the &#039;offset&#039; property.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-AuditTrait.html#constant_OUTCOME">OUTCOME</a>
+    <span>
+        &nbsp;: string&nbsp;= &#039;outcome&#039;                            </span>
+</dt>
+<dd>The machine-readable outcome of the action (e.g. `success`, `denied`, `error`).</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/xyz-oihana-schema-constants-traits-places-SiteTrait.html#constant_OWNED_BY">OWNED_BY</a>
     <span>
-        &nbsp;= &#039;ownedBy&#039;                            </span>
+        &nbsp;: string&nbsp;= &#039;ownedBy&#039;                            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/xyz-oihana-schema-constants-traits-PaginationTrait.html#constant_PAGE">PAGE</a>
     <span>
-        &nbsp;= &#039;page&#039;                            </span>
+        &nbsp;: string&nbsp;= &#039;page&#039;                            </span>
 </dt>
 <dd>The attribute key for the &#039;page&#039; property.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-AuditTrait.html#constant_PATH">PATH</a>
+    <span>
+        &nbsp;: string&nbsp;= &#039;path&#039;                            </span>
+</dt>
+<dd>The full request path (e.g. `/roles/42`).</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/xyz-oihana-schema-constants-traits-places-SiteTrait.html#constant_POSITION">POSITION</a>
     <span>
-        &nbsp;= &#039;position&#039;                            </span>
+        &nbsp;: string&nbsp;= &#039;position&#039;                            </span>
 </dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-AuditTrait.html#constant_RESOURCE">RESOURCE</a>
+    <span>
+        &nbsp;: string&nbsp;= &#039;resource&#039;                            </span>
+</dt>
+<dd>The resource collection name (e.g. `roles`, `users`, `permissions`).</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-AuditTrait.html#constant_RESOURCE_ID">RESOURCE_ID</a>
+    <span>
+        &nbsp;: string&nbsp;= &#039;resourceId&#039;                            </span>
+</dt>
+<dd>The `_key` of the targeted document in the resource collection.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/xyz-oihana-schema-constants-Oihana.html#constant_SCHEMA">SCHEMA</a>
     <span>
-        &nbsp;= &#039;https://schema.oihana.xyz&#039;                            </span>
+        &nbsp;: string&nbsp;= &#039;https://schema.oihana.xyz&#039;                            </span>
 </dt>
 <dd>The default oihana schema.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-AuditTrait.html#constant_STATUS_CODE">STATUS_CODE</a>
+    <span>
+        &nbsp;: string&nbsp;= &#039;statusCode&#039;                            </span>
+</dt>
+<dd>The HTTP status code of the response.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/xyz-oihana-schema-constants-traits-LogTrait.html#constant_TIME">TIME</a>
     <span>
-        &nbsp;= &#039;time&#039;                            </span>
+        &nbsp;: string&nbsp;= &#039;time&#039;                            </span>
 </dt>
 <dd>The attribute key of the &#039;time&#039; property.</dd>
 
@@ -288,7 +357,7 @@
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">DATE</span>
     = <span class="phpdocumentor-signature__default-value">&#039;date&#039;</span>
 </code>
@@ -318,9 +387,71 @@
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">DELIVERY_METHOD</span>
     = <span class="phpdocumentor-signature__default-value">&#039;deliveryMethod&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_EVENT">
+        EVENT
+        <a href="classes/xyz-oihana-schema-constants-traits-AuditTrait.html#constant_EVENT" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/AuditTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-audittrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/AuditTrait.php">AuditTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">17</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The audit event tag (e.g. `role.created`, `user.deleted`).</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">EVENT</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;event&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_IP">
+        IP
+        <a href="classes/xyz-oihana-schema-constants-traits-AuditTrait.html#constant_IP" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/AuditTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-audittrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/AuditTrait.php">AuditTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">22</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The IP address of the client that performed the action.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">IP</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;ip&#039;</span>
 </code>
 
 
@@ -349,7 +480,7 @@
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">LEVEL</span>
     = <span class="phpdocumentor-signature__default-value">&#039;level&#039;</span>
 </code>
@@ -380,7 +511,7 @@
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">LIMIT</span>
     = <span class="phpdocumentor-signature__default-value">&#039;limit&#039;</span>
 </code>
@@ -414,7 +545,7 @@ in an array, JSON, or other structured representation.</p>
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">MAX_LIMIT</span>
     = <span class="phpdocumentor-signature__default-value">&#039;maxLimit&#039;</span>
 </code>
@@ -447,9 +578,40 @@ in an array, JSON, or other structured representation.</p>
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">MESSAGE</span>
     = <span class="phpdocumentor-signature__default-value">&#039;message&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_METHOD">
+        METHOD
+        <a href="classes/xyz-oihana-schema-constants-traits-AuditTrait.html#constant_METHOD" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/AuditTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-audittrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/AuditTrait.php">AuditTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">27</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The HTTP method used (POST, PATCH, PUT, DELETE).</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">METHOD</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;method&#039;</span>
 </code>
 
 
@@ -478,7 +640,7 @@ in an array, JSON, or other structured representation.</p>
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">MIN_LIMIT</span>
     = <span class="phpdocumentor-signature__default-value">&#039;minLimit&#039;</span>
 </code>
@@ -511,7 +673,7 @@ in an array, JSON, or other structured representation.</p>
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">NUMBER_OF_PAGES</span>
     = <span class="phpdocumentor-signature__default-value">&#039;numberOfPages&#039;</span>
 </code>
@@ -545,7 +707,7 @@ Can be used to generate pagination controls or metadata.</p>
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">OFFSET</span>
     = <span class="phpdocumentor-signature__default-value">&#039;offset&#039;</span>
 </code>
@@ -554,6 +716,37 @@ Can be used to generate pagination controls or metadata.</p>
         <section class="phpdocumentor-description"><p>Indicates the number of items to skip before starting to collect the result set.</p>
 </section>
 
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_OUTCOME">
+        OUTCOME
+        <a href="classes/xyz-oihana-schema-constants-traits-AuditTrait.html#constant_OUTCOME" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/AuditTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-audittrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/AuditTrait.php">AuditTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">32</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The machine-readable outcome of the action (e.g. `success`, `denied`, `error`).</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">OUTCOME</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;outcome&#039;</span>
+</code>
+
+
+    
     
     
 
@@ -577,7 +770,7 @@ Can be used to generate pagination controls or metadata.</p>
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">OWNED_BY</span>
     = <span class="phpdocumentor-signature__default-value">&#039;ownedBy&#039;</span>
 </code>
@@ -608,7 +801,7 @@ Can be used to generate pagination controls or metadata.</p>
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">PAGE</span>
     = <span class="phpdocumentor-signature__default-value">&#039;page&#039;</span>
 </code>
@@ -617,6 +810,37 @@ Can be used to generate pagination controls or metadata.</p>
         <section class="phpdocumentor-description"><p>Indicates the current page number in the paginated collection.</p>
 </section>
 
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_PATH">
+        PATH
+        <a href="classes/xyz-oihana-schema-constants-traits-AuditTrait.html#constant_PATH" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/AuditTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-audittrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/AuditTrait.php">AuditTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">37</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The full request path (e.g. `/roles/42`).</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">PATH</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;path&#039;</span>
+</code>
+
+
+    
     
     
 
@@ -640,9 +864,71 @@ Can be used to generate pagination controls or metadata.</p>
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">POSITION</span>
     = <span class="phpdocumentor-signature__default-value">&#039;position&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_RESOURCE">
+        RESOURCE
+        <a href="classes/xyz-oihana-schema-constants-traits-AuditTrait.html#constant_RESOURCE" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/AuditTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-audittrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/AuditTrait.php">AuditTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">42</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The resource collection name (e.g. `roles`, `users`, `permissions`).</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">RESOURCE</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;resource&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_RESOURCE_ID">
+        RESOURCE_ID
+        <a href="classes/xyz-oihana-schema-constants-traits-AuditTrait.html#constant_RESOURCE_ID" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/AuditTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-audittrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/AuditTrait.php">AuditTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">47</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The `_key` of the targeted document in the resource collection.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">RESOURCE_ID</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;resourceId&#039;</span>
 </code>
 
 
@@ -662,7 +948,7 @@ Can be used to generate pagination controls or metadata.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/Oihana.php"><a href="files/src-xyz-oihana-schema-constants-oihana.html"><abbr title="src/xyz/oihana/schema/constants/Oihana.php">Oihana.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">15</span>
+    <span class="phpdocumentor-element-found-in__line">16</span>
 
     </aside>
 
@@ -671,9 +957,40 @@ Can be used to generate pagination controls or metadata.</p>
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">SCHEMA</span>
     = <span class="phpdocumentor-signature__default-value">&#039;https://schema.oihana.xyz&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_STATUS_CODE">
+        STATUS_CODE
+        <a href="classes/xyz-oihana-schema-constants-traits-AuditTrait.html#constant_STATUS_CODE" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/AuditTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-audittrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/AuditTrait.php">AuditTrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">52</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The HTTP status code of the response.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">STATUS_CODE</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;statusCode&#039;</span>
 </code>
 
 
@@ -702,7 +1019,7 @@ Can be used to generate pagination controls or metadata.</p>
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">TIME</span>
     = <span class="phpdocumentor-signature__default-value">&#039;time&#039;</span>
 </code>
@@ -719,100 +1036,7 @@ Can be used to generate pagination controls or metadata.</p>
         
 
         
-        <div class="phpdocumentor-modal" id="source-view">
-    <div class="phpdocumentor-modal-bg" data-exit-button></div>
-    <div class="phpdocumentor-modal-container">
-        <div class="phpdocumentor-modal-content">
-            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/src/xyz/oihana/schema/constants/Oihana.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
-        </div>
-        <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
-    </div>
-</div>
-
-    <script type="text/javascript">
-        (function () {
-            function loadExternalCodeSnippet(el, url, line) {
-                Array.prototype.slice.call(el.querySelectorAll('pre[data-src]')).forEach((pre) => {
-                    const src = url || pre.getAttribute('data-src').replace(/\\/g, '/');
-                    const language = 'php';
-
-                    const code = document.createElement('code');
-                    code.className = 'language-' + language;
-                    pre.textContent = '';
-                    pre.setAttribute('data-line', line)
-                    code.textContent = 'Loading…';
-                    pre.appendChild(code);
-
-                    var xhr = new XMLHttpRequest();
-
-                    xhr.open('GET', src, true);
-
-                    xhr.onreadystatechange = function () {
-                        if (xhr.readyState !== 4) {
-                            return;
-                        }
-
-                        if (xhr.status < 400 && xhr.responseText) {
-                            code.textContent = xhr.responseText;
-                            Prism.highlightElement(code);
-                            d=document.getElementsByClassName("line-numbers");
-                            d[0].scrollTop = d[0].children[1].offsetTop;
-                            return;
-                        }
-
-                        if (xhr.status === 404) {
-                            code.textContent = '✖ Error: File could not be found';
-                            return;
-                        }
-
-                        if (xhr.status >= 400) {
-                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
-                            return;
-                        }
-
-                        code.textContent = '✖ Error: An unknown error occurred';
-                    };
-
-                    xhr.send(null);
-                });
-            }
-
-            const modalButtons = document.querySelectorAll("[data-modal]");
-            const openedAsLocalFile = window.location.protocol === 'file:';
-            if (modalButtons.length > 0 && openedAsLocalFile) {
-                console.warn(
-                    'Viewing the source code is unavailable because you are opening this page from the file:// scheme; ' +
-                    'browsers block XHR requests when a page is opened this way'
-                );
-            }
-
-            modalButtons.forEach(function (trigger) {
-                if (openedAsLocalFile) {
-                    trigger.setAttribute("hidden", "hidden");
-                }
-
-                trigger.addEventListener("click", function (event) {
-                    event.preventDefault();
-                    const modal = document.getElementById(trigger.dataset.modal);
-                    if (!modal) {
-                        console.error(`Modal with id "${trigger.dataset.modal}" could not be found`);
-                        return;
-                    }
-                    modal.classList.add("phpdocumentor-modal__open");
-
-                    loadExternalCodeSnippet(modal, trigger.dataset.src || null, trigger.dataset.line)
-                    const exits = modal.querySelectorAll("[data-exit-button]");
-                    exits.forEach(function (exit) {
-                        exit.addEventListener("click", function (event) {
-                            event.preventDefault();
-                            modal.classList.remove("phpdocumentor-modal__open");
-                        });
-                    });
-                });
-            });
-        })();
-    </script>
-
+        
     </article>
                                 </section>
                 <section class="phpdocumentor-on-this-page__sidebar">
@@ -832,17 +1056,25 @@ Can be used to generate pagination controls or metadata.</p>
                     <ul class="phpdocumentor-list -clean">
                                                     <li class=""><a href="classes/xyz-oihana-schema-constants-traits-LogTrait.html#constant_DATE">DATE</a></li>
                                                     <li class=""><a href="classes/xyz-oihana-schema-constants-traits-places-SiteTrait.html#constant_DELIVERY_METHOD">DELIVERY_METHOD</a></li>
+                                                    <li class=""><a href="classes/xyz-oihana-schema-constants-traits-AuditTrait.html#constant_EVENT">EVENT</a></li>
+                                                    <li class=""><a href="classes/xyz-oihana-schema-constants-traits-AuditTrait.html#constant_IP">IP</a></li>
                                                     <li class=""><a href="classes/xyz-oihana-schema-constants-traits-LogTrait.html#constant_LEVEL">LEVEL</a></li>
                                                     <li class=""><a href="classes/xyz-oihana-schema-constants-traits-PaginationTrait.html#constant_LIMIT">LIMIT</a></li>
                                                     <li class=""><a href="classes/xyz-oihana-schema-constants-traits-PaginationTrait.html#constant_MAX_LIMIT">MAX_LIMIT</a></li>
                                                     <li class=""><a href="classes/xyz-oihana-schema-constants-traits-LogTrait.html#constant_MESSAGE">MESSAGE</a></li>
+                                                    <li class=""><a href="classes/xyz-oihana-schema-constants-traits-AuditTrait.html#constant_METHOD">METHOD</a></li>
                                                     <li class=""><a href="classes/xyz-oihana-schema-constants-traits-PaginationTrait.html#constant_MIN_LIMIT">MIN_LIMIT</a></li>
                                                     <li class=""><a href="classes/xyz-oihana-schema-constants-traits-PaginationTrait.html#constant_NUMBER_OF_PAGES">NUMBER_OF_PAGES</a></li>
                                                     <li class=""><a href="classes/xyz-oihana-schema-constants-traits-PaginationTrait.html#constant_OFFSET">OFFSET</a></li>
+                                                    <li class=""><a href="classes/xyz-oihana-schema-constants-traits-AuditTrait.html#constant_OUTCOME">OUTCOME</a></li>
                                                     <li class=""><a href="classes/xyz-oihana-schema-constants-traits-places-SiteTrait.html#constant_OWNED_BY">OWNED_BY</a></li>
                                                     <li class=""><a href="classes/xyz-oihana-schema-constants-traits-PaginationTrait.html#constant_PAGE">PAGE</a></li>
+                                                    <li class=""><a href="classes/xyz-oihana-schema-constants-traits-AuditTrait.html#constant_PATH">PATH</a></li>
                                                     <li class=""><a href="classes/xyz-oihana-schema-constants-traits-places-SiteTrait.html#constant_POSITION">POSITION</a></li>
+                                                    <li class=""><a href="classes/xyz-oihana-schema-constants-traits-AuditTrait.html#constant_RESOURCE">RESOURCE</a></li>
+                                                    <li class=""><a href="classes/xyz-oihana-schema-constants-traits-AuditTrait.html#constant_RESOURCE_ID">RESOURCE_ID</a></li>
                                                     <li class=""><a href="classes/xyz-oihana-schema-constants-Oihana.html#constant_SCHEMA">SCHEMA</a></li>
+                                                    <li class=""><a href="classes/xyz-oihana-schema-constants-traits-AuditTrait.html#constant_STATUS_CODE">STATUS_CODE</a></li>
                                                     <li class=""><a href="classes/xyz-oihana-schema-constants-traits-LogTrait.html#constant_TIME">TIME</a></li>
                                             </ul>
                 </li>

@@ -6,7 +6,10 @@
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="../">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png"/>
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png"/>
     <link rel="icon" href="images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png"/>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/base.css">
             <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -68,6 +71,16 @@
                     <section class="phpdocumentor-sidebar__category -namespaces">
             <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/com.html" class="">com</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/com-progress.html" class="">progress</a>
+                
+            </li>
+            </ul>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="namespaces/org.html" class="">org</a>
 </h4>
     <ul class="phpdocumentor-list">
@@ -116,18 +129,26 @@
     <article class="phpdocumentor-element -trait">
         <h2 class="phpdocumentor-content__title">
     WebApplicationTrait
+            <span class="phpdocumentor-trait__extends">
+            uses
+                            <a href="classes/xyz-oihana-schema-constants-traits-auth-ClientIdTrait.html"><abbr title="\xyz\oihana\schema\constants\traits\auth\ClientIdTrait">trait:short</abbr></a>                    </span>
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/WebApplicationTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-webapplicationtrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/WebApplicationTrait.php">WebApplicationTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">12</span>
+    <span class="phpdocumentor-element-found-in__line">15</span>
 
     </aside>
 
             <p class="phpdocumentor-summary">The enumeration of all WebApplication properties.</p>
 
 
+    <section class="phpdocumentor-description"><p>Properties already available via other traits:</p>
+<ul>
+<li>CLIENT_ID (ClientIdTrait)</li>
+</ul>
+</section>
 
 
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
@@ -136,24 +157,22 @@
 
     </h5>
     <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">author</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                                
-                                                 <section class="phpdocumentor-description"><p>Marc Alcaraz (ekameleon)</p>
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">author</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                                                                                            <section class="phpdocumentor-description"><p>Marc Alcaraz (ekameleon)</p>
 </section>
 
                                     </dd>
-                                                <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">since</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
+                                <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
                                             <span class="phpdocumentor-tag-link">1.0.2</span>
-                                                                                
-                                             
+                                                                                                        
                                     </dd>
-                                            </dl>
+                        </dl>
 
     
     
@@ -178,31 +197,31 @@
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-WebApplicationTrait.html#constant_API_IDENTIFIER">API_IDENTIFIER</a>
     <span>
-        &nbsp;= &#039;apiIdentifier&#039;                            </span>
+        &nbsp;: string&nbsp;= &#039;apiIdentifier&#039;                            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-WebApplicationTrait.html#constant_APPLICATION_TYPE">APPLICATION_TYPE</a>
     <span>
-        &nbsp;= &#039;applicationType&#039;                            </span>
+        &nbsp;: string&nbsp;= &#039;applicationType&#039;                            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-WebApplicationTrait.html#constant_CLIENT_ID">CLIENT_ID</a>
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-ClientIdTrait.html#constant_CLIENT_ID">CLIENT_ID</a>
     <span>
-        &nbsp;= &#039;clientId&#039;                            </span>
+        &nbsp;: string&nbsp;= &#039;clientId&#039;                            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-WebApplicationTrait.html#constant_POST_LOGOUT_REDIRECT_URIS">POST_LOGOUT_REDIRECT_URIS</a>
     <span>
-        &nbsp;= &#039;postLogoutRedirectUris&#039;                            </span>
+        &nbsp;: string&nbsp;= &#039;postLogoutRedirectUris&#039;                            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-WebApplicationTrait.html#constant_REDIRECT_URIS">REDIRECT_URIS</a>
     <span>
-        &nbsp;= &#039;redirectUris&#039;                            </span>
+        &nbsp;: string&nbsp;= &#039;redirectUris&#039;                            </span>
 </dt>
 
     </dl>
@@ -230,7 +249,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/WebApplicationTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-webapplicationtrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/WebApplicationTrait.php">WebApplicationTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">14</span>
+    <span class="phpdocumentor-element-found-in__line">19</span>
 
     </aside>
 
@@ -238,7 +257,7 @@
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">API_IDENTIFIER</span>
     = <span class="phpdocumentor-signature__default-value">&#039;apiIdentifier&#039;</span>
 </code>
@@ -260,7 +279,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/WebApplicationTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-webapplicationtrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/WebApplicationTrait.php">WebApplicationTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">15</span>
+    <span class="phpdocumentor-element-found-in__line">20</span>
 
     </aside>
 
@@ -268,7 +287,7 @@
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">APPLICATION_TYPE</span>
     = <span class="phpdocumentor-signature__default-value">&#039;applicationType&#039;</span>
 </code>
@@ -283,14 +302,14 @@
                     <article class="phpdocumentor-element -constant -public ">
     <h4 class="phpdocumentor-element__name" id="constant_CLIENT_ID">
         CLIENT_ID
-        <a href="classes/xyz-oihana-schema-constants-traits-auth-WebApplicationTrait.html#constant_CLIENT_ID" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/xyz-oihana-schema-constants-traits-auth-ClientIdTrait.html#constant_CLIENT_ID" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
 
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/WebApplicationTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-webapplicationtrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/WebApplicationTrait.php">WebApplicationTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/ClientIdTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-clientidtrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/ClientIdTrait.php">ClientIdTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">16</span>
+    <span class="phpdocumentor-element-found-in__line">14</span>
 
     </aside>
 
@@ -298,7 +317,7 @@
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">CLIENT_ID</span>
     = <span class="phpdocumentor-signature__default-value">&#039;clientId&#039;</span>
 </code>
@@ -320,7 +339,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/WebApplicationTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-webapplicationtrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/WebApplicationTrait.php">WebApplicationTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">17</span>
+    <span class="phpdocumentor-element-found-in__line">21</span>
 
     </aside>
 
@@ -328,7 +347,7 @@
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">POST_LOGOUT_REDIRECT_URIS</span>
     = <span class="phpdocumentor-signature__default-value">&#039;postLogoutRedirectUris&#039;</span>
 </code>
@@ -350,7 +369,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/WebApplicationTrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-webapplicationtrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/WebApplicationTrait.php">WebApplicationTrait.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">18</span>
+    <span class="phpdocumentor-element-found-in__line">22</span>
 
     </aside>
 
@@ -358,7 +377,7 @@
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">REDIRECT_URIS</span>
     = <span class="phpdocumentor-signature__default-value">&#039;redirectUris&#039;</span>
 </code>
@@ -375,100 +394,7 @@
         
 
         
-        <div class="phpdocumentor-modal" id="source-view">
-    <div class="phpdocumentor-modal-bg" data-exit-button></div>
-    <div class="phpdocumentor-modal-container">
-        <div class="phpdocumentor-modal-content">
-            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/src/xyz/oihana/schema/constants/traits/auth/WebApplicationTrait.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
-        </div>
-        <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
-    </div>
-</div>
-
-    <script type="text/javascript">
-        (function () {
-            function loadExternalCodeSnippet(el, url, line) {
-                Array.prototype.slice.call(el.querySelectorAll('pre[data-src]')).forEach((pre) => {
-                    const src = url || pre.getAttribute('data-src').replace(/\\/g, '/');
-                    const language = 'php';
-
-                    const code = document.createElement('code');
-                    code.className = 'language-' + language;
-                    pre.textContent = '';
-                    pre.setAttribute('data-line', line)
-                    code.textContent = 'Loading…';
-                    pre.appendChild(code);
-
-                    var xhr = new XMLHttpRequest();
-
-                    xhr.open('GET', src, true);
-
-                    xhr.onreadystatechange = function () {
-                        if (xhr.readyState !== 4) {
-                            return;
-                        }
-
-                        if (xhr.status < 400 && xhr.responseText) {
-                            code.textContent = xhr.responseText;
-                            Prism.highlightElement(code);
-                            d=document.getElementsByClassName("line-numbers");
-                            d[0].scrollTop = d[0].children[1].offsetTop;
-                            return;
-                        }
-
-                        if (xhr.status === 404) {
-                            code.textContent = '✖ Error: File could not be found';
-                            return;
-                        }
-
-                        if (xhr.status >= 400) {
-                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
-                            return;
-                        }
-
-                        code.textContent = '✖ Error: An unknown error occurred';
-                    };
-
-                    xhr.send(null);
-                });
-            }
-
-            const modalButtons = document.querySelectorAll("[data-modal]");
-            const openedAsLocalFile = window.location.protocol === 'file:';
-            if (modalButtons.length > 0 && openedAsLocalFile) {
-                console.warn(
-                    'Viewing the source code is unavailable because you are opening this page from the file:// scheme; ' +
-                    'browsers block XHR requests when a page is opened this way'
-                );
-            }
-
-            modalButtons.forEach(function (trigger) {
-                if (openedAsLocalFile) {
-                    trigger.setAttribute("hidden", "hidden");
-                }
-
-                trigger.addEventListener("click", function (event) {
-                    event.preventDefault();
-                    const modal = document.getElementById(trigger.dataset.modal);
-                    if (!modal) {
-                        console.error(`Modal with id "${trigger.dataset.modal}" could not be found`);
-                        return;
-                    }
-                    modal.classList.add("phpdocumentor-modal__open");
-
-                    loadExternalCodeSnippet(modal, trigger.dataset.src || null, trigger.dataset.line)
-                    const exits = modal.querySelectorAll("[data-exit-button]");
-                    exits.forEach(function (exit) {
-                        exit.addEventListener("click", function (event) {
-                            event.preventDefault();
-                            modal.classList.remove("phpdocumentor-modal__open");
-                        });
-                    });
-                });
-            });
-        })();
-    </script>
-
+        
     </article>
                                 </section>
                 <section class="phpdocumentor-on-this-page__sidebar">
@@ -488,7 +414,7 @@
                 <ul class="phpdocumentor-list -clean">
                                             <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-WebApplicationTrait.html#constant_API_IDENTIFIER">API_IDENTIFIER</a></li>
                                             <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-WebApplicationTrait.html#constant_APPLICATION_TYPE">APPLICATION_TYPE</a></li>
-                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-WebApplicationTrait.html#constant_CLIENT_ID">CLIENT_ID</a></li>
+                                            <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-ClientIdTrait.html#constant_CLIENT_ID">CLIENT_ID</a></li>
                                             <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-WebApplicationTrait.html#constant_POST_LOGOUT_REDIRECT_URIS">POST_LOGOUT_REDIRECT_URIS</a></li>
                                             <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-WebApplicationTrait.html#constant_REDIRECT_URIS">REDIRECT_URIS</a></li>
                                     </ul>

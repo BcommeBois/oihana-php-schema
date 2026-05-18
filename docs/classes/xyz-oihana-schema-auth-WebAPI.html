@@ -6,7 +6,10 @@
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="../">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png"/>
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png"/>
     <link rel="icon" href="images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png"/>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/base.css">
             <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -68,6 +71,16 @@
                     <section class="phpdocumentor-sidebar__category -namespaces">
             <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/com.html" class="">com</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/com-progress.html" class="">progress</a>
+                
+            </li>
+            </ul>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="namespaces/org.html" class="">org</a>
 </h4>
     <ul class="phpdocumentor-list">
@@ -121,6 +134,9 @@
     
     
     
+            <span class="phpdocumentor-element__extends">
+            uses
+                            <a href="classes/xyz-oihana-schema-auth-traits-HasProtectedResource.html"><abbr title="\xyz\oihana\schema\auth\traits\HasProtectedResource">HasProtectedResource</abbr></a>,                             <a href="classes/xyz-oihana-schema-constants-traits-auth-WebAPITrait.html"><abbr title="\xyz\oihana\schema\constants\traits\auth\WebAPITrait">WebAPITrait</abbr></a>                    </span>
     </h2>
 
 <div class="phpdocumentor-label-line">
@@ -131,7 +147,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/auth/WebAPI.php"><a href="files/src-xyz-oihana-schema-auth-webapi.html"><abbr title="src/xyz/oihana/schema/auth/WebAPI.php">WebAPI.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">53</span>
+    <span class="phpdocumentor-element-found-in__line">55</span>
 
     </aside>
 
@@ -178,32 +194,29 @@ $api-&gt;scopeHasPermission = true;
 
     </h5>
     <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">see</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">see</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
                                                                                     <span class="phpdocumentor-tag-link"><a href="classes/xyz-oihana-schema-constants-JWTAlgorithm.html"><abbr title="\xyz\oihana\schema\constants\JWTAlgorithm">JWTAlgorithm</abbr></a></span>
-                                        
-                                             
+                                                                
                                     </dd>
-                                                <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">author</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                                
-                                                 <section class="phpdocumentor-description"><p>Marc Alcaraz (ekameleon)</p>
+                                <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">author</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                                                                                            <section class="phpdocumentor-description"><p>Marc Alcaraz (ekameleon)</p>
 </section>
 
                                     </dd>
-                                                <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">since</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
+                                <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">since</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
                                             <span class="phpdocumentor-tag-link">1.0.2</span>
-                                                                                
-                                             
+                                                                                                        
                                     </dd>
-                                            </dl>
+                        </dl>
 
     
     
@@ -226,39 +239,81 @@ $api-&gt;scopeHasPermission = true;
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-WebAPITrait.html#constant_ALGORITHM">ALGORITHM</a>
+    <span>
+        &nbsp;: string&nbsp;= &#039;algorithm&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-WebAPITrait.html#constant_ALLOW_OFFLINE_ACCESS">ALLOW_OFFLINE_ACCESS</a>
+    <span>
+        &nbsp;: string&nbsp;= &#039;allowOfflineAccess&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-WebAPITrait.html#constant_ALLOW_SKIP_USER_CONSENT">ALLOW_SKIP_USER_CONSENT</a>
+    <span>
+        &nbsp;: string&nbsp;= &#039;allowSkipUserConsent&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/xyz-oihana-schema-auth-WebAPI.html#constant_CONTEXT">CONTEXT</a>
     <span>
-        &nbsp;= \xyz\oihana\schema\constants\Oihana::SCHEMA                            </span>
+        &nbsp;: string&nbsp;= \xyz\oihana\schema\constants\Oihana::SCHEMA                            </span>
 </dt>
 <dd>The @context of the json-ld representation of the thing.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/xyz-oihana-schema-auth-WebAPI.html#constant_DEFAULT_ALGORITHM">DEFAULT_ALGORITHM</a>
     <span>
-        &nbsp;= \xyz\oihana\schema\constants\JWTAlgorithm::RS256                            </span>
+        &nbsp;: string&nbsp;= \xyz\oihana\schema\constants\JWTAlgorithm::RS256                            </span>
 </dt>
 <dd>The default JSON Web Token (JWT) Signing Algorithm.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/xyz-oihana-schema-auth-WebAPI.html#constant_DEFAULT_IMPLICIT_HYBRID_TOKEN_LIFETIME">DEFAULT_IMPLICIT_HYBRID_TOKEN_LIFETIME</a>
     <span>
-        &nbsp;= 7200                            </span>
+        &nbsp;: int&nbsp;= 7200                            </span>
 </dt>
 <dd>The default Implicit/Hybrid Flow Access Token Lifetime value in seconds.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/xyz-oihana-schema-auth-WebAPI.html#constant_DEFAULT_TOKEN_EXPIRATION">DEFAULT_TOKEN_EXPIRATION</a>
     <span>
-        &nbsp;= 86400                            </span>
+        &nbsp;: int&nbsp;= 86400                            </span>
 </dt>
 <dd>The default Maximum Access Token Lifetime value in seconds.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-WebAPITrait.html#constant_IMPLICIT_HYBRID_TOKEN_LIFETIME">IMPLICIT_HYBRID_TOKEN_LIFETIME</a>
+    <span>
+        &nbsp;: string&nbsp;= &#039;implicitHybridTokenLifetime&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a class="" href="classes/org-schema-traits-ThingTrait.html#constant_JSON_PRIORITY_KEYS">JSON_PRIORITY_KEYS</a>
     <span>
-        &nbsp;= [\org\schema\constants\Schema::AT_TYPE, \org\schema\constants\Schema::AT_CONTEXT, \org\schema\constants\Schema::_KEY, \org\schema\constants\Schema::_FROM, \org\schema\constants\Schema::_TO, \org\schema\constants\Schema::ID, \org\schema\constants\Schema::NAME, \org\schema\constants\Schema::URL, \org\schema\constants\Schema::CREATED, \org\schema\constants\Schema::MODIFIED]                            </span>
+        &nbsp;: array&lt;string|int, mixed&gt;&nbsp;= [\org\schema\constants\Schema::AT_TYPE, \org\sc...                            </span>
 </dt>
 <dd>Defines the priority order of keys when serializing the object to JSON-LD.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-WebAPITrait.html#constant_MAXIMUM_ACCESS_TOKEN_EXPIRATION">MAXIMUM_ACCESS_TOKEN_EXPIRATION</a>
+    <span>
+        &nbsp;: string&nbsp;= &#039;maximumAccessTokenExpiration&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-WebAPITrait.html#constant_RBAC">RBAC</a>
+    <span>
+        &nbsp;: string&nbsp;= &#039;rbac&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/xyz-oihana-schema-constants-traits-auth-WebAPITrait.html#constant_SCOPE_HAS_PERMISSION">SCOPE_HAS_PERMISSION</a>
+    <span>
+        &nbsp;: string&nbsp;= &#039;scopeHasPermission&#039;                            </span>
+</dt>
 
     </dl>
 
@@ -401,6 +456,13 @@ $api-&gt;scopeHasPermission = true;
                         &nbsp;: null|array&lt;string|int, mixed&gt;|string|<a href="classes/org-schema-CategoryCode.html"><abbr title="\org\schema\CategoryCode">CategoryCode</abbr></a>|<a href="classes/org-schema-Thing.html"><abbr title="\org\schema\Thing">Thing</abbr></a>            </span>
 </dt>
 <dd>A category for the item. Greater signs or slashes can be used to informally indicate a category hierarchy.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/xyz-oihana-schema-auth-traits-HasProtectedResource.html#property_color">$color</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>The display color associated with this resource.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Thing.html#property_created">$created</a>
@@ -585,6 +647,13 @@ $api-&gt;scopeHasPermission = true;
 <dd>Indicates a potential Action, which describes an idealized action in which this thing would play an &#039;object&#039; role.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/xyz-oihana-schema-auth-traits-HasProtectedResource.html#property_protected">$protected</a>
+    <span>
+                        &nbsp;: bool|null            </span>
+</dt>
+<dd>Indicates whether this resource is protected.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Service.html#property_provider">$provider</a>
     <span>
                         &nbsp;: <a href="classes/org-schema-Person.html"><abbr title="\org\schema\Person">Person</abbr></a>|<a href="classes/org-schema-Organization.html"><abbr title="\org\schema\Organization">Organization</abbr></a>|null            </span>
@@ -660,6 +729,13 @@ $api-&gt;scopeHasPermission = true;
                         &nbsp;: null|string|array&lt;string|int, mixed&gt;|<a href="classes/org-schema-CreativeWork.html"><abbr title="\org\schema\CreativeWork">CreativeWork</abbr></a>|<a href="classes/org-schema-Event.html"><abbr title="\org\schema\Event">Event</abbr></a>            </span>
 </dt>
 <dd>A CreativeWork or Event about this Thing.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/xyz-oihana-schema-auth-traits-HasProtectedResource.html#property_system">$system</a>
+    <span>
+                        &nbsp;: bool|null            </span>
+</dt>
+<dd>Indicates whether this resource is a system-defined resource.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a class="" href="classes/org-schema-Service.html#property_termsOfService">$termsOfService</a>
@@ -772,6 +848,96 @@ $api-&gt;scopeHasPermission = true;
 
         </h3>
                     <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_ALGORITHM">
+        ALGORITHM
+        <a href="classes/xyz-oihana-schema-constants-traits-auth-WebAPITrait.html#constant_ALGORITHM" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/WebAPITrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-webapitrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/WebAPITrait.php">WebAPITrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">17</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">ALGORITHM</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;algorithm&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_ALLOW_OFFLINE_ACCESS">
+        ALLOW_OFFLINE_ACCESS
+        <a href="classes/xyz-oihana-schema-constants-traits-auth-WebAPITrait.html#constant_ALLOW_OFFLINE_ACCESS" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/WebAPITrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-webapitrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/WebAPITrait.php">WebAPITrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">18</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">ALLOW_OFFLINE_ACCESS</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;allowOfflineAccess&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_ALLOW_SKIP_USER_CONSENT">
+        ALLOW_SKIP_USER_CONSENT
+        <a href="classes/xyz-oihana-schema-constants-traits-auth-WebAPITrait.html#constant_ALLOW_SKIP_USER_CONSENT" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/WebAPITrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-webapitrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/WebAPITrait.php">WebAPITrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">19</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">ALLOW_SKIP_USER_CONSENT</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;allowSkipUserConsent&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
     <h4 class="phpdocumentor-element__name" id="constant_CONTEXT">
         CONTEXT
         <a href="classes/xyz-oihana-schema-auth-WebAPI.html#constant_CONTEXT" class="headerlink"><i class="fas fa-link"></i></a>
@@ -781,7 +947,7 @@ $api-&gt;scopeHasPermission = true;
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/auth/WebAPI.php"><a href="files/src-xyz-oihana-schema-auth-webapi.html"><abbr title="src/xyz/oihana/schema/auth/WebAPI.php">WebAPI.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">58</span>
+    <span class="phpdocumentor-element-found-in__line">63</span>
 
     </aside>
 
@@ -790,7 +956,7 @@ $api-&gt;scopeHasPermission = true;
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">CONTEXT</span>
     = <span class="phpdocumentor-signature__default-value">\xyz\oihana\schema\constants\Oihana::SCHEMA</span>
 </code>
@@ -812,7 +978,7 @@ $api-&gt;scopeHasPermission = true;
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/auth/WebAPI.php"><a href="files/src-xyz-oihana-schema-auth-webapi.html"><abbr title="src/xyz/oihana/schema/auth/WebAPI.php">WebAPI.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">63</span>
+    <span class="phpdocumentor-element-found-in__line">68</span>
 
     </aside>
 
@@ -821,7 +987,7 @@ $api-&gt;scopeHasPermission = true;
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">DEFAULT_ALGORITHM</span>
     = <span class="phpdocumentor-signature__default-value">\xyz\oihana\schema\constants\JWTAlgorithm::RS256</span>
 </code>
@@ -843,7 +1009,7 @@ $api-&gt;scopeHasPermission = true;
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/auth/WebAPI.php"><a href="files/src-xyz-oihana-schema-auth-webapi.html"><abbr title="src/xyz/oihana/schema/auth/WebAPI.php">WebAPI.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">68</span>
+    <span class="phpdocumentor-element-found-in__line">73</span>
 
     </aside>
 
@@ -852,7 +1018,7 @@ $api-&gt;scopeHasPermission = true;
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">int</span>
     <span class="phpdocumentor-signature__name">DEFAULT_IMPLICIT_HYBRID_TOKEN_LIFETIME</span>
     = <span class="phpdocumentor-signature__default-value">7200</span>
 </code>
@@ -874,7 +1040,7 @@ $api-&gt;scopeHasPermission = true;
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/auth/WebAPI.php"><a href="files/src-xyz-oihana-schema-auth-webapi.html"><abbr title="src/xyz/oihana/schema/auth/WebAPI.php">WebAPI.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">73</span>
+    <span class="phpdocumentor-element-found-in__line">78</span>
 
     </aside>
 
@@ -883,9 +1049,39 @@ $api-&gt;scopeHasPermission = true;
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
+        <span class="phpdocumentor-signature__type">int</span>
     <span class="phpdocumentor-signature__name">DEFAULT_TOKEN_EXPIRATION</span>
     = <span class="phpdocumentor-signature__default-value">86400</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_IMPLICIT_HYBRID_TOKEN_LIFETIME">
+        IMPLICIT_HYBRID_TOKEN_LIFETIME
+        <a href="classes/xyz-oihana-schema-constants-traits-auth-WebAPITrait.html#constant_IMPLICIT_HYBRID_TOKEN_LIFETIME" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/WebAPITrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-webapitrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/WebAPITrait.php">WebAPITrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">20</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">IMPLICIT_HYBRID_TOKEN_LIFETIME</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;implicitHybridTokenLifetime&#039;</span>
 </code>
 
 
@@ -914,7 +1110,7 @@ $api-&gt;scopeHasPermission = true;
     
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">array&lt;string|int, string&gt;</span>
+        <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
     <span class="phpdocumentor-signature__name">JSON_PRIORITY_KEYS</span>
     = <span class="phpdocumentor-signature__default-value">[\org\schema\constants\Schema::AT_TYPE, \org\schema\constants\Schema::AT_CONTEXT, \org\schema\constants\Schema::_KEY, \org\schema\constants\Schema::_FROM, \org\schema\constants\Schema::_TO, \org\schema\constants\Schema::ID, \org\schema\constants\Schema::NAME, \org\schema\constants\Schema::URL, \org\schema\constants\Schema::CREATED, \org\schema\constants\Schema::MODIFIED]</span>
 </code>
@@ -940,6 +1136,96 @@ child classes to modify the serialization order.</li>
         <section class="phpdocumentor-description"><p>List of JSON-LD keys in priority order.</p>
 </section>
 
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_MAXIMUM_ACCESS_TOKEN_EXPIRATION">
+        MAXIMUM_ACCESS_TOKEN_EXPIRATION
+        <a href="classes/xyz-oihana-schema-constants-traits-auth-WebAPITrait.html#constant_MAXIMUM_ACCESS_TOKEN_EXPIRATION" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/WebAPITrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-webapitrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/WebAPITrait.php">WebAPITrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">21</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">MAXIMUM_ACCESS_TOKEN_EXPIRATION</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;maximumAccessTokenExpiration&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_RBAC">
+        RBAC
+        <a href="classes/xyz-oihana-schema-constants-traits-auth-WebAPITrait.html#constant_RBAC" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/WebAPITrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-webapitrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/WebAPITrait.php">WebAPITrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">22</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">RBAC</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;rbac&#039;</span>
+</code>
+
+
+    
+    
+    
+
+        
+    </article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_SCOPE_HAS_PERMISSION">
+        SCOPE_HAS_PERMISSION
+        <a href="classes/xyz-oihana-schema-constants-traits-auth-WebAPITrait.html#constant_SCOPE_HAS_PERMISSION" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/constants/traits/auth/WebAPITrait.php"><a href="files/src-xyz-oihana-schema-constants-traits-auth-webapitrait.html"><abbr title="src/xyz/oihana/schema/constants/traits/auth/WebAPITrait.php">WebAPITrait.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">23</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">SCOPE_HAS_PERMISSION</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;scopeHasPermission&#039;</span>
+</code>
+
+
+    
+    
     
 
         
@@ -1274,7 +1560,7 @@ child classes to modify the serialization order.</li>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/auth/WebAPI.php"><a href="files/src-xyz-oihana-schema-auth-webapi.html"><abbr title="src/xyz/oihana/schema/auth/WebAPI.php">WebAPI.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">81</span>
+    <span class="phpdocumentor-element-found-in__line">86</span>
 
     </aside>
 
@@ -1312,7 +1598,7 @@ child classes to modify the serialization order.</li>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/auth/WebAPI.php"><a href="files/src-xyz-oihana-schema-auth-webapi.html"><abbr title="src/xyz/oihana/schema/auth/WebAPI.php">WebAPI.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">87</span>
+    <span class="phpdocumentor-element-found-in__line">92</span>
 
     </aside>
 
@@ -1350,7 +1636,7 @@ child classes to modify the serialization order.</li>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/auth/WebAPI.php"><a href="files/src-xyz-oihana-schema-auth-webapi.html"><abbr title="src/xyz/oihana/schema/auth/WebAPI.php">WebAPI.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">93</span>
+    <span class="phpdocumentor-element-found-in__line">98</span>
 
     </aside>
 
@@ -1671,6 +1957,50 @@ If it is not clear whether an entity is a broker, seller, or buyer, the latter t
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
     
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_color">
+        $color
+        <a href="classes/xyz-oihana-schema-auth-traits-HasProtectedResource.html#property_color" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/auth/traits/HasProtectedResource.php"><a href="files/src-xyz-oihana-schema-auth-traits-hasprotectedresource.html"><abbr title="src/xyz/oihana/schema/auth/traits/HasProtectedResource.php">HasProtectedResource.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">37</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The display color associated with this resource.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$color</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>This value is generally used for UI rendering purposes such as labels,
+badges, tags, or administration panels.</p>
+<p>Example:</p>
+<pre class="prettyprint"><code class="language-php">$resource-&gt;color = '#ff6600';
+</code></pre>
+</section>
+
     
     
 
@@ -2113,7 +2443,7 @@ If it is not clear whether an entity is a broker, seller, or buyer, the latter t
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/auth/WebAPI.php"><a href="files/src-xyz-oihana-schema-auth-webapi.html"><abbr title="src/xyz/oihana/schema/auth/WebAPI.php">WebAPI.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">101</span>
+    <span class="phpdocumentor-element-found-in__line">106</span>
 
     </aside>
 
@@ -2382,7 +2712,7 @@ Cannot exceed the maximum access token lifetime.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/auth/WebAPI.php"><a href="files/src-xyz-oihana-schema-auth-webapi.html"><abbr title="src/xyz/oihana/schema/auth/WebAPI.php">WebAPI.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">107</span>
+    <span class="phpdocumentor-element-found-in__line">112</span>
 
     </aside>
 
@@ -2577,7 +2907,7 @@ that can be considered the possessor of this Thing.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/auth/WebAPI.php"><a href="files/src-xyz-oihana-schema-auth-webapi.html"><abbr title="src/xyz/oihana/schema/auth/WebAPI.php">WebAPI.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">113</span>
+    <span class="phpdocumentor-element-found-in__line">118</span>
 
     </aside>
 
@@ -2596,8 +2926,8 @@ that can be considered the possessor of this Thing.</p>
 
         
             <section class="phpdocumentor-attributes">
-            <h5 class="phpdocumentor-elements__header" id="attributes">
-                Attributes <a href="classes/xyz-oihana-schema-auth-WebAPI.html#property_permissions#attributes" class="headerlink"><i class="fas fa-link"></i></a>
+            <h5 class="phpdocumentor-elements__header" id="property_permissions_attributes">
+                Attributes <a href="classes/xyz-oihana-schema-auth-WebAPI.html#property_permissions_attributes" class="headerlink"><i class="fas fa-link"></i></a>
 
             </h5>
                             <dl class="phpdocumentor-argument-list">
@@ -2629,7 +2959,7 @@ that can be considered the possessor of this Thing.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/auth/WebAPI.php"><a href="files/src-xyz-oihana-schema-auth-webapi.html"><abbr title="src/xyz/oihana/schema/auth/WebAPI.php">WebAPI.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">120</span>
+    <span class="phpdocumentor-element-found-in__line">125</span>
 
     </aside>
 
@@ -2681,6 +3011,50 @@ that can be considered the possessor of this Thing.</p>
     </code>
 
     
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_protected">
+        $protected
+        <a href="classes/xyz-oihana-schema-auth-traits-HasProtectedResource.html#property_protected" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/auth/traits/HasProtectedResource.php"><a href="files/src-xyz-oihana-schema-auth-traits-hasprotectedresource.html"><abbr title="src/xyz/oihana/schema/auth/traits/HasProtectedResource.php">HasProtectedResource.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">52</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Indicates whether this resource is protected.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">bool|null</span>
+    <span class="phpdocumentor-signature__name">$protected</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>A protected resource cannot normally be modified or assigned through
+public REST API operations or non-privileged actions.</p>
+<p>Example:</p>
+<pre class="prettyprint"><code class="language-php">$resource-&gt;protected = true;
+</code></pre>
+</section>
+
     
     
 
@@ -2822,7 +3196,7 @@ A provider may also serve as the seller.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/auth/WebAPI.php"><a href="files/src-xyz-oihana-schema-auth-webapi.html"><abbr title="src/xyz/oihana/schema/auth/WebAPI.php">WebAPI.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">126</span>
+    <span class="phpdocumentor-element-found-in__line">131</span>
 
     </aside>
 
@@ -2938,7 +3312,7 @@ A provider may also serve as the seller.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/auth/WebAPI.php"><a href="files/src-xyz-oihana-schema-auth-webapi.html"><abbr title="src/xyz/oihana/schema/auth/WebAPI.php">WebAPI.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">132</span>
+    <span class="phpdocumentor-element-found-in__line">137</span>
 
     </aside>
 
@@ -3106,6 +3480,50 @@ A provider may also serve as the seller.</p>
     </code>
 
     
+    
+    
+
+        
+        
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_system">
+        $system
+        <a href="classes/xyz-oihana-schema-auth-traits-HasProtectedResource.html#property_system" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/xyz/oihana/schema/auth/traits/HasProtectedResource.php"><a href="files/src-xyz-oihana-schema-auth-traits-hasprotectedresource.html"><abbr title="src/xyz/oihana/schema/auth/traits/HasProtectedResource.php">HasProtectedResource.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">67</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Indicates whether this resource is a system-defined resource.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">bool|null</span>
+    <span class="phpdocumentor-signature__name">$system</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>System resources are generally immutable and cannot be deleted through
+REST APIs or standard administrative operations.</p>
+<p>Example:</p>
+<pre class="prettyprint"><code class="language-php">$resource-&gt;system = true;
+</code></pre>
+</section>
+
     
     
 
@@ -3399,26 +3817,24 @@ Keys must match public property names.</p>
             </dl>
 
     
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+    <h5 class="phpdocumentor-tag-list__heading" id="method___construct_tags">
         Tags
-        <a href="classes/org-schema-traits-ThingTrait.html#method___construct#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/org-schema-traits-ThingTrait.html#method___construct_tags" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h5>
     <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">throws</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">throws</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
                                                                 <span class="phpdocumentor-tag-link"><abbr title="\ReflectionException">ReflectionException</abbr></span>
-                                                            
-                                             
+                                                                                    
                                     </dd>
-                                                <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">example</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                                
-                                                 <section class="phpdocumentor-description"><pre class="prettyprint"><code class="language-php">use org\schema\Person;
+                                <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">example</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                                                                                            <section class="phpdocumentor-description"><pre class="prettyprint"><code class="language-php">use org\schema\Person;
 use org\schema\constants\Prop;
 
 $person = new Person
@@ -3432,7 +3848,7 @@ echo $person-&gt;name; // Outputs: Jane Doe
 </section>
 
                                     </dd>
-                                            </dl>
+                        </dl>
 
         
     
@@ -3574,28 +3990,26 @@ Null values are automatically removed.</p>
 
     
     
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+    <h5 class="phpdocumentor-tag-list__heading" id="method_jsonSerialize_tags">
         Tags
-        <a href="classes/org-schema-traits-ThingTrait.html#method_jsonSerialize#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/org-schema-traits-ThingTrait.html#method_jsonSerialize_tags" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h5>
     <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">throws</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
+                    <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">throws</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
                                                                 <span class="phpdocumentor-tag-link"><abbr title="\ReflectionException">ReflectionException</abbr></span>
-                                                            
-                                                 <section class="phpdocumentor-description"><p>If reflection fails when accessing properties.</p>
+                                                                                        <section class="phpdocumentor-description"><p>If reflection fails when accessing properties.</p>
 </section>
 
                                     </dd>
-                                                <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">example</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                                
-                                                 <section class="phpdocumentor-description"><pre class="prettyprint"><code class="language-php">use org\schema\Person;
+                                <dt class="phpdocumentor-tag-list__entry">
+                <span class="phpdocumentor-tag__name">example</span>
+            </dt>
+                            <dd class="phpdocumentor-tag-list__definition">
+                                                                                                            <section class="phpdocumentor-description"><pre class="prettyprint"><code class="language-php">use org\schema\Person;
 use org\schema\constants\Prop;
 
 $person = new Person
@@ -3617,7 +4031,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
 </section>
 
                                     </dd>
-                                            </dl>
+                        </dl>
 
         
     
@@ -3801,100 +4215,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
 </article>
             </section>
 
-        <div class="phpdocumentor-modal" id="source-view">
-    <div class="phpdocumentor-modal-bg" data-exit-button></div>
-    <div class="phpdocumentor-modal-container">
-        <div class="phpdocumentor-modal-content">
-            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/src/xyz/oihana/schema/auth/WebAPI.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
-        </div>
-        <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
-    </div>
-</div>
-
-    <script type="text/javascript">
-        (function () {
-            function loadExternalCodeSnippet(el, url, line) {
-                Array.prototype.slice.call(el.querySelectorAll('pre[data-src]')).forEach((pre) => {
-                    const src = url || pre.getAttribute('data-src').replace(/\\/g, '/');
-                    const language = 'php';
-
-                    const code = document.createElement('code');
-                    code.className = 'language-' + language;
-                    pre.textContent = '';
-                    pre.setAttribute('data-line', line)
-                    code.textContent = 'Loading…';
-                    pre.appendChild(code);
-
-                    var xhr = new XMLHttpRequest();
-
-                    xhr.open('GET', src, true);
-
-                    xhr.onreadystatechange = function () {
-                        if (xhr.readyState !== 4) {
-                            return;
-                        }
-
-                        if (xhr.status < 400 && xhr.responseText) {
-                            code.textContent = xhr.responseText;
-                            Prism.highlightElement(code);
-                            d=document.getElementsByClassName("line-numbers");
-                            d[0].scrollTop = d[0].children[1].offsetTop;
-                            return;
-                        }
-
-                        if (xhr.status === 404) {
-                            code.textContent = '✖ Error: File could not be found';
-                            return;
-                        }
-
-                        if (xhr.status >= 400) {
-                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
-                            return;
-                        }
-
-                        code.textContent = '✖ Error: An unknown error occurred';
-                    };
-
-                    xhr.send(null);
-                });
-            }
-
-            const modalButtons = document.querySelectorAll("[data-modal]");
-            const openedAsLocalFile = window.location.protocol === 'file:';
-            if (modalButtons.length > 0 && openedAsLocalFile) {
-                console.warn(
-                    'Viewing the source code is unavailable because you are opening this page from the file:// scheme; ' +
-                    'browsers block XHR requests when a page is opened this way'
-                );
-            }
-
-            modalButtons.forEach(function (trigger) {
-                if (openedAsLocalFile) {
-                    trigger.setAttribute("hidden", "hidden");
-                }
-
-                trigger.addEventListener("click", function (event) {
-                    event.preventDefault();
-                    const modal = document.getElementById(trigger.dataset.modal);
-                    if (!modal) {
-                        console.error(`Modal with id "${trigger.dataset.modal}" could not be found`);
-                        return;
-                    }
-                    modal.classList.add("phpdocumentor-modal__open");
-
-                    loadExternalCodeSnippet(modal, trigger.dataset.src || null, trigger.dataset.line)
-                    const exits = modal.querySelectorAll("[data-exit-button]");
-                    exits.forEach(function (exit) {
-                        exit.addEventListener("click", function (event) {
-                            event.preventDefault();
-                            modal.classList.remove("phpdocumentor-modal__open");
-                        });
-                    });
-                });
-            });
-        })();
-    </script>
-
+        
     </article>
                                 </section>
                 <section class="phpdocumentor-on-this-page__sidebar">
@@ -3914,11 +4235,18 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                             <li class="phpdocumentor-on-this-page-section__title">Constants</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
+                                                    <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-WebAPITrait.html#constant_ALGORITHM">ALGORITHM</a></li>
+                                                    <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-WebAPITrait.html#constant_ALLOW_OFFLINE_ACCESS">ALLOW_OFFLINE_ACCESS</a></li>
+                                                    <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-WebAPITrait.html#constant_ALLOW_SKIP_USER_CONSENT">ALLOW_SKIP_USER_CONSENT</a></li>
                                                     <li class=""><a href="classes/xyz-oihana-schema-auth-WebAPI.html#constant_CONTEXT">CONTEXT</a></li>
                                                     <li class=""><a href="classes/xyz-oihana-schema-auth-WebAPI.html#constant_DEFAULT_ALGORITHM">DEFAULT_ALGORITHM</a></li>
                                                     <li class=""><a href="classes/xyz-oihana-schema-auth-WebAPI.html#constant_DEFAULT_IMPLICIT_HYBRID_TOKEN_LIFETIME">DEFAULT_IMPLICIT_HYBRID_TOKEN_LIFETIME</a></li>
                                                     <li class=""><a href="classes/xyz-oihana-schema-auth-WebAPI.html#constant_DEFAULT_TOKEN_EXPIRATION">DEFAULT_TOKEN_EXPIRATION</a></li>
+                                                    <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-WebAPITrait.html#constant_IMPLICIT_HYBRID_TOKEN_LIFETIME">IMPLICIT_HYBRID_TOKEN_LIFETIME</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-ThingTrait.html#constant_JSON_PRIORITY_KEYS">JSON_PRIORITY_KEYS</a></li>
+                                                    <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-WebAPITrait.html#constant_MAXIMUM_ACCESS_TOKEN_EXPIRATION">MAXIMUM_ACCESS_TOKEN_EXPIRATION</a></li>
+                                                    <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-WebAPITrait.html#constant_RBAC">RBAC</a></li>
+                                                    <li class=""><a href="classes/xyz-oihana-schema-constants-traits-auth-WebAPITrait.html#constant_SCOPE_HAS_PERMISSION">SCOPE_HAS_PERMISSION</a></li>
                                             </ul>
                 </li>
             
@@ -3944,6 +4272,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                                                     <li class=""><a href="classes/org-schema-Service.html#property_brand">$brand</a></li>
                                                     <li class=""><a href="classes/org-schema-Service.html#property_broker">$broker</a></li>
                                                     <li class=""><a href="classes/org-schema-Service.html#property_category">$category</a></li>
+                                                    <li class=""><a href="classes/xyz-oihana-schema-auth-traits-HasProtectedResource.html#property_color">$color</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_created">$created</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_description">$description</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_disambiguatingDescription">$disambiguatingDescription</a></li>
@@ -3970,6 +4299,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                                                     <li class=""><a href="classes/xyz-oihana-schema-auth-WebAPI.html#property_permissions">$permissions</a></li>
                                                     <li class=""><a href="classes/xyz-oihana-schema-auth-WebAPI.html#property_permissionsCount">$permissionsCount</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_potentialAction">$potentialAction</a></li>
+                                                    <li class=""><a href="classes/xyz-oihana-schema-auth-traits-HasProtectedResource.html#property_protected">$protected</a></li>
                                                     <li class=""><a href="classes/org-schema-Service.html#property_provider">$provider</a></li>
                                                     <li class=""><a href="classes/org-schema-Service.html#property_providerMobility">$providerMobility</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_publisher">$publisher</a></li>
@@ -3981,6 +4311,7 @@ echo json_encode($person, JSON_PRETTY_PRINT);
                                                     <li class=""><a href="classes/org-schema-Service.html#property_serviceType">$serviceType</a></li>
                                                     <li class=""><a href="classes/org-schema-Service.html#property_slogan">$slogan</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_subjectOf">$subjectOf</a></li>
+                                                    <li class=""><a href="classes/xyz-oihana-schema-auth-traits-HasProtectedResource.html#property_system">$system</a></li>
                                                     <li class=""><a href="classes/org-schema-Service.html#property_termsOfService">$termsOfService</a></li>
                                                     <li class=""><a href="classes/org-schema-Thing.html#property_url">$url</a></li>
                                                     <li class=""><a href="classes/org-schema-traits-ThingTrait.html#property_atContext">$atContext</a></li>
