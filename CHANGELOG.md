@@ -8,6 +8,21 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds the com\progress\schema namespace — object-oriented mapping of the OpenEdge Progress SQL system catalog tables (~16 classes under com\progress\schema\system)
+  - Adds Table (SYSTABLES), Column (SYSCOLUMNS) and Index (SYSINDEXES) — refactored with full PHPDoc, corrected `Column::$columnType` typing (previously mislabelled as the table type discriminator), and added the missing Progress columns (`columnId`, `precision`, `radix`, `format`, `label`, `mandatory`, `caseSensitive`, `decimal`, `numberOfRows`, `percentTouched`, `recordSize`, `tableAttributes`, `updateStats`, `ascDesc`, `fieldNumber`, `indexOwner`, `indexSequence`, `numberOfComponents`, `primary`, `unique`)
+  - Adds the View class (SYSVIEWS — checkOption, textLength, viewText)
+  - Adds the User class (SYSDBAUTH — grantee, grantor, dbaAccess, resourceAccess — de facto OpenEdge SQL user list)
+  - Adds the Sequence class (SYSSEQUENCES — cycle, increment, initialValue, minValue, maxValue, sequenceOwner)
+  - Adds the Synonym class (SYSSYNONYMS — baseTable, baseTableOwner, synonymOwner)
+  - Adds the Procedure class (SYSPROCEDURES — procedureId, procedureOwner, numberOfArguments, returnType, remarks, procedureText)
+  - Adds the Trigger class (SYSTRIGGER — event I/U/D, forEach R/S, timing B/A, triggerOwner, triggerText)
+  - Adds the TableConstraint, CheckConstraint, ReferentialConstraint and KeyColumnUsage classes (SYS_TBL_CONSTRS, SYS_CHK_CONSTRS, SYS_REF_CONSTRS, SYS_KEYCOL_USAGE — full constraint metadata including matchType, updateRule, deleteRule, keySequence, deferrability)
+  - Adds the TableAuth and ColumnAuth classes (SYSTABAUTH, SYSCOLAUTH — per-table and per-column GRANT flags: select, insert, update, delete, references, index, alter)
+  - Adds the DataType class (SYSDATATYPES — typeCode, columnLength, dataTypePrecision, dataTypeRadix)
+  - Adds the com\progress\schema\constants\Progress aggregator class with `Progress::SCHEMA = 'https://schema.progress.com'`
+  - Adds 13 specialized constant traits (Authorization, Column, Common, Constraint, DataType, Index, Procedure, Sequence, Synonym, Table, Trigger, User, View) composed into a single Properties trait
+  - Registers the PSR-4 autoload entry `com\progress\\` → `src/com/progress`
+  - Adds the tests/com/progress unit-test suite (17 test classes, ~80 tests, 317 assertions) covering every system class and the Progress constants aggregator
 - Adds the SchemaResolver helper class.
 - Adds the xyz\oihana\schema\auth namespace
   - Adds the WebApi (extends the schema.org definition), Permission, Role and User classes
