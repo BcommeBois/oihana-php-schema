@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds the `xyz\oihana\schema\http` namespace and the `UserAgentInfo` DTO (extends `Intangible`) — structured view of an HTTP `User-Agent` header with `browser`, `browserVersion`, `os`, `osVersion`, `deviceType`, `isBot` and `raw` properties. Designed to be populated by the parsing helpers in `oihana/php-http` and to be embedded in `Session` / `AuditAction` records.
+  - Adds the companion `xyz\oihana\schema\constants\traits\http\UserAgentInfoTrait` trait centralising the property name constants.
+  - Adds the `xyz\oihana\schema\constants\http\DeviceType` constant class (`bot`, `desktop`, `mobile`, `tablet`, `unknown`) used by `UserAgentInfo::$deviceType`.
+  - Adds the domain-level `xyz\oihana\schema\constants\traits\HttpTrait` aggregator (mirrors `AuthTrait`'s pattern) and wires it into `xyz\oihana\schema\constants\Oihana`, so the new HTTP field constants are reachable via `Oihana::BROWSER`, `Oihana::DEVICE_TYPE`, etc.
 - Adds the com\progress\schema namespace — object-oriented mapping of the OpenEdge Progress SQL system catalog tables (~16 classes under com\progress\schema\system)
   - Adds Table (SYSTABLES), Column (SYSCOLUMNS) and Index (SYSINDEXES) — refactored with full PHPDoc, corrected `Column::$columnType` typing (previously mislabelled as the table type discriminator), and added the missing Progress columns (`columnId`, `precision`, `radix`, `format`, `label`, `mandatory`, `caseSensitive`, `decimal`, `numberOfRows`, `percentTouched`, `recordSize`, `tableAttributes`, `updateStats`, `ascDesc`, `fieldNumber`, `indexOwner`, `indexSequence`, `numberOfComponents`, `primary`, `unique`)
   - Adds the View class (SYSVIEWS — checkOption, textLength, viewText)

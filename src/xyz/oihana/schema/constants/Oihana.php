@@ -4,6 +4,7 @@ namespace xyz\oihana\schema\constants;
 
 use xyz\oihana\schema\constants\traits\AuditTrait;
 use xyz\oihana\schema\constants\traits\AuthTrait;
+use xyz\oihana\schema\constants\traits\HttpTrait;
 use xyz\oihana\schema\constants\traits\LogTrait;
 use xyz\oihana\schema\constants\traits\PaginationTrait;
 use xyz\oihana\schema\constants\traits\places\SiteTrait;
@@ -17,6 +18,7 @@ class Oihana
 
     use AuditTrait ,
         AuthTrait ,
+        HttpTrait ,
         LogTrait,
         PaginationTrait ,
         SiteTrait ;
