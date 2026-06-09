@@ -21,4 +21,20 @@ class LogTest extends TestCase
         $this->assertNull($log->level   ?? null ) ;
         $this->assertNull($log->message ?? null ) ;
     }
+
+    public function testToStringConcatenatesDateTimeLevelAndMessage()
+    {
+        $log = new Log() ;
+
+        $log->date    = '2025-10-20' ;
+        $log->time    = '14:32:10' ;
+        $log->level   = 'INFO' ;
+        $log->message = 'Application started successfully.' ;
+
+        $this->assertSame
+        (
+            '2025-10-20 14:32:10 INFO Application started successfully.' ,
+            (string) $log
+        ) ;
+    }
 }

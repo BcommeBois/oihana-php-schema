@@ -134,6 +134,36 @@ class ThingTraitTest extends TestCase
     }
 
     /**
+     * The `@type` / `@context` keys in the init data must be extracted into the
+     * internal `atType` / `atContext` metadata (and removed from the public set),
+     * not stored as public properties.
+     *
+     * @throws ReflectionException
+     */
+    public function testConstructorExtractsAtTypeAndAtContext()
+    {
+        $thing = new MockThing
+        ([
+            Schema::AT_TYPE    => 'CustomType' ,
+            Schema::AT_CONTEXT => 'https://custom.example/' ,
+            'name'             => 'Zed' ,
+        ]) ;
+
+        $atType    = new ReflectionProperty( MockThing::class , 'atType' ) ;
+        $atContext = new ReflectionProperty( MockThing::class , 'atContext' ) ;
+
+        $this->assertSame( 'CustomType'              , $atType->getValue( $thing ) ) ;
+        $this->assertSame( 'https://custom.example/' , $atContext->getValue( $thing ) ) ;
+
+        // The metadata keys must not leak into the serialized public properties.
+        $this->assertSame( 'Zed' , $thing->name ) ;
+
+        $data = $thing->jsonSerialize() ;
+        $this->assertSame( 'CustomType'              , $data[ Schema::AT_TYPE ] ) ;
+        $this->assertSame( 'https://custom.example/' , $data[ Schema::AT_CONTEXT ] ) ;
+    }
+
+    /**
      * @throws ReflectionException
      */
     public function testConstructorIgnoresUnknownProperties()
