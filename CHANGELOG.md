@@ -117,6 +117,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Fixed
 
+- Fixes `DataFeed` and `DataCatalog` referencing their related type as `DataSet` while the actual class is `Dataset` (the schema.org casing, https://schema.org/Dataset). On a case-sensitive filesystem (e.g. Linux CI) the PSR-4 autoloader could not resolve `DataSet.php`, making `DataFeed` a fatal load error. References now match the real class name.
 - Fixes `ProductCollection` being impossible to instantiate (fatal error): it extends `Product` (which declares `$funding` as `null|string|array|Grant`) while also using `CreativeWorkTrait`, whose `$funding` was the incompatible `null|Grant|array`. The trait property is now `null|string|array|Grant`, so the composition is valid.
 - Fixes the areaServed property type to accept integer values
 - Fixes Role::toPolicy() crashing when the permissions property is uninitialized

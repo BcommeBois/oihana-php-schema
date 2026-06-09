@@ -13,9 +13,9 @@ class DataCatalog extends MediaObject
 {
     /**
      * A dataset contained in this catalog.
-     * @var array|null|DataSet
+     * @var array|null|Dataset
      */
-    public null|array|DataSet $dataset ;
+    public null|array|Dataset $dataset ;
 
     /**
      * A subproperty of measurementTechnique that can be used for specifying specific methods, in particular via MeasurementMethodEnum.
