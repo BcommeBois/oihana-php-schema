@@ -386,9 +386,9 @@ trait CreativeWorkTrait
     /**
      * A Grant that directly or indirectly provide funding or sponsorship for this item.
      * See also ownershipFundingInfo.
-     * @var null|Grant|array
+     * @var null|string|array|Grant
      */
-    public null|Grant|array $funding ;
+    public null|string|array|Grant $funding ;
 
     /**
      * Genre of the creative work, broadcast channel or group.

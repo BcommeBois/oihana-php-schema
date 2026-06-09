@@ -117,6 +117,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Fixed
 
+- Fixes `ProductCollection` being impossible to instantiate (fatal error): it extends `Product` (which declares `$funding` as `null|string|array|Grant`) while also using `CreativeWorkTrait`, whose `$funding` was the incompatible `null|Grant|array`. The trait property is now `null|string|array|Grant`, so the composition is valid.
 - Fixes the areaServed property type to accept integer values
 - Fixes Role::toPolicy() crashing when the permissions property is uninitialized
 - Fixes PermissionTrait::NAME constant value (was incorrectly set to 'domain' instead of 'name')
