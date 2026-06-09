@@ -19,6 +19,11 @@
     "scripts": {
         "doc": "rm -rf docs && mkdir docs && cp -r assets docs/assets && ./vendor/bin/phpdoc -c phpdoc.xml -v" ,
         "test": "./vendor/bin/phpunit",
+        "coverage": "XDEBUG_MODE=coverage ./vendor/bin/phpunit --coverage-text --coverage-clover build/coverage/clover.xml --coverage-html build/coverage/html" ,
+        "coverage:md": [
+            "@coverage" ,
+            "php tools/clover-to-markdown.php build/coverage/clover.xml build/coverage/COVERAGE.md"
+        ],
         "schemas:all": "php bin/generate-schemas.php",
         "schema:place": "php bin/generate-schema.php org\\schema\\Place"
     },
