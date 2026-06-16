@@ -109,4 +109,67 @@ class BusinessIdentity extends Intangible
      * @var null|string|Person|Organization|Thing
      */
     public null|string|Person|Organization|Thing $subject ;
+
+    /**
+     * Extracts an identifier from a resolved reference.
+     *
+     * A {@see Thing} reference is probed for its `id`, then `_key`, then `_id`
+     * (all tolerant when undefined). A scalar reference (or `null`) is returned
+     * as-is.
+     *
+     * @param null|string|Thing $value The reference to extract the id from.
+     *
+     * @return null|int|string The resolved id, or `null`.
+     */
+    private static function extractId( null|string|Thing $value ) : null|int|string
+    {
+        if ( $value instanceof Thing )
+        {
+            return $value->id ?? $value->_key ?? $value->_id ?? null ;
+        }
+
+        return $value ;
+    }
+
+    /**
+     * Indicates whether this identity carries the given role.
+     *
+     * Tolerant when {@see BusinessIdentity::$role} is not defined : returns
+     * `false` rather than raising an error.
+     *
+     * @param string $role The role to test against (typically a
+     * {@see \xyz\oihana\schema\enumerations\BusinessIdentityRole} constant).
+     *
+     * @return bool `true` if the role is defined and strictly equals `$role`.
+     */
+    public function is( string $role ) : bool
+    {
+        return isset( $this->role ) && $this->role === $role ;
+    }
+
+    /**
+     * Returns the identifier of the {@see BusinessIdentity::$memberOf}.
+     *
+     * Resolves the id whether the member is a scalar reference or a
+     * {@see Thing} (probed for `id`, then `_key`, then `_id`).
+     *
+     * @return null|int|string The member id, or `null` if it cannot be resolved.
+     */
+    public function memberOfId() : null|int|string
+    {
+        return self::extractId( $this->memberOf ?? null ) ;
+    }
+
+    /**
+     * Returns the identifier of the {@see BusinessIdentity::$subject}.
+     *
+     * Resolves the id whether the subject is a scalar reference or a
+     * {@see Thing} (probed for `id`, then `_key`, then `_id`).
+     *
+     * @return null|int|string The subject id, or `null` if it cannot be resolved.
+     */
+    public function subjectId() : null|int|string
+    {
+        return self::extractId( $this->subject ?? null ) ;
+    }
 }

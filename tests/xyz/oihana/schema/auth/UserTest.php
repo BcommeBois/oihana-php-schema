@@ -154,4 +154,61 @@ class UserTest extends TestCase
         $this->assertCount( 2 , $user->identities );
         $this->assertSame( 'seller' , $user->identities[ 0 ]->role );
     }
+
+    public function testIdentitiesByRoleFilters(): void
+    {
+        $user = new User();
+
+        $seller   = new BusinessIdentity([ BusinessIdentity::ROLE => BusinessIdentityRole::SELLER ]);
+        $contact  = new BusinessIdentity([ BusinessIdentity::ROLE => BusinessIdentityRole::CUSTOMER_CONTACT ]);
+        $seller2  = new BusinessIdentity([ BusinessIdentity::ROLE => BusinessIdentityRole::SELLER ]);
+
+        $user->identities = [ $seller , $contact , $seller2 ];
+
+        $sellers = $user->identitiesByRole( BusinessIdentityRole::SELLER );
+
+        $this->assertCount( 2 , $sellers );
+        $this->assertSame( $seller  , $sellers[ 0 ] );
+        $this->assertSame( $seller2 , $sellers[ 1 ] );
+    }
+
+    public function testIdentitiesByRoleWithoutIdentities(): void
+    {
+        $user = new User();
+
+        $this->assertSame( [] , $user->identitiesByRole( BusinessIdentityRole::SELLER ) );
+    }
+
+    public function testIdentitiesByRoleIgnoresNonBusinessIdentity(): void
+    {
+        $user = new User();
+
+        $seller = new BusinessIdentity([ BusinessIdentity::ROLE => BusinessIdentityRole::SELLER ]);
+
+        $user->identities = [ $seller , 'not-an-identity' , new Person() ];
+
+        $sellers = $user->identitiesByRole( BusinessIdentityRole::SELLER );
+
+        $this->assertCount( 1 , $sellers );
+        $this->assertSame( $seller , $sellers[ 0 ] );
+    }
+
+    public function testFirstIdentityByRoleReturnsFirst(): void
+    {
+        $user = new User();
+
+        $seller  = new BusinessIdentity([ BusinessIdentity::ROLE => BusinessIdentityRole::SELLER ]);
+        $seller2 = new BusinessIdentity([ BusinessIdentity::ROLE => BusinessIdentityRole::SELLER ]);
+
+        $user->identities = [ $seller , $seller2 ];
+
+        $this->assertSame( $seller , $user->firstIdentityByRole( BusinessIdentityRole::SELLER ) );
+    }
+
+    public function testFirstIdentityByRoleReturnsNull(): void
+    {
+        $user = new User();
+
+        $this->assertNull( $user->firstIdentityByRole( BusinessIdentityRole::SELLER ) );
+    }
 }

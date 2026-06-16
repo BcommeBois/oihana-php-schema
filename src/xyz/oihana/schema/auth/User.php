@@ -225,4 +225,37 @@ class User extends Person
      * @var int|null|string
      */
     public int|null|string $tokensInvalidBefore ;
+
+    /**
+     * Returns the first business identity matching the given role.
+     *
+     * @param string $role The role to filter on (typically a
+     * {@see \xyz\oihana\schema\enumerations\BusinessIdentityRole} constant).
+     *
+     * @return BusinessIdentity|null The first matching identity, or `null`.
+     */
+    public function firstIdentityByRole( string $role ) : ?BusinessIdentity
+    {
+        return $this->identitiesByRole( $role )[ 0 ] ?? null ;
+    }
+
+    /**
+     * Returns the business identities matching the given role.
+     *
+     * Entries that are not {@see BusinessIdentity} instances are ignored. The
+     * result is reindexed and empty when the user holds no identities.
+     *
+     * @param string $role The role to filter on (typically a
+     * {@see \xyz\oihana\schema\enumerations\BusinessIdentityRole} constant).
+     *
+     * @return array<BusinessIdentity> The matching identities, reindexed.
+     */
+    public function identitiesByRole( string $role ) : array
+    {
+        return array_values( array_filter
+        (
+            $this->identities ?? [] ,
+            fn( $identity ) => $identity instanceof BusinessIdentity && $identity->is( $role )
+        ) ) ;
+    }
 }

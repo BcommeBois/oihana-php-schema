@@ -73,4 +73,87 @@ class BusinessIdentityTest extends TestCase
         $this->assertSame( '94565' , $identity->subject->id );
         $this->assertSame( '13658' , $identity->memberOf->id );
     }
+
+    public function testIsMatchesRole(): void
+    {
+        $identity = new BusinessIdentity([ BusinessIdentity::ROLE => BusinessIdentityRole::SELLER ]);
+
+        $this->assertTrue ( $identity->is( BusinessIdentityRole::SELLER ) );
+        $this->assertFalse( $identity->is( BusinessIdentityRole::CUSTOMER ) );
+    }
+
+    public function testIsWithUndefinedRole(): void
+    {
+        $identity = new BusinessIdentity();
+
+        $this->assertFalse( $identity->is( BusinessIdentityRole::SELLER ) );
+    }
+
+    public function testSubjectIdWithScalar(): void
+    {
+        $identity = new BusinessIdentity([ BusinessIdentity::SUBJECT => 'people/BECOU' ]);
+
+        $this->assertSame( 'people/BECOU' , $identity->subjectId() );
+    }
+
+    public function testSubjectIdWithObject(): void
+    {
+        $identity = new BusinessIdentity();
+        $identity->subject = new Person([ 'id' => '94565' ]);
+
+        $this->assertSame( '94565' , $identity->subjectId() );
+    }
+
+    public function testSubjectIdWithObjectExposingKeyOnly(): void
+    {
+        $identity = new BusinessIdentity();
+        $identity->subject = new Person([ '_key' => 'BECOU' ]);
+
+        $this->assertSame( 'BECOU' , $identity->subjectId() );
+    }
+
+    public function testSubjectIdWithNull(): void
+    {
+        $identity = new BusinessIdentity();
+
+        $this->assertNull( $identity->subjectId() );
+    }
+
+    public function testMemberOfIdWithScalar(): void
+    {
+        $identity = new BusinessIdentity([ BusinessIdentity::MEMBER_OF => 'organizations/13658' ]);
+
+        $this->assertSame( 'organizations/13658' , $identity->memberOfId() );
+    }
+
+    public function testMemberOfIdWithObject(): void
+    {
+        $identity = new BusinessIdentity();
+        $identity->memberOf = new Organization([ 'id' => '13658' ]);
+
+        $this->assertSame( '13658' , $identity->memberOfId() );
+    }
+
+    public function testMemberOfIdWithObjectExposingKeyOnly(): void
+    {
+        $identity = new BusinessIdentity();
+        $identity->memberOf = new Organization([ '_key' => '13658' ]);
+
+        $this->assertSame( '13658' , $identity->memberOfId() );
+    }
+
+    public function testMemberOfIdWithObjectExposingIdOnly(): void
+    {
+        $identity = new BusinessIdentity();
+        $identity->memberOf = new Organization([ '_id' => 'organizations/13658' ]);
+
+        $this->assertSame( 'organizations/13658' , $identity->memberOfId() );
+    }
+
+    public function testMemberOfIdWithNull(): void
+    {
+        $identity = new BusinessIdentity();
+
+        $this->assertNull( $identity->memberOfId() );
+    }
 }
