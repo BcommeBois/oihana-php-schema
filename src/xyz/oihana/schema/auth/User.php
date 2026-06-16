@@ -7,6 +7,7 @@ use oihana\reflect\attributes\HydrateWith;
 use org\schema\Person;
 
 use xyz\oihana\schema\auth\traits\HasProtectedResource;
+use xyz\oihana\schema\business\BusinessIdentity;
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\constants\traits\auth\UserTrait;
 
@@ -73,6 +74,18 @@ class User extends Person
      * @var string|null
      */
     public string|null $firstLoginAt ;
+
+    /**
+     * The business identities this user is linked to (e.g. a seller, a
+     * customer contact). Each entry ties the account to a business entity
+     * without merging their data. Resolved from the account's identity
+     * relationships; an account may hold more than one.
+     *
+     * @see BusinessIdentity
+     * @var array<BusinessIdentity>|null
+     */
+    #[HydrateWith( BusinessIdentity::class ) ]
+    public array|null $identities ;
 
     /**
      * The materialized status of the latest invitation associated with this

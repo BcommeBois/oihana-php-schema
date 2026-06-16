@@ -129,6 +129,21 @@ trait UserTrait
     const string FIRST_LOGIN_AT = 'firstLoginAt' ;
 
     /**
+     * Business identities linked to the user.
+     *
+     * Each entry ties the account to a business entity (a person or an
+     * organization) via a {@see \xyz\oihana\schema\business\BusinessIdentity},
+     * without merging their data. An account may hold more than one.
+     *
+     * Related model property:
+     *
+     * ```php
+     * public array|null $identities ;
+     * ```
+     */
+    const string IDENTITIES = 'identities' ;
+
+    /**
      * Materialized lifecycle status of the latest invitation associated
      * with the user.
      *

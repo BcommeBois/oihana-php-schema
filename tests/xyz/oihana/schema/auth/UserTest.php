@@ -10,6 +10,8 @@ use org\schema\Person;
 use xyz\oihana\schema\auth\Permission;
 use xyz\oihana\schema\auth\Role;
 use xyz\oihana\schema\auth\User;
+use xyz\oihana\schema\business\BusinessIdentity;
+use xyz\oihana\schema\enumerations\BusinessIdentityRole;
 
 class UserTest extends TestCase
 {
@@ -24,6 +26,7 @@ class UserTest extends TestCase
         $this->assertNull( $user->color             ?? null );
         $this->assertNull( $user->devices           ?? null );
         $this->assertNull( $user->firstLoginAt      ?? null );
+        $this->assertNull( $user->identities        ?? null );
         $this->assertNull( $user->lastLogin         ?? null );
         $this->assertNull( $user->loginsCount       ?? null );
         $this->assertNull( $user->maxLevel          ?? null );
@@ -135,5 +138,20 @@ class UserTest extends TestCase
     {
         $user = new User([ 'blockedFor' => 'api:legacy' ]);
         $this->assertSame( 'api:legacy' , $user->blockedFor );
+    }
+
+    public function testIdentitiesAssignment(): void
+    {
+        $user = new User();
+
+        $user->identities =
+        [
+            new BusinessIdentity([ BusinessIdentity::ROLE => BusinessIdentityRole::SELLER ]) ,
+            new BusinessIdentity([ BusinessIdentity::ROLE => BusinessIdentityRole::CUSTOMER_CONTACT ]) ,
+        ];
+
+        $this->assertContainsOnlyInstancesOf( BusinessIdentity::class , $user->identities );
+        $this->assertCount( 2 , $user->identities );
+        $this->assertSame( 'seller' , $user->identities[ 0 ]->role );
     }
 }
