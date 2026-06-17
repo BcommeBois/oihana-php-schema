@@ -17,6 +17,13 @@ use xyz\oihana\schema\constants\traits\auth\UserTrait;
 use xyz\oihana\schema\constants\traits\auth\WebApplicationTrait;
 use xyz\oihana\schema\constants\traits\auth\WebAPITrait;
 
+/**
+ * The enumeration of all auth properties.
+ *
+ * @package xyz\oihana\schema\constants\traits\auth
+ * @author  Marc Alcaraz
+ * @since   1.0.0
+ */
 trait AuthTrait
 {
     use ApplicationTrait ,
