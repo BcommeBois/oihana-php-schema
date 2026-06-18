@@ -66,6 +66,7 @@ use xyz\oihana\schema\constants\traits\business\BusinessIdentityTrait;
  * @package xyz\oihana\schema\business
  * @category Business
  * @author  Marc Alcaraz (ekameleon)
+ * @since   1.0.2
  */
 class BusinessIdentity extends Intangible
 {

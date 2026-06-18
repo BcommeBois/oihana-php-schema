@@ -23,6 +23,7 @@ namespace xyz\oihana\schema\constants\traits\business;
  *
  * @package xyz\oihana\schema\constants\traits\business
  * @author  Marc Alcaraz (ekameleon)
+ * @since   1.0.2
  */
 trait BusinessIdentityTrait
 {
