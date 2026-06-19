@@ -155,7 +155,7 @@ class BusinessIdentity extends Intangible
      *
      * A scalar reference (or `null`) is returned as-is — it *is* the identifier.
      * For an object or an associative array, each candidate key is probed in
-     * order (via {@see \oihana\core\accessors\getKeyValue()}) and the first
+     * order (via {@see getKeyValue}) and the first
      * non-null scalar wins.
      *
      * @param mixed        $value The reference to extract from (object, array, scalar or null).
