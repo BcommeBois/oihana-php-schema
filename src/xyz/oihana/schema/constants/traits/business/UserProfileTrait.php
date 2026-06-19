@@ -11,8 +11,8 @@ namespace xyz\oihana\schema\constants\traits\business;
  *
  * > **Note** — like {@see BusinessIdentityTrait}, this trait is intentionally
  * > **not** aggregated into the global {@see \xyz\oihana\schema\constants\Oihana}
- * > constants class : its `ROLE` key collides with
- * > {@see BusinessIdentityTrait::ROLE}. It is composed directly by the
+ * > constants class : its generic `ROLE` key is scoped to the entity to avoid
+ * > ambiguity with the auth `Role` vocabulary. It is composed directly by the
  * > {@see \xyz\oihana\schema\business\UserProfile} entity instead.
  *
  * Typical usage:

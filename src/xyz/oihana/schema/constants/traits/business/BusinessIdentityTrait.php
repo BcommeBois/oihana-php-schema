@@ -18,7 +18,7 @@ namespace xyz\oihana\schema\constants\traits\business;
  * Typical usage:
  *
  * ```php
- * $identity[ BusinessIdentityTrait::ROLE ] = 'seller' ;
+ * $identity[ BusinessIdentityTrait::SUBJECT ] = new Person([ '_key' => '94565' ]) ;
  * ```
  *
  * @package xyz\oihana\schema\constants\traits\business
@@ -27,34 +27,6 @@ namespace xyz\oihana\schema\constants\traits\business;
  */
 trait BusinessIdentityTrait
 {
-    /**
-     * The organization the {@see BusinessIdentityTrait::SUBJECT} belongs to.
-     *
-     * Optional — typically set when the subject is a person acting for an
-     * organization (e.g. a customer contact and its customer organization).
-     *
-     * Related model property:
-     *
-     * ```php
-     * public null|string|Organization|Thing $memberOf ;
-     * ```
-     */
-    const string MEMBER_OF = 'memberOf' ;
-
-    /**
-     * The role qualifying the link between the account and the subject.
-     *
-     * Expected values are
-     * {@see \xyz\oihana\schema\enumerations\BusinessIdentityRole} constants.
-     *
-     * Related model property:
-     *
-     * ```php
-     * public string|null $role ;
-     * ```
-     */
-    const string ROLE = 'role' ;
-
     /**
      * The business entity the account is linked to (a person or an
      * organization).

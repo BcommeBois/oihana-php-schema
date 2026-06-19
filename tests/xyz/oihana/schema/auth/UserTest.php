@@ -11,7 +11,6 @@ use xyz\oihana\schema\auth\Permission;
 use xyz\oihana\schema\auth\Role;
 use xyz\oihana\schema\auth\User;
 use xyz\oihana\schema\business\BusinessIdentity;
-use xyz\oihana\schema\enumerations\BusinessIdentityRole;
 
 class UserTest extends TestCase
 {
@@ -146,69 +145,69 @@ class UserTest extends TestCase
 
         $user->identities =
         [
-            new BusinessIdentity([ BusinessIdentity::ROLE => BusinessIdentityRole::SELLER ]) ,
-            new BusinessIdentity([ BusinessIdentity::ROLE => BusinessIdentityRole::CUSTOMER_CONTACT ]) ,
+            new BusinessIdentity([ BusinessIdentity::SUBJECT => new Person([ 'additionalType' => 'Seller' ]) ]) ,
+            new BusinessIdentity([ BusinessIdentity::SUBJECT => new Person([ 'additionalType' => 'CustomerEmployee' ]) ]) ,
         ];
 
         $this->assertContainsOnlyInstancesOf( BusinessIdentity::class , $user->identities );
         $this->assertCount( 2 , $user->identities );
-        $this->assertSame( 'seller' , $user->identities[ 0 ]->role );
+        $this->assertTrue( $user->identities[ 0 ]->isType( 'Seller' ) );
     }
 
-    public function testIdentitiesByRoleFilters(): void
+    public function testIdentitiesBySubjectTypeFilters(): void
     {
         $user = new User();
 
-        $seller   = new BusinessIdentity([ BusinessIdentity::ROLE => BusinessIdentityRole::SELLER ]);
-        $contact  = new BusinessIdentity([ BusinessIdentity::ROLE => BusinessIdentityRole::CUSTOMER_CONTACT ]);
-        $seller2  = new BusinessIdentity([ BusinessIdentity::ROLE => BusinessIdentityRole::SELLER ]);
+        $seller  = new BusinessIdentity([ BusinessIdentity::SUBJECT => new Person([ 'additionalType' => 'Seller' ]) ]);
+        $contact = new BusinessIdentity([ BusinessIdentity::SUBJECT => new Person([ 'additionalType' => 'CustomerEmployee' ]) ]);
+        $seller2 = new BusinessIdentity([ BusinessIdentity::SUBJECT => new Person([ 'additionalType' => 'Seller' ]) ]);
 
         $user->identities = [ $seller , $contact , $seller2 ];
 
-        $sellers = $user->identitiesByRole( BusinessIdentityRole::SELLER );
+        $sellers = $user->identitiesBySubjectType( 'Seller' );
 
         $this->assertCount( 2 , $sellers );
         $this->assertSame( $seller  , $sellers[ 0 ] );
         $this->assertSame( $seller2 , $sellers[ 1 ] );
     }
 
-    public function testIdentitiesByRoleWithoutIdentities(): void
+    public function testIdentitiesBySubjectTypeWithoutIdentities(): void
     {
         $user = new User();
 
-        $this->assertSame( [] , $user->identitiesByRole( BusinessIdentityRole::SELLER ) );
+        $this->assertSame( [] , $user->identitiesBySubjectType( 'Seller' ) );
     }
 
-    public function testIdentitiesByRoleIgnoresNonBusinessIdentity(): void
+    public function testIdentitiesBySubjectTypeIgnoresNonBusinessIdentity(): void
     {
         $user = new User();
 
-        $seller = new BusinessIdentity([ BusinessIdentity::ROLE => BusinessIdentityRole::SELLER ]);
+        $seller = new BusinessIdentity([ BusinessIdentity::SUBJECT => new Person([ 'additionalType' => 'Seller' ]) ]);
 
         $user->identities = [ $seller , 'not-an-identity' , new Person() ];
 
-        $sellers = $user->identitiesByRole( BusinessIdentityRole::SELLER );
+        $sellers = $user->identitiesBySubjectType( 'Seller' );
 
         $this->assertCount( 1 , $sellers );
         $this->assertSame( $seller , $sellers[ 0 ] );
     }
 
-    public function testFirstIdentityByRoleReturnsFirst(): void
+    public function testFirstIdentityBySubjectTypeReturnsFirst(): void
     {
         $user = new User();
 
-        $seller  = new BusinessIdentity([ BusinessIdentity::ROLE => BusinessIdentityRole::SELLER ]);
-        $seller2 = new BusinessIdentity([ BusinessIdentity::ROLE => BusinessIdentityRole::SELLER ]);
+        $seller  = new BusinessIdentity([ BusinessIdentity::SUBJECT => new Person([ 'additionalType' => 'Seller' ]) ]);
+        $seller2 = new BusinessIdentity([ BusinessIdentity::SUBJECT => new Person([ 'additionalType' => 'Seller' ]) ]);
 
         $user->identities = [ $seller , $seller2 ];
 
-        $this->assertSame( $seller , $user->firstIdentityByRole( BusinessIdentityRole::SELLER ) );
+        $this->assertSame( $seller , $user->firstIdentityBySubjectType( 'Seller' ) );
     }
 
-    public function testFirstIdentityByRoleReturnsNull(): void
+    public function testFirstIdentityBySubjectTypeReturnsNull(): void
     {
         $user = new User();
 
-        $this->assertNull( $user->firstIdentityByRole( BusinessIdentityRole::SELLER ) );
+        $this->assertNull( $user->firstIdentityBySubjectType( 'Seller' ) );
     }
 }

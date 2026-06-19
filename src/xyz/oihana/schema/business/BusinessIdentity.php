@@ -7,60 +7,46 @@ use org\schema\Organization;
 use org\schema\Person;
 use org\schema\Thing;
 
+use org\schema\constants\Schema;
+
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\constants\traits\business\BusinessIdentityTrait;
+
+use function oihana\core\accessors\getKeyValue;
+use function oihana\core\arrays\toArray;
 
 /**
  * Links an authenticated account to a business entity.
  *
- * A *business identity* is the typed association between an account (the
- * principal that authenticates) and the business entity it corresponds to —
- * a {@see Person} (e.g. a seller, a customer contact) or an
- * {@see Organization} (e.g. a customer). It answers the question *"who is this
- * account, in business terms?"* without ever merging the account's own data
- * with the linked entity's data.
+ * A *business identity* associates an account (the principal that authenticates)
+ * with the business entity it corresponds to — typically a {@see Person} or an
+ * {@see Organization}, exposed through {@see BusinessIdentity::$subject}. It
+ * answers *"who is this account, in business terms?"* without merging the
+ * account's own data with the linked entity's : the subject is a resolved
+ * reference, never a copy.
  *
- * ### Why a dedicated entity
- * The account record and the business entity live in distinct systems and
- * **must not be fused** : the account `givenName` may legitimately differ from
- * the linked person's `givenName`, and the business source may be read-only.
- * `BusinessIdentity` keeps the link explicit and side-effect free : the
- * {@see BusinessIdentity::$subject} (and optional {@see BusinessIdentity::$memberOf})
- * are resolved references, not copies.
+ * An account may hold several identities, so consumers usually expose them as a
+ * list (see {@see \xyz\oihana\schema\auth\User::$identities}).
  *
- * ### Cardinality
- * An account may hold several identities (e.g. both a seller and a customer
- * contact), so consumers typically expose them as a list. The role of each
- * link is carried by {@see BusinessIdentity::$role} (see
- * {@see \xyz\oihana\schema\enumerations\BusinessIdentityRole}).
- *
- * Intentionally extends {@see Intangible} rather than {@see Thing} : an
- * identity is a qualifier of an account, not an independently addressable
- * resource. It still inherits the ArangoDB metadata (`_from`/`_to`),
- * `created`/`modified`, `active` and `identifier` from {@see Thing}.
+ * Intentionally extends {@see Intangible} rather than {@see Thing} : an identity
+ * qualifies an account, it is not an independently addressable resource. It
+ * still inherits the ArangoDB metadata (`_from`/`_to`), `created`/`modified`,
+ * `active` and `identifier` from {@see Thing}.
  *
  * ### Example
  * ```php
+ * use org\schema\Person;
  * use xyz\oihana\schema\business\BusinessIdentity;
- * use xyz\oihana\schema\enumerations\BusinessIdentityRole;
  *
- * // A seller account
  * $identity = new BusinessIdentity
  * ([
- *     BusinessIdentity::ROLE    => BusinessIdentityRole::SELLER ,
- *     BusinessIdentity::SUBJECT => [ '@type' => 'Person' , 'id' => 'BECOU' , 'givenName' => 'Benjamin' ] ,
+ *     BusinessIdentity::SUBJECT => new Person([ '_key' => '94565' , 'additionalType' => 'Seller' ]) ,
  * ]);
  *
- * // A customer contact account (person acting for an organization)
- * $identity = new BusinessIdentity
- * ([
- *     BusinessIdentity::ROLE      => BusinessIdentityRole::CUSTOMER_CONTACT ,
- *     BusinessIdentity::SUBJECT   => [ '@type' => 'Person'       , 'id' => '94565'  ] ,
- *     BusinessIdentity::MEMBER_OF => [ '@type' => 'Organization' , 'id' => '13658'  ] ,
- * ]);
+ * $identity->subjectKey() ;          // '94565'
+ * $identity->isType( 'Seller' ) ;    // true
  * ```
  *
- * @see \xyz\oihana\schema\enumerations\BusinessIdentityRole
  * @see BusinessIdentityTrait
  *
  * @package xyz\oihana\schema\business
@@ -78,33 +64,9 @@ class BusinessIdentity extends Intangible
     public const string CONTEXT = Oihana::SCHEMA ;
 
     /**
-     * The organization the {@see BusinessIdentity::$subject} belongs to.
-     *
-     * Optional — typically set when the subject is a person acting for an
-     * organization (e.g. a customer contact linked to its customer
-     * organization). A resolved reference, never a copy.
-     *
-     * @var null|string|Organization|Thing
-     */
-    public null|string|Organization|Thing $memberOf ;
-
-    /**
-     * The role qualifying the link between the account and the subject.
-     *
-     * Expected values are
-     * {@see \xyz\oihana\schema\enumerations\BusinessIdentityRole} constants
-     * (`customer`, `customerContact`, `seller`, `provider`, `deliverer`).
-     * Stored as a string for forward-compatibility with future roles.
-     *
-     * @var string|null
-     */
-    public string|null $role ;
-
-    /**
      * The business entity the account is linked to.
      *
-     * A {@see Person} (e.g. a seller or a customer contact) or an
-     * {@see Organization} (e.g. a customer). A resolved reference, never a
+     * A {@see Person} or an {@see Organization}. A resolved reference, never a
      * copy of the account's own data.
      *
      * @var null|string|Person|Organization|Thing
@@ -112,65 +74,117 @@ class BusinessIdentity extends Intangible
     public null|string|Person|Organization|Thing $subject ;
 
     /**
-     * Extracts an identifier from a resolved reference.
+     * Indicates whether the {@see BusinessIdentity::$subject} carries the given type.
      *
-     * A {@see Thing} reference is probed for its `id`, then `_key`, then `_id`
-     * (all tolerant when undefined). A scalar reference (or `null`) is returned
-     * as-is.
+     * Compares the subject's Schema.org `additionalType` against `$type` : strict
+     * equality, or membership when `additionalType` is an array.
      *
-     * @param null|string|Thing $value The reference to extract the id from.
+     * @param string $type The type to test against.
      *
-     * @return null|int|string The resolved id, or `null`.
+     * @return bool `true` if the subject type is defined and matches `$type`.
      */
-    private static function extractId( null|string|Thing $value ) : null|int|string
+    public function isType( string $type ) : bool
     {
-        if ( $value instanceof Thing )
+        $subjectType = $this->subjectType() ;
+
+        return is_array( $subjectType )
+            ? in_array( $type , $subjectType , true )
+            : $subjectType === $type ;
+    }
+
+    /**
+     * Returns an identifier of the {@see BusinessIdentity::$subject}.
+     *
+     * Probes the given key (or ordered list of keys) on the resolved subject
+     * reference ; a scalar subject is returned as-is. The choice of key(s) is
+     * left to the caller.
+     *
+     * @param string|array $key The key, or ordered list of keys, to probe. Default {@see Schema::_KEY}.
+     *
+     * @return null|int|string The resolved identifier, or `null`.
+     */
+    public function subjectKey( string|array $key = Schema::_KEY ) : null|int|string
+    {
+        return $this->extractKey( $this->subject ?? null , $key ) ;
+    }
+
+    /**
+     * Returns the Schema.org `additionalType` of the {@see BusinessIdentity::$subject}.
+     *
+     * Tolerant : returns `null` when the subject is a scalar reference, `null`,
+     * or carries no `additionalType`.
+     *
+     * @return array|string|null The subject `additionalType`, or `null`.
+     */
+    public function subjectType() : array|string|null
+    {
+        $subject = $this->subject ?? null ;
+
+        if ( is_object( $subject ) && isset( $subject->additionalType ) )
         {
-            return $value->id ?? $value->_key ?? $value->_id ?? null ;
+            $type = $subject->additionalType ;
+
+            return ( is_array( $type ) || is_string( $type ) ) ? $type : null ;
         }
 
-        return $value ;
+        return null ;
     }
 
     /**
-     * Indicates whether this identity carries the given role.
+     * Returns an identifier of the organization referenced by the subject's
+     * Schema.org `worksFor` property.
      *
-     * Tolerant when {@see BusinessIdentity::$role} is not defined : returns
-     * `false` rather than raising an error.
+     * Probes the given key (or ordered list of keys) on the resolved `worksFor`
+     * reference ; a scalar reference is returned as-is. Returns `null` when the
+     * subject has no `worksFor`.
      *
-     * @param string $role The role to test against (typically a
-     * {@see \xyz\oihana\schema\enumerations\BusinessIdentityRole} constant).
+     * @param string|array $key The key, or ordered list of keys, to probe. Default {@see Schema::_KEY}.
      *
-     * @return bool `true` if the role is defined and strictly equals `$role`.
+     * @return null|int|string The resolved identifier, or `null`.
      */
-    public function is( string $role ) : bool
+    public function worksForKey( string|array $key = Schema::_KEY ) : null|int|string
     {
-        return isset( $this->role ) && $this->role === $role ;
+        $subject  = $this->subject ?? null ;
+        $worksFor = ( is_object( $subject ) && isset( $subject->worksFor ) ) ? $subject->worksFor : null ;
+
+        return $this->extractKey( $worksFor , $key ) ;
     }
 
     /**
-     * Returns the identifier of the {@see BusinessIdentity::$memberOf}.
+     * Extracts an identifier from a resolved reference, trying the given key(s) in order.
      *
-     * Resolves the id whether the member is a scalar reference or a
-     * {@see Thing} (probed for `id`, then `_key`, then `_id`).
+     * A scalar reference (or `null`) is returned as-is — it *is* the identifier.
+     * For an object or an associative array, each candidate key is probed in
+     * order (via {@see \oihana\core\accessors\getKeyValue()}) and the first
+     * non-null scalar wins.
      *
-     * @return null|int|string The member id, or `null` if it cannot be resolved.
+     * @param mixed        $value The reference to extract from (object, array, scalar or null).
+     * @param string|array $key   The key, or ordered list of keys, to probe. Default {@see Schema::_KEY}.
+     *
+     * @return null|int|string The resolved identifier, or `null`.
      */
-    public function memberOfId() : null|int|string
+    private function extractKey( mixed $value , string|array $key = Schema::_KEY ) : null|int|string
     {
-        return self::extractId( $this->memberOf ?? null ) ;
-    }
+        if ( $value === null )
+        {
+            return null ;
+        }
 
-    /**
-     * Returns the identifier of the {@see BusinessIdentity::$subject}.
-     *
-     * Resolves the id whether the subject is a scalar reference or a
-     * {@see Thing} (probed for `id`, then `_key`, then `_id`).
-     *
-     * @return null|int|string The subject id, or `null` if it cannot be resolved.
-     */
-    public function subjectId() : null|int|string
-    {
-        return self::extractId( $this->subject ?? null ) ;
+        if ( !is_array( $value ) && !is_object( $value ) )
+        {
+            return is_scalar( $value ) ? $value : null ;
+        }
+
+        foreach ( toArray( $key ) as $candidate )
+        {
+            $resolved = getKeyValue( $value , $candidate ) ;
+
+            if ( is_int( $resolved ) || is_string( $resolved ) )
+            {
+                return $resolved ;
+            }
+        }
+
+        return null ;
     }
 }

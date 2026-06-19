@@ -227,35 +227,35 @@ class User extends Person
     public int|null|string $tokensInvalidBefore ;
 
     /**
-     * Returns the first business identity matching the given role.
+     * Returns the first business identity whose subject carries the given type.
      *
-     * @param string $role The role to filter on (typically a
-     * {@see \xyz\oihana\schema\enumerations\BusinessIdentityRole} constant).
+     * @param string $type The subject type to filter on (compared against the
+     * subject's Schema.org `additionalType`).
      *
      * @return BusinessIdentity|null The first matching identity, or `null`.
      */
-    public function firstIdentityByRole( string $role ) : ?BusinessIdentity
+    public function firstIdentityBySubjectType( string $type ) : ?BusinessIdentity
     {
-        return $this->identitiesByRole( $role )[ 0 ] ?? null ;
+        return $this->identitiesBySubjectType( $type )[ 0 ] ?? null ;
     }
 
     /**
-     * Returns the business identities matching the given role.
+     * Returns the business identities whose subject carries the given type.
      *
      * Entries that are not {@see BusinessIdentity} instances are ignored. The
-     * result is reindexed and empty when the user holds no identities.
+     * result is reindexed and empty when the user holds no matching identity.
      *
-     * @param string $role The role to filter on (typically a
-     * {@see \xyz\oihana\schema\enumerations\BusinessIdentityRole} constant).
+     * @param string $type The subject type to filter on (compared against the
+     * subject's Schema.org `additionalType`).
      *
      * @return array<BusinessIdentity> The matching identities, reindexed.
      */
-    public function identitiesByRole( string $role ) : array
+    public function identitiesBySubjectType( string $type ) : array
     {
         return array_values( array_filter
         (
             $this->identities ?? [] ,
-            fn( $identity ) => $identity instanceof BusinessIdentity && $identity->is( $role )
+            fn( $identity ) => $identity instanceof BusinessIdentity && $identity->isType( $type )
         ) ) ;
     }
 }
