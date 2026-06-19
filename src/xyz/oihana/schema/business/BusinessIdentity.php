@@ -65,13 +65,10 @@ class BusinessIdentity extends Intangible
 
     /**
      * The business entity the account is linked to.
-     *
-     * A {@see Person} or an {@see Organization}. A resolved reference, never a
-     * copy of the account's own data.
-     *
-     * @var null|string|Person|Organization|Thing
+     * A {@see Person} or an {@see Organization}. A resolved reference, never a copy of the account's own data.
+     * @var null|string|array|Person|Organization|Thing
      */
-    public null|string|Person|Organization|Thing $subject ;
+    public null|string|array|Person|Organization|Thing $subject ;
 
     /**
      * Indicates whether the {@see BusinessIdentity::$subject} carries the given type.
@@ -86,7 +83,6 @@ class BusinessIdentity extends Intangible
     public function isType( string $type ) : bool
     {
         $subjectType = $this->subjectType() ;
-
         return is_array( $subjectType )
             ? in_array( $type , $subjectType , true )
             : $subjectType === $type ;
@@ -111,8 +107,10 @@ class BusinessIdentity extends Intangible
     /**
      * Returns the Schema.org `additionalType` of the {@see BusinessIdentity::$subject}.
      *
-     * Tolerant : returns `null` when the subject is a scalar reference, `null`,
-     * or carries no `additionalType`.
+     * Reads the `additionalType` whether the subject is an object or an
+     * associative array (a raw projection reference). Tolerant : returns `null`
+     * when the subject is a scalar reference, `null`, or carries no
+     * `additionalType`.
      *
      * @return array|string|null The subject `additionalType`, or `null`.
      */
@@ -120,9 +118,9 @@ class BusinessIdentity extends Intangible
     {
         $subject = $this->subject ?? null ;
 
-        if ( is_object( $subject ) && isset( $subject->additionalType ) )
+        if ( is_array( $subject ) || is_object( $subject ) )
         {
-            $type = $subject->additionalType ;
+            $type = getKeyValue( $subject , Schema::ADDITIONAL_TYPE ) ;
 
             return ( is_array( $type ) || is_string( $type ) ) ? $type : null ;
         }
@@ -134,9 +132,10 @@ class BusinessIdentity extends Intangible
      * Returns an identifier of the organization referenced by the subject's
      * Schema.org `worksFor` property.
      *
-     * Probes the given key (or ordered list of keys) on the resolved `worksFor`
-     * reference ; a scalar reference is returned as-is. Returns `null` when the
-     * subject has no `worksFor`.
+     * Reads the subject's `worksFor` whether the subject is an object or an
+     * associative array, then probes the given key (or ordered list of keys) on
+     * it ; a scalar reference is returned as-is. Returns `null` when the subject
+     * has no `worksFor`.
      *
      * @param string|array $key The key, or ordered list of keys, to probe. Default {@see Schema::_KEY}.
      *
@@ -145,7 +144,7 @@ class BusinessIdentity extends Intangible
     public function worksForKey( string|array $key = Schema::_KEY ) : null|int|string
     {
         $subject  = $this->subject ?? null ;
-        $worksFor = ( is_object( $subject ) && isset( $subject->worksFor ) ) ? $subject->worksFor : null ;
+        $worksFor = ( is_array( $subject ) || is_object( $subject ) ) ? getKeyValue( $subject , Schema::WORKS_FOR ) : null ;
 
         return $this->extractKey( $worksFor , $key ) ;
     }

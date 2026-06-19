@@ -204,4 +204,39 @@ class BusinessIdentityTest extends TestCase
 
         $this->assertNull( $identity->worksForKey() );
     }
+
+    // ---- array subject (raw projection reference, e.g. an AQL-projected document)
+
+    public function testSubjectTypeFromArraySubject(): void
+    {
+        $identity = new BusinessIdentity();
+        $identity->subject = [ 'additionalType' => 'Seller' ];
+
+        $this->assertSame( 'Seller' , $identity->subjectType() );
+    }
+
+    public function testIsTypeFromArraySubject(): void
+    {
+        $identity = new BusinessIdentity();
+        $identity->subject = [ 'additionalType' => 'Seller' ];
+
+        $this->assertTrue ( $identity->isType( 'Seller' ) );
+        $this->assertFalse( $identity->isType( 'CustomerEmployee' ) );
+    }
+
+    public function testSubjectKeyFromArraySubject(): void
+    {
+        $identity = new BusinessIdentity();
+        $identity->subject = [ '_key' => '94565' , 'id' => 'BECOU' ];
+
+        $this->assertSame( '94565' , $identity->subjectKey() );
+    }
+
+    public function testWorksForKeyFromArraySubject(): void
+    {
+        $identity = new BusinessIdentity();
+        $identity->subject = [ 'worksFor' => [ '_key' => '13658' ] ];
+
+        $this->assertSame( '13658' , $identity->worksForKey() );
+    }
 }
