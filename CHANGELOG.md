@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds the bilingual wiki guides for the `xyz\oihana\schema\business` (`oihana-business.md`) and `xyz\oihana\schema\http` (`oihana-http.md`) namespaces (EN/FR), and lists both in the README `🗂️ Schemas overview` table and the wiki indexes.
 - Adds the `Docs` GitHub Actions workflow that builds the phpDocumentor site (`composer doc`) and deploys it to GitHub Pages on every push to `main`. The generated `docs/` output is no longer tracked in git (now gitignored), and `phpdoc.xml` is bumped to `1.1.0`. Uses the Node 24 majors of the Pages actions (`configure-pages@v6`, `upload-pages-artifact@v5`, `deploy-pages@v5`) to avoid the Node 20 deprecation warnings.
 
 ## [1.1.0] - 2026-06-23

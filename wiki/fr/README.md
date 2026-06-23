@@ -20,6 +20,8 @@ Ce wiki est un compagnon rédigé à la main de la [référence d'API](../../doc
 |----------------------------------------|------------------------------------------------|---------------------------------------------------------------------------------------------|
 | [`org\schema`](schema-org/README.md)           | [Vocabulaire Schema.org](schema-org/README.md)        | ~400 objets-valeur typés pour Schema.org — `Thing`, `Person`, `Place`, `Event`, `Product`, `Offer`, hiérarchie complète des `Action`, … |
 | [`xyz\oihana\schema\auth`](oihana-auth.md) | [Authentification & RBAC](oihana-auth.md)    | OAuth2/OIDC, sessions, keyfiles, utilisateurs, rôles, permissions, politiques compatibles Casbin. |
+| [`xyz\oihana\schema\business`](oihana-business.md) | [Métier Oihana](oihana-business.md)    | `BusinessIdentity` (lien typé compte ↔ entité) et `UserProfile` (gabarit de provisionnement à la création). |
+| [`xyz\oihana\schema\http`](oihana-http.md) | [HTTP Oihana](oihana-http.md)            | Métadonnées structurées de requête HTTP : `UserAgentInfo` (navigateur, OS, classe d'appareil, indicateur bot). |
 | [`xyz\oihana\schema\places`](oihana-places.md) | [Lieux Oihana](oihana-places.md)         | Emplacements opérationnels : `Site`, `Office`, `Warehouse`, `JobSite`.                      |
 | [`xyz\oihana\schema`](oihana-core.md)   | [Types transverses Oihana](oihana-core.md)     | `Pagination`, `Log`, `AuditAction`, énumérations d'audit.                                   |
 | [`com\progress\schema`](openedge-progress.md) | [Catalogue système OpenEdge Progress](openedge-progress.md) | Tables `SYS%` du catalogue système : tables, colonnes, index, vues, utilisateurs, privilèges, contraintes, séquences, triggers, procédures, types de données. |
