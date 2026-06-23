@@ -39,6 +39,10 @@ final readonly class SchemaResolver
     /**
      * Resolves the schema class name for the given target.
      *
+     * The discriminator value (read at {@see $key}) may be a single string or an
+     * array of types. When it is an array (a multi-typed document), the class is
+     * resolved by {@see $map} declaration order — see {@see resolveFromList()}.
+     *
      * @param mixed $target Object or array containing a schema type value.
      *
      * @return string|null Fully-qualified schema class name, or null if the target
@@ -52,8 +56,35 @@ final readonly class SchemaResolver
         }
 
         $type  = getKeyValue( $target , $this->key ) ;
-        $class = $this->map[ $type ] ?? $this->default ;
+
+        $class = is_array( $type )
+               ? $this->resolveFromList( $type )
+               : ( $this->map[ $type ] ?? $this->default ) ;
 
         return is_string( $class ) && $class !== '' && class_exists( $class ) ? $class : null ;
+    }
+
+    /**
+     * Resolves the schema class from a list of candidate types, honouring the
+     * declaration order of {@see $map} as the resolution priority — so a document
+     * carrying several types resolves deterministically, regardless of the order
+     * the types appear in the document. Falls back to {@see $default} when none
+     * of the candidates is mapped (including an empty list).
+     *
+     * @param array<int,mixed> $types The candidate type values.
+     *
+     * @return string|null The mapped class, the default, or null.
+     */
+    private function resolveFromList( array $types ) : ?string
+    {
+        foreach( $this->map as $type => $class )
+        {
+            if( in_array( $type , $types , true ) )
+            {
+                return $class ;
+            }
+        }
+
+        return $this->default ;
     }
 }

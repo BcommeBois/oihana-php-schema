@@ -114,6 +114,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Changed
 
+- `SchemaResolver` now accepts a **list** of types for the discriminator (multi-typed documents), resolved by **map declaration order** (consistent with `php-arango`'s `FederatedSearch`), falling back to the default; scalar resolution unchanged.
 - ThingTrait::jsonSerialize now returns all null properties by default (no compression)
 - Refactors the ThingTrait::toArray implementation (removes the $class parameter)
 - Refactors ApplicationTrait, OAuthClientTrait, SessionTrait and WebApplicationTrait to consume the shared ClientIdTrait

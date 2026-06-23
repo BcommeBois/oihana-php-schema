@@ -104,4 +104,66 @@ class SchemaResolverTest extends TestCase
         $target = ['otherKey' => 'value'];
         $this->assertNull($resolver($target));
     }
+
+    public function testResolvesByMapOrderFromTypeArray(): void
+    {
+        $resolver = new SchemaResolver(
+            'type',
+            [
+                'customer' => stdClass::class,
+                'place'    => ArrayObject::class
+            ],
+            null
+        );
+
+        // map order (customer before place) wins over array order
+        $this->assertSame( stdClass::class, $resolver(['type' => ['place', 'customer']]));
+        $this->assertSame( stdClass::class, $resolver(['type' => ['customer', 'place']]));
+    }
+
+    public function testReturnsDefaultWhenNoTypeInArrayIsMapped(): void
+    {
+        $resolver = new SchemaResolver(
+            'type',
+            ['customer' => stdClass::class],
+            ArrayObject::class
+        );
+
+        $this->assertSame( ArrayObject::class, $resolver(['type' => ['x', 'y']]));
+    }
+
+    public function testReturnsDefaultForEmptyTypeArray(): void
+    {
+        $resolver = new SchemaResolver(
+            'type',
+            ['customer' => stdClass::class],
+            ArrayObject::class
+        );
+
+        $this->assertSame( ArrayObject::class, $resolver(['type' => []]));
+    }
+
+    public function testIgnoresNonStringElementsInTypeArray(): void
+    {
+        $resolver = new SchemaResolver(
+            'type',
+            ['customer' => stdClass::class],
+            null
+        );
+
+        $this->assertSame( stdClass::class, $resolver(['type' => [123, 'customer']]));
+    }
+
+    public function testArrayTypeNoLongerThrows(): void
+    {
+        $resolver = new SchemaResolver(
+            'type',
+            ['customer' => stdClass::class],
+            null
+        );
+
+        // regression guard: an array discriminator must resolve without a TypeError
+        $this->assertSame( stdClass::class, $resolver(['type' => ['customer']]));
+        $this->assertNull($resolver(['type' => ['unmapped']]));
+    }
 }
