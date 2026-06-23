@@ -6,15 +6,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
-### Added
-
-- Adds the bilingual wiki guides for the `xyz\oihana\schema\business` (`oihana-business.md`) and `xyz\oihana\schema\http` (`oihana-http.md`) namespaces (EN/FR), and lists both in the README `🗂️ Schemas overview` table and the wiki indexes.
-- Adds the `Docs` GitHub Actions workflow that builds the phpDocumentor site (`composer doc`) and deploys it to GitHub Pages on every push to `main`. The generated `docs/` output is no longer tracked in git (now gitignored), and `phpdoc.xml` is bumped to `1.1.0`. Uses the Node 24 majors of the Pages actions (`configure-pages@v6`, `upload-pages-artifact@v5`, `deploy-pages@v5`) to avoid the Node 20 deprecation warnings.
-
 ## [1.1.0] - 2026-06-23
 
 ### Added
 
+- Adds the bilingual wiki guides for the `xyz\oihana\schema\business` (`oihana-business.md`) and `xyz\oihana\schema\http` (`oihana-http.md`) namespaces (EN/FR), and lists both in the README `🗂️ Schemas overview` table and the wiki indexes.
+- Adds the `Docs` GitHub Actions workflow that builds the phpDocumentor site (`composer doc`) and deploys it to GitHub Pages on every push to `main`. The generated `docs/` output is no longer tracked in git (now gitignored), and `phpdoc.xml` is bumped to `1.1.0`. Uses the Node 24 majors of the Pages actions (`configure-pages@v6`, `upload-pages-artifact@v5`, `deploy-pages@v5`) to avoid the Node 20 deprecation warnings.
 - Adds the `xyz\oihana\schema\business` namespace and the `BusinessIdentity` entity (extends `Intangible`) — the typed link between an authenticated account and a business entity (a `Person` or an `Organization`), exposed through a single `subject` property. Keeps the account and its linked entity decoupled (no data merging); `subject` is a resolved reference, never a copy. The identity type is **derived** from the subject (its Schema.org `additionalType`), not stored on the link. `subject` accepts a hydrated object (`Person` / `Organization` / `Thing`), a scalar reference, **or** a raw associative `array` (an AQL-projected reference) — the hydrator does not force a class, so a downstream project can subclass and override the property with `#[HydrateWith]` if it wants a fixed type.
   - Adds the companion `xyz\oihana\schema\constants\traits\business\BusinessIdentityTrait` trait centralising the `BusinessIdentity` property name constant (`SUBJECT`). It is intentionally **not** aggregated into `xyz\oihana\schema\constants\Oihana` because its `SUBJECT` key collides with the already-aggregated `auth\PermissionTrait::SUBJECT`.
   - Adds the `identities` property (array of `BusinessIdentity`, hydrated via `#[HydrateWith]`) to `xyz\oihana\schema\auth\User`, with the companion `UserTrait::IDENTITIES` constant. An account may hold several identities (e.g. both a seller and a customer contact).
