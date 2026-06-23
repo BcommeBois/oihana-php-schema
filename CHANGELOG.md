@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-06-23
+
 ### Added
 
 - Adds the `xyz\oihana\schema\business` namespace and the `BusinessIdentity` entity (extends `Intangible`) — the typed link between an authenticated account and a business entity (a `Person` or an `Organization`), exposed through a single `subject` property. Keeps the account and its linked entity decoupled (no data merging); `subject` is a resolved reference, never a copy. The identity type is **derived** from the subject (its Schema.org `additionalType`), not stored on the link. `subject` accepts a hydrated object (`Person` / `Organization` / `Thing`), a scalar reference, **or** a raw associative `array` (an AQL-projected reference) — the hydrator does not force a class, so a downstream project can subclass and override the property with `#[HydrateWith]` if it wants a fixed type.
