@@ -24,6 +24,9 @@ coverage.xml
 /builds/
 /vendor/
 
+# phpDocumentor generated output
+/docs/
+
 #Bun
 *.lock
 *.lockb
