@@ -86,7 +86,7 @@ class UserProfile extends Intangible
      *
      * A resolved reference — either a role key / name (string) or a hydrated {@see Role} object.
      *
-     * @var null|string|Role
+     * @var null|string|array|Role
      */
-    public null|string|Role $role ;
+    public null|string|array|Role $role ;
 }

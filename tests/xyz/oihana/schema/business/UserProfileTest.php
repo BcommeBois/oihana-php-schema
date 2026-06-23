@@ -67,4 +67,18 @@ class UserProfileTest extends TestCase
         $this->assertInstanceOf( Role::class , $profile->role );
         $this->assertSame( 'seller' , $profile->role->name );
     }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testHydrationWithArrayRole(): void
+    {
+        $profile = new UserProfile
+        ([
+            UserProfile::ROLE => [ '_key' => '42' , 'name' => 'seller' ] ,
+        ]);
+
+        $this->assertIsArray( $profile->role );
+        $this->assertSame( [ '_key' => '42' , 'name' => 'seller' ] , $profile->role );
+    }
 }
