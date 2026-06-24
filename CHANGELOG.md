@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+### Added
+
+- Adds the `xyz\oihana\schema\thesaurus` namespace and the `ThesaurusTerm` entity (extends the schema.org `DefinedTerm`) — a thesaurus term enriched with house-specific properties (e.g. `color`, a `#RRGGBB` hex string) layered on top of harvested data. These local properties survive a re-harvest because the harvest performs an AQL `UPSERT ... UPDATE` merge that only rewrites the source fields and leaves untouched attributes in place.
+  - Adds the companion `xyz\oihana\schema\constants\traits\thesaurus\ThesaurusTermTrait` trait centralising the `ThesaurusTerm` property name constant (`COLOR`), and the domain-level `xyz\oihana\schema\constants\traits\ThesaurusTrait` aggregator (mirrors `AuthTrait`/`HttpTrait`). The aggregator is wired into `xyz\oihana\schema\constants\Oihana`, so the field is reachable via `Oihana::COLOR` (its value matches the `COLOR` keys already exposed by the auth traits).
+  - Adds the `tests/xyz/oihana/schema/thesaurus` unit-test suite covering `ThesaurusTerm` defaults, constants and hydration.
+
 ## [1.1.0] - 2026-06-23
 
 ### Added

@@ -5,7 +5,7 @@ namespace xyz\oihana\schema\constants\traits;
 /**
  * The enumeration of all AuditAction properties.
  *
- * @package xyz\oihana\schema\constants\traits\auth
+ * @package xyz\oihana\schema\constants\traits
  * @author  Marc Alcaraz
  * @since   1.0.0
  */

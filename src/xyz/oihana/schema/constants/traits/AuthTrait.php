@@ -20,7 +20,7 @@ use xyz\oihana\schema\constants\traits\auth\WebAPITrait;
 /**
  * The enumeration of all auth properties.
  *
- * @package xyz\oihana\schema\constants\traits\auth
+ * @package xyz\oihana\schema\constants\traits
  * @author  Marc Alcaraz
  * @since   1.0.0
  */

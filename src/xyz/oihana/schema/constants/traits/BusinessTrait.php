@@ -8,7 +8,7 @@ use xyz\oihana\schema\constants\traits\business\UserProfileTrait;
 /**
  * The enumeration of all business properties.
  *
- * @package xyz\oihana\schema\constants\traits\auth
+ * @package xyz\oihana\schema\constants\traits
  * @author  Marc Alcaraz
  * @since   1.0.2
  */

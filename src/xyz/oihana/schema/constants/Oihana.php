@@ -8,6 +8,7 @@ use xyz\oihana\schema\constants\traits\HttpTrait;
 use xyz\oihana\schema\constants\traits\LogTrait;
 use xyz\oihana\schema\constants\traits\PaginationTrait;
 use xyz\oihana\schema\constants\traits\places\SiteTrait;
+use xyz\oihana\schema\constants\traits\ThesaurusTrait;
 
 class Oihana
 {
@@ -21,5 +22,6 @@ class Oihana
         HttpTrait ,
         LogTrait,
         PaginationTrait ,
-        SiteTrait ;
+        SiteTrait ,
+        ThesaurusTrait ;
 }
