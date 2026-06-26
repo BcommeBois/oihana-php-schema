@@ -22,6 +22,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   - Adds the `xyz\oihana\schema\thesaurus\traits\HasSkosNotes` trait — the SKOS documentation notes `changeNote`, `editorialNote`, `example`, `historyNote`, `note` and `scopeNote` (`skos:definition`/`prefLabel`/`altLabel` are already covered by the inherited `description`/`name`/`alternateName`).
   - Adds the companion constant traits `SkosNotesTrait` and `ConceptSchemeTrait`, extends `ConceptTrait` (`HIDDEN_LABEL`, `RELATED`, `TOP_CONCEPT_OF`), and aggregates them all through `ThesaurusTrait` into `Oihana`.
   - Adds the `ConceptSchemeTest` suite and extends `ConceptTest` (relations, notes, label, the new constants and the `Oihana` aggregation, both hydration paths).
+- Adds the SKOS mapping relations to `Concept`, to align a local concept with concepts in other schemes (e.g. a Proginov category to an external taxonomy).
+  - Adds the `xyz\oihana\schema\thesaurus\traits\HasSkosMappings` trait — `broadMatch`, `closeMatch`, `exactMatch`, `narrowMatch` and `relatedMatch` (`null|string|array`, hydrated via `#[HydrateWith(Concept::class)]`), ranging from the strongest claim (`exactMatch`) to the loosest (`relatedMatch`).
+  - Adds the companion `SkosMappingsTrait` constants, aggregated through `ThesaurusTrait` into `Oihana`, and extends `ConceptTest` with the mapping constants, the `Oihana` aggregation and hydration.
+  - With this, the `thesaurus` namespace covers the SKOS core: `Concept`/`ConceptScheme`, the hierarchy (`broader`/`narrower` and their transitive forms), the associative (`related`) and cross-scheme mapping relations, the labels (`name`/`alternateName`/`hiddenLabel`) and the documentation notes. The SKOS **Collections** (`skos:Collection`/`OrderedCollection`/`member`/`memberList`) are intentionally **deferred** — product categories are purely hierarchical — and can be added later when a cross-cutting, non-hierarchical grouping is needed.
 
 ### Changed
 

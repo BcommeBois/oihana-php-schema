@@ -55,6 +55,15 @@ class ConceptTest extends TestCase
         $this->assertSame( 'scopeNote'     , Concept::SCOPE_NOTE );
     }
 
+    public function testMappingNameConstants(): void
+    {
+        $this->assertSame( 'broadMatch'   , Concept::BROAD_MATCH );
+        $this->assertSame( 'closeMatch'   , Concept::CLOSE_MATCH );
+        $this->assertSame( 'exactMatch'   , Concept::EXACT_MATCH );
+        $this->assertSame( 'narrowMatch'  , Concept::NARROW_MATCH );
+        $this->assertSame( 'relatedMatch' , Concept::RELATED_MATCH );
+    }
+
     public function testConstantsAggregatedIntoOihana(): void
     {
         $this->assertSame( 'broader'            , Oihana::BROADER );
@@ -65,6 +74,8 @@ class ConceptTest extends TestCase
         $this->assertSame( 'topConceptOf'       , Oihana::TOP_CONCEPT_OF );
         $this->assertSame( 'scopeNote'          , Oihana::SCOPE_NOTE );
         $this->assertSame( 'hasTopConcept'      , Oihana::HAS_TOP_CONCEPT );
+        $this->assertSame( 'exactMatch'         , Oihana::EXACT_MATCH );
+        $this->assertSame( 'relatedMatch'       , Oihana::RELATED_MATCH );
     }
 
     public function testNotesAndLabelDefaultToNull(): void
@@ -107,6 +118,32 @@ class ConceptTest extends TestCase
 
         $this->assertInstanceOf( Concept::class , $concept->related[ 0 ] );
         $this->assertSame( 'Rosé wine' , $concept->related[ 0 ]->name );
+    }
+
+    public function testMappingsDefaultToNull(): void
+    {
+        $concept = new Concept();
+
+        $this->assertNull( $concept->broadMatch   ?? null );
+        $this->assertNull( $concept->closeMatch   ?? null );
+        $this->assertNull( $concept->exactMatch   ?? null );
+        $this->assertNull( $concept->narrowMatch  ?? null );
+        $this->assertNull( $concept->relatedMatch ?? null );
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testExactMatchViaReflectionIsHydratedIntoConcepts(): void
+    {
+        $concept = new Reflection()->hydrate
+        (
+            [ Concept::EXACT_MATCH => [ [ 'name' => 'Vin rouge' , 'termCode' => 'EXT-RED' ] ] ],
+            Concept::class
+        );
+
+        $this->assertInstanceOf( Concept::class , $concept->exactMatch[ 0 ] );
+        $this->assertSame( 'Vin rouge' , $concept->exactMatch[ 0 ]->name );
     }
 
     /**

@@ -6,7 +6,9 @@ use org\schema\DefinedTerm;
 
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\constants\traits\thesaurus\ConceptTrait;
+use xyz\oihana\schema\constants\traits\thesaurus\SkosMappingsTrait;
 use xyz\oihana\schema\constants\traits\thesaurus\SkosNotesTrait;
+use xyz\oihana\schema\thesaurus\traits\HasSkosMappings;
 use xyz\oihana\schema\thesaurus\traits\HasSkosNotes;
 use xyz\oihana\schema\thesaurus\traits\HasSkosRelations;
 
@@ -45,6 +47,7 @@ use xyz\oihana\schema\thesaurus\traits\HasSkosRelations;
  * @see DefinedTerm
  * @see HasSkosRelations
  * @see HasSkosNotes
+ * @see HasSkosMappings
  * @see ConceptTrait
  * @see http://www.w3.org/2004/02/skos/core#Concept
  *
@@ -56,8 +59,10 @@ use xyz\oihana\schema\thesaurus\traits\HasSkosRelations;
 class Concept extends DefinedTerm
 {
     use ConceptTrait ,
+        HasSkosMappings ,
         HasSkosNotes ,
         HasSkosRelations ,
+        SkosMappingsTrait ,
         SkosNotesTrait ;
 
     /**
