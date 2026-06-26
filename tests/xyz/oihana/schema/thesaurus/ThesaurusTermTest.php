@@ -8,6 +8,7 @@ use ReflectionException;
 use org\schema\DefinedTerm;
 
 use xyz\oihana\schema\thesaurus\ThesaurusTerm;
+use xyz\oihana\schema\thesaurus\traits\HasColor;
 
 class ThesaurusTermTest extends TestCase
 {
@@ -18,6 +19,11 @@ class ThesaurusTermTest extends TestCase
         $this->assertNull( $term->color            ?? null );
         $this->assertNull( $term->termCode         ?? null );
         $this->assertNull( $term->inDefinedTermSet ?? null );
+    }
+
+    public function testColorComesFromHasColorTrait(): void
+    {
+        $this->assertContains( HasColor::class , class_uses( ThesaurusTerm::class ) );
     }
 
     public function testIsDefinedTerm(): void

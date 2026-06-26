@@ -6,6 +6,7 @@ use org\schema\DefinedTerm;
 
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\constants\traits\thesaurus\ThesaurusTermTrait;
+use xyz\oihana\schema\thesaurus\traits\HasColor;
 
 /**
  * A thesaurus term enriched with house-specific properties.
@@ -30,6 +31,7 @@ use xyz\oihana\schema\constants\traits\thesaurus\ThesaurusTermTrait;
  * ```
  *
  * @see DefinedTerm
+ * @see HasColor
  * @see ThesaurusTermTrait
  *
  * @package xyz\oihana\schema\thesaurus
@@ -39,17 +41,11 @@ use xyz\oihana\schema\constants\traits\thesaurus\ThesaurusTermTrait;
  */
 class ThesaurusTerm extends DefinedTerm
 {
-    use ThesaurusTermTrait ;
+    use HasColor ,
+        ThesaurusTermTrait ;
 
     /**
      * The @context of the json-ld representation of the thing.
      */
     public const string CONTEXT = Oihana::SCHEMA ;
-
-    /**
-     * An optional house color, expressed as a `#RRGGBB` hex string.
-     *
-     * @var string|null
-     */
-    public ?string $color ;
 }

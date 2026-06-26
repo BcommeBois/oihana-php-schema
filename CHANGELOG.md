@@ -12,6 +12,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   - Adds the companion `xyz\oihana\schema\constants\traits\thesaurus\ThesaurusTermTrait` trait centralising the `ThesaurusTerm` property name constant (`COLOR`), and the domain-level `xyz\oihana\schema\constants\traits\ThesaurusTrait` aggregator (mirrors `AuthTrait`/`HttpTrait`). The aggregator is wired into `xyz\oihana\schema\constants\Oihana`, so the field is reachable via `Oihana::COLOR` (its value matches the `COLOR` keys already exposed by the auth traits).
   - Adds the `tests/xyz/oihana/schema/thesaurus` unit-test suite covering `ThesaurusTerm` defaults, constants and hydration.
 
+### Changed
+
+- Extracts the `ThesaurusTerm::$color` property into a reusable `xyz\oihana\schema\thesaurus\traits\HasColor` trait, so the color hint can be composed by several thesaurus entities without duplication. `ThesaurusTerm` now `use`s this trait — no change to its public surface (the `color` property and the `ThesaurusTerm::COLOR` constant are unchanged).
+
 ## [1.1.0] - 2026-06-23
 
 ### Added
