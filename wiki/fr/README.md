@@ -23,7 +23,7 @@ Ce wiki est un compagnon rédigé à la main de la [référence d'API](../../doc
 | [`xyz\oihana\schema\business`](oihana-business.md) | [Métier Oihana](oihana-business.md)    | `BusinessIdentity` (lien typé compte ↔ entité) et `UserProfile` (gabarit de provisionnement à la création). |
 | [`xyz\oihana\schema\http`](oihana-http.md) | [HTTP Oihana](oihana-http.md)            | Métadonnées structurées de requête HTTP : `UserAgentInfo` (navigateur, OS, classe d'appareil, indicateur bot). |
 | [`xyz\oihana\schema\places`](oihana-places.md) | [Lieux Oihana](oihana-places.md)         | Emplacements opérationnels : `Site`, `Office`, `Warehouse`, `JobSite`.                      |
-| [`xyz\oihana\schema\thesaurus`](oihana-thesaurus.md) | [Thésaurus Oihana (SKOS)](oihana-thesaurus.md) | Arbres de concepts SKOS : `ThesaurusTerm`, `Concept`, `ProductCategoryTerm`, `ConceptScheme` — hiérarchie, notes, alignements inter-schémas. |
+| [`xyz\oihana\schema\thesaurus`](oihana-thesaurus.md) | [Thésaurus Oihana (SKOS)](oihana-thesaurus.md) | Arbres de concepts SKOS : `ThesaurusTerm`, `Concept`, `ProductCategoryTerm`, `ConceptScheme`, `Collection`, `OrderedCollection` — hiérarchie, notes, alignements, collections. |
 | [`xyz\oihana\schema`](oihana-core.md)   | [Types transverses Oihana](oihana-core.md)     | `Pagination`, `Log`, `AuditAction`, énumérations d'audit.                                   |
 | [`com\progress\schema`](openedge-progress.md) | [Catalogue système OpenEdge Progress](openedge-progress.md) | Tables `SYS%` du catalogue système : tables, colonnes, index, vues, utilisateurs, privilèges, contraintes, séquences, triggers, procédures, types de données. |
 

@@ -32,6 +32,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   - Adds `xyz\oihana\schema\thesaurus\OrderedCollection` (extends `Collection`) with `memberList` for an explicitly ordered grouping.
   - Adds the companion `CollectionTrait` (`MEMBER`, `MEMBER_LIST`), aggregated through `ThesaurusTrait` into `Oihana`. Members stay nullable and traversal-only.
   - Adds the `CollectionTest` (incl. the polymorphic `@type` dispatch) and `OrderedCollectionTest` suites. SKOS-XL and the abstract super-properties (`semanticRelation`, `mappingRelation`) remain intentionally out of scope.
+- Updates the bilingual `oihana-thesaurus.md` wiki guide (EN/FR) for the SKOS collections — adds `Collection`/`OrderedCollection` to the class catalog and the SKOS-coverage table, the `HasSkosMembers`/`CollectionTrait` rows, a polymorphic-`member` example, and bumps the namespace class count (4 → 6) in the README overview table and both wiki indexes.
 
 ### Changed
 
