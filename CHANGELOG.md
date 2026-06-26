@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-06-26
+
 ### Added
 
 - Adds the `xyz\oihana\schema\thesaurus` namespace and the `ThesaurusTerm` entity (extends the schema.org `DefinedTerm`) — a thesaurus term enriched with house-specific properties (e.g. `color`, a `#RRGGBB` hex string) layered on top of harvested data. These local properties survive a re-harvest because the harvest performs an AQL `UPSERT ... UPDATE` merge that only rewrites the source fields and leaves untouched attributes in place.
