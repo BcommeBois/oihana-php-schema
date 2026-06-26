@@ -25,8 +25,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - Adds the SKOS mapping relations to `Concept`, to align a local concept with concepts in other schemes (e.g. a Proginov category to an external taxonomy).
   - Adds the `xyz\oihana\schema\thesaurus\traits\HasSkosMappings` trait — `broadMatch`, `closeMatch`, `exactMatch`, `narrowMatch` and `relatedMatch` (`null|string|array`, hydrated via `#[HydrateWith(Concept::class)]`), ranging from the strongest claim (`exactMatch`) to the loosest (`relatedMatch`).
   - Adds the companion `SkosMappingsTrait` constants, aggregated through `ThesaurusTrait` into `Oihana`, and extends `ConceptTest` with the mapping constants, the `Oihana` aggregation and hydration.
-  - With this, the `thesaurus` namespace covers the SKOS core: `Concept`/`ConceptScheme`, the hierarchy (`broader`/`narrower` and their transitive forms), the associative (`related`) and cross-scheme mapping relations, the labels (`name`/`alternateName`/`hiddenLabel`) and the documentation notes. The SKOS **Collections** (`skos:Collection`/`OrderedCollection`/`member`/`memberList`) are intentionally **deferred** — product categories are purely hierarchical — and can be added later when a cross-cutting, non-hierarchical grouping is needed.
+  - With this, the `thesaurus` namespace covers the SKOS core: `Concept`/`ConceptScheme`, the hierarchy (`broader`/`narrower` and their transitive forms), the associative (`related`) and cross-scheme mapping relations, the labels (`name`/`alternateName`/`hiddenLabel`) and the documentation notes.
 - Adds the bilingual wiki guide for the `xyz\oihana\schema\thesaurus` namespace (`oihana-thesaurus.md`, EN/FR) — when to use it, the traversal-only relations, code examples, the class catalog, a SKOS-coverage table and the property/constant traits. Lists it in the README `🗂️ Schemas overview` table and in both wiki indexes.
+- Adds the SKOS collections — non-hierarchical groupings of concepts — completing the SKOS core coverage.
+  - Adds `xyz\oihana\schema\thesaurus\Collection` (extends `Intangible`, like the schema.org `ItemList`) with a **polymorphic** `member` (`null|string|array`, `#[HydrateWith(Concept::class, Collection::class)]`): each entry dispatches on its `@type` discriminator, so a collection can hold concepts and/or nested collections (falling back to `Concept`).
+  - Adds `xyz\oihana\schema\thesaurus\OrderedCollection` (extends `Collection`) with `memberList` for an explicitly ordered grouping.
+  - Adds the companion `CollectionTrait` (`MEMBER`, `MEMBER_LIST`), aggregated through `ThesaurusTrait` into `Oihana`. Members stay nullable and traversal-only.
+  - Adds the `CollectionTest` (incl. the polymorphic `@type` dispatch) and `OrderedCollectionTest` suites. SKOS-XL and the abstract super-properties (`semanticRelation`, `mappingRelation`) remain intentionally out of scope.
 
 ### Changed
 
