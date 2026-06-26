@@ -16,6 +16,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   - Adds `xyz\oihana\schema\thesaurus\ProductCategoryTerm` (extends `Concept`, `use HasColor`) — the only thesaurus family that is both hierarchical and colored; flat families stay on `ThesaurusTerm`.
   - Adds the companion `xyz\oihana\schema\constants\traits\thesaurus\ConceptTrait` (constants `BROADER`, `BROADER_TRANSITIVE`, `NARROWER`, `NARROWER_TRANSITIVE`), aggregated through `ThesaurusTrait` into `Oihana` (reachable as `Oihana::BROADER`, etc.).
   - Adds the `ConceptTest` and `ProductCategoryTermTest` suites, covering defaults, constants, the `Oihana` aggregation, and both hydration paths (raw constructor assignment vs `#[HydrateWith]` honored by `Reflection::hydrate()`).
+- Extends the SKOS layer with concept schemes, associative relations and documentation notes.
+  - Adds `xyz\oihana\schema\thesaurus\ConceptScheme` (extends the schema.org `DefinedTermSet`, equated by schema.org with `skos:ConceptScheme`) with `hasTopConcept` (`null|string|array`, hydrated via `#[HydrateWith(Concept::class)]`) — the scheme's root concepts, inverse of `Concept::$topConceptOf`. Scheme membership of a concept is already carried by the inherited `DefinedTerm::$inDefinedTermSet` (`skos:inScheme`).
+  - Adds `related` (`skos:related`, associative link) to `HasSkosRelations`, plus `topConceptOf` (`null|string|array|ConceptScheme`) and `hiddenLabel` (search-only label) to `Concept`.
+  - Adds the `xyz\oihana\schema\thesaurus\traits\HasSkosNotes` trait — the SKOS documentation notes `changeNote`, `editorialNote`, `example`, `historyNote`, `note` and `scopeNote` (`skos:definition`/`prefLabel`/`altLabel` are already covered by the inherited `description`/`name`/`alternateName`).
+  - Adds the companion constant traits `SkosNotesTrait` and `ConceptSchemeTrait`, extends `ConceptTrait` (`HIDDEN_LABEL`, `RELATED`, `TOP_CONCEPT_OF`), and aggregates them all through `ThesaurusTrait` into `Oihana`.
+  - Adds the `ConceptSchemeTest` suite and extends `ConceptTest` (relations, notes, label, the new constants and the `Oihana` aggregation, both hydration paths).
 
 ### Changed
 

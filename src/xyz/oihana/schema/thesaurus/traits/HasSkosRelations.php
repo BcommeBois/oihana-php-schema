@@ -30,6 +30,7 @@ use xyz\oihana\schema\thesaurus\Concept;
  * @see http://www.w3.org/2004/02/skos/core#narrower
  * @see http://www.w3.org/2004/02/skos/core#broaderTransitive
  * @see http://www.w3.org/2004/02/skos/core#narrowerTransitive
+ * @see http://www.w3.org/2004/02/skos/core#related
  *
  * @package xyz\oihana\schema\thesaurus\traits
  * @author  Marc Alcaraz (ekameleon)
@@ -69,4 +70,12 @@ trait HasSkosRelations
      */
     #[ HydrateWith( Concept::class ) ]
     public null|string|array $narrowerTransitive ;
+
+    /**
+     * skos:related — associative (non-hierarchical) links to sibling concepts.
+     *
+     * @var array<Concept>|string|null
+     */
+    #[ HydrateWith( Concept::class ) ]
+    public null|string|array $related ;
 }

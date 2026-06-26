@@ -6,6 +6,8 @@ use org\schema\DefinedTerm;
 
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\constants\traits\thesaurus\ConceptTrait;
+use xyz\oihana\schema\constants\traits\thesaurus\SkosNotesTrait;
+use xyz\oihana\schema\thesaurus\traits\HasSkosNotes;
 use xyz\oihana\schema\thesaurus\traits\HasSkosRelations;
 
 /**
@@ -42,6 +44,7 @@ use xyz\oihana\schema\thesaurus\traits\HasSkosRelations;
  *
  * @see DefinedTerm
  * @see HasSkosRelations
+ * @see HasSkosNotes
  * @see ConceptTrait
  * @see http://www.w3.org/2004/02/skos/core#Concept
  *
@@ -53,10 +56,31 @@ use xyz\oihana\schema\thesaurus\traits\HasSkosRelations;
 class Concept extends DefinedTerm
 {
     use ConceptTrait ,
-        HasSkosRelations ;
+        HasSkosNotes ,
+        HasSkosRelations ,
+        SkosNotesTrait ;
 
     /**
      * The @context of the json-ld representation of the thing.
      */
     public const string CONTEXT = Oihana::SCHEMA ;
+
+    /**
+     * skos:hiddenLabel — a label reachable by search but hidden from display
+     * (e.g. a misspelling or a deprecated synonym). The preferred and
+     * alternative labels are already carried by `name` and `alternateName`.
+     *
+     * @see http://www.w3.org/2004/02/skos/core#hiddenLabel
+     * @var string|array|null
+     */
+    public string|array|null $hiddenLabel ;
+
+    /**
+     * skos:topConceptOf — the scheme(s) this concept is a top (root) concept
+     * of. The inverse of {@see ConceptScheme::$hasTopConcept}.
+     *
+     * @see http://www.w3.org/2004/02/skos/core#topConceptOf
+     * @var null|string|array|ConceptScheme
+     */
+    public null|string|array|ConceptScheme $topConceptOf ;
 }

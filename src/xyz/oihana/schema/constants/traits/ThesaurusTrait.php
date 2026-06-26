@@ -2,7 +2,9 @@
 
 namespace xyz\oihana\schema\constants\traits;
 
+use xyz\oihana\schema\constants\traits\thesaurus\ConceptSchemeTrait;
 use xyz\oihana\schema\constants\traits\thesaurus\ConceptTrait;
+use xyz\oihana\schema\constants\traits\thesaurus\SkosNotesTrait;
 use xyz\oihana\schema\constants\traits\thesaurus\ThesaurusTermTrait;
 
 /**
@@ -14,6 +16,8 @@ use xyz\oihana\schema\constants\traits\thesaurus\ThesaurusTermTrait;
  */
 trait ThesaurusTrait
 {
-    use ConceptTrait ,
+    use ConceptSchemeTrait ,
+        ConceptTrait ,
+        SkosNotesTrait ,
         ThesaurusTermTrait ;
 }
