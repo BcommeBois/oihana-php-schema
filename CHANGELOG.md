@@ -26,6 +26,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   - Adds the `xyz\oihana\schema\thesaurus\traits\HasSkosMappings` trait — `broadMatch`, `closeMatch`, `exactMatch`, `narrowMatch` and `relatedMatch` (`null|string|array`, hydrated via `#[HydrateWith(Concept::class)]`), ranging from the strongest claim (`exactMatch`) to the loosest (`relatedMatch`).
   - Adds the companion `SkosMappingsTrait` constants, aggregated through `ThesaurusTrait` into `Oihana`, and extends `ConceptTest` with the mapping constants, the `Oihana` aggregation and hydration.
   - With this, the `thesaurus` namespace covers the SKOS core: `Concept`/`ConceptScheme`, the hierarchy (`broader`/`narrower` and their transitive forms), the associative (`related`) and cross-scheme mapping relations, the labels (`name`/`alternateName`/`hiddenLabel`) and the documentation notes. The SKOS **Collections** (`skos:Collection`/`OrderedCollection`/`member`/`memberList`) are intentionally **deferred** — product categories are purely hierarchical — and can be added later when a cross-cutting, non-hierarchical grouping is needed.
+- Adds the bilingual wiki guide for the `xyz\oihana\schema\thesaurus` namespace (`oihana-thesaurus.md`, EN/FR) — when to use it, the traversal-only relations, code examples, the class catalog, a SKOS-coverage table and the property/constant traits. Lists it in the README `🗂️ Schemas overview` table and in both wiki indexes.
 
 ### Changed
 

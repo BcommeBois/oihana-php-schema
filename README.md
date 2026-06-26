@@ -79,6 +79,7 @@ The library exposes three top-level namespaces. Each row below links to a dedica
 | `xyz\oihana\schema\business` | Account ↔ business-world link: `BusinessIdentity` (typed account/entity link) and `UserProfile` (creation-time provisioning template). | 2 | [🇬🇧 EN](wiki/en/oihana-business.md) · [🇫🇷 FR](wiki/fr/oihana-business.md) |
 | `xyz\oihana\schema\http` | Structured HTTP request metadata: `UserAgentInfo` (browser, OS, device class, bot flag). | 1 | [🇬🇧 EN](wiki/en/oihana-http.md) · [🇫🇷 FR](wiki/fr/oihana-http.md) |
 | `xyz\oihana\schema\places` | Operational locations: `Site`, `Office`, `Warehouse`, `JobSite`. | 4 | [🇬🇧 EN](wiki/en/oihana-places.md) · [🇫🇷 FR](wiki/fr/oihana-places.md) |
+| `xyz\oihana\schema\thesaurus` | SKOS concept trees on top of `DefinedTerm`: `ThesaurusTerm`, `Concept`, `ProductCategoryTerm`, `ConceptScheme` — `broader`/`narrower` hierarchy, notes, cross-scheme mappings. | 4 | [🇬🇧 EN](wiki/en/oihana-thesaurus.md) · [🇫🇷 FR](wiki/fr/oihana-thesaurus.md) |
 | `xyz\oihana\schema` | Cross-cutting Oihana types: `Pagination`, `Log`, `AuditAction`, audit enumerations. | 3 + enums | [🇬🇧 EN](wiki/en/oihana-core.md) · [🇫🇷 FR](wiki/fr/oihana-core.md) |
 | `com\progress\schema` | OpenEdge Progress SQL `SYS%` system catalog: tables, columns, indexes, views, users, privileges, constraints, sequences, triggers, procedures, data types. | 16 | [🇬🇧 EN](wiki/en/openedge-progress.md) · [🇫🇷 FR](wiki/fr/openedge-progress.md) |
 
