@@ -6,6 +6,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+### Added
+
+- Adds `xyz\oihana\schema\Favorite` (extends the schema.org `Intangible`) — the edge linking an authentication account (`_from`, `users/{key}`) to a favorited resource (`_to`), stored in the `user_has_favorite` edge collection. Its `additionalType` records the **functional** favorite type (e.g. `customers`, `products`, `sellers`) — what kind of resource is bookmarked — which is distinct from the targeted resource's own schema.org `additionalType`, since several functional types may share a physical collection. Server-side only: it routes a write to the right model and lets reads be grouped/scoped by type without loading the targets; a favorites listing rebuilds each targeted resource with its own schema and never exposes the `Favorite` itself.
+- Adds the `FavoriteTest` suite covering the `Intangible` inheritance, the `CONTEXT` constant, the edge/type defaults, constructor hydration of `_from`/`_to`/`additionalType` and the JSON-LD serialization (`@type`/`@context`, edge and `created`).
+
+### Changed
+
+- Refactors the ArangoDB system-attribute constants so the edge attributes live in a single place. The `_FROM`/`_TO` constants now belong to `org\schema\constants\traits\Edge` (documented as edge-only system attributes), and `org\schema\constants\traits\ArangoDB` `use`s `Edge` rather than redeclaring them — `ArangoDB` keeps the document-level `_ID`/`_KEY`/`_REV`. The `Properties` aggregator now composes `ArangoDB` (which pulls in `Edge`) instead of `Edge` directly. No public surface change: `Schema::_FROM`, `Schema::_TO`, `Schema::_ID`, `Schema::_KEY` and `Schema::_REV` resolve to the same values as before.
+
 ## [1.2.0] - 2026-06-26
 
 ### Added

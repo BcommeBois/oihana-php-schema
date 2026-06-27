@@ -10,10 +10,7 @@ namespace org\schema\constants\traits;
  */
 trait ArangoDB
 {
-    /**
-     * The document identifier of the source vertex stored in the _from attribute.
-     */
-    const string _FROM  = '_from' ;
+    use Edge ;
 
     /**
      * The document identifier is stored as a string in the _id attribute.
@@ -23,16 +20,11 @@ trait ArangoDB
     /**
      * The document key is stored as a string in the _key attribute.
      */
-    const string _KEY  = '_key' ;
+    const string _KEY = '_key' ;
 
     /**
      * Every document in ArangoDB has a revision, stored in the system attribute _rev.
      * It is fully managed by the server and read-only for the user.
      */
-    const string _REV  = '_rev' ;
-
-    /**
-     * The document identifier of the target vertex stored in the _to attribute.
-     */
-    const string _TO  = '_to' ;
+    const string _REV = '_rev' ;
 }
