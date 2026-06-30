@@ -3,7 +3,9 @@
 namespace xyz\oihana\schema\thesaurus;
 
 use xyz\oihana\schema\constants\traits\thesaurus\ThesaurusTermTrait;
+use xyz\oihana\schema\constants\traits\thesaurus\TreeMetricsTrait;
 use xyz\oihana\schema\thesaurus\traits\HasColor;
+use xyz\oihana\schema\thesaurus\traits\HasTreeMetrics;
 
 /**
  * A product category : a hierarchical {@see Concept} that also carries a house
@@ -16,7 +18,9 @@ use xyz\oihana\schema\thesaurus\traits\HasColor;
  * It inherits the `@context` and the SKOS relation constants from
  * {@see Concept}, and adds the `color` property through {@see HasColor} (whose
  * name constant comes from {@see ThesaurusTermTrait}, shared with
- * {@see ThesaurusTerm}).
+ * {@see ThesaurusTerm}). It also carries the non-SKOS structural `childrenCount`
+ * through {@see HasTreeMetrics} — a projection-only (`full`-skin) metric, with
+ * `isLeaf` ⟺ `childrenCount === 0`.
  *
  * ### Example
  * ```php
@@ -33,6 +37,7 @@ use xyz\oihana\schema\thesaurus\traits\HasColor;
  *
  * @see Concept
  * @see HasColor
+ * @see HasTreeMetrics
  * @see ThesaurusTerm
  *
  * @package xyz\oihana\schema\thesaurus
@@ -42,6 +47,8 @@ use xyz\oihana\schema\thesaurus\traits\HasColor;
  */
 class ProductCategoryTerm extends Concept
 {
-    use HasColor ,
-        ThesaurusTermTrait ;
+    use HasColor           ,
+        HasTreeMetrics     ,
+        ThesaurusTermTrait ,
+        TreeMetricsTrait   ;
 }

@@ -8,6 +8,7 @@ use xyz\oihana\schema\constants\traits\thesaurus\ConceptTrait;
 use xyz\oihana\schema\constants\traits\thesaurus\SkosMappingsTrait;
 use xyz\oihana\schema\constants\traits\thesaurus\SkosNotesTrait;
 use xyz\oihana\schema\constants\traits\thesaurus\ThesaurusTermTrait;
+use xyz\oihana\schema\constants\traits\thesaurus\TreeMetricsTrait;
 
 /**
  * The enumeration of all thesaurus properties.
@@ -18,10 +19,11 @@ use xyz\oihana\schema\constants\traits\thesaurus\ThesaurusTermTrait;
  */
 trait ThesaurusTrait
 {
-    use CollectionTrait ,
+    use CollectionTrait    ,
         ConceptSchemeTrait ,
-        ConceptTrait ,
-        SkosMappingsTrait ,
-        SkosNotesTrait ,
-        ThesaurusTermTrait ;
+        ConceptTrait       ,
+        SkosMappingsTrait  ,
+        SkosNotesTrait     ,
+        ThesaurusTermTrait ,
+        TreeMetricsTrait   ;
 }
