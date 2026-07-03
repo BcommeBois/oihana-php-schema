@@ -2,6 +2,7 @@
 
 namespace xyz\oihana\schema\constants;
 
+use org\schema\constants\traits\Properties;
 use xyz\oihana\schema\constants\traits\AuditTrait;
 use xyz\oihana\schema\constants\traits\AuthTrait;
 use xyz\oihana\schema\constants\traits\BusinessTrait;
@@ -34,7 +35,8 @@ class Oihana
      */
     public const string SCHEMA = 'https://schema.oihana.xyz';
 
-    use AuditTrait        ,
+    use Properties        , // All schema.org properties
+        AuditTrait        ,
         AuthTrait         ,
         BusinessTrait     ,
         ExtrasTrait       ,

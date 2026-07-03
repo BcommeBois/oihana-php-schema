@@ -33,6 +33,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Changed
 
+- The `Oihana` constants aggregator now composes the `org\schema\constants\traits\Properties` mega-trait, so the full schema.org property vocabulary is reachable through `Oihana::*` alongside the domain-specific traits. No conflict with the existing domain traits — the class loads and the whole suite stays green.
 - Refactors the ArangoDB system-attribute constants so the edge attributes live in a single place. The `_FROM`/`_TO` constants now belong to `org\schema\constants\traits\Edge` (documented as edge-only system attributes), and `org\schema\constants\traits\ArangoDB` `use`s `Edge` rather than redeclaring them — `ArangoDB` keeps the document-level `_ID`/`_KEY`/`_REV`. The `Properties` aggregator now composes `ArangoDB` (which pulls in `Edge`) instead of `Edge` directly. No public surface change: `Schema::_FROM`, `Schema::_TO`, `Schema::_ID`, `Schema::_KEY` and `Schema::_REV` resolve to the same values as before.
 - Renames the `constants/traits/places` property-name trait `SiteTrait` to `Site`, aligning it with the other domain traits — and wires it back into the `Oihana` aggregator (the rename had silently dropped the site constants, e.g. `Oihana::OWNED_BY` and `Oihana::DELIVERY_METHOD`, from the aggregation).
 - Fixes the `@package` tags of the `xyz\oihana\schema\people` classes (they pointed to the `organizations` namespace) and of `ApplicationType`, and completes the missing `@author`/`@package`/`@since` PHPDoc tags across the new namespaces.
