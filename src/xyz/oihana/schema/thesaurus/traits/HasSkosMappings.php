@@ -11,7 +11,7 @@ use xyz\oihana\schema\thesaurus\Concept;
  * concept schemes.
  *
  * Where {@see HasSkosRelations} wires concepts together inside one scheme,
- * mapping relations align a local concept (e.g. a Proginov product category)
+ * mapping relations align a local concept (e.g. a product category)
  * with an equivalent or related concept in an external taxonomy. They range
  * from the strongest claim (`exactMatch`) to the loosest (`relatedMatch`).
  *
