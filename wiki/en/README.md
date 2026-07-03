@@ -23,7 +23,7 @@ This wiki is a hand-written companion to the auto-generated [API reference](../.
 | [`xyz\oihana\schema\business`](oihana-business.md) | [Oihana business](oihana-business.md) | `BusinessIdentity` (typed account ↔ entity link) and `UserProfile` (creation-time provisioning template). |
 | [`xyz\oihana\schema\http`](oihana-http.md) | [Oihana HTTP](oihana-http.md)          | Structured HTTP request metadata: `UserAgentInfo` (browser, OS, device class, bot flag).    |
 | [`xyz\oihana\schema\places`](oihana-places.md) | [Oihana places](oihana-places.md)      | Operational locations: `Site`, `Office`, `Warehouse`, `JobSite`.                            |
-| [`xyz\oihana\schema\thesaurus`](oihana-thesaurus.md) | [Oihana thesaurus (SKOS)](oihana-thesaurus.md) | SKOS concept trees: `ThesaurusTerm`, `Concept`, `ProductCategoryTerm`, `ConceptScheme`, `Collection`, `OrderedCollection` — hierarchy, notes, mappings, collections. |
+| [`xyz\oihana\schema\thesaurus`](oihana-thesaurus.md) | [Oihana thesaurus (SKOS)](oihana-thesaurus.md) | SKOS concept trees: `ThesaurusTerm`, `Concept`, `ProductCategoryTerm`, `ConceptScheme`, `Collection`, `OrderedCollection` — hierarchy, notes, mappings, collections — plus the registry layer (`ThesaurusScheme`, `ThesaurusDomain`). |
 | [`xyz\oihana\schema`](oihana-core.md)   | [Cross-cutting Oihana types](oihana-core.md)| `Pagination`, `Log`, `AuditAction`, audit enumerations.                                     |
 | [`com\progress\schema`](openedge-progress.md) | [OpenEdge Progress SQL catalog](openedge-progress.md) | `SYS%` system catalog tables: tables, columns, indexes, views, users, privileges, constraints, sequences, triggers, procedures, data types. |
 

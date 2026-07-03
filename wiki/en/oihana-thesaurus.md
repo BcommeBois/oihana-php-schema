@@ -14,7 +14,9 @@ Reach for these classes when a plain `DefinedTerm` is not enough — when your t
 - a *Concept* when terms relate to one another — `broader` (parent), `narrower` (children) and their transitive closures, plus associative (`related`) and cross-scheme mapping links,
 - a *ProductCategoryTerm* when a concept is **both** hierarchical and colored (the product-category case),
 - a *ConceptScheme* to hold a vocabulary and expose its root concepts (`hasTopConcept`),
-- a *Collection* (or *OrderedCollection*) to gather concepts **outside** the hierarchy — a labelled, optionally ordered group such as "featured grape varieties".
+- a *Collection* (or *OrderedCollection*) to gather concepts **outside** the hierarchy — a labelled, optionally ordered group such as "featured grape varieties",
+- a *ThesaurusScheme* when a vocabulary must be **managed in a registry** — the concept scheme plus its administrative metadata (visibility, display, routing) and provenance flags,
+- a *ThesaurusDomain* to group the registry's schemes under top-level, flat shelves (products, providers, shipping…).
 
 Why SKOS rather than a home-grown `parent`/`children` pair? Because Schema.org is light on relations, while SKOS is the standard built exactly for thesauri — and anchoring on `DefinedTerm` (rather than re-rooting under `Thing`) keeps the Schema.org bridge: `name`, `termCode`, `inDefinedTermSet`, the ArangoDB metadata and the JSON-LD serialization all come for free.
 
@@ -87,6 +89,30 @@ $collection = new Collection
 ]);
 ```
 
+```php
+use xyz\oihana\schema\thesaurus\ThesaurusScheme;
+
+$scheme = new ThesaurusScheme
+([
+    'name'                     => 'Product categories' ,
+    ThesaurusScheme::ACTIVE    => true ,
+    ThesaurusScheme::COLOR     => '#22C55E' ,
+    ThesaurusScheme::DOMAIN    => 'products' ,                        // a bare domain key
+    ThesaurusScheme::HARVESTED => true ,                              // term core is read-only
+    ThesaurusScheme::PATH      => '/thesaurus/products/categories' ,
+    ThesaurusScheme::SYSTEM    => true ,                              // not deletable via an API
+]);
+```
+
+---
+
+## The registry layer
+
+On top of the SKOS core, the namespace models the **registry** view of a vocabulary catalog — four layers: *registry → domains → schemes → concepts (→ links)*.
+
+- A **`ThesaurusScheme`** is a thesaurus taken as a whole, as it appears in a registry: the `ConceptScheme` plus the manageable metadata — `active` (an inactive scheme is hidden, not deleted), `color`/`order` (display), `domain` (filing), `path` (the relative route path) — and the provenance flags: on a `harvested` scheme the term core (`id`/`name`) is fed by an external source and read-only, only the house overlays are editable; on a `system` scheme the technical skeleton is defined in code, so it cannot be deleted through an API.
+- A **`ThesaurusDomain`** is a pure filing shelf: it groups schemes but is **not** a set of terms (it extends `Intangible`, not `DefinedTermSet`). The domain↔scheme link is carried by `ThesaurusScheme::$domain` — a bare key, an AQL-projected array or a hydrated object (`#[HydrateWith(ThesaurusDomain::class)]`, reflection path only) — and domains are **flat by design**: they do not nest.
+
 ---
 
 ## Class catalog
@@ -99,6 +125,8 @@ $collection = new Collection
 | `ConceptScheme`       | `DefinedTermSet` | A **SKOS concept scheme** (a vocabulary), exposing its root concepts via `hasTopConcept`. Concept membership stays on the inherited `inDefinedTermSet` (`skos:inScheme`). |
 | `Collection`          | `Intangible`     | A **SKOS collection** — a labelled, **non-hierarchical** grouping of concepts (`member`). Members are polymorphic: concepts and/or nested collections. |
 | `OrderedCollection`   | `Collection`     | A `Collection` whose members carry a meaningful order (`memberList`).                                                     |
+| `ThesaurusScheme`     | `ConceptScheme`  | A thesaurus **as registered in a registry** — the manageable metadata (`active`, `color`, `order`, `domain`, `path`) plus the provenance flags (`harvested`, `system`). |
+| `ThesaurusDomain`     | `Intangible`     | A **registry domain** — the top-level, flat grouping of schemes. The link is carried by `ThesaurusScheme::$domain`, not by the domain. |
 
 ### SKOS coverage at a glance
 
@@ -136,7 +164,7 @@ Each class pairs a **property-bearing trait** with its **constant trait**, so a 
 
 ## Related constants
 
-Property keys are exposed by the constant traits under [`constants/traits/thesaurus/`](../../src/xyz/oihana/schema/constants/traits/thesaurus) — `ThesaurusTermTrait` (`COLOR`), `ConceptTrait` (`BROADER`, `NARROWER`, …, `HIDDEN_LABEL`, `RELATED`, `TOP_CONCEPT_OF`), `SkosNotesTrait`, `ConceptSchemeTrait` (`HAS_TOP_CONCEPT`), `SkosMappingsTrait` and `CollectionTrait` (`MEMBER`, `MEMBER_LIST`).
+Property keys are exposed by the constant traits under [`constants/traits/thesaurus/`](../../src/xyz/oihana/schema/constants/traits/thesaurus) — `ThesaurusTermTrait` (`COLOR`), `ConceptTrait` (`BROADER`, `NARROWER`, …, `HIDDEN_LABEL`, `RELATED`, `TOP_CONCEPT_OF`), `SkosNotesTrait`, `ConceptSchemeTrait` (`HAS_TOP_CONCEPT`), `SkosMappingsTrait`, `CollectionTrait` (`MEMBER`, `MEMBER_LIST`) and `ThesaurusSchemeTrait` (`ACTIVE`, `DOMAIN`, `HARVESTED`, `ORDER`, `PATH`, `SYSTEM` — the `ACTIVE`/`ORDER` keys are shared with `ThesaurusDomain`).
 
 Unlike the `business` traits, these **are** aggregated — through the [`ThesaurusTrait`](../../src/xyz/oihana/schema/constants/traits/ThesaurusTrait.php) domain aggregator — into the master [`Oihana`](../../src/xyz/oihana/schema/constants/Oihana.php) class, so every key is reachable as `Oihana::BROADER`, `Oihana::HAS_TOP_CONCEPT`, etc. (the shared `COLOR` value matches the one already exposed by the auth traits).
 
