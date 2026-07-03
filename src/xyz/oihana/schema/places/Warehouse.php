@@ -18,10 +18,13 @@ namespace xyz\oihana\schema\places;
  * associated with an organization, supplier, or service provider.
  *
  * @author  Marc Alcaraz (eKameleon)
- * @package xyz\oihana\places
- * @since   1.0.2
+ * @package xyz\oihana\schema\places
+ * @since   1.3.0
  */
 class Warehouse extends Site
 {
-
+    /**
+     * The availability of this item—for example In stock, Out of stock, Pre-order, etc.
+     */
+    public string|object|null $availability ;
 }

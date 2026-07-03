@@ -13,8 +13,8 @@ namespace xyz\oihana\schema\places;
  * coordination, and administrative activities.
  *
  * @author  Marc Alcaraz (eKameleon)
- * @package xyz\oihana\places
- * @since   1.0.2
+ * @package xyz\oihana\schema\places
+ * @since   1.3.0
  */
 class Office extends Site
 {

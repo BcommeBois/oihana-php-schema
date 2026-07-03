@@ -10,8 +10,8 @@ namespace xyz\oihana\schema\places;
  * It is generally defined by its operational purpose and the duration of the project.
  *
  * @author  Marc Alcaraz (eKameleon)
- * @package xyz\oihana\places
- * @since   1.0.2
+ * @package xyz\oihana\schema\places
+ * @since   1.3.0
  */
 class JobSite extends Site
 {
