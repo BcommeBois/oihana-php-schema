@@ -3,13 +3,18 @@
 namespace org\schema\traits\helpers ;
 
 use org\schema\PropertyValue;
+use ReflectionException;
 
 trait SetAdditionalPropertyTrait
 {
     /**
      * Internal method to inject custom properties in the PostalAddress property of the place.
+     *
      * @param array $init
+     *
      * @return void
+     *
+     * @throws ReflectionException
      */
     protected function setAdditionalProperty( array $init ):void
     {

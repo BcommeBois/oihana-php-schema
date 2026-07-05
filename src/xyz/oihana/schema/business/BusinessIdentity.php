@@ -83,9 +83,7 @@ class BusinessIdentity extends Intangible
     public function isType( string $type ) : bool
     {
         $subjectType = $this->subjectType() ;
-        return is_array( $subjectType )
-            ? in_array( $type , $subjectType , true )
-            : $subjectType === $type ;
+        return is_array( $subjectType ) ? in_array( $type , $subjectType , true ) : $subjectType === $type ;
     }
 
     /**

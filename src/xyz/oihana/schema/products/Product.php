@@ -5,7 +5,6 @@ namespace xyz\oihana\schema\products;
 use ReflectionException;
 
 use oihana\core\strings\SanitizeFlag;
-use oihana\enums\Char;
 use oihana\reflect\attributes\HydrateAs;
 use oihana\reflect\attributes\HydrateWith;
 
@@ -14,7 +13,6 @@ use org\schema\SomeProducts ;
 use org\schema\QuantitativeValue;
 
 use org\schema\constants\Schema;
-use org\schema\creativeWork\Certification;
 use org\schema\traits\helpers\SetAdditionalPropertyTrait;
 
 use org\unece\uncefact\MeasureCode;
@@ -268,141 +266,14 @@ class Product extends SomeProducts
     }
 
     /**
-     * Maps the complete hierarchy identifiers from a product category array representation.
-     *
-     * Given a category array like ["3", "3", "1", "0"], this method reconstructs
-     * the full hierarchical identifiers: [3, 303, 30301].
-     *
-     * The hierarchy levels are:
-     *  - Level 1: 1-99 (family)
-     *  - Level 2: 101-9999 (subfamily 1)
-     *  - Level 3: 10101-999999 (subfamily 2)
-     *  - Level 4: 1010101-99999999 (subfamily 3)
-     *
-     * Example:
-     * ```php
-     * Product::mapCategory(["1", "1", "3", "27"]);
-     * // Returns: [1, 101, 10103, 1010327]
-     *
-     * Product::mapCategory(["3", "3", "1", "0"]);
-     * // Returns: [3, 303, 30301]
-     * ```
-     *
-     * @param null|string|array $category  Array of category segments (max 4 elements).
-     * @param string            $separator The separator character to explode the segments if the $categorySegments is a string expression.
-     *
-     * @return ?array Array of complete hierarchical identifiers.
-     */
-    public static function mapCategory( null|string|array $category , string $separator = Char::SEMI_COLON ): ?array
-    {
-        if( empty( $category ) )
-        {
-            return null ;
-        }
-
-        if( is_string( $category ) )
-        {
-            $category = explode( $separator , $category ) ;
-        }
-
-        $hierarchy = [] ;
-        $currentId = Char::EMPTY ;
-
-        foreach ( $category as $index => $segment )
-        {
-            // Skip if segment is "0" or empty (end of hierarchy)
-            if ( $segment === '0' || $segment === Char::EMPTY || $segment === null || $segment === 0 )
-            {
-                break ;
-            }
-
-            // For first level, just use the segment as-is
-            if ( $index === 0 )
-            {
-                $currentId = $segment ;
-            }
-            else
-            {
-                // For subsequent levels, append the segment with proper padding
-                $paddedSegment = str_pad( $segment , 2 , '0' , STR_PAD_LEFT ) ;
-                $currentId    .= $paddedSegment ;
-            }
-
-            $hierarchy[] = (int) $currentId ;
-        }
-
-        return $hierarchy ;
-    }
-
-    /**
-     * Maps the complete hierarchy identifiers from a price category array representation.
-     *
-     * Given a price category array like ["06", "03", "", ""], this method reconstructs
-     * the full hierarchical identifiers by concatenating segments: ["06", "0603"].
-     *
-     * The hierarchy levels are:
-     *  - Level 1: 2 digits (main price category)
-     *  - Level 2: 4 digits (level 1 + subcategory 1)
-     *  - Level 3: 6 digits (level 2 + subcategory 2)
-     *  - Level 4: 8 digits (level 3 + subcategory 3)
-     *
-     * Example:
-     * ```php
-     * Product::mapPriceCategory("06");
-     * // Returns: ["06"]
-     *
-     * Product::mapPriceCategory("06;;;");
-     * // Returns: ["06"]
-     *
-     * Product::mapPriceCategory("06;03;;");
-     * // Returns: ["06", "0603"]
-     *
-     * Product::mapPriceCategory(["06", "03", "12", "05"]);
-     * // Returns: ["06", "0603", "060312", "06031205"]
-     * ```
-     *
-     * @param null|string|array $priceCategory Array of price category segments (max 4 elements) or string separated by semicolons.
-     * @param string            $separator     The separator character to explode the segments if $priceCategory is a string.
-     *
-     * @return ?array Array of complete hierarchical identifiers.
-     */
-    public static function mapPriceCategory( null|string|array $priceCategory , string $separator = Char::SEMI_COLON ): ?array
-    {
-        if( empty( $priceCategory ) )
-        {
-            return null ;
-        }
-
-        if( is_string( $priceCategory ) )
-        {
-            $priceCategory = explode( $separator , $priceCategory ) ;
-        }
-
-        $hierarchy = [] ;
-        $currentId = Char::EMPTY ;
-
-        foreach ( $priceCategory as $segment )
-        {
-            // Skip if segment is empty (end of hierarchy)
-            if ( $segment === Char::EMPTY || $segment === null )
-            {
-                break ;
-            }
-
-            // Concatenate the segment (already padded to 2 digits)
-            $currentId .= $segment ;
-
-            $hierarchy[] = $currentId ;
-        }
-
-        return empty( $hierarchy ) ? null : $hierarchy ;
-    }
-
-    /**
      * Set the optional additional properties with the magic _set method.
+     *
      * @param string $property Property name
-     * @param mixed $value Value of the property.
+     * @param mixed  $value    Value of the property.
+     *
      * @return bool True if the property was handled, false otherwise
+     *
+     * @throws ReflectionException
      */
     public function setAdditionalProperties( string $property , mixed $value ) :bool
     {
@@ -524,32 +395,6 @@ class Product extends SomeProducts
         $this->eligibleQuantity = $unitQV ;
 
         return true ;
-    }
-
-    /**
-     * Returns a Certification representation based on the given string definition "id;name;description".
-     * @throws ReflectionException
-     */
-    public static function toCertification( ?string $definition ):?Certification
-    {
-        if( $definition === null )
-        {
-            return null ;
-        }
-
-        [ $id , $name , $description ] = explode( Char::SEMI_COLON , $definition ) + [ null , null , null ] ;
-
-        if( empty( $id ) && empty( $name ) && empty( $description ) )
-        {
-            return null ;
-        }
-
-        return new Certification
-        ([
-            Schema::ID          => $id ,
-            Schema::NAME        => $name ,
-            Schema::DESCRIPTION => $description ,
-        ]);
     }
 
     /**

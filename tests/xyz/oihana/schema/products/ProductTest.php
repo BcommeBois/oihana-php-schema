@@ -5,7 +5,6 @@ namespace tests\xyz\oihana\schema\products ;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
 
-use org\schema\creativeWork\Certification;
 use org\schema\QuantitativeValue;
 use org\schema\SomeProducts;
 
@@ -294,76 +293,4 @@ class ProductTest extends TestCase
         $this->assertNull( $product->getInventoryLevelInUnitOfSale( new StockLevel() ) ) ;
     }
 
-    // ---- mapCategory
-
-    public function testMapCategoryBuildsTheHierarchyIdentifiers(): void
-    {
-        $this->assertSame( [ 1 , 101 , 10103 , 1010327 ] , Product::mapCategory([ '1' , '1' , '3' , '27' ]) ) ;
-        $this->assertSame( [ 3 , 303 , 30301 ]           , Product::mapCategory([ '3' , '3' , '1' , '0'  ]) ) ;
-    }
-
-    public function testMapCategoryAcceptsAStringExpression(): void
-    {
-        $this->assertSame( [ 3 , 303 , 30301 ] , Product::mapCategory( '3;3;1;0' ) ) ;
-    }
-
-    public function testMapCategoryReturnsNullOnEmptyInput(): void
-    {
-        $this->assertNull( Product::mapCategory( null ) ) ;
-        $this->assertNull( Product::mapCategory( [] ) ) ;
-    }
-
-    // ---- mapPriceCategory
-
-    public function testMapPriceCategoryBuildsTheHierarchyIdentifiers(): void
-    {
-        $this->assertSame( [ '06' ]                                   , Product::mapPriceCategory( '06' ) ) ;
-        $this->assertSame( [ '06' ]                                   , Product::mapPriceCategory( '06;;;' ) ) ;
-        $this->assertSame( [ '06' , '0603' ]                          , Product::mapPriceCategory( '06;03;;' ) ) ;
-        $this->assertSame( [ '06' , '0603' , '060312' , '06031205' ]  , Product::mapPriceCategory([ '06' , '03' , '12' , '05' ]) ) ;
-    }
-
-    public function testMapPriceCategoryReturnsNullOnEmptyInput(): void
-    {
-        $this->assertNull( Product::mapPriceCategory( null ) ) ;
-        $this->assertNull( Product::mapPriceCategory( [] ) ) ;
-    }
-
-    // ---- toCertification
-
-    /**
-     * @throws ReflectionException
-     */
-    public function testToCertification(): void
-    {
-        $certification = Product::toCertification( 'pefc;PEFC;Sustainable forest management' ) ;
-
-        $this->assertInstanceOf( Certification::class , $certification ) ;
-        $this->assertSame( 'pefc' , $certification->id   ) ;
-        $this->assertSame( 'PEFC' , $certification->name ) ;
-        $this->assertSame( 'Sustainable forest management' , $certification->description ) ;
-    }
-
-    /**
-     * @throws ReflectionException
-     */
-    public function testToCertificationAcceptsAPartialDefinition(): void
-    {
-        $certification = Product::toCertification( 'pefc;PEFC' ) ;
-
-        $this->assertInstanceOf( Certification::class , $certification ) ;
-        $this->assertSame( 'pefc' , $certification->id   ) ;
-        $this->assertSame( 'PEFC' , $certification->name ) ;
-        $this->assertNull( $certification->description ) ;
-    }
-
-    /**
-     * @throws ReflectionException
-     */
-    public function testToCertificationReturnsNullOnNullOrEmptyDefinition(): void
-    {
-        $this->assertNull( Product::toCertification( null ) ) ;
-        $this->assertNull( Product::toCertification( ''   ) ) ;
-        $this->assertNull( Product::toCertification( ';;' ) ) ;
-    }
 }
