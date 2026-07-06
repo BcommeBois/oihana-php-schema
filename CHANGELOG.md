@@ -8,6 +8,39 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds `xyz\oihana\schema\business\documents\Invoice` (Lot 3 of the
+  business-documents workstream) — the final document of the quote →
+  purchase order → invoice cycle: `accountId`, `billingPeriod`, `broker`,
+  `category`, `confirmationNumber`, `paymentDueDate`, `paymentStatus`,
+  `provider`, `referencesOrder`, `scheduledPaymentDate`. Reuses
+  `org\schema\Invoice`'s property names, but deliberately does not share a
+  property trait with it, even though both classes hydrate through the same
+  raw-array `ThingTrait::__construct` path: `referencesOrder` must reference
+  this namespace's own `PurchaseOrder` (the document actually being
+  invoiced), not `org\schema\Order`, and the mirror's `broker`/`category`/
+  `billingPeriod` unions predate the `null|array|X` typing convention —
+  widening them to fit a shared trait would mean editing `org\schema\Invoice`,
+  contradicting this hierarchy's "mirror stays untouched" rule. The
+  properties are declared directly on the class instead, correctly typed.
+  `paymentStatus` reuses `org\schema\enumerations\status\PaymentStatusType`
+  and its existing member classes (`PaymentComplete`, `PaymentDue`,
+  `PaymentDeclined`, `PaymentPastDue`, `PaymentAutomaticallyApplied`) rather
+  than new constants.
+  - Adds the companion `InvoiceTrait` constants trait, wired into
+    `DocumentsTrait` — no name collision found (these properties already
+    exist as Schema.org properties elsewhere), so reachable through `Oihana`
+    as well.
+  - Adds the dedicated test suite (defaults, `CONTEXT`, trait constants,
+    constructor hydration, `paymentStatus`/`category` polymorphism,
+    `Reflection::hydrate()` for `referencesOrder`, inheritance checks).
+- Adds the `xyz\oihana\schema\business\documents\export` namespace — the
+  `BusinessDocumentExporter` interface (`export(BusinessDocument $document): string`)
+  and a trivial `JsonLdExporter` demonstration implementation delegating to
+  `ThingTrait::jsonSerialize()`. Regulatory export formats (UBL, Factur-X,
+  Peppol, PDF, HTML) remain out of scope for now.
+  - Adds the dedicated test suite and extends the bilingual
+    `business-documents.md` wiki guide (FR canonical + EN mirror) and the
+    README overview table (11 → 14) with `Invoice` and the export layer.
 - Adds `xyz\oihana\schema\business\documents\BusinessDocument` (Lot 2 of the
   business-documents workstream) — the common parent of the quote → purchase
   order → invoice cycle: `attachments`, `currency`, `customer`,

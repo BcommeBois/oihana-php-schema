@@ -8,7 +8,7 @@ The `xyz\oihana\schema\business\documents` namespace models the **quote → purc
 
 ## Status of this namespace
 
-This page documents both the **cross-cutting value objects** (`TaxDetail`, `Adjustment`…) and the foundation of the **document hierarchy** (`BusinessDocument`, `Quote`, `PurchaseOrder`). Still to come in an upcoming release: `Invoice`, `CreditNote`, `DeliveryNote`, `Receipt`, `Statement` and the export interface ; this page will be completed accordingly.
+This page documents the **cross-cutting value objects** (`TaxDetail`, `Adjustment`…), the **document hierarchy** (`BusinessDocument`, `Quote`, `PurchaseOrder`, `Invoice`) and **export** (`BusinessDocumentExporter`, `JsonLdExporter`). Still to come in an upcoming release: `CreditNote`, `DeliveryNote`, `Receipt`, `Statement` ; this page will be completed accordingly.
 
 ---
 
@@ -26,8 +26,10 @@ This page documents both the **cross-cutting value objects** (`TaxDetail`, `Adju
 | Carry the properties common to every business document (parties, dates, amounts, status…). | [`BusinessDocument`](#businessdocument) |
 | Represent a quote. | [`Quote`](#quote) |
 | Represent a purchase order. | [`PurchaseOrder`](#purchaseorder) |
+| Represent an invoice. | [`Invoice`](#invoice) |
+| Serialize a business document (JSON-LD, and tomorrow UBL/Factur-X…). | [`BusinessDocumentExporter`](#businessdocumentexporter) / [`JsonLdExporter`](#jsonldexporter) |
 
-The value objects (`TaxDetail`, `Adjustment`…) extend `org\schema\StructuredValue` (like `MonetaryAmount` or `PriceSpecification`): they are structured values, not addressable resources. `BusinessDocument` and its flavors (`Quote`, `PurchaseOrder`) extend `org\schema\Intangible` — see [`BusinessDocument`](#businessdocument) for the rationale behind that anchor. All of them share the `@context = 'https://schema.oihana.xyz'` distinguisher.
+The value objects (`TaxDetail`, `Adjustment`…) extend `org\schema\StructuredValue` (like `MonetaryAmount` or `PriceSpecification`): they are structured values, not addressable resources. `BusinessDocument` and its flavors (`Quote`, `PurchaseOrder`, `Invoice`) extend `org\schema\Intangible` — see [`BusinessDocument`](#businessdocument) for the rationale behind that anchor. All of them share the `@context = 'https://schema.oihana.xyz'` distinguisher.
 
 ---
 
@@ -74,6 +76,24 @@ $quote->documentLines[ 0 ] instanceof \xyz\oihana\schema\business\documents\Busi
 $quote->totals instanceof \xyz\oihana\schema\business\documents\DocumentTotals ;                    // true
 ```
 
+An `Invoice` references the `PurchaseOrder` it bills (not `org\schema\Order` — see [`Invoice`](#invoice) for why), then exports to JSON-LD via `JsonLdExporter`:
+
+```php
+use org\schema\enumerations\status\PaymentComplete;
+use xyz\oihana\schema\business\documents\Invoice;
+use xyz\oihana\schema\business\documents\export\JsonLdExporter;
+
+$invoice = new Invoice
+([
+    Invoice::CURRENCY       => 'EUR' ,
+    Invoice::ACCOUNT_ID     => 'ACC-001' ,
+    Invoice::PAYMENT_STATUS => PaymentComplete::class ,
+]);
+
+echo new JsonLdExporter()->export( $invoice );
+// {"@type":"Invoice","@context":"https://schema.oihana.xyz","accountId":"ACC-001","currency":"EUR","paymentStatus":"org\\schema\\enumerations\\status\\PaymentComplete"}
+```
+
 ---
 
 ## Class catalog
@@ -91,6 +111,9 @@ $quote->totals instanceof \xyz\oihana\schema\business\documents\DocumentTotals ;
 | <a id="businessdocument"></a>`BusinessDocument` | `Intangible` | The common parent of the quote → order → invoice cycle: `attachments`, `currency`, `customer`, `documentLines`, `issueDate`, `paymentTerms`, `references`, `seller`, `status` (→ `BusinessDocumentStatus`), `taxes`, `totals`. Extends `Intangible` rather than reusing `org\schema\Order`/`org\schema\Invoice`: a business document qualifies a transaction, it is not an addressable resource in its own right — and this keeps the Schema.org mirror untouched (existing consumers of `org\schema\Order`/`Invoice` see no change). |
 | <a id="quote"></a>`Quote` | `BusinessDocument` | A quote — adds `validThrough` (reusing the Schema.org property already carried by `PriceSpecification`/`Offer`, rather than a new name). Not to be confused with `org\schema\creativeWork\Quotation`, which is an unrelated **literary citation**. |
 | <a id="purchaseorder"></a>`PurchaseOrder` | `BusinessDocument` | A purchase order — the customer's confirmed commitment, typically following the acceptance of a `Quote`. Carries no property of its own in this version. |
+| <a id="invoice"></a>`Invoice` | `BusinessDocument` | An invoice — the final document of the quote → order → invoice cycle: `accountId`, `billingPeriod`, `broker`, `category`, `confirmationNumber`, `paymentDueDate`, `paymentStatus` (→ `org\schema\enumerations\status\PaymentStatusType`, reusing its existing member classes `PaymentComplete`/`PaymentDue`/`PaymentDeclined`/`PaymentPastDue`/`PaymentAutomaticallyApplied`), `provider`, `referencesOrder` (→ this namespace's own `PurchaseOrder`), `scheduledPaymentDate`. Reuses `org\schema\Invoice`'s property names, but deliberately does not share a property trait with it: `referencesOrder` must point at the house `PurchaseOrder` (not `org\schema\Order`), and some of the mirror's unions (`broker`, `category`, `billingPeriod`) predate the `null\|array\|X` convention — widening them for a shared trait would mean editing the mirror, which this hierarchy avoids (see [`BusinessDocument`](#businessdocument)). |
+| <a id="businessdocumentexporter"></a>`BusinessDocumentExporter` | *(interface)* | The serialization contract for a `BusinessDocument`: `export(BusinessDocument $document): string`. Regulatory formats (UBL, Factur-X, Peppol…) remain out of scope for now. |
+| <a id="jsonldexporter"></a>`JsonLdExporter` | `BusinessDocumentExporter` | Demonstration implementation: delegates to `ThingTrait::jsonSerialize()` (inherited via `Intangible`/`Thing`) then `json_encode()`. |
 
 ---
 
