@@ -8,6 +8,22 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds the autoloaded hydration and pivot helper functions — the library's
+  first `autoload.files` layer. `org\schema\helpers\hydrate` carries the six
+  pure schema.org array-to-object hydrators (`hydrateAdditionalProperty`,
+  `hydrateContactPoint`, `hydrateDefinedTerm`, `hydrateGeoCoordinates`,
+  `hydrateOfferPurchase`, `hydratePostalAddress`) and
+  `xyz\oihana\schema\helpers\hydrate` the six business-layer ones built on
+  top (`hydrateCustomer`, `hydrateCustomerEmployee`, `hydrateCustomerSite`,
+  `hydrateWarehouse`, `hydrateStockLevel`, `hydrateAggregateOffer`) — each
+  handles the single / indexed-list / passthrough shapes and hydrates its
+  nested references (contact points, addresses, geo, defined terms, offers).
+  `xyz\oihana\schema\helpers\pivots` adds the authenticated-account pivots
+  (`customerKey`, `sellerKey`, `sellerKeys`) resolving the business
+  identities of a `User` into the organization or seller keys that scope its
+  resources. Fifteen dedicated test suites keep the source at 100% line
+  coverage.
+
 - Adds the `xyz\oihana\schema\organizations` namespace — the business-entity layer. `Company` (extends the schema.org `Corporation`) is the base entity: French administrative identifiers (SIRET via `taxID`, APE via `naics`), `category`/`industry`/`invoiceType`/`status`/`vat`/`website` and the postal-address + contact-point ingestion via the `Set*` traits (see below). `Customer` (additional properties, assigned company/POS/seller, credit status, payment terms, price segmentation), `Provider` (carrier, minimum order value, `ProductProviderInfo` ingestion), `Subsidiary` and `Affiliate` specialize it.
 - Adds the `xyz\oihana\schema\people` namespace — `Person` (extends the schema.org `Person`; additional properties + contact-point ingestion, `ownedBy`, `position`) and its flavors `Employee`, `CustomerEmployee`, `ProviderEmployee`, `Seller` and `SubsidiaryEmployee`.
 - Adds the `xyz\oihana\schema\products` namespace — the commerce layer. `Product` (extends the schema.org `SomeProducts`) carries the unit of sale, the eligible-quantity tree (unit → package → pallet, UN/CEFACT codes and labels) and the stock conversions (`getUnitOfSaleConversionFactor`, `getInventoryLevelInUnitOfSale`, `findEligibleQuantityByType`). Pure data-to-data transformations (category hierarchy mapping, certification parsing) are deliberately left out of the class: they encode dataset-specific nomenclatures and belong to consumer-side helper functions. Around it: `ProductType`, `TaxRate`, `PriceSegmentation`, `ExtraPriceSpecification` (with `toUnitPriceSpecification()`), `PriceQuantityDiscount`, `PaymentCondition`, `PaymentMethod`, `ProductProviderInfo`, `ProductWarehouseInfo`, `ProviderProductWarehouseInfo`, `ProductWarehouseAvailability` and `StockLevel` (with `fromArray()` hydrating the `assignedPOS` as `Warehouse`).

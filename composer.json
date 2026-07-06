@@ -34,7 +34,25 @@
             "com\\progress\\": "src/com/progress" ,
             "org\\schema\\": "src/org/schema" ,
             "xyz\\oihana\\": "src/xyz/oihana"
-        }
+        } ,
+        "files" :
+        [
+            "src/org/schema/helpers/hydrate/hydrateAdditionalProperty.php" ,
+            "src/org/schema/helpers/hydrate/hydrateContactPoint.php" ,
+            "src/org/schema/helpers/hydrate/hydrateDefinedTerm.php" ,
+            "src/org/schema/helpers/hydrate/hydrateGeoCoordinates.php" ,
+            "src/org/schema/helpers/hydrate/hydrateOfferPurchase.php" ,
+            "src/org/schema/helpers/hydrate/hydratePostalAddress.php" ,
+            "src/xyz/oihana/schema/helpers/hydrate/hydrateAggregateOffer.php" ,
+            "src/xyz/oihana/schema/helpers/hydrate/hydrateCustomer.php" ,
+            "src/xyz/oihana/schema/helpers/hydrate/hydrateCustomerEmployee.php" ,
+            "src/xyz/oihana/schema/helpers/hydrate/hydrateCustomerSite.php" ,
+            "src/xyz/oihana/schema/helpers/hydrate/hydrateStockLevel.php" ,
+            "src/xyz/oihana/schema/helpers/hydrate/hydrateWarehouse.php" ,
+            "src/xyz/oihana/schema/helpers/pivots/customerKey.php" ,
+            "src/xyz/oihana/schema/helpers/pivots/sellerKey.php" ,
+            "src/xyz/oihana/schema/helpers/pivots/sellerKeys.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
