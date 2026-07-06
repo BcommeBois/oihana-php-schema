@@ -15,6 +15,7 @@ The top of the `xyz\oihana\schema` namespace gathers the **cross-cutting Oihana 
 | Record an auditable action (create / update / delete / login / logout). | [`AuditAction`](#auditaction) |
 | Enumerate audit action types.                     | [`AuditActionType`](../../src/xyz/oihana/schema/enumerations/AuditActionType.php) |
 | Enumerate contact channel types.                  | [`ContactType`](../../src/xyz/oihana/schema/enumerations/ContactType.php) |
+| Enumerate the lifecycle status of a business document. | [`BusinessDocumentStatus`](#businessdocumentstatus) |
 
 All entities share the `@context = 'https://schema.oihana.xyz'` distinguisher.
 
@@ -77,6 +78,14 @@ It carries:
 - the action `type` (`CREATE`, `UPDATE`, `DELETE`, `ADD`, `LOGIN`, `LOGOUT`, `REJECT`) — see the [`AuditActionType`](../../src/xyz/oihana/schema/enumerations/AuditActionType.php) enumeration.
 
 Constants for the `AuditAction` property keys are exposed via the [`AuditTrait`](../../src/xyz/oihana/schema/constants/traits/AuditTrait.php) and reachable through the global `Oihana` aggregator.
+
+---
+
+## <a id="businessdocumentstatus"></a> `BusinessDocumentStatus`
+
+`BusinessDocumentStatus` enumerates the **lifecycle status** of a business document (quote, purchase order, invoice…): `DRAFT`, `SENT`, `ACCEPTED`, `REJECTED`, `EXPIRED`, `CONVERTED`, `CANCELLED`. It extends `org\schema\enumerations\StatusEnumeration` and is distinct from Schema.org's `OrderStatus`, which tracks an order's *fulfillment* status (shipped, in transit…), not the document's own lifecycle.
+
+This enumeration lays the ground for the upcoming business-document hierarchy (`xyz\oihana\schema\business\documents`); no class consumes it yet in this release.
 
 ---
 

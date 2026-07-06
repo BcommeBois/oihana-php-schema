@@ -40,6 +40,24 @@ class PriceComponentType extends PriceComponentTypeEnumeration
     public const string COST_FACTOR = 'https://schema.oihana.xyz/CostFactor' ;
 
     /**
+     * Represents the schema.org URL for "Deposit" constant.
+     * Note : consigne (fr)
+     */
+    public const string DEPOSIT = 'https://schema.oihana.xyz/Deposit' ;
+
+    /**
+     * Represents the schema.org URL for "Discount" constant.
+     * Note : remise (fr)
+     */
+    public const string DISCOUNT = 'https://schema.oihana.xyz/Discount' ;
+
+    /**
+     * Represents the schema.org URL for "Environmental Fee" constant.
+     * Note : éco-participation (fr)
+     */
+    public const string ENVIRONMENTAL_FEE = 'https://schema.oihana.xyz/EnvironmentalFee' ;
+
+    /**
      * Represents the schema.org URL for "First Extra Fee" constant.
      * Note : frais libres 1 (fr)
      */
@@ -50,6 +68,12 @@ class PriceComponentType extends PriceComponentTypeEnumeration
      * Note : frais libres 2 (fr)
      */
     public const string EXTRA_2_FEE = 'https://schema.oihana.xyz/Extra2Fee' ;
+
+    /**
+     * Represents the schema.org URL for "Packaging" constant.
+     * Note : emballage (fr)
+     */
+    public const string PACKAGING = 'https://schema.oihana.xyz/Packaging' ;
 
     /**
      * Represents the schema.org URL for "Price Factor" constant.
@@ -81,4 +105,9 @@ class PriceComponentType extends PriceComponentTypeEnumeration
      */
     public const string SHIPPING_FEE = 'https://schema.oihana.xyz/ShippingFee' ;
 
+    /**
+     * Represents the schema.org URL for "Surcharge" constant.
+     * Note : majoration (fr)
+     */
+    public const string SURCHARGE = 'https://schema.oihana.xyz/Surcharge' ;
 }

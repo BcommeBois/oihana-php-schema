@@ -95,7 +95,7 @@ The descriptive `ProductProperty` trait (essence, appearance, certification, col
 |---|---|---|
 | `UnitOfSaleType` | `UNIT` , `PACKAGE` , `PARCEL` | The levels of the quantity tree and the unit of sale (`…#Unit`, `…#Package`, `…#Parcel` URLs). |
 | `PriceType` | buying, selling, reference prices… | The type of a price in a specification. |
-| `PriceComponentType` | the components of a price | The decomposition of a price (base, surcharges, fees). |
+| `PriceComponentType` | the components of a price | The decomposition of a price (base, surcharges, fees) — also covers discount, surcharge, environmental fee, deposit and packaging. |
 | `BusinessEntityType` | professional, individual… | The customer segmentation of an offer. |
 
 ---

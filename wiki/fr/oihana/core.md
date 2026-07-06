@@ -15,6 +15,7 @@ Le sommet du namespace `xyz\oihana\schema` regroupe les **extensions Oihana tran
 | Enregistrer une action auditable (create / update / delete / login / logout). | [`AuditAction`](#auditaction)         |
 | Énumérer les types d'actions d'audit.                                       | [`AuditActionType`](../../src/xyz/oihana/schema/enumerations/AuditActionType.php) |
 | Énumérer les types de canaux de contact.                                    | [`ContactType`](../../src/xyz/oihana/schema/enumerations/ContactType.php) |
+| Énumérer le statut de cycle de vie d'un document métier.                    | [`BusinessDocumentStatus`](#businessdocumentstatus) |
 
 Toutes les entités partagent le distinguisheur `@context = 'https://schema.oihana.xyz'`.
 
@@ -77,6 +78,14 @@ Elle porte :
 - le `type` d'action (`CREATE`, `UPDATE`, `DELETE`, `ADD`, `LOGIN`, `LOGOUT`, `REJECT`) — voir l'énumération [`AuditActionType`](../../src/xyz/oihana/schema/enumerations/AuditActionType.php).
 
 Les constantes des clés de propriétés `AuditAction` sont exposées par le trait [`AuditTrait`](../../src/xyz/oihana/schema/constants/traits/AuditTrait.php) et accessibles via l'agrégateur global `Oihana`.
+
+---
+
+## <a id="businessdocumentstatus"></a> `BusinessDocumentStatus`
+
+`BusinessDocumentStatus` énumère le **statut de cycle de vie** d'un document métier (devis, bon de commande, facture…) : `DRAFT`, `SENT`, `ACCEPTED`, `REJECTED`, `EXPIRED`, `CONVERTED`, `CANCELLED`. Elle étend `org\schema\enumerations\StatusEnumeration` et se distingue de l'`OrderStatus` de Schema.org, qui suit le statut de *livraison* d'une commande (expédiée, en transit…), pas celui du document.
+
+Cette énumération prépare la future hiérarchie de documents commerciaux (`xyz\oihana\schema\business\documents`) ; aucune classe ne la consomme encore dans cette version.
 
 ---
 

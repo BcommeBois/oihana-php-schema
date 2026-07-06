@@ -8,6 +8,28 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Populates three previously-empty Schema.org enumeration shells with their
+  actual members: `org\schema\enumerations\status\OrderStatus` (the eight
+  `OrderCancelled`/`OrderDelivered`/`OrderInTransit`/`OrderPaymentDue`/
+  `OrderPickupAvailable`/`OrderProblem`/`OrderProcessing`/`OrderReturned`
+  constants), `org\schema\enumerations\status\PaymentStatusType` (the five
+  `PaymentAutomaticallyApplied`/`PaymentComplete`/`PaymentDeclined`/
+  `PaymentDue`/`PaymentPastDue` constants) and
+  `org\schema\enumerations\DeliveryMethod` (the eight GoodRelations-derived
+  constants already listed in its own docblock, e.g. `DHL`, `ON_SITE_PICKUP`,
+  `UPS`). Dedicated test suites cover each class's constants and `includes()`.
+- Extends `xyz\oihana\schema\enumerations\PriceComponentType` with `DEPOSIT`,
+  `DISCOUNT`, `ENVIRONMENTAL_FEE`, `PACKAGING` and `SURCHARGE` — the
+  price-component vocabulary needed by the upcoming business-document
+  `Adjustment` value object, reusing this enum rather than introducing a
+  redundant one.
+- Adds `xyz\oihana\schema\enumerations\BusinessDocumentStatus` (extends the
+  schema.org `StatusEnumeration`) — the lifecycle status of a business
+  document (`DRAFT`, `SENT`, `ACCEPTED`, `REJECTED`, `EXPIRED`, `CONVERTED`,
+  `CANCELLED`), distinct from `OrderStatus` (which tracks an order's
+  fulfillment, not the document's own lifecycle). First foundation piece of
+  the upcoming business-document hierarchy; documented in the bilingual
+  `oihana-core.md` wiki guide.
 - Adds the autoloaded hydration and pivot helper functions — the library's
   first `autoload.files` layer. `org\schema\helpers\hydrate` carries the six
   pure schema.org array-to-object hydrators (`hydrateAdditionalProperty`,

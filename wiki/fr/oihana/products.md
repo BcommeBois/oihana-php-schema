@@ -95,7 +95,7 @@ Le trait descriptif `ProductProperty` (essence, apparence, certification, couleu
 |---|---|---|
 | `UnitOfSaleType` | `UNIT` , `PACKAGE` , `PARCEL` | Les niveaux de l'arbre des quantités et l'unité de vente (URLs `…#Unit`, `…#Package`, `…#Parcel`). |
 | `PriceType` | prix d'achat, de vente, de référence… | Le type d'un prix dans une spécification. |
-| `PriceComponentType` | les composantes d'un prix | La décomposition d'un prix (base, majorations, frais). |
+| `PriceComponentType` | les composantes d'un prix | La décomposition d'un prix (base, majorations, frais) — inclut aussi remise, majoration, éco-participation, consigne et emballage. |
 | `BusinessEntityType` | professionnel, particulier… | La segmentation de clientèle d'une offre. |
 
 ---
