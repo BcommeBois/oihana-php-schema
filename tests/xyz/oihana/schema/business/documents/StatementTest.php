@@ -1,0 +1,79 @@
+<?php
+
+namespace tests\xyz\oihana\schema\business\documents ;
+
+use PHPUnit\Framework\TestCase;
+use ReflectionException;
+
+use oihana\reflect\Reflection;
+
+use org\schema\MonetaryAmount;
+
+use xyz\oihana\schema\business\documents\BusinessDocument;
+use xyz\oihana\schema\business\documents\Statement;
+use xyz\oihana\schema\business\documents\StatementEntry;
+use xyz\oihana\schema\constants\Oihana;
+
+class StatementTest extends TestCase
+{
+    public function testIsBusinessDocument(): void
+    {
+        $this->assertInstanceOf( BusinessDocument::class , new Statement() );
+    }
+
+    public function testContextConstant(): void
+    {
+        $this->assertSame( Oihana::SCHEMA , Statement::CONTEXT );
+    }
+
+    public function testTraitConstants(): void
+    {
+        $this->assertSame( 'billingPeriod'  , Statement::BILLING_PERIOD  );
+        $this->assertSame( 'closingBalance' , Statement::CLOSING_BALANCE );
+        $this->assertSame( 'entries'        , Statement::ENTRIES         );
+        $this->assertSame( 'openingBalance' , Statement::OPENING_BALANCE );
+
+        $this->assertSame( Oihana::BILLING_PERIOD , Statement::BILLING_PERIOD );
+    }
+
+    public function testDefaults(): void
+    {
+        $statement = new Statement() ;
+
+        $this->assertNull( $statement->billingPeriod  ?? null );
+        $this->assertNull( $statement->closingBalance ?? null );
+        $this->assertNull( $statement->entries        ?? null );
+        $this->assertNull( $statement->openingBalance ?? null );
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testReflectionHydratesNestedValueObjects(): void
+    {
+        $statement = new Reflection()->hydrate
+        (
+            [
+                Statement::OPENING_BALANCE => [ 'value' => 0 , 'currency' => 'EUR' ] ,
+                Statement::CLOSING_BALANCE => [ 'value' => 100 , 'currency' => 'EUR' ] ,
+                Statement::ENTRIES         =>
+                [
+                    [ StatementEntry::DATE => '2026-01-15' , StatementEntry::AMOUNT => [ 'value' => 100 , 'currency' => 'EUR' ] ] ,
+                ] ,
+            ],
+            Statement::class
+        );
+
+        $this->assertInstanceOf( MonetaryAmount::class , $statement->openingBalance ) ;
+        $this->assertInstanceOf( MonetaryAmount::class , $statement->closingBalance ) ;
+        $this->assertInstanceOf( StatementEntry::class , $statement->entries[ 0 ] ) ;
+        $this->assertInstanceOf( MonetaryAmount::class , $statement->entries[ 0 ]->amount ) ;
+    }
+
+    public function testInheritsBusinessDocumentProperties(): void
+    {
+        $statement = new Statement([ BusinessDocument::CURRENCY => 'EUR' ]) ;
+
+        $this->assertSame( 'EUR' , $statement->currency ) ;
+    }
+}

@@ -8,6 +8,35 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds `CreditNote`, `DeliveryNote`, `Receipt` and `Statement`/`StatementEntry`
+  to `xyz\oihana\schema\business\documents` (Lot 4, closing the
+  business-documents workstream) — the quote → purchase order → invoice
+  cycle's neighbors. `CreditNote` (`reason`, `referencesInvoice` →
+  `Invoice`) corrects/cancels an already-issued invoice; the corrected
+  amount flows through the inherited `totals` recap, the "this reduces
+  what's owed" meaning is carried by the document type itself, not a sign
+  convention. `DeliveryNote` (`orderDelivery`) reuses `org\schema\Order`'s
+  own property name and its `org\schema\ParcelDelivery` type rather than
+  re-inventing shipment tracking. `Receipt` (`confirmationNumber`,
+  `paymentMethod`, `paymentMethodId`, `referencesInvoice` → `Invoice`)
+  reuses `org\schema\Invoice`'s property names ; the received amount and
+  date are not duplicated, they're the inherited `totals`/`issueDate`.
+  `Statement` (`billingPeriod`, `entries`, `openingBalance`,
+  `closingBalance`) is the only non-thin class of the lot: it introduces
+  `StatementEntry` (`document`, `date`, `amount`, `balance`), a new
+  `StructuredValue` line concept distinct from `BusinessDocumentLine`
+  (an account movement, not a priced product/service).
+  - Adds the companion `CreditNoteTrait`/`DeliveryNoteTrait`/`ReceiptTrait`/
+    `StatementTrait`/`StatementEntryTrait` constants traits, wired into
+    `DocumentsTrait` — no name collision found, so reachable through
+    `Oihana` as well.
+  - Adds the five dedicated test suites (defaults, `CONTEXT`, trait
+    constants, constructor hydration, `Reflection::hydrate()` for the
+    nested `referencesInvoice`/`orderDelivery`/`entries`/balance
+    properties, inheritance checks).
+  - Extends the bilingual `business-documents.md` wiki guide (FR canonical
+    + EN mirror) with the four classes, a `Statement` hydration example,
+    and bumps the README overview table (14 → 19) and both wiki indexes.
 - Adds `xyz\oihana\schema\business\documents\Invoice` (Lot 3 of the
   business-documents workstream) — the final document of the quote →
   purchase order → invoice cycle: `accountId`, `billingPeriod`, `broker`,
