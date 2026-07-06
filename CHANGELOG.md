@@ -25,6 +25,28 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   coverage. A bilingual wiki guide (`oihana-helpers.md`, FR/EN) documents
   the layer — the loading, the org/xyz layering rule, the three accepted
   shapes and the full function catalog — wired into both wiki indexes.
+- Completes the wiki coverage of the business layer with four bilingual
+  guides (FR canonical + EN mirror): `oihana-organizations.md` (`Company`
+  and its `Customer`/`Provider`/`Subsidiary`/`Affiliate` flavors),
+  `oihana-people.md` (`Person` and its five typed flavors),
+  `oihana-products.md` (the eligible-quantity tree, the unit-of-sale
+  conversions, the `resolveUnitCode()` extension point and the satellite
+  catalog) and the cross-cutting `oihana-ingestion.md` (the `__set`-driven
+  bridges turning flat dataset rows into nested objects, trait by trait,
+  and how ingestion complements the `hydrate*` helpers). Both wiki indexes
+  gain the three namespace rows and a "Cross-cutting mechanisms" section.
+
+### Changed
+
+- Reorganizes the wiki: every `oihana-*.md` page moves into a dedicated
+  `wiki/{fr,en}/oihana/` folder (dropping the prefix), mirroring the
+  existing `schema-org/` layout — the wiki root shrinks to the language
+  index, the getting-started guide and the three namespace folders. Each
+  `oihana/` folder gains its own `README.md` namespace index (guides +
+  mechanisms tables). Every relative link is rewritten and verified
+  (language indexes, getting-started pages, `schema-org` cross-references,
+  the repository `README.md`), and the repository overview table gains the
+  `organizations`, `people` and `products` rows.
 
 - Adds the `xyz\oihana\schema\organizations` namespace — the business-entity layer. `Company` (extends the schema.org `Corporation`) is the base entity: French administrative identifiers (SIRET via `taxID`, APE via `naics`), `category`/`industry`/`invoiceType`/`status`/`vat`/`website` and the postal-address + contact-point ingestion via the `Set*` traits (see below). `Customer` (additional properties, assigned company/POS/seller, credit status, payment terms, price segmentation), `Provider` (carrier, minimum order value, `ProductProviderInfo` ingestion), `Subsidiary` and `Affiliate` specialize it.
 - Adds the `xyz\oihana\schema\people` namespace — `Person` (extends the schema.org `Person`; additional properties + contact-point ingestion, `ownedBy`, `position`) and its flavors `Employee`, `CustomerEmployee`, `ProviderEmployee`, `Seller` and `SubsidiaryEmployee`.

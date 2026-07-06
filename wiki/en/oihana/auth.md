@@ -2,7 +2,7 @@
 
 The `xyz\oihana\schema\auth` namespace models everything Oihana applications need around **identity, sessions, OAuth2/OIDC clients and Role-Based Access Control** (RBAC). It is designed around an IdP-agnostic core (Zitadel, Auth0, Keycloak, …) and ships with Casbin-friendly helpers.
 
-> 🇫🇷 Cette page existe aussi en [français](../fr/oihana-auth.md).
+> 🇫🇷 Cette page existe aussi en [français](../../fr/oihana/auth.md).
 
 ---
 
@@ -125,8 +125,8 @@ $rules = $role->toCasbinPolicy(); // alias of toPolicy()
 
 ## Related reading
 
-- [Getting started](getting-started.md) — installation, hydration, JSON-LD basics.
-- [`org\schema`](schema-org/README.md) — base vocabulary that `User`, `Application`, `WebAPI`, etc. extend.
+- [Getting started](../getting-started.md) — installation, hydration, JSON-LD basics.
+- [`org\schema`](../schema-org/README.md) — base vocabulary that `User`, `Application`, `WebAPI`, etc. extend.
 - [Casbin documentation](https://casbin.org/) — policy/effect/matcher fundamentals.
 - [RFC 7523 — JWT Profile for OAuth 2.0 Client Authentication](https://www.rfc-editor.org/rfc/rfc7523) — backs `Keyfile` and `Service`.
-- [API reference](../../docs).
+- [API reference](../../../docs).

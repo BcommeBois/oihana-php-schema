@@ -2,7 +2,7 @@
 
 Le sommet du namespace `xyz\oihana\schema` regroupe les **extensions Oihana transverses** qui n'appartiennent à aucun sous-namespace spécialisé : métadonnées de pagination pour les collections, entrées de log et enregistrements d'actions auditables.
 
-> 🇬🇧 This page is also available in [English](../en/oihana-core.md).
+> 🇬🇧 This page is also available in [English](../../en/oihana/core.md).
 
 ---
 
@@ -82,7 +82,7 @@ Les constantes des clés de propriétés `AuditAction` sont exposées par le tra
 
 ## Pour aller plus loin
 
-- [`org\schema`](schema-org/README.md) — classes de base (`Intangible`, `Thing`, `Action`).
-- [`xyz\oihana\schema\auth`](oihana-auth.md) — entités d'authentification souvent référencées par les enregistrements d'audit.
-- [Démarrage rapide](demarrage.md) — installation, hydratation, bases du JSON-LD.
-- [Référence d'API](../../docs).
+- [`org\schema`](../schema-org/README.md) — classes de base (`Intangible`, `Thing`, `Action`).
+- [`xyz\oihana\schema\auth`](auth.md) — entités d'authentification souvent référencées par les enregistrements d'audit.
+- [Démarrage rapide](../demarrage.md) — installation, hydratation, bases du JSON-LD.
+- [Référence d'API](../../../docs).

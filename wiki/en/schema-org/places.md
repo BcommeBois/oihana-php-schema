@@ -15,7 +15,7 @@ Reach for these classes whenever you need a more precise description than the ge
 - represent civic and tourism infrastructure (`CivicStructure`, `LandmarksOrHistoricalBuildings`, `TouristAttraction`, `TouristDestination`),
 - describe lodging (`Accommodation`, `Residence`).
 
-For Oihana-specific operational locations (Site, Office, Warehouse, JobSite), use the [`xyz\oihana\schema\places`](../oihana-places.md) namespace instead.
+For Oihana-specific operational locations (Site, Office, Warehouse, JobSite), use the [`xyz\oihana\schema\places`](../oihana/places.md) namespace instead.
 
 ---
 

@@ -2,13 +2,13 @@
 
 Le namespace `xyz\oihana\schema\business` modélise le **lien entre un compte authentifié et le monde métier** : *qui* est un compte en termes métier (`BusinessIdentity`), et le *gabarit* réutilisable servant à provisionner un nouveau compte (`UserProfile`).
 
-> 🇬🇧 This page is also available in [English](../en/oihana-business.md).
+> 🇬🇧 This page is also available in [English](../../en/oihana/business.md).
 
 ---
 
 ## Quand l'utiliser
 
-Choisissez ces classes lorsque vous devez relier l'**axe authentification** (rôles, permissions — voir [`xyz\oihana\schema\auth`](oihana-auth.md)) à l'**axe identité** (la `Person` ou l'`Organization` que le compte représente) sans fusionner leurs données :
+Choisissez ces classes lorsque vous devez relier l'**axe authentification** (rôles, permissions — voir [`xyz\oihana\schema\auth`](auth.md)) à l'**axe identité** (la `Person` ou l'`Organization` que le compte représente) sans fusionner leurs données :
 
 - une *BusinessIdentity* pour répondre à *« à quelle entité métier correspond ce compte ? »* — un compte peut en porter plusieurs (par ex. à la fois un vendeur et un contact client),
 - un *UserProfile* comme modèle de création qui associe un rôle d'autorisation au type d'entité auquel le compte est censé être rattaché.
@@ -69,9 +69,9 @@ Helpers neutres pour naviguer le lien sans réimplémenter la résolution — ch
 - `subjectKey( string|array $key = '_key' )` — résout l'identifiant du sujet.
 - `worksForKey( string|array $key = '_key' )` — résout la `_key`/`id` de l'organisation pour laquelle le sujet `worksFor`.
 
-Côté compte, [`User`](oihana-auth.md) expose `firstIdentityBySubjectType()` et `identitiesBySubjectType()` pour filtrer ses `identities` par type de sujet.
+Côté compte, [`User`](auth.md) expose `firstIdentityBySubjectType()` et `identitiesBySubjectType()` pour filtrer ses `identities` par type de sujet.
 
-Pour la liste exhaustive des propriétés, parcourez le code source sous [`src/xyz/oihana/schema/business/`](../../src/xyz/oihana/schema/business) ou la [référence d'API](../../docs).
+Pour la liste exhaustive des propriétés, parcourez le code source sous [`src/xyz/oihana/schema/business/`](../../src/xyz/oihana/schema/business) ou la [référence d'API](../../../docs).
 
 ---
 
@@ -85,7 +85,7 @@ Contrairement aux traits `places` et `http`, ils ne sont **volontairement pas** 
 
 ## Pour aller plus loin
 
-- [`xyz\oihana\schema\auth`](oihana-auth.md) — rôles, permissions, `User::$identities`.
-- [`org\schema`](schema-org/README.md) — `Person`, `Organization`, `Intangible`.
-- [Démarrage rapide](demarrage.md) — installation, hydratation, bases du JSON-LD.
-- [Référence d'API](../../docs).
+- [`xyz\oihana\schema\auth`](auth.md) — rôles, permissions, `User::$identities`.
+- [`org\schema`](../schema-org/README.md) — `Person`, `Organization`, `Intangible`.
+- [Démarrage rapide](../demarrage.md) — installation, hydratation, bases du JSON-LD.
+- [Référence d'API](../../../docs).

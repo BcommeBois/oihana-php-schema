@@ -91,6 +91,6 @@ Prop::NAME; // 'name'
 ## Related reading
 
 - [Getting started](../getting-started.md) — installation, hydration and JSON-LD basics.
-- [`xyz\oihana\schema`](../oihana-core.md) — Oihana cross-cutting utilities (Pagination, Log, AuditAction).
+- [`xyz\oihana\schema`](../oihana/core.md) — Oihana cross-cutting utilities (Pagination, Log, AuditAction).
 - [Schema.org official website](https://schema.org) — original specification.
 - [API reference](../../../docs) — every class, property and method.

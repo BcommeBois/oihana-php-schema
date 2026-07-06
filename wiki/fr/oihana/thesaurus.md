@@ -2,7 +2,7 @@
 
 Le namespace `xyz\oihana\schema\thesaurus` modélise les **schémas de classification et les arbres de concepts** — thésaurus, taxonomies, vocabulaires contrôlés. Il superpose le vocabulaire W3C **SKOS** (`broader`/`narrower`, schémas de concepts, relations d'alignement) au `DefinedTerm` de Schema.org, que Schema.org assimile lui-même à `skos:Concept`.
 
-> 🇬🇧 This page is also available in [English](../en/oihana-thesaurus.md).
+> 🇬🇧 This page is also available in [English](../../en/oihana/thesaurus.md).
 
 ---
 
@@ -144,7 +144,7 @@ Au-dessus du cœur SKOS, le namespace modélise la vue **registre** d'un catalog
 
 `skos:definition` est volontairement mappé sur le `description` hérité, non dupliqué. **SKOS-XL** (libellés réifiés) et les super-propriétés abstraites (`skos:semanticRelation`, `skos:mappingRelation`) sont volontairement hors périmètre.
 
-Pour la liste exhaustive des propriétés, parcourez le code source sous [`src/xyz/oihana/schema/thesaurus/`](../../src/xyz/oihana/schema/thesaurus) ou la [référence d'API](../../docs).
+Pour la liste exhaustive des propriétés, parcourez le code source sous [`src/xyz/oihana/schema/thesaurus/`](../../src/xyz/oihana/schema/thesaurus) ou la [référence d'API](../../../docs).
 
 ---
 
@@ -172,7 +172,7 @@ Contrairement aux traits `business`, ils **sont** agrégés — via l'agrégateu
 
 ## Pour aller plus loin
 
-- [`org\schema`](schema-org/README.md) — `DefinedTerm`, `DefinedTermSet`, `Intangible`, `Thing`.
-- [Démarrage rapide](demarrage.md) — installation, hydratation, bases du JSON-LD.
+- [`org\schema`](../schema-org/README.md) — `DefinedTerm`, `DefinedTermSet`, `Intangible`, `Thing`.
+- [Démarrage rapide](../demarrage.md) — installation, hydratation, bases du JSON-LD.
 - [Référence SKOS](https://www.w3.org/TR/skos-reference/) — la spécification du W3C.
-- [Référence d'API](../../docs).
+- [Référence d'API](../../../docs).

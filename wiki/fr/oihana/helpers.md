@@ -7,7 +7,7 @@ Deux familles vivent dans cette couche :
 - les **hydrateurs** — transformer une donnée brute (un tableau associatif sorti d'une base ou d'une API) en objet de schéma typé, références imbriquées comprises ;
 - les **pivots de compte** — résoudre les identités métier d'un compte authentifié (`User`) en clés d'organisation ou de vendeur, celles qui délimitent le périmètre de ses ressources.
 
-> 🇬🇧 This page is also available in [English](../en/oihana-helpers.md).
+> 🇬🇧 This page is also available in [English](../../en/oihana/helpers.md).
 
 ---
 
@@ -87,7 +87,7 @@ $key  = customerKey( $user ) ; // '137285125' — le client pour lequel le conta
 $keys = sellerKeys( $user ) ;  // [ '147737218' , '147737209' ] — les casquettes vendeur, dédupliquées
 ```
 
-Un compte porte zéro, une ou plusieurs identités métier (voir [`BusinessIdentity`](oihana-business.md)) : `customerKey()` et `sellerKey()` résolvent la première du type attendu, `sellerKeys()` les résout toutes.
+Un compte porte zéro, une ou plusieurs identités métier (voir [`BusinessIdentity`](business.md)) : `customerKey()` et `sellerKey()` résolvent la première du type attendu, `sellerKeys()` les résout toutes.
 
 ---
 
@@ -127,5 +127,5 @@ Un compte porte zéro, une ou plusieurs identités métier (voir [`BusinessIdent
 
 ## Voir aussi
 
-- [Métier Oihana](oihana-business.md) — `BusinessIdentity`, le lien compte ↔ entité que les pivots parcourent.
-- [Vocabulaire Schema.org](schema-org/README.md) — les classes produites par les hydrateurs purs.
+- [Métier Oihana](business.md) — `BusinessIdentity`, le lien compte ↔ entité que les pivots parcourent.
+- [Vocabulaire Schema.org](../schema-org/README.md) — les classes produites par les hydrateurs purs.

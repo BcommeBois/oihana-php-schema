@@ -2,7 +2,7 @@
 
 Le namespace `xyz\oihana\schema\places` ajoute des **types de lieux opérationnels et métier** absents du cœur de Schema.org. Il modélise des emplacements concrets au sein d'une organisation (sites, bureaux, entrepôts, chantiers) tout en restant compatible avec le vocabulaire `Place` standard.
 
-> 🇬🇧 This page is also available in [English](../en/oihana-places.md).
+> 🇬🇧 This page is also available in [English](../../en/oihana/places.md).
 
 ---
 
@@ -53,7 +53,7 @@ echo json_encode( $site , JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
 | `Warehouse` | `Place`   | Entrepôt — généralement avec méthodes de livraison, capacité et horaires d'ouverture.             |
 | `JobSite`   | `Place`   | Lieu rattaché à un projet (chantier, intervention sur site, déploiement temporaire).              |
 
-Pour la liste exhaustive des propriétés, parcourez le code source sous [`src/xyz/oihana/schema/places/`](../../src/xyz/oihana/schema/places) ou la [référence d'API](../../docs).
+Pour la liste exhaustive des propriétés, parcourez le code source sous [`src/xyz/oihana/schema/places/`](../../src/xyz/oihana/schema/places) ou la [référence d'API](../../../docs).
 
 ---
 
@@ -65,6 +65,6 @@ Les clés de propriétés spécifiques aux sites sont exposées par le trait [`S
 
 ## Pour aller plus loin
 
-- [`org\schema`](schema-org/README.md) — `Place`, `PostalAddress`, `Organization`, `Person`.
-- [Démarrage rapide](demarrage.md) — installation, hydratation, bases du JSON-LD.
-- [Référence d'API](../../docs).
+- [`org\schema`](../schema-org/README.md) — `Place`, `PostalAddress`, `Organization`, `Person`.
+- [Démarrage rapide](../demarrage.md) — installation, hydratation, bases du JSON-LD.
+- [Référence d'API](../../../docs).

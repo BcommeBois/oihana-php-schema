@@ -2,7 +2,7 @@
 
 The `xyz\oihana\schema\http` namespace provides **structured views of HTTP request metadata**. Its first member, `UserAgentInfo`, normalises the free-form `User-Agent` header into typed fields that are easy to consume, store and audit.
 
-> 🇫🇷 Cette page existe aussi en [français](../fr/oihana-http.md).
+> 🇫🇷 Cette page existe aussi en [français](../../fr/oihana/http.md).
 
 ---
 
@@ -60,7 +60,7 @@ echo json_encode( $info , JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
 | `isBot`          | `bool\|null`   | Whether the agent is a bot, crawler or other automated client.                    |
 | `raw`            | `string\|null` | The original `User-Agent` header value, preserved verbatim for audit / forensics. |
 
-For exhaustive property lists, browse the source under [`src/xyz/oihana/schema/http/`](../../src/xyz/oihana/schema/http) or the [API reference](../../docs).
+For exhaustive property lists, browse the source under [`src/xyz/oihana/schema/http/`](../../src/xyz/oihana/schema/http) or the [API reference](../../../docs).
 
 ---
 
@@ -74,7 +74,7 @@ The `deviceType` values come from the [`DeviceType`](../../src/xyz/oihana/schema
 
 ## Related reading
 
-- [`xyz\oihana\schema`](oihana-core.md) — `AuditAction` and the cross-cutting types a `UserAgentInfo` is embedded in.
-- [`org\schema`](schema-org/README.md) — `Intangible` and the Schema.org base.
-- [Getting started](getting-started.md) — installation, hydration, JSON-LD basics.
-- [API reference](../../docs).
+- [`xyz\oihana\schema`](core.md) — `AuditAction` and the cross-cutting types a `UserAgentInfo` is embedded in.
+- [`org\schema`](../schema-org/README.md) — `Intangible` and the Schema.org base.
+- [Getting started](../getting-started.md) — installation, hydration, JSON-LD basics.
+- [API reference](../../../docs).

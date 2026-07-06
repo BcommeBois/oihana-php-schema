@@ -2,7 +2,7 @@
 
 The `xyz\oihana\schema\places` namespace adds **operational, business-oriented place types** that are not part of Schema.org core. They model real-world locations within an organization (sites, offices, warehouses, jobsites) while staying compatible with the standard `Place` vocabulary.
 
-> 🇫🇷 Cette page existe aussi en [français](../fr/oihana-places.md).
+> 🇫🇷 Cette page existe aussi en [français](../../fr/oihana/places.md).
 
 ---
 
@@ -53,7 +53,7 @@ echo json_encode( $site , JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
 | `Warehouse` | `Place`   | Storage facility — typically with delivery methods, capacity and operating hours.                   |
 | `JobSite`   | `Place`   | Project-tied location (construction, on-site intervention, temporary deployment).                   |
 
-For exhaustive property lists, browse the source under [`src/xyz/oihana/schema/places/`](../../src/xyz/oihana/schema/places) or the [API reference](../../docs).
+For exhaustive property lists, browse the source under [`src/xyz/oihana/schema/places/`](../../src/xyz/oihana/schema/places) or the [API reference](../../../docs).
 
 ---
 
@@ -65,6 +65,6 @@ Site-specific property keys are exposed by the [`SiteTrait`](../../src/xyz/oihan
 
 ## Related reading
 
-- [`org\schema`](schema-org/README.md) — `Place`, `PostalAddress`, `Organization`, `Person`.
-- [Getting started](getting-started.md) — installation, hydration, JSON-LD basics.
-- [API reference](../../docs).
+- [`org\schema`](../schema-org/README.md) — `Place`, `PostalAddress`, `Organization`, `Person`.
+- [Getting started](../getting-started.md) — installation, hydration, JSON-LD basics.
+- [API reference](../../../docs).

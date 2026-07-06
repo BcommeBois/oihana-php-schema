@@ -91,6 +91,6 @@ Prop::NAME; // 'name'
 ## Pour aller plus loin
 
 - [Démarrage rapide](../demarrage.md) — installation, hydratation et bases du JSON-LD.
-- [`xyz\oihana\schema`](../oihana-core.md) — utilitaires transverses Oihana (Pagination, Log, AuditAction).
+- [`xyz\oihana\schema`](../oihana/core.md) — utilitaires transverses Oihana (Pagination, Log, AuditAction).
 - [Site officiel Schema.org](https://schema.org) — spécification d'origine.
 - [Référence d'API](../../../docs) — toutes les classes, propriétés et méthodes.

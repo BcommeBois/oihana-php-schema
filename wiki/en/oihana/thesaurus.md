@@ -2,7 +2,7 @@
 
 The `xyz\oihana\schema\thesaurus` namespace models **classification schemes and concept trees** — thesauri, taxonomies, controlled vocabularies. It layers the W3C **SKOS** vocabulary (`broader`/`narrower`, concept schemes, mapping relations) on top of the Schema.org `DefinedTerm`, which Schema.org itself equates with `skos:Concept`.
 
-> 🇫🇷 Cette page existe aussi en [français](../fr/oihana-thesaurus.md).
+> 🇫🇷 Cette page existe aussi en [français](../../fr/oihana/thesaurus.md).
 
 ---
 
@@ -144,7 +144,7 @@ On top of the SKOS core, the namespace models the **registry** view of a vocabul
 
 `skos:definition` is deliberately mapped to the inherited `description`, not duplicated. **SKOS-XL** (reified labels) and the abstract super-properties (`skos:semanticRelation`, `skos:mappingRelation`) are intentionally out of scope.
 
-For exhaustive property lists, browse the source under [`src/xyz/oihana/schema/thesaurus/`](../../src/xyz/oihana/schema/thesaurus) or the [API reference](../../docs).
+For exhaustive property lists, browse the source under [`src/xyz/oihana/schema/thesaurus/`](../../src/xyz/oihana/schema/thesaurus) or the [API reference](../../../docs).
 
 ---
 
@@ -172,7 +172,7 @@ Unlike the `business` traits, these **are** aggregated — through the [`Thesaur
 
 ## Related reading
 
-- [`org\schema`](schema-org/README.md) — `DefinedTerm`, `DefinedTermSet`, `Intangible`, `Thing`.
-- [Getting started](getting-started.md) — installation, hydration, JSON-LD basics.
+- [`org\schema`](../schema-org/README.md) — `DefinedTerm`, `DefinedTermSet`, `Intangible`, `Thing`.
+- [Getting started](../getting-started.md) — installation, hydration, JSON-LD basics.
 - [SKOS Reference](https://www.w3.org/TR/skos-reference/) — the W3C specification.
-- [API reference](../../docs).
+- [API reference](../../../docs).

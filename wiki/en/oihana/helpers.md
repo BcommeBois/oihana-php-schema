@@ -7,7 +7,7 @@ Two families live in this layer:
 - the **hydrators** — turn a raw piece of data (an associative array coming out of a database or an API) into a typed schema object, nested references included;
 - the **account pivots** — resolve the business identities of an authenticated account (`User`) into the organization or seller keys that scope its resources.
 
-> 🇫🇷 Cette page est aussi disponible en [français](../fr/oihana-helpers.md).
+> 🇫🇷 Cette page est aussi disponible en [français](../../fr/oihana/helpers.md).
 
 ---
 
@@ -87,7 +87,7 @@ $key  = customerKey( $user ) ; // '137285125' — the customer the contact works
 $keys = sellerKeys( $user ) ;  // [ '147737218' , '147737209' ] — the seller hats, deduplicated
 ```
 
-An account carries zero, one or several business identities (see [`BusinessIdentity`](oihana-business.md)): `customerKey()` and `sellerKey()` resolve the first identity of the expected type, `sellerKeys()` resolves them all.
+An account carries zero, one or several business identities (see [`BusinessIdentity`](business.md)): `customerKey()` and `sellerKey()` resolve the first identity of the expected type, `sellerKeys()` resolves them all.
 
 ---
 
@@ -127,5 +127,5 @@ An account carries zero, one or several business identities (see [`BusinessIdent
 
 ## See also
 
-- [Oihana business](oihana-business.md) — `BusinessIdentity`, the account ↔ entity link the pivots walk through.
-- [Schema.org vocabulary](schema-org/README.md) — the classes produced by the pure hydrators.
+- [Oihana business](business.md) — `BusinessIdentity`, the account ↔ entity link the pivots walk through.
+- [Schema.org vocabulary](../schema-org/README.md) — the classes produced by the pure hydrators.

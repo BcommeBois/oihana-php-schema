@@ -2,7 +2,7 @@
 
 Le namespace `xyz\oihana\schema\http` fournit des **vues structurées des métadonnées de requête HTTP**. Son premier membre, `UserAgentInfo`, normalise l'en-tête `User-Agent` au format libre en champs typés faciles à consommer, stocker et auditer.
 
-> 🇬🇧 This page is also available in [English](../en/oihana-http.md).
+> 🇬🇧 This page is also available in [English](../../en/oihana/http.md).
 
 ---
 
@@ -60,7 +60,7 @@ echo json_encode( $info , JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
 | `isBot`          | `bool\|null`   | Indique si l'agent est un bot, un crawler ou un autre client automatisé.          |
 | `raw`            | `string\|null` | La valeur originale de l'en-tête `User-Agent`, conservée telle quelle pour l'audit / la forensique. |
 
-Pour la liste exhaustive des propriétés, parcourez le code source sous [`src/xyz/oihana/schema/http/`](../../src/xyz/oihana/schema/http) ou la [référence d'API](../../docs).
+Pour la liste exhaustive des propriétés, parcourez le code source sous [`src/xyz/oihana/schema/http/`](../../src/xyz/oihana/schema/http) ou la [référence d'API](../../../docs).
 
 ---
 
@@ -74,7 +74,7 @@ Les valeurs de `deviceType` proviennent de la classe de constantes [`DeviceType`
 
 ## Pour aller plus loin
 
-- [`xyz\oihana\schema`](oihana-core.md) — `AuditAction` et les types transverses dans lesquels un `UserAgentInfo` est embarqué.
-- [`org\schema`](schema-org/README.md) — `Intangible` et la base Schema.org.
-- [Démarrage rapide](demarrage.md) — installation, hydratation, bases du JSON-LD.
-- [Référence d'API](../../docs).
+- [`xyz\oihana\schema`](core.md) — `AuditAction` et les types transverses dans lesquels un `UserAgentInfo` est embarqué.
+- [`org\schema`](../schema-org/README.md) — `Intangible` et la base Schema.org.
+- [Démarrage rapide](../demarrage.md) — installation, hydratation, bases du JSON-LD.
+- [Référence d'API](../../../docs).

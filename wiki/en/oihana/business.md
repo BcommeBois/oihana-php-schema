@@ -2,13 +2,13 @@
 
 The `xyz\oihana\schema\business` namespace models the **link between an authenticated account and the business world** : *who* an account is in business terms (`BusinessIdentity`), and the reusable *template* used to provision a new account (`UserProfile`).
 
-> 🇫🇷 Cette page existe aussi en [français](../fr/oihana-business.md).
+> 🇫🇷 Cette page existe aussi en [français](../../fr/oihana/business.md).
 
 ---
 
 ## When to use it
 
-Pick these classes when you need to connect the **auth axis** (roles, permissions — see [`xyz\oihana\schema\auth`](oihana-auth.md)) with the **identity axis** (the `Person` or `Organization` the account stands for) without merging their data:
+Pick these classes when you need to connect the **auth axis** (roles, permissions — see [`xyz\oihana\schema\auth`](auth.md)) with the **identity axis** (the `Person` or `Organization` the account stands for) without merging their data:
 
 - a *BusinessIdentity* to answer *"which business entity does this account correspond to?"* — an account may hold several (e.g. both a seller and a customer contact),
 - a *UserProfile* as a creation-time blueprint that pairs an authorization role with the kind of entity the account is expected to be linked to.
@@ -69,9 +69,9 @@ Neutral helpers so consumers navigate the link without re-implementing the looku
 - `subjectKey( string|array $key = '_key' )` — resolve the subject's identifier.
 - `worksForKey( string|array $key = '_key' )` — resolve the `_key`/`id` of the organization the subject `worksFor`.
 
-On the account side, [`User`](oihana-auth.md) exposes `firstIdentityBySubjectType()` and `identitiesBySubjectType()` to filter its `identities` by subject type.
+On the account side, [`User`](auth.md) exposes `firstIdentityBySubjectType()` and `identitiesBySubjectType()` to filter its `identities` by subject type.
 
-For exhaustive property lists, browse the source under [`src/xyz/oihana/schema/business/`](../../src/xyz/oihana/schema/business) or the [API reference](../../docs).
+For exhaustive property lists, browse the source under [`src/xyz/oihana/schema/business/`](../../src/xyz/oihana/schema/business) or the [API reference](../../../docs).
 
 ---
 
@@ -85,7 +85,7 @@ Unlike the `places` and `http` traits, these are **intentionally not** aggregate
 
 ## Related reading
 
-- [`xyz\oihana\schema\auth`](oihana-auth.md) — roles, permissions, `User::$identities`.
-- [`org\schema`](schema-org/README.md) — `Person`, `Organization`, `Intangible`.
-- [Getting started](getting-started.md) — installation, hydration, JSON-LD basics.
-- [API reference](../../docs).
+- [`xyz\oihana\schema\auth`](auth.md) — roles, permissions, `User::$identities`.
+- [`org\schema`](../schema-org/README.md) — `Person`, `Organization`, `Intangible`.
+- [Getting started](../getting-started.md) — installation, hydration, JSON-LD basics.
+- [API reference](../../../docs).

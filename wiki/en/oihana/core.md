@@ -2,7 +2,7 @@
 
 The top of the `xyz\oihana\schema` namespace gathers the **cross-cutting Oihana extensions** that don't belong to a specialised sub-namespace: pagination metadata for collections, log entries, and auditable action records.
 
-> 🇫🇷 Cette page existe aussi en [français](../fr/oihana-core.md).
+> 🇫🇷 Cette page existe aussi en [français](../../fr/oihana/core.md).
 
 ---
 
@@ -82,7 +82,7 @@ Constants for the `AuditAction` property keys are exposed via the [`AuditTrait`]
 
 ## Related reading
 
-- [`org\schema`](schema-org/README.md) — base classes (`Intangible`, `Thing`, `Action`).
-- [`xyz\oihana\schema\auth`](oihana-auth.md) — auth-related entities often referenced by audit records.
-- [Getting started](getting-started.md) — installation, hydration, JSON-LD basics.
-- [API reference](../../docs).
+- [`org\schema`](../schema-org/README.md) — base classes (`Intangible`, `Thing`, `Action`).
+- [`xyz\oihana\schema\auth`](auth.md) — auth-related entities often referenced by audit records.
+- [Getting started](../getting-started.md) — installation, hydration, JSON-LD basics.
+- [API reference](../../../docs).
