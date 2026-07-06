@@ -8,6 +8,27 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds `xyz\oihana\schema\business\documents\BusinessDocument` (Lot 2 of the
+  business-documents workstream) — the common parent of the quote → purchase
+  order → invoice cycle: `attachments`, `currency`, `customer`,
+  `documentLines`, `issueDate`, `paymentTerms`, `references`, `seller`,
+  `status` (→ `BusinessDocumentStatus`), `taxes`, `totals`. Extends
+  `org\schema\Intangible` rather than reusing the mirror's `Order`/`Invoice`:
+  a business document qualifies a transaction, it is not an addressable
+  resource in its own right, and this keeps the schema.org mirror untouched —
+  existing consumers of `org\schema\Order`/`Invoice` see no change. Adds
+  `Quote` (adds `validThrough`, reusing the schema.org property already
+  carried by `PriceSpecification`/`Offer` rather than a new `validUntil`
+  name) and `PurchaseOrder` (no properties of its own in this version).
+  - Adds the companion `BusinessDocumentTrait`/`QuoteTrait` constants traits,
+    wired into `DocumentsTrait` — no name collision found, so reachable
+    through `Oihana` as well.
+  - Adds the three test suites (defaults, `CONTEXT`, trait constants,
+    constructor hydration, `Reflection::hydrate()` for the nested
+    `documentLines`/`taxes`/`totals`/`paymentTerms`, inheritance checks).
+  - Extends the bilingual `business-documents.md` wiki guide with the three
+    classes and a full-document hydration example, and bumps the namespace
+    class count (8 → 11) in the README overview table and both wiki indexes.
 - Adds the `xyz\oihana\schema\business\documents` namespace — the cross-cutting
   value objects of the quote/purchase-order/invoice cycle (Lot 1 of the
   business-documents workstream, ahead of the document hierarchy itself):

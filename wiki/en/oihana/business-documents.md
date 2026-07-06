@@ -8,7 +8,7 @@ The `xyz\oihana\schema\business\documents` namespace models the **quote → purc
 
 ## Status of this namespace
 
-This page documents the **cross-cutting value objects** — the building blocks reused by every business document. The document hierarchy itself (`BusinessDocument`, `Quote`, `PurchaseOrder`, `Invoice`…) ships in an upcoming release ; this page will be completed accordingly.
+This page documents both the **cross-cutting value objects** (`TaxDetail`, `Adjustment`…) and the foundation of the **document hierarchy** (`BusinessDocument`, `Quote`, `PurchaseOrder`). Still to come in an upcoming release: `Invoice`, `CreditNote`, `DeliveryNote`, `Receipt`, `Statement` and the export interface ; this page will be completed accordingly.
 
 ---
 
@@ -23,8 +23,11 @@ This page documents the **cross-cutting value objects** — the building blocks 
 | Summarize a document's amounts (excl. tax, tax, incl. tax, prepaid, due). | [`DocumentTotals`](#documenttotals) |
 | Represent a line of a business document. | [`BusinessDocumentLine`](#businessdocumentline) |
 | Spread a payment over several installments. | [`PaymentSchedule`](#paymentschedule) / [`PaymentInstallment`](#paymentinstallment) |
+| Carry the properties common to every business document (parties, dates, amounts, status…). | [`BusinessDocument`](#businessdocument) |
+| Represent a quote. | [`Quote`](#quote) |
+| Represent a purchase order. | [`PurchaseOrder`](#purchaseorder) |
 
-All these classes extend `org\schema\StructuredValue` (like `MonetaryAmount` or `PriceSpecification`): they are structured values, not addressable resources. They share the `@context = 'https://schema.oihana.xyz'` distinguisher.
+The value objects (`TaxDetail`, `Adjustment`…) extend `org\schema\StructuredValue` (like `MonetaryAmount` or `PriceSpecification`): they are structured values, not addressable resources. `BusinessDocument` and its flavors (`Quote`, `PurchaseOrder`) extend `org\schema\Intangible` — see [`BusinessDocument`](#businessdocument) for the rationale behind that anchor. All of them share the `@context = 'https://schema.oihana.xyz'` distinguisher.
 
 ---
 
@@ -50,6 +53,27 @@ $line = new BusinessDocumentLine
 
 As everywhere else in the library, the constructor only performs a raw assignment: `$line->taxes[0]` stays an array until you go through `new \oihana\reflect\Reflection()->hydrate(...)`, which honors each class's `#[HydrateWith]`/`#[HydrateAs]` attributes and turns the nested arrays into `TaxDetail`/`Adjustment`/`MonetaryAmount` objects.
 
+A full `Quote`, with its lines and payment schedule, hydrates the same way:
+
+```php
+use oihana\reflect\Reflection;
+use xyz\oihana\schema\business\documents\Quote;
+use xyz\oihana\schema\enumerations\BusinessDocumentStatus;
+
+$quote = new Reflection()->hydrate
+([
+    Quote::CURRENCY       => 'EUR' ,
+    Quote::ISSUE_DATE     => '2026-01-15' ,
+    Quote::VALID_THROUGH  => '2026-02-15' ,
+    Quote::STATUS         => BusinessDocumentStatus::DRAFT ,
+    Quote::DOCUMENT_LINES => [ [ 'position' => 1 , 'quantity' => 5 ] ] ,
+    Quote::TOTALS         => [ 'total' => [ 'value' => 120 , 'currency' => 'EUR' ] ] ,
+], Quote::class);
+
+$quote->documentLines[ 0 ] instanceof \xyz\oihana\schema\business\documents\BusinessDocumentLine ; // true
+$quote->totals instanceof \xyz\oihana\schema\business\documents\DocumentTotals ;                    // true
+```
+
 ---
 
 ## Class catalog
@@ -64,6 +88,9 @@ As everywhere else in the library, the constructor only performs a raw assignmen
 | <a id="businessdocumentline"></a>`BusinessDocumentLine` | `StructuredValue` | A document line (`item`, `position`, `quantity`, `unit`, `price`, `taxes`, `adjustments`, `subtotal`, `total`) — `taxes` and `adjustments` are scoped to the line, so a document can mix lines taxed at different rates. |
 | <a id="paymentschedule"></a>`PaymentSchedule` | `StructuredValue` | A payment schedule (`installments`, a list of `PaymentInstallment`). Base version: reminders and a per-installment status are a later iteration. |
 | <a id="paymentinstallment"></a>`PaymentInstallment` | `StructuredValue` | A single installment (`dueDate`, `amount` or `percentage`). |
+| <a id="businessdocument"></a>`BusinessDocument` | `Intangible` | The common parent of the quote → order → invoice cycle: `attachments`, `currency`, `customer`, `documentLines`, `issueDate`, `paymentTerms`, `references`, `seller`, `status` (→ `BusinessDocumentStatus`), `taxes`, `totals`. Extends `Intangible` rather than reusing `org\schema\Order`/`org\schema\Invoice`: a business document qualifies a transaction, it is not an addressable resource in its own right — and this keeps the Schema.org mirror untouched (existing consumers of `org\schema\Order`/`Invoice` see no change). |
+| <a id="quote"></a>`Quote` | `BusinessDocument` | A quote — adds `validThrough` (reusing the Schema.org property already carried by `PriceSpecification`/`Offer`, rather than a new name). Not to be confused with `org\schema\creativeWork\Quotation`, which is an unrelated **literary citation**. |
+| <a id="purchaseorder"></a>`PurchaseOrder` | `BusinessDocument` | A purchase order — the customer's confirmed commitment, typically following the acceptance of a `Quote`. Carries no property of its own in this version. |
 
 ---
 

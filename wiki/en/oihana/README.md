@@ -12,7 +12,7 @@ The `xyz\oihana\schema` namespace is the library's **house layer**: the domain t
 |---|---|---|
 | [Authentication & RBAC](auth.md) | `…\auth` | OAuth2/OIDC, sessions, keyfiles, users, roles, permissions, Casbin-compatible policies. |
 | [Business](business.md) | `…\business` | `BusinessIdentity` (typed account ↔ entity link) and `UserProfile` (provisioning template). |
-| [Business documents](business-documents.md) | `…\business\documents` | Cross-cutting value objects for the quote/order/invoice cycle: `TaxDetail`, `Adjustment`, `EcoFeeRule`/`AppliedEcoFee`, `DocumentTotals`, `BusinessDocumentLine`, `PaymentSchedule`/`PaymentInstallment`. |
+| [Business documents](business-documents.md) | `…\business\documents` | The quote → purchase order → invoice cycle: `BusinessDocument`, `Quote`, `PurchaseOrder`, plus the cross-cutting value objects `TaxDetail`, `Adjustment`, `EcoFeeRule`/`AppliedEcoFee`, `DocumentTotals`, `BusinessDocumentLine`, `PaymentSchedule`/`PaymentInstallment`. |
 | [Business entities](organizations.md) | `…\organizations` | `Company` (French SIRET/APE, address + contact ingestion) and its `Customer`, `Provider`, `Subsidiary`, `Affiliate` flavors. |
 | [People](people.md) | `…\people` | `Person` and its typed flavors `Seller`, `CustomerEmployee`, `Employee`, `ProviderEmployee`, `SubsidiaryEmployee`. |
 | [Commerce layer](products.md) | `…\products` | `Product` (eligible-quantity tree, conversions, `resolveUnitCode()` hook) and its satellites. |
