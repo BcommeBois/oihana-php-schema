@@ -8,6 +8,40 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds the `xyz\oihana\schema\business\documents` namespace — the cross-cutting
+  value objects of the quote/purchase-order/invoice cycle (Lot 1 of the
+  business-documents workstream, ahead of the document hierarchy itself):
+  `TaxDetail` (a tax breakdown: `category`, `rate`, `basisAmount`,
+  `taxAmount`), `Adjustment` (a UBL `AllowanceCharge`-inspired price
+  adjustment: `type`, `amount`/`percentage`, `reason`, `includedInBase`,
+  reusing `PriceComponentType` for `type` rather than a redundant enum),
+  `EcoFeeRule`/`AppliedEcoFee` (an environmental-fee calculation rule and its
+  traced application on a line — the monetary effect always flows through an
+  `Adjustment` of type `environmentalFee`, never a dedicated `ecoTax`
+  property), `DocumentTotals` (the document's monetary recap — `subtotal`,
+  `totalTax`, `total`, `prepaidAmount`, `balanceDue`, each a `MonetaryAmount`;
+  a dedicated value object rather than a reuse of
+  `CompoundPriceSpecification`, whose schema.org role doesn't match a
+  document-level recap), `BusinessDocumentLine` (a document line: `item`,
+  `position`, `quantity`, `unit`, `price`, line-scoped `taxes`/`adjustments`,
+  `subtotal`, `total`) and `PaymentSchedule`/`PaymentInstallment` (a base
+  multi-installment payment plan — reminders and a per-installment status
+  are a later iteration). All eight classes extend `org\schema\StructuredValue`
+  and carry the `#[HydrateAs]`/`#[HydrateWith]` attributes needed for
+  `Reflection::hydrate()` to deep-hydrate their `MonetaryAmount` and nested
+  collection properties.
+  - Adds the companion constants traits under
+    `constants/traits/business/documents/`, aggregated through the new
+    `DocumentsTrait` and composed into `BusinessTrait` — unlike
+    `BusinessIdentityTrait`/`UserProfileTrait`, no name collision was found,
+    so the new constants are also reachable through the global `Oihana`
+    aggregator (e.g. `Oihana::RATE`, `Oihana::AMOUNT`).
+  - Adds the eight dedicated test suites (defaults, `CONTEXT`, trait
+    constants, constructor hydration, `Reflection::hydrate()` for the
+    `MonetaryAmount`/nested-collection properties).
+  - Adds the bilingual `business-documents.md` wiki guide (FR canonical + EN
+    mirror), wired into both `oihana` wiki indexes and the repository
+    `README.md` overview table.
 - Adds the eight missing `org\schema\enumerations\status\OrderStatus` members
   as dedicated classes — `OrderCancelled`, `OrderDelivered`, `OrderInTransit`,
   `OrderPaymentDue`, `OrderPickupAvailable`, `OrderProblem`, `OrderProcessing`,

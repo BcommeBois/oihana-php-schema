@@ -3,6 +3,7 @@
 namespace xyz\oihana\schema\constants\traits;
 
 use xyz\oihana\schema\constants\traits\business\BusinessIdentityTrait;
+use xyz\oihana\schema\constants\traits\business\DocumentsTrait;
 use xyz\oihana\schema\constants\traits\business\UserProfileTrait;
 
 /**
@@ -15,5 +16,6 @@ use xyz\oihana\schema\constants\traits\business\UserProfileTrait;
 trait BusinessTrait
 {
     use BusinessIdentityTrait ,
-         UserProfileTrait     ;
+        DocumentsTrait        ,
+        UserProfileTrait      ;
 }
