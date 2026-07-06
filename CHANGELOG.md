@@ -202,6 +202,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - `org\schema\constants\traits\Order::ACCEPTED_OFFER` (reachable as `Schema::ACCEPTED_OFFER`) held `'acceptedPaymentMethod'` instead of `'acceptedOffer'`, mismatching the `Order::$acceptedOffer` property it names.
 - The same trait's `ORDER__ITEM` constant (double underscore, unused) named no matching property; renamed to `ORDERED_ITEM` with value `'orderedItem'`, matching `Order::$orderedItem`.
 - Removes the dead-code duplicate `org\schema\enumerations\status\StatusEnumeration` (a second, unrelated class sharing the short name of `org\schema\enumerations\StatusEnumeration`, the one actually used everywhere else in the `status` sub-namespace). `ActionStatusType` turned out to be silently relying on the duplicate through unqualified same-namespace class resolution (no explicit `use`); it now explicitly `use`s the real `StatusEnumeration`, restoring `ActionStatusType` and its four members (`ActiveActionStatus`, `CompletedActionStatus`, `FailedActionStatus`, `PotentialActionStatus`).
+- The five `PaymentStatusType` members (`PaymentComplete`, `PaymentDue`, `PaymentDeclined`, `PaymentPastDue`, `PaymentAutomaticallyApplied`) now `extends PaymentStatusType` instead of `extends StatusEnumeration` directly, matching the one-class-per-member convention used by `OrderStatus`'s members — `is_subclass_of(PaymentComplete::class, PaymentStatusType::class)` now returns `true`.
 
 ## [1.2.0] - 2026-06-26
 
