@@ -2,6 +2,8 @@
 
 namespace xyz\oihana\schema\places;
 
+use xyz\oihana\schema\traits\SiteTrait;
+
 /**
  * Represents a warehouse site used for storage and logistics operations.
  *
@@ -23,6 +25,8 @@ namespace xyz\oihana\schema\places;
  */
 class Warehouse extends Site
 {
+    use SiteTrait ;
+
     /**
      * The availability of this item—for example In stock, Out of stock, Pre-order, etc.
      */

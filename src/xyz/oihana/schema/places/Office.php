@@ -2,6 +2,8 @@
 
 namespace xyz\oihana\schema\places;
 
+use xyz\oihana\schema\traits\SiteTrait;
+
 /**
  * Represents an administrative or corporate workspace within an organization.
  *
@@ -18,5 +20,5 @@ namespace xyz\oihana\schema\places;
  */
 class Office extends Site
 {
-
+    use SiteTrait ;
 }

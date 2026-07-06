@@ -2,6 +2,8 @@
 
 namespace xyz\oihana\schema\places;
 
+use xyz\oihana\schema\traits\SiteTrait;
+
 /**
  * Represents a physical location where a specific project or construction work is executed.
  *
@@ -15,5 +17,5 @@ namespace xyz\oihana\schema\places;
  */
 class JobSite extends Site
 {
-
+    use SiteTrait ;
 }
