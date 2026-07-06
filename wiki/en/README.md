@@ -27,6 +27,10 @@ This wiki is a hand-written companion to the auto-generated [API reference](../.
 | [`xyz\oihana\schema`](oihana-core.md)   | [Cross-cutting Oihana types](oihana-core.md)| `Pagination`, `Log`, `AuditAction`, audit enumerations.                                     |
 | [`com\progress\schema`](openedge-progress.md) | [OpenEdge Progress SQL catalog](openedge-progress.md) | `SYS%` system catalog tables: tables, columns, indexes, views, users, privileges, constraints, sequences, triggers, procedures, data types. |
 
+### Helper functions
+
+- [Hydration and pivots](oihana-helpers.md) — the autoloaded free functions: hydrate a raw piece of data into a typed schema object (nested references included) and resolve the business identities of an account into its scoping keys.
+
 ### Coming soon
 
 Pages on the following topics will be added over time:

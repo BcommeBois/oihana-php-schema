@@ -22,7 +22,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   (`customerKey`, `sellerKey`, `sellerKeys`) resolving the business
   identities of a `User` into the organization or seller keys that scope its
   resources. Fifteen dedicated test suites keep the source at 100% line
-  coverage.
+  coverage. A bilingual wiki guide (`oihana-helpers.md`, FR/EN) documents
+  the layer — the loading, the org/xyz layering rule, the three accepted
+  shapes and the full function catalog — wired into both wiki indexes.
 
 - Adds the `xyz\oihana\schema\organizations` namespace — the business-entity layer. `Company` (extends the schema.org `Corporation`) is the base entity: French administrative identifiers (SIRET via `taxID`, APE via `naics`), `category`/`industry`/`invoiceType`/`status`/`vat`/`website` and the postal-address + contact-point ingestion via the `Set*` traits (see below). `Customer` (additional properties, assigned company/POS/seller, credit status, payment terms, price segmentation), `Provider` (carrier, minimum order value, `ProductProviderInfo` ingestion), `Subsidiary` and `Affiliate` specialize it.
 - Adds the `xyz\oihana\schema\people` namespace — `Person` (extends the schema.org `Person`; additional properties + contact-point ingestion, `ownedBy`, `position`) and its flavors `Employee`, `CustomerEmployee`, `ProviderEmployee`, `Seller` and `SubsidiaryEmployee`.

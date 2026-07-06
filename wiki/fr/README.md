@@ -27,6 +27,10 @@ Ce wiki est un compagnon rédigé à la main de la [référence d'API](../../doc
 | [`xyz\oihana\schema`](oihana-core.md)   | [Types transverses Oihana](oihana-core.md)     | `Pagination`, `Log`, `AuditAction`, énumérations d'audit.                                   |
 | [`com\progress\schema`](openedge-progress.md) | [Catalogue système OpenEdge Progress](openedge-progress.md) | Tables `SYS%` du catalogue système : tables, colonnes, index, vues, utilisateurs, privilèges, contraintes, séquences, triggers, procédures, types de données. |
 
+### Fonctions d'assistance
+
+- [Hydratation et pivots](oihana-helpers.md) — les fonctions libres autoloadées : hydrater une donnée brute en objet de schéma typé (références imbriquées comprises) et résoudre les identités métier d'un compte en clés de périmètre.
+
 ### À venir
 
 D'autres pages seront ajoutées progressivement :
