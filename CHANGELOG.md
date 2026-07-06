@@ -8,16 +8,20 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
-- Populates three previously-empty Schema.org enumeration shells with their
-  actual members: `org\schema\enumerations\status\OrderStatus` (the eight
-  `OrderCancelled`/`OrderDelivered`/`OrderInTransit`/`OrderPaymentDue`/
-  `OrderPickupAvailable`/`OrderProblem`/`OrderProcessing`/`OrderReturned`
-  constants), `org\schema\enumerations\status\PaymentStatusType` (the five
-  `PaymentAutomaticallyApplied`/`PaymentComplete`/`PaymentDeclined`/
-  `PaymentDue`/`PaymentPastDue` constants) and
-  `org\schema\enumerations\DeliveryMethod` (the eight GoodRelations-derived
-  constants already listed in its own docblock, e.g. `DHL`, `ON_SITE_PICKUP`,
-  `UPS`). Dedicated test suites cover each class's constants and `includes()`.
+- Adds the eight missing `org\schema\enumerations\status\OrderStatus` members
+  as dedicated classes — `OrderCancelled`, `OrderDelivered`, `OrderInTransit`,
+  `OrderPaymentDue`, `OrderPickupAvailable`, `OrderProblem`, `OrderProcessing`,
+  `OrderReturned` (each `extends OrderStatus`) — following the one-class-per-member
+  convention already established by this same `status/` folder (see
+  `PaymentComplete`, `ActiveActionStatus`...), rather than plain constants.
+  `org\schema\enumerations\status\PaymentStatusType` needed no change: its five
+  members already exist as such classes. Populates
+  `org\schema\enumerations\DeliveryMethod` (which, unlike its `status/`
+  siblings, follows the constants convention shared by `Enumeration`
+  subclasses such as `ItemAvailability`/`BusinessFunction`) with the eight
+  GoodRelations-derived constants already listed in its own docblock, e.g.
+  `DHL`, `ON_SITE_PICKUP`, `UPS`. Dedicated test suites cover the new classes
+  and `DeliveryMethod`'s constants and `includes()`.
 - Extends `xyz\oihana\schema\enumerations\PriceComponentType` with `DEPOSIT`,
   `DISCOUNT`, `ENVIRONMENTAL_FEE`, `PACKAGING` and `SURCHARGE` — the
   price-component vocabulary needed by the upcoming business-document
@@ -109,6 +113,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - `Warehouse`, `Office` and `JobSite` now `use` the `SiteTrait` composed by their `CustomerSite`/`ProviderSite` cousins — without it, flat address properties (`streetAddress`, `postalCode`, `geoLatitude`...) were never routed to the nested `address`/`geo` objects and were instead created as undeclared dynamic properties (a PHP 8.4 deprecation).
 - `org\schema\constants\traits\Order::ACCEPTED_OFFER` (reachable as `Schema::ACCEPTED_OFFER`) held `'acceptedPaymentMethod'` instead of `'acceptedOffer'`, mismatching the `Order::$acceptedOffer` property it names.
 - The same trait's `ORDER__ITEM` constant (double underscore, unused) named no matching property; renamed to `ORDERED_ITEM` with value `'orderedItem'`, matching `Order::$orderedItem`.
+- Removes the dead-code duplicate `org\schema\enumerations\status\StatusEnumeration` (a second, unrelated class sharing the short name of `org\schema\enumerations\StatusEnumeration`, the one actually used everywhere else in the `status` sub-namespace). `ActionStatusType` turned out to be silently relying on the duplicate through unqualified same-namespace class resolution (no explicit `use`); it now explicitly `use`s the real `StatusEnumeration`, restoring `ActionStatusType` and its four members (`ActiveActionStatus`, `CompletedActionStatus`, `FailedActionStatus`, `PotentialActionStatus`).
 
 ## [1.2.0] - 2026-06-26
 

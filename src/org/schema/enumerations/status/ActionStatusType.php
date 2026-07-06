@@ -2,6 +2,8 @@
 
 namespace org\schema\enumerations\status;
 
+use org\schema\enumerations\StatusEnumeration;
+
 /**
  * The status of an Action.
  * Members:
