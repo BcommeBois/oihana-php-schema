@@ -85,6 +85,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - `hydrateStockLevel()` and `hydrateAggregateOffer()` now delegate the assigned/available `Warehouse` to `hydrateWarehouse()` instead of instantiating it directly — the nested `ownedBy` is now hydrated into a `Subsidiary` (it used to stay a raw array and lose its `@type` on serialization).
 - `StockLevel::fromArray()` had the same issue and duplicated the whole hydration logic besides — it now delegates entirely to `hydrateStockLevel()` instead, so the two call sites can no longer drift apart.
 - `Warehouse`, `Office` and `JobSite` now `use` the `SiteTrait` composed by their `CustomerSite`/`ProviderSite` cousins — without it, flat address properties (`streetAddress`, `postalCode`, `geoLatitude`...) were never routed to the nested `address`/`geo` objects and were instead created as undeclared dynamic properties (a PHP 8.4 deprecation).
+- `org\schema\constants\traits\Order::ACCEPTED_OFFER` (reachable as `Schema::ACCEPTED_OFFER`) held `'acceptedPaymentMethod'` instead of `'acceptedOffer'`, mismatching the `Order::$acceptedOffer` property it names.
+- The same trait's `ORDER__ITEM` constant (double underscore, unused) named no matching property; renamed to `ORDERED_ITEM` with value `'orderedItem'`, matching `Order::$orderedItem`.
 
 ## [1.2.0] - 2026-06-26
 

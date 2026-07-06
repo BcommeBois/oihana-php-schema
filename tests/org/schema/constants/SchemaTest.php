@@ -80,6 +80,15 @@ class SchemaTest extends TestCase
         $this->assertSame('variesBy', Schema::VARIES_BY);
     }
 
+    public function testOrderConstantsAreAvailable()
+    {
+        // Quelques constantes du trait Order
+        $this->assertSame('acceptedOffer', Schema::ACCEPTED_OFFER);
+        $this->assertSame('orderedItem', Schema::ORDERED_ITEM);
+        $this->assertSame('orderNumber', Schema::ORDER_NUMBER);
+        $this->assertSame('orderStatus', Schema::ORDER_STATUS);
+    }
+
     public function testAlignmentObject()
     {
         $this->assertSame('alignmentType', Schema::ALIGNMENT_TYPE);

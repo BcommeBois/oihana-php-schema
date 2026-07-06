@@ -4,7 +4,7 @@ namespace org\schema\constants\traits;
 
 trait Order
 {
-    const string ACCEPTED_OFFER           = 'acceptedPaymentMethod' ;
+    const string ACCEPTED_OFFER           = 'acceptedOffer' ;
     const string BILLING_ADDRESS          = 'billingAddress' ;
     const string BROKER                   = 'broker' ;
     const string CONFIRMATION_NUMBER      = 'confirmationNumber' ;
@@ -13,11 +13,11 @@ trait Order
     const string DISCOUNT_CODE            = 'discountCode' ;
     const string DISCOUNT_CURRENCY        = 'discountCurrency' ;
     const string IS_GIFT                  = 'isGift' ;
+    const string ORDERED_ITEM             = 'orderedItem' ;
     const string ORDER_DATE               = 'orderDate' ;
     const string ORDER_DELIVERY           = 'orderDelivery' ;
     const string ORDER_NUMBER             = 'orderNumber' ;
     const string ORDER_STATUS             = 'orderStatus' ;
-    const string ORDER__ITEM              = 'orderItem' ;
     const string PART_OF_INVOICE          = 'partOfInvoice' ;
     const string PAYMENT_DUE_DATE         = 'paymentDueDate' ;
     const string PAYMENT_METHOD           = 'paymentMethod' ;
