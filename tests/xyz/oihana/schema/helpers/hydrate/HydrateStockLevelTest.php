@@ -5,6 +5,7 @@ namespace tests\xyz\oihana\schema\helpers\hydrate ;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
 
+use xyz\oihana\schema\organizations\Subsidiary;
 use xyz\oihana\schema\places\Warehouse;
 use xyz\oihana\schema\products\StockLevel;
 
@@ -20,12 +21,13 @@ final class HydrateStockLevelTest extends TestCase
         $level = hydrateStockLevel(
         [
             'value'       => 120 ,
-            'assignedPOS' => [ 'name' => 'Bayonne' ] ,
+            'assignedPOS' => [ 'name' => 'Bayonne' , 'ownedBy' => [ 'name' => 'South Branch' ] ] ,
         ]) ;
 
         $this->assertInstanceOf( StockLevel::class , $level ) ;
         $this->assertInstanceOf( Warehouse::class , $level->assignedPOS ) ;
         $this->assertSame( 'Bayonne' , $level->assignedPOS->name ) ;
+        $this->assertInstanceOf( Subsidiary::class , $level->assignedPOS->ownedBy ) ;
     }
 
     /**

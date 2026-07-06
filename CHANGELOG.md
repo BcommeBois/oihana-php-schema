@@ -82,6 +82,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - `Product::getUnitOfSaleConversionFactor()` no longer crashes on a fresh instance — the `$unitOfSale` typed property was read before initialization; it is now accessed with the usual `?? null` guard.
 - `Product::toCertification()` now accepts a partial `id;name` definition (the destructuring is padded, no more PHP warning on short expressions) and returns `null` on an empty definition — the previous empty-guard was unreachable.
+- `hydrateStockLevel()` and `hydrateAggregateOffer()` now delegate the assigned/available `Warehouse` to `hydrateWarehouse()` instead of instantiating it directly — the nested `ownedBy` is now hydrated into a `Subsidiary` (it used to stay a raw array and lose its `@type` on serialization).
 
 ## [1.2.0] - 2026-06-26
 

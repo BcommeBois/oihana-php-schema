@@ -33,7 +33,7 @@ function hydrateAggregateOffer( ?array $init = null  ):?AggregateOffer
         $availableAtOrFrom = $offer->availableAtOrFrom ?? null ;
         if( !( $availableAtOrFrom instanceof Warehouse ) && is_array( $availableAtOrFrom ) )
         {
-            $offer->availableAtOrFrom = new Warehouse( $availableAtOrFrom ) ;
+            $offer->availableAtOrFrom = hydrateWarehouse( $availableAtOrFrom ) ;
         }
 
         $eligibleQuantity = $offer->eligibleQuantity ?? null ;

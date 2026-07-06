@@ -10,6 +10,7 @@ use org\schema\OfferForPurchase;
 use org\schema\QuantitativeValue;
 
 use xyz\oihana\schema\organizations\Provider;
+use xyz\oihana\schema\organizations\Subsidiary;
 use xyz\oihana\schema\places\Warehouse;
 
 use function xyz\oihana\schema\helpers\hydrate\hydrateAggregateOffer;
@@ -23,7 +24,7 @@ final class HydrateAggregateOfferTest extends TestCase
     {
         $offer = hydrateAggregateOffer(
         [
-            'availableAtOrFrom' => [ 'name' => 'Bayonne' ] ,
+            'availableAtOrFrom' => [ 'name' => 'Bayonne' , 'ownedBy' => [ 'name' => 'South Branch' ] ] ,
             'eligibleQuantity'  => [ 'value' => 1 , 'unitCode' => 'C62' ] ,
             'offers'            => [ [ 'price' => 12.5 ] , [ 'price' => 11.9 ] ] ,
             'provider'          => [ 'name' => 'ACME' ] ,
@@ -31,6 +32,7 @@ final class HydrateAggregateOfferTest extends TestCase
 
         $this->assertInstanceOf( AggregateOffer::class , $offer ) ;
         $this->assertInstanceOf( Warehouse::class         , $offer->availableAtOrFrom ) ;
+        $this->assertInstanceOf( Subsidiary::class        , $offer->availableAtOrFrom->ownedBy ) ;
         $this->assertInstanceOf( QuantitativeValue::class , $offer->eligibleQuantity ) ;
         $this->assertInstanceOf( Provider::class          , $offer->provider ) ;
 

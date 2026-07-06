@@ -28,7 +28,7 @@ function hydrateStockLevel( mixed $init = null  ):?StockLevel
         $assignedPOS = $level->assignedPOS ?? null ;
         if( !( $assignedPOS instanceof Warehouse ) && is_array( $assignedPOS ) )
         {
-            $level->assignedPOS = new Warehouse( $assignedPOS ) ;
+            $level->assignedPOS = hydrateWarehouse( $assignedPOS ) ;
         }
     }
 
