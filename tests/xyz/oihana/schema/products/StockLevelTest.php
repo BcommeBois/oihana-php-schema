@@ -8,6 +8,7 @@ use ReflectionException;
 use org\schema\QuantitativeValue;
 
 use xyz\oihana\schema\constants\Oihana;
+use xyz\oihana\schema\organizations\Subsidiary;
 use xyz\oihana\schema\places\Warehouse;
 use xyz\oihana\schema\products\StockLevel;
 
@@ -40,10 +41,15 @@ class StockLevelTest extends TestCase
      */
     public function testFromArrayHydratesTheAssignedPOSAsWarehouse(): void
     {
-        $level = StockLevel::fromArray([ 'value' => 24 , 'assignedPOS' => [ 'name' => 'Bayonne' ] ]) ;
+        $level = StockLevel::fromArray(
+        [
+            'value'       => 24 ,
+            'assignedPOS' => [ 'name' => 'Bayonne' , 'ownedBy' => [ 'name' => 'South Branch' ] ] ,
+        ]) ;
 
         $this->assertInstanceOf( Warehouse::class , $level->assignedPOS ) ;
         $this->assertSame( 'Bayonne' , $level->assignedPOS->name ) ;
+        $this->assertInstanceOf( Subsidiary::class , $level->assignedPOS->ownedBy ) ;
     }
 
     /**

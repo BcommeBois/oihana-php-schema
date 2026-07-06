@@ -11,6 +11,8 @@ use org\schema\QuantitativeValue;
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\places\Warehouse;
 
+use function xyz\oihana\schema\helpers\hydrate\hydrateStockLevel;
+
 /**
  * Represents the stock level information for a specific product within a given warehouse.
  *
@@ -74,26 +76,14 @@ class StockLevel extends QuantitativeValue
 
     /**
      * Creates a new StockLevel instanceof with an array.
+     *
+     * Delegates to {@see hydrateStockLevel()} rather than re-implementing the
+     * hydration logic here, so the two call sites can never drift apart again.
+     *
      * @throws ReflectionException
      */
     public static function fromArray( ?array $init = null  ):?StockLevel
     {
-        $level = null ;
-
-        if( is_array( $init ) )
-        {
-            $level = new StockLevel( $init ) ;
-        }
-
-        if( ( $level instanceof StockLevel ) )
-        {
-            $assignedPOS = $level->assignedPOS ?? null ;
-            if( !( $assignedPOS instanceof Warehouse ) && is_array( $assignedPOS ) )
-            {
-                $level->assignedPOS = new Warehouse( $assignedPOS ) ;
-            }
-        }
-
-        return $level instanceof StockLevel ? $level : null ;
+        return hydrateStockLevel( $init ) ;
     }
 }
