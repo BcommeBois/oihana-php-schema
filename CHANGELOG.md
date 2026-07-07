@@ -8,6 +8,27 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Enriches the credit note (Lot 7 of the post-audit business-documents
+  backlog) with the fields commercial accounting APIs expose on a credit
+  note. Adds `xyz\oihana\schema\enumerations\CreditNoteReasonCode`
+  (DUPLICATE_BILLING, GOODS_RETURNED, GOODWILL, OTHER, PRICING_ERROR,
+  SERVICE_NOT_RENDERED — the structured cause UBL's `DiscrepancyResponse`
+  and Peppol's reason codes expect) and `CreditNoteDisposition` (REFUNDED,
+  REAPPLIED, PENDING — the cash-refund vs. reapply-to-invoice distinction
+  Odoo's reversal wizard makes explicit), both free-value maison
+  enumerations. `CreditNote` gains `reasonCode` (→ `CreditNoteReasonCode`,
+  alongside the existing free-text `reason`, not replacing it),
+  `remainingBalance` (`null|array|MonetaryAmount`, the not-yet-applied part
+  of the credit — Xero's `RemainingCredit`, QuickBooks' `Balance`) and
+  `disposition` (→ `CreditNoteDisposition`).
+  - Adds the `DISPOSITION`/`REASON_CODE`/`REMAINING_BALANCE` constants on
+    `CreditNoteTrait` (reachable through `Oihana`, no collision) and the
+    `CreditNoteDispositionTest`/`CreditNoteReasonCodeTest` suites, and
+    extends `CreditNoteTest` (new constants, `Reflection::hydrate()` of
+    `remainingBalance`).
+  - Extends the bilingual `business-documents.md` wiki guide (FR canonical
+    + EN mirror) with the enriched `CreditNote` entry and the enumerations
+    pointer.
 - Enriches the account statement (Lot 6 of the post-audit business-documents
   backlog) with the reporting fields a statement of account is usually
   expected to expose. Adds `xyz\oihana\schema\enumerations\StatementEntryType`

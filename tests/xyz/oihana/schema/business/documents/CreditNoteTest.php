@@ -7,10 +7,14 @@ use ReflectionException;
 
 use oihana\reflect\Reflection;
 
+use org\schema\MonetaryAmount;
+
 use xyz\oihana\schema\business\documents\BusinessDocument;
 use xyz\oihana\schema\business\documents\CreditNote;
 use xyz\oihana\schema\business\documents\Invoice;
 use xyz\oihana\schema\constants\Oihana;
+use xyz\oihana\schema\enumerations\CreditNoteDisposition;
+use xyz\oihana\schema\enumerations\CreditNoteReasonCode;
 
 class CreditNoteTest extends TestCase
 {
@@ -26,8 +30,11 @@ class CreditNoteTest extends TestCase
 
     public function testTraitConstants(): void
     {
+        $this->assertSame( 'disposition'       , CreditNote::DISPOSITION        );
         $this->assertSame( 'reason'            , CreditNote::REASON             );
-        $this->assertSame( 'referencesInvoice' , CreditNote::REFERENCES_INVOICE );
+        $this->assertSame( 'reasonCode'         , CreditNote::REASON_CODE        );
+        $this->assertSame( 'referencesInvoice'  , CreditNote::REFERENCES_INVOICE );
+        $this->assertSame( 'remainingBalance'   , CreditNote::REMAINING_BALANCE  );
 
         $this->assertSame( Oihana::REASON , CreditNote::REASON );
     }
@@ -36,15 +43,42 @@ class CreditNoteTest extends TestCase
     {
         $creditNote = new CreditNote() ;
 
+        $this->assertNull( $creditNote->disposition       ?? null );
         $this->assertNull( $creditNote->reason            ?? null );
+        $this->assertNull( $creditNote->reasonCode        ?? null );
         $this->assertNull( $creditNote->referencesInvoice ?? null );
+        $this->assertNull( $creditNote->remainingBalance  ?? null );
     }
 
     public function testConstructorHydratesScalarProperties(): void
     {
-        $creditNote = new CreditNote([ CreditNote::REASON => 'Goods returned' ]) ;
+        $creditNote = new CreditNote
+        ([
+            CreditNote::REASON      => 'Goods returned' ,
+            CreditNote::REASON_CODE  => CreditNoteReasonCode::GOODS_RETURNED ,
+            CreditNote::DISPOSITION  => CreditNoteDisposition::REAPPLIED ,
+        ]);
 
         $this->assertSame( 'Goods returned' , $creditNote->reason ) ;
+        $this->assertSame( CreditNoteReasonCode::GOODS_RETURNED , $creditNote->reasonCode ) ;
+        $this->assertSame( CreditNoteDisposition::REAPPLIED , $creditNote->disposition ) ;
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testReflectionHydratesRemainingBalance(): void
+    {
+        $creditNote = new Reflection()->hydrate
+        (
+            [
+                CreditNote::REMAINING_BALANCE => [ 'value' => 40 , 'currency' => 'EUR' ] ,
+            ],
+            CreditNote::class
+        );
+
+        $this->assertInstanceOf( MonetaryAmount::class , $creditNote->remainingBalance ) ;
+        $this->assertSame( 40 , $creditNote->remainingBalance->value ) ;
     }
 
     /**

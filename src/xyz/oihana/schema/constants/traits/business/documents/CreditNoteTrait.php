@@ -11,6 +11,9 @@ namespace xyz\oihana\schema\constants\traits\business\documents;
  */
 trait CreditNoteTrait
 {
+    const string DISPOSITION        = 'disposition' ;
     const string REASON             = 'reason' ;
+    const string REASON_CODE        = 'reasonCode' ;
     const string REFERENCES_INVOICE = 'referencesInvoice' ;
+    const string REMAINING_BALANCE  = 'remainingBalance' ;
 }
