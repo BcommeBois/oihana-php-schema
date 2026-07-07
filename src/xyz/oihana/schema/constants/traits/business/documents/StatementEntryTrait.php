@@ -11,8 +11,12 @@ namespace xyz\oihana\schema\constants\traits\business\documents;
  */
 trait StatementEntryTrait
 {
-    const string AMOUNT   = 'amount' ;
-    const string BALANCE  = 'balance' ;
-    const string DATE     = 'date' ;
-    const string DOCUMENT = 'document' ;
+    const string AMOUNT        = 'amount' ;
+    const string BALANCE       = 'balance' ;
+    const string CREDIT_AMOUNT = 'creditAmount' ;
+    const string DATE          = 'date' ;
+    const string DEBIT_AMOUNT  = 'debitAmount' ;
+    const string DOCUMENT      = 'document' ;
+    const string DUE_DATE      = 'dueDate' ;
+    const string TYPE          = 'type' ;
 }

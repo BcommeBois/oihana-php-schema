@@ -8,7 +8,7 @@ The `xyz\oihana\schema\business\documents` namespace models the **quote → purc
 
 ## Status of this namespace
 
-This page documents the whole namespace: the **cross-cutting value objects** (`TaxDetail`, `Adjustment`, `PaymentReminder`, `DeliveryLine`, `ProofOfDelivery`…), the complete **document hierarchy** (`BusinessDocument`, `Quote`, `PurchaseOrder`, `Invoice`, `CreditNote`, `DeliveryNote`, `Receipt`, `Statement`) and **export** (`BusinessDocumentExporter`, `JsonLdExporter`).
+This page documents the whole namespace: the **cross-cutting value objects** (`TaxDetail`, `Adjustment`, `PaymentReminder`, `DeliveryLine`, `ProofOfDelivery`, `AgingSummary`…), the complete **document hierarchy** (`BusinessDocument`, `Quote`, `PurchaseOrder`, `Invoice`, `CreditNote`, `DeliveryNote`, `Receipt`, `Statement`) and **export** (`BusinessDocumentExporter`, `JsonLdExporter`).
 
 ---
 
@@ -34,6 +34,7 @@ This page documents the whole namespace: the **cross-cutting value objects** (`T
 | Record the confirmation that a delivery was received (signatory, date, noted discrepancy). | [`ProofOfDelivery`](#proofofdelivery) |
 | Represent a payment receipt. | [`Receipt`](#receipt) |
 | Represent a periodic account statement. | [`Statement`](#statement) / [`StatementEntry`](#statemententry) |
+| Break down a customer balance by days overdue (aging). | [`AgingSummary`](#agingsummary) |
 | Serialize a business document (JSON-LD, and tomorrow UBL/Factur-X…). | [`BusinessDocumentExporter`](#businessdocumentexporter) / [`JsonLdExporter`](#jsonldexporter) |
 
 The value objects (`TaxDetail`, `Adjustment`…, as well as `StatementEntry`) extend `org\schema\StructuredValue` (like `MonetaryAmount` or `PriceSpecification`): they are structured values, not addressable resources. `BusinessDocument` and its flavors (`Quote`, `PurchaseOrder`, `Invoice`, `CreditNote`, `DeliveryNote`, `Receipt`, `Statement`) extend `org\schema\Intangible` — see [`BusinessDocument`](#businessdocument) for the rationale behind that anchor. All of them share the `@context = 'https://schema.oihana.xyz'` distinguisher.
@@ -144,25 +145,42 @@ echo new JsonLdExporter()->export( $invoice );
 // {"@type":"Invoice","@context":"https://schema.oihana.xyz","accountId":"ACC-001","currency":"EUR","paymentStatus":"org\\schema\\enumerations\\status\\PaymentComplete"}
 ```
 
-A `Statement` recaps the documents that moved an account's balance over a period, as a list of `StatementEntry`:
+A `Statement` recaps the documents that moved an account's balance over a period, as a list of `StatementEntry`. Each entry can carry its **type** (invoice, payment, credit note…) and its **due date**, and the statement can expose an **aging breakdown** (`AgingSummary`) — the balance split by days overdue, which the consumer computes and fills in:
 
 ```php
 use oihana\reflect\Reflection;
+use xyz\oihana\schema\business\documents\AgingSummary;
 use xyz\oihana\schema\business\documents\Statement;
 use xyz\oihana\schema\business\documents\StatementEntry;
+use xyz\oihana\schema\enumerations\StatementEntryType;
 
 $statement = new Reflection()->hydrate
 ([
     Statement::OPENING_BALANCE => [ 'value' => 0   , 'currency' => 'EUR' ] ,
     Statement::CLOSING_BALANCE => [ 'value' => 120 , 'currency' => 'EUR' ] ,
+    Statement::TOTAL_DEBIT     => [ 'value' => 120 , 'currency' => 'EUR' ] ,
     Statement::ENTRIES =>
     [
-        [ StatementEntry::DATE => '2026-01-15' , StatementEntry::DOCUMENT => 'INV-001' , StatementEntry::AMOUNT => [ 'value' => 120 , 'currency' => 'EUR' ] ] ,
+        [
+            StatementEntry::TYPE     => StatementEntryType::INVOICE ,
+            StatementEntry::DATE     => '2026-01-15' ,
+            StatementEntry::DUE_DATE => '2026-02-15' ,
+            StatementEntry::DOCUMENT => 'INV-001' ,
+            StatementEntry::AMOUNT   => [ 'value' => 120 , 'currency' => 'EUR' ] ,
+        ],
+    ],
+    Statement::AGING_SUMMARY =>
+    [
+        AgingSummary::CURRENT => [ 'value' => 100 , 'currency' => 'EUR' ] ,
+        AgingSummary::OVER_90 => [ 'value' => 20  , 'currency' => 'EUR' ] ,
     ],
 ], Statement::class);
 
-$statement->entries[ 0 ] instanceof StatementEntry ; // true
+$statement->entries[ 0 ] instanceof StatementEntry ;       // true
+$statement->agingSummary instanceof AgingSummary ;         // true
 ```
+
+The signed `amount` stays the sufficient movement value; `debitAmount`/`creditAmount` are an **optional** debit/credit split (UBL's / double-entry accounting's separate columns), complementing `amount`, not replacing it.
 
 An overdue installment can carry its **reminders** — the trace of the dunning notices sent, with any late-payment charges expressed as `Adjustment` (never a bespoke "penalty" field):
 
@@ -255,8 +273,9 @@ $note->proofOfDelivery instanceof ProofOfDelivery ;     // true
 | <a id="deliveryline"></a>`DeliveryLine` | `StructuredValue` | A `DeliveryNote` line: `position` (references the originating purchase-order line), `item`, `orderedQuantity`/`deliveredQuantity`/`backorderQuantity` (+ `backorderReason`), `batchNumber`/`serialNumbers` (optional traceability). Closes the gap confirmed by UBL (`DespatchLine`), GS1/EDIFACT, Odoo and SAP alike: without it, a delivery note can only say "a parcel shipped," not how much of what was actually delivered — a blind spot the moment a delivery is only partial. |
 | <a id="proofofdelivery"></a>`ProofOfDelivery` | `StructuredValue` | The confirmation that a delivery was received: `signatory`, `date`, `discrepancyNote`. A trace, not an engine (same logic as `PaymentReminder`): signature capture and dispute resolution stay consumer-side concerns. |
 | <a id="receipt"></a>`Receipt` | `BusinessDocument` | A receipt — proof that the payment of an `Invoice` was received: `confirmationNumber`, `paymentMethod`/`paymentMethodId` (reused from `org\schema\Invoice`), `referencesInvoice` (→ one or more `Invoice`). The received amount isn't duplicated here (already covered by the inherited `totals`); the date received is the inherited `issueDate`. |
-| <a id="statement"></a>`Statement` | `BusinessDocument` | A statement — recaps, over a period, the documents that moved an account's balance: `billingPeriod` (reusing the name already used by `org\schema\Invoice`), `entries` (a list of `StatementEntry`), `openingBalance`/`closingBalance` (`MonetaryAmount`, no Schema.org equivalent — UBL names them `BeginningBalanceAmount`/`EndingBalanceAmount`). The only class of the lot that isn't a thin single-property subclass: it introduces its own line concept. |
-| <a id="statemententry"></a>`StatementEntry` | `StructuredValue` | A `Statement` line: `document` (the related `BusinessDocument`, or a plain string when the full object isn't available), `date`, `amount`, `balance` (the running balance after this entry). Distinct from `BusinessDocumentLine`, which prices a product/service, not an account movement. |
+| <a id="statement"></a>`Statement` | `BusinessDocument` | A statement — recaps, over a period, the documents that moved an account's balance: `billingPeriod` (reusing the name already used by `org\schema\Invoice`), `entries` (a list of `StatementEntry`), `openingBalance`/`closingBalance` (`MonetaryAmount`, no Schema.org equivalent — UBL names them `BeginningBalanceAmount`/`EndingBalanceAmount`), `totalDebit`/`totalCredit` (period aggregates, mirroring UBL `TotalDebitAmount`/`TotalCreditAmount`), `agingSummary` (→ `AgingSummary`, the aging breakdown). The only class of the lot that isn't a thin single-property subclass: it introduces its own line concept. |
+| <a id="statemententry"></a>`StatementEntry` | `StructuredValue` | A `Statement` line: `document` (the related `BusinessDocument`, or a plain string when the full object isn't available), `type` (→ `StatementEntryType`: invoice, payment, credit note…, rather than inferring it from the referenced document), `date`, `dueDate` (the maturity aging is computed from), `amount` (the signed movement), `debitAmount`/`creditAmount` (an optional debit/credit split, complementing `amount`), `balance` (the running balance after this entry). Distinct from `BusinessDocumentLine`, which prices a product/service, not an account movement. |
+| <a id="agingsummary"></a>`AgingSummary` | `StructuredValue` | A `Statement`'s aging breakdown: `current`, `days1To30`, `days31To60`, `days61To90`, `over90` (each a `MonetaryAmount`). A reporting convention expected of a statement of account (QuickBooks, Xero) that UBL itself doesn't carry. The library only models the shape: the consumer computes each bucket (typically from each entry's `dueDate`), this object stores the result — a value, not an aging engine (same logic as `PaymentReminder`). |
 | <a id="businessdocumentexporter"></a>`BusinessDocumentExporter` | *(interface)* | The serialization contract for a `BusinessDocument`: `export(BusinessDocument $document): string`. Regulatory formats (UBL, Factur-X, Peppol…) remain out of scope for now. |
 | <a id="jsonldexporter"></a>`JsonLdExporter` | `BusinessDocumentExporter` | Demonstration implementation: delegates to `ThingTrait::jsonSerialize()` (inherited via `Intangible`/`Thing`) then `json_encode()`. |
 
@@ -272,7 +291,7 @@ Each class exposes its property constants through a dedicated trait under [`cons
 
 - [`xyz\oihana\schema\business`](business.md) — `BusinessIdentity`, `UserProfile`.
 - [`xyz\oihana\schema\products`](products.md) — `PriceComponentType`, reused by `Adjustment::$type`.
-- [`xyz\oihana\schema\enumerations`](../../src/xyz/oihana/schema/enumerations) — `PaymentReminderLevel`/`PaymentReminderChannel`, reused by `PaymentReminder`.
+- [`xyz\oihana\schema\enumerations`](../../src/xyz/oihana/schema/enumerations) — `PaymentReminderLevel`/`PaymentReminderChannel`, reused by `PaymentReminder`; `StatementEntryType`, reused by `StatementEntry`.
 - [`org\schema`](../schema-org/README.md) — `MonetaryAmount`, `PriceSpecification`, `StructuredValue`.
 - [Getting started](../getting-started.md) — installation, hydration, JSON-LD basics.
 - [API reference](../../../docs).

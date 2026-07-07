@@ -11,8 +11,11 @@ namespace xyz\oihana\schema\constants\traits\business\documents;
  */
 trait StatementTrait
 {
+    const string AGING_SUMMARY   = 'agingSummary' ;
     const string BILLING_PERIOD  = 'billingPeriod' ;
     const string CLOSING_BALANCE = 'closingBalance' ;
     const string ENTRIES         = 'entries' ;
     const string OPENING_BALANCE = 'openingBalance' ;
+    const string TOTAL_CREDIT    = 'totalCredit' ;
+    const string TOTAL_DEBIT     = 'totalDebit' ;
 }

@@ -8,6 +8,36 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Enriches the account statement (Lot 6 of the post-audit business-documents
+  backlog) with the reporting fields a statement of account is usually
+  expected to expose. Adds `xyz\oihana\schema\enumerations\StatementEntryType`
+  (INVOICE, PAYMENT, CREDIT_NOTE, ADJUSTMENT, OPENING_BALANCE, OTHER — free
+  values, like the other maison enumerations) and the
+  `xyz\oihana\schema\business\documents\AgingSummary` value object (the
+  accounts-receivable aging breakdown: `current`, `days1To30`, `days31To60`,
+  `days61To90`, `over90`, each a `MonetaryAmount`) — a reporting convention
+  expected by QuickBooks/Xero that UBL's own `Statement` schema doesn't carry
+  either; the library models the shape only, the consumer computes each
+  bucket. `StatementEntry` gains `type` (→ `StatementEntryType`, so the
+  movement's nature is explicit rather than inferred from the referenced
+  document, à la Odoo `move_type`), `dueDate` (the maturity aging is computed
+  from), and `debitAmount`/`creditAmount` (an optional explicit debit/credit
+  split, mirroring UBL's `DebitLineAmount`/`CreditLineAmount` — the existing
+  signed `amount` is kept as-is, these complement it rather than replacing
+  it). `Statement` gains `agingSummary` (→ `AgingSummary`) and
+  `totalDebit`/`totalCredit` (period aggregates, mirroring UBL's
+  `TotalDebitAmount`/`TotalCreditAmount`).
+  - Adds the companion `AgingSummaryTrait` constants trait and the new
+    `StatementEntryTrait`/`StatementTrait` constants, wired into
+    `DocumentsTrait` — `TYPE`/`DUE_DATE` reuse the values already declared on
+    `AdjustmentTrait`/`PaymentInstallmentTrait`, so they compose cleanly; no
+    name collision found, all reachable through `Oihana`.
+  - Adds the `AgingSummaryTest` and `StatementEntryTypeTest` suites and
+    extends `StatementEntryTest`/`StatementTest` (defaults, trait constants,
+    `Reflection::hydrate()` deep-hydration of the new nested properties).
+  - Extends the bilingual `business-documents.md` wiki guide (FR canonical
+    + EN mirror) with the aging/type/debit-credit example, and bumps the
+    README overview table (22 → 23) and both wiki indexes.
 - Adds `xyz\oihana\schema\business\documents\DeliveryLine` and
   `ProofOfDelivery` (Lot 5 of the post-audit business-documents backlog) —
   closing the biggest gap confirmed by the retrospective standards audit

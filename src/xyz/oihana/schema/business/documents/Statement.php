@@ -26,7 +26,10 @@ use xyz\oihana\schema\constants\traits\business\documents\StatementTrait;
  * the document"). `openingBalance`/`closingBalance` have no Schema.org
  * equivalent — UBL's `Statement` names them `BeginningBalanceAmount`/
  * `EndingBalanceAmount`, kept here as plain camelCase to match this
- * namespace's style.
+ * namespace's style. `totalDebit`/`totalCredit` are the period's aggregate
+ * debit and credit totals (UBL's `TotalDebitAmount`/`TotalCreditAmount`),
+ * and `agingSummary` the accounts-receivable aging breakdown a statement of
+ * account is usually expected to expose.
  *
  * @package xyz\oihana\schema\business\documents
  * @author  Marc Alcaraz (eKameleon)
@@ -35,6 +38,14 @@ use xyz\oihana\schema\constants\traits\business\documents\StatementTrait;
 class Statement extends BusinessDocument
 {
     use StatementTrait ;
+
+    /**
+     * The accounts-receivable aging breakdown of the closing balance
+     * (current, 1–30, 31–60, 61–90, over 90 days).
+     * @var null|array|AgingSummary
+     */
+    #[HydrateAs(AgingSummary::class)]
+    public null|array|AgingSummary $agingSummary ;
 
     /**
      * The time interval covered by the statement.
@@ -62,4 +73,18 @@ class Statement extends BusinessDocument
      */
     #[HydrateAs(MonetaryAmount::class)]
     public null|array|MonetaryAmount $openingBalance ;
+
+    /**
+     * The aggregate of all credit movements over the period.
+     * @var MonetaryAmount|array|null
+     */
+    #[HydrateAs(MonetaryAmount::class)]
+    public null|array|MonetaryAmount $totalCredit ;
+
+    /**
+     * The aggregate of all debit movements over the period.
+     * @var MonetaryAmount|array|null
+     */
+    #[HydrateAs(MonetaryAmount::class)]
+    public null|array|MonetaryAmount $totalDebit ;
 }
