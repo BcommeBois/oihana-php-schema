@@ -8,6 +8,23 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds the `xyz\oihana\schema\business\documents\PaymentReminder` value
+  object — the record of a payment reminder sent to (or planned for) the
+  customer about an unpaid installment or document. A pure trace, not an
+  engine: `date`, `level` (→ `PaymentReminderLevel`), `channel`
+  (→ `PaymentReminderChannel`), `status` (→ `org\schema\enumerations\status\ActionStatusType`
+  and its `PotentialActionStatus`/`ActiveActionStatus`/`CompletedActionStatus`
+  members — no new enumeration), `amountClaimed` (`MonetaryAmount`),
+  `adjustments` (the late-payment charges expressed as `Adjustment`, the same
+  vehicle used on lines and documents — never a bespoke "penalty" field) and
+  a free-text `note`. The reminder *scheduling/sending* logic stays a
+  consumer concern. Adds the companion `PaymentReminderTrait`, wired into
+  `DocumentsTrait` — its `ADJUSTMENTS`/`DATE`/`LEVEL`/`NOTE`/`STATUS`
+  constants share the value already present elsewhere, so they compose
+  cleanly and stay reachable through `Oihana`. Adds the `PaymentReminderTest`
+  suite (defaults, constants + `Oihana` aggregation, constructor and
+  `Reflection::hydrate()` deep-hydration of the nested `MonetaryAmount` and
+  `Adjustment`).
 - Adds the `xyz\oihana\schema\enumerations\PaymentReminderLevel` and
   `PaymentReminderChannel` enumerations — the two "maison" enumerations
   backing the upcoming payment-reminder value object. Both extend

@@ -12,6 +12,7 @@ use xyz\oihana\schema\constants\traits\business\documents\DocumentTotalsTrait;
 use xyz\oihana\schema\constants\traits\business\documents\EcoFeeRuleTrait;
 use xyz\oihana\schema\constants\traits\business\documents\InvoiceTrait;
 use xyz\oihana\schema\constants\traits\business\documents\PaymentInstallmentTrait;
+use xyz\oihana\schema\constants\traits\business\documents\PaymentReminderTrait;
 use xyz\oihana\schema\constants\traits\business\documents\PaymentScheduleTrait;
 use xyz\oihana\schema\constants\traits\business\documents\PurchaseOrderTrait;
 use xyz\oihana\schema\constants\traits\business\documents\QuoteTrait;
@@ -39,6 +40,7 @@ trait DocumentsTrait
         EcoFeeRuleTrait           ,
         InvoiceTrait              ,
         PaymentInstallmentTrait   ,
+        PaymentReminderTrait      ,
         PaymentScheduleTrait      ,
         PurchaseOrderTrait        ,
         QuoteTrait                ,
