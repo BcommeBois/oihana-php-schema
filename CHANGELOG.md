@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-07-07
+
 ### Added
 
 - Adds the three documents the retrospective standards audit flagged as
