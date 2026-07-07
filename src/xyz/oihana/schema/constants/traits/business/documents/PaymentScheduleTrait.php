@@ -12,4 +12,5 @@ namespace xyz\oihana\schema\constants\traits\business\documents;
 trait PaymentScheduleTrait
 {
     const string INSTALLMENTS = 'installments' ;
+    const string REMINDERS    = 'reminders' ;
 }

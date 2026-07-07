@@ -8,6 +8,20 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Attaches the reminders to the payment plan: adds a `reminders` property
+  (`null|array|PaymentReminder`, deep-hydrated through `#[HydrateWith]`) to
+  both `PaymentInstallment` (reminders for that installment) and
+  `PaymentSchedule` (reminders for the plan as a whole), so reminders can be
+  recorded at either grain. Adds the `REMINDERS` constant on both
+  `PaymentInstallmentTrait` and `PaymentScheduleTrait` (same value, so they
+  compose cleanly through `DocumentsTrait` and stay reachable as
+  `Oihana::REMINDERS`). Updates the `PaymentSchedule` PHPDoc (reminders are
+  no longer "a later iteration"), extends `PaymentInstallmentTest` and
+  `PaymentScheduleTest` with the reminders hydration, and completes the
+  bilingual `business-documents.md` wiki guide (FR canonical + EN mirror)
+  with the `PaymentReminder` catalog entry, a reminders example, the
+  when-to-use row and the enumerations pointer — bumping the namespace class
+  count (19 → 20) in the README overview and both wiki indexes.
 - Adds the `xyz\oihana\schema\business\documents\PaymentReminder` value
   object — the record of a payment reminder sent to (or planned for) the
   customer about an unpaid installment or document. A pure trace, not an

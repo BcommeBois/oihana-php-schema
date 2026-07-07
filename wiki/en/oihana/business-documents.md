@@ -8,7 +8,7 @@ The `xyz\oihana\schema\business\documents` namespace models the **quote → purc
 
 ## Status of this namespace
 
-This page documents the whole namespace: the **cross-cutting value objects** (`TaxDetail`, `Adjustment`…), the complete **document hierarchy** (`BusinessDocument`, `Quote`, `PurchaseOrder`, `Invoice`, `CreditNote`, `DeliveryNote`, `Receipt`, `Statement`) and **export** (`BusinessDocumentExporter`, `JsonLdExporter`).
+This page documents the whole namespace: the **cross-cutting value objects** (`TaxDetail`, `Adjustment`, `PaymentReminder`…), the complete **document hierarchy** (`BusinessDocument`, `Quote`, `PurchaseOrder`, `Invoice`, `CreditNote`, `DeliveryNote`, `Receipt`, `Statement`) and **export** (`BusinessDocumentExporter`, `JsonLdExporter`).
 
 ---
 
@@ -23,6 +23,7 @@ This page documents the whole namespace: the **cross-cutting value objects** (`T
 | Summarize a document's amounts (excl. tax, tax, incl. tax, prepaid, due). | [`DocumentTotals`](#documenttotals) |
 | Represent a line of a business document. | [`BusinessDocumentLine`](#businessdocumentline) |
 | Spread a payment over several installments. | [`PaymentSchedule`](#paymentschedule) / [`PaymentInstallment`](#paymentinstallment) |
+| Record payment reminders (dunning notices sent to the customer). | [`PaymentReminder`](#paymentreminder) |
 | Carry the properties common to every business document (parties, dates, amounts, status…). | [`BusinessDocument`](#businessdocument) |
 | Represent a quote. | [`Quote`](#quote) |
 | Represent a purchase order. | [`PurchaseOrder`](#purchaseorder) |
@@ -161,6 +162,41 @@ $statement = new Reflection()->hydrate
 $statement->entries[ 0 ] instanceof StatementEntry ; // true
 ```
 
+An overdue installment can carry its **reminders** — the trace of the dunning notices sent, with any late-payment charges expressed as `Adjustment` (never a bespoke "penalty" field):
+
+```php
+use oihana\reflect\Reflection;
+use org\schema\enumerations\status\CompletedActionStatus;
+use xyz\oihana\schema\business\documents\PaymentInstallment;
+use xyz\oihana\schema\business\documents\PaymentReminder;
+use xyz\oihana\schema\enumerations\PaymentReminderChannel;
+use xyz\oihana\schema\enumerations\PaymentReminderLevel;
+
+$installment = new Reflection()->hydrate
+([
+    PaymentInstallment::DUE_DATE  => '2026-02-01' ,
+    PaymentInstallment::REMINDERS =>
+    [
+        [
+            PaymentReminder::DATE           => '2026-02-20' ,
+            PaymentReminder::LEVEL          => PaymentReminderLevel::SECOND_REMINDER ,
+            PaymentReminder::CHANNEL        => PaymentReminderChannel::EMAIL ,
+            PaymentReminder::STATUS         => CompletedActionStatus::class ,
+            PaymentReminder::AMOUNT_CLAIMED => [ 'value' => 120 , 'currency' => 'EUR' ] ,
+            PaymentReminder::ADJUSTMENTS    =>
+            [
+                [ 'type' => 'surcharge' , 'reason' => 'Late fee' , 'amount' => [ 'value' => 40 , 'currency' => 'EUR' ] ] ,
+            ],
+        ],
+    ],
+], PaymentInstallment::class);
+
+$installment->reminders[ 0 ] instanceof PaymentReminder ;                 // true
+$installment->reminders[ 0 ]->adjustments[ 0 ]->amount->value === 40 ;   // true
+```
+
+Reminders also exist at the level of the whole schedule (`PaymentSchedule::$reminders`), not only per installment.
+
 ---
 
 ## Class catalog
@@ -173,8 +209,9 @@ $statement->entries[ 0 ] instanceof StatementEntry ; // true
 | <a id="appliedecofee"></a>`AppliedEcoFee` | `StructuredValue` | The record of an `EcoFeeRule` applied on a line (`rule`, `quantity`, `amount`) — the actual monetary effect always flows through an `Adjustment` of type `environmentalFee`. |
 | <a id="documenttotals"></a>`DocumentTotals` | `StructuredValue` | The monetary summary of a document (`subtotal`, `totalTax`, `total`, `prepaidAmount`, `balanceDue`, plus the optional derived totals `allowanceTotal`/`chargeTotal` of the document-level adjustments, mirroring UBL `AllowanceTotalAmount`/`ChargeTotalAmount`), each amount a `MonetaryAmount`. A dedicated object rather than a reuse of `CompoundPriceSpecification`, whose Schema.org role (bundling prices that apply in parallel, e.g. electricity + cleaning) doesn't match a HT/tax/TTC recap. |
 | <a id="businessdocumentline"></a>`BusinessDocumentLine` | `StructuredValue` | A document line (`item`, `position`, `quantity`, `unit`, `price`, `taxes`, `adjustments`, `subtotal`, `total`) — `taxes` and `adjustments` are scoped to the line, so a document can mix lines taxed at different rates. |
-| <a id="paymentschedule"></a>`PaymentSchedule` | `StructuredValue` | A payment schedule (`installments`, a list of `PaymentInstallment`). Each installment carries its own payment status, so the plan can be tracked installment by installment; only reminders remain a later iteration. |
-| <a id="paymentinstallment"></a>`PaymentInstallment` | `StructuredValue` | A single installment (`dueDate`, `amount` or `percentage`, `paymentStatus`). `paymentStatus` reuses `org\schema\enumerations\status\PaymentStatusType` (paid, due, past due…), the installment-level counterpart of the invoice's `paymentStatus`. |
+| <a id="paymentschedule"></a>`PaymentSchedule` | `StructuredValue` | A payment schedule (`installments`, a list of `PaymentInstallment`; `reminders`, the plan-level reminders). Each installment carries its own payment status and its own reminders, so the plan can be tracked installment by installment. |
+| <a id="paymentinstallment"></a>`PaymentInstallment` | `StructuredValue` | A single installment (`dueDate`, `amount` or `percentage`, `paymentStatus`, `reminders`). `paymentStatus` reuses `org\schema\enumerations\status\PaymentStatusType` (paid, due, past due…), the installment-level counterpart of the invoice's `paymentStatus`; `reminders` lists the `PaymentReminder` specific to this installment. |
+| <a id="paymentreminder"></a>`PaymentReminder` | `StructuredValue` | The record of a payment reminder (`date`, `level` → `PaymentReminderLevel`, `channel` → `PaymentReminderChannel`, `status` → `org\schema\enumerations\status\ActionStatusType`, `amountClaimed`, `adjustments`, `note`). A trace, not an engine: the sending/scheduling logic stays consumer-side. Late-payment charges go through an `Adjustment` (never a bespoke "penalty" field). Attachable to an installment or to the whole schedule. |
 | <a id="businessdocument"></a>`BusinessDocument` | `Intangible` | The common parent of the quote → order → invoice cycle: `adjustments` (document-level adjustments, see `Adjustment`), `attachments`, `currency`, `customer`, `documentLines`, `issueDate`, `paymentTerms`, `references`, `seller`, `status` (→ `BusinessDocumentStatus`), `taxes`, `totals`. Extends `Intangible` rather than reusing `org\schema\Order`/`org\schema\Invoice`: a business document qualifies a transaction, it is not an addressable resource in its own right — and this keeps the Schema.org mirror untouched (existing consumers of `org\schema\Order`/`Invoice` see no change). |
 | <a id="quote"></a>`Quote` | `BusinessDocument` | A quote — adds `validThrough` (reusing the Schema.org property already carried by `PriceSpecification`/`Offer`, rather than a new name). Not to be confused with `org\schema\creativeWork\Quotation`, which is an unrelated **literary citation**. |
 | <a id="purchaseorder"></a>`PurchaseOrder` | `BusinessDocument` | A purchase order — the customer's confirmed commitment, typically following the acceptance of a `Quote`: `referencesQuote` (→ one or more `Quote`), the upstream link of the cycle and the data behind the `BusinessDocumentStatus::CONVERTED` status. |
@@ -199,6 +236,7 @@ Each class exposes its property constants through a dedicated trait under [`cons
 
 - [`xyz\oihana\schema\business`](business.md) — `BusinessIdentity`, `UserProfile`.
 - [`xyz\oihana\schema\products`](products.md) — `PriceComponentType`, reused by `Adjustment::$type`.
+- [`xyz\oihana\schema\enumerations`](../../src/xyz/oihana/schema/enumerations) — `PaymentReminderLevel`/`PaymentReminderChannel`, reused by `PaymentReminder`.
 - [`org\schema`](../schema-org/README.md) — `MonetaryAmount`, `PriceSpecification`, `StructuredValue`.
 - [Getting started](../getting-started.md) — installation, hydration, JSON-LD basics.
 - [API reference](../../../docs).

@@ -15,4 +15,5 @@ trait PaymentInstallmentTrait
     const string DUE_DATE       = 'dueDate' ;
     const string PAYMENT_STATUS = 'paymentStatus' ;
     const string PERCENTAGE     = 'percentage' ;
+    const string REMINDERS      = 'reminders' ;
 }

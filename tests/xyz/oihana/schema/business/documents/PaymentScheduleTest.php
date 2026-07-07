@@ -10,6 +10,7 @@ use oihana\reflect\Reflection;
 use org\schema\StructuredValue;
 
 use xyz\oihana\schema\business\documents\PaymentInstallment;
+use xyz\oihana\schema\business\documents\PaymentReminder;
 use xyz\oihana\schema\business\documents\PaymentSchedule;
 use xyz\oihana\schema\constants\Oihana;
 
@@ -28,7 +29,10 @@ class PaymentScheduleTest extends TestCase
     public function testTraitConstants(): void
     {
         $this->assertSame( 'installments' , PaymentSchedule::INSTALLMENTS );
+        $this->assertSame( 'reminders'    , PaymentSchedule::REMINDERS    );
+
         $this->assertSame( Oihana::INSTALLMENTS , PaymentSchedule::INSTALLMENTS );
+        $this->assertSame( Oihana::REMINDERS    , PaymentSchedule::REMINDERS    );
     }
 
     public function testDefaults(): void
@@ -36,6 +40,31 @@ class PaymentScheduleTest extends TestCase
         $schedule = new PaymentSchedule() ;
 
         $this->assertNull( $schedule->installments ?? null );
+        $this->assertNull( $schedule->reminders    ?? null );
+    }
+
+    /**
+     * The plan-level reminders hydrate into an array of {@see PaymentReminder}.
+     *
+     * @throws ReflectionException
+     */
+    public function testReflectionHydratesReminders(): void
+    {
+        $schedule = new Reflection()->hydrate
+        (
+            [
+                PaymentSchedule::REMINDERS =>
+                [
+                    [ 'date' => '2026-02-10' , 'level' => 'first' ] ,
+                    [ 'date' => '2026-02-20' ] ,
+                ],
+            ],
+            PaymentSchedule::class
+        );
+
+        $this->assertCount( 2 , $schedule->reminders ) ;
+        $this->assertContainsOnlyInstancesOf( PaymentReminder::class , $schedule->reminders ) ;
+        $this->assertSame( '2026-02-10' , $schedule->reminders[ 0 ]->date ) ;
     }
 
     public function testConstructorKeepsInstallmentsAsRawArrays(): void

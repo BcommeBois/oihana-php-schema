@@ -3,6 +3,7 @@
 namespace xyz\oihana\schema\business\documents;
 
 use oihana\reflect\attributes\HydrateAs;
+use oihana\reflect\attributes\HydrateWith;
 
 use org\schema\MonetaryAmount;
 use org\schema\StructuredValue;
@@ -58,4 +59,12 @@ class PaymentInstallment extends StructuredValue
      * @var int|float|null
      */
     public null|int|float $percentage ;
+
+    /**
+     * The reminders sent (or planned) for this installment when it falls due
+     * or overdue.
+     * @var null|array|PaymentReminder
+     */
+    #[HydrateWith(PaymentReminder::class)]
+    public null|array|PaymentReminder $reminders ;
 }

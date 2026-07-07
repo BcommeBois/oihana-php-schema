@@ -12,6 +12,7 @@ use org\schema\StructuredValue;
 use org\schema\enumerations\status\PaymentComplete;
 
 use xyz\oihana\schema\business\documents\PaymentInstallment;
+use xyz\oihana\schema\business\documents\PaymentReminder;
 use xyz\oihana\schema\constants\Oihana;
 
 class PaymentInstallmentTest extends TestCase
@@ -32,9 +33,11 @@ class PaymentInstallmentTest extends TestCase
         $this->assertSame( 'dueDate'       , PaymentInstallment::DUE_DATE       );
         $this->assertSame( 'paymentStatus' , PaymentInstallment::PAYMENT_STATUS );
         $this->assertSame( 'percentage'    , PaymentInstallment::PERCENTAGE     );
+        $this->assertSame( 'reminders'     , PaymentInstallment::REMINDERS      );
 
         $this->assertSame( Oihana::DUE_DATE       , PaymentInstallment::DUE_DATE       );
         $this->assertSame( Oihana::PAYMENT_STATUS , PaymentInstallment::PAYMENT_STATUS );
+        $this->assertSame( Oihana::REMINDERS      , PaymentInstallment::REMINDERS      );
     }
 
     public function testDefaults(): void
@@ -45,6 +48,7 @@ class PaymentInstallmentTest extends TestCase
         $this->assertNull( $installment->dueDate       ?? null );
         $this->assertNull( $installment->paymentStatus ?? null );
         $this->assertNull( $installment->percentage    ?? null );
+        $this->assertNull( $installment->reminders     ?? null );
     }
 
     public function testConstructorHydratesScalarProperties(): void
@@ -79,5 +83,30 @@ class PaymentInstallmentTest extends TestCase
 
         $this->assertInstanceOf( MonetaryAmount::class , $installment->amount ) ;
         $this->assertSame( 300 , $installment->amount->value ) ;
+    }
+
+    /**
+     * The installment-level reminders hydrate into an array of
+     * {@see PaymentReminder}.
+     *
+     * @throws ReflectionException
+     */
+    public function testReflectionHydratesReminders(): void
+    {
+        $installment = new Reflection()->hydrate
+        (
+            [
+                PaymentInstallment::REMINDERS =>
+                [
+                    [ 'date' => '2026-02-10' , 'level' => 'first' ] ,
+                    [ 'date' => '2026-02-20' ] ,
+                ],
+            ],
+            PaymentInstallment::class
+        );
+
+        $this->assertCount( 2 , $installment->reminders ) ;
+        $this->assertContainsOnlyInstancesOf( PaymentReminder::class , $installment->reminders ) ;
+        $this->assertSame( '2026-02-20' , $installment->reminders[ 1 ]->date ) ;
     }
 }

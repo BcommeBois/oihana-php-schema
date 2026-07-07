@@ -15,8 +15,8 @@ use xyz\oihana\schema\constants\traits\business\documents\PaymentScheduleTrait;
  *
  * Each {@see PaymentInstallment} carries a due date, an amount or percentage
  * and its own {@see PaymentInstallment::$paymentStatus}, so the plan can be
- * tracked installment by installment. Reminders are a later, more advanced
- * iteration.
+ * tracked installment by installment. Reminders can be recorded per
+ * installment or, for the plan as a whole, through {@see $reminders}.
  *
  * @package xyz\oihana\schema\business\documents
  * @author  Marc Alcaraz (eKameleon)
@@ -37,4 +37,12 @@ class PaymentSchedule extends StructuredValue
      */
     #[HydrateWith(PaymentInstallment::class)]
     public null|array|PaymentInstallment $installments ;
+
+    /**
+     * The reminders sent (or planned) for the plan as a whole, as opposed to
+     * a specific installment's {@see PaymentInstallment::$reminders}.
+     * @var null|array|PaymentReminder
+     */
+    #[HydrateWith(PaymentReminder::class)]
+    public null|array|PaymentReminder $reminders ;
 }
