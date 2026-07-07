@@ -8,6 +8,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds the `xyz\oihana\schema\enumerations\PaymentReminderLevel` and
+  `PaymentReminderChannel` enumerations — the two "maison" enumerations
+  backing the upcoming payment-reminder value object. Both extend
+  `org\schema\Enumeration` with `schema.oihana.xyz` URI values and keep the
+  value free (a member, a free-text label, or a project subclass adding its
+  own members). `PaymentReminderLevel` carries the escalation scale
+  `REMINDER` → `FIRST_REMINDER` → `SECOND_REMINDER` → `FINAL_NOTICE` →
+  `FORMAL_NOTICE` (mise en demeure); `PaymentReminderChannel` carries
+  `EMAIL`, `POSTAL`, `PHONE`, `SMS` and `OTHER`. Adds the
+  `PaymentReminderLevelTest` and `PaymentReminderChannelTest` suites
+  (instance, constants, `includes()`).
 - Adds a per-installment payment status to
   `xyz\oihana\schema\business\documents\PaymentInstallment`:
   `$paymentStatus` (`null|string|PaymentStatusType`) reuses
