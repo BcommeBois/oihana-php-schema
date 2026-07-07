@@ -8,10 +8,13 @@ use xyz\oihana\schema\constants\traits\business\documents\AppliedEcoFeeTrait;
 use xyz\oihana\schema\constants\traits\business\documents\BusinessDocumentLineTrait;
 use xyz\oihana\schema\constants\traits\business\documents\BusinessDocumentTrait;
 use xyz\oihana\schema\constants\traits\business\documents\CreditNoteTrait;
+use xyz\oihana\schema\constants\traits\business\documents\DebitNoteTrait;
 use xyz\oihana\schema\constants\traits\business\documents\DeliveryLineTrait;
 use xyz\oihana\schema\constants\traits\business\documents\DeliveryNoteTrait;
 use xyz\oihana\schema\constants\traits\business\documents\DocumentTotalsTrait;
 use xyz\oihana\schema\constants\traits\business\documents\EcoFeeRuleTrait;
+use xyz\oihana\schema\constants\traits\business\documents\GoodsReceiptConfirmationTrait;
+use xyz\oihana\schema\constants\traits\business\documents\GoodsReceiptLineTrait;
 use xyz\oihana\schema\constants\traits\business\documents\InvoiceTrait;
 use xyz\oihana\schema\constants\traits\business\documents\PaymentInstallmentTrait;
 use xyz\oihana\schema\constants\traits\business\documents\PaymentReminderTrait;
@@ -20,6 +23,7 @@ use xyz\oihana\schema\constants\traits\business\documents\ProofOfDeliveryTrait;
 use xyz\oihana\schema\constants\traits\business\documents\PurchaseOrderTrait;
 use xyz\oihana\schema\constants\traits\business\documents\QuoteTrait;
 use xyz\oihana\schema\constants\traits\business\documents\ReceiptTrait;
+use xyz\oihana\schema\constants\traits\business\documents\RemittanceAdviceTrait;
 use xyz\oihana\schema\constants\traits\business\documents\StatementEntryTrait;
 use xyz\oihana\schema\constants\traits\business\documents\StatementTrait;
 use xyz\oihana\schema\constants\traits\business\documents\TaxDetailTrait;
@@ -33,25 +37,29 @@ use xyz\oihana\schema\constants\traits\business\documents\TaxDetailTrait;
  */
 trait DocumentsTrait
 {
-    use AdjustmentTrait           ,
-        AgingSummaryTrait         ,
-        AppliedEcoFeeTrait        ,
-        BusinessDocumentLineTrait ,
-        BusinessDocumentTrait     ,
-        CreditNoteTrait           ,
-        DeliveryLineTrait         ,
-        DeliveryNoteTrait         ,
-        DocumentTotalsTrait       ,
-        EcoFeeRuleTrait           ,
-        InvoiceTrait              ,
-        PaymentInstallmentTrait   ,
-        PaymentReminderTrait      ,
-        PaymentScheduleTrait      ,
-        ProofOfDeliveryTrait      ,
-        PurchaseOrderTrait        ,
-        QuoteTrait                ,
-        ReceiptTrait              ,
-        StatementEntryTrait       ,
-        StatementTrait            ,
-        TaxDetailTrait            ;
+    use AdjustmentTrait                 ,
+        AgingSummaryTrait               ,
+        AppliedEcoFeeTrait              ,
+        BusinessDocumentLineTrait       ,
+        BusinessDocumentTrait           ,
+        CreditNoteTrait                 ,
+        DebitNoteTrait                  ,
+        DeliveryLineTrait               ,
+        DeliveryNoteTrait               ,
+        DocumentTotalsTrait             ,
+        EcoFeeRuleTrait                 ,
+        GoodsReceiptConfirmationTrait   ,
+        GoodsReceiptLineTrait           ,
+        InvoiceTrait                    ,
+        PaymentInstallmentTrait         ,
+        PaymentReminderTrait            ,
+        PaymentScheduleTrait            ,
+        ProofOfDeliveryTrait            ,
+        PurchaseOrderTrait              ,
+        QuoteTrait                      ,
+        ReceiptTrait                    ,
+        RemittanceAdviceTrait           ,
+        StatementEntryTrait             ,
+        StatementTrait                  ,
+        TaxDetailTrait                  ;
 }

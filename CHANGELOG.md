@@ -8,6 +8,35 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds the three documents the retrospective standards audit flagged as
+  entirely absent from the hierarchy (Lot 9, closing the post-audit backlog):
+  `DebitNote`, `GoodsReceiptConfirmation` (+ its `GoodsReceiptLine` value
+  object) and `RemittanceAdvice`, all under
+  `xyz\oihana\schema\business\documents`.
+  - `DebitNote` — the symmetric inverse of `CreditNote` (increases what's
+    owed, correcting an under-billed invoice): `reason`, `referencesInvoice`
+    (→ one or more `Invoice`). UBL defines it as its own document type; the
+    adjusting amount flows through the inherited `totals`.
+  - `GoodsReceiptConfirmation` — the buyer confirming receipt of a
+    `DeliveryNote`'s goods (`referencesDeliveryNote`, `lines`), each
+    `GoodsReceiptLine` reconciling `expectedQuantity`/`receivedQuantity` with
+    a `condition` and `discrepancyNote`. This is what UBL/Peppol's
+    `ReceiptAdvice` actually models — the buyer-side mirror of a despatch
+    advice, NOT this namespace's payment-focused `Receipt` — and the first
+    buyer-side document of an otherwise seller-centric hierarchy.
+  - `RemittanceAdvice` — the payer-side counterpart of `Receipt`
+    (`amountRemitted`, `referencesInvoice`): the document a payer sends the
+    payee to detail a payment. The two deliberately coexist, each modelling
+    the same event from opposite ends of the transaction.
+  - Adds the companion `DebitNoteTrait`, `GoodsReceiptConfirmationTrait`,
+    `GoodsReceiptLineTrait` and `RemittanceAdviceTrait` constants traits,
+    wired into `DocumentsTrait` — their `reason`/`referencesInvoice`/`lines`/
+    `item`/`position`/`discrepancyNote` constants reuse values already
+    declared elsewhere, so they compose cleanly; no collision, all reachable
+    through `Oihana`.
+  - Adds the four dedicated test suites and extends the bilingual
+    `business-documents.md` wiki guide (FR canonical + EN mirror), bumping
+    the README overview table (23 → 27) and both wiki indexes.
 - Enriches the credit note (Lot 7 of the post-audit business-documents
   backlog) with the fields commercial accounting APIs expose on a credit
   note. Adds `xyz\oihana\schema\enumerations\CreditNoteReasonCode`
