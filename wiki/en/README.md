@@ -13,6 +13,7 @@ This wiki is a hand-written companion to the auto-generated [API reference](../.
 ### Fundamentals
 
 - [Getting started](getting-started.md) — install, hydrate your first `Thing`, serialize it to JSON-LD, use property constants safely.
+- [Why an ontology](why-an-ontology.md) — the vision: why model on Schema.org and extend it, for business solutions that are both standardized and evolvable.
 
 ### Schemas by namespace
 

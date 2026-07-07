@@ -13,6 +13,7 @@ Ce wiki est un compagnon rédigé à la main de la [référence d'API](../../doc
 ### Fondamentaux
 
 - [Démarrage rapide](demarrage.md) — installation, hydratation d'un premier `Thing`, sérialisation JSON-LD, utilisation sûre des constantes.
+- [Pourquoi une ontologie](pourquoi-une-ontologie.md) — la vision : pourquoi modéliser sur Schema.org et l'étendre, pour des solutions métier à la fois standardisées et évolutives.
 
 ### Schémas par namespace
 
