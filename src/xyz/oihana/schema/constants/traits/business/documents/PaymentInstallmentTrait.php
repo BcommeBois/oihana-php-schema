@@ -11,7 +11,8 @@ namespace xyz\oihana\schema\constants\traits\business\documents;
  */
 trait PaymentInstallmentTrait
 {
-    const string AMOUNT     = 'amount' ;
-    const string DUE_DATE   = 'dueDate' ;
-    const string PERCENTAGE = 'percentage' ;
+    const string AMOUNT         = 'amount' ;
+    const string DUE_DATE       = 'dueDate' ;
+    const string PAYMENT_STATUS = 'paymentStatus' ;
+    const string PERCENTAGE     = 'percentage' ;
 }

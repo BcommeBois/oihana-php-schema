@@ -13,9 +13,10 @@ use xyz\oihana\schema\constants\traits\business\documents\PaymentScheduleTrait;
  * A multi-installment payment plan attached to a {@see BusinessDocument}
  * (e.g. "30% on order, 70% on delivery").
  *
- * This is the base version : each {@see PaymentInstallment} only carries a
- * due date and an amount or percentage. Reminders and a per-installment
- * payment status are a later, more advanced iteration.
+ * Each {@see PaymentInstallment} carries a due date, an amount or percentage
+ * and its own {@see PaymentInstallment::$paymentStatus}, so the plan can be
+ * tracked installment by installment. Reminders are a later, more advanced
+ * iteration.
  *
  * @package xyz\oihana\schema\business\documents
  * @author  Marc Alcaraz (eKameleon)

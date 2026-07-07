@@ -6,6 +6,7 @@ use oihana\reflect\attributes\HydrateAs;
 
 use org\schema\MonetaryAmount;
 use org\schema\StructuredValue;
+use org\schema\enumerations\status\PaymentStatusType;
 
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\constants\traits\business\documents\PaymentInstallmentTrait;
@@ -41,6 +42,16 @@ class PaymentInstallment extends StructuredValue
      * @var string|int|null
      */
     public null|string|int $dueDate ;
+
+    /**
+     * The payment status of this installment — whether it has been paid,
+     * is still due or is past due. Reuses {@see PaymentStatusType} and its
+     * existing member classes ({@see \org\schema\enumerations\status\PaymentComplete},
+     * `PaymentDue`, `PaymentPastDue`...), the finer-grained counterpart of
+     * {@see Invoice::$paymentStatus} at the level of a single installment.
+     * @var null|string|PaymentStatusType
+     */
+    public null|string|PaymentStatusType $paymentStatus ;
 
     /**
      * The share of the document total this installment represents, as a percentage (e.g. 30 for 30%).

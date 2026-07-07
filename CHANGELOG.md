@@ -8,6 +8,21 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds a per-installment payment status to
+  `xyz\oihana\schema\business\documents\PaymentInstallment`:
+  `$paymentStatus` (`null|string|PaymentStatusType`) reuses
+  `org\schema\enumerations\status\PaymentStatusType` and its existing member
+  classes (`PaymentComplete`, `PaymentDue`, `PaymentPastDue`...) — no new
+  enumeration — so a payment plan can be tracked installment by installment
+  (one installment paid while another is still due or past due), the
+  finer-grained counterpart of `Invoice::$paymentStatus`. Adds the
+  `PAYMENT_STATUS` constant on `PaymentInstallmentTrait` (already present on
+  `InvoiceTrait` with the same value, so the two compose cleanly through
+  `DocumentsTrait`) — `PaymentInstallment::PAYMENT_STATUS` and
+  `Oihana::PAYMENT_STATUS` both resolve. Reminders stay out of scope, a later
+  iteration. Extends `PaymentInstallmentTest` (constant + `Oihana`
+  aggregation, default, member class-name assignment) and the bilingual
+  `business-documents.md` wiki guide (FR canonical + EN mirror).
 - Adds the upstream link of the quote → purchase order → invoice cycle:
   `xyz\oihana\schema\business\documents\PurchaseOrder::$referencesQuote`
   (→ `Quote`), the counterpart of `Invoice::$referencesOrder` downstream and
@@ -139,9 +154,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   `CompoundPriceSpecification`, whose schema.org role doesn't match a
   document-level recap), `BusinessDocumentLine` (a document line: `item`,
   `position`, `quantity`, `unit`, `price`, line-scoped `taxes`/`adjustments`,
-  `subtotal`, `total`) and `PaymentSchedule`/`PaymentInstallment` (a base
-  multi-installment payment plan — reminders and a per-installment status
-  are a later iteration). All eight classes extend `org\schema\StructuredValue`
+  `subtotal`, `total`) and `PaymentSchedule`/`PaymentInstallment` (a
+  multi-installment payment plan — reminders are a later iteration). All
+  eight classes extend `org\schema\StructuredValue`
   and carry the `#[HydrateAs]`/`#[HydrateWith]` attributes needed for
   `Reflection::hydrate()` to deep-hydrate their `MonetaryAmount` and nested
   collection properties.
