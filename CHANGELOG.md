@@ -8,8 +8,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds the upstream link of the quote → purchase order → invoice cycle:
+  `xyz\oihana\schema\business\documents\PurchaseOrder::$referencesQuote`
+  (→ `Quote`), the counterpart of `Invoice::$referencesOrder` downstream and
+  the data behind the `BusinessDocumentStatus::CONVERTED` transition —
+  previously `PurchaseOrder` was a property-less shell. Adds the companion
+  `PurchaseOrderTrait` (`REFERENCES_QUOTE`), wired into `DocumentsTrait` —
+  no name collision found, so reachable through `Oihana` as well.
 - Adds a document-level `adjustments` property to
-  `xyz\oihana\schema\business\documents\BusinessDocument` (Lot 5) —
+  `xyz\oihana\schema\business\documents\BusinessDocument` —
   completing the UBL `AllowanceCharge` design where an `Adjustment` applies
   either to a single `BusinessDocumentLine` **or** to the whole document
   (a footer discount, a global shipping fee, packaging billed at the
@@ -206,6 +213,23 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Changed
 
+- Harmonizes the whole business-document cycle's `references*` links to
+  **collections**: `Invoice::$referencesOrder`,
+  `CreditNote::$referencesInvoice` and `Receipt::$referencesInvoice` switch
+  from `#[HydrateAs]` (single object) to `#[HydrateWith]` (one-or-many),
+  matching the new `PurchaseOrder::$referencesQuote` and the real cardinality
+  of the domain — a consolidated invoice bills several purchase orders, a
+  single payment settles several invoices, an order may aggregate several
+  accepted quotes. Deep hydration stays polymorphic (a single associative
+  array yields one object, a list yields an array of objects), so the type
+  stays `null|array|X` and existing single-reference hydration is unaffected;
+  this also resolves the prior mismatch where `Invoice::$referencesOrder`'s
+  PHPDoc promised "one or more" while the attribute only hydrated one. All of
+  it unreleased (`dev-main`), so no published API changes. Extends the
+  reference test suites with the list case (`PurchaseOrderTest`,
+  `InvoiceTest`, `CreditNoteTest`, `ReceiptTest`) and the bilingual
+  `business-documents.md` wiki guide (FR canonical + EN mirror) with a
+  "chaining the cycle" example.
 - Reorganizes the wiki: every `oihana-*.md` page moves into a dedicated
   `wiki/{fr,en}/oihana/` folder (dropping the prefix), mirroring the
   existing `schema-org/` layout — the wiki root shrinks to the language

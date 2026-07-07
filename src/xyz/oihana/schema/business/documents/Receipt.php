@@ -2,7 +2,7 @@
 
 namespace xyz\oihana\schema\business\documents;
 
-use oihana\reflect\attributes\HydrateAs;
+use oihana\reflect\attributes\HydrateWith;
 
 use org\schema\PaymentMethod;
 
@@ -46,9 +46,10 @@ class Receipt extends BusinessDocument
     public ?string $paymentMethodId ;
 
     /**
-     * The invoice this receipt confirms payment for.
+     * The invoice(s) this receipt confirms payment for. A single payment may
+     * settle more than one invoice at once.
      * @var null|array|Invoice
      */
-    #[HydrateAs(Invoice::class)]
+    #[HydrateWith(Invoice::class)]
     public null|array|Invoice $referencesInvoice ;
 }

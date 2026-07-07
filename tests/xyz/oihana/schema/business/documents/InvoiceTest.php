@@ -115,6 +115,33 @@ class InvoiceTest extends TestCase
         $this->assertSame( 'EUR' , $invoice->referencesOrder->currency ) ;
     }
 
+    /**
+     * A list of arrays hydrates into an array of {@see PurchaseOrder} — one or
+     * more purchase orders combined into a single invoice.
+     *
+     * @throws ReflectionException
+     */
+    public function testReflectionHydratesReferencesOrderList(): void
+    {
+        $invoice = new Reflection()->hydrate
+        (
+            [
+                Invoice::REFERENCES_ORDER =>
+                [
+                    [ BusinessDocument::CURRENCY => 'EUR' ] ,
+                    [ BusinessDocument::CURRENCY => 'USD' ] ,
+                ] ,
+            ],
+            Invoice::class
+        );
+
+        $this->assertIsArray( $invoice->referencesOrder ) ;
+        $this->assertCount( 2 , $invoice->referencesOrder ) ;
+        $this->assertInstanceOf( PurchaseOrder::class , $invoice->referencesOrder[ 0 ] ) ;
+        $this->assertInstanceOf( PurchaseOrder::class , $invoice->referencesOrder[ 1 ] ) ;
+        $this->assertSame( 'USD' , $invoice->referencesOrder[ 1 ]->currency ) ;
+    }
+
     public function testInheritsBusinessDocumentProperties(): void
     {
         $invoice = new Invoice

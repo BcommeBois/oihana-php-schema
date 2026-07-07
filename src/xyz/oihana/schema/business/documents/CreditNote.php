@@ -2,7 +2,7 @@
 
 namespace xyz\oihana\schema\business\documents;
 
-use oihana\reflect\attributes\HydrateAs;
+use oihana\reflect\attributes\HydrateWith;
 
 use xyz\oihana\schema\constants\traits\business\documents\CreditNoteTrait;
 
@@ -34,9 +34,10 @@ class CreditNote extends BusinessDocument
     public ?string $reason ;
 
     /**
-     * The invoice this credit note corrects.
+     * The invoice(s) this credit note corrects. A single credit note may
+     * consolidate corrections spanning more than one invoice.
      * @var null|array|Invoice
      */
-    #[HydrateAs(Invoice::class)]
+    #[HydrateWith(Invoice::class)]
     public null|array|Invoice $referencesInvoice ;
 }

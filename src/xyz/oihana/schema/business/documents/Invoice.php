@@ -2,7 +2,7 @@
 
 namespace xyz\oihana\schema\business\documents;
 
-use oihana\reflect\attributes\HydrateAs;
+use oihana\reflect\attributes\HydrateWith;
 
 use org\schema\CategoryCode;
 use org\schema\Duration;
@@ -106,10 +106,10 @@ class Invoice extends BusinessDocument
     public null|array|Organization|Person $provider ;
 
     /**
-     * The purchase order this invoice bills. One or more purchase orders may be combined into a single invoice.
+     * The purchase order(s) this invoice bills. One or more purchase orders may be combined into a single invoice.
      * @var null|array|PurchaseOrder
      */
-    #[HydrateAs(PurchaseOrder::class)]
+    #[HydrateWith(PurchaseOrder::class)]
     public null|array|PurchaseOrder $referencesOrder ;
 
     /**

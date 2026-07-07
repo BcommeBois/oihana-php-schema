@@ -64,6 +64,33 @@ class CreditNoteTest extends TestCase
         $this->assertSame( 'EUR' , $creditNote->referencesInvoice->currency ) ;
     }
 
+    /**
+     * A list of arrays hydrates into an array of {@see Invoice} — a single
+     * credit note consolidating corrections across more than one invoice.
+     *
+     * @throws ReflectionException
+     */
+    public function testReflectionHydratesReferencesInvoiceList(): void
+    {
+        $creditNote = new Reflection()->hydrate
+        (
+            [
+                CreditNote::REFERENCES_INVOICE =>
+                [
+                    [ BusinessDocument::CURRENCY => 'EUR' ] ,
+                    [ BusinessDocument::CURRENCY => 'USD' ] ,
+                ] ,
+            ],
+            CreditNote::class
+        );
+
+        $this->assertIsArray( $creditNote->referencesInvoice ) ;
+        $this->assertCount( 2 , $creditNote->referencesInvoice ) ;
+        $this->assertInstanceOf( Invoice::class , $creditNote->referencesInvoice[ 0 ] ) ;
+        $this->assertInstanceOf( Invoice::class , $creditNote->referencesInvoice[ 1 ] ) ;
+        $this->assertSame( 'USD' , $creditNote->referencesInvoice[ 1 ]->currency ) ;
+    }
+
     public function testInheritsBusinessDocumentProperties(): void
     {
         $creditNote = new CreditNote

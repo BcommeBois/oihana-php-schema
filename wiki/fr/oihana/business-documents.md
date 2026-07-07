@@ -92,6 +92,37 @@ $quote->totals             instanceof \xyz\oihana\schema\business\documents\Docu
 
 **Ligne vs document.** Un `Adjustment` s'applique soit à une ligne (`BusinessDocumentLine::$adjustments` — remise propre à un article), soit au document entier (`BusinessDocument::$adjustments` — remise de pied de document, forfait de port ou emballage facturés globalement), sur le modèle d'UBL `AllowanceCharge`. L'effet cumulé des ajustements de niveau document se relit, si besoin, dans les champs dérivés optionnels `DocumentTotals::$allowanceTotal` (total des remises) et `DocumentTotals::$chargeTotal` (total des majorations/frais), miroirs des `AllowanceTotalAmount`/`ChargeTotalAmount` d'UBL.
 
+**Le chaînage du cycle.** Chaque maillon référence le document amont via une propriété `references*` : `PurchaseOrder::$referencesQuote` (→ `Quote`), `Invoice::$referencesOrder` (→ `PurchaseOrder`), `CreditNote`/`Receipt::$referencesInvoice` (→ `Invoice`). Ces liens sont **des collections** : chacun accepte un document unique **ou** plusieurs (facture de regroupement, paiement soldant plusieurs factures, commande agrégeant plusieurs devis). L'hydratation profonde est polymorphe — un tableau associatif unique donne un objet, une liste donne un tableau d'objets :
+
+```php
+use oihana\reflect\Reflection;
+use xyz\oihana\schema\business\documents\Invoice;
+use xyz\oihana\schema\business\documents\PurchaseOrder;
+use xyz\oihana\schema\business\documents\Quote;
+
+// Un bon de commande issu d'un devis accepté.
+$order = new Reflection()->hydrate
+([
+    PurchaseOrder::CURRENCY         => 'EUR' ,
+    PurchaseOrder::REFERENCES_QUOTE => [ Quote::CURRENCY => 'EUR' ] , // un seul devis → un objet Quote
+], PurchaseOrder::class);
+
+$order->referencesQuote instanceof Quote ; // true
+
+// Une facture de regroupement soldant deux bons de commande.
+$invoice = new Reflection()->hydrate
+([
+    Invoice::CURRENCY         => 'EUR' ,
+    Invoice::REFERENCES_ORDER =>
+    [
+        [ PurchaseOrder::CURRENCY => 'EUR' ] ,
+        [ PurchaseOrder::CURRENCY => 'EUR' ] ,
+    ], // une liste → un tableau de PurchaseOrder
+], Invoice::class);
+
+is_array( $invoice->referencesOrder ) && count( $invoice->referencesOrder ) === 2 ; // true
+```
+
 Une `Invoice` référence le `PurchaseOrder` qu'elle facture (et non `org\schema\Order` — voir [`Invoice`](#invoice) pour la justification), puis s'exporte en JSON-LD via `JsonLdExporter` :
 
 ```php
@@ -146,11 +177,11 @@ $statement->entries[ 0 ] instanceof StatementEntry ; // true
 | <a id="paymentinstallment"></a>`PaymentInstallment` | `StructuredValue` | Une échéance (`dueDate`, `amount` ou `percentage`). |
 | <a id="businessdocument"></a>`BusinessDocument` | `Intangible` | Le parent commun du cycle devis → commande → facture : `adjustments` (ajustements de niveau document, cf. `Adjustment`), `attachments`, `currency`, `customer`, `documentLines`, `issueDate`, `paymentTerms`, `references`, `seller`, `status` (→ `BusinessDocumentStatus`), `taxes`, `totals`. Étend `Intangible` plutôt que de réutiliser `org\schema\Order`/`org\schema\Invoice` : un document commercial qualifie une transaction, ce n'est pas une ressource adressable en propre — et cela laisse le miroir Schema.org intact (les consommateurs existants d'`org\schema\Order`/`Invoice` ne voient aucun changement). |
 | <a id="quote"></a>`Quote` | `BusinessDocument` | Un devis — ajoute `validThrough` (réutilisation de la propriété Schema.org déjà portée par `PriceSpecification`/`Offer`, plutôt qu'un nouveau nom). À ne pas confondre avec `org\schema\creativeWork\Quotation`, qui est une **citation littéraire** sans rapport. |
-| <a id="purchaseorder"></a>`PurchaseOrder` | `BusinessDocument` | Un bon de commande — l'engagement confirmé du client, typiquement après acceptation d'un `Quote`. Ne porte aucune propriété propre dans cette version. |
-| <a id="invoice"></a>`Invoice` | `BusinessDocument` | Une facture — le document final du cycle devis → commande → facture : `accountId`, `billingPeriod`, `broker`, `category`, `confirmationNumber`, `paymentDueDate`, `paymentStatus` (→ `org\schema\enumerations\status\PaymentStatusType`, réutilisant ses classes membres existantes `PaymentComplete`/`PaymentDue`/`PaymentDeclined`/`PaymentPastDue`/`PaymentAutomaticallyApplied`), `provider`, `referencesOrder` (→ `PurchaseOrder`, propre à ce namespace), `scheduledPaymentDate`. Reprend les noms de propriétés de `org\schema\Invoice`, mais ne partage volontairement pas de trait de propriétés avec lui : `referencesOrder` doit pointer vers le `PurchaseOrder` maison (pas `org\schema\Order`), et certaines unions du miroir (`broker`, `category`, `billingPeriod`) datent d'avant la convention `null\|array\|X` — les élargir pour un trait commun reviendrait à modifier le miroir, ce que cette hiérarchie s'interdit (voir [`BusinessDocument`](#businessdocument)). |
-| <a id="creditnote"></a>`CreditNote` | `BusinessDocument` | Un avoir — corrige ou annule tout ou partie d'une `Invoice` déjà émise : `reason` (justification libre, même nom/type que `Adjustment::$reason`), `referencesInvoice` (→ `Invoice`). Le montant corrigé passe par le `totals` hérité (recap positif) ; c'est le type de document (`CreditNote`) qui porte le sens « ça réduit ce qui est dû », pas une convention de signe. |
+| <a id="purchaseorder"></a>`PurchaseOrder` | `BusinessDocument` | Un bon de commande — l'engagement confirmé du client, typiquement après acceptation d'un `Quote` : `referencesQuote` (→ un ou plusieurs `Quote`), le maillon amont du cycle et la donnée derrière le statut `BusinessDocumentStatus::CONVERTED`. |
+| <a id="invoice"></a>`Invoice` | `BusinessDocument` | Une facture — le document final du cycle devis → commande → facture : `accountId`, `billingPeriod`, `broker`, `category`, `confirmationNumber`, `paymentDueDate`, `paymentStatus` (→ `org\schema\enumerations\status\PaymentStatusType`, réutilisant ses classes membres existantes `PaymentComplete`/`PaymentDue`/`PaymentDeclined`/`PaymentPastDue`/`PaymentAutomaticallyApplied`), `provider`, `referencesOrder` (→ un ou plusieurs `PurchaseOrder`, propres à ce namespace), `scheduledPaymentDate`. Reprend les noms de propriétés de `org\schema\Invoice`, mais ne partage volontairement pas de trait de propriétés avec lui : `referencesOrder` doit pointer vers le `PurchaseOrder` maison (pas `org\schema\Order`), et certaines unions du miroir (`broker`, `category`, `billingPeriod`) datent d'avant la convention `null\|array\|X` — les élargir pour un trait commun reviendrait à modifier le miroir, ce que cette hiérarchie s'interdit (voir [`BusinessDocument`](#businessdocument)). |
+| <a id="creditnote"></a>`CreditNote` | `BusinessDocument` | Un avoir — corrige ou annule tout ou partie d'une `Invoice` déjà émise : `reason` (justification libre, même nom/type que `Adjustment::$reason`), `referencesInvoice` (→ une ou plusieurs `Invoice`). Le montant corrigé passe par le `totals` hérité (recap positif) ; c'est le type de document (`CreditNote`) qui porte le sens « ça réduit ce qui est dû », pas une convention de signe. |
 | <a id="deliverynote"></a>`DeliveryNote` | `BusinessDocument` | Un bon de livraison — atteste la livraison physique des biens d'un `PurchaseOrder` : `orderDelivery` (→ `org\schema\ParcelDelivery`, réutilisant le nom de propriété et le type déjà portés par `org\schema\Order`, plutôt que de réinventer le suivi de colis). |
-| <a id="receipt"></a>`Receipt` | `BusinessDocument` | Un reçu — preuve que le paiement d'une `Invoice` a été reçu : `confirmationNumber`, `paymentMethod`/`paymentMethodId` (repris de `org\schema\Invoice`), `referencesInvoice` (→ `Invoice`). Le montant reçu n'est pas dupliqué ici (déjà porté par `totals` hérité) ; la date de réception est le `issueDate` hérité. |
+| <a id="receipt"></a>`Receipt` | `BusinessDocument` | Un reçu — preuve que le paiement d'une `Invoice` a été reçu : `confirmationNumber`, `paymentMethod`/`paymentMethodId` (repris de `org\schema\Invoice`), `referencesInvoice` (→ une ou plusieurs `Invoice`). Le montant reçu n'est pas dupliqué ici (déjà porté par `totals` hérité) ; la date de réception est le `issueDate` hérité. |
 | <a id="statement"></a>`Statement` | `BusinessDocument` | Un relevé de compte — récapitule sur une période les documents qui ont fait bouger le solde d'un compte : `billingPeriod` (repris du nom déjà utilisé par `org\schema\Invoice`), `entries` (une liste de `StatementEntry`), `openingBalance`/`closingBalance` (`MonetaryAmount`, sans équivalent Schema.org — UBL les nomme `BeginningBalanceAmount`/`EndingBalanceAmount`). Seule classe du lot qui n'est pas un simple sous-type à une propriété : elle introduit son propre concept de ligne. |
 | <a id="statemententry"></a>`StatementEntry` | `StructuredValue` | Une ligne de `Statement` : `document` (le `BusinessDocument` concerné, ou une simple chaîne si l'objet complet n'est pas disponible), `date`, `amount`, `balance` (solde courant après application de cette ligne). Distincte de `BusinessDocumentLine`, qui tarife un produit/service et non un mouvement de compte. |
 | <a id="businessdocumentexporter"></a>`BusinessDocumentExporter` | *(interface)* | Le contrat de sérialisation d'un `BusinessDocument` : `export(BusinessDocument $document): string`. Les formats réglementaires (UBL, Factur-X, Peppol…) restent hors périmètre pour l'instant. |

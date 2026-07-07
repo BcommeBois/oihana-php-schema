@@ -75,6 +75,33 @@ class ReceiptTest extends TestCase
         $this->assertSame( 'EUR' , $receipt->referencesInvoice->currency ) ;
     }
 
+    /**
+     * A list of arrays hydrates into an array of {@see Invoice} — a single
+     * payment settling more than one invoice at once.
+     *
+     * @throws ReflectionException
+     */
+    public function testReflectionHydratesReferencesInvoiceList(): void
+    {
+        $receipt = new Reflection()->hydrate
+        (
+            [
+                Receipt::REFERENCES_INVOICE =>
+                [
+                    [ BusinessDocument::CURRENCY => 'EUR' ] ,
+                    [ BusinessDocument::CURRENCY => 'USD' ] ,
+                ] ,
+            ],
+            Receipt::class
+        );
+
+        $this->assertIsArray( $receipt->referencesInvoice ) ;
+        $this->assertCount( 2 , $receipt->referencesInvoice ) ;
+        $this->assertInstanceOf( Invoice::class , $receipt->referencesInvoice[ 0 ] ) ;
+        $this->assertInstanceOf( Invoice::class , $receipt->referencesInvoice[ 1 ] ) ;
+        $this->assertSame( 'USD' , $receipt->referencesInvoice[ 1 ]->currency ) ;
+    }
+
     public function testInheritsBusinessDocumentProperties(): void
     {
         $receipt = new Receipt([ BusinessDocument::CURRENCY => 'EUR' ]) ;
