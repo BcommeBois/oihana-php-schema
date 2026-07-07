@@ -8,6 +8,31 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds `xyz\oihana\schema\business\documents\DeliveryLine` and
+  `ProofOfDelivery` (Lot 5 of the post-audit business-documents backlog) —
+  closing the biggest gap confirmed by the retrospective standards audit
+  (UBL `DespatchLine`, GS1/EDIFACT, Odoo `stock.move`, SAP delivery items):
+  a bare `DeliveryNote::$orderDelivery` (a single `org\schema\ParcelDelivery`)
+  could only say a parcel shipped, not how much of what was ordered it
+  actually contains. `DeliveryLine` (`position`, `item`, `orderedQuantity`/
+  `deliveredQuantity`/`backorderQuantity` + `backorderReason`, `batchNumber`,
+  `serialNumbers`) reconciles ordered vs. delivered vs. backorder quantity
+  per line, with optional lot/serial traceability. `ProofOfDelivery`
+  (`signatory`, `date`, `discrepancyNote`) records the delivery confirmation
+  — a pure trace, not an engine, in the same spirit as `PaymentReminder`.
+  Both attach to `DeliveryNote` as `lines` (`null|array|DeliveryLine`,
+  `#[HydrateWith]`) and `proofOfDelivery` (`null|array|ProofOfDelivery`,
+  `#[HydrateAs]`), alongside the existing `orderDelivery`.
+  - Adds the companion `DeliveryLineTrait`/`ProofOfDeliveryTrait` constants
+    traits, and the `LINES`/`PROOF_OF_DELIVERY` constants on
+    `DeliveryNoteTrait`, wired into `DocumentsTrait` — no name collision
+    found, so reachable through `Oihana` as well.
+  - Adds the `DeliveryLineTest`/`ProofOfDeliveryTest` suites and extends
+    `DeliveryNoteTest` (defaults, trait constants, `Reflection::hydrate()`
+    deep-hydration of both nested properties).
+  - Extends the bilingual `business-documents.md` wiki guide (FR canonical
+    + EN mirror) with both classes, a partial-delivery hydration example,
+    and bumps the README overview table (20 → 22) and both wiki indexes.
 - Attaches the reminders to the payment plan: adds a `reminders` property
   (`null|array|PaymentReminder`, deep-hydrated through `#[HydrateWith]`) to
   both `PaymentInstallment` (reminders for that installment) and

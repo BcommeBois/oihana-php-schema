@@ -7,6 +7,7 @@ use xyz\oihana\schema\constants\traits\business\documents\AppliedEcoFeeTrait;
 use xyz\oihana\schema\constants\traits\business\documents\BusinessDocumentLineTrait;
 use xyz\oihana\schema\constants\traits\business\documents\BusinessDocumentTrait;
 use xyz\oihana\schema\constants\traits\business\documents\CreditNoteTrait;
+use xyz\oihana\schema\constants\traits\business\documents\DeliveryLineTrait;
 use xyz\oihana\schema\constants\traits\business\documents\DeliveryNoteTrait;
 use xyz\oihana\schema\constants\traits\business\documents\DocumentTotalsTrait;
 use xyz\oihana\schema\constants\traits\business\documents\EcoFeeRuleTrait;
@@ -14,6 +15,7 @@ use xyz\oihana\schema\constants\traits\business\documents\InvoiceTrait;
 use xyz\oihana\schema\constants\traits\business\documents\PaymentInstallmentTrait;
 use xyz\oihana\schema\constants\traits\business\documents\PaymentReminderTrait;
 use xyz\oihana\schema\constants\traits\business\documents\PaymentScheduleTrait;
+use xyz\oihana\schema\constants\traits\business\documents\ProofOfDeliveryTrait;
 use xyz\oihana\schema\constants\traits\business\documents\PurchaseOrderTrait;
 use xyz\oihana\schema\constants\traits\business\documents\QuoteTrait;
 use xyz\oihana\schema\constants\traits\business\documents\ReceiptTrait;
@@ -35,6 +37,7 @@ trait DocumentsTrait
         BusinessDocumentLineTrait ,
         BusinessDocumentTrait     ,
         CreditNoteTrait           ,
+        DeliveryLineTrait         ,
         DeliveryNoteTrait         ,
         DocumentTotalsTrait       ,
         EcoFeeRuleTrait           ,
@@ -42,6 +45,7 @@ trait DocumentsTrait
         PaymentInstallmentTrait   ,
         PaymentReminderTrait      ,
         PaymentScheduleTrait      ,
+        ProofOfDeliveryTrait      ,
         PurchaseOrderTrait        ,
         QuoteTrait                ,
         ReceiptTrait              ,

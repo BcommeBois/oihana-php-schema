@@ -8,7 +8,7 @@ The `xyz\oihana\schema\business\documents` namespace models the **quote → purc
 
 ## Status of this namespace
 
-This page documents the whole namespace: the **cross-cutting value objects** (`TaxDetail`, `Adjustment`, `PaymentReminder`…), the complete **document hierarchy** (`BusinessDocument`, `Quote`, `PurchaseOrder`, `Invoice`, `CreditNote`, `DeliveryNote`, `Receipt`, `Statement`) and **export** (`BusinessDocumentExporter`, `JsonLdExporter`).
+This page documents the whole namespace: the **cross-cutting value objects** (`TaxDetail`, `Adjustment`, `PaymentReminder`, `DeliveryLine`, `ProofOfDelivery`…), the complete **document hierarchy** (`BusinessDocument`, `Quote`, `PurchaseOrder`, `Invoice`, `CreditNote`, `DeliveryNote`, `Receipt`, `Statement`) and **export** (`BusinessDocumentExporter`, `JsonLdExporter`).
 
 ---
 
@@ -30,6 +30,8 @@ This page documents the whole namespace: the **cross-cutting value objects** (`T
 | Represent an invoice. | [`Invoice`](#invoice) |
 | Represent a credit note correcting an invoice. | [`CreditNote`](#creditnote) |
 | Represent a delivery note. | [`DeliveryNote`](#deliverynote) |
+| Detail, line by line, what was actually delivered (versus what was ordered). | [`DeliveryLine`](#deliveryline) |
+| Record the confirmation that a delivery was received (signatory, date, noted discrepancy). | [`ProofOfDelivery`](#proofofdelivery) |
 | Represent a payment receipt. | [`Receipt`](#receipt) |
 | Represent a periodic account statement. | [`Statement`](#statement) / [`StatementEntry`](#statemententry) |
 | Serialize a business document (JSON-LD, and tomorrow UBL/Factur-X…). | [`BusinessDocumentExporter`](#businessdocumentexporter) / [`JsonLdExporter`](#jsonldexporter) |
@@ -197,6 +199,38 @@ $installment->reminders[ 0 ]->adjustments[ 0 ]->amount->value === 40 ;   // true
 
 Reminders also exist at the level of the whole schedule (`PaymentSchedule::$reminders`), not only per installment.
 
+A `DeliveryNote` can detail, line by line, what was actually delivered versus what was ordered (partial delivery, backorder), and carry the delivery confirmation:
+
+```php
+use oihana\reflect\Reflection;
+use xyz\oihana\schema\business\documents\DeliveryLine;
+use xyz\oihana\schema\business\documents\DeliveryNote;
+use xyz\oihana\schema\business\documents\ProofOfDelivery;
+
+$note = new Reflection()->hydrate
+([
+    DeliveryNote::LINES =>
+    [
+        [
+            DeliveryLine::POSITION           => 1 ,
+            DeliveryLine::ORDERED_QUANTITY   => 100 ,
+            DeliveryLine::DELIVERED_QUANTITY => 80 ,
+            DeliveryLine::BACKORDER_QUANTITY => 20 ,
+            DeliveryLine::BACKORDER_REASON   => 'Out of stock' ,
+        ],
+    ],
+    DeliveryNote::PROOF_OF_DELIVERY =>
+    [
+        ProofOfDelivery::SIGNATORY => 'Jane Doe' ,
+        ProofOfDelivery::DATE      => '2026-01-20' ,
+    ],
+], DeliveryNote::class);
+
+$note->lines[ 0 ] instanceof DeliveryLine ;             // true
+$note->lines[ 0 ]->backorderQuantity === 20 ;           // true
+$note->proofOfDelivery instanceof ProofOfDelivery ;     // true
+```
+
 ---
 
 ## Class catalog
@@ -217,7 +251,9 @@ Reminders also exist at the level of the whole schedule (`PaymentSchedule::$remi
 | <a id="purchaseorder"></a>`PurchaseOrder` | `BusinessDocument` | A purchase order — the customer's confirmed commitment, typically following the acceptance of a `Quote`: `referencesQuote` (→ one or more `Quote`), the upstream link of the cycle and the data behind the `BusinessDocumentStatus::CONVERTED` status. |
 | <a id="invoice"></a>`Invoice` | `BusinessDocument` | An invoice — the final document of the quote → order → invoice cycle: `accountId`, `billingPeriod`, `broker`, `category`, `confirmationNumber`, `paymentDueDate`, `paymentStatus` (→ `org\schema\enumerations\status\PaymentStatusType`, reusing its existing member classes `PaymentComplete`/`PaymentDue`/`PaymentDeclined`/`PaymentPastDue`/`PaymentAutomaticallyApplied`), `provider`, `referencesOrder` (→ one or more of this namespace's own `PurchaseOrder`), `scheduledPaymentDate`. Reuses `org\schema\Invoice`'s property names, but deliberately does not share a property trait with it: `referencesOrder` must point at the house `PurchaseOrder` (not `org\schema\Order`), and some of the mirror's unions (`broker`, `category`, `billingPeriod`) predate the `null\|array\|X` convention — widening them for a shared trait would mean editing the mirror, which this hierarchy avoids (see [`BusinessDocument`](#businessdocument)). |
 | <a id="creditnote"></a>`CreditNote` | `BusinessDocument` | A credit note — corrects or cancels all or part of an `Invoice` already issued: `reason` (free-text justification, same name/type as `Adjustment::$reason`), `referencesInvoice` (→ one or more `Invoice`). The corrected amount flows through the inherited `totals` (a positive recap); it's the document type (`CreditNote`) itself that carries the "this reduces what's owed" meaning, not a sign convention. |
-| <a id="deliverynote"></a>`DeliveryNote` | `BusinessDocument` | A delivery note — attests the physical delivery of a `PurchaseOrder`'s goods: `orderDelivery` (→ `org\schema\ParcelDelivery`, reusing the property name and type already carried by `org\schema\Order` rather than re-inventing shipment tracking). |
+| <a id="deliverynote"></a>`DeliveryNote` | `BusinessDocument` | A delivery note — attests the physical delivery of a `PurchaseOrder`'s goods: `orderDelivery` (→ `org\schema\ParcelDelivery`, reusing the property name and type already carried by `org\schema\Order` rather than re-inventing shipment tracking), `lines` (a list of `DeliveryLine`, the line-by-line detail), `proofOfDelivery` (→ `ProofOfDelivery`). |
+| <a id="deliveryline"></a>`DeliveryLine` | `StructuredValue` | A `DeliveryNote` line: `position` (references the originating purchase-order line), `item`, `orderedQuantity`/`deliveredQuantity`/`backorderQuantity` (+ `backorderReason`), `batchNumber`/`serialNumbers` (optional traceability). Closes the gap confirmed by UBL (`DespatchLine`), GS1/EDIFACT, Odoo and SAP alike: without it, a delivery note can only say "a parcel shipped," not how much of what was actually delivered — a blind spot the moment a delivery is only partial. |
+| <a id="proofofdelivery"></a>`ProofOfDelivery` | `StructuredValue` | The confirmation that a delivery was received: `signatory`, `date`, `discrepancyNote`. A trace, not an engine (same logic as `PaymentReminder`): signature capture and dispute resolution stay consumer-side concerns. |
 | <a id="receipt"></a>`Receipt` | `BusinessDocument` | A receipt — proof that the payment of an `Invoice` was received: `confirmationNumber`, `paymentMethod`/`paymentMethodId` (reused from `org\schema\Invoice`), `referencesInvoice` (→ one or more `Invoice`). The received amount isn't duplicated here (already covered by the inherited `totals`); the date received is the inherited `issueDate`. |
 | <a id="statement"></a>`Statement` | `BusinessDocument` | A statement — recaps, over a period, the documents that moved an account's balance: `billingPeriod` (reusing the name already used by `org\schema\Invoice`), `entries` (a list of `StatementEntry`), `openingBalance`/`closingBalance` (`MonetaryAmount`, no Schema.org equivalent — UBL names them `BeginningBalanceAmount`/`EndingBalanceAmount`). The only class of the lot that isn't a thin single-property subclass: it introduces its own line concept. |
 | <a id="statemententry"></a>`StatementEntry` | `StructuredValue` | A `Statement` line: `document` (the related `BusinessDocument`, or a plain string when the full object isn't available), `date`, `amount`, `balance` (the running balance after this entry). Distinct from `BusinessDocumentLine`, which prices a product/service, not an account movement. |

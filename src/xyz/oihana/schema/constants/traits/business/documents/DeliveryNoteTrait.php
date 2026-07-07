@@ -11,5 +11,7 @@ namespace xyz\oihana\schema\constants\traits\business\documents;
  */
 trait DeliveryNoteTrait
 {
-    const string ORDER_DELIVERY = 'orderDelivery' ;
+    const string LINES             = 'lines' ;
+    const string ORDER_DELIVERY    = 'orderDelivery' ;
+    const string PROOF_OF_DELIVERY = 'proofOfDelivery' ;
 }

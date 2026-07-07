@@ -10,7 +10,9 @@ use oihana\reflect\Reflection;
 use org\schema\ParcelDelivery;
 
 use xyz\oihana\schema\business\documents\BusinessDocument;
+use xyz\oihana\schema\business\documents\DeliveryLine;
 use xyz\oihana\schema\business\documents\DeliveryNote;
+use xyz\oihana\schema\business\documents\ProofOfDelivery;
 use xyz\oihana\schema\constants\Oihana;
 
 class DeliveryNoteTest extends TestCase
@@ -27,7 +29,10 @@ class DeliveryNoteTest extends TestCase
 
     public function testTraitConstants(): void
     {
-        $this->assertSame( 'orderDelivery' , DeliveryNote::ORDER_DELIVERY );
+        $this->assertSame( 'lines'           , DeliveryNote::LINES             );
+        $this->assertSame( 'orderDelivery'   , DeliveryNote::ORDER_DELIVERY    );
+        $this->assertSame( 'proofOfDelivery' , DeliveryNote::PROOF_OF_DELIVERY );
+
         $this->assertSame( Oihana::ORDER_DELIVERY , DeliveryNote::ORDER_DELIVERY );
     }
 
@@ -35,7 +40,9 @@ class DeliveryNoteTest extends TestCase
     {
         $note = new DeliveryNote() ;
 
-        $this->assertNull( $note->orderDelivery ?? null );
+        $this->assertNull( $note->lines           ?? null );
+        $this->assertNull( $note->orderDelivery   ?? null );
+        $this->assertNull( $note->proofOfDelivery ?? null );
     }
 
     /**
@@ -53,6 +60,29 @@ class DeliveryNoteTest extends TestCase
 
         $this->assertInstanceOf( ParcelDelivery::class , $note->orderDelivery ) ;
         $this->assertSame( 'TRACK-001' , $note->orderDelivery->trackingNumber ) ;
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testReflectionHydratesLinesAndProofOfDelivery(): void
+    {
+        $note = new Reflection()->hydrate
+        (
+            [
+                DeliveryNote::LINES =>
+                [
+                    [ DeliveryLine::POSITION => 1 , DeliveryLine::ORDERED_QUANTITY => 100 , DeliveryLine::DELIVERED_QUANTITY => 80 ] ,
+                ] ,
+                DeliveryNote::PROOF_OF_DELIVERY => [ ProofOfDelivery::SIGNATORY => 'Jane Doe' ] ,
+            ],
+            DeliveryNote::class
+        );
+
+        $this->assertInstanceOf( DeliveryLine::class , $note->lines[ 0 ] ) ;
+        $this->assertSame( 80 , $note->lines[ 0 ]->deliveredQuantity ) ;
+        $this->assertInstanceOf( ProofOfDelivery::class , $note->proofOfDelivery ) ;
+        $this->assertSame( 'Jane Doe' , $note->proofOfDelivery->signatory ) ;
     }
 
     public function testInheritsBusinessDocumentProperties(): void
