@@ -59,12 +59,13 @@ $line = new BusinessDocumentLine
 
 As everywhere else in the library, the constructor only performs a raw assignment: `$line->taxes[0]` stays an array until you go through `new \oihana\reflect\Reflection()->hydrate(...)`, which honors each class's `#[HydrateWith]`/`#[HydrateAs]` attributes and turns the nested arrays into `TaxDetail`/`Adjustment`/`MonetaryAmount` objects.
 
-A full `Quote`, with its lines and payment schedule, hydrates the same way:
+A full `Quote`, with its lines, a **discount applied to the whole document**, and its recap, hydrates the same way:
 
 ```php
 use oihana\reflect\Reflection;
 use xyz\oihana\schema\business\documents\Quote;
 use xyz\oihana\schema\enumerations\BusinessDocumentStatus;
+use xyz\oihana\schema\enumerations\PriceComponentType;
 
 $quote = new Reflection()->hydrate
 ([
@@ -73,12 +74,23 @@ $quote = new Reflection()->hydrate
     Quote::VALID_THROUGH  => '2026-02-15' ,
     Quote::STATUS         => BusinessDocumentStatus::DRAFT ,
     Quote::DOCUMENT_LINES => [ [ 'position' => 1 , 'quantity' => 5 ] ] ,
-    Quote::TOTALS         => [ 'total' => [ 'value' => 120 , 'currency' => 'EUR' ] ] ,
+    Quote::ADJUSTMENTS    =>
+    [
+        [ 'type' => PriceComponentType::DISCOUNT , 'percentage' => 5 , 'reason' => 'Order-level discount' ] ,
+    ],
+    Quote::TOTALS =>
+    [
+        'total'          => [ 'value' => 114 , 'currency' => 'EUR' ] ,
+        'allowanceTotal' => [ 'value' => 6   , 'currency' => 'EUR' ] ,
+    ],
 ], Quote::class);
 
 $quote->documentLines[ 0 ] instanceof \xyz\oihana\schema\business\documents\BusinessDocumentLine ; // true
-$quote->totals instanceof \xyz\oihana\schema\business\documents\DocumentTotals ;                    // true
+$quote->adjustments[ 0 ]   instanceof \xyz\oihana\schema\business\documents\Adjustment ;            // true
+$quote->totals             instanceof \xyz\oihana\schema\business\documents\DocumentTotals ;        // true
 ```
+
+**Line vs document.** An `Adjustment` applies either to a single line (`BusinessDocumentLine::$adjustments` — a discount specific to one item) or to the whole document (`BusinessDocument::$adjustments` — a document-level discount, or a shipping/packaging fee charged globally), following UBL's `AllowanceCharge`. The combined effect of the document-level adjustments can be read back, if needed, from the optional derived fields `DocumentTotals::$allowanceTotal` (total allowances) and `DocumentTotals::$chargeTotal` (total charges/fees), mirroring UBL's `AllowanceTotalAmount`/`ChargeTotalAmount`.
 
 An `Invoice` references the `PurchaseOrder` it bills (not `org\schema\Order` — see [`Invoice`](#invoice) for why), then exports to JSON-LD via `JsonLdExporter`:
 
@@ -128,11 +140,11 @@ $statement->entries[ 0 ] instanceof StatementEntry ; // true
 | <a id="adjustment"></a>`Adjustment` | `StructuredValue` | A price adjustment (`type`, `amount` or `percentage`, `reason`, `includedInBase`), inspired by UBL's `AllowanceCharge`. Covers discount, surcharge, shipping fee, environmental fee, deposit and packaging through the single `type` property (see `PriceComponentType`). |
 | <a id="ecofeerule"></a>`EcoFeeRule` | `StructuredValue` | The calculation rule of an environmental fee (`category`, `rate`, `validFrom`, `validThrough`) — a catalog concept, with no monetary effect of its own. |
 | <a id="appliedecofee"></a>`AppliedEcoFee` | `StructuredValue` | The record of an `EcoFeeRule` applied on a line (`rule`, `quantity`, `amount`) — the actual monetary effect always flows through an `Adjustment` of type `environmentalFee`. |
-| <a id="documenttotals"></a>`DocumentTotals` | `StructuredValue` | The monetary summary of a document (`subtotal`, `totalTax`, `total`, `prepaidAmount`, `balanceDue`), each amount a `MonetaryAmount`. A dedicated object rather than a reuse of `CompoundPriceSpecification`, whose Schema.org role (bundling prices that apply in parallel, e.g. electricity + cleaning) doesn't match a HT/tax/TTC recap. |
+| <a id="documenttotals"></a>`DocumentTotals` | `StructuredValue` | The monetary summary of a document (`subtotal`, `totalTax`, `total`, `prepaidAmount`, `balanceDue`, plus the optional derived totals `allowanceTotal`/`chargeTotal` of the document-level adjustments, mirroring UBL `AllowanceTotalAmount`/`ChargeTotalAmount`), each amount a `MonetaryAmount`. A dedicated object rather than a reuse of `CompoundPriceSpecification`, whose Schema.org role (bundling prices that apply in parallel, e.g. electricity + cleaning) doesn't match a HT/tax/TTC recap. |
 | <a id="businessdocumentline"></a>`BusinessDocumentLine` | `StructuredValue` | A document line (`item`, `position`, `quantity`, `unit`, `price`, `taxes`, `adjustments`, `subtotal`, `total`) — `taxes` and `adjustments` are scoped to the line, so a document can mix lines taxed at different rates. |
 | <a id="paymentschedule"></a>`PaymentSchedule` | `StructuredValue` | A payment schedule (`installments`, a list of `PaymentInstallment`). Base version: reminders and a per-installment status are a later iteration. |
 | <a id="paymentinstallment"></a>`PaymentInstallment` | `StructuredValue` | A single installment (`dueDate`, `amount` or `percentage`). |
-| <a id="businessdocument"></a>`BusinessDocument` | `Intangible` | The common parent of the quote → order → invoice cycle: `attachments`, `currency`, `customer`, `documentLines`, `issueDate`, `paymentTerms`, `references`, `seller`, `status` (→ `BusinessDocumentStatus`), `taxes`, `totals`. Extends `Intangible` rather than reusing `org\schema\Order`/`org\schema\Invoice`: a business document qualifies a transaction, it is not an addressable resource in its own right — and this keeps the Schema.org mirror untouched (existing consumers of `org\schema\Order`/`Invoice` see no change). |
+| <a id="businessdocument"></a>`BusinessDocument` | `Intangible` | The common parent of the quote → order → invoice cycle: `adjustments` (document-level adjustments, see `Adjustment`), `attachments`, `currency`, `customer`, `documentLines`, `issueDate`, `paymentTerms`, `references`, `seller`, `status` (→ `BusinessDocumentStatus`), `taxes`, `totals`. Extends `Intangible` rather than reusing `org\schema\Order`/`org\schema\Invoice`: a business document qualifies a transaction, it is not an addressable resource in its own right — and this keeps the Schema.org mirror untouched (existing consumers of `org\schema\Order`/`Invoice` see no change). |
 | <a id="quote"></a>`Quote` | `BusinessDocument` | A quote — adds `validThrough` (reusing the Schema.org property already carried by `PriceSpecification`/`Offer`, rather than a new name). Not to be confused with `org\schema\creativeWork\Quotation`, which is an unrelated **literary citation**. |
 | <a id="purchaseorder"></a>`PurchaseOrder` | `BusinessDocument` | A purchase order — the customer's confirmed commitment, typically following the acceptance of a `Quote`. Carries no property of its own in this version. |
 | <a id="invoice"></a>`Invoice` | `BusinessDocument` | An invoice — the final document of the quote → order → invoice cycle: `accountId`, `billingPeriod`, `broker`, `category`, `confirmationNumber`, `paymentDueDate`, `paymentStatus` (→ `org\schema\enumerations\status\PaymentStatusType`, reusing its existing member classes `PaymentComplete`/`PaymentDue`/`PaymentDeclined`/`PaymentPastDue`/`PaymentAutomaticallyApplied`), `provider`, `referencesOrder` (→ this namespace's own `PurchaseOrder`), `scheduledPaymentDate`. Reuses `org\schema\Invoice`'s property names, but deliberately does not share a property trait with it: `referencesOrder` must point at the house `PurchaseOrder` (not `org\schema\Order`), and some of the mirror's unions (`broker`, `category`, `billingPeriod`) predate the `null\|array\|X` convention — widening them for a shared trait would mean editing the mirror, which this hierarchy avoids (see [`BusinessDocument`](#businessdocument)). |

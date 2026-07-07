@@ -11,6 +11,7 @@ use org\schema\Intangible;
 use org\schema\Organization;
 use org\schema\Person;
 
+use xyz\oihana\schema\business\documents\Adjustment;
 use xyz\oihana\schema\business\documents\BusinessDocument;
 use xyz\oihana\schema\business\documents\BusinessDocumentLine;
 use xyz\oihana\schema\business\documents\DocumentTotals;
@@ -33,6 +34,7 @@ class BusinessDocumentTest extends TestCase
 
     public function testTraitConstants(): void
     {
+        $this->assertSame( 'adjustments'    , BusinessDocument::ADJUSTMENTS    );
         $this->assertSame( 'attachments'    , BusinessDocument::ATTACHMENTS    );
         $this->assertSame( 'currency'       , BusinessDocument::CURRENCY       );
         $this->assertSame( 'customer'       , BusinessDocument::CUSTOMER       );
@@ -45,14 +47,16 @@ class BusinessDocumentTest extends TestCase
         $this->assertSame( 'taxes'          , BusinessDocument::TAXES          );
         $this->assertSame( 'totals'         , BusinessDocument::TOTALS         );
 
-        $this->assertSame( Oihana::CUSTOMER , BusinessDocument::CUSTOMER );
-        $this->assertSame( Oihana::TOTALS   , BusinessDocument::TOTALS   );
+        $this->assertSame( Oihana::ADJUSTMENTS , BusinessDocument::ADJUSTMENTS );
+        $this->assertSame( Oihana::CUSTOMER    , BusinessDocument::CUSTOMER    );
+        $this->assertSame( Oihana::TOTALS      , BusinessDocument::TOTALS      );
     }
 
     public function testDefaults(): void
     {
         $document = new BusinessDocument() ;
 
+        $this->assertNull( $document->adjustments   ?? null );
         $this->assertNull( $document->attachments   ?? null );
         $this->assertNull( $document->currency      ?? null );
         $this->assertNull( $document->customer      ?? null );
@@ -93,6 +97,7 @@ class BusinessDocumentTest extends TestCase
         (
             [
                 BusinessDocument::DOCUMENT_LINES => [ [ 'position' => 1 , 'quantity' => 2 ] ] ,
+                BusinessDocument::ADJUSTMENTS    => [ [ 'type' => 'discount' , 'percentage' => 5 , 'reason' => 'Order-level discount' ] ] ,
                 BusinessDocument::TAXES          => [ [ 'category' => 'VAT' , 'rate' => 20.0 ] ] ,
                 BusinessDocument::TOTALS         => [ 'subtotal' => [ 'value' => 100 , 'currency' => 'EUR' ] ] ,
                 BusinessDocument::PAYMENT_TERMS  => [ 'installments' => [ [ 'dueDate' => '2026-02-01' , 'percentage' => 100.0 ] ] ] ,
@@ -103,6 +108,10 @@ class BusinessDocumentTest extends TestCase
         $this->assertInstanceOf( BusinessDocumentLine::class , $document->documentLines[ 0 ] ) ;
         $this->assertSame( 1 , $document->documentLines[ 0 ]->position ) ;
 
+        $this->assertInstanceOf( Adjustment::class , $document->adjustments[ 0 ] ) ;
+        $this->assertSame( 5 , $document->adjustments[ 0 ]->percentage ) ;
+        $this->assertSame( 'Order-level discount' , $document->adjustments[ 0 ]->reason ) ;
+
         $this->assertInstanceOf( TaxDetail::class , $document->taxes[ 0 ] ) ;
 
         $this->assertInstanceOf( DocumentTotals::class , $document->totals ) ;
@@ -110,6 +119,17 @@ class BusinessDocumentTest extends TestCase
 
         $this->assertInstanceOf( PaymentSchedule::class , $document->paymentTerms ) ;
         $this->assertCount( 1 , $document->paymentTerms->installments ) ;
+    }
+
+    public function testConstructorAcceptsDocumentLevelAdjustments(): void
+    {
+        $adjustment = new Adjustment([ Adjustment::TYPE => 'shipping' , Adjustment::REASON => 'Carriage' ]) ;
+
+        $document = new BusinessDocument([ BusinessDocument::ADJUSTMENTS => [ $adjustment ] ]) ;
+
+        $this->assertIsArray( $document->adjustments ) ;
+        $this->assertInstanceOf( Adjustment::class , $document->adjustments[ 0 ] ) ;
+        $this->assertSame( 'Carriage' , $document->adjustments[ 0 ]->reason ) ;
     }
 
     public function testPaymentTermsAcceptsFreeText(): void

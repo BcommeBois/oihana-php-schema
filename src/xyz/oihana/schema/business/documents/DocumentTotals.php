@@ -12,7 +12,8 @@ use xyz\oihana\schema\constants\traits\business\documents\DocumentTotalsTrait;
 
 /**
  * The monetary summary of a {@see BusinessDocument} : total excluding tax,
- * total tax, total including tax, amount already prepaid and balance due.
+ * total tax, total including tax, amount already prepaid and balance due,
+ * plus the optional document-level allowance (discount) and charge totals.
  *
  * A dedicated value object rather than a reuse of
  * {@see \org\schema\CompoundPriceSpecification} : that schema.org type
@@ -38,11 +39,32 @@ class DocumentTotals extends StructuredValue
     public const string CONTEXT = Oihana::SCHEMA ;
 
     /**
+     * The total of the document-level allowances (discounts) — the summed
+     * effect of the discount {@see Adjustment} carried by the document,
+     * mirroring UBL's `AllowanceTotalAmount`. A derived recap value ; the
+     * individual allowances remain on {@see BusinessDocument::$adjustments}.
+     * @var MonetaryAmount|array|null
+     */
+    #[HydrateAs(MonetaryAmount::class)]
+    public null|array|MonetaryAmount $allowanceTotal ;
+
+    /**
      * The remaining amount to be paid (total − prepaidAmount).
      * @var MonetaryAmount|array|null
      */
     #[HydrateAs(MonetaryAmount::class)]
     public null|array|MonetaryAmount $balanceDue ;
+
+    /**
+     * The total of the document-level charges (surcharges, shipping fees,
+     * packaging...) — the summed effect of the charge {@see Adjustment}
+     * carried by the document, mirroring UBL's `ChargeTotalAmount`. A derived
+     * recap value ; the individual charges remain on
+     * {@see BusinessDocument::$adjustments}.
+     * @var MonetaryAmount|array|null
+     */
+    #[HydrateAs(MonetaryAmount::class)]
+    public null|array|MonetaryAmount $chargeTotal ;
 
     /**
      * The amount already paid (e.g. a deposit or down payment).

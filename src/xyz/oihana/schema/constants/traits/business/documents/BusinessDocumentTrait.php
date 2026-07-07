@@ -11,6 +11,7 @@ namespace xyz\oihana\schema\constants\traits\business\documents;
  */
 trait BusinessDocumentTrait
 {
+    const string ADJUSTMENTS    = 'adjustments' ;
     const string ATTACHMENTS    = 'attachments' ;
     const string CURRENCY       = 'currency' ;
     const string CUSTOMER       = 'customer' ;

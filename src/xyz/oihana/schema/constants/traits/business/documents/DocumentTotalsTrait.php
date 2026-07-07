@@ -11,9 +11,11 @@ namespace xyz\oihana\schema\constants\traits\business\documents;
  */
 trait DocumentTotalsTrait
 {
-    const string BALANCE_DUE    = 'balanceDue' ;
-    const string PREPAID_AMOUNT = 'prepaidAmount' ;
-    const string SUBTOTAL       = 'subtotal' ;
-    const string TOTAL          = 'total' ;
-    const string TOTAL_TAX      = 'totalTax' ;
+    const string ALLOWANCE_TOTAL = 'allowanceTotal' ;
+    const string BALANCE_DUE     = 'balanceDue' ;
+    const string CHARGE_TOTAL    = 'chargeTotal' ;
+    const string PREPAID_AMOUNT  = 'prepaidAmount' ;
+    const string SUBTOTAL        = 'subtotal' ;
+    const string TOTAL           = 'total' ;
+    const string TOTAL_TAX       = 'totalTax' ;
 }

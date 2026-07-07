@@ -8,6 +8,31 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds a document-level `adjustments` property to
+  `xyz\oihana\schema\business\documents\BusinessDocument` (Lot 5) —
+  completing the UBL `AllowanceCharge` design where an `Adjustment` applies
+  either to a single `BusinessDocumentLine` **or** to the whole document
+  (a footer discount, a global shipping fee, packaging billed at the
+  document level). Typed `null|array|Adjustment` with `#[HydrateWith(
+  Adjustment::class)]`, mirroring the existing `taxes` handling. The
+  `ADJUSTMENTS` property-name constant is declared on `BusinessDocumentTrait`
+  (already present on `BusinessDocumentLineTrait` with the same value, so the
+  two compose cleanly through `DocumentsTrait` under PHP 8.4), making
+  `BusinessDocument::ADJUSTMENTS` and `Oihana::ADJUSTMENTS` both resolve.
+  - Adds the optional derived `allowanceTotal`/`chargeTotal` amounts to
+    `DocumentTotals` (with the `ALLOWANCE_TOTAL`/`CHARGE_TOTAL` trait
+    constants), mirroring UBL's `AllowanceTotalAmount`/`ChargeTotalAmount`
+    monetary-total breakdown: the summed effect of the document-level
+    allowances (discounts) and charges (surcharges/fees). Both are
+    `null|array|MonetaryAmount` recap values — the individual adjustments
+    remain on `BusinessDocument::$adjustments`.
+  - Extends `BusinessDocumentTest` (default, constant + `Oihana` aggregation,
+    constructor and `Reflection::hydrate()` of an `Adjustment` array) and
+    `DocumentTotalsTest` (the two new amounts across defaults, constants and
+    deep hydration).
+  - Extends the bilingual `business-documents.md` wiki guide (FR canonical +
+    EN mirror): the full `Quote` example gains a document-level discount and
+    an `allowanceTotal`, and the line/document distinction is spelled out.
 - Adds `CreditNote`, `DeliveryNote`, `Receipt` and `Statement`/`StatementEntry`
   to `xyz\oihana\schema\business\documents` (Lot 4, closing the
   business-documents workstream) — the quote → purchase order → invoice

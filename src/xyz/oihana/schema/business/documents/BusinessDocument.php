@@ -43,6 +43,15 @@ class BusinessDocument extends Intangible
     public const string CONTEXT = Oihana::SCHEMA ;
 
     /**
+     * The document-level adjustments (discounts, surcharges, shipping fees,
+     * packaging...) applying to the whole document, as opposed to a specific
+     * line's {@see BusinessDocumentLine::$adjustments}.
+     * @var null|array|Adjustment
+     */
+    #[HydrateWith(Adjustment::class)]
+    public null|array|Adjustment $adjustments ;
+
+    /**
      * Files attached to the document (e.g. a signed PDF, supporting documents).
      * @var null|array|string|MediaObject
      */
