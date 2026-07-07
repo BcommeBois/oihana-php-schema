@@ -346,6 +346,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Changed
 
+- Documents `Receipt`'s direct/cash-sale shape (Lot 8 of the post-audit
+  business-documents backlog) — no new property, since `Receipt` already
+  inherits `documentLines`/`taxes`/`totals` from `BusinessDocument` and
+  `referencesInvoice` is already optional. Clarifies in the class docblock,
+  the bilingual `business-documents.md` wiki guide (FR + EN) and a dedicated
+  test that a receipt need not reference an invoice at all : a point-of-sale
+  sale with no prior invoice (QuickBooks' `SalesReceipt`, Xero's `RECEIVE`
+  bank transaction) leaves `referencesInvoice` null and carries the sale on
+  the inherited `documentLines`/`taxes`/`totals`, so no separate
+  "sales receipt" type is needed.
 - Harmonizes the whole business-document cycle's `references*` links to
   **collections**: `Invoice::$referencesOrder`,
   `CreditNote::$referencesInvoice` and `Receipt::$referencesInvoice` switch

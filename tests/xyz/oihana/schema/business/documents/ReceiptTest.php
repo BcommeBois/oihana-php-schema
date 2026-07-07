@@ -7,9 +7,14 @@ use ReflectionException;
 
 use oihana\reflect\Reflection;
 
+use org\schema\MonetaryAmount;
+
 use xyz\oihana\schema\business\documents\BusinessDocument;
+use xyz\oihana\schema\business\documents\BusinessDocumentLine;
+use xyz\oihana\schema\business\documents\DocumentTotals;
 use xyz\oihana\schema\business\documents\Invoice;
 use xyz\oihana\schema\business\documents\Receipt;
+use xyz\oihana\schema\business\documents\TaxDetail;
 use xyz\oihana\schema\constants\Oihana;
 
 class ReceiptTest extends TestCase
@@ -107,5 +112,34 @@ class ReceiptTest extends TestCase
         $receipt = new Receipt([ BusinessDocument::CURRENCY => 'EUR' ]) ;
 
         $this->assertSame( 'EUR' , $receipt->currency ) ;
+    }
+
+    /**
+     * A direct/cash sale with no prior invoice : `referencesInvoice` stays
+     * null and the sale is carried on the inherited `documentLines`/`taxes`/
+     * `totals`, exactly as any other business document.
+     *
+     * @throws ReflectionException
+     */
+    public function testDirectSaleWithoutInvoice(): void
+    {
+        $receipt = new Reflection()->hydrate
+        (
+            [
+                Receipt::CONFIRMATION_NUMBER => 'POS-2026-001' ,
+                Receipt::PAYMENT_METHOD      => 'Cash' ,
+                BusinessDocument::DOCUMENT_LINES => [ [ 'position' => 1 , 'quantity' => 2 ] ] ,
+                BusinessDocument::TAXES          => [ [ 'category' => 'VAT' , 'rate' => 20.0 ] ] ,
+                BusinessDocument::TOTALS         => [ 'total' => [ 'value' => 24 , 'currency' => 'EUR' ] ] ,
+            ],
+            Receipt::class
+        );
+
+        $this->assertNull( $receipt->referencesInvoice ?? null ) ;
+        $this->assertInstanceOf( BusinessDocumentLine::class , $receipt->documentLines[ 0 ] ) ;
+        $this->assertInstanceOf( TaxDetail::class , $receipt->taxes[ 0 ] ) ;
+        $this->assertInstanceOf( DocumentTotals::class , $receipt->totals ) ;
+        $this->assertInstanceOf( MonetaryAmount::class , $receipt->totals->total ) ;
+        $this->assertSame( 'POS-2026-001' , $receipt->confirmationNumber ) ;
     }
 }
