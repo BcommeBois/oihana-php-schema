@@ -74,6 +74,40 @@ The descriptive `ProductProperty` trait (essence, appearance, certification, col
 
 ---
 
+## Pricing conditions
+
+A **`PricingCondition`** is a conditional pricing rule: a discount — or a tariff substitution — granted to a scoped set of buyers on a scoped set of items, valid over a period. It is the sell-side twin of a provider buying condition; it is resolved most-specific-first for a given (customer, item, place) context.
+
+What it carries reads in three moves:
+
+| Part | Role |
+|---|---|
+| `selector` (`PricingConditionSelector`) | The scope: **who** (`customerScope` + `customerId`), **what** (`itemScope` + `itemId`, refined by `categoryLevel`) and **where** (`areaServed`). |
+| `adjustment` (`Adjustment`) | The first possible effect: a discount (a signed percentage or amount — negative means a surcharge). |
+| `substitutesSegment` (`PriceSegmentation`) | The second possible effect: the buyer's usual tariff segment is swapped — applied *instead of* a discount (the two effects are mutually exclusive). |
+| `excludedCustomers` / `excludedProducts` | The exceptions carved out of the scope. |
+| `validFrom` / `validThrough` | The validity window. |
+| `quantityDiscount` (`PriceQuantityDiscount`) | An optional quantity-tier effect. |
+
+The scope resolves by decreasing granularity: `INDIVIDUAL` outranks `GROUP`, which outranks `COMPANY`, which outranks `ALL` (same on the item axis: `PRODUCT` › `CATEGORY` › `PROVIDER` › `ALL`). Both axes rely on the `PricingTargetScope` and `PricingItemScope` enumerations.
+
+```json
+{
+  "@type": "PricingCondition",
+  "selector": {
+    "@type": "PricingConditionSelector",
+    "customerScope": "https://schema.oihana.xyz/PricingTargetScope#Group",
+    "customerId": "600214",
+    "itemScope": "https://schema.oihana.xyz/PricingItemScope#Category",
+    "itemId": "05",
+    "categoryLevel": 1
+  },
+  "validThrough": "2026-12-31",
+  "adjustment": { "@type": "Adjustment", "type": "https://schema.oihana.xyz/Discount", "percentage": 10 },
+  "excludedCustomers": [ "600160" ]
+}
+```
+
 ## The satellite catalog
 
 | Class | Role |
@@ -83,6 +117,7 @@ The descriptive `ProductProperty` trait (essence, appearance, certification, col
 | `PriceSegmentation` | The price segmentation of a customer or a product. |
 | `ExtraPriceSpecification` | A surcharge/discount, convertible into a `UnitPriceSpecification` (`toUnitPriceSpecification()`). |
 | `PriceQuantityDiscount` | The quantity discount. |
+| `PricingCondition` / `PricingConditionSelector` | The pricing condition (discount or substitution) and its scope (see above). |
 | `PaymentCondition` / `PaymentMethod` | The accepted payment conditions and methods. |
 | `ProductProviderInfo` | The buying information of a product at its supplier (price, margin, reference quantity). |
 | `ProductWarehouseInfo` / `ProviderProductWarehouseInfo` | The per-warehouse product information, house side and supplier side. |
@@ -97,6 +132,8 @@ The descriptive `ProductProperty` trait (essence, appearance, certification, col
 | `PriceType` | buying, selling, reference prices… | The type of a price in a specification. |
 | `PriceComponentType` | the components of a price | The decomposition of a price (base, surcharges, fees) — also covers discount, surcharge, environmental fee, deposit and packaging. |
 | `BusinessEntityType` | professional, individual… | The customer segmentation of an offer. |
+| `PricingTargetScope` | `INDIVIDUAL` , `GROUP` , `COMPANY` , `ALL` | The granularity of the buyer targeted by a `PricingCondition`. |
+| `PricingItemScope` | `PRODUCT` , `CATEGORY` , `PROVIDER` , `ALL` | The granularity of the item targeted by a `PricingCondition`. |
 
 ---
 

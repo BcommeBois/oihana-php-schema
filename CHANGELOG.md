@@ -6,6 +6,33 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+### Added
+
+- Adds `PricingCondition` and its `PricingConditionSelector`, under
+  `xyz\oihana\schema\products` — a conditional pricing rule: a discount (or a
+  tariff substitution) granted to a scoped set of buyers on a scoped set of
+  items, valid over a period. It is the sell-side twin of a provider buying
+  condition, resolved most-specific-first for a given (customer, item, place)
+  context.
+  - `PricingConditionSelector` (a `StructuredValue`) carries the scope on three
+    axes: the buyer (`customerScope` + `customerId`), the item (`itemScope` +
+    `itemId`, refined by `categoryLevel` for hierarchical categories) and the
+    place (`areaServed`).
+  - `PricingCondition` (a `StructuredValue`) carries exactly one effect — an
+    `Adjustment` (a signed percentage/amount discount) or a `substitutesSegment`
+    (`PriceSegmentation`, applied instead of a discount) — plus
+    `excludedCustomers` / `excludedProducts` exceptions, a `validFrom` /
+    `validThrough` window, and an optional `quantityDiscount`
+    (`PriceQuantityDiscount`). Nested effects and the selector hydrate through
+    `#[HydrateAs]`.
+- Adds the `PricingTargetScope` (`INDIVIDUAL` / `GROUP` / `COMPANY` / `ALL`) and
+  `PricingItemScope` (`PRODUCT` / `CATEGORY` / `PROVIDER` / `ALL`) enumerations
+  under `xyz\oihana\schema\enumerations`, driving the two resolution axes of a
+  `PricingCondition`.
+- Wires the two new property-constant traits into `ProductsTrait` (so the
+  constants surface on the `Oihana` aggregator) and documents the whole in the
+  `products` wiki page (FR + EN).
+
 ## [1.3.0] - 2026-07-07
 
 ### Added

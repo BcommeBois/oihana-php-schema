@@ -74,6 +74,40 @@ Le trait descriptif `ProductProperty` (essence, apparence, certification, couleu
 
 ---
 
+## Les conditions tarifaires
+
+Une **`PricingCondition`** est une règle de prix conditionnelle : une remise — ou une substitution de tarif — accordée à un ensemble ciblé d'acheteurs sur un ensemble ciblé d'articles, valable sur une période. C'est le pendant, côté vente, d'une condition d'achat fournisseur ; on la résout du plus précis au plus général pour un contexte (client, article, lieu) donné.
+
+Ce qu'elle porte se lit en trois temps :
+
+| Partie | Rôle |
+|---|---|
+| `selector` (`PricingConditionSelector`) | Le périmètre : **qui** (`customerScope` + `customerId`), **quoi** (`itemScope` + `itemId`, affiné par `categoryLevel`) et **où** (`areaServed`). |
+| `adjustment` (`Adjustment`) | Le premier effet possible : une remise (pourcentage ou montant signé — négatif = majoration). |
+| `substitutesSegment` (`PriceSegmentation`) | Le second effet possible : on remplace le segment tarifaire habituel de l'acheteur — appliqué *à la place* d'une remise (les deux effets sont exclusifs). |
+| `excludedCustomers` / `excludedProducts` | Les exceptions découpées dans le périmètre. |
+| `validFrom` / `validThrough` | La fenêtre de validité. |
+| `quantityDiscount` (`PriceQuantityDiscount`) | Un effet optionnel par palier de quantité. |
+
+Le périmètre se résout par granularité décroissante : `INDIVIDUAL` prime sur `GROUP`, qui prime sur `COMPANY`, qui prime sur `ALL` (de même côté article : `PRODUCT` › `CATEGORY` › `PROVIDER` › `ALL`). Les deux axes s'appuient sur les énumérations `PricingTargetScope` et `PricingItemScope`.
+
+```json
+{
+  "@type": "PricingCondition",
+  "selector": {
+    "@type": "PricingConditionSelector",
+    "customerScope": "https://schema.oihana.xyz/PricingTargetScope#Group",
+    "customerId": "600214",
+    "itemScope": "https://schema.oihana.xyz/PricingItemScope#Category",
+    "itemId": "05",
+    "categoryLevel": 1
+  },
+  "validThrough": "2026-12-31",
+  "adjustment": { "@type": "Adjustment", "type": "https://schema.oihana.xyz/Discount", "percentage": 10 },
+  "excludedCustomers": [ "600160" ]
+}
+```
+
 ## Le catalogue des satellites
 
 | Classe | Rôle |
@@ -83,6 +117,7 @@ Le trait descriptif `ProductProperty` (essence, apparence, certification, couleu
 | `PriceSegmentation` | La segmentation tarifaire d'un client ou d'un produit. |
 | `ExtraPriceSpecification` | Une majoration/minoration, convertible en `UnitPriceSpecification` (`toUnitPriceSpecification()`). |
 | `PriceQuantityDiscount` | La remise par quantité. |
+| `PricingCondition` / `PricingConditionSelector` | La condition tarifaire (remise ou substitution) et son périmètre (voir ci-dessus). |
 | `PaymentCondition` / `PaymentMethod` | Les conditions et moyens de paiement acceptés. |
 | `ProductProviderInfo` | Les informations d'achat d'un produit chez son fournisseur (prix, marge, quantité de référence). |
 | `ProductWarehouseInfo` / `ProviderProductWarehouseInfo` | Les informations produit par dépôt, côté maison et côté fournisseur. |
@@ -97,6 +132,8 @@ Le trait descriptif `ProductProperty` (essence, apparence, certification, couleu
 | `PriceType` | prix d'achat, de vente, de référence… | Le type d'un prix dans une spécification. |
 | `PriceComponentType` | les composantes d'un prix | La décomposition d'un prix (base, majorations, frais) — inclut aussi remise, majoration, éco-participation, consigne et emballage. |
 | `BusinessEntityType` | professionnel, particulier… | La segmentation de clientèle d'une offre. |
+| `PricingTargetScope` | `INDIVIDUAL` , `GROUP` , `COMPANY` , `ALL` | La granularité de l'acheteur ciblé par une `PricingCondition`. |
+| `PricingItemScope` | `PRODUCT` , `CATEGORY` , `PROVIDER` , `ALL` | La granularité de l'article ciblé par une `PricingCondition`. |
 
 ---
 

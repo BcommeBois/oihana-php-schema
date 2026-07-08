@@ -11,6 +11,8 @@ use xyz\oihana\schema\constants\traits\products\PaymentMethod;
 use xyz\oihana\schema\constants\traits\products\PriceQuantityDiscount;
 use xyz\oihana\schema\constants\traits\products\PriceSegmentation;
 use xyz\oihana\schema\constants\traits\products\PriceSegmentationFactor;
+use xyz\oihana\schema\constants\traits\products\PricingCondition;
+use xyz\oihana\schema\constants\traits\products\PricingConditionSelector;
 use xyz\oihana\schema\constants\traits\products\ProductAdditionalProperty;
 use xyz\oihana\schema\constants\traits\products\ProductProviderInfo;
 use xyz\oihana\schema\constants\traits\products\ProductType;
@@ -33,6 +35,8 @@ trait ProductsTrait
         PriceQuantityDiscount        ,
         PriceSegmentation            ,
         PriceSegmentationFactor      ,
+        PricingCondition             ,
+        PricingConditionSelector     ,
         ProductAdditionalProperty    ,
         ProductProviderInfo          ,
         ProductType                  ,
