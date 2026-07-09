@@ -17,4 +17,5 @@ trait PricingConditionSelector
     public const string CUSTOMER_SCOPE = 'customerScope' ;
     public const string ITEM_ID        = 'itemId' ;
     public const string ITEM_SCOPE     = 'itemScope' ;
+    public const string PROVIDER_ID    = 'providerId' ;
 }

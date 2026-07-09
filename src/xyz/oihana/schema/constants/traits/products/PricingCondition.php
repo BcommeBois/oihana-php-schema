@@ -11,6 +11,7 @@ namespace xyz\oihana\schema\constants\traits\products ;
  */
 trait PricingCondition
 {
+    public const string ADDITIONAL_PROPERTY = 'additionalProperty' ;
     public const string ADJUSTMENT          = 'adjustment' ;
     public const string EXCLUDED_CUSTOMERS  = 'excludedCustomers' ;
     public const string EXCLUDED_PRODUCTS   = 'excludedProducts' ;

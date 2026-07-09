@@ -7,6 +7,7 @@ use ReflectionException;
 
 use oihana\reflect\Reflection;
 
+use org\schema\PropertyValue;
 use org\schema\StructuredValue;
 
 use xyz\oihana\schema\business\documents\Adjustment;
@@ -32,6 +33,7 @@ class PricingConditionTest extends TestCase
 
     public function testConstantsAreWiredOnTheAggregator(): void
     {
+        $this->assertSame( 'additionalProperty'  , Oihana::ADDITIONAL_PROPERTY );
         $this->assertSame( 'adjustment'          , Oihana::ADJUSTMENT          );
         $this->assertSame( 'excludedCustomers'   , Oihana::EXCLUDED_CUSTOMERS  );
         $this->assertSame( 'excludedProducts'    , Oihana::EXCLUDED_PRODUCTS   );
@@ -46,6 +48,7 @@ class PricingConditionTest extends TestCase
     {
         $condition = new PricingCondition() ;
 
+        $this->assertNull( $condition->additionalProperty ?? null );
         $this->assertNull( $condition->adjustment         ?? null );
         $this->assertNull( $condition->excludedCustomers  ?? null );
         $this->assertNull( $condition->excludedProducts   ?? null );
@@ -139,5 +142,32 @@ class PricingConditionTest extends TestCase
 
         $this->assertInstanceOf( PriceSegmentation::class , $condition->substitutesSegment ) ;
         $this->assertSame( 5 , $condition->substitutesSegment->id ) ;
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testReflectionHydratesTheAdditionalProperty(): void
+    {
+        $condition = new Reflection()->hydrate
+        (
+            [
+                Oihana::ADDITIONAL_PROPERTY =>
+                [
+                    [ Oihana::PROPERTY_ID => 'channel' , Oihana::VALUE => 'retail' ] ,
+                    [ Oihana::PROPERTY_ID => 'priority' , Oihana::VALUE => 10 ] ,
+                ] ,
+            ],
+            PricingCondition::class
+        );
+
+        $this->assertIsArray( $condition->additionalProperty ) ;
+        $this->assertCount( 2 , $condition->additionalProperty ) ;
+        $this->assertContainsOnlyInstancesOf( PropertyValue::class , $condition->additionalProperty ) ;
+
+        $this->assertSame( 'channel' , $condition->additionalProperty[0]->propertyID ) ;
+        $this->assertSame( 'retail'  , $condition->additionalProperty[0]->value      ) ;
+        $this->assertSame( 'priority', $condition->additionalProperty[1]->propertyID ) ;
+        $this->assertSame( 10        , $condition->additionalProperty[1]->value      ) ;
     }
 }

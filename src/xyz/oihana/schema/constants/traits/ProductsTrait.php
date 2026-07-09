@@ -2,9 +2,6 @@
 
 namespace xyz\oihana\schema\constants\traits;
 
-use xyz\oihana\schema\constants\traits\extras\ContactPointType;
-use xyz\oihana\schema\constants\traits\extras\GeoCoordinates;
-use xyz\oihana\schema\constants\traits\extras\PostalAddress;
 use xyz\oihana\schema\constants\traits\products\ExtraPriceSpecification;
 use xyz\oihana\schema\constants\traits\products\PaymentCondition;
 use xyz\oihana\schema\constants\traits\products\PaymentMethod;

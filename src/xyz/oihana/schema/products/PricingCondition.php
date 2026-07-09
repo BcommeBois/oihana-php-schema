@@ -4,6 +4,8 @@ namespace xyz\oihana\schema\products;
 
 use oihana\reflect\attributes\HydrateAs;
 
+use oihana\reflect\attributes\HydrateWith;
+use org\schema\PropertyValue;
 use org\schema\StructuredValue;
 
 use xyz\oihana\schema\business\documents\Adjustment;
@@ -37,6 +39,13 @@ class PricingCondition extends StructuredValue
      * The @context of the json-ld representation of the thing.
      */
     public const string CONTEXT = Oihana::SCHEMA ;
+
+    /**
+     * Additional, not-yet-modelled properties carried structurally.
+     * @var array|PropertyValue|null
+     */
+    #[HydrateWith( PropertyValue::class ) ]
+    public null|array|PropertyValue $additionalProperty = null ;
 
     /**
      * The price adjustment granted (a signed percentage or amount). Mutually

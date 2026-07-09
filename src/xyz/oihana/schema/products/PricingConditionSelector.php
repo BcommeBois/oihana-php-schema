@@ -70,4 +70,10 @@ class PricingConditionSelector extends StructuredValue
      * @var null|string|PricingItemScope
      */
     public null|string|PricingItemScope $itemScope ;
+
+    /**
+     * The identifier of the targeted provider.
+     * @var string|null
+     */
+    public ?string $providerId ;
 }

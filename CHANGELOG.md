@@ -17,13 +17,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   - `PricingConditionSelector` (a `StructuredValue`) carries the scope on three
     axes: the buyer (`customerScope` + `customerId`), the item (`itemScope` +
     `itemId`, refined by `categoryLevel` for hierarchical categories) and the
-    place (`areaServed`).
+    place (`areaServed`). A `providerId` further restricts the condition to a
+    targeted provider.
   - `PricingCondition` (a `StructuredValue`) carries exactly one effect — an
     `Adjustment` (a signed percentage/amount discount) or a `substitutesSegment`
     (`PriceSegmentation`, applied instead of a discount) — plus
     `excludedCustomers` / `excludedProducts` exceptions, a `validFrom` /
     `validThrough` window, and an optional `quantityDiscount`
-    (`PriceQuantityDiscount`). Nested effects and the selector hydrate through
+    (`PriceQuantityDiscount`). It also carries an `additionalProperty` for
+    not-yet-modelled properties, hydrated as `PropertyValue` instances through
+    `#[HydrateWith]`. Nested effects and the selector hydrate through
     `#[HydrateAs]`.
 - Adds the `PricingTargetScope` (`INDIVIDUAL` / `GROUP` / `COMPANY` / `ALL`) and
   `PricingItemScope` (`PRODUCT` / `CATEGORY` / `PROVIDER` / `ALL`) enumerations

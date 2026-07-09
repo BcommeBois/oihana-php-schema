@@ -31,6 +31,7 @@ class PricingConditionSelectorTest extends TestCase
         $this->assertSame( 'customerScope' , Oihana::CUSTOMER_SCOPE );
         $this->assertSame( 'itemId'        , Oihana::ITEM_ID        );
         $this->assertSame( 'itemScope'     , Oihana::ITEM_SCOPE     );
+        $this->assertSame( 'providerId'    , Oihana::PROVIDER_ID    );
     }
 
     public function testDefaults(): void
@@ -43,6 +44,7 @@ class PricingConditionSelectorTest extends TestCase
         $this->assertNull( $selector->customerScope ?? null );
         $this->assertNull( $selector->itemId        ?? null );
         $this->assertNull( $selector->itemScope     ?? null );
+        $this->assertNull( $selector->providerId    ?? null );
     }
 
     public function testConstructorHydratesProperties(): void
@@ -55,6 +57,7 @@ class PricingConditionSelectorTest extends TestCase
             Oihana::ITEM_ID        => '05' ,
             Oihana::CATEGORY_LEVEL => 1 ,
             Oihana::AREA_SERVED    => '600' ,
+            Oihana::PROVIDER_ID    => 'P-42' ,
         ]);
 
         $this->assertSame( PricingTargetScope::GROUP    , $selector->customerScope ) ;
@@ -63,5 +66,6 @@ class PricingConditionSelectorTest extends TestCase
         $this->assertSame( '05'                         , $selector->itemId        ) ;
         $this->assertSame( 1                            , $selector->categoryLevel ) ;
         $this->assertSame( '600'                        , $selector->areaServed    ) ;
+        $this->assertSame( 'P-42'                       , $selector->providerId    ) ;
     }
 }
