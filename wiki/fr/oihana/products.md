@@ -83,8 +83,10 @@ Ce qu'elle porte se lit en trois temps :
 | Partie | Rôle |
 |---|---|
 | `selector` (`PricingConditionSelector`) | Le périmètre : **qui** (`customerScope` + `customerId`), **quoi** (`itemScope` + `itemId`, affiné par `categoryLevel`) et **où** (`areaServed`). |
-| `adjustment` (`Adjustment`) | Le premier effet possible : une remise (pourcentage ou montant signé — négatif = majoration). |
-| `substitutesSegment` (`PriceSegmentation`) | Le second effet possible : on remplace le segment tarifaire habituel de l'acheteur — appliqué *à la place* d'une remise (les deux effets sont exclusifs). |
+| `adjustment` (liste d'`Adjustment`) | Le premier effet possible : une liste de remises empilées appliquées dans l'ordre (chacune un pourcentage ou montant signé — négatif = majoration). Toujours une liste, même pour une remise unique. |
+| `substitutesSegment` (`PriceSegmentation`) | Le second effet possible : on remplace le segment tarifaire habituel de l'acheteur — appliqué *à la place* d'une remise. |
+| `fixedPrice` (`MonetaryAmount`) | Le troisième effet possible : un prix net fixe imposé *à la place* de tout ajustement ou substitution de segment. Les trois effets sont exclusifs. |
+| `free` (`bool`) | Indique que l'article est offert (gratuit) sous cette condition. |
 | `excludedCustomers` / `excludedProducts` | Les exceptions découpées dans le périmètre. |
 | `validFrom` / `validThrough` | La fenêtre de validité. |
 | `quantityDiscount` (`PriceQuantityDiscount`) | Un effet optionnel par palier de quantité. |
@@ -103,7 +105,7 @@ Le périmètre se résout par granularité décroissante : `INDIVIDUAL` prime su
     "categoryLevel": 1
   },
   "validThrough": "2026-12-31",
-  "adjustment": { "@type": "Adjustment", "type": "https://schema.oihana.xyz/Discount", "percentage": 10 },
+  "adjustment": [ { "@type": "Adjustment", "type": "https://schema.oihana.xyz/Discount", "percentage": 10 } ],
   "excludedCustomers": [ "600160" ]
 }
 ```

@@ -15,6 +15,8 @@ trait PricingCondition
     public const string ADJUSTMENT          = 'adjustment' ;
     public const string EXCLUDED_CUSTOMERS  = 'excludedCustomers' ;
     public const string EXCLUDED_PRODUCTS   = 'excludedProducts' ;
+    public const string FIXED_PRICE         = 'fixedPrice' ;
+    public const string FREE                = 'free' ;
     public const string QUANTITY_DISCOUNT   = 'quantityDiscount' ;
     public const string SELECTOR            = 'selector' ;
     public const string SUBSTITUTES_SEGMENT = 'substitutesSegment' ;

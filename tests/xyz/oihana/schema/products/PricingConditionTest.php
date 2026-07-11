@@ -7,6 +7,7 @@ use ReflectionException;
 
 use oihana\reflect\Reflection;
 
+use org\schema\MonetaryAmount;
 use org\schema\PropertyValue;
 use org\schema\StructuredValue;
 
@@ -37,6 +38,8 @@ class PricingConditionTest extends TestCase
         $this->assertSame( 'adjustment'          , Oihana::ADJUSTMENT          );
         $this->assertSame( 'excludedCustomers'   , Oihana::EXCLUDED_CUSTOMERS  );
         $this->assertSame( 'excludedProducts'    , Oihana::EXCLUDED_PRODUCTS   );
+        $this->assertSame( 'fixedPrice'          , Oihana::FIXED_PRICE         );
+        $this->assertSame( 'free'                , Oihana::FREE                );
         $this->assertSame( 'quantityDiscount'    , Oihana::QUANTITY_DISCOUNT   );
         $this->assertSame( 'selector'            , Oihana::SELECTOR            );
         $this->assertSame( 'substitutesSegment'  , Oihana::SUBSTITUTES_SEGMENT );
@@ -52,6 +55,8 @@ class PricingConditionTest extends TestCase
         $this->assertNull( $condition->adjustment         ?? null );
         $this->assertNull( $condition->excludedCustomers  ?? null );
         $this->assertNull( $condition->excludedProducts   ?? null );
+        $this->assertNull( $condition->fixedPrice         ?? null );
+        $this->assertNull( $condition->free               ?? null );
         $this->assertNull( $condition->quantityDiscount   ?? null );
         $this->assertNull( $condition->selector           ?? null );
         $this->assertNull( $condition->substitutesSegment ?? null );
@@ -111,16 +116,50 @@ class PricingConditionTest extends TestCase
             [
                 Oihana::ADJUSTMENT =>
                 [
-                    Oihana::TYPE       => PriceComponentType::DISCOUNT ,
-                    Oihana::PERCENTAGE => 10 ,
+                    [
+                        Oihana::TYPE       => PriceComponentType::DISCOUNT ,
+                        Oihana::PERCENTAGE => 10 ,
+                    ] ,
                 ] ,
             ],
             PricingCondition::class
         );
 
-        $this->assertInstanceOf( Adjustment::class , $condition->adjustment ) ;
-        $this->assertSame( PriceComponentType::DISCOUNT , $condition->adjustment->type ) ;
-        $this->assertSame( 10 , $condition->adjustment->percentage ) ;
+        $this->assertIsArray( $condition->adjustment ) ;
+        $this->assertCount( 1 , $condition->adjustment ) ;
+        $this->assertContainsOnlyInstancesOf( Adjustment::class , $condition->adjustment ) ;
+        $this->assertSame( PriceComponentType::DISCOUNT , $condition->adjustment[0]->type ) ;
+        $this->assertSame( 10 , $condition->adjustment[0]->percentage ) ;
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testReflectionHydratesTheStackedAdjustmentEffect(): void
+    {
+        $condition = new Reflection()->hydrate
+        (
+            [
+                Oihana::ADJUSTMENT =>
+                [
+                    [
+                        Oihana::TYPE       => PriceComponentType::DISCOUNT ,
+                        Oihana::PERCENTAGE => 10 ,
+                    ] ,
+                    [
+                        Oihana::TYPE       => PriceComponentType::DISCOUNT ,
+                        Oihana::PERCENTAGE => 5 ,
+                    ] ,
+                ] ,
+            ],
+            PricingCondition::class
+        );
+
+        $this->assertIsArray( $condition->adjustment ) ;
+        $this->assertCount( 2 , $condition->adjustment ) ;
+        $this->assertContainsOnlyInstancesOf( Adjustment::class , $condition->adjustment ) ;
+        $this->assertSame( 10 , $condition->adjustment[0]->percentage ) ;
+        $this->assertSame( 5  , $condition->adjustment[1]->percentage ) ;
     }
 
     /**
@@ -142,6 +181,42 @@ class PricingConditionTest extends TestCase
 
         $this->assertInstanceOf( PriceSegmentation::class , $condition->substitutesSegment ) ;
         $this->assertSame( 5 , $condition->substitutesSegment->id ) ;
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testReflectionHydratesTheFixedPriceEffect(): void
+    {
+        $condition = new Reflection()->hydrate
+        (
+            [
+                Oihana::FIXED_PRICE =>
+                [
+                    Oihana::CURRENCY => 'EUR' ,
+                    Oihana::VALUE    => 42.5 ,
+                ] ,
+            ],
+            PricingCondition::class
+        );
+
+        $this->assertInstanceOf( MonetaryAmount::class , $condition->fixedPrice ) ;
+        $this->assertSame( 'EUR' , $condition->fixedPrice->currency ) ;
+        $this->assertSame( 42.5  , $condition->fixedPrice->value    ) ;
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testFreeFlag(): void
+    {
+        $condition = new Reflection()->hydrate
+        (
+            [ Oihana::FREE => true ],
+            PricingCondition::class
+        );
+
+        $this->assertTrue( $condition->free ) ;
     }
 
     /**

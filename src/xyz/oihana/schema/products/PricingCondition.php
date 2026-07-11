@@ -5,6 +5,7 @@ namespace xyz\oihana\schema\products;
 use oihana\reflect\attributes\HydrateAs;
 
 use oihana\reflect\attributes\HydrateWith;
+use org\schema\MonetaryAmount;
 use org\schema\PropertyValue;
 use org\schema\StructuredValue;
 
@@ -18,11 +19,13 @@ use xyz\oihana\schema\constants\Oihana;
  * A condition is a catalog/reference concept — the twin, on the sell side, of a
  * provider buying condition — resolved most-specific-first for a given
  * (customer, item, place) context by reading its {@see PricingConditionSelector}.
- * It carries exactly one effect :
- * - an {@see Adjustment} (a signed percentage or amount — a discount, or a
- *   surcharge when negative), or
+ * It carries at most one of three mutually exclusive effects :
+ * - a list of stacked `adjustment` ({@see Adjustment}) applied in order (each a
+ *   signed percentage or amount — a discount, or a surcharge when negative), or
  * - a `substitutesSegment` ({@see PriceSegmentation}) that swaps the buyer's
- *   usual tariff segment for another (applied *instead of* a discount).
+ *   usual tariff segment for another, or
+ * - a `fixedPrice` ({@see MonetaryAmount}) that imposes a fixed net price.
+ * A `free` flag may additionally mark the item as granted free of charge.
  *
  * `excludedCustomers` / `excludedProducts` carve exceptions out of the scope
  * (e.g. "−10 % for this group, except these two customers"). `quantityDiscount`
@@ -48,11 +51,13 @@ class PricingCondition extends StructuredValue
     public null|array|PropertyValue $additionalProperty = null ;
 
     /**
-     * The price adjustment granted (a signed percentage or amount). Mutually
-     * exclusive with `substitutesSegment`.
+     * A list of stacked adjustments applied in order (e.g. −10 %, then −5 % on
+     * the remaining amount). Each is a signed percentage or amount — a discount,
+     * or a surcharge when negative. Always a list, even for a single adjustment.
+     * Mutually exclusive with `substitutesSegment` and `fixedPrice`.
      * @var Adjustment|array|null
      */
-    #[HydrateAs(Adjustment::class)]
+    #[HydrateWith(Adjustment::class)]
     public null|array|Adjustment $adjustment ;
 
     /**
@@ -66,6 +71,21 @@ class PricingCondition extends StructuredValue
      * @var array|null
      */
     public ?array $excludedProducts ;
+
+    /**
+     * A fixed net price imposed by this condition, applied *instead of* any
+     * adjustment or segment substitution. Mutually exclusive with `adjustment`
+     * and `substitutesSegment`.
+     * @var MonetaryAmount|array|null
+     */
+    #[HydrateAs(MonetaryAmount::class)]
+    public null|array|MonetaryAmount $fixedPrice ;
+
+    /**
+     * Whether the item is granted free of charge under this condition.
+     * @var bool|null
+     */
+    public ?bool $free ;
 
     /**
      * An optional quantity-tier effect (discounts by quantity).

@@ -83,8 +83,10 @@ What it carries reads in three moves:
 | Part | Role |
 |---|---|
 | `selector` (`PricingConditionSelector`) | The scope: **who** (`customerScope` + `customerId`), **what** (`itemScope` + `itemId`, refined by `categoryLevel`) and **where** (`areaServed`). |
-| `adjustment` (`Adjustment`) | The first possible effect: a discount (a signed percentage or amount — negative means a surcharge). |
-| `substitutesSegment` (`PriceSegmentation`) | The second possible effect: the buyer's usual tariff segment is swapped — applied *instead of* a discount (the two effects are mutually exclusive). |
+| `adjustment` (list of `Adjustment`) | The first possible effect: a list of stacked discounts applied in order (each a signed percentage or amount — negative means a surcharge). Always a list, even for a single adjustment. |
+| `substitutesSegment` (`PriceSegmentation`) | The second possible effect: the buyer's usual tariff segment is swapped — applied *instead of* a discount. |
+| `fixedPrice` (`MonetaryAmount`) | The third possible effect: a fixed net price imposed *instead of* any adjustment or segment substitution. The three effects are mutually exclusive. |
+| `free` (`bool`) | Whether the item is granted free of charge under this condition. |
 | `excludedCustomers` / `excludedProducts` | The exceptions carved out of the scope. |
 | `validFrom` / `validThrough` | The validity window. |
 | `quantityDiscount` (`PriceQuantityDiscount`) | An optional quantity-tier effect. |
@@ -103,7 +105,7 @@ The scope resolves by decreasing granularity: `INDIVIDUAL` outranks `GROUP`, whi
     "categoryLevel": 1
   },
   "validThrough": "2026-12-31",
-  "adjustment": { "@type": "Adjustment", "type": "https://schema.oihana.xyz/Discount", "percentage": 10 },
+  "adjustment": [ { "@type": "Adjustment", "type": "https://schema.oihana.xyz/Discount", "percentage": 10 } ],
   "excludedCustomers": [ "600160" ]
 }
 ```

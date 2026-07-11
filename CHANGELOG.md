@@ -19,15 +19,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
     `itemId`, refined by `categoryLevel` for hierarchical categories) and the
     place (`areaServed`). A `providerId` further restricts the condition to a
     targeted provider.
-  - `PricingCondition` (a `StructuredValue`) carries exactly one effect — an
-    `Adjustment` (a signed percentage/amount discount) or a `substitutesSegment`
-    (`PriceSegmentation`, applied instead of a discount) — plus
+  - `PricingCondition` (a `StructuredValue`) carries at most one of three
+    mutually exclusive effects — a list of stacked `adjustment` (`Adjustment`)
+    applied in order, a `substitutesSegment` (`PriceSegmentation`, applied
+    instead of a discount) or a `fixedPrice` (`MonetaryAmount`) imposing a fixed
+    net price — plus a `free` flag marking the item as granted free of charge,
     `excludedCustomers` / `excludedProducts` exceptions, a `validFrom` /
     `validThrough` window, and an optional `quantityDiscount`
     (`PriceQuantityDiscount`). It also carries an `additionalProperty` for
     not-yet-modelled properties, hydrated as `PropertyValue` instances through
-    `#[HydrateWith]`. Nested effects and the selector hydrate through
-    `#[HydrateAs]`.
+    `#[HydrateWith]`. `adjustment` is now **always a list** — hydrated element
+    by element through `#[HydrateWith]` — so even a single adjustment must be
+    wrapped in an array; the remaining nested effects and the selector hydrate
+    through `#[HydrateAs]`.
 - Adds the `PricingTargetScope` (`INDIVIDUAL` / `GROUP` / `COMPANY` / `ALL`) and
   `PricingItemScope` (`PRODUCT` / `CATEGORY` / `PROVIDER` / `ALL`) enumerations
   under `xyz\oihana\schema\enumerations`, driving the two resolution axes of a
