@@ -76,7 +76,7 @@ Le trait descriptif `ProductProperty` (essence, apparence, certification, couleu
 
 ## Les conditions tarifaires
 
-Une **`PricingCondition`** est une règle de prix conditionnelle : une remise — ou une substitution de tarif — accordée à un ensemble ciblé d'acheteurs sur un ensemble ciblé d'articles, valable sur une période. C'est le pendant, côté vente, d'une condition d'achat fournisseur ; on la résout du plus précis au plus général pour un contexte (client, article, lieu) donné.
+Une **`PricingCondition`** est une règle de prix conditionnelle : une remise, une substitution de tarif ou un prix net imposé, accordée à un ensemble ciblé d'acheteurs sur un ensemble ciblé d'articles, valable sur une période. C'est le pendant, côté vente, d'une condition d'achat fournisseur ; on la résout du plus précis au plus général pour un contexte (client, article, lieu) donné.
 
 Ce qu'elle porte se lit en trois temps :
 

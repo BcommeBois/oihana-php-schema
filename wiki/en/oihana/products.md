@@ -76,7 +76,7 @@ The descriptive `ProductProperty` trait (essence, appearance, certification, col
 
 ## Pricing conditions
 
-A **`PricingCondition`** is a conditional pricing rule: a discount — or a tariff substitution — granted to a scoped set of buyers on a scoped set of items, valid over a period. It is the sell-side twin of a provider buying condition; it is resolved most-specific-first for a given (customer, item, place) context.
+A **`PricingCondition`** is a conditional pricing rule: a discount, a tariff substitution or an imposed net price granted to a scoped set of buyers on a scoped set of items, valid over a period. It is the sell-side twin of a provider buying condition; it is resolved most-specific-first for a given (customer, item, place) context.
 
 What it carries reads in three moves:
 
