@@ -103,7 +103,8 @@ class PricingCondition extends StructuredValue
 
     /**
      * The tariff segment substituted for the buyer's usual one, applied
-     * *instead of* a discount. Mutually exclusive with `adjustment`.
+     * *instead of* a discount. Mutually exclusive with `adjustment` and
+     * `fixedPrice`.
      * @var PriceSegmentation|array|null
      */
     #[HydrateAs(PriceSegmentation::class)]
