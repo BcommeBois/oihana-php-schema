@@ -79,15 +79,17 @@ hydrateCustomer( 'raw' ) ;                                    // anything else  
 
 ```php
 use function xyz\oihana\schema\helpers\pivots\customerKey;
+use function xyz\oihana\schema\helpers\pivots\customerKeys;
 use function xyz\oihana\schema\helpers\pivots\sellerKeys;
 
 // $user: a xyz\oihana\schema\auth\User with its `identities` hydrated.
 
-$key  = customerKey( $user ) ; // '137285125' — the customer the contact works for, or null
-$keys = sellerKeys( $user ) ;  // [ '147737218' , '147737209' ] — the seller hats, deduplicated
+$key      = customerKey( $user )  ; // '137285125' — the customer the contact works for, or null
+$clients  = customerKeys( $user ) ; // [ '137285125' , '137285130' ] — all its customers, deduplicated
+$keys     = sellerKeys( $user )   ; // [ '147737218' , '147737209' ] — the seller hats, deduplicated
 ```
 
-An account carries zero, one or several business identities (see [`BusinessIdentity`](business.md)): `customerKey()` and `sellerKey()` resolve the first identity of the expected type, `sellerKeys()` resolves them all.
+An account carries zero, one or several business identities (see [`BusinessIdentity`](business.md)): `customerKey()` and `sellerKey()` resolve the first identity of the expected type; `customerKeys()` and `sellerKeys()` resolve them all.
 
 ---
 
@@ -120,6 +122,7 @@ An account carries zero, one or several business identities (see [`BusinessIdent
 | Function      | Returns             | Role                                                                 |
 |---------------|---------------------|----------------------------------------------------------------------|
 | `customerKey` | `_key` or `null`    | The customer organization the account's first contact identity works for (`worksFor`). |
+| `customerKeys`| list of `_key`      | Every customer organization the account is a contact for, deduplicated, never `null` entries. |
 | `sellerKey`   | `_key` or `null`    | The key of the account's first seller identity.                      |
 | `sellerKeys`  | list of `_key`      | Every seller key of the account, deduplicated, never `null` entries. |
 

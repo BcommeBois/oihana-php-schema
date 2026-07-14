@@ -50,6 +50,7 @@
             "src/xyz/oihana/schema/helpers/hydrate/hydrateStockLevel.php" ,
             "src/xyz/oihana/schema/helpers/hydrate/hydrateWarehouse.php" ,
             "src/xyz/oihana/schema/helpers/pivots/customerKey.php" ,
+            "src/xyz/oihana/schema/helpers/pivots/customerKeys.php" ,
             "src/xyz/oihana/schema/helpers/pivots/sellerKey.php" ,
             "src/xyz/oihana/schema/helpers/pivots/sellerKeys.php"
         ]

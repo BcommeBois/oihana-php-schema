@@ -79,15 +79,17 @@ hydrateCustomer( 'brut' ) ;                                 // autre valeur    �
 
 ```php
 use function xyz\oihana\schema\helpers\pivots\customerKey;
+use function xyz\oihana\schema\helpers\pivots\customerKeys;
 use function xyz\oihana\schema\helpers\pivots\sellerKeys;
 
 // $user : un xyz\oihana\schema\auth\User dont les `identities` sont hydratées.
 
-$key  = customerKey( $user ) ; // '137285125' — le client pour lequel le contact travaille, ou null
-$keys = sellerKeys( $user ) ;  // [ '147737218' , '147737209' ] — les casquettes vendeur, dédupliquées
+$key     = customerKey( $user )  ; // '137285125' — le client pour lequel le contact travaille, ou null
+$clients = customerKeys( $user ) ; // [ '137285125' , '137285130' ] — tous ses clients, dédupliqués
+$keys    = sellerKeys( $user )   ; // [ '147737218' , '147737209' ] — les casquettes vendeur, dédupliquées
 ```
 
-Un compte porte zéro, une ou plusieurs identités métier (voir [`BusinessIdentity`](business.md)) : `customerKey()` et `sellerKey()` résolvent la première du type attendu, `sellerKeys()` les résout toutes.
+Un compte porte zéro, une ou plusieurs identités métier (voir [`BusinessIdentity`](business.md)) : `customerKey()` et `sellerKey()` résolvent la première du type attendu ; `customerKeys()` et `sellerKeys()` les résolvent toutes.
 
 ---
 
@@ -120,6 +122,7 @@ Un compte porte zéro, une ou plusieurs identités métier (voir [`BusinessIdent
 | Fonction      | Rend                | Rôle                                                                 |
 |---------------|---------------------|----------------------------------------------------------------------|
 | `customerKey` | `_key` ou `null`    | L'organisation cliente pour laquelle travaille le premier contact du compte (`worksFor`). |
+| `customerKeys`| liste de `_key`     | Toutes les organisations clientes dont le compte est contact, dédupliquées, jamais de `null`. |
 | `sellerKey`   | `_key` ou `null`    | La clé de la première identité vendeur du compte.                    |
 | `sellerKeys`  | liste de `_key`     | Toutes les clés vendeur du compte, dédupliquées, jamais de `null`.   |
 

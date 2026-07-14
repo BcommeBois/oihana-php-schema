@@ -8,6 +8,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds the `customerKeys()` account pivot under
+  `xyz\oihana\schema\helpers\pivots` — the plural counterpart of `customerKey()`:
+  it resolves every `CustomerEmployee` identity of an authenticated account and
+  returns the deduplicated `_key` list of the customer organizations it is a
+  contact for (`worksFor`), for scoping the resources of the customer(s) an
+  account represents. Registered in the autoload `files` and documented in the
+  `helpers` wiki page (FR + EN).
 - Adds `CustomerOffer` under `xyz\oihana\schema\products` — a sell offer priced
   for one specific customer, specializing `OfferForPurchase`. It reuses the whole
   inherited pricing surface (`price`, `priceCurrency`, `priceSpecification`,
