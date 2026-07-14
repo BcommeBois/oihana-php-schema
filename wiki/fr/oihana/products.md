@@ -110,6 +110,40 @@ Le périmètre se résout par granularité décroissante : `INDIVIDUAL` prime su
 }
 ```
 
+## L'offre au tarif d'un client
+
+Une **`CustomerOffer`** est une offre de vente destinée à **un client précis** : le prix de son segment tarifaire dans son dépôt, éventuellement obtenu via une `PricingCondition`. Elle spécialise `OfferForPurchase` et réutilise toute la surface tarifaire héritée (`price`, `priceCurrency`, `priceSpecification`, `eligibleCustomerType` pour le segment appliqué, `availableAtOrFrom` pour le dépôt, `validFrom` / `validThrough`, `seller`), en y ajoutant deux propriétés propres :
+
+| Propriété | Rôle |
+|---|---|
+| `customer` | Une référence légère au client bénéficiaire (`id`, `name`, `url`). |
+| `appliedCondition` (`PricingCondition`) | La condition tarifaire qui a produit le prix — `null` quand le tarif de base s'applique tel quel. |
+
+Le `priceSpecification` est typiquement un `CompoundPriceSpecification` dont les composantes décomposent le prix de grille (`ListPrice`), la remise éventuelle (`Discount`) et le prix effectif (`SalePrice`) ; côté vente, une composante `SellingMargin` peut porter la marge.
+
+```json
+{
+  "@type": "CustomerOffer",
+  "customer": { "@type": "Customer", "id": "216303", "name": "Menuiserie Fabre" },
+  "eligibleCustomerType": { "@type": "BusinessEntityType", "id": 4, "name": "Pro." },
+  "availableAtOrFrom": { "@type": "Warehouse", "id": "1", "name": "Bouney" },
+  "price": 9.20,
+  "priceCurrency": "EUR",
+  "appliedCondition": {
+    "@type": "PricingCondition",
+    "adjustment": [ { "@type": "Adjustment", "type": "https://schema.oihana.xyz/Discount", "percentage": 7.15 } ]
+  },
+  "priceSpecification": {
+    "@type": "CompoundPriceSpecification",
+    "priceComponent": [
+      { "@type": "UnitPriceSpecification", "price": 9.91, "priceType": "https://schema.org/ListPrice" },
+      { "@type": "UnitPriceSpecification", "price": 7.15, "priceComponentType": "https://schema.oihana.xyz/Discount", "unitText": "%" },
+      { "@type": "UnitPriceSpecification", "price": 9.20, "priceType": "https://schema.org/SalePrice" }
+    ]
+  }
+}
+```
+
 ## Le catalogue des satellites
 
 | Classe | Rôle |
@@ -120,6 +154,7 @@ Le périmètre se résout par granularité décroissante : `INDIVIDUAL` prime su
 | `ExtraPriceSpecification` | Une majoration/minoration, convertible en `UnitPriceSpecification` (`toUnitPriceSpecification()`). |
 | `PriceQuantityDiscount` | La remise par quantité. |
 | `PricingCondition` / `PricingConditionSelector` | La condition tarifaire (remise ou substitution) et son périmètre (voir ci-dessus). |
+| `CustomerOffer` | L'offre de vente au tarif d'un client précis (segment × dépôt, condition éventuelle) ; spécialise `OfferForPurchase` (voir ci-dessus). |
 | `PaymentCondition` / `PaymentMethod` | Les conditions et moyens de paiement acceptés. |
 | `ProductProviderInfo` | Les informations d'achat d'un produit chez son fournisseur (prix, marge, quantité de référence). |
 | `ProductWarehouseInfo` / `ProviderProductWarehouseInfo` | Les informations produit par dépôt, côté maison et côté fournisseur. |

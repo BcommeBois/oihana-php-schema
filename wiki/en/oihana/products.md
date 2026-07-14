@@ -110,6 +110,40 @@ The scope resolves by decreasing granularity: `INDIVIDUAL` outranks `GROUP`, whi
 }
 ```
 
+## The customer-priced offer
+
+A **`CustomerOffer`** is a sell offer aimed at **one specific customer**: the price of their tariff segment at their warehouse, optionally reached through a `PricingCondition`. It specializes `OfferForPurchase` and reuses the whole inherited pricing surface (`price`, `priceCurrency`, `priceSpecification`, `eligibleCustomerType` for the applied segment, `availableAtOrFrom` for the warehouse, `validFrom` / `validThrough`, `seller`), adding two own properties:
+
+| Property | Role |
+|---|---|
+| `customer` | A lightweight reference to the beneficiary customer (`id`, `name`, `url`). |
+| `appliedCondition` (`PricingCondition`) | The pricing condition that produced the price — `null` when the base tariff applies as-is. |
+
+The `priceSpecification` is typically a `CompoundPriceSpecification` whose components decompose the list price (`ListPrice`), the optional discount (`Discount`) and the effective price (`SalePrice`); on the sell side, a `SellingMargin` component may carry the margin.
+
+```json
+{
+  "@type": "CustomerOffer",
+  "customer": { "@type": "Customer", "id": "216303", "name": "Menuiserie Fabre" },
+  "eligibleCustomerType": { "@type": "BusinessEntityType", "id": 4, "name": "Pro." },
+  "availableAtOrFrom": { "@type": "Warehouse", "id": "1", "name": "Bouney" },
+  "price": 9.20,
+  "priceCurrency": "EUR",
+  "appliedCondition": {
+    "@type": "PricingCondition",
+    "adjustment": [ { "@type": "Adjustment", "type": "https://schema.oihana.xyz/Discount", "percentage": 7.15 } ]
+  },
+  "priceSpecification": {
+    "@type": "CompoundPriceSpecification",
+    "priceComponent": [
+      { "@type": "UnitPriceSpecification", "price": 9.91, "priceType": "https://schema.org/ListPrice" },
+      { "@type": "UnitPriceSpecification", "price": 7.15, "priceComponentType": "https://schema.oihana.xyz/Discount", "unitText": "%" },
+      { "@type": "UnitPriceSpecification", "price": 9.20, "priceType": "https://schema.org/SalePrice" }
+    ]
+  }
+}
+```
+
 ## The satellite catalog
 
 | Class | Role |
@@ -120,6 +154,7 @@ The scope resolves by decreasing granularity: `INDIVIDUAL` outranks `GROUP`, whi
 | `ExtraPriceSpecification` | A surcharge/discount, convertible into a `UnitPriceSpecification` (`toUnitPriceSpecification()`). |
 | `PriceQuantityDiscount` | The quantity discount. |
 | `PricingCondition` / `PricingConditionSelector` | The pricing condition (discount or substitution) and its scope (see above). |
+| `CustomerOffer` | The sell offer at one specific customer's tariff (segment × warehouse, optional condition); specializes `OfferForPurchase` (see above). |
 | `PaymentCondition` / `PaymentMethod` | The accepted payment conditions and methods. |
 | `ProductProviderInfo` | The buying information of a product at its supplier (price, margin, reference quantity). |
 | `ProductWarehouseInfo` / `ProviderProductWarehouseInfo` | The per-warehouse product information, house side and supplier side. |

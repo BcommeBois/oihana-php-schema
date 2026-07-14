@@ -2,6 +2,7 @@
 
 namespace xyz\oihana\schema\constants\traits;
 
+use xyz\oihana\schema\constants\traits\products\CustomerOffer;
 use xyz\oihana\schema\constants\traits\products\ExtraPriceSpecification;
 use xyz\oihana\schema\constants\traits\products\PaymentCondition;
 use xyz\oihana\schema\constants\traits\products\PaymentMethod;
@@ -26,7 +27,8 @@ use xyz\oihana\schema\constants\traits\products\StockLevel;
  */
 trait ProductsTrait
 {
-    use ExtraPriceSpecification      ,
+    use CustomerOffer                ,
+        ExtraPriceSpecification      ,
         PaymentCondition             ,
         PaymentMethod                ,
         PriceQuantityDiscount        ,

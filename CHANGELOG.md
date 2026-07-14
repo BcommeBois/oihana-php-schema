@@ -8,6 +8,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds `CustomerOffer` under `xyz\oihana\schema\products` — a sell offer priced
+  for one specific customer, specializing `OfferForPurchase`. It reuses the whole
+  inherited pricing surface (`price`, `priceCurrency`, `priceSpecification`,
+  `eligibleCustomerType`, `availableAtOrFrom`, `validFrom` / `validThrough`,
+  `seller`) and adds two own properties: `customer` (a lightweight reference to
+  the beneficiary, hydrated as `Customer`) and `appliedCondition` (the
+  `PricingCondition` that produced the price, hydrated through `#[HydrateAs]`,
+  `null` when the base tariff applies as-is). Its property-constant trait is
+  wired into `ProductsTrait`, surfacing `customer` / `appliedCondition` on the
+  `Oihana` aggregator, and it is documented in the `products` wiki page (FR + EN).
 - Adds the `SELLING_MARGIN` price component type under
   `xyz\oihana\schema\enumerations\PriceComponentType`
   (`https://schema.oihana.xyz/SellingMargin`) — the selling margin (selling
