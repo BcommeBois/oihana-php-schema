@@ -2,12 +2,14 @@
 
 namespace xyz\oihana\schema\helpers\hydrate;
 
+use org\schema\PostalAddress;
 use ReflectionException;
 
 use xyz\oihana\schema\organizations\Subsidiary;
 use xyz\oihana\schema\places\Warehouse;
 
 use function oihana\core\arrays\isIndexed;
+use function org\schema\helpers\hydrate\hydratePostalAddress;
 
 /**
  * Hydrate an array definition with the Warehouse class.
@@ -42,6 +44,12 @@ function hydrateWarehouse( mixed $init = null  ):mixed
         if( !( $ownedBy instanceof Subsidiary ) && is_array( $ownedBy ) )
         {
             $warehouse->ownedBy = new Subsidiary( $ownedBy ) ;
+        }
+
+        $address = $warehouse->address ?? null ;
+        if( !( $address instanceof PostalAddress ) && is_array( $address ) )
+        {
+            $warehouse->address = hydratePostalAddress( $address ) ;
         }
     }
 

@@ -5,6 +5,8 @@ namespace tests\xyz\oihana\schema\helpers\hydrate ;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
 
+use org\schema\PostalAddress;
+
 use xyz\oihana\schema\organizations\Subsidiary;
 use xyz\oihana\schema\places\Warehouse;
 
@@ -36,6 +38,23 @@ final class HydrateWarehouseTest extends TestCase
 
         $this->assertInstanceOf( Warehouse::class , $warehouse ) ;
         $this->assertSame( 'Bayonne' , $warehouse->name ) ;
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testHydratesThePostalAddress(): void
+    {
+        $warehouse = hydrateWarehouse(
+        [
+            'name'    => 'Bayonne' ,
+            'address' => [ 'addressLocality' => 'Bayonne' , 'postalCode' => '64100' ] ,
+        ]) ;
+
+        $this->assertInstanceOf( Warehouse::class , $warehouse ) ;
+        $this->assertInstanceOf( PostalAddress::class , $warehouse->address ) ;
+        $this->assertSame( 'Bayonne' , $warehouse->address->addressLocality ) ;
+        $this->assertSame( '64100'   , $warehouse->address->postalCode ) ;
     }
 
     /**

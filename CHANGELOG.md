@@ -8,6 +8,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- `hydrateWarehouse()` now hydrates the `address` property of a `Warehouse`:
+  when the incoming `address` is a plain array (and not already a
+  `PostalAddress`), it is passed through `hydratePostalAddress()`, mirroring the
+  existing `ownedBy` → `Subsidiary` handling. Covered by a new
+  `HydrateWarehouseTest::testHydratesThePostalAddress` case.
 - Adds the `customerKeys()` account pivot under
   `xyz\oihana\schema\helpers\pivots` — the plural counterpart of `customerKey()`:
   it resolves every `CustomerEmployee` identity of an authenticated account and
