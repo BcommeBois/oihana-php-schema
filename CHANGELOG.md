@@ -8,6 +8,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds the `SELLING_MARGIN` price component type under
+  `xyz\oihana\schema\enumerations\PriceComponentType`
+  (`https://schema.oihana.xyz/SellingMargin`) — the selling margin (selling
+  price minus cost price), carried as a `priceComponent` of a compound price
+  specification on the sell side.
 - Adds `PricingCondition` and its `PricingConditionSelector`, under
   `xyz\oihana\schema\products` — a conditional pricing rule: a discount (or a
   tariff substitution) granted to a scoped set of buyers on a scoped set of

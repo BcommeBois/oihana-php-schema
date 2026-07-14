@@ -132,7 +132,7 @@ Le périmètre se résout par granularité décroissante : `INDIVIDUAL` prime su
 |---|---|---|
 | `UnitOfSaleType` | `UNIT` , `PACKAGE` , `PARCEL` | Les niveaux de l'arbre des quantités et l'unité de vente (URLs `…#Unit`, `…#Package`, `…#Parcel`). |
 | `PriceType` | prix d'achat, de vente, de référence… | Le type d'un prix dans une spécification. |
-| `PriceComponentType` | les composantes d'un prix | La décomposition d'un prix (base, majorations, frais) — inclut aussi remise, majoration, éco-participation, consigne et emballage. |
+| `PriceComponentType` | les composantes d'un prix | La décomposition d'un prix (base, majorations, frais) — inclut aussi remise, majoration, marge de vente, éco-participation, consigne et emballage. |
 | `BusinessEntityType` | professionnel, particulier… | La segmentation de clientèle d'une offre. |
 | `PricingTargetScope` | `INDIVIDUAL` , `GROUP` , `COMPANY` , `ALL` | La granularité de l'acheteur ciblé par une `PricingCondition`. |
 | `PricingItemScope` | `PRODUCT` , `CATEGORY` , `PROVIDER` , `ALL` | La granularité de l'article ciblé par une `PricingCondition`. |

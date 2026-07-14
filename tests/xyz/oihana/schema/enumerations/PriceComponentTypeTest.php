@@ -28,6 +28,11 @@ class PriceComponentTypeTest extends TestCase
         $this->assertSame( 'https://schema.oihana.xyz/Surcharge'       , PriceComponentType::SURCHARGE        );
     }
 
+    public function testSellingMarginConstant(): void
+    {
+        $this->assertSame( 'https://schema.oihana.xyz/SellingMargin' , PriceComponentType::SELLING_MARGIN );
+    }
+
     public function testIncludes(): void
     {
         $this->assertTrue ( PriceComponentType::includes( PriceComponentType::DISCOUNT ) );

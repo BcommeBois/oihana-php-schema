@@ -88,6 +88,12 @@ class PriceComponentType extends PriceComponentTypeEnumeration
     public const string SELLING_FACTOR = 'https://schema.oihana.xyz/SellingFactor' ;
 
     /**
+     * Represents the schema.org URL for "Selling Margin" constant.
+     * Note : Marge dégagée sur une vente — prix de vente moins prix de revient (fr)
+     */
+    public const string SELLING_MARGIN = 'https://schema.oihana.xyz/SellingMargin' ;
+
+    /**
      * Represents the schema.org URL for "Selling Reference Factor" constant.
      * Note : Taux du prix de vente de reference (T4) (fr)
      */
