@@ -8,6 +8,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds the `PricingAreaScope` enumeration under
+  `xyz\oihana\schema\enumerations` — the granularity of the place a
+  `PricingCondition` is valid at, resolved most-specific-first: `WAREHOUSE`
+  (one point of sale) outranks `COMPANY` (every point of sale of a company),
+  which outranks `GROUP`, which outranks the catch-all `ALL`. The
+  `PricingConditionSelector` gains a matching `areaScope` property (typed
+  `null|string|PricingAreaScope`) telling the resolver *what kind* of place its
+  `areaServed` carries, and `areaServed` is widened from `?string` to
+  `null|int|string|Place|GeoShape|AdministrativeArea|array` so a condition can
+  be scoped to a raw id, a `Place`, a `GeoShape` or an `AdministrativeArea`. Its
+  property-constant trait surfaces `areaScope` on the `Oihana` aggregator, and
+  both the enumeration and the selector are covered at 100%.
 - `hydrateWarehouse()` now hydrates the `address` property of a `Warehouse`:
   when the incoming `address` is a plain array (and not already a
   `PostalAddress`), it is passed through `hydratePostalAddress()`, mirroring the

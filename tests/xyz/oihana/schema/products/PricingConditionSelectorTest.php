@@ -7,6 +7,7 @@ use PHPUnit\Framework\TestCase;
 use org\schema\StructuredValue;
 
 use xyz\oihana\schema\constants\Oihana;
+use xyz\oihana\schema\enumerations\PricingAreaScope;
 use xyz\oihana\schema\enumerations\PricingItemScope;
 use xyz\oihana\schema\enumerations\PricingTargetScope;
 use xyz\oihana\schema\products\PricingConditionSelector;
@@ -25,6 +26,7 @@ class PricingConditionSelectorTest extends TestCase
 
     public function testConstantsAreWiredOnTheAggregator(): void
     {
+        $this->assertSame( 'areaScope'     , Oihana::AREA_SCOPE     );
         $this->assertSame( 'areaServed'    , Oihana::AREA_SERVED    );
         $this->assertSame( 'categoryLevel' , Oihana::CATEGORY_LEVEL );
         $this->assertSame( 'customerId'    , Oihana::CUSTOMER_ID    );
@@ -38,6 +40,7 @@ class PricingConditionSelectorTest extends TestCase
     {
         $selector = new PricingConditionSelector() ;
 
+        $this->assertNull( $selector->areaScope     ?? null );
         $this->assertNull( $selector->areaServed    ?? null );
         $this->assertNull( $selector->categoryLevel ?? null );
         $this->assertNull( $selector->customerId    ?? null );
@@ -56,6 +59,7 @@ class PricingConditionSelectorTest extends TestCase
             Oihana::ITEM_SCOPE     => PricingItemScope::CATEGORY ,
             Oihana::ITEM_ID        => '05' ,
             Oihana::CATEGORY_LEVEL => 1 ,
+            Oihana::AREA_SCOPE     => PricingAreaScope::WAREHOUSE ,
             Oihana::AREA_SERVED    => '600' ,
             Oihana::PROVIDER_ID    => 'P-42' ,
         ]);
@@ -65,6 +69,7 @@ class PricingConditionSelectorTest extends TestCase
         $this->assertSame( PricingItemScope::CATEGORY   , $selector->itemScope     ) ;
         $this->assertSame( '05'                         , $selector->itemId        ) ;
         $this->assertSame( 1                            , $selector->categoryLevel ) ;
+        $this->assertSame( PricingAreaScope::WAREHOUSE  , $selector->areaScope     ) ;
         $this->assertSame( '600'                        , $selector->areaServed    ) ;
         $this->assertSame( 'P-42'                       , $selector->providerId    ) ;
     }

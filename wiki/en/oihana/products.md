@@ -82,7 +82,7 @@ What it carries reads in three moves:
 
 | Part | Role |
 |---|---|
-| `selector` (`PricingConditionSelector`) | The scope: **who** (`customerScope` + `customerId`), **what** (`itemScope` + `itemId`, refined by `categoryLevel`) and **where** (`areaServed`). |
+| `selector` (`PricingConditionSelector`) | The scope: **who** (`customerScope` + `customerId`), **what** (`itemScope` + `itemId`, refined by `categoryLevel`) and **where** (`areaScope` + `areaServed`). |
 | `adjustment` (list of `Adjustment`) | The first possible effect: a list of stacked discounts applied in order (each a signed percentage or amount — negative means a surcharge). Always a list, even for a single adjustment. |
 | `substitutesSegment` (`PriceSegmentation`) | The second possible effect: the buyer's usual tariff segment is swapped — applied *instead of* a discount. |
 | `fixedPrice` (`MonetaryAmount`) | The third possible effect: a fixed net price imposed *instead of* any adjustment or segment substitution. The three effects are mutually exclusive. |
@@ -91,7 +91,7 @@ What it carries reads in three moves:
 | `validFrom` / `validThrough` | The validity window. |
 | `quantityDiscount` (`PriceQuantityDiscount`) | An optional quantity-tier effect. |
 
-The scope resolves by decreasing granularity: `INDIVIDUAL` outranks `GROUP`, which outranks `COMPANY`, which outranks `ALL` (same on the item axis: `PRODUCT` › `CATEGORY` › `PROVIDER` › `ALL`). Both axes rely on the `PricingTargetScope` and `PricingItemScope` enumerations.
+The scope resolves by decreasing granularity on three axes: on the buyer axis `INDIVIDUAL` outranks `GROUP`, which outranks `COMPANY`, which outranks `ALL`; on the item axis `PRODUCT` › `CATEGORY` › `PROVIDER` › `ALL`; on the place axis `WAREHOUSE` (one point of sale) outranks `COMPANY`, which outranks `GROUP`, which outranks `ALL` (everywhere). `areaScope` states the nature of the place carried by `areaServed`. The three axes rely on the `PricingTargetScope`, `PricingItemScope` and `PricingAreaScope` enumerations.
 
 ```json
 {
@@ -171,6 +171,7 @@ The `priceSpecification` is typically a `CompoundPriceSpecification` whose compo
 | `BusinessEntityType` | professional, individual… | The customer segmentation of an offer. |
 | `PricingTargetScope` | `INDIVIDUAL` , `GROUP` , `COMPANY` , `ALL` | The granularity of the buyer targeted by a `PricingCondition`. |
 | `PricingItemScope` | `PRODUCT` , `CATEGORY` , `PROVIDER` , `ALL` | The granularity of the item targeted by a `PricingCondition`. |
+| `PricingAreaScope` | `WAREHOUSE` , `COMPANY` , `GROUP` , `ALL` | The granularity of the place a `PricingCondition` applies at (the nature of the place carried by `areaServed`). |
 
 ---
 

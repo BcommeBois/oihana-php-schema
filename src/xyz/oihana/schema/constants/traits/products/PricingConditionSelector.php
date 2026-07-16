@@ -11,6 +11,7 @@ namespace xyz\oihana\schema\constants\traits\products ;
  */
 trait PricingConditionSelector
 {
+    public const string AREA_SCOPE     = 'areaScope' ;
     public const string AREA_SERVED    = 'areaServed' ;
     public const string CATEGORY_LEVEL = 'categoryLevel' ;
     public const string CUSTOMER_ID    = 'customerId' ;

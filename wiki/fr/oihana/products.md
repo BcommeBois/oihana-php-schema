@@ -82,7 +82,7 @@ Ce qu'elle porte se lit en trois temps :
 
 | Partie | Rôle |
 |---|---|
-| `selector` (`PricingConditionSelector`) | Le périmètre : **qui** (`customerScope` + `customerId`), **quoi** (`itemScope` + `itemId`, affiné par `categoryLevel`) et **où** (`areaServed`). |
+| `selector` (`PricingConditionSelector`) | Le périmètre : **qui** (`customerScope` + `customerId`), **quoi** (`itemScope` + `itemId`, affiné par `categoryLevel`) et **où** (`areaScope` + `areaServed`). |
 | `adjustment` (liste d'`Adjustment`) | Le premier effet possible : une liste de remises empilées appliquées dans l'ordre (chacune un pourcentage ou montant signé — négatif = majoration). Toujours une liste, même pour une remise unique. |
 | `substitutesSegment` (`PriceSegmentation`) | Le second effet possible : on remplace le segment tarifaire habituel de l'acheteur — appliqué *à la place* d'une remise. |
 | `fixedPrice` (`MonetaryAmount`) | Le troisième effet possible : un prix net fixe imposé *à la place* de tout ajustement ou substitution de segment. Les trois effets sont exclusifs. |
@@ -91,7 +91,7 @@ Ce qu'elle porte se lit en trois temps :
 | `validFrom` / `validThrough` | La fenêtre de validité. |
 | `quantityDiscount` (`PriceQuantityDiscount`) | Un effet optionnel par palier de quantité. |
 
-Le périmètre se résout par granularité décroissante : `INDIVIDUAL` prime sur `GROUP`, qui prime sur `COMPANY`, qui prime sur `ALL` (de même côté article : `PRODUCT` › `CATEGORY` › `PROVIDER` › `ALL`). Les deux axes s'appuient sur les énumérations `PricingTargetScope` et `PricingItemScope`.
+Le périmètre se résout par granularité décroissante sur trois axes : côté acheteur `INDIVIDUAL` prime sur `GROUP`, qui prime sur `COMPANY`, qui prime sur `ALL` ; côté article `PRODUCT` › `CATEGORY` › `PROVIDER` › `ALL` ; côté lieu `WAREHOUSE` (un point de vente) prime sur `COMPANY`, qui prime sur `GROUP`, qui prime sur `ALL` (partout). `areaScope` indique la nature du lieu porté par `areaServed`. Les trois axes s'appuient sur les énumérations `PricingTargetScope`, `PricingItemScope` et `PricingAreaScope`.
 
 ```json
 {
@@ -171,6 +171,7 @@ Le `priceSpecification` est typiquement un `CompoundPriceSpecification` dont les
 | `BusinessEntityType` | professionnel, particulier… | La segmentation de clientèle d'une offre. |
 | `PricingTargetScope` | `INDIVIDUAL` , `GROUP` , `COMPANY` , `ALL` | La granularité de l'acheteur ciblé par une `PricingCondition`. |
 | `PricingItemScope` | `PRODUCT` , `CATEGORY` , `PROVIDER` , `ALL` | La granularité de l'article ciblé par une `PricingCondition`. |
+| `PricingAreaScope` | `WAREHOUSE` , `COMPANY` , `GROUP` , `ALL` | La granularité du lieu où s'applique une `PricingCondition` (nature du lieu porté par `areaServed`). |
 
 ---
 

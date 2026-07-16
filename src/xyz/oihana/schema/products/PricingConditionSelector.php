@@ -2,9 +2,13 @@
 
 namespace xyz\oihana\schema\products;
 
+use org\schema\GeoShape;
+use org\schema\Place;
+use org\schema\places\AdministrativeArea;
 use org\schema\StructuredValue;
 
 use xyz\oihana\schema\constants\Oihana;
+use xyz\oihana\schema\enumerations\PricingAreaScope;
 use xyz\oihana\schema\enumerations\PricingItemScope;
 use xyz\oihana\schema\enumerations\PricingTargetScope;
 
@@ -32,15 +36,23 @@ class PricingConditionSelector extends StructuredValue
     public const string CONTEXT = Oihana::SCHEMA ;
 
     /**
-     * The place (point of sale, region…) the condition is restricted to,
-     * or null to apply everywhere.
-     * @var string|null
+     * The nature of the place carried by `areaServed` — one point of sale
+     * (`WAREHOUSE`), every point of sale of a company (`COMPANY`), of a group
+     * (`GROUP`), or everywhere (`ALL`). Null when the condition is not
+     * place-scoped.
+     * @var null|string|PricingAreaScope
      */
-    public ?string $areaServed ;
+    public null|string|PricingAreaScope $areaScope ;
 
     /**
-     * The category depth targeted when `itemScope` is `CATEGORY` and categories
-     * are hierarchical (1 = top level). Null when not category-scoped.
+     * The place (point of sale, region…) the condition is restricted to, or null to apply everywhere.
+     * @var null|int|string|Place|GeoShape|AdministrativeArea|array
+     */
+    public null|int|string|Place|GeoShape|AdministrativeArea|array $areaServed ;
+
+    /**
+     * The category depth targeted when `itemScope` is `CATEGORY` and categories are hierarchical (1 = top level).
+     * Null when not category-scoped.
      * @var int|null
      */
     public ?int $categoryLevel ;
