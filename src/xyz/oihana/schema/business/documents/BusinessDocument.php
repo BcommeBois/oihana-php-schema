@@ -8,7 +8,10 @@ use oihana\reflect\attributes\HydrateWith;
 use org\schema\creativeWork\MediaObject;
 use org\schema\Intangible;
 use org\schema\Organization;
+use org\schema\ParcelDelivery;
 use org\schema\Person;
+use org\schema\Place;
+use org\schema\PostalAddress;
 
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\constants\traits\business\documents\BusinessDocumentTrait;
@@ -58,6 +61,25 @@ class BusinessDocument extends Intangible
     public null|array|string|MediaObject $attachments ;
 
     /**
+     * The address the document is billed to — stored as a frozen copy so the
+     * document stays self-contained even if the party's address book changes
+     * later. Reuses the Schema.org `billingAddress` name from `Order`.
+     * @var null|array|PostalAddress
+     */
+    #[HydrateAs(PostalAddress::class)]
+    public null|array|PostalAddress $billingAddress ;
+
+    /**
+     * The individual to deal with about the document (the interlocutor on the
+     * customer's side) — distinct from the {@see BusinessDocument::$customer}
+     * party the document is addressed to. Absent from Schema.org's commercial
+     * documents, hence added here.
+     * @var null|array|Person
+     */
+    #[HydrateAs(Person::class)]
+    public null|array|Person $contact ;
+
+    /**
      * The currency the document's amounts are expressed in (ISO 4217, e.g. "EUR").
      * @var string|null
      */
@@ -83,11 +105,30 @@ class BusinessDocument extends Intangible
     public null|string|int $issueDate ;
 
     /**
+     * The delivery attached to the document: the shipping address (a frozen
+     * copy), the delivery method and the requested date. Reuses the name
+     * already used by {@see DeliveryNote::$orderDelivery} for internal
+     * consistency.
+     * @var null|array|ParcelDelivery
+     */
+    #[HydrateAs(ParcelDelivery::class)]
+    public null|array|ParcelDelivery $orderDelivery ;
+
+    /**
      * The payment terms — free text, or a structured {@see PaymentSchedule}.
      * @var null|string|array|PaymentSchedule
      */
     #[HydrateAs(PaymentSchedule::class)]
     public null|string|array|PaymentSchedule $paymentTerms ;
+
+    /**
+     * The point of sale (store, outlet, warehouse) the document is bound to —
+     * the outlet that carries it and drives its pricing. A frozen copy, like
+     * the other header references.
+     * @var null|array|Place
+     */
+    #[HydrateAs(Place::class)]
+    public null|array|Place $pointOfSale ;
 
     /**
      * References to other related documents (e.g. a purchase order number quoted on an invoice).

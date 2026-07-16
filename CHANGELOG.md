@@ -8,6 +8,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds four header properties to `BusinessDocument` under
+  `xyz\oihana\schema\business\documents` — `billingAddress` (`PostalAddress`),
+  `contact` (`Person`, the interlocutor a document is dealt with — a concept
+  absent from Schema.org's commercial documents), `orderDelivery`
+  (`ParcelDelivery`, the delivery address / method / requested date, reusing the
+  name already used by `DeliveryNote`) and `pointOfSale` (`Place`, the outlet
+  the document is bound to). All four are single value objects hydrated through
+  `#[HydrateAs]` and meant to be stored as frozen copies so a document stays
+  self-contained. Their constants are added to `BusinessDocumentTrait`, surfacing
+  `billingAddress` / `contact` / `orderDelivery` / `pointOfSale` on the `Oihana`
+  aggregator (`orderDelivery` was already carried, with the same value, by
+  `DeliveryNoteTrait`), and the `business-documents` wiki page is updated (FR + EN).
 - Adds the `PricingAreaScope` enumeration under
   `xyz\oihana\schema\enumerations` — the granularity of the place a
   `PricingCondition` is valid at, resolved most-specific-first: `WAREHOUSE`

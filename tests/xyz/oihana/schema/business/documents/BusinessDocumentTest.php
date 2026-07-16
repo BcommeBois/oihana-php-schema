@@ -9,7 +9,10 @@ use oihana\reflect\Reflection;
 
 use org\schema\Intangible;
 use org\schema\Organization;
+use org\schema\ParcelDelivery;
 use org\schema\Person;
+use org\schema\Place;
+use org\schema\PostalAddress;
 
 use xyz\oihana\schema\business\documents\Adjustment;
 use xyz\oihana\schema\business\documents\BusinessDocument;
@@ -34,40 +37,52 @@ class BusinessDocumentTest extends TestCase
 
     public function testTraitConstants(): void
     {
-        $this->assertSame( 'adjustments'    , BusinessDocument::ADJUSTMENTS    );
-        $this->assertSame( 'attachments'    , BusinessDocument::ATTACHMENTS    );
-        $this->assertSame( 'currency'       , BusinessDocument::CURRENCY       );
-        $this->assertSame( 'customer'       , BusinessDocument::CUSTOMER       );
-        $this->assertSame( 'documentLines'  , BusinessDocument::DOCUMENT_LINES );
-        $this->assertSame( 'issueDate'      , BusinessDocument::ISSUE_DATE     );
-        $this->assertSame( 'paymentTerms'   , BusinessDocument::PAYMENT_TERMS  );
-        $this->assertSame( 'references'     , BusinessDocument::REFERENCES     );
-        $this->assertSame( 'seller'         , BusinessDocument::SELLER         );
-        $this->assertSame( 'status'         , BusinessDocument::STATUS         );
-        $this->assertSame( 'taxes'          , BusinessDocument::TAXES          );
-        $this->assertSame( 'totals'         , BusinessDocument::TOTALS         );
+        $this->assertSame( 'adjustments'    , BusinessDocument::ADJUSTMENTS     );
+        $this->assertSame( 'attachments'    , BusinessDocument::ATTACHMENTS     );
+        $this->assertSame( 'billingAddress' , BusinessDocument::BILLING_ADDRESS );
+        $this->assertSame( 'contact'        , BusinessDocument::CONTACT         );
+        $this->assertSame( 'currency'       , BusinessDocument::CURRENCY        );
+        $this->assertSame( 'customer'       , BusinessDocument::CUSTOMER        );
+        $this->assertSame( 'documentLines'  , BusinessDocument::DOCUMENT_LINES  );
+        $this->assertSame( 'issueDate'      , BusinessDocument::ISSUE_DATE      );
+        $this->assertSame( 'orderDelivery'  , BusinessDocument::ORDER_DELIVERY  );
+        $this->assertSame( 'paymentTerms'   , BusinessDocument::PAYMENT_TERMS   );
+        $this->assertSame( 'pointOfSale'    , BusinessDocument::POINT_OF_SALE   );
+        $this->assertSame( 'references'     , BusinessDocument::REFERENCES      );
+        $this->assertSame( 'seller'         , BusinessDocument::SELLER          );
+        $this->assertSame( 'status'         , BusinessDocument::STATUS          );
+        $this->assertSame( 'taxes'          , BusinessDocument::TAXES           );
+        $this->assertSame( 'totals'         , BusinessDocument::TOTALS          );
 
-        $this->assertSame( Oihana::ADJUSTMENTS , BusinessDocument::ADJUSTMENTS );
-        $this->assertSame( Oihana::CUSTOMER    , BusinessDocument::CUSTOMER    );
-        $this->assertSame( Oihana::TOTALS      , BusinessDocument::TOTALS      );
+        $this->assertSame( Oihana::ADJUSTMENTS     , BusinessDocument::ADJUSTMENTS     );
+        $this->assertSame( Oihana::BILLING_ADDRESS , BusinessDocument::BILLING_ADDRESS );
+        $this->assertSame( Oihana::CONTACT         , BusinessDocument::CONTACT         );
+        $this->assertSame( Oihana::CUSTOMER        , BusinessDocument::CUSTOMER        );
+        $this->assertSame( Oihana::ORDER_DELIVERY  , BusinessDocument::ORDER_DELIVERY  );
+        $this->assertSame( Oihana::POINT_OF_SALE   , BusinessDocument::POINT_OF_SALE   );
+        $this->assertSame( Oihana::TOTALS          , BusinessDocument::TOTALS          );
     }
 
     public function testDefaults(): void
     {
         $document = new BusinessDocument() ;
 
-        $this->assertNull( $document->adjustments   ?? null );
-        $this->assertNull( $document->attachments   ?? null );
-        $this->assertNull( $document->currency      ?? null );
-        $this->assertNull( $document->customer      ?? null );
-        $this->assertNull( $document->documentLines ?? null );
-        $this->assertNull( $document->issueDate     ?? null );
-        $this->assertNull( $document->paymentTerms  ?? null );
-        $this->assertNull( $document->references    ?? null );
-        $this->assertNull( $document->seller        ?? null );
-        $this->assertNull( $document->status        ?? null );
-        $this->assertNull( $document->taxes         ?? null );
-        $this->assertNull( $document->totals        ?? null );
+        $this->assertNull( $document->adjustments    ?? null );
+        $this->assertNull( $document->attachments    ?? null );
+        $this->assertNull( $document->billingAddress ?? null );
+        $this->assertNull( $document->contact        ?? null );
+        $this->assertNull( $document->currency       ?? null );
+        $this->assertNull( $document->customer       ?? null );
+        $this->assertNull( $document->documentLines  ?? null );
+        $this->assertNull( $document->issueDate      ?? null );
+        $this->assertNull( $document->orderDelivery  ?? null );
+        $this->assertNull( $document->paymentTerms   ?? null );
+        $this->assertNull( $document->pointOfSale    ?? null );
+        $this->assertNull( $document->references     ?? null );
+        $this->assertNull( $document->seller         ?? null );
+        $this->assertNull( $document->status         ?? null );
+        $this->assertNull( $document->taxes          ?? null );
+        $this->assertNull( $document->totals         ?? null );
     }
 
     public function testConstructorHydratesScalarProperties(): void
@@ -96,17 +111,33 @@ class BusinessDocumentTest extends TestCase
         $document = new Reflection()->hydrate
         (
             [
-                BusinessDocument::DOCUMENT_LINES => [ [ 'position' => 1 , 'quantity' => 2 ] ] ,
-                BusinessDocument::ADJUSTMENTS    => [ [ 'type' => 'discount' , 'percentage' => 5 , 'reason' => 'Order-level discount' ] ] ,
-                BusinessDocument::TAXES          => [ [ 'category' => 'VAT' , 'rate' => 20.0 ] ] ,
-                BusinessDocument::TOTALS         => [ 'subtotal' => [ 'value' => 100 , 'currency' => 'EUR' ] ] ,
-                BusinessDocument::PAYMENT_TERMS  => [ 'installments' => [ [ 'dueDate' => '2026-02-01' , 'percentage' => 100.0 ] ] ] ,
+                BusinessDocument::DOCUMENT_LINES  => [ [ 'position' => 1 , 'quantity' => 2 ] ] ,
+                BusinessDocument::ADJUSTMENTS     => [ [ 'type' => 'discount' , 'percentage' => 5 , 'reason' => 'Order-level discount' ] ] ,
+                BusinessDocument::TAXES           => [ [ 'category' => 'VAT' , 'rate' => 20.0 ] ] ,
+                BusinessDocument::TOTALS          => [ 'subtotal' => [ 'value' => 100 , 'currency' => 'EUR' ] ] ,
+                BusinessDocument::PAYMENT_TERMS   => [ 'installments' => [ [ 'dueDate' => '2026-02-01' , 'percentage' => 100.0 ] ] ] ,
+                BusinessDocument::BILLING_ADDRESS => [ 'streetAddress' => '1 rue du Test' , 'postalCode' => '12000' , 'addressLocality' => 'Rodez' ] ,
+                BusinessDocument::CONTACT         => [ 'name' => 'Jane Doe' ] ,
+                BusinessDocument::ORDER_DELIVERY  => [ 'trackingNumber' => 'PKG-1' , 'expectedArrivalFrom' => '2026-07-21' ] ,
+                BusinessDocument::POINT_OF_SALE   => [ 'name' => 'Rodez' ] ,
             ],
             BusinessDocument::class
         );
 
         $this->assertInstanceOf( BusinessDocumentLine::class , $document->documentLines[ 0 ] ) ;
         $this->assertSame( 1 , $document->documentLines[ 0 ]->position ) ;
+
+        $this->assertInstanceOf( PostalAddress::class , $document->billingAddress ) ;
+        $this->assertSame( '1 rue du Test' , $document->billingAddress->streetAddress ) ;
+
+        $this->assertInstanceOf( Person::class , $document->contact ) ;
+        $this->assertSame( 'Jane Doe' , $document->contact->name ) ;
+
+        $this->assertInstanceOf( ParcelDelivery::class , $document->orderDelivery ) ;
+        $this->assertSame( 'PKG-1' , $document->orderDelivery->trackingNumber ) ;
+
+        $this->assertInstanceOf( Place::class , $document->pointOfSale ) ;
+        $this->assertSame( 'Rodez' , $document->pointOfSale->name ) ;
 
         $this->assertInstanceOf( Adjustment::class , $document->adjustments[ 0 ] ) ;
         $this->assertSame( 5 , $document->adjustments[ 0 ]->percentage ) ;
