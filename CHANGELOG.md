@@ -8,6 +8,20 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds six resolved, display-only target properties to `PricingCondition` under
+  `xyz\oihana\schema\products` — `category` (`DefinedTerm`), `customer`
+  (`Customer`), `product` (`Product`), `provider` (`Provider`), `subsidiary`
+  (`Subsidiary`) and `warehouse` (`Warehouse`). Each is the hydrated twin of an
+  id the resolver already reads off the `selector` (`itemId` for
+  `category`/`product`, `customerId` for `customer`, `providerId` for `provider`,
+  `areaServed` for `subsidiary`/`warehouse`): the resolver never reads them, they
+  exist only to display the entity a condition targets. All six are single value
+  objects typed `null|array|X`, hydrated through `#[HydrateAs]` and defaulting to
+  `null`. Their constants are added to the products `PricingCondition` trait,
+  surfacing `category` / `customer` / `product` / `provider` / `subsidiary` /
+  `warehouse` on the `Oihana` aggregator (`category`, `customer`, `product` and
+  `provider` were already carried, with the same value, by other product traits),
+  and the class stays covered at 100%.
 - Adds four header properties to `BusinessDocument` under
   `xyz\oihana\schema\business\documents` — `billingAddress` (`PostalAddress`),
   `contact` (`Person`, the interlocutor a document is dealt with — a concept

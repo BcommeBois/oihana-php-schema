@@ -5,12 +5,17 @@ namespace xyz\oihana\schema\products;
 use oihana\reflect\attributes\HydrateAs;
 
 use oihana\reflect\attributes\HydrateWith;
+use org\schema\DefinedTerm;
 use org\schema\MonetaryAmount;
 use org\schema\PropertyValue;
 use org\schema\StructuredValue;
 
 use xyz\oihana\schema\business\documents\Adjustment;
 use xyz\oihana\schema\constants\Oihana;
+use xyz\oihana\schema\organizations\Customer;
+use xyz\oihana\schema\organizations\Provider;
+use xyz\oihana\schema\organizations\Subsidiary;
+use xyz\oihana\schema\places\Warehouse;
 
 /**
  * A conditional pricing rule : a discount (or a tariff substitution) granted to
@@ -61,6 +66,22 @@ class PricingCondition extends StructuredValue
     public null|array|Adjustment $adjustment ;
 
     /**
+     * The resolved price category the condition targets, when `selector.itemScope` is `CATEGORY`.
+     * Display-only : the resolver reads `selector.itemId`, never this.
+     * @var DefinedTerm|array|null
+     */
+    #[HydrateAs(DefinedTerm::class)]
+    public null|array|DefinedTerm $category = null ;
+
+    /**
+     * The resolved buyer the condition targets, when `selector.customerScope` is
+     * `INDIVIDUAL`. Display-only : the resolver reads `selector.customerId`, never this.
+     * @var Customer|array|null
+     */
+    #[HydrateAs(Customer::class)]
+    public null|array|Customer $customer = null ;
+
+    /**
      * The identifiers of the customers carved out of the scope (exceptions).
      * @var array|null
      */
@@ -88,6 +109,22 @@ class PricingCondition extends StructuredValue
     public ?bool $free ;
 
     /**
+     * The resolved product the condition targets, when `selector.itemScope` is
+     * `PRODUCT`. Display-only : the resolver reads `selector.itemId`, never this.
+     * @var Product|array|null
+     */
+    #[HydrateAs(Product::class)]
+    public null|array|Product $product = null ;
+
+    /**
+     * The resolved supplier the condition is constrained to, when `selector.providerId`
+     * is set. Display-only : the resolver reads `selector.providerId`, never this.
+     * @var Provider|array|null
+     */
+    #[HydrateAs(Provider::class)]
+    public null|array|Provider $provider = null ;
+
+    /**
      * An optional quantity-tier effect (discounts by quantity).
      * @var PriceQuantityDiscount|array|null
      */
@@ -100,6 +137,14 @@ class PricingCondition extends StructuredValue
      */
     #[HydrateAs(PricingConditionSelector::class)]
     public null|array|PricingConditionSelector $selector ;
+
+    /**
+     * The resolved company the condition is valid at, when `selector.areaScope` is
+     * `COMPANY`. Display-only : the resolver reads `selector.areaServed`, never this.
+     * @var Subsidiary|array|null
+     */
+    #[HydrateAs(Subsidiary::class)]
+    public null|array|Subsidiary $subsidiary = null ;
 
     /**
      * The tariff segment substituted for the buyer's usual one, applied
@@ -121,4 +166,12 @@ class PricingCondition extends StructuredValue
      * @var string|int|null
      */
     public null|string|int $validThrough ;
+
+    /**
+     * The resolved point of sale the condition is valid at, when `selector.areaScope`
+     * is `WAREHOUSE`. Display-only : the resolver reads `selector.areaServed`, never this.
+     * @var Warehouse|array|null
+     */
+    #[HydrateAs(Warehouse::class)]
+    public null|array|Warehouse $warehouse = null ;
 }

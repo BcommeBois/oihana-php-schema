@@ -16,9 +16,16 @@ use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\enumerations\PriceComponentType;
 use xyz\oihana\schema\enumerations\PricingItemScope;
 use xyz\oihana\schema\enumerations\PricingTargetScope;
+use org\schema\DefinedTerm;
+
+use xyz\oihana\schema\organizations\Customer;
+use xyz\oihana\schema\organizations\Provider;
+use xyz\oihana\schema\organizations\Subsidiary;
+use xyz\oihana\schema\places\Warehouse;
 use xyz\oihana\schema\products\PriceSegmentation;
 use xyz\oihana\schema\products\PricingCondition;
 use xyz\oihana\schema\products\PricingConditionSelector;
+use xyz\oihana\schema\products\Product;
 
 class PricingConditionTest extends TestCase
 {
@@ -36,15 +43,21 @@ class PricingConditionTest extends TestCase
     {
         $this->assertSame( 'additionalProperty'  , Oihana::ADDITIONAL_PROPERTY );
         $this->assertSame( 'adjustment'          , Oihana::ADJUSTMENT          );
+        $this->assertSame( 'category'            , Oihana::CATEGORY            );
+        $this->assertSame( 'customer'            , Oihana::CUSTOMER            );
         $this->assertSame( 'excludedCustomers'   , Oihana::EXCLUDED_CUSTOMERS  );
         $this->assertSame( 'excludedProducts'    , Oihana::EXCLUDED_PRODUCTS   );
         $this->assertSame( 'fixedPrice'          , Oihana::FIXED_PRICE         );
         $this->assertSame( 'free'                , Oihana::FREE                );
+        $this->assertSame( 'product'             , Oihana::PRODUCT             );
+        $this->assertSame( 'provider'            , Oihana::PROVIDER            );
         $this->assertSame( 'quantityDiscount'    , Oihana::QUANTITY_DISCOUNT   );
         $this->assertSame( 'selector'            , Oihana::SELECTOR            );
+        $this->assertSame( 'subsidiary'          , Oihana::SUBSIDIARY          );
         $this->assertSame( 'substitutesSegment'  , Oihana::SUBSTITUTES_SEGMENT );
         $this->assertSame( 'validFrom'           , Oihana::VALID_FROM          );
         $this->assertSame( 'validThrough'        , Oihana::VALID_THROUGH       );
+        $this->assertSame( 'warehouse'           , Oihana::WAREHOUSE           );
     }
 
     public function testDefaults(): void
@@ -53,15 +66,21 @@ class PricingConditionTest extends TestCase
 
         $this->assertNull( $condition->additionalProperty ?? null );
         $this->assertNull( $condition->adjustment         ?? null );
+        $this->assertNull( $condition->category           ?? null );
+        $this->assertNull( $condition->customer           ?? null );
         $this->assertNull( $condition->excludedCustomers  ?? null );
         $this->assertNull( $condition->excludedProducts   ?? null );
         $this->assertNull( $condition->fixedPrice         ?? null );
         $this->assertNull( $condition->free               ?? null );
+        $this->assertNull( $condition->product            ?? null );
+        $this->assertNull( $condition->provider           ?? null );
         $this->assertNull( $condition->quantityDiscount   ?? null );
         $this->assertNull( $condition->selector           ?? null );
+        $this->assertNull( $condition->subsidiary         ?? null );
         $this->assertNull( $condition->substitutesSegment ?? null );
         $this->assertNull( $condition->validFrom          ?? null );
         $this->assertNull( $condition->validThrough       ?? null );
+        $this->assertNull( $condition->warehouse          ?? null );
     }
 
     public function testConstructorHydratesScalarProperties(): void
@@ -244,5 +263,38 @@ class PricingConditionTest extends TestCase
         $this->assertSame( 'retail'  , $condition->additionalProperty[0]->value      ) ;
         $this->assertSame( 'priority', $condition->additionalProperty[1]->propertyID ) ;
         $this->assertSame( 10        , $condition->additionalProperty[1]->value      ) ;
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testReflectionHydratesTheResolvedTargets(): void
+    {
+        $condition = new Reflection()->hydrate
+        (
+            [
+                Oihana::CATEGORY   => [ Oihana::ID => '05'     , Oihana::NAME => 'Wines'      ] ,
+                Oihana::CUSTOMER   => [ Oihana::ID => '600214' , Oihana::NAME => 'Acme'       ] ,
+                Oihana::PRODUCT    => [ Oihana::ID => '70196'  , Oihana::NAME => 'Merlot'     ] ,
+                Oihana::PROVIDER   => [ Oihana::ID => 'P-1'    , Oihana::NAME => 'Vineyard'   ] ,
+                Oihana::SUBSIDIARY => [ Oihana::ID => 'S-1'    , Oihana::NAME => 'North'      ] ,
+                Oihana::WAREHOUSE  => [ Oihana::ID => 'W-1'    , Oihana::NAME => 'Cellar'     ] ,
+            ],
+            PricingCondition::class
+        );
+
+        $this->assertInstanceOf( DefinedTerm::class , $condition->category   ) ;
+        $this->assertInstanceOf( Customer::class    , $condition->customer   ) ;
+        $this->assertInstanceOf( Product::class     , $condition->product    ) ;
+        $this->assertInstanceOf( Provider::class    , $condition->provider   ) ;
+        $this->assertInstanceOf( Subsidiary::class  , $condition->subsidiary ) ;
+        $this->assertInstanceOf( Warehouse::class   , $condition->warehouse  ) ;
+
+        $this->assertSame( '05'     , $condition->category->id   ) ;
+        $this->assertSame( '600214' , $condition->customer->id   ) ;
+        $this->assertSame( '70196'  , $condition->product->id    ) ;
+        $this->assertSame( 'P-1'    , $condition->provider->id   ) ;
+        $this->assertSame( 'S-1'    , $condition->subsidiary->id ) ;
+        $this->assertSame( 'W-1'    , $condition->warehouse->id  ) ;
     }
 }
