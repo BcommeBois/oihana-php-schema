@@ -2,13 +2,13 @@
 
 namespace xyz\oihana\schema\products;
 
-use oihana\reflect\attributes\HydrateAs;
-
-use oihana\reflect\attributes\HydrateWith;
 use org\schema\DefinedTerm;
 use org\schema\MonetaryAmount;
 use org\schema\PropertyValue;
 use org\schema\StructuredValue;
+
+use oihana\reflect\attributes\HydrateAs;
+use oihana\reflect\attributes\HydrateWith;
 
 use xyz\oihana\schema\business\documents\Adjustment;
 use xyz\oihana\schema\constants\Oihana;
