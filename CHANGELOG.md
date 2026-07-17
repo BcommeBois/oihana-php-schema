@@ -8,6 +8,20 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds `xyz\oihana\schema\thesaurus\ProductPriceCategoryTerm` (extends `Concept`,
+  `use HasColor`, `HasTreeMetrics`) — a product **price** category (a tariff
+  family used to scope pricing rules and conditions), the second hierarchical
+  and colored thesaurus family alongside `ProductCategoryTerm`. It is kept as its
+  own class rather than reusing `ProductCategoryTerm` so a term's `@type` stays
+  meaningful : a price category never advertises itself as a catalog category.
+  It shares the exact same shape — the SKOS `broader`/`narrower` relations and
+  `@context` from `Concept`, the `color` from `HasColor`, and the projection-only
+  `childrenCount` from `HasTreeMetrics` (`isLeaf` ⟺ `childrenCount === 0`).
+  Covered at 100% by the new `ProductPriceCategoryTermTest` suite (defaults, the
+  `Concept`/`DefinedTerm` lineage, the `HasColor`/`HasTreeMetrics` composition,
+  the relation and `CHILDREN_COUNT` constants and their `Oihana` aggregation, the
+  distinction from `ProductCategoryTerm`, and both hydration paths — raw
+  constructor assignment vs the reflection path).
 - Adds six resolved, display-only target properties to `PricingCondition` under
   `xyz\oihana\schema\products` — `category` (`DefinedTerm`), `customer`
   (`Customer`), `product` (`Product`), `provider` (`Provider`), `subsidiary`

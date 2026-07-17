@@ -13,6 +13,7 @@ Choisissez ces classes lorsqu'un simple `DefinedTerm` ne suffit pas — lorsque 
 - un *ThesaurusTerm* pour un terme **plat** enrichi d'un indice de couleur maison `color`,
 - un *Concept* lorsque les termes se relient entre eux — `broader` (parent), `narrower` (enfants) et leurs fermetures transitives, plus les liens associatifs (`related`) et d'alignement inter-schémas,
 - un *ProductCategoryTerm* lorsqu'un concept est **à la fois** hiérarchique et coloré (le cas des catégories produits),
+- un *ProductPriceCategoryTerm* pour la même forme, mais dédiée aux **catégories de prix** (une famille tarifaire servant à cadrer les règles et conditions de prix) — distincte d'une catégorie catalogue pour que le `@type` d'un terme reste parlant,
 - un *ConceptScheme* pour porter un vocabulaire et exposer ses concepts racines (`hasTopConcept`),
 - une *Collection* (ou *OrderedCollection*) pour regrouper des concepts **hors** hiérarchie — un groupe étiqueté, éventuellement ordonné, du type « cépages mis en avant »,
 - un *ThesaurusScheme* lorsqu'un vocabulaire doit être **administré dans un registre** — le schéma de concepts plus ses métadonnées administrables (visibilité, affichage, routage) et ses drapeaux de provenance,
@@ -122,6 +123,7 @@ Au-dessus du cœur SKOS, le namespace modélise la vue **registre** d'un catalog
 | `ThesaurusTerm`       | `DefinedTerm`    | Un terme de thésaurus **plat** enrichi d'une couleur maison `color` (`#RRGGBB`) — pour les vocabulaires sans hiérarchie.  |
 | `Concept`             | `DefinedTerm`    | Un **concept SKOS** portant les relations hiérarchiques (`broader`/`narrower` + transitives), associatives (`related`) et d'alignement inter-schémas (`*Match`), le `hiddenLabel` et les notes documentaires. |
 | `ProductCategoryTerm` | `Concept`        | Un concept **à la fois** hiérarchique et coloré (`use HasColor`) — la famille des catégories produits. Les familles plates restent sur `ThesaurusTerm`. |
+| `ProductPriceCategoryTerm` | `Concept`   | Même forme que `ProductCategoryTerm`, mais pour les **catégories de prix** (familles tarifaires cadrant les règles/conditions de prix). Classe distincte pour que le `@type` reste parlant : une catégorie de prix ne se présente jamais comme une catégorie catalogue. |
 | `ConceptScheme`       | `DefinedTermSet` | Un **schéma de concepts SKOS** (un vocabulaire), exposant ses concepts racines via `hasTopConcept`. L'appartenance d'un concept reste portée par `inDefinedTermSet` hérité (`skos:inScheme`). |
 | `Collection`          | `Intangible`     | Une **collection SKOS** — un regroupement étiqueté et **non hiérarchique** de concepts (`member`). Les membres sont polymorphes : concepts et/ou sous-collections imbriquées. |
 | `OrderedCollection`   | `Collection`     | Une `Collection` dont les membres ont un ordre signifiant (`memberList`).                                                 |
@@ -154,7 +156,7 @@ Chaque classe associe un **trait porteur de propriétés** à son **trait de con
 
 | Trait de propriétés                                                                                  | Porte                                                             |
 |-----------------------------------------------------------------------------------------------------|------------------------------------------------------------------|
-| [`HasColor`](../../src/xyz/oihana/schema/traits/HasColor.php)                                        | `color` (partagé par `ThesaurusTerm` et `ProductCategoryTerm`)   |
+| [`HasColor`](../../src/xyz/oihana/schema/traits/HasColor.php)                                        | `color` (partagé par `ThesaurusTerm`, `ProductCategoryTerm` et `ProductPriceCategoryTerm`)   |
 | [`HasSkosRelations`](../../src/xyz/oihana/schema/thesaurus/traits/HasSkosRelations.php)              | `broader`, `narrower`, les formes transitives, `related`         |
 | [`HasSkosNotes`](../../src/xyz/oihana/schema/thesaurus/traits/HasSkosNotes.php)                      | les six notes documentaires SKOS                                 |
 | [`HasSkosMappings`](../../src/xyz/oihana/schema/thesaurus/traits/HasSkosMappings.php)                | les cinq relations d'alignement `*Match` inter-schémas           |

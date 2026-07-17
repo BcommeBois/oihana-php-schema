@@ -13,6 +13,7 @@ Reach for these classes when a plain `DefinedTerm` is not enough — when your t
 - a *ThesaurusTerm* for a **flat** term enriched with a house `color` hint,
 - a *Concept* when terms relate to one another — `broader` (parent), `narrower` (children) and their transitive closures, plus associative (`related`) and cross-scheme mapping links,
 - a *ProductCategoryTerm* when a concept is **both** hierarchical and colored (the product-category case),
+- a *ProductPriceCategoryTerm* for the same shape, but dedicated to **price categories** (a tariff family used to scope pricing rules and conditions) — kept distinct from a catalog category so a term's `@type` stays meaningful,
 - a *ConceptScheme* to hold a vocabulary and expose its root concepts (`hasTopConcept`),
 - a *Collection* (or *OrderedCollection*) to gather concepts **outside** the hierarchy — a labelled, optionally ordered group such as "featured grape varieties",
 - a *ThesaurusScheme* when a vocabulary must be **managed in a registry** — the concept scheme plus its administrative metadata (visibility, display, routing) and provenance flags,
@@ -122,6 +123,7 @@ On top of the SKOS core, the namespace models the **registry** view of a vocabul
 | `ThesaurusTerm`       | `DefinedTerm`    | A **flat** thesaurus term enriched with a house `color` (`#RRGGBB`) — for vocabularies with no hierarchy.                 |
 | `Concept`             | `DefinedTerm`    | A **SKOS concept** carrying the hierarchical (`broader`/`narrower` + transitive), associative (`related`) and cross-scheme mapping (`*Match`) relations, the `hiddenLabel` and the documentation notes. |
 | `ProductCategoryTerm` | `Concept`        | A concept that is **both** hierarchical and colored (`use HasColor`) — the product-category family. Flat families stay on `ThesaurusTerm`. |
+| `ProductPriceCategoryTerm` | `Concept`   | Same shape as `ProductCategoryTerm`, but for **price categories** (tariff families scoping pricing rules/conditions). A distinct class so `@type` stays meaningful: a price category never advertises itself as a catalog category. |
 | `ConceptScheme`       | `DefinedTermSet` | A **SKOS concept scheme** (a vocabulary), exposing its root concepts via `hasTopConcept`. Concept membership stays on the inherited `inDefinedTermSet` (`skos:inScheme`). |
 | `Collection`          | `Intangible`     | A **SKOS collection** — a labelled, **non-hierarchical** grouping of concepts (`member`). Members are polymorphic: concepts and/or nested collections. |
 | `OrderedCollection`   | `Collection`     | A `Collection` whose members carry a meaningful order (`memberList`).                                                     |
@@ -154,7 +156,7 @@ Each class pairs a **property-bearing trait** with its **constant trait**, so a 
 
 | Property trait                                                                                      | Carries                                                            |
 |-----------------------------------------------------------------------------------------------------|-------------------------------------------------------------------|
-| [`HasColor`](../../src/xyz/oihana/schema/traits/HasColor.php)                                        | `color` (shared by `ThesaurusTerm` and `ProductCategoryTerm`)     |
+| [`HasColor`](../../src/xyz/oihana/schema/traits/HasColor.php)                                        | `color` (shared by `ThesaurusTerm`, `ProductCategoryTerm` and `ProductPriceCategoryTerm`)     |
 | [`HasSkosRelations`](../../src/xyz/oihana/schema/thesaurus/traits/HasSkosRelations.php)              | `broader`, `narrower`, the transitive forms, `related`            |
 | [`HasSkosNotes`](../../src/xyz/oihana/schema/thesaurus/traits/HasSkosNotes.php)                      | the six SKOS documentation notes                                  |
 | [`HasSkosMappings`](../../src/xyz/oihana/schema/thesaurus/traits/HasSkosMappings.php)                | the five cross-scheme `*Match` relations                          |
