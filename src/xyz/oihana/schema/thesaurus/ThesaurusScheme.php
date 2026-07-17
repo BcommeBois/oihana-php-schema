@@ -6,7 +6,7 @@ use oihana\reflect\attributes\HydrateWith;
 
 use xyz\oihana\schema\constants\traits\thesaurus\ThesaurusSchemeTrait;
 use xyz\oihana\schema\constants\traits\thesaurus\ThesaurusTermTrait;
-use xyz\oihana\schema\thesaurus\traits\HasColor;
+use xyz\oihana\schema\traits\HasColor;
 
 /**
  * A thesaurus taken as a whole, as it appears in a registry : the manageable metadata plus the provenance flags.
@@ -60,14 +60,6 @@ class ThesaurusScheme extends ConceptScheme
     use HasColor             ,
         ThesaurusSchemeTrait ,
         ThesaurusTermTrait   ;
-
-    /**
-     * The visibility flag : an inactive scheme is hidden from the interfaces
-     * without being deleted.
-     *
-     * @var bool|null
-     */
-    public ?bool $active ;
 
     /**
      * The domain the scheme is filed under : a bare key, an AQL-projected

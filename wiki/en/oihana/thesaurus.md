@@ -154,7 +154,7 @@ Each class pairs a **property-bearing trait** with its **constant trait**, so a 
 
 | Property trait                                                                                      | Carries                                                            |
 |-----------------------------------------------------------------------------------------------------|-------------------------------------------------------------------|
-| [`HasColor`](../../src/xyz/oihana/schema/thesaurus/traits/HasColor.php)                              | `color` (shared by `ThesaurusTerm` and `ProductCategoryTerm`)     |
+| [`HasColor`](../../src/xyz/oihana/schema/traits/HasColor.php)                                        | `color` (shared by `ThesaurusTerm` and `ProductCategoryTerm`)     |
 | [`HasSkosRelations`](../../src/xyz/oihana/schema/thesaurus/traits/HasSkosRelations.php)              | `broader`, `narrower`, the transitive forms, `related`            |
 | [`HasSkosNotes`](../../src/xyz/oihana/schema/thesaurus/traits/HasSkosNotes.php)                      | the six SKOS documentation notes                                  |
 | [`HasSkosMappings`](../../src/xyz/oihana/schema/thesaurus/traits/HasSkosMappings.php)                | the five cross-scheme `*Match` relations                          |

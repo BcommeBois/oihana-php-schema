@@ -154,7 +154,7 @@ Chaque classe associe un **trait porteur de propriétés** à son **trait de con
 
 | Trait de propriétés                                                                                  | Porte                                                             |
 |-----------------------------------------------------------------------------------------------------|------------------------------------------------------------------|
-| [`HasColor`](../../src/xyz/oihana/schema/thesaurus/traits/HasColor.php)                              | `color` (partagé par `ThesaurusTerm` et `ProductCategoryTerm`)   |
+| [`HasColor`](../../src/xyz/oihana/schema/traits/HasColor.php)                                        | `color` (partagé par `ThesaurusTerm` et `ProductCategoryTerm`)   |
 | [`HasSkosRelations`](../../src/xyz/oihana/schema/thesaurus/traits/HasSkosRelations.php)              | `broader`, `narrower`, les formes transitives, `related`         |
 | [`HasSkosNotes`](../../src/xyz/oihana/schema/thesaurus/traits/HasSkosNotes.php)                      | les six notes documentaires SKOS                                 |
 | [`HasSkosMappings`](../../src/xyz/oihana/schema/thesaurus/traits/HasSkosMappings.php)                | les cinq relations d'alignement `*Match` inter-schémas           |

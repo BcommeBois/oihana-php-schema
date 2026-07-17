@@ -4,8 +4,8 @@ namespace xyz\oihana\schema\thesaurus;
 
 use xyz\oihana\schema\constants\traits\thesaurus\ThesaurusTermTrait;
 use xyz\oihana\schema\constants\traits\thesaurus\TreeMetricsTrait;
-use xyz\oihana\schema\thesaurus\traits\HasColor;
 use xyz\oihana\schema\thesaurus\traits\HasTreeMetrics;
+use xyz\oihana\schema\traits\HasColor;
 
 /**
  * A product category : a hierarchical {@see Concept} that also carries a house

@@ -104,6 +104,26 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - Wires the two new property-constant traits into `ProductsTrait` (so the
   constants surface on the `Oihana` aggregator) and documents the whole in the
   `products` wiki page (FR + EN).
+- Adds the `HasPricingMarkup` trait under `xyz\oihana\schema\traits` — an
+  optional `pricingMarkup` guardrail carried as a `null|array|QuantitativeValue`
+  (`minValue` floor, `maxValue` ceiling, `value` target, `unitCode` and
+  `valueReference` naming the base, e.g. `PriceType::COGS`), hydrated through
+  `#[HydrateAs]`. It models a commercial bound on the markup a seller may quote,
+  never a price effect (those stay on `PricingCondition`). The trait is not yet
+  composed by any class — it is provided for opt-in use, mirroring `HasColor`.
+
+### Changed
+
+- Moves `HasColor` from `xyz\oihana\schema\thesaurus\traits` to the shared
+  `xyz\oihana\schema\traits` namespace: `color` is a house presentation hint, not
+  a thesaurus-specific concern (it is already composed by `ThesaurusScheme` and
+  `ThesaurusDomain`, which are not terms). All imports are updated across `src`
+  and `tests`; the SKOS-specific `HasTreeMetrics` stays under `thesaurus\traits`.
+  The thesaurus wiki page trait link is updated (FR + EN).
+- Removes the redundant `$active` property redeclarations from `WebApplication`,
+  `ThesaurusScheme` and `ThesaurusDomain`: the flag is already declared on the
+  root `Thing`, so every entity inherits it. Behaviour is unchanged (the types
+  were compatible); the property is simply no longer shadowed.
 
 ## [1.3.0] - 2026-07-07
 

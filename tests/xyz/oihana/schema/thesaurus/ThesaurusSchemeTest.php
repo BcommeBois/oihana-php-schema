@@ -14,7 +14,7 @@ use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\thesaurus\ConceptScheme;
 use xyz\oihana\schema\thesaurus\ThesaurusDomain;
 use xyz\oihana\schema\thesaurus\ThesaurusScheme;
-use xyz\oihana\schema\thesaurus\traits\HasColor;
+use xyz\oihana\schema\traits\HasColor;
 
 class ThesaurusSchemeTest extends TestCase
 {

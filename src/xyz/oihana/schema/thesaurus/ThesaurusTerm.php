@@ -6,7 +6,7 @@ use org\schema\DefinedTerm;
 
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\constants\traits\thesaurus\ThesaurusTermTrait;
-use xyz\oihana\schema\thesaurus\traits\HasColor;
+use xyz\oihana\schema\traits\HasColor;
 
 /**
  * A thesaurus term enriched with house-specific properties.

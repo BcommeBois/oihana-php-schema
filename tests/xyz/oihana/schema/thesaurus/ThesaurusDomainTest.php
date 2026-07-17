@@ -13,7 +13,7 @@ use org\schema\constants\Schema;
 
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\thesaurus\ThesaurusDomain;
-use xyz\oihana\schema\thesaurus\traits\HasColor;
+use xyz\oihana\schema\traits\HasColor;
 
 class ThesaurusDomainTest extends TestCase
 {

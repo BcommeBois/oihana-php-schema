@@ -12,8 +12,8 @@ use org\schema\DefinedTerm;
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\thesaurus\Concept;
 use xyz\oihana\schema\thesaurus\ProductCategoryTerm;
-use xyz\oihana\schema\thesaurus\traits\HasColor;
 use xyz\oihana\schema\thesaurus\traits\HasTreeMetrics;
+use xyz\oihana\schema\traits\HasColor;
 
 class ProductCategoryTermTest extends TestCase
 {

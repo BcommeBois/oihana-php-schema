@@ -47,7 +47,8 @@ class Thing implements JsonSerializable
     public int|string|null $url ;
 
     /**
-     * The active flag.
+     * The visibility flag.
+     * @var bool|null
      */
     public ?bool $active ;
 

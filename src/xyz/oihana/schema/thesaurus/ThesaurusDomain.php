@@ -7,7 +7,7 @@ use org\schema\Intangible;
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\constants\traits\thesaurus\ThesaurusSchemeTrait;
 use xyz\oihana\schema\constants\traits\thesaurus\ThesaurusTermTrait;
-use xyz\oihana\schema\thesaurus\traits\HasColor;
+use xyz\oihana\schema\traits\HasColor;
 
 /**
  * A thesaurus domain : the top-level grouping of the schemes of a registry
@@ -60,14 +60,6 @@ class ThesaurusDomain extends Intangible
      * The @context of the json-ld representation of the thing.
      */
     public const string CONTEXT = Oihana::SCHEMA ;
-
-    /**
-     * The visibility flag : an inactive domain is hidden from the interfaces
-     * without being deleted.
-     *
-     * @var bool|null
-     */
-    public ?bool $active ;
 
     /**
      * The display order of the domain among its siblings.

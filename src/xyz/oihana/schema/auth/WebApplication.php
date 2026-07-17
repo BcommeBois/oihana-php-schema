@@ -20,12 +20,6 @@ class WebApplication extends SoftwareApplication
     public const string CONTEXT = Oihana::SCHEMA ;
 
     /**
-     * Indicates if the application is active.
-     * @var bool|null
-     */
-    public bool|null $active ;
-
-    /**
      * The API domain identifier this application accesses (ex: 'commerce-api').
      * Maps to the owning WebAPI's identifier, used as Casbin domain.
      * @var string|null

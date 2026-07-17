@@ -8,7 +8,7 @@ use ReflectionException;
 use org\schema\DefinedTerm;
 
 use xyz\oihana\schema\thesaurus\ThesaurusTerm;
-use xyz\oihana\schema\thesaurus\traits\HasColor;
+use xyz\oihana\schema\traits\HasColor;
 
 class ThesaurusTermTest extends TestCase
 {

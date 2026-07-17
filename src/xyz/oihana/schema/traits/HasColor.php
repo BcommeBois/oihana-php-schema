@@ -1,6 +1,6 @@
 <?php
 
-namespace xyz\oihana\schema\thesaurus\traits;
+namespace xyz\oihana\schema\traits;
 
 /**
  * Provides an optional display color for a schema entity.
@@ -8,14 +8,12 @@ namespace xyz\oihana\schema\thesaurus\traits;
  * The color is a house property — a presentation hint layered on top of the
  * harvested data, expressed as a `#RRGGBB` hex string. It is extracted into a
  * dedicated trait so it can be composed by several thesaurus entities (e.g.
- * {@see \xyz\oihana\schema\thesaurus\ThesaurusTerm} and
- * {@see \xyz\oihana\schema\thesaurus\ProductCategoryTerm}) without duplicating
+ * {@see ThesaurusTerm} and {@see ProductCategoryTerm}) without duplicating
  * the property declaration.
  *
- * The companion property name constant lives in
- * {@see \xyz\oihana\schema\constants\traits\thesaurus\ThesaurusTermTrait}.
+ * The companion property name constant lives in {@see ThesaurusTermTrait}.
  *
- * @package xyz\oihana\schema\thesaurus\traits
+ * @package xyz\oihana\schema\traits
  * @author  Marc Alcaraz (ekameleon)
  * @since   1.1.1
  */
