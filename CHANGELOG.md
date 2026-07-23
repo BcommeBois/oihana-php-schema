@@ -158,6 +158,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Changed
 
+- Stops committing the JSON Schema generator output: `schemas/` is now gitignored
+  and its 283 tracked `*.schema.json` files are untracked (the files stay on disk
+  locally). Nothing in `src`, `tests`, `tools` or CI consumed them, the committed
+  set had drifted well out of sync with `src` (whole namespaces such as
+  `organizations/` and `actions/` were missing), and `composer schemas:all` — which
+  deletes every artifact *before* regenerating — aborts on a fatal error partway
+  through, so any attempt to refresh them destroyed the committed set. The
+  generator is kept as local, on-demand tooling; the README now flags it as
+  experimental and documents its known limitations (the fatal, the
+  `additionalProperties: false` vs `@type`/`@context` mismatch that makes every
+  serialized document fail its own schema, the unsatisfiable `oneOf` on `int|float`
+  unions, the dropped `null` on simple nullable types, and the stub `$defs` and
+  colliding `$id`s).
 - Reparents `org\schema\creativeWork\EducationalOccupationalCredential` from
   `CreativeWork` to the new `Credential`, matching schema.org's own hierarchy.
   The four credential properties move up to the parent and are no longer

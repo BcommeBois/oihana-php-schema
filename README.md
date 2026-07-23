@@ -305,6 +305,11 @@ See `CHANGELOG.md` for notable changes.
 
 Generate JSON Schemas from the typed public properties of your classes.
 
+> **Experimental — local tooling only.** `schemas/` is gitignored: the generated
+> files are not committed and nothing in the library consumes them. Regenerate on
+> demand. The generator is known to be incomplete (see *Known limitations* below)
+> and its output should not be relied upon for validation yet.
+
 - Single class (example: Place):
 ```bash
 composer schema:place
@@ -332,3 +337,24 @@ Details:
 When a property type includes `array` plus other types (e.g. `string|ImageObject|array<ImageObject|string>|null`), the generator emits:
 - direct options for `string`, `ImageObject`, `null` (if present)
 - and an `array` variant whose `items` use a `oneOf` of the non-array types (here `ImageObject` and `string`).
+
+### Known limitations
+
+The generator has not been finished; the following are known and unfixed:
+
+- `composer schemas:all` aborts with a fatal error on the function-only files
+  under `helpers/hydrate/` (`class_exists()` re-includes them). Since the script
+  deletes every `*.schema.json` *before* generating, an aborted run leaves the
+  output directory half-empty.
+- Generated schemas set `additionalProperties: false` but omit the `@type` and
+  `@context` keys that `jsonSerialize()` always emits, so no document produced by
+  this library validates against its own schema.
+- Union types are emitted as `oneOf`, which requires exactly one matching branch.
+  A union containing both `int` and `float` yields both an `integer` and a
+  `number` branch, and can therefore never be satisfied — `anyOf` is the correct
+  keyword here.
+- Simple nullable types (e.g. `?bool`) lose their `null` option through a dead
+  condition, so `null` is rejected where the PHP type allows it.
+- `$defs` entries are untyped stubs, and every `$id` uses
+  `https://schema.oihana.xyz/{ShortName}.json` — including for `org\schema` types,
+  and with collisions between identical short names in different namespaces.
