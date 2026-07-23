@@ -22,6 +22,7 @@ trait Properties
         ConstraintNode ,
         ContactPoint ,
         CreativeWork ,
+        Credential ,
         DataFeedItem ,
         Dataset ,
         DefinedRegion ,

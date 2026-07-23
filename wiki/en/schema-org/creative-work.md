@@ -13,7 +13,7 @@ Use this namespace whenever you describe a piece of content rather than an actio
 - editorial content (`Article`, `Book`, `Chapter`),
 - media objects (`ImageObject`, `VideoObject`, `AudioObject`, `Photograph`, `Drawing`),
 - structured data (`Dataset`, `DataCatalog`, `DataFeed`),
-- learning material and credentials (`HowTo`, `Certification`, `EducationalOccupationalCredential`),
+- learning material and credentials (`HowTo`, `Certification`, `Credential`, `EducationalOccupationalCredential`),
 - web pages and site structure (`WebPage`, `WebSite`, `BreadcrumbList`, `SiteNavigationElement`),
 - conversational content (`Comment`, `Question`, `Answer`, `Quotation`).
 
@@ -58,7 +58,7 @@ $article = new Article
 | Web structure          | `WebSite`, `BreadcrumbList`, `SiteNavigationElement`, `WPHeader`, `WPFooter`, `WPSideBar`, `WPAdBlock` |
 | Software & apps        | `SoftwareApplication`                                                                            |
 | Knowledge & terms      | `DefinedTermSet`, `CategoryCodeSet`, `Claim`, `SpeakableSpecification`                            |
-| Credentials            | `Certification`, `EducationalOccupationalCredential`                                              |
+| Credentials            | `Certification`, `Credential`, `EducationalOccupationalCredential`                              |
 | Real-estate            | `RealEstateListing`                                                                              |
 
 Sub-folders organise specialisations: [`creativeWork/medias/`](../../../src/org/schema/creativeWork/medias) (ImageObject, VideoObject, AudioObject), [`creativeWork/comments/`](../../../src/org/schema/creativeWork/comments) (Answer, CorrectionComment), [`creativeWork/web/`](../../../src/org/schema/creativeWork/web) (WPHeader, WPFooter, …).

@@ -8,6 +8,23 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds `org\schema\creativeWork\Credential` (extends `CreativeWork`) — the
+  schema.org parent type of `EducationalOccupationalCredential`, "a certificate
+  that is used to verify the identity of a person or entity". It carries the four
+  properties schema.org defines on `Credential` : `credentialCategory`
+  (`null|string|array|DefinedTerm`), `recognizedBy`
+  (`null|string|array|Organization`), `validFor`
+  (`null|string|array|int|float|Duration`) and `validIn`
+  (`null|string|array|AdministrativeArea`) — each including `array` so raw,
+  pre-hydration payloads survive the constructor's shallow assignment. The
+  matching `org\schema\constants\traits\Credential` constants trait
+  (`CREDENTIAL_CATEGORY`, `RECOGNIZED_BY`, `VALID_FOR`, `VALID_IN`) is aggregated
+  into `Schema`/`Prop` through `Properties`, and composed by the
+  `EducationalOccupationCredential` trait so the educational subtype keeps
+  exposing them. Covered by the new `CredentialTest` and
+  `EducationalOccupationalCredentialTest` suites (defaults, lineage, schema type,
+  constant aggregation, scalar/structured/array typing, both hydration paths and
+  `jsonSerialize`).
 - Adds the `xyz\oihana\schema\enumerations\BusinessDocumentDirection` enumeration
   (`Sale` / `Purchase`) and two header properties to `BusinessDocument` under
   `xyz\oihana\schema\business\documents` — `direction`
@@ -141,6 +158,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Changed
 
+- Reparents `org\schema\creativeWork\EducationalOccupationalCredential` from
+  `CreativeWork` to the new `Credential`, matching schema.org's own hierarchy.
+  The four credential properties move up to the parent and are no longer
+  declared (nor their constants duplicated) on the educational subtype, which now
+  only owns `competencyRequired` and `educationalLevel`. Consequently
+  `Person::$hasCredential` and `Organization::$hasCredential` are widened from
+  `EducationalOccupationalCredential` to `Credential`, so a non-educational
+  credential can be attached. Existing code is unaffected : an
+  `EducationalOccupationalCredential` is still a valid value, and every moved
+  property keeps its name and stays reachable on the subtype.
 - Moves `HasColor` from `xyz\oihana\schema\thesaurus\traits` to the shared
   `xyz\oihana\schema\traits` namespace: `color` is a house presentation hint, not
   a thesaurus-specific concern (it is already composed by `ThesaurusScheme` and

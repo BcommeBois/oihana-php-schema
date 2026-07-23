@@ -3,7 +3,7 @@
 namespace org\schema;
 
 use org\schema\creativeWork\Certification;
-use org\schema\creativeWork\EducationalOccupationalCredential;
+use org\schema\creativeWork\Credential;
 use org\schema\creativeWork\medias\ImageObject;
 use org\schema\organizations\EducationalOrganization;
 use org\schema\places\Country;
@@ -161,9 +161,9 @@ class Person extends Thing
 
     /**
      * A credential awarded to the Person or Organization.
-     * @var string|array|EducationalOccupationalCredential|null
+     * @var null|string|array|Credential
      */
-    public null|string|array|EducationalOccupationalCredential $hasCredential ;
+    public null|string|array|Credential $hasCredential ;
 
     /**
      * The Person's occupation. For past professions, use Role for expressing dates.

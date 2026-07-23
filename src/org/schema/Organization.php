@@ -4,7 +4,7 @@ namespace org\schema;
 
 use org\schema\creativeWork\Article;
 use org\schema\creativeWork\Certification;
-use org\schema\creativeWork\EducationalOccupationalCredential;
+use org\schema\creativeWork\Credential;
 use org\schema\creativeWork\medias\ImageObject;
 use org\schema\enumerations\NonprofitType;
 use org\schema\places\AdministrativeArea;
@@ -229,9 +229,9 @@ class Organization extends Thing
 
     /**
      * A credential awarded to the Person or Organization.
-     * @var string|array|EducationalOccupationalCredential|null
+     * @var null|string|array|Credential
      */
-    public null|string|array|EducationalOccupationalCredential $hasCredential ;
+    public null|string|array|Credential $hasCredential ;
 
     /**
      * The GS1 digital link associated with the object. This URL should conform
