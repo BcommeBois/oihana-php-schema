@@ -21,6 +21,7 @@ use xyz\oihana\schema\business\documents\DocumentTotals;
 use xyz\oihana\schema\business\documents\PaymentSchedule;
 use xyz\oihana\schema\business\documents\TaxDetail;
 use xyz\oihana\schema\constants\Oihana;
+use xyz\oihana\schema\enumerations\BusinessDocumentDirection;
 use xyz\oihana\schema\enumerations\BusinessDocumentStatus;
 
 class BusinessDocumentTest extends TestCase
@@ -39,10 +40,12 @@ class BusinessDocumentTest extends TestCase
     {
         $this->assertSame( 'adjustments'    , BusinessDocument::ADJUSTMENTS     );
         $this->assertSame( 'attachments'    , BusinessDocument::ATTACHMENTS     );
+        $this->assertSame( 'author'         , BusinessDocument::AUTHOR          );
         $this->assertSame( 'billingAddress' , BusinessDocument::BILLING_ADDRESS );
         $this->assertSame( 'contact'        , BusinessDocument::CONTACT         );
         $this->assertSame( 'currency'       , BusinessDocument::CURRENCY        );
         $this->assertSame( 'customer'       , BusinessDocument::CUSTOMER        );
+        $this->assertSame( 'direction'      , BusinessDocument::DIRECTION       );
         $this->assertSame( 'documentLines'  , BusinessDocument::DOCUMENT_LINES  );
         $this->assertSame( 'issueDate'      , BusinessDocument::ISSUE_DATE      );
         $this->assertSame( 'orderDelivery'  , BusinessDocument::ORDER_DELIVERY  );
@@ -69,10 +72,12 @@ class BusinessDocumentTest extends TestCase
 
         $this->assertNull( $document->adjustments    ?? null );
         $this->assertNull( $document->attachments    ?? null );
+        $this->assertNull( $document->author         ?? null );
         $this->assertNull( $document->billingAddress ?? null );
         $this->assertNull( $document->contact        ?? null );
         $this->assertNull( $document->currency       ?? null );
         $this->assertNull( $document->customer       ?? null );
+        $this->assertNull( $document->direction      ?? null );
         $this->assertNull( $document->documentLines  ?? null );
         $this->assertNull( $document->issueDate      ?? null );
         $this->assertNull( $document->orderDelivery  ?? null );
@@ -92,15 +97,19 @@ class BusinessDocumentTest extends TestCase
             BusinessDocument::CURRENCY   => 'EUR' ,
             BusinessDocument::ISSUE_DATE => '2026-01-15' ,
             BusinessDocument::STATUS     => BusinessDocumentStatus::DRAFT ,
+            BusinessDocument::DIRECTION  => BusinessDocumentDirection::SALE ,
             BusinessDocument::CUSTOMER   => new Person([ 'name' => 'Jane Doe' ]) ,
             BusinessDocument::SELLER     => new Organization([ 'name' => 'ACME Supplies' ]) ,
+            BusinessDocument::AUTHOR     => new Organization([ 'name' => 'ACME Supplies' ]) ,
         ]);
 
         $this->assertSame( 'EUR' , $document->currency ) ;
         $this->assertSame( '2026-01-15' , $document->issueDate ) ;
         $this->assertSame( BusinessDocumentStatus::DRAFT , $document->status ) ;
+        $this->assertSame( BusinessDocumentDirection::SALE , $document->direction ) ;
         $this->assertInstanceOf( Person::class , $document->customer ) ;
         $this->assertInstanceOf( Organization::class , $document->seller ) ;
+        $this->assertInstanceOf( Organization::class , $document->author ) ;
     }
 
     /**

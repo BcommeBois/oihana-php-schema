@@ -69,6 +69,8 @@ Les deux versions **coexistent volontairement** : un logiciel agissant pour le v
 
 Sur chaque document, les deux parties sont toujours nommées de la même façon — `customer` (le client) et `seller` (le vendeur), les noms hérités de Schema.org — quel que soit le sens de lecture.
 
+Pour dire explicitement **de quel côté on se place**, tout `BusinessDocument` peut porter une propriété `direction` (→ [`BusinessDocumentDirection`](core.md#businessdocumentdirection)) : `SALE` quand l'opérateur est le vendeur (un document sortant, de vente), `PURCHASE` quand il est le client (un document entrant, d'achat). Elle est **orthogonale** au type du document et à son statut de cycle de vie : elle ne fait qu'indiquer laquelle des parties `seller`/`customer` est l'organisation de l'opérateur — de quoi faire servir un même modèle indifféremment à la vue vendeur ou acheteur.
+
 ---
 
 ## Le fil qui relie les documents

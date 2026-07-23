@@ -13,10 +13,12 @@ trait BusinessDocumentTrait
 {
     const string ADJUSTMENTS     = 'adjustments' ;
     const string ATTACHMENTS     = 'attachments' ;
+    const string AUTHOR          = 'author' ;
     const string BILLING_ADDRESS = 'billingAddress' ;
     const string CONTACT         = 'contact' ;
     const string CURRENCY        = 'currency' ;
     const string CUSTOMER        = 'customer' ;
+    const string DIRECTION       = 'direction' ;
     const string DOCUMENT_LINES  = 'documentLines' ;
     const string ISSUE_DATE      = 'issueDate' ;
     const string ORDER_DELIVERY  = 'orderDelivery' ;

@@ -15,6 +15,7 @@ use org\schema\PostalAddress;
 
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\constants\traits\business\documents\BusinessDocumentTrait;
+use xyz\oihana\schema\enumerations\BusinessDocumentDirection;
 use xyz\oihana\schema\enumerations\BusinessDocumentStatus;
 
 /**
@@ -61,6 +62,13 @@ class BusinessDocument extends Intangible
     public null|array|string|MediaObject $attachments ;
 
     /**
+     * The author of the document — the party (organization or person) who
+     * authored it. Reuses the Schema.org `author` name.
+     * @var null|Organization|Person|array
+     */
+    public null|Organization|Person|array $author ;
+
+    /**
      * The address the document is billed to — stored as a frozen copy so the
      * document stays self-contained even if the party's address book changes
      * later. Reuses the Schema.org `billingAddress` name from `Order`.
@@ -90,6 +98,14 @@ class BusinessDocument extends Intangible
      * @var Organization|Person|null
      */
     public null|Organization|Person $customer ;
+
+    /**
+     * The commercial direction of the document (sale / purchase), from the
+     * operator's point of view — which of {@see self::$seller} / {@see self::$customer}
+     * is the operator's own organization.
+     * @var null|string|BusinessDocumentDirection
+     */
+    public null|string|BusinessDocumentDirection $direction ;
 
     /**
      * The lines of the document.

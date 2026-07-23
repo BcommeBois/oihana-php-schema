@@ -69,6 +69,8 @@ The two versions **coexist deliberately**: software acting for the seller models
 
 On every document, both parties are always named the same way — `customer` and `seller`, the names inherited from Schema.org — whichever way you read it.
 
+To state explicitly **which side you stand on**, any `BusinessDocument` can carry a `direction` property (→ [`BusinessDocumentDirection`](core.md#businessdocumentdirection)): `SALE` when the operator is the seller (an outbound, sales document), `PURCHASE` when it is the customer (an inbound, procurement document). It is **orthogonal** to the document's type and to its lifecycle status: it only tells which of the `seller`/`customer` parties is the operator's own organization — enough to let one model serve the seller's or the buyer's view interchangeably.
+
 ---
 
 ## The thread linking the documents

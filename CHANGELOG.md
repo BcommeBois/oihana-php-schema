@@ -8,6 +8,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds the `xyz\oihana\schema\enumerations\BusinessDocumentDirection` enumeration
+  (`Sale` / `Purchase`) and two header properties to `BusinessDocument` under
+  `xyz\oihana\schema\business\documents` — `direction`
+  (`null|string|BusinessDocumentDirection`), the commercial direction of the
+  document from the operator's point of view (which of `seller` / `customer` is
+  the operator's own organization), orthogonal to the document's type and to its
+  `BusinessDocumentStatus` lifecycle ; and `author`
+  (`null|Organization|Person|array`), the party who authored the document,
+  reusing the Schema.org `author` name. Their constants (`DIRECTION`, `AUTHOR`)
+  are added to `BusinessDocumentTrait`. Both properties default to `null` and the
+  class stays covered at 100%, with a new `BusinessDocumentDirectionTest` suite
+  (lineage, constants and `includes`) and the `BusinessDocument` suite extended
+  for the two new constants, defaults and hydration.
 - Adds `xyz\oihana\schema\thesaurus\ProductPriceCategoryTerm` (extends `Concept`,
   `use HasColor`, `HasTreeMetrics`) — a product **price** category (a tariff
   family used to scope pricing rules and conditions), the second hierarchical

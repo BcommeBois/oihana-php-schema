@@ -16,6 +16,7 @@ Le sommet du namespace `xyz\oihana\schema` regroupe les **extensions Oihana tran
 | Énumérer les types d'actions d'audit.                                       | [`AuditActionType`](../../src/xyz/oihana/schema/enumerations/AuditActionType.php) |
 | Énumérer les types de canaux de contact.                                    | [`ContactType`](../../src/xyz/oihana/schema/enumerations/ContactType.php) |
 | Énumérer le statut de cycle de vie d'un document métier.                    | [`BusinessDocumentStatus`](#businessdocumentstatus) |
+| Énumérer la direction commerciale d'un document métier (vente / achat).     | [`BusinessDocumentDirection`](#businessdocumentdirection) |
 
 Toutes les entités partagent le distinguisheur `@context = 'https://schema.oihana.xyz'`.
 
@@ -85,7 +86,15 @@ Les constantes des clés de propriétés `AuditAction` sont exposées par le tra
 
 `BusinessDocumentStatus` énumère le **statut de cycle de vie** d'un document métier (devis, bon de commande, facture…) : `DRAFT`, `SENT`, `ACCEPTED`, `REJECTED`, `EXPIRED`, `CONVERTED`, `CANCELLED`. Elle étend `org\schema\enumerations\StatusEnumeration` et se distingue de l'`OrderStatus` de Schema.org, qui suit le statut de *livraison* d'une commande (expédiée, en transit…), pas celui du document.
 
-Cette énumération prépare la future hiérarchie de documents commerciaux (`xyz\oihana\schema\business\documents`) ; aucune classe ne la consomme encore dans cette version.
+Elle est consommée par [`BusinessDocument::$status`](business-documents.md#businessdocument) et l'ensemble de la hiérarchie de documents commerciaux (`xyz\oihana\schema\business\documents`).
+
+---
+
+## <a id="businessdocumentdirection"></a> `BusinessDocumentDirection`
+
+`BusinessDocumentDirection` énumère la **direction commerciale** d'un document métier du point de vue de l'organisation qui l'exploite : `SALE` (l'opérateur est le vendeur — un document sortant, de vente) et `PURCHASE` (l'opérateur est le client — un document entrant, d'achat). Elle étend `org\schema\Enumeration`.
+
+Elle est **orthogonale** au type du document (devis, commande, facture…) et à son cycle de vie [`BusinessDocumentStatus`](#businessdocumentstatus) : elle indique seulement laquelle des parties — le `seller` ou le `customer` — est l'organisation de l'opérateur. Elle est consommée par [`BusinessDocument::$direction`](business-documents.md#businessdocument).
 
 ---
 

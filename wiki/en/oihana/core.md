@@ -16,6 +16,7 @@ The top of the `xyz\oihana\schema` namespace gathers the **cross-cutting Oihana 
 | Enumerate audit action types.                     | [`AuditActionType`](../../src/xyz/oihana/schema/enumerations/AuditActionType.php) |
 | Enumerate contact channel types.                  | [`ContactType`](../../src/xyz/oihana/schema/enumerations/ContactType.php) |
 | Enumerate the lifecycle status of a business document. | [`BusinessDocumentStatus`](#businessdocumentstatus) |
+| Enumerate the commercial direction of a business document (sale / purchase). | [`BusinessDocumentDirection`](#businessdocumentdirection) |
 
 All entities share the `@context = 'https://schema.oihana.xyz'` distinguisher.
 
@@ -85,7 +86,15 @@ Constants for the `AuditAction` property keys are exposed via the [`AuditTrait`]
 
 `BusinessDocumentStatus` enumerates the **lifecycle status** of a business document (quote, purchase order, invoice…): `DRAFT`, `SENT`, `ACCEPTED`, `REJECTED`, `EXPIRED`, `CONVERTED`, `CANCELLED`. It extends `org\schema\enumerations\StatusEnumeration` and is distinct from Schema.org's `OrderStatus`, which tracks an order's *fulfillment* status (shipped, in transit…), not the document's own lifecycle.
 
-This enumeration lays the ground for the upcoming business-document hierarchy (`xyz\oihana\schema\business\documents`); no class consumes it yet in this release.
+It is consumed by [`BusinessDocument::$status`](business-documents.md#businessdocument) and the whole business-document hierarchy (`xyz\oihana\schema\business\documents`).
+
+---
+
+## <a id="businessdocumentdirection"></a> `BusinessDocumentDirection`
+
+`BusinessDocumentDirection` enumerates the **commercial direction** of a business document from the point of view of the organization operating it: `SALE` (the operator is the seller — an outbound, sales document) and `PURCHASE` (the operator is the customer — an inbound, procurement document). It extends `org\schema\Enumeration`.
+
+It is **orthogonal** to the document's type (quote, order, invoice…) and to its [`BusinessDocumentStatus`](#businessdocumentstatus) lifecycle: it only tells which party — the `seller` or the `customer` — is the operator's own organization. It is consumed by [`BusinessDocument::$direction`](business-documents.md#businessdocument).
 
 ---
 
