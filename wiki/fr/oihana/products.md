@@ -159,7 +159,7 @@ Le `priceSpecification` est typiquement un `CompoundPriceSpecification` dont les
 | `ProductProviderInfo` | Les informations d'achat d'un produit chez son fournisseur (prix, marge, quantité de référence). |
 | `ProductWarehouseInfo` / `ProviderProductWarehouseInfo` | Les informations produit par dépôt, côté maison et côté fournisseur. |
 | `ProductWarehouseAvailability` | La disponibilité d'un produit dans un dépôt. |
-| `ProductType` | Le type fonctionnel du produit (stock, suivi, règles…). |
+| `ProductType` | Le type fonctionnel du produit — `stockable`, `trackable`, ainsi que la couleur d'affichage maison `color` (`#RRGGBB`, via [`HasColor`](thesaurus.md), le même indice que portent les familles du thésaurus). |
 
 ## Les énumérations
 

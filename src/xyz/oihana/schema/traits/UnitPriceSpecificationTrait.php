@@ -2,6 +2,7 @@
 
 namespace xyz\oihana\schema\traits;
 
+use org\iso\Iso8601Format;
 use org\schema\constants\Schema;
 use org\schema\UnitPriceSpecification;
 
@@ -25,14 +26,14 @@ trait UnitPriceSpecificationTrait
      *
      * @param array<UnitPriceSpecification>|null $specifications Array of specifications to be evaluated.
      * @param string $propertyName The property used to extract the date for comparison. Defaults to Schema::VALID_FROM.
-     * @param string $format The date format (default 'Y-m-d').
+     * @param string $format The date format the compared values are expected in. Defaults to {@see Iso8601Format::DATE} (`'Y-m-d'`).
      * @return UnitPriceSpecification|null The latest UnitPriceSpecification or null if not found.
      */
     public function getLastUnitPriceSpecification
     (
         ?array $specifications ,
         string $propertyName = Schema::VALID_FROM ,
-        string $format       = 'Y-m-d'
+        string $format       = Iso8601Format::DATE
     )
     :?UnitPriceSpecification
     {

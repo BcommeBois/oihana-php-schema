@@ -11,6 +11,7 @@ namespace xyz\oihana\schema\constants\traits\products ;
  */
 trait ProductType
 {
+    public const string COLOR     = 'color'     ;
     public const string STOCKABLE = 'stockable' ;
     public const string TRACKABLE = 'trackable' ;
 }

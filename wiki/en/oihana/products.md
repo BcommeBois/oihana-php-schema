@@ -159,7 +159,7 @@ The `priceSpecification` is typically a `CompoundPriceSpecification` whose compo
 | `ProductProviderInfo` | The buying information of a product at its supplier (price, margin, reference quantity). |
 | `ProductWarehouseInfo` / `ProviderProductWarehouseInfo` | The per-warehouse product information, house side and supplier side. |
 | `ProductWarehouseAvailability` | The availability of a product in a warehouse. |
-| `ProductType` | The functional type of the product (stock, tracking, rules…). |
+| `ProductType` | The functional type of the product — `stockable`, `trackable`, plus the house display `color` (`#RRGGBB`, from [`HasColor`](thesaurus.md), the same hint the thesaurus families carry). |
 
 ## The enumerations
 

@@ -7,11 +7,16 @@ namespace xyz\oihana\schema\traits;
  *
  * The color is a house property — a presentation hint layered on top of the
  * harvested data, expressed as a `#RRGGBB` hex string. It is extracted into a
- * dedicated trait so it can be composed by several thesaurus entities (e.g.
- * {@see ThesaurusTerm} and {@see ProductCategoryTerm}) without duplicating
- * the property declaration.
+ * dedicated trait so it can be composed by any entity a user interface needs to
+ * tint, without duplicating the property declaration : the thesaurus families
+ * ({@see ThesaurusTerm}, {@see ProductCategoryTerm}, {@see ProductPriceCategoryTerm},
+ * {@see ThesaurusDomain} and {@see ThesaurusScheme}) and, outside the thesaurus,
+ * the product type ({@see ProductType}).
  *
- * The companion property name constant lives in {@see ThesaurusTermTrait}.
+ * The companion property name constant lives next to the composing entity : in
+ * {@see ThesaurusTermTrait} for the thesaurus families, and in the products
+ * `ProductType` constants trait for the product type. All of them carry the
+ * same `'color'` value.
  *
  * @package xyz\oihana\schema\traits
  * @author  Marc Alcaraz (ekameleon)

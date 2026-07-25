@@ -156,8 +156,29 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   never a price effect (those stay on `PricingCondition`). The trait is not yet
   composed by any class — it is provided for opt-in use, mirroring `HasColor`.
 
+- Adds the house display `color` to `xyz\oihana\schema\products\ProductType`,
+  through the shared `HasColor` trait — the same `#RRGGBB` presentation hint the
+  thesaurus families already carry, so a product type can be tinted in a user
+  interface like any other classification term. `ProductType` stays a flat
+  `DefinedTerm` (no SKOS hierarchy, unlike `ProductCategoryTerm`) : only the
+  color is borrowed, not the thesaurus shape. The matching `COLOR` constant joins
+  `STOCKABLE` and `TRACKABLE` in the `constants\traits\products\ProductType`
+  trait, hence in `Oihana` — its `'color'` value matches the other `COLOR` keys
+  already aggregated there, so the trait constants stay compatible. The class,
+  which had no suite of its own, is now covered by a new `ProductTypeTest`
+  (defaults, the `DefinedTerm` lineage, `@context`, the `HasColor` composition,
+  the constant aggregation into `Oihana`, both hydration paths and
+  `jsonSerialize` with and without a color).
+
 ### Changed
 
+- Replaces the hardcoded `'Y-m-d'` default of
+  `UnitPriceSpecificationTrait::getLastUnitPriceSpecification()` with
+  `org\iso\Iso8601Format::DATE`, so the expected date shape is named rather than
+  spelled out. The value is identical — no behaviour change — and the suite now
+  pins the default explicitly and covers a non-default format
+  (`Iso8601Format::DATE_BASIC`) and a non-default property name
+  (`validThrough`).
 - Stops committing the JSON Schema generator output: `schemas/` is now gitignored
   and its 283 tracked `*.schema.json` files are untracked (the files stay on disk
   locally). Nothing in `src`, `tests`, `tools` or CI consumed them, the committed
