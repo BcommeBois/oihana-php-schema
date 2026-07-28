@@ -213,6 +213,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   root `Thing`, so every entity inherits it. Behaviour is unchanged (the types
   were compatible); the property is simply no longer shadowed.
 
+### Fixed
+
+- Widens `BusinessDocument::$customer` and `BusinessDocument::$seller` from
+  `null|Organization|Person` to `null|array|Organization|Person`. Both properties
+  were the last two party slots of the class still missing `array`, so a raw,
+  pre-hydration payload (`[ 'customer' => [ 'name' => 'Jane Doe' ] ]`) threw a
+  `TypeError` in the constructor's shallow assignment, while the sibling
+  `author`, `contact` and `billingAddress` accepted it. They now match the rest
+  of the class — and `Reflection::hydrate` still yields real `Organization` /
+  `Person` instances. Covered by a new `BusinessDocument` test asserting the
+  three party slots keep their raw arrays through the constructor.
+
 ## [1.3.0] - 2026-07-07
 
 ### Added

@@ -178,4 +178,23 @@ class BusinessDocumentTest extends TestCase
 
         $this->assertSame( 'Net 30 days' , $document->paymentTerms ) ;
     }
+
+    public function testConstructorKeepsPartiesAsRawArrays(): void
+    {
+        $document = new BusinessDocument
+        ([
+            BusinessDocument::CUSTOMER => [ 'name' => 'Jane Doe' ] ,
+            BusinessDocument::SELLER   => [ 'name' => 'ACME Supplies' ] ,
+            BusinessDocument::AUTHOR   => [ 'name' => 'ACME Supplies' ] ,
+        ]);
+
+        $this->assertIsArray( $document->customer ) ;
+        $this->assertSame( 'Jane Doe' , $document->customer[ 'name' ] ) ;
+
+        $this->assertIsArray( $document->seller ) ;
+        $this->assertSame( 'ACME Supplies' , $document->seller[ 'name' ] ) ;
+
+        $this->assertIsArray( $document->author ) ;
+        $this->assertSame( 'ACME Supplies' , $document->author[ 'name' ] ) ;
+    }
 }

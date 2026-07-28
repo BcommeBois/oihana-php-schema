@@ -95,9 +95,9 @@ class BusinessDocument extends Intangible
 
     /**
      * The party the document is addressed to.
-     * @var Organization|Person|null
+     * @var null|array|Organization|Person
      */
-    public null|Organization|Person $customer ;
+    public null|array|Organization|Person $customer ;
 
     /**
      * The commercial direction of the document (sale / purchase), from the
@@ -154,9 +154,9 @@ class BusinessDocument extends Intangible
 
     /**
      * The party issuing the document.
-     * @var Organization|Person|null
+     * @var null|array|Organization|Person
      */
-    public null|Organization|Person $seller ;
+    public null|array|Organization|Person $seller ;
 
     /**
      * The lifecycle status of the document.
