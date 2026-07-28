@@ -156,4 +156,23 @@ class ServiceTest extends TestCase
         $this->assertContainsOnlyInstancesOf( Policy::class , $service->policies );
         $this->assertSame( 3 , $service->policiesCount );
     }
+
+    public function testConstructorKeepsStructuredPropertiesAsRawArrays(): void
+    {
+        $service = new Service
+        ([
+            Service::CREATED_BY  => [ 'name' => 'system' ] ,
+            Service::DISABLED_BY => [ 'name' => 'system' ] ,
+            Service::KEYFILE     => [ 'keyId' => 'K1' ] ,
+        ]);
+
+        $this->assertIsArray( $service->createdBy ) ;
+        $this->assertSame( 'system' , $service->createdBy[ 'name' ] ) ;
+
+        $this->assertIsArray( $service->disabledBy ) ;
+        $this->assertSame( 'system' , $service->disabledBy[ 'name' ] ) ;
+
+        $this->assertIsArray( $service->keyfile ) ;
+        $this->assertSame( 'K1' , $service->keyfile[ 'keyId' ] ) ;
+    }
 }

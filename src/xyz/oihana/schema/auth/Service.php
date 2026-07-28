@@ -46,9 +46,9 @@ class Service extends Thing
 
     /**
      * The user (or system) who created this service.
-     * @var string|Thing|null
+     * @var null|array|string|Thing
      */
-    public string|null|Thing $createdBy ;
+    public null|array|string|Thing $createdBy ;
 
     /**
      * The date this service was disabled (ISO 8601).
@@ -58,9 +58,9 @@ class Service extends Thing
 
     /**
      * The user (or system) who disabled this service.
-     * @var string|Thing|null
+     * @var null|array|string|Thing
      */
-    public string|null|Thing $disabledBy ;
+    public null|array|string|Thing $disabledBy ;
 
     /**
      * The reason why this service was disabled.
@@ -87,8 +87,10 @@ class Service extends Thing
      * POST /me/services, POST /services/{id}/rotate-key and
      * POST /me/services/{id}/rotate-key. Never persisted server-side
      * and never returned by GET endpoints.
+     * 
+     * @var null|array|Keyfile
      */
-    public ?Keyfile $keyfile = null ;
+    public null|array|Keyfile $keyfile = null ;
 
     /**
      * The last IP address from which this service was seen.

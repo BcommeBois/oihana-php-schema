@@ -79,10 +79,10 @@ class Product extends SomeProducts
      *     }
      * }
      * ```
-     * @var QuantitativeValue|null
+     * @var null|array|QuantitativeValue
      */
     #[HydrateAs(QuantitativeValue::class)]
-    public null|QuantitativeValue $eligibleQuantity = null ;
+    public null|array|QuantitativeValue $eligibleQuantity = null ;
 
     /**
      * Indicates if the product is managed in stock.

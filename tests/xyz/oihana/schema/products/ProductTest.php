@@ -293,4 +293,12 @@ class ProductTest extends TestCase
         $this->assertNull( $product->getInventoryLevelInUnitOfSale( new StockLevel() ) ) ;
     }
 
+    public function testConstructorKeepsEligibleQuantityAsRawArray(): void
+    {
+        $product = new Product([ 'eligibleQuantity' => [ 'value' => 12 , 'unitCode' => 'C62' ] ]) ;
+
+        $this->assertIsArray( $product->eligibleQuantity ) ;
+        $this->assertSame( 12 , $product->eligibleQuantity[ 'value' ] ) ;
+    }
+
 }

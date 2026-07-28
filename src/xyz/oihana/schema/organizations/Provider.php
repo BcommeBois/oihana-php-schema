@@ -45,9 +45,9 @@ class Provider extends Company
 
     /**
      * The product information of the provider.
-     * @var ProductProviderInfo|null
+     * @var null|array|ProductProviderInfo
      */
-    public ?ProductProviderInfo $productInfo = null ;
+    public null|array|ProductProviderInfo $productInfo = null ;
 
     /**
      * Provider functional type.

@@ -224,6 +224,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   of the class — and `Reflection::hydrate` still yields real `Organization` /
   `Person` instances. Covered by a new `BusinessDocument` test asserting the
   three party slots keep their raw arrays through the constructor.
+- Adds the missing `array` member to the eleven remaining structured properties
+  of the `xyz\oihana` namespace, closing the same `TypeError` as above wherever
+  the house domain classes can be built straight from a raw payload :
+  `Product::$eligibleQuantity`, `Provider::$productInfo`,
+  `Application::$createdBy` / `$disabledBy` / `$keyfile`, the same three on
+  `Service`, `TaxDetail::$category`, `EcoFeeRule::$category` and
+  `Person::$ownedBy`. `Product::$eligibleQuantity` was the clearest
+  inconsistency : it carries `#[HydrateAs(QuantitativeValue::class)]`, which
+  declares the value arrives as an array, while its type forbade one. The
+  matching `@var` tags are realigned on the declarations, and each class gains a
+  constructor test asserting the widened properties keep their raw arrays. The
+  `org\schema` mapping layer is deliberately left untouched : its unions mirror
+  schema.org and it is not built from raw payloads directly.
 
 ## [1.3.0] - 2026-07-07
 

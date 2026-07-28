@@ -88,4 +88,12 @@ class TaxDetailTest extends TestCase
         $this->assertInstanceOf( MonetaryAmount::class , $tax->taxAmount ) ;
         $this->assertSame( 20 , $tax->taxAmount->value ) ;
     }
+
+    public function testConstructorKeepsCategoryAsRawArray(): void
+    {
+        $tax = new TaxDetail([ TaxDetail::CATEGORY => [ 'codeValue' => 'S' ] ]) ;
+
+        $this->assertIsArray( $tax->category ) ;
+        $this->assertSame( 'S' , $tax->category[ 'codeValue' ] ) ;
+    }
 }

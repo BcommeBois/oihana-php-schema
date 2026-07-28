@@ -114,4 +114,23 @@ class ApplicationTest extends TestCase
         $this->assertContainsOnlyInstancesOf( Policy::class , $app->policies );
         $this->assertSame( 3 , $app->policiesCount );
     }
+
+    public function testConstructorKeepsStructuredPropertiesAsRawArrays(): void
+    {
+        $app = new Application
+        ([
+            Application::CREATED_BY  => [ 'name' => 'system' ] ,
+            Application::DISABLED_BY => [ 'name' => 'system' ] ,
+            Application::KEYFILE     => [ 'keyId' => 'K1' ] ,
+        ]);
+
+        $this->assertIsArray( $app->createdBy ) ;
+        $this->assertSame( 'system' , $app->createdBy[ 'name' ] ) ;
+
+        $this->assertIsArray( $app->disabledBy ) ;
+        $this->assertSame( 'system' , $app->disabledBy[ 'name' ] ) ;
+
+        $this->assertIsArray( $app->keyfile ) ;
+        $this->assertSame( 'K1' , $app->keyfile[ 'keyId' ] ) ;
+    }
 }

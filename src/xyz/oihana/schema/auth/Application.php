@@ -48,9 +48,9 @@ class Application extends Thing
 
     /**
      * The user (or system) who created this application.
-     * @var string|Thing|null
+     * @var null|array|string|Thing
      */
-    public string|null|Thing $createdBy ;
+    public null|array|string|Thing $createdBy ;
 
     /**
      * Whether this is the default application for the API.
@@ -66,9 +66,9 @@ class Application extends Thing
 
     /**
      * The user (or system) who disabled this application.
-     * @var string|Thing|null
+     * @var null|array|string|Thing
      */
-    public string|null|Thing $disabledBy ;
+    public null|array|string|Thing $disabledBy ;
 
     /**
      * The reason why this application was disabled.
@@ -96,8 +96,10 @@ class Application extends Thing
      * POST /me/applications, POST /applications/{id}/rotate-key and
      * POST /me/applications/{id}/rotate-key. Never persisted server-side
      * and never returned by GET endpoints.
+     *
+     * @var null|array|Keyfile
      */
-    public ?Keyfile $keyfile = null ;
+    public null|array|Keyfile $keyfile = null ;
 
     /**
      * The last IP address from which this application was seen.

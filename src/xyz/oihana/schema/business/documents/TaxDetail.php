@@ -45,9 +45,9 @@ class TaxDetail extends StructuredValue
 
     /**
      * The tax category (e.g. standard/reduced VAT rate).
-     * @var null|string|CategoryCode|Thing
+     * @var null|array|string|CategoryCode|Thing
      */
-    public null|string|CategoryCode|Thing $category ;
+    public null|array|string|CategoryCode|Thing $category ;
 
     /**
      * The tax rate, expressed as a percentage (e.g. 20 for 20%).

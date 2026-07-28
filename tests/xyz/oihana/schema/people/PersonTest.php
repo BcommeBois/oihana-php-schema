@@ -55,4 +55,12 @@ class PersonTest extends TestCase
         $this->assertFalse( $person->setAdditionalProperties( 'unknownProperty' , '1' ) ) ;
         $this->assertNull( $person->additionalProperty ) ;
     }
+
+    public function testConstructorKeepsOwnedByAsRawArray(): void
+    {
+        $person = new Person([ 'ownedBy' => [ 'name' => 'ACME' ] ]) ;
+
+        $this->assertIsArray( $person->ownedBy ) ;
+        $this->assertSame( 'ACME' , $person->ownedBy[ 'name' ] ) ;
+    }
 }

@@ -40,9 +40,9 @@ class Person extends SchemaPerson
 
     /**
      * The owner organization of the person.
-     * @var int|string|Organization|SchemaPerson|null
+     * @var null|array|int|string|Organization|SchemaPerson
      */
-    public null|int|string|Organization|SchemaPerson $ownedBy ;
+    public null|array|int|string|Organization|SchemaPerson $ownedBy ;
 
     /**
      * The position of an item in a series or sequence of items.

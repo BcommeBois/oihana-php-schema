@@ -73,4 +73,12 @@ class EcoFeeRuleTest extends TestCase
         $this->assertInstanceOf( MonetaryAmount::class , $rule->rate ) ;
         $this->assertSame( 0.25 , $rule->rate->value ) ;
     }
+
+    public function testConstructorKeepsCategoryAsRawArray(): void
+    {
+        $rule = new EcoFeeRule([ EcoFeeRule::CATEGORY => [ 'codeValue' => 'EEE' ] ]) ;
+
+        $this->assertIsArray( $rule->category ) ;
+        $this->assertSame( 'EEE' , $rule->category[ 'codeValue' ] ) ;
+    }
 }

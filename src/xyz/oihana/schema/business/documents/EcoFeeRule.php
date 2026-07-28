@@ -37,9 +37,9 @@ class EcoFeeRule extends StructuredValue
 
     /**
      * The product category this rule applies to.
-     * @var null|string|CategoryCode|Thing
+     * @var null|array|string|CategoryCode|Thing
      */
-    public null|string|CategoryCode|Thing $category ;
+    public null|array|string|CategoryCode|Thing $category ;
 
     /**
      * The fee amount charged per unit.

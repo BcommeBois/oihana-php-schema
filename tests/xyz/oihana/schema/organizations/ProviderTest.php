@@ -36,4 +36,12 @@ class ProviderTest extends TestCase
         $this->assertInstanceOf( ProductProviderInfo::class , $provider->productInfo ) ;
         $this->assertSame( 12.5 , $provider->productInfo->buyingPrice ) ;
     }
+
+    public function testConstructorKeepsProductInfoAsRawArray(): void
+    {
+        $provider = new Provider([ 'productInfo' => [ 'buyingPrice' => 12.5 ] ]) ;
+
+        $this->assertIsArray( $provider->productInfo ) ;
+        $this->assertSame( 12.5 , $provider->productInfo[ 'buyingPrice' ] ) ;
+    }
 }
