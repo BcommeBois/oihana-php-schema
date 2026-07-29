@@ -172,6 +172,22 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Changed
 
+- `BusinessDocumentLine::$price` now carries
+  `#[HydrateAs(CompoundPriceSpecification::class)]`, so a raw price payload is
+  hydrated into a `CompoundPriceSpecification` instead of a `MonetaryAmount`. The
+  declared type (`null|array|MonetaryAmount|PriceSpecification`) is unchanged, and
+  so is the constructor's shallow assignment — a raw array still survives it
+  untouched. What changes is `Reflection::hydrate` : the union was ambiguous and
+  resolved to its first class member (`MonetaryAmount`), which silently dropped
+  any `price` / `priceCurrency` payload ; the attribute now pins the target, and
+  a unit price can be broken down into the `UnitPriceSpecification` components
+  applying in parallel (base price, eco-fee, deposit...) through
+  `priceComponent`, which hydrates too. Note the flip side of a single-class
+  attribute : a `MonetaryAmount`-shaped payload (`value` / `currency`) is now the
+  one that hydrates into an empty object — a line price is expected in the
+  `price` / `priceCurrency` shape. Covered by three new `BusinessDocumentLine`
+  tests (hydration target, nested `priceComponent`, and the `@type` surviving
+  `jsonSerialize`).
 - Replaces the hardcoded `'Y-m-d'` default of
   `UnitPriceSpecificationTrait::getLastUnitPriceSpecification()` with
   `org\iso\Iso8601Format::DATE`, so the expected date shape is named rather than

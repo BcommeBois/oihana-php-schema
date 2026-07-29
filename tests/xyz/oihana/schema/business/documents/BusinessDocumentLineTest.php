@@ -7,9 +7,11 @@ use ReflectionException;
 
 use oihana\reflect\Reflection;
 
+use org\schema\CompoundPriceSpecification;
 use org\schema\MonetaryAmount;
 use org\schema\QuantitativeValue;
 use org\schema\StructuredValue;
+use org\schema\UnitPriceSpecification;
 
 use xyz\oihana\schema\business\documents\Adjustment;
 use xyz\oihana\schema\business\documents\BusinessDocumentLine;
@@ -121,5 +123,82 @@ class BusinessDocumentLineTest extends TestCase
 
         $this->assertInstanceOf( QuantitativeValue::class , $line->quantity ) ;
         $this->assertSame( 5 , $line->quantity->value ) ;
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testReflectionHydratesPriceIntoCompoundPriceSpecification(): void
+    {
+        $line = new Reflection()->hydrate
+        (
+            [
+                BusinessDocumentLine::PRICE =>
+                [
+                    'price'         => 20.0  ,
+                    'priceCurrency' => 'EUR' ,
+                ] ,
+            ],
+            BusinessDocumentLine::class
+        );
+
+        $this->assertInstanceOf( CompoundPriceSpecification::class , $line->price ) ;
+        $this->assertSame( 20.0  , $line->price->price         ) ;
+        $this->assertSame( 'EUR' , $line->price->priceCurrency ) ;
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testReflectionHydratesThePriceComponents(): void
+    {
+        $line = new Reflection()->hydrate
+        (
+            [
+                BusinessDocumentLine::PRICE =>
+                [
+                    'price'          => 22.5  ,
+                    'priceCurrency'  => 'EUR' ,
+                    'priceComponent' =>
+                    [
+                        [ 'name' => 'base'    , 'price' => 20.0 , 'priceCurrency' => 'EUR' ] ,
+                        [ 'name' => 'ecoFee'  , 'price' => 2.5  , 'priceCurrency' => 'EUR' ] ,
+                    ] ,
+                ] ,
+            ],
+            BusinessDocumentLine::class
+        );
+
+        $this->assertInstanceOf( CompoundPriceSpecification::class , $line->price ) ;
+        $this->assertIsArray( $line->price->priceComponent ) ;
+        $this->assertCount( 2 , $line->price->priceComponent ) ;
+
+        $this->assertInstanceOf( UnitPriceSpecification::class , $line->price->priceComponent[ 0 ] ) ;
+        $this->assertSame( 'base' , $line->price->priceComponent[ 0 ]->name  ) ;
+        $this->assertSame( 20.0   , $line->price->priceComponent[ 0 ]->price ) ;
+
+        $this->assertInstanceOf( UnitPriceSpecification::class , $line->price->priceComponent[ 1 ] ) ;
+        $this->assertSame( 'ecoFee' , $line->price->priceComponent[ 1 ]->name  ) ;
+        $this->assertSame( 2.5      , $line->price->priceComponent[ 1 ]->price ) ;
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testHydratedPriceKeepsItsTypeOnSerialization(): void
+    {
+        $line = new Reflection()->hydrate
+        (
+            [
+                BusinessDocumentLine::PRICE => [ 'price' => 20.0 , 'priceCurrency' => 'EUR' ] ,
+            ],
+            BusinessDocumentLine::class
+        );
+
+        $json = json_decode( json_encode( $line ) , true ) ;
+
+        $this->assertSame( 'CompoundPriceSpecification' , $json[ 'price' ][ '@type' ] ) ;
+        $this->assertEquals( 20.0 , $json[ 'price' ][ 'price'         ] ) ;
+        $this->assertSame( 'EUR'  , $json[ 'price' ][ 'priceCurrency' ] ) ;
     }
 }

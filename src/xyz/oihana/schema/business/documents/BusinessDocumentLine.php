@@ -5,12 +5,14 @@ namespace xyz\oihana\schema\business\documents;
 use oihana\reflect\attributes\HydrateAs;
 use oihana\reflect\attributes\HydrateWith;
 
+use org\schema\CompoundPriceSpecification;
 use org\schema\MonetaryAmount;
 use org\schema\PriceSpecification;
 use org\schema\Product;
 use org\schema\QuantitativeValue;
 use org\schema\Service;
 use org\schema\StructuredValue;
+use org\schema\UnitPriceSpecification;
 
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\constants\traits\business\documents\BusinessDocumentLineTrait;
@@ -59,8 +61,14 @@ class BusinessDocumentLine extends StructuredValue
 
     /**
      * The unit price of the item.
+     *
+     * A raw payload is hydrated into a {@see CompoundPriceSpecification}, so a
+     * unit price can be broken down into the {@see UnitPriceSpecification}
+     * components applying in parallel (base price, eco-fee, deposit...).
+     *
      * @var MonetaryAmount|PriceSpecification|array|null
      */
+    #[HydrateAs(CompoundPriceSpecification::class)]
     public null|array|MonetaryAmount|PriceSpecification $price ;
 
     /**
