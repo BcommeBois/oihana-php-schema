@@ -38,13 +38,16 @@ use function xyz\oihana\schema\helpers\pivots\sellerKeys;
 
 La couche respecte la règle de la bibliothèque : `org\schema` est le miroir pur du vocabulaire Schema.org, `xyz\oihana\schema` est l'extension maison qui s'appuie dessus — **jamais l'inverse**.
 
-| Namespace                              | Contenu                                                | Dépend de              |
-|----------------------------------------|--------------------------------------------------------|------------------------|
-| `org\schema\helpers\hydrate`           | Les 6 hydrateurs Schema.org purs                       | `org\schema` seulement |
-| `xyz\oihana\schema\helpers\hydrate`    | Les 6 hydrateurs métier                                | `xyz` + `org`          |
-| `xyz\oihana\schema\helpers\pivots`     | Les 3 pivots de compte                                 | `xyz` + `org`          |
+| Namespace                                     | Contenu                             | Dépend de              |
+|-----------------------------------------------|-------------------------------------|------------------------|
+| `org\schema\helpers\hydrate`                  | Les 6 hydrateurs Schema.org purs    | `org\schema` seulement |
+| `xyz\oihana\schema\helpers\hydrate`           | Les 6 hydrateurs métier             | `xyz` + `org`          |
+| `xyz\oihana\schema\helpers\hydrate\documents` | Les 2 hydrateurs de documents       | `xyz` + `org`          |
+| `xyz\oihana\schema\helpers\pivots`            | Les 3 pivots de compte              | `xyz` + `org`          |
 
 Les hydrateurs métier appellent les hydrateurs purs pour leurs références imbriquées (`hydrateCustomer` délègue à `hydrateContactPoint` et `hydratePostalAddress`) — le sens de la flèche est toujours `xyz` → `org`.
+
+Le sous-dossier `hydrate/documents` regroupe les hydrateurs des [documents commerciaux](business-documents.md). Ils se distinguent des autres sur un point : au lieu d'appeler le constructeur puis de recâbler chaque référence imbriquée à la main, ils passent par `Reflection::hydrate()` — le seul chemin qui honore les attributs `#[HydrateAs]` / `#[HydrateWith]` déjà portés par `BusinessDocumentLine`. La correspondance reste donc déclarée une seule fois, sur la classe.
 
 ---
 
@@ -72,6 +75,31 @@ hydrateCustomer( [ 'name' => 'A' ] ) ;                      // une définition  
 hydrateCustomer( [ [ 'name' => 'A' ] , [ 'name' => 'B' ] ] ); // une liste       → Customer[]
 hydrateCustomer( 'brut' ) ;                                 // autre valeur    → rendue telle quelle
 ```
+
+---
+
+## Exemple express — hydrater les lignes d'un document
+
+```php
+use function xyz\oihana\schema\helpers\hydrate\documents\hydrateDocumentLine;
+
+// $document : un BusinessDocument sorti du serveur — ses lignes sont des tableaux bruts.
+
+$document->documentLines = hydrateDocumentLine( $document->documentLines ) ;
+
+$line = $document->documentLines[0] ;
+
+$line->quantity->value ;                // 5       (QuantitativeValue)
+$line->price->price ;                   // 22.5    (CompoundPriceSpecification)
+$line->price->priceComponent[0]->name ; // 'base'  (UnitPriceSpecification)
+$line->taxes[0]->rate ;                 // 20.0    (TaxDetail)
+$line->total->value ;                   // 135.0   (MonetaryAmount)
+$line->item->name ;                     // 'Peinture blanche' (Product)
+```
+
+Le constructeur de `BusinessDocument` ne fait qu'une affectation superficielle : sans cet appel, `documentLines` reste un tableau de tableaux, et le prix, la quantité, les taxes et les totaux d'une ligne ne deviennent jamais des objets.
+
+L'`item` est le seul cas que le type déclaré ne suffit pas à trancher — l'union `Product|Service` se résoudrait toujours sur `Product`, prestation comprise. C'est donc le `@type` du contenu qui décide : `Service` pour une prestation, `Product` sinon.
 
 ---
 
@@ -117,6 +145,13 @@ Un compte porte zéro, une ou plusieurs identités métier (voir [`BusinessIdent
 | `hydrateStockLevel`       | `StockLevel`        | `assignedPOS` (Warehouse)                                |
 | `hydrateWarehouse`        | `Warehouse` ou liste | `ownedBy` (Subsidiary)                                  |
 
+### `xyz\oihana\schema\helpers\hydrate\documents` — les hydrateurs de documents
+
+| Fonction                  | Produit                          | Références imbriquées hydratées                          |
+|---------------------------|----------------------------------|----------------------------------------------------------|
+| `hydrateDocumentLine`     | `BusinessDocumentLine` ou liste  | `adjustments` (Adjustment[]), `price` (CompoundPriceSpecification + son `priceComponent`), `quantity`, `subtotal`, `taxes` (TaxDetail[]), `total`, `item` (délégué ci-dessous) |
+| `hydrateDocumentLineItem` | `Product` ou `Service`, ou liste | Résout l'union d'après le `@type` : suffixe `Service` → `Service`, sinon `Product` (avec ses `eligibleQuantity` et `inventoryLevel`) |
+
 ### `xyz\oihana\schema\helpers\pivots` — les pivots de compte
 
 | Fonction      | Rend                | Rôle                                                                 |
@@ -131,4 +166,5 @@ Un compte porte zéro, une ou plusieurs identités métier (voir [`BusinessIdent
 ## Voir aussi
 
 - [Métier Oihana](business.md) — `BusinessIdentity`, le lien compte ↔ entité que les pivots parcourent.
+- [Documents commerciaux](business-documents.md) — `BusinessDocument`, `BusinessDocumentLine` et les objets de valeur que les hydrateurs de documents produisent.
 - [Vocabulaire Schema.org](../schema-org/README.md) — les classes produites par les hydrateurs purs.

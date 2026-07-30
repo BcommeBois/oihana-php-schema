@@ -8,6 +8,29 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds the `xyz\oihana\schema\helpers\hydrate\documents` namespace — the first
+  `documents` sub-layer of the hydration helpers — with `hydrateDocumentLine()`
+  and `hydrateDocumentLineItem()`. A `BusinessDocument` served by an API carries
+  its `documentLines` as raw arrays : the constructor's shallow assignment leaves
+  them that way, so a line's `price`, `quantity`, `subtotal`, `taxes`,
+  `adjustments` and `total` never become objects. `hydrateDocumentLine()` handles
+  the three usual shapes (single line / indexed list of lines / passthrough) and
+  builds each line through `Reflection::hydrate()` rather than the constructor —
+  the only path that honors the `#[HydrateAs]` / `#[HydrateWith]` attributes
+  already declared on `BusinessDocumentLine`, so nothing about the mapping is
+  duplicated in the helper (the reflection instance is kept `static`, so a whole
+  document costs one hydration plan, not one per line). `item` is the exception :
+  its `Product|Service` union cannot be resolved from the property type alone
+  (reflection would always pick `Product`, even for a service), so
+  `hydrateDocumentLineItem()` reads the payload's JSON-LD `@type` — a type ending
+  with `Service` gives an `org\schema\Service`, anything else the
+  commerce-enriched `xyz\oihana\schema\products\Product` (itself an
+  `org\schema\Product`, so the line's declared type still holds), with its own
+  `eligibleQuantity` / `inventoryLevel` references hydrated. Both functions are
+  registered in `autoload.files` and covered by two new suites
+  (`HydrateDocumentLineTest`, `HydrateDocumentLineItemTest` — 15 tests) spanning
+  the nested references, the `@type` resolution and its fallbacks, the indexed
+  list, the already-hydrated input and the passthrough.
 - Adds `org\schema\creativeWork\Credential` (extends `CreativeWork`) — the
   schema.org parent type of `EducationalOccupationalCredential`, "a certificate
   that is used to verify the identity of a person or entity". It carries the four

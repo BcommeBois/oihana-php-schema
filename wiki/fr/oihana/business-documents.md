@@ -66,6 +66,8 @@ $line = new BusinessDocumentLine
 
 Comme partout ailleurs dans la lib, le constructeur ne fait qu'une affectation brute : `$line->taxes[0]` reste un tableau tant qu'on ne passe pas par `new \oihana\reflect\Reflection()->hydrate(...)`, qui honore les attributs `#[HydrateWith]`/`#[HydrateAs]` de chaque classe et transforme les tableaux imbriqués en `TaxDetail`/`Adjustment`/`MonetaryAmount`.
 
+Ce même besoin se pose isolément quand seul le tableau `documentLines` est disponible — par exemple une réponse serveur où le `BusinessDocument` a déjà été construit ailleurs et n'a pas traversé `Reflection::hydrate()`. Le helper [`hydrateDocumentLine()`](helpers.md#xyzoihanaschemahelpershydratedocuments--les-hydrateurs-de-documents) couvre ce cas précis, lignes brutes ou déjà hydratées, simple ligne ou liste.
+
 Un `Quote` complet, avec ses lignes, une **remise appliquée au document entier** et son récapitulatif, s'hydrate de la même façon :
 
 ```php

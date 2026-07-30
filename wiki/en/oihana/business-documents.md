@@ -66,6 +66,8 @@ $line = new BusinessDocumentLine
 
 As everywhere else in the library, the constructor only performs a raw assignment: `$line->taxes[0]` stays an array until you go through `new \oihana\reflect\Reflection()->hydrate(...)`, which honors each class's `#[HydrateWith]`/`#[HydrateAs]` attributes and turns the nested arrays into `TaxDetail`/`Adjustment`/`MonetaryAmount` objects.
 
+The same need comes up in isolation when only the `documentLines` array is available — for instance a server response where the `BusinessDocument` was already built elsewhere and never went through `Reflection::hydrate()`. The [`hydrateDocumentLine()`](helpers.md#xyzoihanaschemahelpershydratedocuments--the-document-hydrators) helper covers exactly that case, raw or already-hydrated lines, a single line or a list.
+
 A full `Quote`, with its lines, a **discount applied to the whole document**, and its recap, hydrates the same way:
 
 ```php

@@ -38,13 +38,16 @@ use function xyz\oihana\schema\helpers\pivots\sellerKeys;
 
 The layer follows the library's rule: `org\schema` is the pure mirror of the Schema.org vocabulary, `xyz\oihana\schema` is the house extension built on top of it — **never the other way around**.
 
-| Namespace                              | Content                                | Depends on         |
-|----------------------------------------|----------------------------------------|--------------------|
-| `org\schema\helpers\hydrate`           | The 6 pure Schema.org hydrators        | `org\schema` only  |
-| `xyz\oihana\schema\helpers\hydrate`    | The 6 business-layer hydrators         | `xyz` + `org`      |
-| `xyz\oihana\schema\helpers\pivots`     | The 3 account pivots                   | `xyz` + `org`      |
+| Namespace                                     | Content                         | Depends on         |
+|-----------------------------------------------|---------------------------------|--------------------|
+| `org\schema\helpers\hydrate`                  | The 6 pure Schema.org hydrators | `org\schema` only  |
+| `xyz\oihana\schema\helpers\hydrate`           | The 6 business-layer hydrators  | `xyz` + `org`      |
+| `xyz\oihana\schema\helpers\hydrate\documents` | The 2 document hydrators        | `xyz` + `org`      |
+| `xyz\oihana\schema\helpers\pivots`            | The 3 account pivots            | `xyz` + `org`      |
 
 The business hydrators delegate their nested references to the pure ones (`hydrateCustomer` calls `hydrateContactPoint` and `hydratePostalAddress`) — the arrow always points `xyz` → `org`.
+
+The `hydrate/documents` subfolder gathers the hydrators of the [business documents](business-documents.md). They differ from the others on one point: instead of calling the constructor and then re-wiring every nested reference by hand, they go through `Reflection::hydrate()` — the only path that honors the `#[HydrateAs]` / `#[HydrateWith]` attributes already carried by `BusinessDocumentLine`. The mapping therefore stays declared once, on the class.
 
 ---
 
@@ -72,6 +75,31 @@ hydrateCustomer( [ 'name' => 'A' ] ) ;                        // one definition 
 hydrateCustomer( [ [ 'name' => 'A' ] , [ 'name' => 'B' ] ] ); // a list         → Customer[]
 hydrateCustomer( 'raw' ) ;                                    // anything else  → returned unchanged
 ```
+
+---
+
+## Quick example — hydrating a document's lines
+
+```php
+use function xyz\oihana\schema\helpers\hydrate\documents\hydrateDocumentLine;
+
+// $document: a BusinessDocument coming out of the server — its lines are raw arrays.
+
+$document->documentLines = hydrateDocumentLine( $document->documentLines ) ;
+
+$line = $document->documentLines[0] ;
+
+$line->quantity->value ;                // 5       (QuantitativeValue)
+$line->price->price ;                   // 22.5    (CompoundPriceSpecification)
+$line->price->priceComponent[0]->name ; // 'base'  (UnitPriceSpecification)
+$line->taxes[0]->rate ;                 // 20.0    (TaxDetail)
+$line->total->value ;                   // 135.0   (MonetaryAmount)
+$line->item->name ;                     // 'White paint' (Product)
+```
+
+The `BusinessDocument` constructor only performs a shallow assignment: without that call, `documentLines` stays an array of arrays, and a line's price, quantity, taxes and totals never become objects.
+
+The `item` is the one case the declared type cannot settle — the `Product|Service` union would always resolve to `Product`, services included. The payload's `@type` decides instead: `Service` for a service, `Product` otherwise.
 
 ---
 
@@ -117,6 +145,13 @@ An account carries zero, one or several business identities (see [`BusinessIdent
 | `hydrateStockLevel`       | `StockLevel`        | `assignedPOS` (Warehouse)                                |
 | `hydrateWarehouse`        | `Warehouse` or list | `ownedBy` (Subsidiary)                                   |
 
+### `xyz\oihana\schema\helpers\hydrate\documents` — the document hydrators
+
+| Function                  | Produces                         | Hydrated nested references                               |
+|---------------------------|----------------------------------|----------------------------------------------------------|
+| `hydrateDocumentLine`     | `BusinessDocumentLine` or list    | `adjustments` (Adjustment[]), `price` (CompoundPriceSpecification + its `priceComponent`), `quantity`, `subtotal`, `taxes` (TaxDetail[]), `total`, `item` (delegated below) |
+| `hydrateDocumentLineItem` | `Product` or `Service`, or list   | Resolves the union from the `@type`: a `Service` suffix → `Service`, otherwise `Product` (with its `eligibleQuantity` and `inventoryLevel`) |
+
 ### `xyz\oihana\schema\helpers\pivots` — the account pivots
 
 | Function      | Returns             | Role                                                                 |
@@ -131,4 +166,5 @@ An account carries zero, one or several business identities (see [`BusinessIdent
 ## See also
 
 - [Oihana business](business.md) — `BusinessIdentity`, the account ↔ entity link the pivots walk through.
+- [Business documents](business-documents.md) — `BusinessDocument`, `BusinessDocumentLine` and the value objects the document hydrators produce.
 - [Schema.org vocabulary](../schema-org/README.md) — the classes produced by the pure hydrators.
