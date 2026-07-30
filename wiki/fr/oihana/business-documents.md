@@ -68,6 +68,10 @@ Comme partout ailleurs dans la lib, le constructeur ne fait qu'une affectation b
 
 Ce même besoin se pose isolément quand seul le tableau `documentLines` est disponible — par exemple une réponse serveur où le `BusinessDocument` a déjà été construit ailleurs et n'a pas traversé `Reflection::hydrate()`. Le helper [`hydrateDocumentLine()`](helpers.md#xyzoihanaschemahelpershydratedocuments--les-hydrateurs-de-documents) couvre ce cas précis, lignes brutes ou déjà hydratées, simple ligne ou liste.
 
+**Les unions de parties.** `customer`, `seller` et `author` (et, sur `Invoice`, `broker`/`provider`) sont typés `Organization|Person` — une union qu'un type de propriété ne suffit pas à trancher, la réflexion retenant sinon le premier membre déclaré quel que soit le contenu. Chacune porte donc un `#[HydrateWith(Organization::class, Person::class)]` : `Reflection::hydrate()` choisit alors la classe d'après le discriminateur du payload (`@type`, `atType` ou `type`) et, à défaut, d'après les propriétés présentes. Même mécanisme pour l'`item` d'une `BusinessDocumentLine`, d'une `DeliveryLine` ou d'une `GoodsReceiptLine` (`Product|Service`). Un identifiant brut (chaîne ou entier) passé à la place d'un objet reste inchangé.
+
+Le helper [`hydrateBusinessDocument()`](helpers.md#xyzoihanaschemahelpershydratedocuments--les-hydrateurs-de-documents) n'est donc pas nécessaire à cette résolution : il ajoute les formes d'entrée (document seul, liste de documents, passage à travers) et sert n'importe quel maillon du cycle via son second paramètre (`hydrateBusinessDocument( $raw , Quote::class )`, `Invoice::class`…).
+
 Un `Quote` complet, avec ses lignes, une **remise appliquée au document entier** et son récapitulatif, s'hydrate de la même façon :
 
 ```php

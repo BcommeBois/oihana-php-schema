@@ -8,6 +8,25 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds `org\schema\helpers\hydrate\hydrateOrganizationOrPerson()` and
+  `xyz\oihana\schema\helpers\hydrate\documents\hydrateBusinessDocument()`, the
+  helper-layer counterparts of the `#[HydrateWith]` fix below.
+  `hydrateOrganizationOrPerson()` resolves an `Organization|Person` payload from
+  its JSON-LD `@type` (`Person` → `Person`, anything else — `Organization` itself
+  or one of its many subtypes — → `Organization`, the safe default when `@type`
+  is absent), and accepts optional `$organizationClass`/`$personClass` overrides
+  so a caller can pin the result to a business subtype (e.g. `Customer`,
+  `CustomerEmployee`) instead of the plain Schema.org class.
+  `hydrateBusinessDocument()` hydrates a whole document through
+  `Reflection::hydrate()` and takes an optional `$class` parameter (default
+  `BusinessDocument::class`) so the same function serves every subclass
+  (`Quote`, `PurchaseOrder`, `Invoice`, `CreditNote`, `DebitNote`,
+  `DeliveryNote`, `GoodsReceiptConfirmation`, `Receipt`, `RemittanceAdvice`,
+  `Statement`). Since the attributes now settle the unions on their own, what
+  these two add over a direct `Reflection::hydrate()` call is the
+  single/indexed-list/passthrough input handling shared by the whole helpers
+  layer. Both are registered in `autoload.files` and covered by two new suites
+  (`HydrateOrganizationOrPersonTest`, `HydrateBusinessDocumentTest` — 16 tests).
 - Adds the `xyz\oihana\schema\helpers\hydrate\documents` namespace — the first
   `documents` sub-layer of the hydration helpers — with `hydrateDocumentLine()`
   and `hydrateDocumentLineItem()`. A `BusinessDocument` served by an API carries
@@ -254,6 +273,28 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Fixed
 
+- Fixes the silent mis-hydration of every ambiguous `A|B` union across the
+  business documents, by declaring the candidate classes on the property itself :
+  `#[HydrateWith(Organization::class, Person::class)]` on
+  `BusinessDocument::$customer`/`$seller`/`$author`,
+  `Invoice::$broker`/`$provider` and `Site::$ownedBy` ;
+  `#[HydrateWith(Product::class, Service::class)]` on the `item` of
+  `BusinessDocumentLine`, `DeliveryLine` and `GoodsReceiptLine`. Without them,
+  `Reflection::hydrate()` had nothing to discriminate on and kept the union's
+  first class member whatever the payload said — so a `Person` customer came out
+  as an (empty-ish) `Organization`, and a `Service` line item as a `Product`.
+  `#[HydrateWith]` accepts several classes and lets the hydrator pick from the
+  payload's discriminator (`@type`, `atType` or `type`, matched against each
+  candidate's short or fully-qualified name) and, failing that, from the
+  properties present. The fix is therefore declarative and applies to **every**
+  caller, including a direct `Reflection::hydrate()` with no helper involved, and
+  is inherited by all ten `BusinessDocument` subclasses since none of them
+  override these properties. The declared types are unchanged, the constructor's
+  shallow assignment is unchanged, and a raw identifier (string or integer)
+  passed instead of an object still comes through untouched. The `item`
+  properties resolve to `xyz\oihana\schema\products\Product` — the
+  commerce-enriched product, itself an `org\schema\Product`, so the declared
+  union still holds.
 - Widens `BusinessDocument::$customer` and `BusinessDocument::$seller` from
   `null|Organization|Person` to `null|array|Organization|Person`. Both properties
   were the last two party slots of the class still missing `array`, so a raw,

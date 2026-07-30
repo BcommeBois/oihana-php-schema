@@ -66,6 +66,7 @@ class BusinessDocument extends Intangible
      * authored it. Reuses the Schema.org `author` name.
      * @var null|Organization|Person|array
      */
+    #[HydrateWith(Organization::class, Person::class)]
     public null|Organization|Person|array $author ;
 
     /**
@@ -97,6 +98,7 @@ class BusinessDocument extends Intangible
      * The party the document is addressed to.
      * @var null|array|Organization|Person
      */
+    #[HydrateWith(Organization::class, Person::class)]
     public null|array|Organization|Person $customer ;
 
     /**
@@ -156,6 +158,7 @@ class BusinessDocument extends Intangible
      * The party issuing the document.
      * @var null|array|Organization|Person
      */
+    #[HydrateWith(Organization::class, Person::class)]
     public null|array|Organization|Person $seller ;
 
     /**

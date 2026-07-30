@@ -40,14 +40,18 @@ La couche respecte la règle de la bibliothèque : `org\schema` est le miroir pu
 
 | Namespace                                     | Contenu                             | Dépend de              |
 |-----------------------------------------------|-------------------------------------|------------------------|
-| `org\schema\helpers\hydrate`                  | Les 6 hydrateurs Schema.org purs    | `org\schema` seulement |
+| `org\schema\helpers\hydrate`                  | Les 7 hydrateurs Schema.org purs    | `org\schema` seulement |
 | `xyz\oihana\schema\helpers\hydrate`           | Les 6 hydrateurs métier             | `xyz` + `org`          |
-| `xyz\oihana\schema\helpers\hydrate\documents` | Les 2 hydrateurs de documents       | `xyz` + `org`          |
+| `xyz\oihana\schema\helpers\hydrate\documents` | Les 3 hydrateurs de documents       | `xyz` + `org`          |
 | `xyz\oihana\schema\helpers\pivots`            | Les 3 pivots de compte              | `xyz` + `org`          |
 
 Les hydrateurs métier appellent les hydrateurs purs pour leurs références imbriquées (`hydrateCustomer` délègue à `hydrateContactPoint` et `hydratePostalAddress`) — le sens de la flèche est toujours `xyz` → `org`.
 
-Le sous-dossier `hydrate/documents` regroupe les hydrateurs des [documents commerciaux](business-documents.md). Ils se distinguent des autres sur un point : au lieu d'appeler le constructeur puis de recâbler chaque référence imbriquée à la main, ils passent par `Reflection::hydrate()` — le seul chemin qui honore les attributs `#[HydrateAs]` / `#[HydrateWith]` déjà portés par `BusinessDocumentLine`. La correspondance reste donc déclarée une seule fois, sur la classe.
+Le sous-dossier `hydrate/documents` regroupe les hydrateurs des [documents commerciaux](business-documents.md). Ils se distinguent des autres sur un point : au lieu d'appeler le constructeur puis de recâbler chaque référence imbriquée à la main, ils passent par `Reflection::hydrate()` — le seul chemin qui honore les attributs `#[HydrateAs]` / `#[HydrateWith]` déjà portés par `BusinessDocumentLine`/`BusinessDocument`. La correspondance reste donc déclarée une seule fois, sur la classe.
+
+`hydrateOrganizationOrPerson`, lui, vit dans `org\schema\helpers\hydrate` : n'ayant besoin que des classes `org\schema\Organization`/`org\schema\Person`, il reste un hydrateur pur. Il résout une union `Organization|Person` d'après le `@type` du contenu, et accepte deux classes cibles personnalisées (`$organizationClass`/`$personClass`) pour viser un sous-type métier.
+
+> **Note.** Les unions ambiguës des documents (`customer`/`seller`/`author`, `broker`/`provider`, `item`, `ownedBy`) sont désormais tranchées **déclarativement**, par un `#[HydrateWith(A::class, B::class)]` posé sur la propriété : `Reflection::hydrate()` choisit alors la bonne classe d'après le discriminateur (`@type`, `atType` ou `type`) et, à défaut, d'après les propriétés présentes. La résolution est donc correcte **même sans passer par un helper**. Les hydrateurs de cette couche restent utiles pour ce que la réflexion ne fait pas : accepter indifféremment une définition simple, une liste indexée ou une valeur quelconque rendue telle quelle.
 
 ---
 
@@ -99,7 +103,28 @@ $line->item->name ;                     // 'Peinture blanche' (Product)
 
 Le constructeur de `BusinessDocument` ne fait qu'une affectation superficielle : sans cet appel, `documentLines` reste un tableau de tableaux, et le prix, la quantité, les taxes et les totaux d'une ligne ne deviennent jamais des objets.
 
-L'`item` est le seul cas que le type déclaré ne suffit pas à trancher — l'union `Product|Service` se résoudrait toujours sur `Product`, prestation comprise. C'est donc le `@type` du contenu qui décide : `Service` pour une prestation, `Product` sinon.
+L'`item` d'une ligne est une union `Product|Service` : c'est le `@type` du contenu qui décide de sa classe — `Service` pour une prestation, le `Product` enrichi commerce sinon — grâce au `#[HydrateWith(Product::class, Service::class)]` porté par la propriété.
+
+---
+
+## Exemple express — hydrater un document entier
+
+```php
+use function xyz\oihana\schema\helpers\hydrate\documents\hydrateBusinessDocument;
+use xyz\oihana\schema\business\documents\Invoice;
+
+// $raw : la réponse brute du serveur pour une facture.
+
+$invoice = hydrateBusinessDocument( $raw , Invoice::class ) ;
+
+$invoice->customer->name ; // 'Jean Dupont' — Person, même si Organization vient en premier dans l'union
+$invoice->seller->name   ; // 'ACME'        — Organization
+$invoice->provider->name ; // 'Sous-traitant SA' — Organization, même sans @type explicite
+```
+
+`customer`, `seller` et `author` sont typés `Organization|Person` sur tout `BusinessDocument` (`broker`/`provider` en plus sur `Invoice`) — la même ambiguïté que l'`item` d'une ligne, transposée à l'en-tête, et tranchée de la même façon par un `#[HydrateWith(Organization::class, Person::class)]`. `hydrateBusinessDocument()` hydrate le document via `Reflection::hydrate()` — donc tout, en-tête comme lignes, sort typé — puis repasse sur ces propriétés via `hydrateOrganizationOrPerson()`. Son second paramètre (`$class`, par défaut `BusinessDocument::class`) sert n'importe quel maillon du cycle — `Quote::class`, `PurchaseOrder::class`, `CreditNote::class`… — puisqu'aucun d'eux ne redéfinit `customer`/`seller`/`author`.
+
+L'intérêt du helper n'est donc pas la résolution de l'union — l'attribut s'en charge, même pour un appel direct à `Reflection::hydrate()` — mais les trois formes d'entrée acceptées : un document, une liste de documents, ou toute autre valeur rendue telle quelle.
 
 ---
 
@@ -132,6 +157,7 @@ Un compte porte zéro, une ou plusieurs identités métier (voir [`BusinessIdent
 | `hydrateDefinedTerm`        | `DefinedTerm` ou `DefinedTerm[]` | simple, liste, passage à travers        |
 | `hydrateGeoCoordinates`     | `GeoCoordinates` ou liste        | simple, liste, passage à travers        |
 | `hydrateOfferPurchase`      | `OfferForPurchase`               | tableau ou instance, sinon `null` — type le `eligibleCustomerType` en `BusinessEntityType` |
+| `hydrateOrganizationOrPerson` | `Organization` ou `Person`, ou liste | Résout l'union d'après le `@type` : `Person` → `Person`, sinon `Organization` (défaut sûr) — classes cibles personnalisables via `$organizationClass`/`$personClass` |
 | `hydratePostalAddress`      | `PostalAddress` ou liste         | simple (valeurs vides nettoyées), liste, passage à travers |
 
 ### `xyz\oihana\schema\helpers\hydrate` — les hydrateurs métier
@@ -147,8 +173,9 @@ Un compte porte zéro, une ou plusieurs identités métier (voir [`BusinessIdent
 
 ### `xyz\oihana\schema\helpers\hydrate\documents` — les hydrateurs de documents
 
-| Fonction                  | Produit                          | Références imbriquées hydratées                          |
-|---------------------------|----------------------------------|----------------------------------------------------------|
+| Fonction                    | Produit                          | Références imbriquées hydratées                          |
+|-----------------------------|-----------------------------------|----------------------------------------------------------|
+| `hydrateBusinessDocument` | `BusinessDocument` (ou sous-classe via `$class`), ou liste | `customer`, `seller`, `author` (et `broker`/`provider` sur `Invoice`), résolus par `hydrateOrganizationOrPerson` — le reste (`documentLines`, `taxes`, `totals`…) vient de `Reflection::hydrate()` |
 | `hydrateDocumentLine`     | `BusinessDocumentLine` ou liste  | `adjustments` (Adjustment[]), `price` (CompoundPriceSpecification + son `priceComponent`), `quantity`, `subtotal`, `taxes` (TaxDetail[]), `total`, `item` (délégué ci-dessous) |
 | `hydrateDocumentLineItem` | `Product` ou `Service`, ou liste | Résout l'union d'après le `@type` : suffixe `Service` → `Service`, sinon `Product` (avec ses `eligibleQuantity` et `inventoryLevel`) |
 

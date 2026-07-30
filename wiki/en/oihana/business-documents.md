@@ -68,6 +68,10 @@ As everywhere else in the library, the constructor only performs a raw assignmen
 
 The same need comes up in isolation when only the `documentLines` array is available — for instance a server response where the `BusinessDocument` was already built elsewhere and never went through `Reflection::hydrate()`. The [`hydrateDocumentLine()`](helpers.md#xyzoihanaschemahelpershydratedocuments--the-document-hydrators) helper covers exactly that case, raw or already-hydrated lines, a single line or a list.
 
+**The party unions.** `customer`, `seller` and `author` (and, on `Invoice`, `broker`/`provider`) are typed `Organization|Person` — a union a property type alone cannot settle, reflection otherwise keeping the first declared member whatever the payload says. Each therefore carries a `#[HydrateWith(Organization::class, Person::class)]`: `Reflection::hydrate()` then picks the class from the payload's discriminator (`@type`, `atType` or `type`) and, failing that, from the properties present. Same mechanism for the `item` of a `BusinessDocumentLine`, a `DeliveryLine` or a `GoodsReceiptLine` (`Product|Service`). A raw identifier (string or integer) passed instead of an object stays unchanged.
+
+The [`hydrateBusinessDocument()`](helpers.md#xyzoihanaschemahelpershydratedocuments--the-document-hydrators) helper is therefore not required for that resolution: it adds the input shapes (a single document, a list of documents, passthrough) and serves any link in the cycle through its second parameter (`hydrateBusinessDocument( $raw , Quote::class )`, `Invoice::class`...).
+
 A full `Quote`, with its lines, a **discount applied to the whole document**, and its recap, hydrates the same way:
 
 ```php

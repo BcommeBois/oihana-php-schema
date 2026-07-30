@@ -17,6 +17,7 @@ use org\schema\UnitPriceSpecification;
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\constants\traits\business\documents\BusinessDocumentLineTrait;
 use xyz\oihana\schema\enumerations\UnitOfSaleType;
+use xyz\oihana\schema\products\Product as OihanaProduct;
 
 /**
  * A single line of a {@see BusinessDocument} : the item sold, its quantity
@@ -49,8 +50,14 @@ class BusinessDocumentLine extends StructuredValue
 
     /**
      * The product or service sold on this line.
+     *
+     * The `Product|Service` union is resolved from the payload's `@type` : a raw
+     * item hydrates into a {@see Service} when it says so, and into the
+     * commerce-enriched {@see OihanaProduct} (a `org\schema\Product`) otherwise.
+     *
      * @var null|array|Product|Service
      */
+    #[HydrateWith(OihanaProduct::class, Service::class)]
     public null|array|Product|Service $item ;
 
     /**

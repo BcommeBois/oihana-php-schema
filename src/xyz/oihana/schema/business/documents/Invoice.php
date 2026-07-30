@@ -72,6 +72,7 @@ class Invoice extends BusinessDocument
      * In most cases a broker never acquires or releases ownership of a product or service involved in an exchange.
      * @var null|array|Organization|Person
      */
+    #[HydrateWith(Organization::class, Person::class)]
     public null|array|Organization|Person $broker ;
 
     /**
@@ -103,6 +104,7 @@ class Invoice extends BusinessDocument
      * Another party (a seller) may offer those services or goods on behalf of the provider, who may also serve as the seller.
      * @var null|array|Organization|Person
      */
+    #[HydrateWith(Organization::class, Person::class)]
     public null|array|Organization|Person $provider ;
 
     /**

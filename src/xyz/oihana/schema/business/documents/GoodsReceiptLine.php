@@ -3,6 +3,7 @@
 namespace xyz\oihana\schema\business\documents;
 
 use oihana\reflect\attributes\HydrateAs;
+use oihana\reflect\attributes\HydrateWith;
 
 use org\schema\Product;
 use org\schema\QuantitativeValue;
@@ -11,6 +12,7 @@ use org\schema\StructuredValue;
 
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\constants\traits\business\documents\GoodsReceiptLineTrait;
+use xyz\oihana\schema\products\Product as OihanaProduct;
 
 /**
  * A single line of a {@see GoodsReceiptConfirmation} : how much of a given
@@ -55,8 +57,13 @@ class GoodsReceiptLine extends StructuredValue
 
     /**
      * The product or service this line concerns.
+     * The `Product|Service` union is resolved from the payload's `@type` : a raw
+     * item hydrates into a {@see Service} when it says so, and into the
+     * commerce-enriched {@see OihanaProduct} (a `org\schema\Product`) otherwise.
+     *
      * @var null|array|Product|Service
      */
+    #[HydrateWith(OihanaProduct::class, Service::class)]
     public null|array|Product|Service $item ;
 
     /**

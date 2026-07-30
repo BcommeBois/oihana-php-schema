@@ -2,6 +2,8 @@
 
 namespace xyz\oihana\schema\places;
 
+use oihana\reflect\attributes\HydrateWith;
+
 use org\schema\DefinedTerm;
 use org\schema\enumerations\DeliveryMethod;
 use org\schema\Organization;
@@ -54,6 +56,7 @@ class Site extends Place
      *
      * @var int|array|string|Organization|Person|null
      */
+    #[HydrateWith(Organization::class, Person::class)]
     public null|array|int|string|Organization|Person $ownedBy ;
 
     /**
