@@ -8,6 +8,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds `xyz\oihana\schema\thesaurus\DeliveryMethodTerm`, a `ThesaurusTerm`
+  carrying what a delivery method costs : `shippingRate` (the flat carriage),
+  `freeShippingThreshold` (the order value above which carriage is free, `null`
+  meaning never free) and `vat` (raw tax code, or the resolved `TaxRate` once
+  joined). The two amounts are scalars rather than `MonetaryAmount` instances so
+  a term hydrates directly from a flat table row. Property names come from the
+  new `DeliveryMethodTermTrait`, aggregated into `ThesaurusTrait`.
 - Adds `org\schema\helpers\hydrate\hydrateOrganizationOrPerson()` and
   `xyz\oihana\schema\helpers\hydrate\documents\hydrateBusinessDocument()`, the
   helper-layer counterparts of the `#[HydrateWith]` fix below.
