@@ -94,7 +94,7 @@ For deep object graphs (nested entities, union types, arrays of objects) you can
 use oihana\reflect\Reflection;
 use org\schema\Person;
 
-$person = Reflection::hydrate
+$person = new Reflection()->hydrate
 (
     [
         'name'    => 'Alice',
@@ -110,7 +110,59 @@ $person = Reflection::hydrate
 // $person->address is now a fully-typed PostalAddress instance.
 ```
 
-`hydrate()` walks the public properties of the target class, resolves union types and instantiates nested value objects as it goes.
+`hydrate()` walks the public properties of the target class and instantiates nested value objects as it goes. It is an **instance method**: calling `Reflection::hydrate(...)` statically throws an `Error`. Keep the instance around when hydrating in a loop — it caches the hydration plan of each class.
+
+### 3.3 Union types: picking the target class with `#[HydrateWith]`
+
+When a property declares a union of classes (`Organization|Person`, `Product|Service`...), the type alone does not say which one to instantiate: reflection then keeps **the first declared member**, whatever the payload says. A `Person` customer would come out as a half-empty `Organization`.
+
+The `#[HydrateWith]` attribute settles it by listing the candidate classes:
+
+```php
+use oihana\reflect\attributes\HydrateWith;
+
+#[HydrateWith(Organization::class, Person::class)]
+public null|array|Organization|Person $customer ;
+```
+
+The hydrator then picks:
+
+1. from the payload's **discriminator** — `@type`, `atType` or `type` — matched against each candidate's **short or fully-qualified name** (so `'@type' => 'Person'` is enough, no namespace needed);
+2. failing that, from the **properties present** in the payload (match score);
+3. as a last resort, **the first candidate in the list** — put the most common case there.
+
+The library's affected properties already carry it (`customer`, `seller`, `author`, `broker`, `provider`, the line `item`s, `Site::$ownedBy`).
+
+The attribute only applies to **array** values; anything else is left as-is, **provided the declared type accepts it**. `Site::$ownedBy` declares `int|string` in its union and therefore accepts a raw identifier in place of the object, whereas `customer`/`seller` do not declare `string`: passing them a raw identifier raises a `HydrationException`. That follows from the declared type, not from the attribute — a property without `#[HydrateWith]` behaves the same way.
+
+### 3.4 Overriding the target from your own project
+
+You can aim at **your own classes** by extending and **redeclaring the property with the same type**, carrying a new attribute:
+
+```php
+use oihana\reflect\attributes\HydrateWith;
+use org\schema\Organization;
+use org\schema\Person;
+use xyz\oihana\schema\business\documents\BusinessDocument;
+
+class MyDocument extends BusinessDocument
+{
+    // Same type as the parent; only the candidate classes change.
+    #[HydrateWith( MyCustomer::class , MyContact::class )]
+    public null|array|Organization|Person $customer ;
+}
+```
+
+```php
+$doc = new Reflection()->hydrate( [ 'customer' => [ '@type' => 'MyCustomer' , 'name' => 'ACME' ] ] , MyDocument::class ) ;
+$doc->customer instanceof MyCustomer ; // true
+```
+
+Things to keep in mind:
+
+- **the type must stay strictly identical** to the parent's — PHP enforces property type invariance. Narrowing it (`public null|array|MyCustomer $customer`) raises a *fatal error at class load*: `Type of MyDocument::$customer must be org\schema\Organization|org\schema\Person|array|null`. This is no hindrance: since `MyCustomer` is an `Organization`, the parent type already accepts it — only the attribute changes;
+- the parent class is unaffected, and properties you do not redeclare keep the inherited attribute;
+- overriding **stacks all the way down**: a document can point at your own lines (`#[HydrateWith(MyLine::class)]` on `documentLines`), which in turn point at your own products, and the whole graph hydrates into your classes — including their own properties.
 
 ---
 

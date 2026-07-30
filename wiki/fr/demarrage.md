@@ -94,7 +94,7 @@ Pour des graphes profonds (entités imbriquées, types union, tableaux d'objets)
 use oihana\reflect\Reflection;
 use org\schema\Person;
 
-$person = Reflection::hydrate
+$person = new Reflection()->hydrate
 (
     [
         'name'    => 'Alice',
@@ -110,7 +110,59 @@ $person = Reflection::hydrate
 // $person->address est désormais une instance de PostalAddress complètement typée.
 ```
 
-`hydrate()` parcourt les propriétés publiques de la classe cible, résout les types union et instancie les objets imbriqués au fil de l'eau.
+`hydrate()` parcourt les propriétés publiques de la classe cible et instancie les objets imbriqués au fil de l'eau. C'est une **méthode d'instance** : `Reflection::hydrate(...)` en appel statique lève une `Error`. Gardez l'instance si vous hydratez en boucle — elle met en cache le plan d'hydratation de chaque classe.
+
+### 3.3 Types union : choisir la classe cible avec `#[HydrateWith]`
+
+Quand une propriété déclare une union de classes (`Organization|Person`, `Product|Service`…), le type seul ne dit pas laquelle instancier : la réflexion retient alors **le premier membre déclaré**, quel que soit le contenu du payload. Un client `Person` ressortirait en `Organization` à moitié vide.
+
+L'attribut `#[HydrateWith]` lève l'ambiguïté en listant les classes candidates :
+
+```php
+use oihana\reflect\attributes\HydrateWith;
+
+#[HydrateWith(Organization::class, Person::class)]
+public null|array|Organization|Person $customer ;
+```
+
+L'hydrateur choisit alors :
+
+1. d'après le **discriminateur** du payload — `@type`, `atType` ou `type` — comparé au **nom court ou au nom complet** de chaque candidat (donc `'@type' => 'Person'` suffit, sans namespace) ;
+2. à défaut, d'après les **propriétés présentes** dans le payload (score de correspondance) ;
+3. en dernier recours, **le premier candidat de la liste** — placez-y le cas le plus courant.
+
+Les propriétés concernées de la bibliothèque le portent déjà (`customer`, `seller`, `author`, `broker`, `provider`, les `item` de lignes, `Site::$ownedBy`).
+
+L'attribut ne s'applique qu'aux valeurs **tableau** ; toute autre valeur est laissée telle quelle, **à condition que le type déclaré l'accepte**. `Site::$ownedBy` déclare `int|string` dans son union et accepte donc un identifiant brut à la place de l'objet, tandis que `customer`/`seller` ne déclarent pas `string` : leur passer un identifiant brut lève une `HydrationException`. C'est une conséquence du type déclaré, pas de l'attribut — une propriété sans `#[HydrateWith]` se comporte pareil.
+
+### 3.4 Surcharger la cible depuis votre projet
+
+Vous pouvez viser **vos propres classes** en héritant et en **redéclarant la propriété avec le même type**, porteuse d'un nouvel attribut :
+
+```php
+use oihana\reflect\attributes\HydrateWith;
+use org\schema\Organization;
+use org\schema\Person;
+use xyz\oihana\schema\business\documents\BusinessDocument;
+
+class MyDocument extends BusinessDocument
+{
+    // Type identique au parent ; seules les classes candidates changent.
+    #[HydrateWith( MyCustomer::class , MyContact::class )]
+    public null|array|Organization|Person $customer ;
+}
+```
+
+```php
+$doc = new Reflection()->hydrate( [ 'customer' => [ '@type' => 'MyCustomer' , 'name' => 'ACME' ] ] , MyDocument::class ) ;
+$doc->customer instanceof MyCustomer ; // true
+```
+
+Points à retenir :
+
+- **le type doit rester strictement identique** à celui du parent — PHP impose l'invariance des types de propriétés. Le restreindre (`public null|array|MyCustomer $customer`) provoque une *erreur fatale au chargement de la classe* : `Type of MyDocument::$customer must be org\schema\Organization|org\schema\Person|array|null`. Ce n'est pas une gêne : `MyCustomer` étant une `Organization`, le type parent l'accepte déjà — seul l'attribut change ;
+- la classe parente n'est pas affectée, et les propriétés non redéclarées conservent l'attribut hérité ;
+- la surcharge **se cumule en profondeur** : un document peut pointer vers vos lignes (`#[HydrateWith(MyLine::class)]` sur `documentLines`), qui pointent elles-mêmes vers vos produits, et tout le graphe s'hydrate dans vos classes — y compris leurs propriétés propres.
 
 ---
 

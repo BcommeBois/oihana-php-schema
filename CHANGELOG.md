@@ -273,6 +273,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Fixed
 
+- Documents the `#[HydrateWith]` union resolution and its project-side override
+  in the bilingual getting-started guide (FR + EN), as two new sections : how the
+  hydrator picks a class from the payload's discriminator (`@type`/`atType`/`type`,
+  matched on the short or fully-qualified name), then from the properties present,
+  then from the first candidate ; and how a downstream project aims at its own
+  classes by extending and redeclaring the property — with the same type, since
+  PHP enforces property type invariance and narrowing it is a fatal error at class
+  load. Also corrects the guide's reflection example, which called
+  `Reflection::hydrate()` statically : `hydrate()` is an instance method, so the
+  documented snippet raised an `Error` as written.
 - Fixes the silent mis-hydration of every ambiguous `A|B` union across the
   business documents, by declaring the candidate classes on the property itself :
   `#[HydrateWith(Organization::class, Person::class)]` on
