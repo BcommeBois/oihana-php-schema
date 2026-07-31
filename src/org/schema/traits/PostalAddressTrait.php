@@ -13,6 +13,14 @@ trait PostalAddressTrait
     public ?string $addressCountry ;
 
     /**
+     * The department the locality belongs to — the French second-level administrative division,
+     * between the locality and the region.
+     * Not a Schema.org term : an addition of ours, which the ERP fills in.
+     * @var null|string
+     */
+    public ?string $addressDepartment ;
+
+    /**
      * The locality in which the street address is, and which is in the region. For example, Mountain View.
      * @var null|string
      */

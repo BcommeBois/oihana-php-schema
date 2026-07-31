@@ -8,6 +8,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds `addressDepartment` to `org\schema\traits\PostalAddressTrait` — the
+  French second-level administrative division, between the locality and the
+  region. Not a Schema.org term (the `ADDRESS_DEPARTMENT` /
+  `FULL_ADDRESS_DEPARTMENT` constants already existed on
+  `org\schema\constants\traits\PostalAddress`, unused, ahead of this
+  property) : a deliberate, documented exception to the library's usual
+  `org\schema` = pure Schema.org mirror rule, kept simple rather than
+  introducing a house `PostalAddress` subclass just to carry one ERP-sourced
+  field. Covered by a new `PostalAddressTest` (defaults, constructor, direct
+  assignment, property-name constants) and a new
+  `HydratePostalAddressTest::testHydratesAddressDepartment` case.
+
 - Adds `org\schema\traits\helpers\GetAdditionalPropertyTrait`, the read
   counterpart of `SetAdditionalPropertyTrait` : `getAdditionalPropertyValue()`
   looks up a `propertyID` in the thing's `additionalProperty` list and returns

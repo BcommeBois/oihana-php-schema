@@ -31,6 +31,21 @@ final class HydratePostalAddressTest extends TestCase
     /**
      * @throws ReflectionException
      */
+    public function testHydratesAddressDepartment(): void
+    {
+        $address = hydratePostalAddress(
+        [
+            'streetAddress'     => '20 Rue Mably' ,
+            'addressDepartment' => 'Gironde' ,
+        ]) ;
+
+        $this->assertInstanceOf( PostalAddress::class , $address ) ;
+        $this->assertSame( 'Gironde' , $address->addressDepartment ) ;
+    }
+
+    /**
+     * @throws ReflectionException
+     */
     public function testHydratesAnIndexedArrayOfDefinitions(): void
     {
         $addresses = hydratePostalAddress(
