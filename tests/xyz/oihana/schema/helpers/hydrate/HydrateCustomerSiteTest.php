@@ -11,6 +11,7 @@ use org\schema\PostalAddress;
 use org\schema\PropertyValue;
 
 use xyz\oihana\schema\places\CustomerSite;
+use xyz\oihana\schema\thesaurus\DeliveryMethodTerm;
 
 use function xyz\oihana\schema\helpers\hydrate\hydrateCustomerSite;
 
@@ -35,6 +36,31 @@ final class HydrateCustomerSiteTest extends TestCase
         $this->assertInstanceOf( PostalAddress::class  , $site->address ) ;
         $this->assertInstanceOf( GeoCoordinates::class , $site->geo ) ;
         $this->assertInstanceOf( DefinedTerm::class    , $site->deliveryMethod ) ;
+    }
+
+    /**
+     * The site's `deliveryMethod` hydrates into the enriched `DeliveryMethodTerm`
+     * subclass — not the plain schema.org `DefinedTerm` — so `shippingRate` and
+     * `freeShippingThreshold` survive the hydration.
+     *
+     * @throws ReflectionException
+     */
+    public function testHydratesDeliveryMethodAsADeliveryMethodTerm(): void
+    {
+        $site = hydrateCustomerSite(
+        [
+            'name'           => 'Chantier A' ,
+            'deliveryMethod' =>
+            [
+                'name'                                      => 'Free above 1000, otherwise 39' ,
+                DeliveryMethodTerm::SHIPPING_RATE           => 39 ,
+                DeliveryMethodTerm::FREE_SHIPPING_THRESHOLD => 1000 ,
+            ],
+        ]) ;
+
+        $this->assertInstanceOf( DeliveryMethodTerm::class , $site->deliveryMethod ) ;
+        $this->assertSame( 39   , $site->deliveryMethod->shippingRate ) ;
+        $this->assertSame( 1000 , $site->deliveryMethod->freeShippingThreshold ) ;
     }
 
     /**

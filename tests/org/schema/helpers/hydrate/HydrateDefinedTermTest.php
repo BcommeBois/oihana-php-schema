@@ -7,6 +7,8 @@ use ReflectionException;
 
 use org\schema\DefinedTerm;
 
+use xyz\oihana\schema\thesaurus\DeliveryMethodTerm;
+
 use function org\schema\helpers\hydrate\hydrateDefinedTerm;
 
 final class HydrateDefinedTermTest extends TestCase
@@ -20,6 +22,41 @@ final class HydrateDefinedTermTest extends TestCase
 
         $this->assertInstanceOf( DefinedTerm::class , $term ) ;
         $this->assertSame( 'Express' , $term->name ) ;
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testHydratesASingleDefinitionIntoTheGivenClass(): void
+    {
+        $term = hydrateDefinedTerm
+        (
+            [ 'name' => 'Free above 1000' , DeliveryMethodTerm::SHIPPING_RATE => 39 ] ,
+            DeliveryMethodTerm::class
+        );
+
+        $this->assertInstanceOf( DeliveryMethodTerm::class , $term ) ;
+        $this->assertSame( 'Free above 1000' , $term->name ) ;
+        $this->assertSame( 39 , $term->shippingRate ) ;
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testHydratesAnIndexedArrayIntoTheGivenClass(): void
+    {
+        $terms = hydrateDefinedTerm
+        (
+            [
+                [ 'name' => 'Express'  ] ,
+                [ 'name' => 'Standard' ] ,
+            ] ,
+            DeliveryMethodTerm::class
+        );
+
+        $this->assertIsArray( $terms ) ;
+        $this->assertCount( 2 , $terms ) ;
+        $this->assertContainsOnlyInstancesOf( DeliveryMethodTerm::class , $terms ) ;
     }
 
     /**

@@ -13,13 +13,15 @@ use function oihana\core\arrays\isIndexed;
  *
  * Handles both single DefinedTerm array and array of DefinedTerm.
  *
- * @param array|null $init Single DefinedTerm data or array of DefinedTerm data
+ * @param array|null                $init  Single DefinedTerm data or array of DefinedTerm data.
+ * @param class-string<DefinedTerm> $class The class to hydrate into. A subclass lets an enriched term keep the properties DefinedTerm
+ * does not declare.
  *
  * @return mixed
  *
  * @throws ReflectionException
  */
-function hydrateDefinedTerm (mixed $init = null ) :mixed
+function hydrateDefinedTerm ( mixed $init = null , string $class = DefinedTerm::class ) :mixed
 {
     if ( !is_array( $init ) )
     {
@@ -30,7 +32,7 @@ function hydrateDefinedTerm (mixed $init = null ) :mixed
     {
         $terms = array_map
         (
-            fn( $term ) => hydrateDefinedTerm( $term ) ,
+            fn( $term ) => hydrateDefinedTerm( $term , $class ) ,
             $init
         );
 
@@ -39,5 +41,5 @@ function hydrateDefinedTerm (mixed $init = null ) :mixed
         return count( $filtered ) > 0 ? $filtered : null ;
     }
 
-    return new DefinedTerm( $init ) ;
+    return new $class( $init ) ;
 }

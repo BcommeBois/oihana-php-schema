@@ -244,6 +244,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Changed
 
+- `org\schema\helpers\hydrate\hydrateDefinedTerm()` takes an optional
+  `$class` parameter (default `DefinedTerm::class`), so a caller can pin the
+  hydration target to an enriched subclass instead of the plain schema.org
+  class. `xyz\oihana\schema\helpers\hydrate\hydrateCustomerSite()` now passes
+  `DeliveryMethodTerm::class`, so a site's `deliveryMethod` keeps
+  `shippingRate`, `freeShippingThreshold` and `vat` instead of losing them to
+  the base `DefinedTerm` shape. Existing callers are unaffected — the default
+  reproduces the prior behaviour exactly. Covered by two new
+  `HydrateDefinedTermTest` cases (single definition and indexed array into the
+  given class) and a new `HydrateCustomerSiteTest` case asserting the
+  `DeliveryMethodTerm` instance and its two amounts.
 - `BusinessDocumentLine::$price` now carries
   `#[HydrateAs(CompoundPriceSpecification::class)]`, so a raw price payload is
   hydrated into a `CompoundPriceSpecification` instead of a `MonetaryAmount`. The

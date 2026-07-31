@@ -6,6 +6,7 @@ use ReflectionException;
 
 use xyz\oihana\schema\places\CustomerSite;
 
+use xyz\oihana\schema\thesaurus\DeliveryMethodTerm;
 use function oihana\core\arrays\isIndexed;
 
 use function org\schema\helpers\hydrate\hydrateAdditionalProperty;
@@ -72,7 +73,7 @@ function hydrateCustomerSite( mixed $init = null ) :mixed
 
     // ------- deliveryMethod
 
-    $deliveryMethod = hydrateDefinedTerm($site->deliveryMethod ?? null ) ;
+    $deliveryMethod = hydrateDefinedTerm($site->deliveryMethod ?? null , DeliveryMethodTerm::class ) ;
     if ( $deliveryMethod !== null )
     {
         $site->deliveryMethod = $deliveryMethod;
