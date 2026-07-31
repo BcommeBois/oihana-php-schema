@@ -25,8 +25,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   `xyz\oihana\schema\traits\places\SiteFlagsTrait` (`isBillingAddress()`,
   `isConstructionSite()`, `isDefaultAddress()`, `isDeliveryAddress()`,
   `isShippingAddress()`, backed by `Oihana`'s site constants). `Person` now
-  composes `GetAdditionalPropertyTrait`, and `CustomerSite`/`ProviderSite`
-  compose `SiteFlagsTrait`. Covered by three new suites
+  composes `GetAdditionalPropertyTrait`, `CustomerEmployee` composes
+  `EmployeeFlagsTrait` directly, and `CustomerSite`/`ProviderSite` compose
+  `SiteFlagsTrait`. Covered by three new suites
   (`GetAdditionalPropertyTraitTest`, `EmployeeFlagsTraitTest`,
   `SiteFlagsTraitTest`), including the tolerant-flag data provider and the
   case of a site claiming none of the flags.

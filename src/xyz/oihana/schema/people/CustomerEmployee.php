@@ -2,6 +2,8 @@
 
 namespace xyz\oihana\schema\people ;
 
+use xyz\oihana\schema\traits\people\EmployeeFlagsTrait;
+
 /**
  * Someone working for a customer organization.
  *
@@ -11,5 +13,5 @@ namespace xyz\oihana\schema\people ;
  */
 class CustomerEmployee extends Person
 {
-
+    use EmployeeFlagsTrait ;
 }
