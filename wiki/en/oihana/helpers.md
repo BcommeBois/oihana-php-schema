@@ -154,7 +154,7 @@ An account carries zero, one or several business identities (see [`BusinessIdent
 |-----------------------------|----------------------------------|----------------------------------------|
 | `hydrateAdditionalProperty` | `PropertyValue[]`                | indexed list only, `null` otherwise    |
 | `hydrateContactPoint`       | `ContactPoint[]`                 | indexed list only, `null` otherwise    |
-| `hydrateDefinedTerm`        | `DefinedTerm` or `DefinedTerm[]` | single, list, passthrough              |
+| `hydrateDefinedTerm`        | `DefinedTerm` or `DefinedTerm[]` | single, list, passthrough — target class overridable via `$class` (e.g. `DeliveryMethodTerm::class`) |
 | `hydrateGeoCoordinates`     | `GeoCoordinates` or list         | single, list, passthrough              |
 | `hydrateOfferPurchase`      | `OfferForPurchase`               | array or instance, `null` otherwise — types the `eligibleCustomerType` as `BusinessEntityType` |
 | `hydrateOrganizationOrPerson` | `Organization` or `Person`, or list | Resolves the union from the `@type`: `Person` → `Person`, otherwise `Organization` (the safe default) — target classes overridable via `$organizationClass`/`$personClass` |
@@ -167,7 +167,7 @@ An account carries zero, one or several business identities (see [`BusinessIdent
 | `hydrateAggregateOffer`   | `AggregateOffer`    | `availableAtOrFrom` (Warehouse), `eligibleQuantity`, `offers` (OfferForPurchase[]), `provider` |
 | `hydrateCustomer`         | `Customer` or list  | `contactPoint`, `address`                                |
 | `hydrateCustomerEmployee` | `CustomerEmployee` or list | `additionalProperty`, `contactPoint`, `workLocation` (CustomerSite) |
-| `hydrateCustomerSite`     | `CustomerSite` or list | `additionalProperty`, `address`, `geo`, `deliveryMethod` |
+| `hydrateCustomerSite`     | `CustomerSite` or list | `additionalProperty`, `address`, `geo`, `deliveryMethod` (DeliveryMethodTerm) |
 | `hydrateStockLevel`       | `StockLevel`        | `assignedPOS` (Warehouse)                                |
 | `hydrateWarehouse`        | `Warehouse` or list | `ownedBy` (Subsidiary)                                   |
 

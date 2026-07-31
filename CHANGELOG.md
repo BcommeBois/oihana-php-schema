@@ -38,6 +38,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   joined). The two amounts are scalars rather than `MonetaryAmount` instances so
   a term hydrates directly from a flat table row. Property names come from the
   new `DeliveryMethodTermTrait`, aggregated into `ThesaurusTrait`.
+- Adds `xyz\oihana\schema\enumerations\ShippingChargeTiming` (`AT_ORDER`,
+  `AT_DELIVERY`) and backs it with a new `DeliveryMethodTerm::$chargeTiming`
+  property (`CHARGE_TIMING` in `DeliveryMethodTermTrait`), so a delivery method
+  can say when its carriage amount is locked in, alongside what it costs.
+  `null` leaves the timing unspecified. Covered by a new
+  `ShippingChargeTimingTest` and new `DeliveryMethodTermTest` cases (defaults,
+  assignment, constructor and reflection hydration paths).
 - Adds `org\schema\helpers\hydrate\hydrateOrganizationOrPerson()` and
   `xyz\oihana\schema\helpers\hydrate\documents\hydrateBusinessDocument()`, the
   helper-layer counterparts of the `#[HydrateWith]` fix below.

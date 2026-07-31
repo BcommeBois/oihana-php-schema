@@ -154,7 +154,7 @@ Un compte porte zéro, une ou plusieurs identités métier (voir [`BusinessIdent
 |-----------------------------|----------------------------------|-----------------------------------------|
 | `hydrateAdditionalProperty` | `PropertyValue[]`                | liste indexée seulement, sinon `null`   |
 | `hydrateContactPoint`       | `ContactPoint[]`                 | liste indexée seulement, sinon `null`   |
-| `hydrateDefinedTerm`        | `DefinedTerm` ou `DefinedTerm[]` | simple, liste, passage à travers        |
+| `hydrateDefinedTerm`        | `DefinedTerm` ou `DefinedTerm[]` | simple, liste, passage à travers — classe cible personnalisable via `$class` (ex. `DeliveryMethodTerm::class`) |
 | `hydrateGeoCoordinates`     | `GeoCoordinates` ou liste        | simple, liste, passage à travers        |
 | `hydrateOfferPurchase`      | `OfferForPurchase`               | tableau ou instance, sinon `null` — type le `eligibleCustomerType` en `BusinessEntityType` |
 | `hydrateOrganizationOrPerson` | `Organization` ou `Person`, ou liste | Résout l'union d'après le `@type` : `Person` → `Person`, sinon `Organization` (défaut sûr) — classes cibles personnalisables via `$organizationClass`/`$personClass` |
@@ -167,7 +167,7 @@ Un compte porte zéro, une ou plusieurs identités métier (voir [`BusinessIdent
 | `hydrateAggregateOffer`   | `AggregateOffer`    | `availableAtOrFrom` (Warehouse), `eligibleQuantity`, `offers` (OfferForPurchase[]), `provider` |
 | `hydrateCustomer`         | `Customer` ou liste | `contactPoint`, `address`                                |
 | `hydrateCustomerEmployee` | `CustomerEmployee` ou liste | `additionalProperty`, `contactPoint`, `workLocation` (CustomerSite) |
-| `hydrateCustomerSite`     | `CustomerSite` ou liste | `additionalProperty`, `address`, `geo`, `deliveryMethod` |
+| `hydrateCustomerSite`     | `CustomerSite` ou liste | `additionalProperty`, `address`, `geo`, `deliveryMethod` (DeliveryMethodTerm) |
 | `hydrateStockLevel`       | `StockLevel`        | `assignedPOS` (Warehouse)                                |
 | `hydrateWarehouse`        | `Warehouse` ou liste | `ownedBy` (Subsidiary)                                  |
 

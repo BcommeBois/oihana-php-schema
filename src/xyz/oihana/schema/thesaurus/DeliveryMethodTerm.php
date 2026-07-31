@@ -5,6 +5,7 @@ namespace xyz\oihana\schema\thesaurus;
 use org\schema\enumerations\DeliveryMethod;
 
 use xyz\oihana\schema\constants\traits\thesaurus\DeliveryMethodTermTrait;
+use xyz\oihana\schema\enumerations\ShippingChargeTiming;
 use xyz\oihana\schema\organizations\Company;
 use xyz\oihana\schema\products\TaxRate;
 
@@ -18,7 +19,7 @@ use xyz\oihana\schema\products\TaxRate;
  * keeps its own, longer list, each entry priced by its own commercial terms.
  * This class is that list : a {@see ThesaurusTerm} first — referenced by its
  * `id` from organizations, sites and business documents — enriched with the
- * three values needed to charge carriage.
+ * four values needed to charge carriage.
  *
  * The inherited `identifier` is available to carry the reference of the
  * catalogue item carriage is invoiced through, when the back-office models the
@@ -38,6 +39,13 @@ use xyz\oihana\schema\products\TaxRate;
  * That is the same convention {@see Company::$freeShippingThreshold} follows for
  * the per-organization override, so the two can be composed with a plain
  * coalesce, the organization winning over the method.
+ *
+ * ### When the charge is fixed
+ *
+ * The rule above says *whether* carriage is due ; {@see ShippingChargeTiming}
+ * says *when* the figure it resolves to is locked in — at order time, or
+ * recomputed at delivery time. `null` leaves the timing unspecified, which a
+ * consumer is free to read as whichever of the two its own process defaults to.
  *
  * ### Scalars rather than value objects
  *
@@ -72,6 +80,7 @@ use xyz\oihana\schema\products\TaxRate;
  * @see ThesaurusTerm
  * @see DeliveryMethod
  * @see DeliveryMethodTermTrait
+ * @see ShippingChargeTiming
  *
  * @package  xyz\oihana\schema\thesaurus
  * @category Thesaurus
@@ -81,6 +90,17 @@ use xyz\oihana\schema\products\TaxRate;
 class DeliveryMethodTerm extends ThesaurusTerm
 {
     use DeliveryMethodTermTrait ;
+
+    /**
+     * When the carriage amount is settled. Reuses {@see ShippingChargeTiming}
+     * (at order time, or recomputed at delivery time) or a plain free-text
+     * label.
+     *
+     * `null` means the timing is unspecified.
+     *
+     * @var null|string|ShippingChargeTiming
+     */
+    public null|string|ShippingChargeTiming $chargeTiming ;
 
     /**
      * A minimum order value at (or above) which carriage becomes free.

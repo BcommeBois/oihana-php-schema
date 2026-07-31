@@ -10,6 +10,7 @@ use oihana\reflect\Reflection;
 use org\schema\DefinedTerm;
 
 use xyz\oihana\schema\constants\traits\thesaurus\DeliveryMethodTermTrait;
+use xyz\oihana\schema\enumerations\ShippingChargeTiming;
 use xyz\oihana\schema\products\TaxRate;
 use xyz\oihana\schema\thesaurus\DeliveryMethodTerm;
 use xyz\oihana\schema\thesaurus\ThesaurusTerm;
@@ -20,6 +21,7 @@ class DeliveryMethodTermTest extends TestCase
     {
         $term = new DeliveryMethodTerm();
 
+        $this->assertNull( $term->chargeTiming           ?? null );
         $this->assertNull( $term->freeShippingThreshold ?? null );
         $this->assertNull( $term->shippingRate           ?? null );
         $this->assertNull( $term->vat                    ?? null );
@@ -45,6 +47,7 @@ class DeliveryMethodTermTest extends TestCase
 
     public function testPropertyNameConstants(): void
     {
+        $this->assertSame( 'chargeTiming'          , DeliveryMethodTerm::CHARGE_TIMING );
         $this->assertSame( 'freeShippingThreshold' , DeliveryMethodTerm::FREE_SHIPPING_THRESHOLD );
         $this->assertSame( 'shippingRate'           , DeliveryMethodTerm::SHIPPING_RATE );
         $this->assertSame( 'vat'                    , DeliveryMethodTerm::VAT );
@@ -52,7 +55,7 @@ class DeliveryMethodTermTest extends TestCase
 
     /**
      * The constructor copies scalar fields verbatim, including the inherited
-     * `id`/`name`/`identifier` and the three delivery-specific properties.
+     * `id`/`name`/`identifier` and the four delivery-specific properties.
      */
     public function testConstructorCopiesScalarProperties(): void
     {
@@ -63,6 +66,7 @@ class DeliveryMethodTermTest extends TestCase
             'identifier'                                => '59483' ,
             DeliveryMethodTerm::SHIPPING_RATE           => 39 ,
             DeliveryMethodTerm::FREE_SHIPPING_THRESHOLD => 1000 ,
+            DeliveryMethodTerm::CHARGE_TIMING           => ShippingChargeTiming::AT_ORDER ,
         ]);
 
         $this->assertSame( 'F11'                             , $term->id );
@@ -70,6 +74,7 @@ class DeliveryMethodTermTest extends TestCase
         $this->assertSame( '59483'                            , $term->identifier );
         $this->assertSame( 39                                 , $term->shippingRate );
         $this->assertSame( 1000                               , $term->freeShippingThreshold );
+        $this->assertSame( ShippingChargeTiming::AT_ORDER     , $term->chargeTiming );
     }
 
     /**
@@ -190,5 +195,40 @@ class DeliveryMethodTermTest extends TestCase
 
         $this->assertSame( 4.9 , $term->shippingRate );
         $this->assertSame( 50  , $term->freeShippingThreshold );
+    }
+
+    /**
+     * `chargeTiming` accepts either a {@see ShippingChargeTiming} constant or a
+     * plain free-text label — the type is not restricted to the enumeration.
+     */
+    public function testChargeTimingAssignment(): void
+    {
+        $term = new DeliveryMethodTerm();
+
+        $term->chargeTiming = ShippingChargeTiming::AT_DELIVERY ;
+        $this->assertSame( ShippingChargeTiming::AT_DELIVERY , $term->chargeTiming );
+
+        $term->chargeTiming = 'on dispatch' ;
+        $this->assertSame( 'on dispatch' , $term->chargeTiming );
+    }
+
+    /**
+     * Through the reflection-based hydration path, `chargeTiming` stays a
+     * plain scalar — no value-object wrapping.
+     *
+     * @throws ReflectionException
+     */
+    public function testReflectionHydratesChargeTimingAsScalar(): void
+    {
+        $term = ( new Reflection() )->hydrate
+        (
+            [
+                'name'                             => 'Free above 1000, otherwise 39' ,
+                DeliveryMethodTerm::CHARGE_TIMING => ShippingChargeTiming::AT_DELIVERY ,
+            ],
+            DeliveryMethodTerm::class
+        );
+
+        $this->assertSame( ShippingChargeTiming::AT_DELIVERY , $term->chargeTiming );
     }
 }
