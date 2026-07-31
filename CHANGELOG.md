@@ -8,6 +8,28 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds `org\schema\traits\helpers\GetAdditionalPropertyTrait`, the read
+  counterpart of `SetAdditionalPropertyTrait` : `getAdditionalPropertyValue()`
+  looks up a `propertyID` in the thing's `additionalProperty` list and returns
+  its `value` (or `null` when absent), and `hasAdditionalPropertyFlag()` wraps
+  it with `filter_var( … , FILTER_VALIDATE_BOOLEAN )` so a flag reads the same
+  whether the stored value is a real boolean, the string `"1"` or the number
+  `1`. Both the hydrated `PropertyValue` objects and the plain arrays a
+  document comes back as when nothing re-hydrated it are honoured. Built on
+  top of it, two new domain traits answer the flag questions asked throughout
+  the business-documents code by name instead of by raw `additionalProperty`
+  lookup : `xyz\oihana\schema\traits\people\EmployeeFlagsTrait`
+  (`isDeliveryNoteRecipient()`, `isDocumentRecipient()`,
+  `isInvoiceRecipient()`, `isOrderRecipient()`, `isQuoteRecipient()`,
+  `showsApplications()`, backed by `PersonAdditionalProperty`) and
+  `xyz\oihana\schema\traits\places\SiteFlagsTrait` (`isBillingAddress()`,
+  `isConstructionSite()`, `isDefaultAddress()`, `isDeliveryAddress()`,
+  `isShippingAddress()`, backed by `Oihana`'s site constants). `Person` now
+  composes `GetAdditionalPropertyTrait`, and `CustomerSite`/`ProviderSite`
+  compose `SiteFlagsTrait`. Covered by three new suites
+  (`GetAdditionalPropertyTraitTest`, `EmployeeFlagsTraitTest`,
+  `SiteFlagsTraitTest`), including the tolerant-flag data provider and the
+  case of a site claiming none of the flags.
 - Adds `xyz\oihana\schema\thesaurus\DeliveryMethodTerm`, a `ThesaurusTerm`
   carrying what a delivery method costs : `shippingRate` (the flat carriage),
   `freeShippingThreshold` (the order value above which carriage is free, `null`

@@ -8,6 +8,7 @@ use org\schema\constants\Schema;
 use org\schema\Organization;
 use org\schema\Person as SchemaPerson;
 use org\schema\PropertyValue;
+use org\schema\traits\helpers\GetAdditionalPropertyTrait;
 use org\schema\traits\helpers\SetAdditionalPropertyTrait;
 
 use xyz\oihana\schema\constants\Oihana;
@@ -23,7 +24,8 @@ use xyz\oihana\schema\traits\SetContactPointTrait;
  */
 class Person extends SchemaPerson
 {
-    use SetAdditionalPropertyTrait ,
+    use GetAdditionalPropertyTrait ,
+        SetAdditionalPropertyTrait ,
         SetContactPointTrait       ;
 
     /**

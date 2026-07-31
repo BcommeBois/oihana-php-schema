@@ -3,6 +3,7 @@
 namespace xyz\oihana\schema\places;
 
 use xyz\oihana\schema\places\Site;
+use xyz\oihana\schema\traits\places\SiteFlagsTrait;
 use xyz\oihana\schema\traits\SiteTrait;
 
 /**
@@ -24,5 +25,6 @@ use xyz\oihana\schema\traits\SiteTrait;
  */
 class CustomerSite extends Site
 {
-    use SiteTrait ;
+    use SiteFlagsTrait ,
+        SiteTrait      ;
 }
