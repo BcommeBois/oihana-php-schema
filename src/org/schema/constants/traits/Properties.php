@@ -62,6 +62,7 @@ trait Properties
         Offer ,
         OfferShippingDetails ,
         Organization ,
+        ParcelDelivery ,
         Person ,
         Place ,
         PostalAddress ,

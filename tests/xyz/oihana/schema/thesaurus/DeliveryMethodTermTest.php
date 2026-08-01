@@ -8,6 +8,7 @@ use ReflectionException;
 use oihana\reflect\Reflection;
 
 use org\schema\DefinedTerm;
+use org\schema\ParcelDelivery;
 
 use xyz\oihana\schema\constants\traits\thesaurus\DeliveryMethodTermTrait;
 use xyz\oihana\schema\enumerations\ShippingChargeTiming;
@@ -230,5 +231,21 @@ class DeliveryMethodTermTest extends TestCase
         );
 
         $this->assertSame( ShippingChargeTiming::AT_DELIVERY , $term->chargeTiming );
+    }
+
+    /**
+     * A house delivery term is assignable to {@see ParcelDelivery::$hasDeliveryMethod} :
+     * it reaches that union through {@see DefinedTerm}, so `org\schema` never has
+     * to know about the thesaurus.
+     */
+    public function testIsAssignableToParcelDeliveryHasDeliveryMethod(): void
+    {
+        $term = new DeliveryMethodTerm();
+        $term->name = 'Livraison express' ;
+
+        $delivery = new ParcelDelivery();
+        $delivery->hasDeliveryMethod = $term ;
+
+        $this->assertSame( $term , $delivery->hasDeliveryMethod );
     }
 }

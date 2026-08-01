@@ -6,16 +6,20 @@ use org\schema\enumerations\DeliveryMethod;
 use org\schema\events\DeliveryEvent;
 
 /**
- * An order is a confirmation of a transaction (a receipt), which can contain multiple line items, each represented by an Offer that has been accepted by the customer.
- * @see https://schema.org/Order
+ * The delivery of a parcel either via the postal service or a commercial service.
+ * @see https://schema.org/ParcelDelivery
  */
 class ParcelDelivery extends Intangible
 {
     /**
-     * The identifier of the order item.
-     * @var null|string|PostalAddress
+     * Destination address.
+     *
+     * Accepts a raw associative array so a row read straight from storage can be
+     * assigned as-is, exactly like {@see \xyz\oihana\schema\business\documents\BusinessDocument::$billingAddress}.
+     *
+     * @var null|array|string|PostalAddress
      */
-    public null|string|PostalAddress $deliveryAddress ;
+    public null|array|string|PostalAddress $deliveryAddress ;
 
     /**
      * New entry added as the package passes through each leg of its journey (from shipment to final delivery).
@@ -37,9 +41,16 @@ class ParcelDelivery extends Intangible
 
     /**
      * Method used for delivery or shipping.
-     * @var array|DeliveryMethod|null
+     *
+     * This property may be expressed as a predefined {@see DeliveryMethod}, a
+     * {@see DefinedTerm} — which covers the house, priced delivery terms a back
+     * office maintains in its own thesaurus — a string identifier, or a list of
+     * such values. Same union as {@see \xyz\oihana\schema\places\Site::$deliveryMethod}
+     * and {@see \xyz\oihana\schema\organizations\Company::$deliveryMethod}.
+     *
+     * @var null|array|string|DeliveryMethod|DefinedTerm
      */
-    public null|array|DeliveryMethod $hasDeliveryMethod ;
+    public null|array|string|DeliveryMethod|DefinedTerm $hasDeliveryMethod ;
 
     /**
      * Item(s) being shipped.
@@ -49,23 +60,38 @@ class ParcelDelivery extends Intangible
 
     /**
      * Shipper's address.
-     * @var null|string|PostalAddress
+     * @var null|string|array|PostalAddress
      */
-    public null|string|PostalAddress $originAddress ;
+    public null|string|array|PostalAddress $originAddress ;
 
     /**
      * The overall order the items in this delivery were included in.
-     * @var null|Order
+     * @var null|array|Order
      */
-    public ?Order $partOfOrder ;
+    public null|array|Order $partOfOrder ;
 
     /**
      * The service provider, service operator, or service performer; the goods producer.
      * Another party (a seller) may offer those services or goods on behalf of the provider.
      * A provider may also serve as the seller.
-     * @var Organization|Person|null
+     * @var null|array|Organization|Person
      */
-    public null|Organization|Person $provider ;
+    public null|array|Organization|Person $provider ;
+
+    /**
+     * The date the customer asks the parcel to be delivered on.
+     *
+     * This is an intent, stated when the delivery is ordered — not an estimate :
+     * {@see ParcelDelivery::$expectedArrivalFrom} and
+     * {@see ParcelDelivery::$expectedArrivalUntil} say when the parcel *may*
+     * arrive, as bounded by the carrier, and stay free to express that window
+     * later on, once the carrier has answered.
+     *
+     * @var null|string|int
+     *
+     * @since 1.4.0
+     */
+    public null|string|int $requestedDeliveryDate ;
 
     /**
      * Shipper tracking number.

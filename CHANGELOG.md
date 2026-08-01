@@ -8,6 +8,32 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds `org\schema\ParcelDelivery::$requestedDeliveryDate`
+  (`null|string|int`), the date the *customer asks* the parcel to be delivered
+  on. It says something `expectedArrivalFrom` / `expectedArrivalUntil` do not :
+  those bound the window the carrier says the parcel *may* arrive in, and stay
+  free to express it later, once the carrier has answered. The property fills a
+  hole `BusinessDocument::$orderDelivery` already promised in its docblock
+  ("the shipping address, the delivery method and the requested date") without
+  anything backing it.
+- Adds `org\schema\constants\traits\ParcelDelivery`, the property-name trait the
+  type was missing while all its neighbours had one — consumers had nothing but
+  hard-coded strings for `deliveryAddress`, `hasDeliveryMethod`,
+  `trackingNumber`… The twelve constants are aggregated into
+  `org\schema\constants\traits\Properties`, hence reachable from
+  `org\schema\constants\Schema`. `PROVIDER` is redeclared with its existing
+  value (`'provider'`), as the seven other traits of the aggregator already
+  declaring it do — identical redeclarations compose without conflict.
+- Adds `xyz\oihana\schema\places\CustomPostalAddress`, a `PostalAddress`
+  subclass whose sole member is `CONTEXT = Oihana::SCHEMA`, so
+  `getSchemaType()` yields `https://schema.oihana.xyz/CustomPostalAddress`. A
+  delivery address is not always picked from an address book : it can be
+  dictated on the spot, for a place no record describes. This type lets a frozen
+  copy *say* so in its `additionalType`, instead of leaving it to be inferred
+  from the absence of a reference key — an inference that flips the day such
+  addresses do get recorded. It exists to name a type, never to hydrate into,
+  and appears in no property union.
+
 - Adds `addressDepartment` to `org\schema\traits\PostalAddressTrait` — the
   French second-level administrative division, between the locality and the
   region. Not a Schema.org term (the `ADDRESS_DEPARTMENT` /
@@ -263,6 +289,31 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Changed
 
+- `org\schema\ParcelDelivery::$deliveryAddress` widens from
+  `null|string|PostalAddress` to `null|array|string|PostalAddress`. A base read
+  hands back an associative array and `Thing`'s constructor assigns values
+  as-is, so a raw array on the former union raised a `TypeError`. Its direct
+  counterpart, `BusinessDocument::$billingAddress`, was already
+  `null|array|PostalAddress` — the two now agree.
+- `org\schema\ParcelDelivery::$hasDeliveryMethod` widens from
+  `null|array|DeliveryMethod` to
+  `null|array|string|DeliveryMethod|DefinedTerm`. `DeliveryMethod` is the
+  schema.org enumeration — eight goodrelations URLs, no property — whereas a
+  back office keeps its own priced list of methods. `DefinedTerm` covers those
+  by inheritance (`DeliveryMethodTerm` → `ThesaurusTerm` → `DefinedTerm`)
+  without `org\schema` ever depending on `xyz\oihana`, which is exactly the
+  union `Site::$deliveryMethod` and `Company::$deliveryMethod` already declare.
+- `org\schema\ParcelDelivery`'s three other structured properties take a raw
+  array as well, for the reason that drove `deliveryAddress` :
+  `$originAddress` becomes `null|string|array|PostalAddress`, `$partOfOrder`
+  becomes `null|array|Order` and `$provider` becomes
+  `null|array|Organization|Person`. The whole type now survives a plain base
+  read, not just its delivery address. Note that `$provider`'s union stays
+  ambiguous for `Reflection::hydrate` — two class members, so a `Person`-shaped
+  payload resolves to the first candidate, `Organization` — which the
+  `#[HydrateWith]` attribute is there to pin, as `BusinessDocument::$author`
+  and `$customer` do.
+
 - `org\schema\helpers\hydrate\hydrateDefinedTerm()` takes an optional
   `$class` parameter (default `DefinedTerm::class`), so a caller can pin the
   hydration target to an enriched subclass instead of the plain schema.org
@@ -332,6 +383,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   were compatible); the property is simply no longer shadowed.
 
 ### Fixed
+
+- Fixes the class docblock of `org\schema\ParcelDelivery`, which described an
+  `Order` word for word — the text and the `@see` link had been copied from
+  that class — and now describes the parcel delivery it actually models, with
+  the matching `@see https://schema.org/ParcelDelivery`.
 
 - Documents the `#[HydrateWith]` union resolution and its project-side override
   in the bilingual getting-started guide (FR + EN), as two new sections : how the
