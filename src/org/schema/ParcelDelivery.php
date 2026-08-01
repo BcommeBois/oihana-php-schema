@@ -2,6 +2,7 @@
 
 namespace org\schema;
 
+use oihana\reflect\attributes\HydrateWith;
 use org\schema\enumerations\DeliveryMethod;
 use org\schema\events\DeliveryEvent;
 
@@ -74,8 +75,18 @@ class ParcelDelivery extends Intangible
      * The service provider, service operator, or service performer; the goods producer.
      * Another party (a seller) may offer those services or goods on behalf of the provider.
      * A provider may also serve as the seller.
+     *
+     * The `Organization|Person` union cannot be resolved from the property type
+     * alone — reflection picks the first class member, so a `Person` payload
+     * would come out an `Organization`. The attribute pins the candidates, which
+     * lets a payload carrying a JSON-LD `@type` discriminator land on the right
+     * one. A payload *without* that discriminator still falls back to
+     * `Organization` : {@see \org\schema\helpers\hydrate\hydrateOrganizationOrPerson()}
+     * is what a caller reaches for when it needs more than the attribute can give.
+     *
      * @var null|array|Organization|Person
      */
+    #[HydrateWith(Organization::class, Person::class)]
     public null|array|Organization|Person $provider ;
 
     /**

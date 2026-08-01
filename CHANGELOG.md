@@ -308,11 +308,31 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   `$originAddress` becomes `null|string|array|PostalAddress`, `$partOfOrder`
   becomes `null|array|Order` and `$provider` becomes
   `null|array|Organization|Person`. The whole type now survives a plain base
-  read, not just its delivery address. Note that `$provider`'s union stays
-  ambiguous for `Reflection::hydrate` — two class members, so a `Person`-shaped
-  payload resolves to the first candidate, `Organization` — which the
-  `#[HydrateWith]` attribute is there to pin, as `BusinessDocument::$author`
-  and `$customer` do.
+  read, not just its delivery address.
+- `org\schema\ParcelDelivery::$provider` carries
+  `#[HydrateWith(Organization::class, Person::class)]`. Its `Organization|Person`
+  union cannot be resolved from the property type alone — `Reflection::hydrate`
+  walks the union in declaration order and takes its first class member, so a
+  `Person` payload came out an `Organization`. The attribute pins the candidates,
+  as `BusinessDocument::$author` and `$customer` already do. Worth stating
+  plainly, because the attribute promises less than it looks : it decides from
+  the payload's JSON-LD discriminator (`@type` / `atType` / `type`) and nothing
+  else. Its second strategy — guessing from the properties present — scores a
+  candidate on *the share of its own properties* found in the payload, against a
+  0.3 threshold ; with 91 properties on `Person` and 99 on `Organization`, no
+  realistic payload comes close, so an undiscriminated one still falls back to
+  the first candidate. That default is deliberate and safe (`Organization`), and
+  the library's own `jsonSerialize()` emits `@type`, so every round-trip through
+  it does resolve.
+- `hydrateBusinessDocument()` re-resolves `orderDelivery.provider` — the carrier —
+  through `hydrateOrganizationOrPerson()`, the same treatment `customer`,
+  `seller`, `author` and the `Invoice` pair already get. The document's
+  `ParcelDelivery` is built by `#[HydrateAs]`, so nothing inside it was ever
+  re-resolved from the raw payload. This overlaps with the attribute above and
+  changes no observable outcome today ; it is kept because it does not depend on
+  an attribute declared on a schema.org mirror class, and because the helper's
+  `$organizationClass` / `$personClass` parameters are the only way to aim at a
+  house subtype (`Customer`, `CustomerEmployee`) later on.
 
 - `org\schema\helpers\hydrate\hydrateDefinedTerm()` takes an optional
   `$class` parameter (default `DefinedTerm::class`), so a caller can pin the

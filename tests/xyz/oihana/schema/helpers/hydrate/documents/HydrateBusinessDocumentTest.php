@@ -8,6 +8,7 @@ use ReflectionException;
 use oihana\reflect\exceptions\HydrationException;
 
 use org\schema\Organization;
+use org\schema\ParcelDelivery;
 use org\schema\Person;
 
 use xyz\oihana\schema\business\documents\Adjustment;
@@ -44,6 +45,73 @@ final class HydrateBusinessDocumentTest extends TestCase
 
         // No @type given : falls back to Organization, the safe default.
         $this->assertInstanceOf( Organization::class , $document->author ) ;
+    }
+
+    /**
+     * The carrier carries the same `Organization|Person` union, one level down
+     * inside the delivery. Reflection builds the delivery through `#[HydrateAs]`,
+     * so nothing inside it was re-resolved before.
+     *
+     * @throws HydrationException
+     * @throws ReflectionException
+     */
+    public function testResolvesTheCarrierInsideOrderDelivery(): void
+    {
+        $document = hydrateBusinessDocument
+        ([
+            'orderDelivery' =>
+            [
+                'trackingNumber' => 'T-1' ,
+                'provider'       => [ '@type' => 'Person' , 'name' => 'Ada Lovelace' ] ,
+            ] ,
+        ]) ;
+
+        $this->assertInstanceOf( ParcelDelivery::class , $document->orderDelivery ) ;
+        $this->assertInstanceOf( Person::class , $document->orderDelivery->provider ) ;
+        $this->assertSame( 'Ada Lovelace' , $document->orderDelivery->provider->name ) ;
+
+        // The rest of the delivery survives the second pass untouched.
+        $this->assertSame( 'T-1' , $document->orderDelivery->trackingNumber ) ;
+    }
+
+    /**
+     * An organization carrier, and one with no discriminator at all — which stays
+     * an `Organization`, the safe default.
+     *
+     * @throws HydrationException
+     * @throws ReflectionException
+     */
+    public function testResolvesAnOrganizationCarrierAndDefaultsWithoutADiscriminator(): void
+    {
+        $typed = hydrateBusinessDocument
+        ([
+            'orderDelivery' => [ 'provider' => [ '@type' => 'Organization' , 'name' => 'Etchea' ] ] ,
+        ]) ;
+
+        $untyped = hydrateBusinessDocument
+        ([
+            'orderDelivery' => [ 'provider' => [ 'name' => 'Etchea' ] ] ,
+        ]) ;
+
+        $this->assertInstanceOf( Organization::class , $typed->orderDelivery->provider   ) ;
+        $this->assertInstanceOf( Organization::class , $untyped->orderDelivery->provider ) ;
+    }
+
+    /**
+     * A document with no delivery, or a delivery with no carrier, goes through
+     * the second pass without tripping on an uninitialized property.
+     *
+     * @throws HydrationException
+     * @throws ReflectionException
+     */
+    public function testToleratesAMissingDeliveryOrCarrier(): void
+    {
+        $withoutDelivery = hydrateBusinessDocument( [ 'issueDate' => '2026-08-01' ] ) ;
+        $withoutCarrier  = hydrateBusinessDocument( [ 'orderDelivery' => [ 'trackingNumber' => 'T-2' ] ] ) ;
+
+        $this->assertInstanceOf( BusinessDocument::class , $withoutDelivery ) ;
+        $this->assertSame( 'T-2' , $withoutCarrier->orderDelivery->trackingNumber ) ;
+        $this->assertNull( $withoutCarrier->orderDelivery->provider ?? null ) ;
     }
 
     /**

@@ -7,6 +7,9 @@ use ReflectionException;
 use oihana\reflect\Reflection;
 use oihana\reflect\exceptions\HydrationException;
 
+use org\schema\constants\Schema;
+use org\schema\ParcelDelivery;
+
 use xyz\oihana\schema\business\documents\BusinessDocument;
 use xyz\oihana\schema\business\documents\Invoice;
 
@@ -31,6 +34,11 @@ use function org\schema\helpers\hydrate\hydrateOrganizationOrPerson;
  * always picks `Organization`, even for a `Person` payload — so they are re-resolved from
  * the raw payload through {@see hydrateOrganizationOrPerson()}. On an {@see Invoice}, `broker`
  * and `provider` carry the same union and get the same treatment.
+ *
+ * The document's {@see ParcelDelivery} carries the same union one level down, on its own
+ * `provider` — the carrier. Reflection builds the delivery through `#[HydrateAs]`, so nothing
+ * inside it was ever re-resolved : `orderDelivery.provider` is therefore given the same
+ * treatment from the raw payload, once the delivery itself has been hydrated.
  *
  * @param mixed  $init  Single document data or array of document data.
  * @param string $class The BusinessDocument subclass to hydrate into. Defaults to
@@ -92,6 +100,17 @@ function hydrateBusinessDocument( mixed $init = null , string $class = BusinessD
             {
                 $document->{ $property } = $resolved ;
             }
+        }
+    }
+
+    $delivery = $document->{ BusinessDocument::ORDER_DELIVERY } ?? null ;
+
+    if( $delivery instanceof ParcelDelivery )
+    {
+        $resolved = hydrateOrganizationOrPerson( $init[ BusinessDocument::ORDER_DELIVERY ][ Schema::PROVIDER ] ?? null ) ;
+        if( $resolved !== null )
+        {
+            $delivery->{ Schema::PROVIDER } = $resolved ;
         }
     }
 

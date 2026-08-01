@@ -5,11 +5,15 @@ namespace tests\org\schema ;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
 
+use oihana\reflect\Reflection;
+
 use org\schema\constants\Schema;
 use org\schema\DefinedTerm;
 use org\schema\enumerations\DeliveryMethod;
 use org\schema\Intangible;
+use org\schema\Organization;
 use org\schema\ParcelDelivery;
+use org\schema\Person;
 use org\schema\PostalAddress;
 
 class ParcelDeliveryTest extends TestCase
@@ -148,6 +152,54 @@ class ParcelDeliveryTest extends TestCase
         $delivery->hasDeliveryMethod = 'express' ;
 
         $this->assertSame( 'express' , $delivery->hasDeliveryMethod );
+    }
+
+    /**
+     * `#[HydrateWith]` pins the two candidates of the `Organization|Person` union,
+     * which reflection alone would always resolve to its first class member. The
+     * discriminator is what picks between them.
+     *
+     * @throws ReflectionException
+     */
+    public function testProviderResolvesFromItsDiscriminator(): void
+    {
+        $reflection = new Reflection();
+
+        $person = $reflection->hydrate
+        (
+            [ Schema::PROVIDER => [ Schema::AT_TYPE => 'Person' , Schema::NAME => 'Ada Lovelace' ] ] ,
+            ParcelDelivery::class
+        );
+
+        $organization = $reflection->hydrate
+        (
+            [ Schema::PROVIDER => [ Schema::AT_TYPE => 'Organization' , Schema::NAME => 'Etchea' ] ] ,
+            ParcelDelivery::class
+        );
+
+        $this->assertInstanceOf( Person::class       , $person->provider       );
+        $this->assertInstanceOf( Organization::class , $organization->provider );
+
+        $this->assertSame( 'Ada Lovelace' , $person->provider->name       );
+        $this->assertSame( 'Etchea'       , $organization->provider->name );
+    }
+
+    /**
+     * Without a discriminator the attribute cannot decide, and the fallback is the
+     * first candidate — `Organization`, the safe default. Documented rather than
+     * fixed : a caller needing more reaches for `hydrateOrganizationOrPerson()`.
+     *
+     * @throws ReflectionException
+     */
+    public function testProviderFallsBackToOrganizationWithoutADiscriminator(): void
+    {
+        $delivery = ( new Reflection() )->hydrate
+        (
+            [ Schema::PROVIDER => [ 'givenName' => 'Ada' , 'familyName' => 'Lovelace' ] ] ,
+            ParcelDelivery::class
+        );
+
+        $this->assertInstanceOf( Organization::class , $delivery->provider );
     }
 
     public function testPropertyNameConstants(): void
