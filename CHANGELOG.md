@@ -416,6 +416,24 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Fixed
 
+- Fixes four fatal errors in `xyz\oihana\schema\traits\SetContactPointTrait`,
+  raised by shapes its own property type declares as legal. `contactPoint` is
+  `null|ContactPoint|array|string` everywhere the trait is composed, but the code
+  only ever handled the list form :
+  a lone `ContactPoint` died on *"Cannot use object of type ContactPoint as
+  array"*, an unresolved string reference on *"[] operator not supported for
+  strings"*, and `findContactPointByType()` raised a `TypeError` on both a lone
+  instance (`array_find()` wants an array) and on a list of raw arrays — which is
+  precisely what a base read hands back before anything hydrates it, so that last
+  one was reachable from the most ordinary path there is. A new
+  `contactPointList()` normalises the property to a list, wrapping a lone
+  instance or a string rather than discarding it, and the lookup now skips
+  entries that are not hydrated instead of dereferencing them. Behaviour on the
+  nominal list form is unchanged. This also clears 40 of the 57 findings PHPStan
+  reports at level 7, from five source lines. Covered by four new
+  `SetContactPointTraitTest` cases, each of which reproduces one of the crashes
+  when the fix is reverted.
+
 - Raises the PHPStan floor to **level 6**, which costs nothing : every single one
   of that level's 728 findings was `missingType.iterableValue`, now excluded in
   `phpstan.neon`. The rule asks each `array` member of a union to document its

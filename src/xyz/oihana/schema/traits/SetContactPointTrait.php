@@ -49,7 +49,7 @@ trait SetContactPointTrait
                 return false ;
             }
 
-            $contactPoint = $this->contactPoint ?? [] ;
+            $contactPoint = $this->contactPointList() ;
 
             $foundKey = null ;
             foreach ( $contactPoint as $key => $existingContact )
@@ -111,18 +111,46 @@ trait SetContactPointTrait
     /**
      * Find a specific ContactPoint reference by type.
      *
+     * Entries that are not hydrated {@see ContactPoint} instances — the raw
+     * arrays a base read hands back, or an unresolved reference — are skipped
+     * rather than dereferenced, so only a real instance is ever returned.
+     *
      * @param  ?string $type The type of the resource to find.
      *
      * @return ContactPoint|null
      */
     protected function findContactPointByType( ?string $type ) :?ContactPoint
     {
-        $contactPoint = $this->contactPoint ?? [] ;
-        if( empty( $contactPoint ) )
+        $found = array_find
+        (
+            $this->contactPointList() ,
+            fn( mixed $contact ) => $contact instanceof ContactPoint && $contact->contactType === $type
+        );
+
+        return $found instanceof ContactPoint ? $found : null ;
+    }
+
+    /**
+     * The contact points as a list, whatever shape the property holds.
+     *
+     * `contactPoint` is declared as `null|ContactPoint|array|string` wherever
+     * this trait is composed, but the code around it only ever makes sense on a
+     * list. A lone {@see ContactPoint} and an unresolved string reference are
+     * therefore wrapped rather than discarded — nothing is lost, and the caller
+     * can iterate and append without checking first.
+     *
+     * @return array The contact points, always a list.
+     */
+    protected function contactPointList() :array
+    {
+        $contactPoint = $this->contactPoint ?? null ;
+
+        return match( true )
         {
-            return null ;
-        }
-        return array_find( $contactPoint , fn( ContactPoint $contact ) => $contact->contactType === $type );
+            is_array( $contactPoint ) => $contactPoint ,
+            $contactPoint === null    => [] ,
+            default                   => [ $contactPoint ] ,
+        };
     }
 
     /**

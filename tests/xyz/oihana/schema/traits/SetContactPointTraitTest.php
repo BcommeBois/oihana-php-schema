@@ -18,7 +18,11 @@ class SetContactPointHost
 {
     use SetContactPointTrait ;
 
-    public null|array|ContactPoint $contactPoint = null ;
+    /**
+     * The same union the consuming classes declare — `Site`, `Organization` and
+     * `Person` all allow a lone instance and a plain string beside the list.
+     */
+    public null|array|ContactPoint|string $contactPoint = null ;
 
     public function set( string $name , mixed $value ): bool
     {
@@ -173,6 +177,76 @@ class SetContactPointTraitTest extends TestCase
         $this->assertInstanceOf( ContactPoint::class , $host->contactPoint[ 1 ] ) ;
         $this->assertSame( '0102030405'         , $host->contactPoint[ 1 ]->telephone   ) ;
         $this->assertSame( ContactType::DEFAULT , $host->contactPoint[ 1 ]->contactType ) ;
+    }
+
+    /**
+     * `contactPoint` may legally hold a lone {@see ContactPoint} rather than a
+     * list — the handler used to treat it as an array and died on
+     * "Cannot use object of type ContactPoint as array".
+     */
+    public function testAcceptsALoneContactPointAndKeepsIt(): void
+    {
+        $host = new SetContactPointHost() ;
+
+        $existing = new ContactPoint() ;
+        $existing->contactType = ContactType::HOME ;
+        $existing->telephone   = '0559000000' ;
+
+        $host->contactPoint = $existing ;
+
+        $this->assertTrue( $host->set( Oihana::MOBILE , '0612345678' ) ) ;
+
+        $this->assertIsArray( $host->contactPoint ) ;
+        $this->assertCount( 2 , $host->contactPoint ) ;
+
+        $this->assertSame( $existing , $host->contactPoint[ 0 ] ) ;
+        $this->assertSame( '0612345678' , $host->contactPoint[ 1 ]->telephone ) ;
+    }
+
+    /**
+     * An unresolved string reference is legal too, and used to blow up on
+     * "[] operator not supported for strings". It is wrapped, not discarded.
+     */
+    public function testAcceptsAnUnresolvedStringReferenceAndKeepsIt(): void
+    {
+        $host = new SetContactPointHost() ;
+
+        $host->contactPoint = 'contact-ref-42' ;
+
+        $this->assertTrue( $host->set( Oihana::MOBILE , '0612345678' ) ) ;
+
+        $this->assertIsArray( $host->contactPoint ) ;
+        $this->assertCount( 2 , $host->contactPoint ) ;
+
+        $this->assertSame( 'contact-ref-42' , $host->contactPoint[ 0 ] ) ;
+        $this->assertInstanceOf( ContactPoint::class , $host->contactPoint[ 1 ] ) ;
+    }
+
+    /**
+     * The lookup used to type its callback `ContactPoint`, so a list of raw
+     * arrays — what a base read hands back — raised a TypeError instead of
+     * simply not matching.
+     */
+    public function testFindSkipsEntriesThatAreNotHydrated(): void
+    {
+        $host = new SetContactPointHost() ;
+
+        $host->contactPoint = [ [ 'contactType' => ContactType::MOBILE , 'telephone' => '0611111111' ] ] ;
+
+        $this->assertNull( $host->find( ContactType::MOBILE ) ) ;
+    }
+
+    public function testFindLooksInsideALoneContactPoint(): void
+    {
+        $host = new SetContactPointHost() ;
+
+        $existing = new ContactPoint() ;
+        $existing->contactType = ContactType::MOBILE ;
+
+        $host->contactPoint = $existing ;
+
+        $this->assertSame( $existing , $host->find( ContactType::MOBILE ) ) ;
+        $this->assertNull( $host->find( ContactType::HOME ) ) ;
     }
 
     // ---- isValidPhoneNumber
