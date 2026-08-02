@@ -416,6 +416,28 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Fixed
 
+- Fixes four unguarded `mixed` values, found by auditing PHPStan level 9 and each
+  reproduced before being touched :
+  `SetContactPointTrait` passed its `mixed $value` straight to
+  `isValidPhoneNumber( string $phone )`, so assigning an array to a phone-shaped
+  property raised a `TypeError` — and `__set` routes whatever a caller assigns ;
+  `Product::resolveUnitCode()` cast `mixed` to `string`, turning an array into the
+  literal unit code `"Array"` — a silent corruption — and raising a fatal `Error`
+  on an object ;
+  `Product::getInventoryLevelInUnitOfSale()` divided a `StockLevel::$value` that
+  a base read may well have left as a raw array or a non-numeric string,
+  raising *"Unsupported operand types"* ;
+  and the `QuantitativeValue` builder cast any non-null value to `float`, so a
+  non-numeric one became a meaningless `0.0` instead of "unknown". All four now
+  guard on the shape they need and read an unusable value as absent. Covered by
+  three new test cases, each failing with the original error when the fix is
+  reverted.
+  This clears 11 of level 9's 35 findings. The floor stays at **8** : the
+  remaining 24 are not defects but the cost of two deliberate choices — the
+  hydration helpers' `mixed` passthrough contract, and the untyped arrays AQL and
+  SQL rows arrive as. Silencing those would mean adding defensive checks that
+  prove to the analyser what the design already guarantees.
+
 - Raises the PHPStan floor to **level 8** and clears everything below it. The 17
   remaining level 7 findings split into two unrelated families, which the report
   presented identically :

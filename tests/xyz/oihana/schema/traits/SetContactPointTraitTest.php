@@ -249,6 +249,24 @@ class SetContactPointTraitTest extends TestCase
         $this->assertNull( $host->find( ContactType::HOME ) ) ;
     }
 
+    /**
+     * `setContactPointProperty()` takes `mixed`, and `__set` routes whatever the
+     * caller assigns. A non-string phone value used to reach
+     * `isValidPhoneNumber(string $phone)` and raise a TypeError.
+     */
+    public function testRejectsANonStringPhoneValueInsteadOfCrashing(): void
+    {
+        $host = new SetContactPointHost() ;
+
+        $this->assertFalse( $host->set( Oihana::MOBILE , [ '0612345678' ] ) ) ;
+        $this->assertFalse( $host->set( Oihana::DEFAULT_TELEPHONE , 612345678 ) ) ;
+
+        $this->assertNull( $host->contactPoint ) ;
+
+        // The string form still works.
+        $this->assertTrue( $host->set( Oihana::MOBILE , '0612345678' ) ) ;
+    }
+
     // ---- isValidPhoneNumber
 
     public function testIsValidPhoneNumber(): void

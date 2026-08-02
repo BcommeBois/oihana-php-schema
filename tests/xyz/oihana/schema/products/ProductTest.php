@@ -301,4 +301,51 @@ class ProductTest extends TestCase
         $this->assertSame( 12 , $product->eligibleQuantity[ 'value' ] ) ;
     }
 
+    /**
+     * Only a scalar names a unit. An array used to be cast to the literal string
+     * `"Array"` — a silent corruption — and an object raised a fatal Error.
+     *
+     * @throws ReflectionException
+     */
+    public function testResolveUnitCodeRejectsNonScalarValues(): void
+    {
+        $product = new Product() ;
+        $resolve = fn( mixed $value ) : ?string => ( fn() => $this->resolveUnitCode( $value ) )
+                 ->call( $product ) ;
+
+        $this->assertSame( 'KGM' , $resolve( 'KGM' ) ) ;
+        $this->assertSame( '42'  , $resolve( 42 ) ) ;
+
+        $this->assertNull( $resolve( [ 'KGM' ] ) ) ;
+        $this->assertNull( $resolve( new QuantitativeValue() ) ) ;
+        $this->assertNull( $resolve( null ) ) ;
+    }
+
+    /**
+     * A `StockLevel` whose `value` never got hydrated holds the raw shape the base
+     * returned. Dividing that used to raise "Unsupported operand types".
+     *
+     * @throws ReflectionException
+     */
+    public function testInventoryLevelInUnitOfSaleIgnoresANonNumericValue(): void
+    {
+        $product = new Product() ;
+
+        $numeric = new StockLevel() ;
+        $numeric->value = '12' ;
+        $this->assertSame( 12.0 , $product->getInventoryLevelInUnitOfSale( $numeric ) ) ;
+
+        foreach ( [ [ 1 , 2 ] , 'abc' , new QuantitativeValue() ] as $raw )
+        {
+            $level = new StockLevel() ;
+            $level->value = $raw ;
+
+            $this->assertNull
+            (
+                $product->getInventoryLevelInUnitOfSale( $level ) ,
+                sprintf( 'A %s value should read as unknown, not divide.' , get_debug_type( $raw ) )
+            ) ;
+        }
+    }
+
 }

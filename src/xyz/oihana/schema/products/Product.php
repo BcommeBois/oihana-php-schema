@@ -174,6 +174,10 @@ class Product extends SomeProducts
     /**
      * Calculates the inventory level in the unit of sale.
      *
+     * A non-numeric `value` — the raw shape a base read can leave on the stock
+     * level — yields `null` like an absent one, rather than a `TypeError` on the
+     * division.
+     *
      * @param StockLevel|null $inventoryLevel The inventory level (in base unit).
      *
      * @return float|null The inventory level converted to the unit of sale, or null if calculation is not possible.
@@ -182,14 +186,16 @@ class Product extends SomeProducts
      */
     public function getInventoryLevelInUnitOfSale( ?StockLevel $inventoryLevel ): ?float
     {
-        if ( !$inventoryLevel || !isset( $inventoryLevel->value ) )
+        $value = $inventoryLevel->value ?? null ;
+
+        if ( !is_numeric( $value ) )
         {
             return null;
         }
 
         $factor = $this->getUnitOfSaleConversionFactor();
 
-        return $factor > 0 ? $inventoryLevel->value / $factor : null;
+        return $factor > 0 ? (float) $value / $factor : null ;
     }
 
     /**
@@ -372,7 +378,9 @@ class Product extends SomeProducts
             return new QuantitativeValue
             ([
                 Schema::ADDITIONAL_TYPE => $type ,
-                Schema::VALUE           => $val !== null ? (float) $val : null,
+                // Only a numeric value converts : anything else would cast to a
+                // meaningless 0.0 (or raise on an object) instead of saying "unknown".
+                Schema::VALUE           => is_numeric( $val ) ? (float) $val : null,
                 Schema::UNIT_CODE       => $code,
                 Schema::UNIT_TEXT       => $code ? ( MeasureCode::getName( $code ) ?? PackageCode::getName( $code ) ) : null
             ]);
@@ -404,13 +412,18 @@ class Product extends SomeProducts
      * to map a proprietary nomenclature (e.g. an ERP specific unit code) to its
      * UN/CEFACT equivalent before the {@see $eligibleQuantity} tree is built.
      *
+     * Only a scalar can name a unit : an array or an object yields `null` rather
+     * than being cast, which produced the literal string `"Array"` for the first
+     * and a fatal `Error` for the second.
+     *
      * @param mixed $value The raw unit code expression to resolve.
      *
-     * @return string|null The normalized UN/CEFACT unit code, or null if the value is empty.
+     * @return string|null The normalized UN/CEFACT unit code, or null if the value
+     *                     is empty or not a scalar.
      */
     protected function resolveUnitCode( mixed $value ) :?string
     {
-        return isset( $value ) ? (string) $value : null ;
+        return is_scalar( $value ) ? (string) $value : null ;
     }
 
     /**

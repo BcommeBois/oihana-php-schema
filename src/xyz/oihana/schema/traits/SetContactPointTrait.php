@@ -68,6 +68,7 @@ trait SetContactPointTrait
 
             if(
                 ( $name == Oihana::MOBILE || $name == Oihana::MOBILE_PROFESSIONAL || str_ends_with( $name , Schema::TELEPHONE ) )
+               && is_string( $value )
                && $this->isValidPhoneNumber( $value )
             )
             {
