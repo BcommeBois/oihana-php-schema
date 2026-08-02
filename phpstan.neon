@@ -17,13 +17,21 @@ parameters:
 
     ignoreErrors:
 
-        # Every `array` member of a union would have to document its value type
-        # — `array<string, PostalAddress|string>` and the like. On a library that
-        # mirrors Schema.org, where a property routinely accepts a raw array
-        # beside its object form, that is a typing convention rather than a set
-        # of defects : it accounted for every single one of level 6's findings.
-        # Excluded so the rest of that level, and the levels above it, stay
-        # readable. Revisit as a project of its own, not as a side effect.
+        # The rule assumes every `array` is a homogeneous collection and asks what
+        # it holds. In this library it is not a collection at all : it is a state.
+        #
+        # A property declared `null|array|Organization|Person` receives an
+        # untyped associative array from an AQL or SQL row, then has it replaced
+        # by `new Organization( ... )`. The `array` member exists to let that raw
+        # row sit in the property until hydration swaps it — it does not *contain*
+        # an Organization, it *is* one, not yet built.
+        #
+        # So `array<Organization|Person>` would not be a more precise annotation,
+        # it would be a false one : nothing in that array is an Organization. The
+        # only accurate form, `array<string, mixed>`, says nothing at all. There
+        # is no correct annotation to write, which makes this a mismatch between
+        # the rule and the design rather than a backlog of missing types — and it
+        # accounted for every single one of level 6's findings.
         - identifier: missingType.iterableValue
 
         # `paths` covers src only, so a trait used solely by the test suite — or

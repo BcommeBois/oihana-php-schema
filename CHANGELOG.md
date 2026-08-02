@@ -462,10 +462,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - Raises the PHPStan floor to **level 6**, which costs nothing : every single one
   of that level's 728 findings was `missingType.iterableValue`, now excluded in
-  `phpstan.neon`. The rule asks each `array` member of a union to document its
-  value type ; on a library mirroring Schema.org, where a property routinely
-  accepts a raw array beside its object form, that is a typing convention to
-  adopt deliberately, not a backlog of defects. With it out of the way the
+  `phpstan.neon`. The rule assumes every `array` is a homogeneous collection and
+  asks what it holds ; here it is not a collection but a *state*. A property
+  declared `null|array|Organization|Person` receives an untyped associative array
+  from an AQL or SQL row and later has it replaced by `new Organization( ... )` —
+  the `array` member exists so that raw row can sit in the property until
+  hydration swaps it. `array<Organization|Person>` would therefore not be a more
+  precise annotation but a false one, since nothing in that array *is* an
+  Organization ; and the only accurate form, `array<string, mixed>`, says nothing.
+  With no correct annotation to write, this is a mismatch between the rule and the
+  design rather than missing types. With it out of the way the
   levels above become readable — 57 real findings at level 7, 94 at level 9, 188
   at level 10 — and they concentrate far more than the raw counts suggest : the
   57 come from just 16 distinct source lines, since a line in a trait is
