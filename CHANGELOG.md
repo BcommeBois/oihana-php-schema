@@ -8,6 +8,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds `xyz\oihana\schema\business\documents\BusinessDocumentLine::$additionalProperty`
+  (`null|array|PropertyValue`, `#[HydrateWith(PropertyValue::class)]`), the
+  schema.org extension point the line was missing while the other commerce
+  types of the library (`Person`, `Company`, `PricingCondition`, `Product`…)
+  already carried it — a line can now say what no dedicated property covers
+  (a lot number, a serial number, an ERP-specific line flag) as
+  `PropertyValue` pairs, readable through `GetAdditionalPropertyTrait`
+  consumers. The `ADDITIONAL_PROPERTY` constant joins
+  `BusinessDocumentLineTrait` (an identical redeclaration of the value already
+  composed into `Oihana`, hence conflict-free), and the test suite covers the
+  constant, the default, the raw-array constructor path and the
+  `Reflection::hydrate()` conversion into `PropertyValue` objects.
+
 - Adds static analysis to the project : `phpstan/phpstan` as a dev dependency,
   a `phpstan.neon` covering `src`, and a `composer phpstan` script. The level is
   set to **5** and is meant as a non-regression floor, raised one batch at a time

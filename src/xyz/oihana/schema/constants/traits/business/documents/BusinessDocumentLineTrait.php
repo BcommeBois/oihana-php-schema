@@ -11,13 +11,14 @@ namespace xyz\oihana\schema\constants\traits\business\documents;
  */
 trait BusinessDocumentLineTrait
 {
-    const string ADJUSTMENTS = 'adjustments' ;
-    const string ITEM        = 'item' ;
-    const string POSITION    = 'position' ;
-    const string PRICE       = 'price' ;
-    const string QUANTITY    = 'quantity' ;
-    const string SUBTOTAL    = 'subtotal' ;
-    const string TAXES       = 'taxes' ;
-    const string TOTAL       = 'total' ;
-    const string UNIT        = 'unit' ;
+    const string ADDITIONAL_PROPERTY = 'additionalProperty' ;
+    const string ADJUSTMENTS         = 'adjustments' ;
+    const string ITEM                = 'item' ;
+    const string POSITION            = 'position' ;
+    const string PRICE               = 'price' ;
+    const string QUANTITY            = 'quantity' ;
+    const string SUBTOTAL            = 'subtotal' ;
+    const string TAXES               = 'taxes' ;
+    const string TOTAL               = 'total' ;
+    const string UNIT                = 'unit' ;
 }

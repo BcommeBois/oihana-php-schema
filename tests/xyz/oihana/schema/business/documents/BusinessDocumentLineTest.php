@@ -9,6 +9,7 @@ use oihana\reflect\Reflection;
 
 use org\schema\CompoundPriceSpecification;
 use org\schema\MonetaryAmount;
+use org\schema\PropertyValue;
 use org\schema\QuantitativeValue;
 use org\schema\StructuredValue;
 use org\schema\UnitPriceSpecification;
@@ -33,15 +34,16 @@ class BusinessDocumentLineTest extends TestCase
 
     public function testTraitConstants(): void
     {
-        $this->assertSame( 'adjustments' , BusinessDocumentLine::ADJUSTMENTS );
-        $this->assertSame( 'item'        , BusinessDocumentLine::ITEM        );
-        $this->assertSame( 'position'    , BusinessDocumentLine::POSITION    );
-        $this->assertSame( 'price'       , BusinessDocumentLine::PRICE       );
-        $this->assertSame( 'quantity'    , BusinessDocumentLine::QUANTITY    );
-        $this->assertSame( 'subtotal'    , BusinessDocumentLine::SUBTOTAL    );
-        $this->assertSame( 'taxes'       , BusinessDocumentLine::TAXES       );
-        $this->assertSame( 'total'       , BusinessDocumentLine::TOTAL       );
-        $this->assertSame( 'unit'        , BusinessDocumentLine::UNIT        );
+        $this->assertSame( 'additionalProperty' , BusinessDocumentLine::ADDITIONAL_PROPERTY );
+        $this->assertSame( 'adjustments'        , BusinessDocumentLine::ADJUSTMENTS         );
+        $this->assertSame( 'item'               , BusinessDocumentLine::ITEM                );
+        $this->assertSame( 'position'           , BusinessDocumentLine::POSITION            );
+        $this->assertSame( 'price'              , BusinessDocumentLine::PRICE               );
+        $this->assertSame( 'quantity'           , BusinessDocumentLine::QUANTITY            );
+        $this->assertSame( 'subtotal'           , BusinessDocumentLine::SUBTOTAL            );
+        $this->assertSame( 'taxes'              , BusinessDocumentLine::TAXES               );
+        $this->assertSame( 'total'              , BusinessDocumentLine::TOTAL               );
+        $this->assertSame( 'unit'               , BusinessDocumentLine::UNIT                );
 
         $this->assertSame( Oihana::ADJUSTMENTS , BusinessDocumentLine::ADJUSTMENTS );
     }
@@ -50,15 +52,16 @@ class BusinessDocumentLineTest extends TestCase
     {
         $line = new BusinessDocumentLine() ;
 
-        $this->assertNull( $line->adjustments ?? null );
-        $this->assertNull( $line->item        ?? null );
-        $this->assertNull( $line->position    ?? null );
-        $this->assertNull( $line->price       ?? null );
-        $this->assertNull( $line->quantity    ?? null );
-        $this->assertNull( $line->subtotal    ?? null );
-        $this->assertNull( $line->taxes       ?? null );
-        $this->assertNull( $line->total       ?? null );
-        $this->assertNull( $line->unit        ?? null );
+        $this->assertNull( $line->additionalProperty ?? null );
+        $this->assertNull( $line->adjustments        ?? null );
+        $this->assertNull( $line->item               ?? null );
+        $this->assertNull( $line->position           ?? null );
+        $this->assertNull( $line->price              ?? null );
+        $this->assertNull( $line->quantity           ?? null );
+        $this->assertNull( $line->subtotal           ?? null );
+        $this->assertNull( $line->taxes              ?? null );
+        $this->assertNull( $line->total              ?? null );
+        $this->assertNull( $line->unit               ?? null );
     }
 
     public function testConstructorHydratesScalarProperties(): void
@@ -95,6 +98,20 @@ class BusinessDocumentLineTest extends TestCase
         $this->assertIsArray( $line->quantity ) ;
     }
 
+    public function testConstructorKeepsAdditionalPropertyAsRawArray(): void
+    {
+        $line = new BusinessDocumentLine
+        ([
+            BusinessDocumentLine::ADDITIONAL_PROPERTY =>
+            [
+                [ 'propertyID' => 'lotNumber' , 'value' => 'LOT-2026-08' ] ,
+            ] ,
+        ]);
+
+        $this->assertIsArray( $line->additionalProperty ) ;
+        $this->assertIsArray( $line->additionalProperty[ 0 ] ) ;
+    }
+
     /**
      * @throws ReflectionException
      */
@@ -123,6 +140,33 @@ class BusinessDocumentLineTest extends TestCase
 
         $this->assertInstanceOf( QuantitativeValue::class , $line->quantity ) ;
         $this->assertSame( 5 , $line->quantity->value ) ;
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testReflectionHydratesTheAdditionalProperty(): void
+    {
+        $line = new Reflection()->hydrate
+        (
+            [
+                BusinessDocumentLine::ADDITIONAL_PROPERTY =>
+                [
+                    [ 'propertyID' => 'lotNumber'    , 'value' => 'LOT-2026-08' ] ,
+                    [ 'propertyID' => 'serialNumber' , 'value' => 'SN-0042'     ] ,
+                ] ,
+            ],
+            BusinessDocumentLine::class
+        );
+
+        $this->assertIsArray( $line->additionalProperty ) ;
+        $this->assertCount( 2 , $line->additionalProperty ) ;
+        $this->assertContainsOnlyInstancesOf( PropertyValue::class , $line->additionalProperty ) ;
+
+        $this->assertSame( 'lotNumber'    , $line->additionalProperty[ 0 ]->propertyID ) ;
+        $this->assertSame( 'LOT-2026-08'  , $line->additionalProperty[ 0 ]->value      ) ;
+        $this->assertSame( 'serialNumber' , $line->additionalProperty[ 1 ]->propertyID ) ;
+        $this->assertSame( 'SN-0042'      , $line->additionalProperty[ 1 ]->value      ) ;
     }
 
     /**

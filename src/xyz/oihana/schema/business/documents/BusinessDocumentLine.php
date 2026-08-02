@@ -9,6 +9,7 @@ use org\schema\CompoundPriceSpecification;
 use org\schema\MonetaryAmount;
 use org\schema\PriceSpecification;
 use org\schema\Product;
+use org\schema\PropertyValue;
 use org\schema\QuantitativeValue;
 use org\schema\Service;
 use org\schema\StructuredValue;
@@ -40,6 +41,13 @@ class BusinessDocumentLine extends StructuredValue
      * The @context of the json-ld representation of the thing.
      */
     public const string CONTEXT = Oihana::SCHEMA ;
+
+    /**
+     * A property-value pair representing an additional characteristic of the entity, e.g. a product feature or another characteristic for which there is no matching property in schema.org.
+     * @var null|array|PropertyValue
+     */
+    #[HydrateWith( PropertyValue::class ) ]
+    public null|array|PropertyValue $additionalProperty = null ;
 
     /**
      * The adjustments (discounts, surcharges, fees...) applying to this line.
