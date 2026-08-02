@@ -1,17 +1,14 @@
 # Static analysis for the library sources.
 #
 # The level is a floor, raised one batch at a time as the reported errors get
-# fixed — not an aspiration. Level 6 is deliberately skipped for now : 96% of
-# what it adds is a single identifier (missingType.iterableValue, ~730 hits),
-# which asks every `array` in a union to document its value type. That is a
-# typing convention this library never adopted, not a list of defects.
+# fixed — not an aspiration.
 #
 #   composer phpstan            analyse at the configured level
 #   composer phpstan -- -l 7    try a higher level without editing this file
 
 parameters:
 
-    level: 5
+    level: 6
 
     paths:
         - src
@@ -19,6 +16,15 @@ parameters:
     tmpDir: build/phpstan
 
     ignoreErrors:
+
+        # Every `array` member of a union would have to document its value type
+        # — `array<string, PostalAddress|string>` and the like. On a library that
+        # mirrors Schema.org, where a property routinely accepts a raw array
+        # beside its object form, that is a typing convention rather than a set
+        # of defects : it accounted for every single one of level 6's findings.
+        # Excluded so the rest of that level, and the levels above it, stay
+        # readable. Revisit as a project of its own, not as a side effect.
+        - identifier: missingType.iterableValue
 
         # `paths` covers src only, so a trait used solely by the test suite — or
         # exported for consumers of the library and never composed in here — reads
