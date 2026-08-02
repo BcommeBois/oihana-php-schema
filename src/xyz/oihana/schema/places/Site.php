@@ -4,11 +4,13 @@ namespace xyz\oihana\schema\places;
 
 use oihana\reflect\attributes\HydrateWith;
 
+use org\schema\ContactPoint;
 use org\schema\DefinedTerm;
 use org\schema\enumerations\DeliveryMethod;
 use org\schema\Organization;
 use org\schema\Person;
 use org\schema\Place;
+
 use xyz\oihana\schema\constants\Oihana;
 
 /**
@@ -36,6 +38,20 @@ class Site extends Place
      * The @context of the json-ld representation of the thing.
      */
     public const string CONTEXT = Oihana::SCHEMA ;
+
+    /**
+     * A contact point for a person or organization.
+     *
+     * Declared here rather than on the leaf classes because every site flavour
+     * composes {@see \xyz\oihana\schema\traits\SetContactPointTrait} — through
+     * {@see \xyz\oihana\schema\traits\SiteTrait} or directly — and that trait
+     * reads and writes this property.
+     *
+     * @var null|ContactPoint|array|string
+     *
+     * @since 1.4.0
+     */
+    public null|ContactPoint|array|string $contactPoint ;
 
     /**
      * The standardized procedure used to transfer a product or service

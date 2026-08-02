@@ -416,6 +416,24 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Fixed
 
+- Fixes the silent loss of contact points on every site flavour.
+  `xyz\oihana\schema\places\Site` now declares `contactPoint`, and the
+  declaration is removed from `xyz\oihana\schema\places\Place` (which extends
+  `Site`) where it became redundant — the same treatment the `$active`
+  redeclarations already got. `SetContactPointTrait` reads and writes that
+  property, and is composed by every flavour through `SiteTrait` or directly,
+  but only `Place` declared it : on `Office`, `Warehouse`, `JobSite`,
+  `CustomerSite` and `ProviderSite` the write landed on the classes' own
+  `__set` hook — which routes additional properties, geo coordinates and postal
+  addresses, and nothing else — so the contact was dropped without a word. Not
+  even a dynamic-property deprecation surfaced, precisely because `__set` was
+  there to swallow it. Found by PHPStan at level 1 (5 errors, all of them this).
+  Note that `setContactPointProperty()` is still not wired into `SiteTrait::__set`
+  — it is invoked only by `Company` and `Person` — so this changes no behaviour
+  on its own ; it makes the trait's contract hold wherever it is composed.
+  Covered by a new `SiteTest` (the property exists on all seven flavours, is
+  declared once on `Site`, and a contact really is stored instead of vanishing).
+
 - Fixes a latent autoload failure in `org\schema\traits\PlaceTrait`, which
   imported `org\schema\creativeWork\Website` while the class — and its file —
   are named `WebSite`. PHP matches class names case-insensitively, so the
