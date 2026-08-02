@@ -70,4 +70,26 @@ final class HydrateCustomerTest extends TestCase
         $this->assertNull( hydrateCustomer() ) ;
         $this->assertSame( 'raw' , hydrateCustomer( 'raw' ) ) ;
     }
+
+    /**
+     * `contactPoint` may hold a lone instance or an unresolved reference, not
+     * only a list. Both used to reach `hydrateContactPoint()`'s `?array`
+     * parameter and raise a TypeError — from an ordinary payload, at that.
+     *
+     * @throws ReflectionException
+     */
+    public function testSurvivesAContactPointThatIsNotAList(): void
+    {
+        $contact = new ContactPoint( [ 'telephone' => '06 33 67 42 07' ] ) ;
+
+        $fromInstance = hydrateCustomer( [ 'name' => 'ACME' , 'contactPoint' => $contact ] ) ;
+        $fromString   = hydrateCustomer( [ 'name' => 'ACME' , 'contactPoint' => 'contact-ref-42' ] ) ;
+
+        $this->assertInstanceOf( Customer::class , $fromInstance ) ;
+        $this->assertInstanceOf( Customer::class , $fromString   ) ;
+
+        // Neither shape is rewritten : the helper leaves what it cannot hydrate.
+        $this->assertSame( $contact         , $fromInstance->contactPoint ) ;
+        $this->assertSame( 'contact-ref-42' , $fromString->contactPoint   ) ;
+    }
 }

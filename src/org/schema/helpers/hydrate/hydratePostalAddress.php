@@ -15,7 +15,7 @@ use function oihana\core\normalize;
  *
  * Handles both single PostalAddress array and array of PostalAddress.
  *
- * @param array|null $init Single PostalAddress data or array of PostalAddress data
+ * @param mixed $init Single PostalAddress data or array of PostalAddress data
  *
  * @return mixed
  *

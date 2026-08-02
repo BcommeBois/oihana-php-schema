@@ -38,4 +38,21 @@ final class HydrateContactPointTest extends TestCase
         $this->assertNull( hydrateContactPoint( [] ) ) ;
         $this->assertNull( hydrateContactPoint( [ 'telephone' => '05 59 00 00 00' ] ) ) ;
     }
+
+    /**
+     * A lone instance and an unresolved reference are legal shapes of the
+     * `contactPoint` property. The signature used to be `?array`, so callers
+     * feeding it straight from that property — as `hydrateCustomer()` does —
+     * raised a TypeError on both.
+     *
+     * @throws ReflectionException
+     */
+    public function testHandsBackAnythingThatIsNotAnArray(): void
+    {
+        $contact = new ContactPoint( [ 'telephone' => '05 59 00 00 00' ] ) ;
+
+        $this->assertSame( $contact         , hydrateContactPoint( $contact ) ) ;
+        $this->assertSame( 'contact-ref-42' , hydrateContactPoint( 'contact-ref-42' ) ) ;
+        $this->assertSame( 42               , hydrateContactPoint( 42 ) ) ;
+    }
 }

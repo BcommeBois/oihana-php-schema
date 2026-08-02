@@ -38,4 +38,19 @@ final class HydrateAdditionalPropertyTest extends TestCase
         $this->assertNull( hydrateAdditionalProperty( [] ) ) ;
         $this->assertNull( hydrateAdditionalProperty( [ 'propertyID' => 'grain' ] ) ) ;
     }
+
+    /**
+     * A lone instance is a legal shape of the `additionalProperty` property. The
+     * signature used to be `?array`, so callers feeding it straight from that
+     * property — as `hydrateCustomerSite()` does — raised a TypeError.
+     *
+     * @throws ReflectionException
+     */
+    public function testHandsBackAnythingThatIsNotAnArray(): void
+    {
+        $property = new PropertyValue( [ 'propertyID' => 'grain' ] ) ;
+
+        $this->assertSame( $property , hydrateAdditionalProperty( $property ) ) ;
+        $this->assertSame( 'ref-7'   , hydrateAdditionalProperty( 'ref-7' ) ) ;
+    }
 }

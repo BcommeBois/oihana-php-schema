@@ -239,4 +239,38 @@ class BusinessIdentityTest extends TestCase
 
         $this->assertSame( '13658' , $identity->worksForKey() );
     }
+
+    /**
+     * A `bool` or a `float` is not a key. They used to slip through the scalar
+     * check and be coerced into the `int|string` return type — `true` came back
+     * as `1`, and `1.5` as `1` with a precision-loss deprecation.
+     *
+     * The subject itself cannot carry them (its own union coerces a `bool` to a
+     * string long before this code runs), but a nested `worksFor` is untyped, so
+     * whatever the payload holds arrives here as-is.
+     */
+    public function testWorksForKeyRejectsNonKeyScalars(): void
+    {
+        $identity = new BusinessIdentity();
+
+        $identity->subject = [ 'worksFor' => true ] ;
+        $this->assertNull( $identity->worksForKey() );
+
+        $identity->subject = [ 'worksFor' => 1.5 ] ;
+        $this->assertNull( $identity->worksForKey() );
+    }
+
+    /**
+     * The two shapes that really are keys still pass straight through.
+     */
+    public function testWorksForKeyKeepsIntAndStringReferences(): void
+    {
+        $identity = new BusinessIdentity();
+
+        $identity->subject = [ 'worksFor' => 13658 ] ;
+        $this->assertSame( 13658 , $identity->worksForKey() );
+
+        $identity->subject = [ 'worksFor' => 'organizations/ACME' ] ;
+        $this->assertSame( 'organizations/ACME' , $identity->worksForKey() );
+    }
 }

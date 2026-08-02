@@ -19,7 +19,7 @@ use function org\schema\helpers\hydrate\hydratePostalAddress;
  *
  * Handles both single CustomerSite array and array of CustomerSite things.
  *
- * @param array|null $init Single CustomerSite data or array of CustomerSite data
+ * @param mixed $init Single CustomerSite data or array of CustomerSite data
  *
  * @return mixed
  *

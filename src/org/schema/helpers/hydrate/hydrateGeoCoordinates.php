@@ -13,7 +13,7 @@ use function oihana\core\arrays\isIndexed;
  *
  * Handles both single GeoCoordinates array and array of GeoCoordinates.
  *
- * @param array|null $init Single GeoCoordinates data or array of GeoCoordinates data
+ * @param mixed $init Single GeoCoordinates data or array of GeoCoordinates data
  *
  * @return mixed
  *

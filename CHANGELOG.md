@@ -416,6 +416,32 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Fixed
 
+- Raises the PHPStan floor to **level 8** and clears everything below it. The 17
+  remaining level 7 findings split into two unrelated families, which the report
+  presented identically :
+  `hydrateAdditionalProperty()` and `hydrateContactPoint()` were natively typed
+  `?array` while their four sibling helpers take `mixed` and pass through what
+  they cannot hydrate. Since callers feed them straight from properties declared
+  `null|array|ContactPoint|string`, a lone instance or an unresolved string
+  reference raised a `TypeError` — reachable from an ordinary `hydrateCustomer()`
+  payload. Both now follow the sibling contract : anything that is not an array
+  is handed back untouched, an array that is not an indexed non-empty list still
+  yields `null`. Widening a parameter is backward compatible for existing
+  callers.
+  The other family was documentation : five `@param array|null` docblocks on
+  functions whose native signature is already `mixed`, corrected to match.
+  Two further fixes came out of the same pass :
+  `BusinessIdentity::extractKey()` filtered on `is_scalar()` while declaring a
+  `null|int|string` return, so a `bool` came back as `1` and a `float` was
+  truncated with a precision-loss deprecation — it now filters on
+  `is_int()`/`is_string()`, matching the check the rest of the method already
+  used. Reachable through a nested `worksFor`, which is untyped ; not through
+  `subject`, whose own union coerces such values to string first.
+  And `SetPostalAddressTrait::normalizePostalAddress()` guards against an empty
+  separator, which made `explode()` raise a `ValueError`.
+  Five new test cases, each reproducing its defect when the fix is reverted.
+  Level 8 needed no further work — it reports nothing this library does.
+
 - Fixes four fatal errors in `xyz\oihana\schema\traits\SetContactPointTrait`,
   raised by shapes its own property type declares as legal. `contactPoint` is
   `null|ContactPoint|array|string` everywhere the trait is composed, but the code

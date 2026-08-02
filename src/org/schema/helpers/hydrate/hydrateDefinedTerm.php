@@ -13,9 +13,9 @@ use function oihana\core\arrays\isIndexed;
  *
  * Handles both single DefinedTerm array and array of DefinedTerm.
  *
- * @param array|null                $init  Single DefinedTerm data or array of DefinedTerm data.
+ * @param mixed                     $init  Single DefinedTerm data or array of DefinedTerm data.
  * @param class-string<DefinedTerm> $class The class to hydrate into. A subclass lets an enriched term keep the properties DefinedTerm
- * does not declare.
+ *                                         does not declare.
  *
  * @return mixed
  *

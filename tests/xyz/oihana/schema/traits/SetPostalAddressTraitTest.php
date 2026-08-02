@@ -59,6 +59,21 @@ class SetPostalAddressTraitTest extends TestCase
         $this->assertSame( '12 rue des Bois' , $address->streetAddress ) ;
     }
 
+    /**
+     * An empty separator splits nothing : `explode()` raises a `ValueError` on
+     * one, so the address is handed back untouched instead.
+     */
+    public function testNormalizePostalAddressLeavesTheAddressAloneOnAnEmptySeparator(): void
+    {
+        $address = new PostalAddress() ;
+        $address->streetAddress = '12 rue des Bois;Bat. C;BP 42' ;
+
+        $result = SetPostalAddressHost::normalizePostalAddress( $address , '' ) ;
+
+        $this->assertSame( $address , $result ) ;
+        $this->assertSame( '12 rue des Bois;Bat. C;BP 42' , $address->streetAddress ) ;
+    }
+
     public function testNormalizePostalAddressReturnsNonPostalAddressUnchanged(): void
     {
         $this->assertSame( 'foo' , SetPostalAddressHost::normalizePostalAddress( 'foo' ) ) ;

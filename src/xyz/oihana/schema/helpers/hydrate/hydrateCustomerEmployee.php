@@ -16,7 +16,7 @@ use function org\schema\helpers\hydrate\hydrateContactPoint;
  *
  * Handles both single employee array and array of employees.
  *
- * @param array|null $init Single employee data or array of employee data
+ * @param mixed $init Single employee data or array of employee data
  *
  * @return mixed
  *

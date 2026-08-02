@@ -18,7 +18,7 @@ use function org\schema\helpers\hydrate\hydratePostalAddress;
  * nested `contactPoint` and `address` references so the resolved customer matches the
  * shape served by the dedicated `/customers` endpoint (typed, null fields dropped).
  *
- * @param array|null $init Single customer data or array of customer data.
+ * @param mixed $init Single customer data or array of customer data.
  *
  * @return mixed
  *

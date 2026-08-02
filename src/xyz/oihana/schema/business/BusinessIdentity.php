@@ -150,10 +150,12 @@ class BusinessIdentity extends Intangible
     /**
      * Extracts an identifier from a resolved reference, trying the given key(s) in order.
      *
-     * A scalar reference (or `null`) is returned as-is — it *is* the identifier.
+     * An `int` or `string` reference (or `null`) is returned as-is — it *is* the
+     * identifier. Any other scalar yields `null` : a `bool` or a `float` is not
+     * a key, and letting one through silently turned `true` into `1` and
+     * truncated `1.5` to `1`, deprecation notice included.
      * For an object or an associative array, each candidate key is probed in
-     * order (via {@see getKeyValue}) and the first
-     * non-null scalar wins.
+     * order (via {@see getKeyValue}) and the first `int` or `string` wins.
      *
      * @param mixed        $value The reference to extract from (object, array, scalar or null).
      * @param string|array $key   The key, or ordered list of keys, to probe. Default {@see Schema::_KEY}.
@@ -169,7 +171,7 @@ class BusinessIdentity extends Intangible
 
         if ( !is_array( $value ) && !is_object( $value ) )
         {
-            return is_scalar( $value ) ? $value : null ;
+            return is_int( $value ) || is_string( $value ) ? $value : null ;
         }
 
         foreach ( toArray( $key ) as $candidate )

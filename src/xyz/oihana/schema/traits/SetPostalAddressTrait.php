@@ -26,13 +26,17 @@ trait SetPostalAddressTrait
      * Normalize a PostalAddress definition and search if the streetAddress expression contains a ';' separator
      * to extract properties from the specific field.
      *
-     * @param mixed $definition The definition to normalize.
-     * @param string $separator The separator to explode the postal address expression (default ';')
+     * @param mixed  $definition The definition to normalize.
+     * @param string $separator  The separator to explode the postal address expression
+     *                           (default ';'). An empty separator splits nothing and
+     *                           leaves the definition untouched — `explode()` would
+     *                           raise a `ValueError` on it.
+     *
      * @return mixed
      */
     public static function normalizePostalAddress( mixed $definition , string $separator = ';' ):mixed
     {
-        if( $definition instanceof PostalAddress )
+        if( $definition instanceof PostalAddress && $separator !== '' )
         {
             $streetAddress = $definition->streetAddress ?? null ;
             if( !empty( $streetAddress ) && str_contains( $streetAddress, $separator ) )
