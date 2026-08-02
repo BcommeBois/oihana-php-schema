@@ -8,6 +8,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds static analysis to the project : `phpstan/phpstan` as a dev dependency,
+  a `phpstan.neon` covering `src`, and a `composer phpstan` script. The level is
+  set to **5** and is meant as a non-regression floor, raised one batch at a time
+  as the reported errors get fixed. Level 6 is deliberately skipped for now :
+  96% of what it adds is a single identifier (`missingType.iterableValue`, ~730
+  hits across 161 files), which asks every `array` member of a union to document
+  its value type — a typing convention this library never adopted, and not a list
+  of defects. For the record, the error count per level on `src` at the time of
+  writing : 1 (level 0), 6, 9, 10, 29, 29 (level 5), 756 (level 6), 788, 788,
+  825, 944 (level 10). The CI workflow is left untouched and still runs the test
+  suite only.
+
 - Adds `org\schema\ParcelDelivery::$requestedDeliveryDate`
   (`null|string|int`), the date the *customer asks* the parcel to be delivered
   on. It says something `expectedArrivalFrom` / `expectedArrivalUntil` do not :

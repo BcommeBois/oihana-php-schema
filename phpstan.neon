@@ -1,0 +1,19 @@
+# Static analysis for the library sources.
+#
+# The level is a floor, raised one batch at a time as the reported errors get
+# fixed — not an aspiration. Level 6 is deliberately skipped for now : 96% of
+# what it adds is a single identifier (missingType.iterableValue, ~730 hits),
+# which asks every `array` in a union to document its value type. That is a
+# typing convention this library never adopted, not a list of defects.
+#
+#   composer phpstan            analyse at the configured level
+#   composer phpstan -- -l 7    try a higher level without editing this file
+
+parameters:
+
+    level: 5
+
+    paths:
+        - src
+
+    tmpDir: build/phpstan
