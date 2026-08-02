@@ -54,7 +54,7 @@ trait SetContactPointTrait
             $foundKey = null ;
             foreach ( $contactPoint as $key => $existingContact )
             {
-                $existingType = $existingContact?->contactType ?? null ;
+                $existingType = $existingContact->contactType ?? null ;
                 if ( $existingType === $type )
                 {
                     $foundKey = $key;

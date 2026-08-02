@@ -152,6 +152,29 @@ class SetContactPointTraitTest extends TestCase
         $this->assertNull( $host->find( ContactType::MOBILE ) ) ;
     }
 
+    /**
+     * A `contactPoint` read straight from storage is a list of plain arrays, not
+     * of hydrated objects — the trait scans it for a matching type before it
+     * appends, so it has to survive entries that carry no property at all.
+     */
+    public function testToleratesRawArrayEntriesWhileScanning(): void
+    {
+        $host = new SetContactPointHost() ;
+
+        $host->contactPoint = [ [ 'contactType' => ContactType::MOBILE , 'telephone' => '0601020304' ] ] ;
+
+        $this->assertTrue( $host->set( Oihana::DEFAULT_TELEPHONE , '0102030405' ) ) ;
+
+        // The raw entry matches nothing, so a real ContactPoint is appended
+        // beside it rather than replacing it.
+        $this->assertCount( 2 , $host->contactPoint ) ;
+        $this->assertIsArray( $host->contactPoint[ 0 ] ) ;
+
+        $this->assertInstanceOf( ContactPoint::class , $host->contactPoint[ 1 ] ) ;
+        $this->assertSame( '0102030405'         , $host->contactPoint[ 1 ]->telephone   ) ;
+        $this->assertSame( ContactType::DEFAULT , $host->contactPoint[ 1 ]->contactType ) ;
+    }
+
     // ---- isValidPhoneNumber
 
     public function testIsValidPhoneNumber(): void

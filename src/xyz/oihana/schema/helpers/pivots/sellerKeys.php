@@ -33,7 +33,7 @@ function sellerKeys( User $user ) : array
 
     foreach ( $user->identitiesBySubjectType( Seller::getSchemaType() ) as $identity )
     {
-        $key = $identity?->subjectKey() ;
+        $key = $identity->subjectKey() ;
 
         if ( $key !== null && $key !== '' )
         {

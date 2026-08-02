@@ -441,7 +441,9 @@ class Product extends SomeProducts
 
         if ( $additionalType === $type )
         {
-            return $qv instanceof QuantitativeValue ? $qv : new QuantitativeValue( $qv ) ;
+            // Always a fresh instance : the conversion above leaves $qv an array
+            // whichever way it came in, so there is no object left to hand back.
+            return new QuantitativeValue( $qv ) ;
         }
 
         $qv = $this->searchEligibleQuantityByType( $type , $qv[ Schema::VALUE_REFERENCE ] ?? null ) ;

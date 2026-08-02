@@ -416,6 +416,28 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Fixed
 
+- Clears the last of PHPStan's level 4 findings, which turn out to be five
+  distinct sites rather than the eighteen the report counts (one trait line is
+  reported once per composing class) :
+  `xyz\oihana\schema\products\Product::searchEligibleQuantityByType()` dropped a
+  dead ternary branch — by the time it ran, the conversion a few lines above had
+  already turned `$qv` into an array, so the `instanceof` arm was unreachable and
+  a fresh `QuantitativeValue` was always built ;
+  `hydrateWarehouse()` lost an `if` and a ternary that tested whether a
+  `new Warehouse()` is a `Warehouse` ;
+  `customerKeys()`, `sellerKeys()` and `SetContactPointTrait` dropped `?->`
+  operators on values that cannot be null. `User::$identities` keeps its runtime
+  `instanceof` guard — the guard is right and the docblock was wrong, promising
+  `array<BusinessIdentity>` when the raw arrays a base read hands back survive
+  the constructor untouched, so it now says `array<BusinessIdentity|array>`.
+  Behaviour is unchanged throughout, and a new `SetContactPointTraitTest` case
+  covers the raw-array entries the removed `?->` used to paper over.
+  The four `trait.unused` findings are excluded in `phpstan.neon` instead : the
+  analysis covers `src` only, so a trait used solely by the test suite — or
+  exported for consumers and never composed in here — reads as dead, which is a
+  question of API surface rather than of static correctness. **`src` is now clean
+  at level 5.**
+
 - Fixes the `@return` of `org\schema\helpers\hydrate\hydrateContactPoint()`,
   which announced `PropertyValue[]|null` while the function has always returned
   `ContactPoint[]|null` — a copy-paste from `hydrateAdditionalProperty()`, its

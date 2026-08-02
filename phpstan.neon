@@ -17,3 +17,11 @@ parameters:
         - src
 
     tmpDir: build/phpstan
+
+    ignoreErrors:
+
+        # `paths` covers src only, so a trait used solely by the test suite — or
+        # exported for consumers of the library and never composed in here — reads
+        # as dead. That is a question of API surface, not of static correctness,
+        # and it is not one this analysis can answer.
+        - identifier: trait.unused

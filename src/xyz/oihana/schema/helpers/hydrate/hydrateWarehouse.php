@@ -38,20 +38,17 @@ function hydrateWarehouse( mixed $init = null  ):mixed
 
     $warehouse = new Warehouse( $init ) ;
 
-    if( ( $warehouse instanceof Warehouse ) )
+    $ownedBy = $warehouse->ownedBy ?? null ;
+    if( !( $ownedBy instanceof Subsidiary ) && is_array( $ownedBy ) )
     {
-        $ownedBy = $warehouse->ownedBy ?? null ;
-        if( !( $ownedBy instanceof Subsidiary ) && is_array( $ownedBy ) )
-        {
-            $warehouse->ownedBy = new Subsidiary( $ownedBy ) ;
-        }
-
-        $address = $warehouse->address ?? null ;
-        if( !( $address instanceof PostalAddress ) && is_array( $address ) )
-        {
-            $warehouse->address = hydratePostalAddress( $address ) ;
-        }
+        $warehouse->ownedBy = new Subsidiary( $ownedBy ) ;
     }
 
-    return $warehouse instanceof Warehouse ? $warehouse : null ;
+    $address = $warehouse->address ?? null ;
+    if( !( $address instanceof PostalAddress ) && is_array( $address ) )
+    {
+        $warehouse->address = hydratePostalAddress( $address ) ;
+    }
+
+    return $warehouse ;
 }

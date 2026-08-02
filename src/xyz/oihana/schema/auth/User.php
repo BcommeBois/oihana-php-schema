@@ -81,8 +81,13 @@ class User extends Person
      * without merging their data. Resolved from the account's identity
      * relationships; an account may hold more than one.
      *
+     * Entries are `BusinessIdentity` instances once hydrated, but the raw
+     * arrays a base read hands back survive the constructor untouched — so
+     * consumers must check before they dereference, as
+     * {@see User::identitiesBySubjectType()} does.
+     *
      * @see BusinessIdentity
-     * @var array<BusinessIdentity>|null
+     * @var array<BusinessIdentity|array>|null
      */
     #[HydrateWith( BusinessIdentity::class ) ]
     public array|null $identities ;

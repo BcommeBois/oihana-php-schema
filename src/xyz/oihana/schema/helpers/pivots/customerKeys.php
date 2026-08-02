@@ -35,7 +35,7 @@ function customerKeys( User $user ) : array
 
     foreach ( $user->identitiesBySubjectType( CustomerEmployee::getSchemaType() ) as $identity )
     {
-        $key = $identity?->worksForKey() ;
+        $key = $identity->worksForKey() ;
 
         if ( $key !== null && $key !== '' )
         {
