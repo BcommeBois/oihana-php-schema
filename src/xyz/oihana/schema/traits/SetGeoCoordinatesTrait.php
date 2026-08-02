@@ -9,7 +9,15 @@ use xyz\oihana\schema\constants\Oihana;
 use function oihana\core\accessors\setKeyValue;
 
 /**
- * @property ?GeoCoordinates geo
+ * Injects the geo coordinates of a place from flat property expressions.
+ *
+ * Each flat key — `geoLatitude`, `geoLongitude`, `geoDistance`, `geoElevation` —
+ * is written into the `geo` property of the consumer class, creating a
+ * {@see GeoCoordinates} on first use. A non-numeric value clears the matching
+ * field instead.
+ *
+ * The consumer class must therefore declare `geo` ; every place in this library
+ * inherits it from {@see \org\schema\traits\PlaceTrait}.
  *
  * @author  Marc Alcaraz (eKameleon)
  * @package xyz\oihana\schema\traits

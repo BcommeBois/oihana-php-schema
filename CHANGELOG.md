@@ -416,6 +416,23 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Fixed
 
+- Fixes the `@return` of `org\schema\helpers\hydrate\hydrateContactPoint()`,
+  which announced `PropertyValue[]|null` while the function has always returned
+  `ContactPoint[]|null` — a copy-paste from `hydrateAdditionalProperty()`, its
+  neighbour. The `PropertyValue` import it dragged along is dropped too.
+  Behaviour is unchanged, and the existing `HydrateContactPointTest` already
+  asserted the real contract (`assertContainsOnlyInstancesOf(ContactPoint::class)`),
+  so the docblock was the only thing that ever disagreed. Reported by PHPStan
+  at level 3, with its level 4 twin (`return.unusedType`) falling away with it.
+
+- Fixes the class docblock of `xyz\oihana\schema\traits\SetGeoCoordinatesTrait`,
+  whose only content was `@property ?GeoCoordinates geo` — invalid PHPDoc (the
+  variable name needs its `$`), and wrong twice over : `geo` is a real declared
+  property, not a magic one, and its type is
+  `null|array|GeoCoordinates|GeoShape` on `org\schema\traits\PlaceTrait`, not
+  `?GeoCoordinates`. Removed rather than repaired, and replaced by a description
+  of what the trait actually does. Reported by PHPStan at level 2.
+
 - Fixes the silent loss of contact points on every site flavour.
   `xyz\oihana\schema\places\Site` now declares `contactPoint`, and the
   declaration is removed from `xyz\oihana\schema\places\Place` (which extends

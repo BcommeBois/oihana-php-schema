@@ -5,16 +5,18 @@ namespace org\schema\helpers\hydrate;
 use ReflectionException;
 
 use org\schema\ContactPoint;
-use org\schema\PropertyValue;
 
 use function oihana\core\arrays\isIndexed;
 
 /**
  * Hydrate an array of ContactPoint objects.
  *
- * @param array|null $properties
+ * Returns `null` — never an empty array — when the input is not an indexed,
+ * non-empty array, so a caller can tell "nothing to hydrate" from a result.
  *
- * @return PropertyValue[]|null
+ * @param array|null $properties An indexed array of ContactPoint definitions.
+ *
+ * @return ContactPoint[]|null
  *
  * @throws ReflectionException
  */
