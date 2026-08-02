@@ -416,6 +416,20 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Fixed
 
+- Fixes a latent autoload failure in `org\schema\traits\PlaceTrait`, which
+  imported `org\schema\creativeWork\Website` while the class — and its file —
+  are named `WebSite`. PHP matches class names case-insensitively, so the
+  `WebSite $website` declaration resolved through that faulty alias ; PSR-4,
+  however, turns the name straight into a path and looked for a `Website.php`
+  that does not exist. On macOS the filesystem is case-insensitive and the class
+  loaded anyway, which is why nothing ever surfaced ; on the Linux CI and in
+  production it would not have. Found by PHPStan at level 0 — the only error
+  that level reported. Covered by a new `Psr4ImportCaseTest` that walks every
+  `use` in `src` and `tests`, resolves it through the project's PSR-4 roots and
+  compares against the real directory listing (`file_exists()` is itself
+  case-insensitive on macOS, so it cannot be trusted here). The library's other
+  ~800 files are clean.
+
 - Fixes the class docblock of `org\schema\ParcelDelivery`, which described an
   `Order` word for word — the text and the `@see` link had been copied from
   that class — and now describes the parcel delivery it actually models, with
