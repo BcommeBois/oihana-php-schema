@@ -6,13 +6,13 @@ use PHPUnit\Framework\TestCase;
 use ReflectionException;
 
 use oihana\reflect\Reflection;
-
 use org\schema\MonetaryAmount;
 use org\schema\StructuredValue;
 
 use xyz\oihana\schema\business\documents\Adjustment;
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\enumerations\PriceComponentType;
+use xyz\oihana\schema\business\documents\TaxDetail;
 
 class AdjustmentTest extends TestCase
 {
@@ -32,6 +32,7 @@ class AdjustmentTest extends TestCase
         $this->assertSame( 'includedInBase' , Adjustment::INCLUDED_IN_BASE );
         $this->assertSame( 'percentage'     , Adjustment::PERCENTAGE       );
         $this->assertSame( 'reason'         , Adjustment::REASON           );
+        $this->assertSame( 'taxes'          , Adjustment::TAXES            );
         $this->assertSame( 'type'           , Adjustment::TYPE             );
 
         $this->assertSame( Oihana::AMOUNT , Adjustment::AMOUNT );
@@ -44,11 +45,16 @@ class AdjustmentTest extends TestCase
 
         $this->assertNull( $adjustment->amount         ?? null );
         $this->assertNull( $adjustment->includedInBase ?? null );
-        $this->assertNull( $adjustment->percentage      ?? null );
-        $this->assertNull( $adjustment->reason          ?? null );
-        $this->assertNull( $adjustment->type            ?? null );
+        $this->assertNull( $adjustment->percentage     ?? null );
+        $this->assertNull( $adjustment->reason         ?? null );
+        $this->assertNull( $adjustment->taxes          ?? null );
+        $this->assertNull( $adjustment->type           ?? null );
     }
 
+    /**
+     * @return void
+     * @throws ReflectionException
+     */
     public function testConstructorHydratesScalarProperties(): void
     {
         $adjustment = new Adjustment
@@ -78,5 +84,34 @@ class AdjustmentTest extends TestCase
 
         $this->assertInstanceOf( MonetaryAmount::class , $adjustment->amount ) ;
         $this->assertSame( 15 , $adjustment->amount->value ) ;
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testReflectionHydratesTaxesIntoTaxDetails(): void
+    {
+        $adjustment = new Reflection()->hydrate
+        (
+            [
+                Adjustment::AMOUNT => [ 'value' => 52 , 'currency' => 'EUR' ] ,
+                Adjustment::TAXES  =>
+                    [
+                        [
+                            'basisAmount' => [ 'value' => 52   , 'currency' => 'EUR' ] ,
+                            'rate'        => 20 ,
+                            'taxAmount'   => [ 'value' => 10.4 , 'currency' => 'EUR' ] ,
+                        ],
+                    ],
+            ],
+            Adjustment::class
+        );
+
+        $this->assertIsArray( $adjustment->taxes ) ;
+        $this->assertCount( 1 , $adjustment->taxes ) ;
+        $this->assertInstanceOf( TaxDetail::class      , $adjustment->taxes[ 0 ] ) ;
+        $this->assertInstanceOf( MonetaryAmount::class , $adjustment->taxes[ 0 ]->taxAmount ) ;
+        $this->assertSame( 20   , $adjustment->taxes[ 0 ]->rate ) ;
+        $this->assertSame( 10.4 , $adjustment->taxes[ 0 ]->taxAmount->value ) ;
     }
 }

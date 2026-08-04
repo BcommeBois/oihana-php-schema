@@ -8,6 +8,23 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds `xyz\oihana\schema\business\documents\Adjustment::$taxes`
+  (`null|array|TaxDetail`, `#[HydrateWith(TaxDetail::class)]`), the tax an
+  adjustment owes on its own account. A charge is rarely tax-free, and its rate
+  is not necessarily the rate of what it accompanies : a shipping fee answers to
+  the carrier, an environmental contribution to its own schedule. Until now the
+  only place such a tax could land was a document-level total, which said how
+  much was owed without ever saying what had produced it — a reader adding up
+  the lines found a remainder no field explained. The property reuses the shape
+  of `BusinessDocumentLine::$taxes` (one `TaxDetail` per rate, each carrying its
+  basis and its amount), so a consumer reads the tax of a charge with the code
+  that already reads the tax of a line. The `TAXES` constant joins
+  `AdjustmentTrait` — an identical redeclaration of the value already composed
+  into `DocumentsTrait` by `BusinessDocumentLineTrait` and
+  `BusinessDocumentTrait`, hence conflict-free — and the suite covers the
+  constant, the default and the `Reflection::hydrate()` conversion into
+  `TaxDetail` objects.
+
 - Adds `xyz\oihana\schema\enumerations\PriceType::SELLING_UNIT_PRICE`
   (`https://schema.oihana.xyz/SellingUnitPrice`), the real selling price
   expressed per unit of sale — the tariff price converted into the unit the

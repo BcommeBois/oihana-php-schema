@@ -15,5 +15,6 @@ trait AdjustmentTrait
     const string INCLUDED_IN_BASE = 'includedInBase' ;
     const string PERCENTAGE       = 'percentage' ;
     const string REASON           = 'reason' ;
+    const string TAXES            = 'taxes' ;
     const string TYPE             = 'type' ;
 }

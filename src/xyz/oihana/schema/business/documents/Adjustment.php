@@ -3,6 +3,7 @@
 namespace xyz\oihana\schema\business\documents;
 
 use oihana\reflect\attributes\HydrateAs;
+use oihana\reflect\attributes\HydrateWith;
 
 use org\schema\MonetaryAmount;
 use org\schema\StructuredValue;
@@ -24,6 +25,10 @@ use xyz\oihana\schema\enumerations\PriceComponentType;
  *
  * Exactly one of `amount` or `percentage` is expected to be set ; when both
  * are absent the adjustment carries no monetary effect (informational only).
+ *
+ * An adjustment with a monetary effect may carry the `taxes` it owes, at a
+ * rate of its own : the tax on a shipping fee answers to the carrier, not to
+ * the goods.
  *
  * @package xyz\oihana\schema\business\documents
  * @author  Marc Alcaraz (eKameleon)
@@ -63,6 +68,25 @@ class Adjustment extends StructuredValue
      * @var string|null
      */
     public ?string $reason ;
+
+    /**
+     * The taxes owed on the adjustment itself.
+     *
+     * A charge is rarely tax-free : a shipping fee is taxed at its own rate,
+     * which is not necessarily the rate of the goods it delivers. Stating it
+     * here — rather than folding it into a document-level total — is what lets
+     * a reader tell where each part of the tax came from, and keeps a document
+     * whose lines and charges are taxed differently readable line by line.
+     *
+     * Same shape as {@see BusinessDocumentLine::$taxes} : one {@see TaxDetail}
+     * per rate, each carrying the basis it applies to and the amount it
+     * produces. An adjustment carrying no monetary effect carries no tax
+     * either.
+     *
+     * @var null|array|TaxDetail
+     */
+    #[HydrateWith(TaxDetail::class)]
+    public null|array|TaxDetail $taxes ;
 
     /**
      * The kind of adjustment (discount, surcharge, shipping fee, environmental fee...).
