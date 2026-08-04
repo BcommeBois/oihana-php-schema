@@ -58,4 +58,11 @@ class PriceType extends PriceTypeEnumeration
      * Note : Prix de vente de référence pour les clients (T4) (fr)
      */
     public const string SELLING_REFERENCE = 'https://schema.oihana.xyz/SellingPriceReference' ;
+
+    /**
+     * Represents the real selling price expressed per unit of sale — the tariff
+     * price converted into the unit the customer actually buys.
+     * Note : Prix de vente réel par unité de vente (fr)
+     */
+    public const string SELLING_UNIT_PRICE = 'https://schema.oihana.xyz/SellingUnitPrice' ;
 }

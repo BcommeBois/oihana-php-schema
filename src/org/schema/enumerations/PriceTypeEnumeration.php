@@ -27,7 +27,7 @@ class PriceTypeEnumeration extends Enumeration
      * Represents the minimum advertised price ("MAP") (as dictated by the manufacturer) of an offered product.
      * Note : prix minimum annoncé par le fabricant (fr)
      */
-    public const string MinimumAdvertisedPrice = 'https://schema.org/MinimumAdvertisedPrice' ;
+    public const string MINIMUM_ADVERTISED_PRICE = 'https://schema.org/MinimumAdvertisedPrice' ;
 
     /**
      * Represents the manufacturer suggested retail price ("MSRP") of an offered product.
@@ -43,21 +43,20 @@ class PriceTypeEnumeration extends Enumeration
     public const string REGULAR_PRICE = 'https://schema.org/RegularPrice' ;
 
     /**
-     * Represents the suggested retail price ("SRP") of an offered product.
-     * Note : prix de détail suggéré (fr)
-     */
-    public const string SRP = 'https://schema.org/SRP' ;
-
-    /**
      * Represents a sale price (usually active for a limited period) of an offered product.
      * Note : prix de vente actuel du produit (fr)
      */
     public const string SALE_PRICE = 'https://schema.org/SalePrice' ;
 
     /**
+     * Represents the suggested retail price ("SRP") of an offered product.
+     * Note : prix de détail suggéré (fr)
+     */
+    public const string SRP = 'https://schema.org/SRP' ;
+
+    /**
      * Represents the strikethrough price (the previous advertised price) of an offered product.
      * Note : prix barré (fr)
      */
-    public const string STRIKE_THROUGH_PRICE = 'http://schema/org/StrikethroughPrice' ;
-
+    public const string STRIKE_THROUGH_PRICE = 'https://schema.org/StrikethroughPrice' ;
 }

@@ -8,6 +8,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds `xyz\oihana\schema\enumerations\PriceType::SELLING_UNIT_PRICE`
+  (`https://schema.oihana.xyz/SellingUnitPrice`), the real selling price
+  expressed per unit of sale — the tariff price converted into the unit the
+  customer actually buys. It completes the house pricing ladder next to
+  `SELLING_REFERENCE` (the T4 reference price) and `SELLING_FORCED`. The class,
+  which had no suite of its own, is now covered by a new `PriceTypeTest`
+  (the `PriceTypeEnumeration` lineage, the inherited schema.org constants, the
+  seven house constants, the new one and `includes()`).
+
 - Adds `xyz\oihana\schema\business\documents\BusinessDocumentLine::$additionalProperty`
   (`null|array|PropertyValue`, `#[HydrateWith(PropertyValue::class)]`), the
   schema.org extension point the line was missing while the other commerce
@@ -314,6 +323,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Changed
 
+- Renames `org\schema\enumerations\PriceTypeEnumeration::MinimumAdvertisedPrice`
+  to `MINIMUM_ADVERTISED_PRICE`, the last camel-cased constant of the class,
+  now aligned on the SCREAMING_SNAKE_CASE convention every other enumeration
+  constant of the library follows. The value is unchanged and nothing in `src`
+  or `tests` referenced the old name. The constants are also reordered
+  alphabetically (`SALE_PRICE` before `SRP`).
+
 - `org\schema\ParcelDelivery::$deliveryAddress` widens from
   `null|string|PostalAddress` to `null|array|string|PostalAddress`. A base read
   hands back an associative array and `Thing`'s constructor assigns values
@@ -428,6 +444,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   were compatible); the property is simply no longer shadowed.
 
 ### Fixed
+
+- Fixes the URL of `org\schema\enumerations\PriceTypeEnumeration::STRIKE_THROUGH_PRICE` :
+  it read `http://schema/org/StrikethroughPrice` — plain `http`, and a slash
+  where the dot of `schema.org` belongs — a dead host no schema.org term ever
+  lived on. It now points at `https://schema.org/StrikethroughPrice`, and the
+  new `PriceTypeTest` pins the corrected value.
 
 - Fixes four unguarded `mixed` values, found by auditing PHPStan level 9 and each
   reproduced before being touched :
