@@ -10,12 +10,13 @@ namespace xyz\oihana\schema\traits;
  * dedicated trait so it can be composed by any entity a user interface needs to
  * tint, without duplicating the property declaration : the thesaurus families
  * ({@see ThesaurusTerm}, {@see ProductCategoryTerm}, {@see ProductPriceCategoryTerm},
- * {@see ThesaurusDomain} and {@see ThesaurusScheme}) and, outside the thesaurus,
- * the product type ({@see ProductType}).
+ * {@see ThesaurusDomain} and {@see ThesaurusScheme}), the product type
+ * ({@see ProductType}) and the document line ({@see BusinessDocumentLine}).
  *
  * The companion property name constant lives next to the composing entity : in
- * {@see ThesaurusTermTrait} for the thesaurus families, and in the products
- * `ProductType` constants trait for the product type. All of them carry the
+ * {@see ThesaurusTermTrait} for the thesaurus families, in the products
+ * `ProductType` constants trait for the product type and in
+ * {@see BusinessDocumentLineTrait} for the document line. All of them carry the
  * same `'color'` value.
  *
  * @package xyz\oihana\schema\traits

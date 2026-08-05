@@ -8,6 +8,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Composes `xyz\oihana\schema\traits\HasColor` on
+  `xyz\oihana\schema\business\documents\BusinessDocumentLine`, so a line can
+  carry the same optional `#RRGGBB` house color the thesaurus families and
+  `ProductType` already carry. A document line is what an interface actually
+  draws — a quote grid, a picking list, an order preview — and until now the
+  only way to tint one was to walk back to the item, then to its type, hoping
+  something was set there ; a line highlighted for its own reason (an
+  out-of-stock item, a renegotiated price, a block being assembled) had nowhere
+  to say so. The `COLOR` constant joins `BusinessDocumentLineTrait` with the
+  same `'color'` value the other declaring traits use, and the suite covers the
+  constant, the default and the constructor path.
+
 - Adds `xyz\oihana\schema\business\documents\Adjustment::$taxes`
   (`null|array|TaxDetail`, `#[HydrateWith(TaxDetail::class)]`), the tax an
   adjustment owes on its own account. A charge is rarely tax-free, and its rate

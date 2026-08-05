@@ -36,6 +36,7 @@ class BusinessDocumentLineTest extends TestCase
     {
         $this->assertSame( 'additionalProperty' , BusinessDocumentLine::ADDITIONAL_PROPERTY );
         $this->assertSame( 'adjustments'        , BusinessDocumentLine::ADJUSTMENTS         );
+        $this->assertSame( 'color'              , BusinessDocumentLine::COLOR               );
         $this->assertSame( 'item'               , BusinessDocumentLine::ITEM                );
         $this->assertSame( 'position'           , BusinessDocumentLine::POSITION            );
         $this->assertSame( 'price'              , BusinessDocumentLine::PRICE               );
@@ -54,6 +55,7 @@ class BusinessDocumentLineTest extends TestCase
 
         $this->assertNull( $line->additionalProperty ?? null );
         $this->assertNull( $line->adjustments        ?? null );
+        $this->assertNull( $line->color              ?? null );
         $this->assertNull( $line->item               ?? null );
         $this->assertNull( $line->position           ?? null );
         $this->assertNull( $line->price              ?? null );
@@ -64,6 +66,24 @@ class BusinessDocumentLineTest extends TestCase
         $this->assertNull( $line->unit               ?? null );
     }
 
+    /**
+     * @return void
+     * @throws ReflectionException
+     */
+    public function testConstructorHasColor(): void
+    {
+        $line = new BusinessDocumentLine
+        ([
+            BusinessDocumentLine::COLOR => '#ff0000' ,
+        ]);
+
+        $this->assertEquals( '#ff0000' , $line->color ) ;
+    }
+
+    /**
+     * @return void
+     * @throws ReflectionException
+     */
     public function testConstructorHydratesScalarProperties(): void
     {
         $line = new BusinessDocumentLine
@@ -78,6 +98,10 @@ class BusinessDocumentLineTest extends TestCase
         $this->assertSame( UnitOfSaleType::UNIT , $line->unit ) ;
     }
 
+    /**
+     * @return void
+     * @throws ReflectionException
+     */
     public function testConstructorKeepsPriceAsRawArray(): void
     {
         $line = new BusinessDocumentLine
@@ -88,6 +112,10 @@ class BusinessDocumentLineTest extends TestCase
         $this->assertIsArray( $line->price ) ;
     }
 
+    /**
+     * @return void
+     * @throws ReflectionException
+     */
     public function testConstructorKeepsQuantityAsRawArray(): void
     {
         $line = new BusinessDocumentLine
@@ -98,6 +126,10 @@ class BusinessDocumentLineTest extends TestCase
         $this->assertIsArray( $line->quantity ) ;
     }
 
+    /**
+     * @return void
+     * @throws ReflectionException
+     */
     public function testConstructorKeepsAdditionalPropertyAsRawArray(): void
     {
         $line = new BusinessDocumentLine
