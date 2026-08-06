@@ -11,7 +11,9 @@ use org\schema\PostalAddress;
 use org\schema\PropertyValue;
 
 use xyz\oihana\schema\places\CustomerSite;
+use xyz\oihana\schema\shipping\DeliveryRouteAssignment;
 use xyz\oihana\schema\thesaurus\DeliveryMethodTerm;
+use xyz\oihana\schema\thesaurus\DeliveryRouteTerm;
 
 use function xyz\oihana\schema\helpers\hydrate\hydrateCustomerSite;
 
@@ -99,5 +101,39 @@ final class HydrateCustomerSiteTest extends TestCase
     {
         $this->assertNull( hydrateCustomerSite() ) ;
         $this->assertSame( 'raw' , hydrateCustomerSite( 'raw' ) ) ;
+    }
+
+    /**
+     * The routes serving the address come out as assignments, each resolving its
+     * own route reference — a joined row into a term, a bare code left alone.
+     *
+     * @throws ReflectionException
+     */
+    public function testHydratesDeliveryRouteAsAssignments(): void
+    {
+        $site = hydrateCustomerSite
+        ([
+            'name'          => 'Chantier ouest' ,
+            'deliveryRoute' =>
+            [
+                [
+                    DeliveryRouteAssignment::ROUTE    => [ 'id' => '01D' , 'name' => 'Ouest, milieu de semaine' ] ,
+                    DeliveryRouteAssignment::POSITION => 12 ,
+                ],
+                [ DeliveryRouteAssignment::ROUTE => '03' ] ,
+            ],
+        ]) ;
+
+        $this->assertInstanceOf( CustomerSite::class , $site ) ;
+
+        $this->assertIsArray( $site->deliveryRoute ) ;
+        $this->assertCount( 2 , $site->deliveryRoute ) ;
+        $this->assertContainsOnlyInstancesOf( DeliveryRouteAssignment::class , $site->deliveryRoute ) ;
+
+        $this->assertInstanceOf( DeliveryRouteTerm::class , $site->deliveryRoute[ 0 ]->route ) ;
+        $this->assertSame( 'Ouest, milieu de semaine' , $site->deliveryRoute[ 0 ]->route->name ) ;
+        $this->assertSame( 12 , $site->deliveryRoute[ 0 ]->position ) ;
+
+        $this->assertSame( '03' , $site->deliveryRoute[ 1 ]->route ) ;
     }
 }

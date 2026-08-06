@@ -11,6 +11,8 @@ Le namespace `xyz\oihana\schema\thesaurus` modélise les **schémas de classific
 Choisissez ces classes lorsqu'un simple `DefinedTerm` ne suffit pas — lorsque vos termes forment une **hiérarchie parent/enfant** (par ex. un arbre de catégories produits) ou nécessitent un alignement entre vocabulaires :
 
 - un *ThesaurusTerm* pour un terme **plat** enrichi d'un indice de couleur maison `color`,
+- un *DeliveryMethodTerm* pour un terme plat qui **tarife aussi le port** — la façon dont une commande est acheminée, et ce qu'elle coûte,
+- un *DeliveryRouteTerm* pour le **circuit** récurrent que parcourt un camion en propre — les jours où il roule, le dépôt d'où il part (les adresses qu'il dessert sont portées à l'autre bout, voir [`shipping`](shipping.md)),
 - un *Concept* lorsque les termes se relient entre eux — `broader` (parent), `narrower` (enfants) et leurs fermetures transitives, plus les liens associatifs (`related`) et d'alignement inter-schémas,
 - un *ProductCategoryTerm* lorsqu'un concept est **à la fois** hiérarchique et coloré (le cas des catégories produits),
 - un *ProductPriceCategoryTerm* pour la même forme, mais dédiée aux **catégories de prix** (une famille tarifaire servant à cadrer les règles et conditions de prix) — distincte d'une catégorie catalogue pour que le `@type` d'un terme reste parlant,
@@ -121,6 +123,8 @@ Au-dessus du cœur SKOS, le namespace modélise la vue **registre** d'un catalog
 | Classe                | Étend            | Rôle                                                                                                                     |
 |-----------------------|------------------|--------------------------------------------------------------------------------------------------------------------------|
 | `ThesaurusTerm`       | `DefinedTerm`    | Un terme de thésaurus **plat** enrichi d'une couleur maison `color` (`#RRGGBB`) — pour les vocabulaires sans hiérarchie.  |
+| `DeliveryMethodTerm`  | `ThesaurusTerm`  | Un terme plat qui tarife aussi le port — `shippingRate`, `freeShippingThreshold` (`null` se lit *jamais gratuit*), `chargeTiming` et `vat`. Les montants restent des scalaires nus : un terme s'hydrate directement depuis une ligne plate. |
+| `DeliveryRouteTerm`   | `ThesaurusTerm`  | Le **circuit** récurrent que parcourt un camion en propre — `byDay` (les jours où il roule, valeurs `DayOfWeek` ; une liste vide signifie *pas encore planifié*) et `assignedPOS` (le dépôt d'où il part). Orthogonal à la méthode : une douzaine de tournées peuvent partager l'unique mode « camion en propre », et une tournée ne porte aucun frais. |
 | `Concept`             | `DefinedTerm`    | Un **concept SKOS** portant les relations hiérarchiques (`broader`/`narrower` + transitives), associatives (`related`) et d'alignement inter-schémas (`*Match`), le `hiddenLabel` et les notes documentaires. |
 | `ProductCategoryTerm` | `Concept`        | Un concept **à la fois** hiérarchique et coloré (`use HasColor`) — la famille des catégories produits. Les familles plates restent sur `ThesaurusTerm`. |
 | `ProductPriceCategoryTerm` | `Concept`   | Même forme que `ProductCategoryTerm`, mais pour les **catégories de prix** (familles tarifaires cadrant les règles/conditions de prix). Classe distincte pour que le `@type` reste parlant : une catégorie de prix ne se présente jamais comme une catégorie catalogue. |
@@ -166,7 +170,7 @@ Chaque classe associe un **trait porteur de propriétés** à son **trait de con
 
 ## Constantes associées
 
-Les clés de propriétés sont exposées par les traits de constantes sous [`constants/traits/thesaurus/`](../../src/xyz/oihana/schema/constants/traits/thesaurus) — `ThesaurusTermTrait` (`COLOR`), `ConceptTrait` (`BROADER`, `NARROWER`, …, `HIDDEN_LABEL`, `RELATED`, `TOP_CONCEPT_OF`), `SkosNotesTrait`, `ConceptSchemeTrait` (`HAS_TOP_CONCEPT`), `SkosMappingsTrait`, `CollectionTrait` (`MEMBER`, `MEMBER_LIST`) et `ThesaurusSchemeTrait` (`ACTIVE`, `DOMAIN`, `HARVESTED`, `ORDER`, `PATH`, `SYSTEM` — les clés `ACTIVE`/`ORDER` sont partagées avec `ThesaurusDomain`).
+Les clés de propriétés sont exposées par les traits de constantes sous [`constants/traits/thesaurus/`](../../src/xyz/oihana/schema/constants/traits/thesaurus) — `ThesaurusTermTrait` (`COLOR`), `DeliveryMethodTermTrait` (`CHARGE_TIMING`, `FREE_SHIPPING_THRESHOLD`, `SHIPPING_RATE`, `VAT`), `DeliveryRouteTermTrait` (`ASSIGNED_POS`, `BY_DAY`), `ConceptTrait` (`BROADER`, `NARROWER`, …, `HIDDEN_LABEL`, `RELATED`, `TOP_CONCEPT_OF`), `SkosNotesTrait`, `ConceptSchemeTrait` (`HAS_TOP_CONCEPT`), `SkosMappingsTrait`, `CollectionTrait` (`MEMBER`, `MEMBER_LIST`) et `ThesaurusSchemeTrait` (`ACTIVE`, `DOMAIN`, `HARVESTED`, `ORDER`, `PATH`, `SYSTEM` — les clés `ACTIVE`/`ORDER` sont partagées avec `ThesaurusDomain`).
 
 Contrairement aux traits `business`, ils **sont** agrégés — via l'agrégateur de domaine [`ThesaurusTrait`](../../src/xyz/oihana/schema/constants/traits/ThesaurusTrait.php) — dans la classe maîtresse [`Oihana`](../../src/xyz/oihana/schema/constants/Oihana.php), si bien que chaque clé est atteignable via `Oihana::BROADER`, `Oihana::HAS_TOP_CONCEPT`, etc. (la valeur partagée `COLOR` coïncide avec celle déjà exposée par les traits d'auth).
 

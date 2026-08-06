@@ -17,6 +17,15 @@ trait Site
     public const string DELIVERY_METHOD = 'deliveryMethod'  ;
 
     /**
+     * The delivery routes serving the site.
+     *
+     * The delivery itself names its route under `hasDeliveryRoute` — see
+     * {@see \org\schema\constants\traits\ParcelDelivery} — mirroring the
+     * `deliveryMethod` / `hasDeliveryMethod` pair above.
+     */
+    public const string DELIVERY_ROUTE = 'deliveryRoute' ;
+
+    /**
      * Determines whether the address is a billing address.
      */
     public const string IS_BILLING_ADDRESS = "isBillingAddress";

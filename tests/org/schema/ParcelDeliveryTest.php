@@ -154,6 +154,48 @@ class ParcelDeliveryTest extends TestCase
         $this->assertSame( 'express' , $delivery->hasDeliveryMethod );
     }
 
+    public function testHasDeliveryRouteDefaultsToNull(): void
+    {
+        $delivery = new ParcelDelivery();
+
+        $this->assertNull( $delivery->hasDeliveryRoute ?? null );
+    }
+
+    /**
+     * The route is orthogonal to the method : a dozen circuits may all be run
+     * under the single "own fleet" method, so naming one says nothing about the
+     * other and neither overwrites it.
+     */
+    public function testHasDeliveryRouteIsIndependentOfTheMethod(): void
+    {
+        $delivery = new ParcelDelivery();
+
+        $delivery->hasDeliveryMethod = DeliveryMethod::OWN_FLEET ;
+        $delivery->hasDeliveryRoute  = '01D' ;
+
+        $this->assertSame( DeliveryMethod::OWN_FLEET , $delivery->hasDeliveryMethod );
+        $this->assertSame( '01D'                     , $delivery->hasDeliveryRoute );
+    }
+
+    /**
+     * The union accepts the bare reference a document freezes, as well as the
+     * {@see DefinedTerm} it resolves to.
+     */
+    public function testHasDeliveryRouteAcceptsAReferenceOrATerm(): void
+    {
+        $delivery = new ParcelDelivery();
+
+        $delivery->hasDeliveryRoute = '01D' ;
+        $this->assertSame( '01D' , $delivery->hasDeliveryRoute );
+
+        $term = new DefinedTerm();
+        $term->name = 'West coast, midweek' ;
+
+        $delivery->hasDeliveryRoute = $term ;
+        $this->assertInstanceOf( DefinedTerm::class , $delivery->hasDeliveryRoute );
+        $this->assertSame( $term , $delivery->hasDeliveryRoute );
+    }
+
     /**
      * `#[HydrateWith]` pins the two candidates of the `Organization|Person` union,
      * which reflection alone would always resolve to its first class member. The
@@ -209,6 +251,7 @@ class ParcelDeliveryTest extends TestCase
         $this->assertSame( 'expectedArrivalFrom'   , Schema::EXPECTED_ARRIVAL_FROM   );
         $this->assertSame( 'expectedArrivalUntil'  , Schema::EXPECTED_ARRIVAL_UNTIL  );
         $this->assertSame( 'hasDeliveryMethod'     , Schema::HAS_DELIVERY_METHOD     );
+        $this->assertSame( 'hasDeliveryRoute'      , Schema::HAS_DELIVERY_ROUTE      );
         $this->assertSame( 'itemShipped'           , Schema::ITEM_SHIPPED            );
         $this->assertSame( 'originAddress'         , Schema::ORIGIN_ADDRESS          );
         $this->assertSame( 'partOfOrder'           , Schema::PART_OF_ORDER           );
@@ -230,6 +273,7 @@ class ParcelDeliveryTest extends TestCase
             Schema::EXPECTED_ARRIVAL_FROM   ,
             Schema::EXPECTED_ARRIVAL_UNTIL  ,
             Schema::HAS_DELIVERY_METHOD     ,
+            Schema::HAS_DELIVERY_ROUTE      ,
             Schema::ITEM_SHIPPED            ,
             Schema::ORIGIN_ADDRESS          ,
             Schema::PART_OF_ORDER           ,

@@ -14,6 +14,7 @@ use xyz\oihana\schema\constants\traits\PaginationTrait;
 use xyz\oihana\schema\constants\traits\PeopleTrait;
 use xyz\oihana\schema\constants\traits\places\Site;
 use xyz\oihana\schema\constants\traits\ProductsTrait;
+use xyz\oihana\schema\constants\traits\ShippingTrait;
 use xyz\oihana\schema\constants\traits\ThesaurusTrait;
 use xyz\oihana\schema\constants\traits\WebsiteTrait;
 
@@ -46,6 +47,7 @@ class Oihana
         PaginationTrait   ,
         ProductsTrait     ,
         PeopleTrait       ,
+        ShippingTrait     ,
         Site              ,
         ThesaurusTrait    ,
         WebsiteTrait      ;

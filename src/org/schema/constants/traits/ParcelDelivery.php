@@ -16,6 +16,7 @@ trait ParcelDelivery
     const string EXPECTED_ARRIVAL_FROM   = 'expectedArrivalFrom' ;
     const string EXPECTED_ARRIVAL_UNTIL  = 'expectedArrivalUntil' ;
     const string HAS_DELIVERY_METHOD     = 'hasDeliveryMethod' ;
+    const string HAS_DELIVERY_ROUTE      = 'hasDeliveryRoute' ;
     const string ITEM_SHIPPED            = 'itemShipped' ;
     const string ORIGIN_ADDRESS          = 'originAddress' ;
     const string PART_OF_ORDER           = 'partOfOrder' ;

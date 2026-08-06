@@ -12,6 +12,7 @@ use org\schema\Person;
 use org\schema\Place;
 
 use xyz\oihana\schema\constants\Oihana;
+use xyz\oihana\schema\shipping\DeliveryRouteAssignment;
 
 /**
  * Represents a multi-functional operational site for an organization.
@@ -63,6 +64,23 @@ class Site extends Place
      * @var null|array|string|DeliveryMethod|DefinedTerm
      */
     public null|array|string|DeliveryMethod|DefinedTerm $deliveryMethod ;
+
+    /**
+     * The delivery routes serving this site.
+     *
+     * A list of {@see DeliveryRouteAssignment}, one per route stopping here :
+     * a same address is commonly visited by more than one circuit, each on its
+     * own days and in its own order of passage.
+     *
+     * Only the route reference is carried by an assignment, never a copy of its
+     * label — see {@see DeliveryRouteAssignment::$route}.
+     *
+     * @var null|array|DeliveryRouteAssignment
+     *
+     * @since 1.4.0
+     */
+    #[HydrateWith(DeliveryRouteAssignment::class)]
+    public null|array|DeliveryRouteAssignment $deliveryRoute ;
 
     /**
      * The organization or person that owns or operates this site.

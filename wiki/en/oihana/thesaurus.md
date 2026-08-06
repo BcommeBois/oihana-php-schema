@@ -11,6 +11,8 @@ The `xyz\oihana\schema\thesaurus` namespace models **classification schemes and 
 Reach for these classes when a plain `DefinedTerm` is not enough — when your terms form a **parent/child hierarchy** (e.g. a product-category tree) or need cross-vocabulary alignment:
 
 - a *ThesaurusTerm* for a **flat** term enriched with a house `color` hint,
+- a *DeliveryMethodTerm* for a flat term that also **prices carriage** — the shipping arrangement an order is fulfilled under, and what it costs,
+- a *DeliveryRouteTerm* for the recurring **circuit** an own-fleet vehicle runs — the days it is on the road, the warehouse it leaves from (the addresses it serves are carried the other way round, see [`shipping`](shipping.md)),
 - a *Concept* when terms relate to one another — `broader` (parent), `narrower` (children) and their transitive closures, plus associative (`related`) and cross-scheme mapping links,
 - a *ProductCategoryTerm* when a concept is **both** hierarchical and colored (the product-category case),
 - a *ProductPriceCategoryTerm* for the same shape, but dedicated to **price categories** (a tariff family used to scope pricing rules and conditions) — kept distinct from a catalog category so a term's `@type` stays meaningful,
@@ -121,6 +123,8 @@ On top of the SKOS core, the namespace models the **registry** view of a vocabul
 | Class                 | Extends          | Purpose                                                                                                                  |
 |-----------------------|------------------|--------------------------------------------------------------------------------------------------------------------------|
 | `ThesaurusTerm`       | `DefinedTerm`    | A **flat** thesaurus term enriched with a house `color` (`#RRGGBB`) — for vocabularies with no hierarchy.                 |
+| `DeliveryMethodTerm`  | `ThesaurusTerm`  | A flat term that also prices carriage — `shippingRate`, `freeShippingThreshold` (`null` reads as *never free*), `chargeTiming` and `vat`. Amounts stay plain scalars so a term hydrates straight from a flat row. |
+| `DeliveryRouteTerm`   | `ThesaurusTerm`  | The recurring **circuit** an own-fleet vehicle runs — `byDay` (the days it is on the road, `DayOfWeek` values ; an empty list means *not yet scheduled*) and `assignedPOS` (the warehouse it departs from). Orthogonal to the method : a dozen routes may share the single "own fleet" mode, and a route carries no charge. |
 | `Concept`             | `DefinedTerm`    | A **SKOS concept** carrying the hierarchical (`broader`/`narrower` + transitive), associative (`related`) and cross-scheme mapping (`*Match`) relations, the `hiddenLabel` and the documentation notes. |
 | `ProductCategoryTerm` | `Concept`        | A concept that is **both** hierarchical and colored (`use HasColor`) — the product-category family. Flat families stay on `ThesaurusTerm`. |
 | `ProductPriceCategoryTerm` | `Concept`   | Same shape as `ProductCategoryTerm`, but for **price categories** (tariff families scoping pricing rules/conditions). A distinct class so `@type` stays meaningful: a price category never advertises itself as a catalog category. |
@@ -166,7 +170,7 @@ Each class pairs a **property-bearing trait** with its **constant trait**, so a 
 
 ## Related constants
 
-Property keys are exposed by the constant traits under [`constants/traits/thesaurus/`](../../src/xyz/oihana/schema/constants/traits/thesaurus) — `ThesaurusTermTrait` (`COLOR`), `ConceptTrait` (`BROADER`, `NARROWER`, …, `HIDDEN_LABEL`, `RELATED`, `TOP_CONCEPT_OF`), `SkosNotesTrait`, `ConceptSchemeTrait` (`HAS_TOP_CONCEPT`), `SkosMappingsTrait`, `CollectionTrait` (`MEMBER`, `MEMBER_LIST`) and `ThesaurusSchemeTrait` (`ACTIVE`, `DOMAIN`, `HARVESTED`, `ORDER`, `PATH`, `SYSTEM` — the `ACTIVE`/`ORDER` keys are shared with `ThesaurusDomain`).
+Property keys are exposed by the constant traits under [`constants/traits/thesaurus/`](../../src/xyz/oihana/schema/constants/traits/thesaurus) — `ThesaurusTermTrait` (`COLOR`), `DeliveryMethodTermTrait` (`CHARGE_TIMING`, `FREE_SHIPPING_THRESHOLD`, `SHIPPING_RATE`, `VAT`), `DeliveryRouteTermTrait` (`ASSIGNED_POS`, `BY_DAY`), `ConceptTrait` (`BROADER`, `NARROWER`, …, `HIDDEN_LABEL`, `RELATED`, `TOP_CONCEPT_OF`), `SkosNotesTrait`, `ConceptSchemeTrait` (`HAS_TOP_CONCEPT`), `SkosMappingsTrait`, `CollectionTrait` (`MEMBER`, `MEMBER_LIST`) and `ThesaurusSchemeTrait` (`ACTIVE`, `DOMAIN`, `HARVESTED`, `ORDER`, `PATH`, `SYSTEM` — the `ACTIVE`/`ORDER` keys are shared with `ThesaurusDomain`).
 
 Unlike the `business` traits, these **are** aggregated — through the [`ThesaurusTrait`](../../src/xyz/oihana/schema/constants/traits/ThesaurusTrait.php) domain aggregator — into the master [`Oihana`](../../src/xyz/oihana/schema/constants/Oihana.php) class, so every key is reachable as `Oihana::BROADER`, `Oihana::HAS_TOP_CONCEPT`, etc. (the shared `COLOR` value matches the one already exposed by the auth traits).
 

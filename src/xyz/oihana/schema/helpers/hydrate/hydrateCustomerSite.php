@@ -79,5 +79,13 @@ function hydrateCustomerSite( mixed $init = null ) :mixed
         $site->deliveryMethod = $deliveryMethod;
     }
 
+    // ------- deliveryRoute
+
+    $deliveryRoute = hydrateDeliveryRouteAssignment( $site->deliveryRoute ?? null ) ;
+    if ( $deliveryRoute !== null )
+    {
+        $site->deliveryRoute = $deliveryRoute;
+    }
+
     return $site ;
 }

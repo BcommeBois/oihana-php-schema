@@ -18,6 +18,7 @@ Le namespace `xyz\oihana\schema` est la **couche maison** de la bibliothèque : 
 | [Personnes](people.md) | `…\people` | `Person` et ses déclinaisons typées `Seller`, `CustomerEmployee`, `Employee`, `ProviderEmployee`, `SubsidiaryEmployee`. |
 | [Couche commerce](products.md) | `…\products` | `Product` (arbre des quantités éligibles, conversions, hook `resolveUnitCode()`) et ses satellites. |
 | [Lieux](places.md) | `…\places` | Emplacements opérationnels : `Site`, `Office`, `Warehouse`, `JobSite`. |
+| [Expédition](shipping.md) | `…\shipping` | Dispositions d'expédition permanentes : `DeliveryRouteAssignment` — quelle tournée dessert une adresse, et quand. |
 | [Thésaurus (SKOS)](thesaurus.md) | `…\thesaurus` | Arbres de concepts SKOS et couche registre (`ThesaurusScheme`, `ThesaurusDomain`). |
 | [HTTP](http.md) | `…\http` | Métadonnées structurées de requête : `UserAgentInfo`. |
 | [Types transverses](core.md) | racine | `Pagination`, `Log`, `AuditAction`, énumérations d'audit. |

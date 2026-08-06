@@ -167,7 +167,8 @@ An account carries zero, one or several business identities (see [`BusinessIdent
 | `hydrateAggregateOffer`   | `AggregateOffer`    | `availableAtOrFrom` (Warehouse), `eligibleQuantity`, `offers` (OfferForPurchase[]), `provider` |
 | `hydrateCustomer`         | `Customer` or list  | `contactPoint`, `address`                                |
 | `hydrateCustomerEmployee` | `CustomerEmployee` or list | `additionalProperty`, `contactPoint`, `workLocation` (CustomerSite) |
-| `hydrateCustomerSite`     | `CustomerSite` or list | `additionalProperty`, `address`, `geo`, `deliveryMethod` (DeliveryMethodTerm) |
+| `hydrateCustomerSite`     | `CustomerSite` or list | `additionalProperty`, `address`, `geo`, `deliveryMethod` (DeliveryMethodTerm), `deliveryRoute` (DeliveryRouteAssignment[]) |
+| `hydrateDeliveryRouteAssignment` | `DeliveryRouteAssignment` or list | `route` (DeliveryRouteTerm, when the joined reference row is present — a bare code is left alone) |
 | `hydrateStockLevel`       | `StockLevel`        | `assignedPOS` (Warehouse)                                |
 | `hydrateWarehouse`        | `Warehouse` or list | `ownedBy` (Subsidiary)                                   |
 

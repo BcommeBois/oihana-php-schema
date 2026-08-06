@@ -8,6 +8,54 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds delivery routes — the recurring circuits an own-fleet vehicle runs — as a
+  new `xyz\oihana\schema\shipping` namespace plus one thesaurus term, filling a
+  gap the library only half covered : `DeliveryMethodTerm` said *how* an order
+  travels and what that costs, but nothing said *on which passage* it travels,
+  nor which addresses a given circuit serves. The two are orthogonal — a dozen
+  routes may all be run under the single "own fleet" method, and a route carries
+  no charge of its own.
+
+  `xyz\oihana\schema\thesaurus\DeliveryRouteTerm` (extends `ThesaurusTerm`)
+  describes the circuit itself : `byDay`, the days it is on the road, in the
+  `DayOfWeek` vocabulary `Schedule::$byDay` already uses — an empty list means a
+  route defined but not yet scheduled, which is not the `null` of a route whose
+  days were never read — and `assignedPOS`, the warehouse it departs from,
+  reusing the property name, the shape and the capitalized spelling
+  `Customer::$assignedPOS` carries for the point of sale a customer is attached
+  to. A joined row resolves into a `Warehouse`, a bare reference stays as read.
+
+  `xyz\oihana\schema\shipping\DeliveryRouteAssignment` (extends
+  `StructuredValue`) is the other half : the pairing of a route with one
+  address, carrying what only that pairing knows — `route` (the reference,
+  resolved into a `DeliveryRouteTerm` once joined), `byDay` (the days the route
+  serves *this* address, always a subset of the days it runs), `position` (the
+  order of passage), `startTime` / `endTime` (`HH:MM` bounds, independent of one
+  another) and `weekFrom` / `weekThrough` (ISO week numbers, for a stop that
+  only exists part of the year — deliberately not named `validFrom` /
+  `validThrough`, which carry dates everywhere else in the library and would
+  make the type a lie).
+
+  The two ends are wired : `Site::$deliveryRoute` lists the assignments serving
+  an address — a list, since a same address is commonly visited by more than one
+  circuit — hydrated element by element through `#[HydrateWith]`, and
+  `ParcelDelivery::$hasDeliveryRoute` names the route a delivery travels on,
+  mirroring the `hasDeliveryMethod` it sits next to. Nothing anywhere copies a
+  route's label : an assignment holds the bare reference, so renaming a circuit
+  is a single write in the thesaurus. A business document is the deliberate
+  exception, freezing what it names so a quote keeps saying what was chosen.
+
+  New hydrator `hydrateDeliveryRouteAssignment()`, called by
+  `hydrateCustomerSite()`, turns stored rows into assignments and resolves each
+  nested route when the joined reference row is present — a bare code is left
+  alone, since building a term out of a string would claim a label nobody read.
+  Constants join `DeliveryRouteTermTrait` and the new
+  `constants/traits/shipping/DeliveryRouteAssignment`, aggregated through
+  `ThesaurusTrait` and `ShippingTrait` into `Oihana`; the six values shared with
+  other entities are redeclared identically (the house pattern — a divergent
+  value would be fatal at class load), and the suite covers that composition
+  explicitly, since nothing else would catch it.
+
 - Composes `xyz\oihana\schema\traits\HasColor` on
   `xyz\oihana\schema\business\documents\BusinessDocumentLine`, so a line can
   carry the same optional `#RRGGBB` house color the thesaurus families and

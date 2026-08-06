@@ -6,6 +6,7 @@ use xyz\oihana\schema\constants\traits\thesaurus\CollectionTrait;
 use xyz\oihana\schema\constants\traits\thesaurus\ConceptSchemeTrait;
 use xyz\oihana\schema\constants\traits\thesaurus\ConceptTrait;
 use xyz\oihana\schema\constants\traits\thesaurus\DeliveryMethodTermTrait;
+use xyz\oihana\schema\constants\traits\thesaurus\DeliveryRouteTermTrait;
 use xyz\oihana\schema\constants\traits\thesaurus\SkosMappingsTrait;
 use xyz\oihana\schema\constants\traits\thesaurus\SkosNotesTrait;
 use xyz\oihana\schema\constants\traits\thesaurus\ThesaurusSchemeTrait;
@@ -25,6 +26,7 @@ trait ThesaurusTrait
         ConceptSchemeTrait      ,
         ConceptTrait            ,
         DeliveryMethodTermTrait ,
+        DeliveryRouteTermTrait  ,
         SkosMappingsTrait       ,
         SkosNotesTrait          ,
         ThesaurusSchemeTrait    ,

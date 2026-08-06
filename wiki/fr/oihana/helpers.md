@@ -167,7 +167,8 @@ Un compte porte zéro, une ou plusieurs identités métier (voir [`BusinessIdent
 | `hydrateAggregateOffer`   | `AggregateOffer`    | `availableAtOrFrom` (Warehouse), `eligibleQuantity`, `offers` (OfferForPurchase[]), `provider` |
 | `hydrateCustomer`         | `Customer` ou liste | `contactPoint`, `address`                                |
 | `hydrateCustomerEmployee` | `CustomerEmployee` ou liste | `additionalProperty`, `contactPoint`, `workLocation` (CustomerSite) |
-| `hydrateCustomerSite`     | `CustomerSite` ou liste | `additionalProperty`, `address`, `geo`, `deliveryMethod` (DeliveryMethodTerm) |
+| `hydrateCustomerSite`     | `CustomerSite` ou liste | `additionalProperty`, `address`, `geo`, `deliveryMethod` (DeliveryMethodTerm), `deliveryRoute` (DeliveryRouteAssignment[]) |
+| `hydrateDeliveryRouteAssignment` | `DeliveryRouteAssignment` ou liste | `route` (DeliveryRouteTerm, lorsque la ligne de référence jointe est présente — un code nu est laissé tel quel) |
 | `hydrateStockLevel`       | `StockLevel`        | `assignedPOS` (Warehouse)                                |
 | `hydrateWarehouse`        | `Warehouse` ou liste | `ownedBy` (Subsidiary)                                  |
 

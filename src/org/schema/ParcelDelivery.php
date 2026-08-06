@@ -54,6 +54,28 @@ class ParcelDelivery extends Intangible
     public null|array|string|DeliveryMethod|DefinedTerm $hasDeliveryMethod ;
 
     /**
+     * The delivery route the parcel travels on.
+     *
+     * Where {@see ParcelDelivery::$hasDeliveryMethod} says *how* the parcel
+     * travels (counter pick-up, carrier, own fleet), this says *on which
+     * passage* : the recurring circuit a vehicle runs on given days, which a
+     * back office maintains in its own thesaurus. The two are orthogonal — a
+     * dozen routes may all be run under the single "own fleet" method.
+     *
+     * Expressed as a bare reference, or as the {@see DefinedTerm} the reference
+     * resolves to — which covers the house
+     * {@see \xyz\oihana\schema\thesaurus\DeliveryRouteTerm}, so `org\schema`
+     * never has to know about the thesaurus. The addresses a route serves are
+     * carried the other way round, by
+     * {@see \xyz\oihana\schema\places\Site::$deliveryRoute}.
+     *
+     * @var null|array|string|DefinedTerm
+     *
+     * @since 1.4.0
+     */
+    public null|array|string|DefinedTerm $hasDeliveryRoute ;
+
+    /**
      * Item(s) being shipped.
      * @var array|Product|null
      */
