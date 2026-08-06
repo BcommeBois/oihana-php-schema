@@ -126,7 +126,7 @@ Le `priceSpecification` est typiquement un `CompoundPriceSpecification` dont les
   "@type": "CustomerOffer",
   "customer": { "@type": "Customer", "id": "216303", "name": "Menuiserie Fabre" },
   "eligibleCustomerType": { "@type": "BusinessEntityType", "id": 4, "name": "Pro." },
-  "availableAtOrFrom": { "@type": "Warehouse", "id": "1", "name": "Bouney" },
+  "availableAtOrFrom": { "@type": "Warehouse", "id": "1", "name": "Entrepôt principal" },
   "price": 9.20,
   "priceCurrency": "EUR",
   "appliedCondition": {

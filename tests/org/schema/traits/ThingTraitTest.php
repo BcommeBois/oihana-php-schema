@@ -58,7 +58,7 @@ class MockCustomThing implements JsonSerializable
     use ThingTrait;
 
     /**
-     * Custom context for Proginov.
+     * Custom context, as a downstream consumer would declare it.
      */
     public const string CONTEXT = 'https://schema.custom.com' ;
 }
