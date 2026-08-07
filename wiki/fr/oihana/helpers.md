@@ -80,6 +80,30 @@ hydrateCustomer( [ [ 'name' => 'A' ] , [ 'name' => 'B' ] ] ); // une liste      
 hydrateCustomer( 'brut' ) ;                                 // autre valeur    → rendue telle quelle
 ```
 
+### La règle des références imbriquées
+
+Un hydrateur qui résout des références imbriquées (`hydrateCustomer`, `hydrateCustomerSite`,
+`hydrateBusinessDocument`, …) applique à chacune la même règle :
+
+- **il n'hydrate que ce qui est un tableau** — là où il y a quelque chose à hydrater. Une
+  référence textuelle non résolue ou une instance déjà typée est laissée intacte, jamais
+  réécrite ;
+- **la réponse de l'hydrateur imbriqué est ensuite écrite telle quelle, `null` compris.**
+  Un tableau qui ne résout rien — liste vide, liste d'entrées non hydratables — devient
+  `null`, jamais un tableau brut résiduel ;
+- **une propriété que la charge utile n'a jamais portée n'est pas inventée.** Elle reste
+  non initialisée, donc absente de la forme sérialisée.
+
+C'est le deuxième point qui met les deux chemins d'accord : une référence imbriquée répond
+la même chose à travers son parent qu'à travers l'hydrateur imbriqué appelé seul.
+
+```php
+hydrateDeliveryRouteAssignment( [] ) ;                                // null
+
+$site = hydrateCustomerSite( [ 'name' => 'A' , 'deliveryRoute' => [] ] ) ;
+$site->deliveryRoute ;                                                // null — la même réponse
+```
+
 ---
 
 ## Exemple express — hydrater les lignes d'un document

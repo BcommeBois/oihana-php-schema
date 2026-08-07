@@ -40,6 +40,12 @@ use function org\schema\helpers\hydrate\hydrateOrganizationOrPerson;
  * inside it was ever re-resolved : `orderDelivery.provider` is therefore given the same
  * treatment from the raw payload, once the delivery itself has been hydrated.
  *
+ * Each of those re-resolutions happens only when the raw payload holds an array under
+ * the property — when there is something to hydrate. The resolved value is then written
+ * as is, `null` included : an array that resolves to nothing (an empty list, a list of
+ * unhydratable entries) becomes `null`, never a leftover raw array. Anything else is
+ * left to whatever {@see Reflection::hydrate()} made of it.
+ *
  * @param mixed  $init  Single document data or array of document data.
  * @param string $class The BusinessDocument subclass to hydrate into. Defaults to
  *                       {@see BusinessDocument} itself.
@@ -84,10 +90,10 @@ function hydrateBusinessDocument( mixed $init = null , string $class = BusinessD
 
     foreach( [ BusinessDocument::CUSTOMER , BusinessDocument::SELLER , BusinessDocument::AUTHOR ] as $property )
     {
-        $resolved = hydrateOrganizationOrPerson( $init[ $property ] ?? null ) ;
-        if( $resolved !== null )
+        $raw = $init[ $property ] ?? null ;
+        if( is_array( $raw ) )
         {
-            $document->{ $property } = $resolved ;
+            $document->{ $property } = hydrateOrganizationOrPerson( $raw ) ;
         }
     }
 
@@ -95,10 +101,10 @@ function hydrateBusinessDocument( mixed $init = null , string $class = BusinessD
     {
         foreach( [ Invoice::BROKER , Invoice::PROVIDER ] as $property )
         {
-            $resolved = hydrateOrganizationOrPerson( $init[ $property ] ?? null ) ;
-            if( $resolved !== null )
+            $raw = $init[ $property ] ?? null ;
+            if( is_array( $raw ) )
             {
-                $document->{ $property } = $resolved ;
+                $document->{ $property } = hydrateOrganizationOrPerson( $raw ) ;
             }
         }
     }
@@ -107,10 +113,10 @@ function hydrateBusinessDocument( mixed $init = null , string $class = BusinessD
 
     if( $delivery instanceof ParcelDelivery )
     {
-        $resolved = hydrateOrganizationOrPerson( $init[ BusinessDocument::ORDER_DELIVERY ][ Schema::PROVIDER ] ?? null ) ;
-        if( $resolved !== null )
+        $raw = $init[ BusinessDocument::ORDER_DELIVERY ][ Schema::PROVIDER ] ?? null ;
+        if( is_array( $raw ) )
         {
-            $delivery->{ Schema::PROVIDER } = $resolved ;
+            $delivery->{ Schema::PROVIDER } = hydrateOrganizationOrPerson( $raw ) ;
         }
     }
 

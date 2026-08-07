@@ -164,4 +164,22 @@ final class HydrateDocumentLineTest extends TestCase
         $this->assertNull( hydrateDocumentLine() ) ;
         $this->assertSame( 'raw' , hydrateDocumentLine( 'raw' ) ) ;
     }
+
+    /**
+     * An empty list is not a list of things : it says "nothing here". A line whose
+     * `item` is declared empty carries no item, and says so with `null` rather than
+     * with the raw empty array the payload came in with.
+     *
+     * @throws HydrationException
+     * @throws ReflectionException
+     */
+    public function testAnEmptyItemYieldsNull(): void
+    {
+        $line = hydrateDocumentLine( [ 'position' => 1 , 'item' => [] ] ) ;
+
+        $this->assertInstanceOf( BusinessDocumentLine::class , $line ) ;
+
+        $this->assertNull( $line->item ) ;
+        $this->assertSame( 1 , $line->position ) ;
+    }
 }

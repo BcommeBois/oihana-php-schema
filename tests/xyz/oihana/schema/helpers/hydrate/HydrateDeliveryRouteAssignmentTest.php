@@ -112,4 +112,25 @@ class HydrateDeliveryRouteAssignmentTest extends TestCase
     {
         $this->assertNull( hydrateDeliveryRouteAssignment( [] ) );
     }
+
+    /**
+     * The same rule one level down : an assignment whose `route` holds an empty list
+     * carries no route, and says so with `null` rather than handing back the raw
+     * empty array the payload came in with.
+     *
+     * @throws ReflectionException
+     */
+    public function testAnEmptyRouteYieldsNull(): void
+    {
+        $assignment = hydrateDeliveryRouteAssignment
+        ([
+            DeliveryRouteAssignment::ROUTE    => [] ,
+            DeliveryRouteAssignment::POSITION => 12 ,
+        ]);
+
+        $this->assertInstanceOf( DeliveryRouteAssignment::class , $assignment );
+
+        $this->assertNull( $assignment->route );
+        $this->assertSame( 12 , $assignment->position );
+    }
 }

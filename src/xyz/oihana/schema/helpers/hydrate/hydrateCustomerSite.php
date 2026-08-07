@@ -19,6 +19,13 @@ use function org\schema\helpers\hydrate\hydratePostalAddress;
  *
  * Handles both single CustomerSite array and array of CustomerSite things.
  *
+ * Each nested reference is hydrated only when the raw value is an array — when there is
+ * something to hydrate. The helper's answer is then written as is, `null` included : an
+ * array that resolves to nothing (an empty list, a list of unhydratable entries) becomes
+ * `null`, never a leftover raw array, so the site answers the same thing as the nested
+ * helper called on its own. Anything that is not an array — an unresolved string
+ * reference, an already typed instance — is left untouched.
+ *
  * @param mixed $init Single CustomerSite data or array of CustomerSite data
  *
  * @return mixed
@@ -49,42 +56,42 @@ function hydrateCustomerSite( mixed $init = null ) :mixed
 
     // ------- additionalProperty
 
-    $additionalProperty = hydrateAdditionalProperty($site->additionalProperty ?? null ) ;
-    if ( $additionalProperty !== null )
+    $additionalProperty = $site->additionalProperty ?? null ;
+    if ( is_array( $additionalProperty ) )
     {
-        $site->additionalProperty = $additionalProperty;
+        $site->additionalProperty = hydrateAdditionalProperty( $additionalProperty ) ;
     }
 
-    // ------- contactPoint
+    // ------- address
 
-    $address = hydratePostalAddress($site->address ?? null ) ;
-    if ( $address !== null )
+    $address = $site->address ?? null ;
+    if ( is_array( $address ) )
     {
-        $site->address = $address;
+        $site->address = hydratePostalAddress( $address ) ;
     }
 
     // ------- geo
 
-    $geo = hydrateGeoCoordinates($site->geo ?? null ) ;
-    if ( $geo !== null )
+    $geo = $site->geo ?? null ;
+    if ( is_array( $geo ) )
     {
-        $site->geo = $geo;
+        $site->geo = hydrateGeoCoordinates( $geo ) ;
     }
 
     // ------- deliveryMethod
 
-    $deliveryMethod = hydrateDefinedTerm($site->deliveryMethod ?? null , DeliveryMethodTerm::class ) ;
-    if ( $deliveryMethod !== null )
+    $deliveryMethod = $site->deliveryMethod ?? null ;
+    if ( is_array( $deliveryMethod ) )
     {
-        $site->deliveryMethod = $deliveryMethod;
+        $site->deliveryMethod = hydrateDefinedTerm( $deliveryMethod , DeliveryMethodTerm::class ) ;
     }
 
     // ------- deliveryRoute
 
-    $deliveryRoute = hydrateDeliveryRouteAssignment( $site->deliveryRoute ?? null ) ;
-    if ( $deliveryRoute !== null )
+    $deliveryRoute = $site->deliveryRoute ?? null ;
+    if ( is_array( $deliveryRoute ) )
     {
-        $site->deliveryRoute = $deliveryRoute;
+        $site->deliveryRoute = hydrateDeliveryRouteAssignment( $deliveryRoute ) ;
     }
 
     return $site ;

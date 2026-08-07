@@ -80,6 +80,29 @@ hydrateCustomer( [ [ 'name' => 'A' ] , [ 'name' => 'B' ] ] ); // a list         
 hydrateCustomer( 'raw' ) ;                                    // anything else  → returned unchanged
 ```
 
+### The rule for nested references
+
+A hydrator that resolves nested references (`hydrateCustomer`, `hydrateCustomerSite`,
+`hydrateBusinessDocument`, …) applies one rule to each of them:
+
+- **it hydrates only what is an array** — there is something to hydrate. An unresolved
+  string reference or an already typed instance is left untouched, never rewritten;
+- **the nested hydrator's answer is then written as is, `null` included.** An array that
+  resolves to nothing — an empty list, a list of unhydratable entries — becomes `null`,
+  never a leftover raw array;
+- **a property the payload never carried is not invented.** It stays uninitialized, and
+  so absent from the serialized shape.
+
+The second point is what makes the two paths agree: a nested reference answers the same
+thing through its parent as through the nested hydrator called on its own.
+
+```php
+hydrateDeliveryRouteAssignment( [] ) ;                                // null
+
+$site = hydrateCustomerSite( [ 'name' => 'A' , 'deliveryRoute' => [] ] ) ;
+$site->deliveryRoute ;                                                // null — the same answer
+```
+
 ---
 
 ## Quick example — hydrating a document's lines

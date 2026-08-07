@@ -15,8 +15,15 @@ use function org\schema\helpers\hydrate\hydratePostalAddress;
  * Hydrate an array definition with the Customer class.
  *
  * Handles both a single customer array and an array of customers, and hydrates the
- * nested `contactPoint` and `address` references so the resolved customer matches the
- * shape served by the dedicated `/customers` endpoint (typed, null fields dropped).
+ * nested `contactPoint` and `address` references so the resolved customer carries typed
+ * values rather than raw arrays.
+ *
+ * Each nested reference is hydrated only when the raw value is an array — when there is
+ * something to hydrate. The helper's answer is then written as is, `null` included : an
+ * array that resolves to nothing (an empty list, a list of unhydratable entries) becomes
+ * `null`, never a leftover raw array, so the customer answers the same thing as the
+ * nested helper called on its own. Anything that is not an array — an unresolved string
+ * reference, an already typed instance — is left untouched.
  *
  * @param mixed $init Single customer data or array of customer data.
  *
@@ -48,18 +55,18 @@ function hydrateCustomer( mixed $init = null ) :mixed
 
     // ------- contactPoint
 
-    $contactPoint = hydrateContactPoint( $customer->contactPoint ?? null ) ;
-    if ( $contactPoint !== null )
+    $contactPoint = $customer->contactPoint ?? null ;
+    if ( is_array( $contactPoint ) )
     {
-        $customer->contactPoint = $contactPoint ;
+        $customer->contactPoint = hydrateContactPoint( $contactPoint ) ;
     }
 
     // ------- address
 
-    $address = hydratePostalAddress( $customer->address ?? null ) ;
-    if ( $address !== null )
+    $address = $customer->address ?? null ;
+    if ( is_array( $address ) )
     {
-        $customer->address = $address ;
+        $customer->address = hydratePostalAddress( $address ) ;
     }
 
     return $customer ;

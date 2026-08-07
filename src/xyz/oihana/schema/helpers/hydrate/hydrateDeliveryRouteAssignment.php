@@ -23,6 +23,10 @@ use function org\schema\helpers\hydrate\hydrateDefinedTerm;
  * joined yet, and inventing a term out of a string would claim a label nobody
  * read.
  *
+ * `route` is hydrated only when the raw value is an array — when there is something
+ * to hydrate. The helper's answer is then written as is, `null` included : an array
+ * that resolves to nothing becomes `null`, never a leftover raw array.
+ *
  * @param mixed $init Single DeliveryRouteAssignment data or array of DeliveryRouteAssignment data.
  *
  * @return mixed
@@ -51,11 +55,11 @@ function hydrateDeliveryRouteAssignment( mixed $init = null ) :mixed
 
     $assignment = new DeliveryRouteAssignment( $init ) ;
 
-    $route = hydrateDefinedTerm( $assignment->route ?? null , DeliveryRouteTerm::class ) ;
+    $route = $assignment->route ?? null ;
 
-    if ( $route !== null )
+    if ( is_array( $route ) )
     {
-        $assignment->route = $route ;
+        $assignment->route = hydrateDefinedTerm( $route , DeliveryRouteTerm::class ) ;
     }
 
     return $assignment ;

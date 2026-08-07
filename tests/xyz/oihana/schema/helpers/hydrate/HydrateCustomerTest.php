@@ -92,4 +92,27 @@ final class HydrateCustomerTest extends TestCase
         $this->assertSame( $contact         , $fromInstance->contactPoint ) ;
         $this->assertSame( 'contact-ref-42' , $fromString->contactPoint   ) ;
     }
+
+    /**
+     * An empty list is not a list of things : it says "nothing here". Both nested
+     * references must answer the same through the customer as through the nested
+     * helper called on its own, otherwise the same fact takes two shapes depending
+     * on the path taken.
+     *
+     * @throws ReflectionException
+     */
+    public function testEmptyNestedListsYieldNullNotAnEmptyArray(): void
+    {
+        $customer = hydrateCustomer
+        ([
+            'name'         => 'ACME' ,
+            'contactPoint' => [] ,
+            'address'      => [] ,
+        ]) ;
+
+        $this->assertInstanceOf( Customer::class , $customer ) ;
+
+        $this->assertNull( $customer->contactPoint ) ;
+        $this->assertNull( $customer->address      ) ;
+    }
 }

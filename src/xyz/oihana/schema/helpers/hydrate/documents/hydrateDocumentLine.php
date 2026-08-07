@@ -26,7 +26,11 @@ use function oihana\core\arrays\isIndexed;
  *
  * The `item` property is the exception : its `Product|Service` union cannot be
  * resolved from the property type alone, so it is delegated to
- * {@see hydrateDocumentLineItem()} which reads the payload's `@type`.
+ * {@see hydrateDocumentLineItem()} which reads the payload's `@type`. That delegation
+ * happens only when the raw payload holds an array under `item` — when there is
+ * something to hydrate — and its answer is then written as is, `null` included : an
+ * array that resolves to nothing becomes `null`, never a leftover raw array. Anything
+ * else is left to whatever {@see Reflection::hydrate()} made of it.
  *
  * @param mixed $init Single line data or array of line data.
  *
@@ -66,10 +70,10 @@ function hydrateDocumentLine( mixed $init = null ) :mixed
     // ------- item
     // Read from the raw payload : the union resolution done by hydrate() ignores the `@type`.
 
-    $item = hydrateDocumentLineItem( $init[ BusinessDocumentLine::ITEM ] ?? null ) ;
-    if( $item !== null )
+    $item = $init[ BusinessDocumentLine::ITEM ] ?? null ;
+    if( is_array( $item ) )
     {
-        $line->item = $item ;
+        $line->item = hydrateDocumentLineItem( $item ) ;
     }
 
     return $line ;

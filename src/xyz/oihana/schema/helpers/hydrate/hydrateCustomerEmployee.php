@@ -16,6 +16,13 @@ use function org\schema\helpers\hydrate\hydrateContactPoint;
  *
  * Handles both single employee array and array of employees.
  *
+ * Each nested reference is hydrated only when the raw value is an array — when there is
+ * something to hydrate. The helper's answer is then written as is, `null` included : an
+ * array that resolves to nothing (an empty list, a list of unhydratable entries) becomes
+ * `null`, never a leftover raw array, so the employee answers the same thing as the
+ * nested helper called on its own. Anything that is not an array — an unresolved string
+ * reference, an already typed instance — is left untouched.
+ *
  * @param mixed $init Single employee data or array of employee data
  *
  * @return mixed
@@ -46,26 +53,26 @@ function hydrateCustomerEmployee( mixed $init = null  ):mixed
 
     // ------- additionalProperty
 
-    $additionalProperty = hydrateAdditionalProperty($employee->additionalProperty ?? null ) ;
-    if ( $additionalProperty !== null )
+    $additionalProperty = $employee->additionalProperty ?? null ;
+    if ( is_array( $additionalProperty ) )
     {
-        $employee->additionalProperty = $additionalProperty;
+        $employee->additionalProperty = hydrateAdditionalProperty( $additionalProperty ) ;
     }
 
     // ------- contactPoint
 
-    $contactPoint = hydrateContactPoint($employee->contactPoint ?? null ) ;
-    if ( $contactPoint !== null )
+    $contactPoint = $employee->contactPoint ?? null ;
+    if ( is_array( $contactPoint ) )
     {
-        $employee->contactPoint = $contactPoint;
+        $employee->contactPoint = hydrateContactPoint( $contactPoint ) ;
     }
 
     // ------- workLocation
 
-    $workLocation = hydrateCustomerSite($employee->workLocation ?? null ) ;
-    if ( $workLocation !== null )
+    $workLocation = $employee->workLocation ?? null ;
+    if ( is_array( $workLocation ) )
     {
-        $employee->workLocation = $workLocation;
+        $employee->workLocation = hydrateCustomerSite( $workLocation ) ;
     }
 
     return $employee ;

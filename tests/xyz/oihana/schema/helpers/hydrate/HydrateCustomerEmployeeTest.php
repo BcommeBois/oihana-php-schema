@@ -12,6 +12,7 @@ use xyz\oihana\schema\people\CustomerEmployee;
 use xyz\oihana\schema\places\CustomerSite;
 
 use function xyz\oihana\schema\helpers\hydrate\hydrateCustomerEmployee;
+use function xyz\oihana\schema\helpers\hydrate\hydrateCustomerSite;
 
 final class HydrateCustomerEmployeeTest extends TestCase
 {
@@ -70,5 +71,51 @@ final class HydrateCustomerEmployeeTest extends TestCase
     {
         $this->assertNull( hydrateCustomerEmployee() ) ;
         $this->assertSame( 'raw' , hydrateCustomerEmployee( 'raw' ) ) ;
+    }
+
+    /**
+     * An empty list is not a list of things : it says "nothing here". Every nested
+     * reference must answer the same through the employee as through the nested
+     * helper called on its own, otherwise the same fact takes two shapes depending
+     * on the path taken.
+     *
+     * @throws ReflectionException
+     */
+    public function testEmptyNestedListsYieldNullNotAnEmptyArray(): void
+    {
+        $employee = hydrateCustomerEmployee
+        ([
+            'name'               => 'Jean Dupont' ,
+            'additionalProperty' => [] ,
+            'contactPoint'       => [] ,
+            'workLocation'       => [] ,
+        ]) ;
+
+        $this->assertInstanceOf( CustomerEmployee::class , $employee ) ;
+
+        $this->assertNull( $employee->additionalProperty ) ;
+        $this->assertNull( $employee->contactPoint       ) ;
+        $this->assertNull( $employee->workLocation       ) ;
+
+        // Same answer through the employee as through the nested helper on its own.
+        $this->assertSame( hydrateCustomerSite( [] ) , $employee->workLocation ) ;
+    }
+
+    /**
+     * A reference nobody joined yet stays what it was : hydration reads what the
+     * payload holds, it never rewrites a value it cannot resolve.
+     *
+     * @throws ReflectionException
+     */
+    public function testLeavesUnresolvedReferencesUntouched(): void
+    {
+        $employee = hydrateCustomerEmployee
+        ([
+            'name'         => 'Jean Dupont' ,
+            'workLocation' => 'site-ref-42' ,
+        ]) ;
+
+        $this->assertInstanceOf( CustomerEmployee::class , $employee ) ;
+        $this->assertSame( 'site-ref-42' , $employee->workLocation ) ;
     }
 }

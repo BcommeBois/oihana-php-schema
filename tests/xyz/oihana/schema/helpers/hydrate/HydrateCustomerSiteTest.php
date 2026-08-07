@@ -16,6 +16,7 @@ use xyz\oihana\schema\thesaurus\DeliveryMethodTerm;
 use xyz\oihana\schema\thesaurus\DeliveryRouteTerm;
 
 use function xyz\oihana\schema\helpers\hydrate\hydrateCustomerSite;
+use function xyz\oihana\schema\helpers\hydrate\hydrateDeliveryRouteAssignment;
 
 final class HydrateCustomerSiteTest extends TestCase
 {
@@ -135,5 +136,85 @@ final class HydrateCustomerSiteTest extends TestCase
         $this->assertSame( 12 , $site->deliveryRoute[ 0 ]->position ) ;
 
         $this->assertSame( '03' , $site->deliveryRoute[ 1 ]->route ) ;
+    }
+
+    /**
+     * An empty list is not a list of things : it says "nothing here". Every nested
+     * reference must answer the same through the site as through the nested helper
+     * called on its own, otherwise the same fact takes two shapes depending on the
+     * path taken, and a consumer iterating the result has to handle both.
+     *
+     * @throws ReflectionException
+     */
+    public function testEmptyNestedListsYieldNullNotAnEmptyArray(): void
+    {
+        $site = hydrateCustomerSite
+        ([
+            'name'               => 'Chantier vide' ,
+            'additionalProperty' => [] ,
+            'address'            => [] ,
+            'geo'                => [] ,
+            'deliveryMethod'     => [] ,
+            'deliveryRoute'      => [] ,
+        ]) ;
+
+        $this->assertInstanceOf( CustomerSite::class , $site ) ;
+
+        $this->assertNull( $site->additionalProperty ) ;
+        $this->assertNull( $site->address            ) ;
+        $this->assertNull( $site->geo                ) ;
+        $this->assertNull( $site->deliveryMethod     ) ;
+        $this->assertNull( $site->deliveryRoute      ) ;
+
+        // Same answer through the site as through the nested helper on its own.
+        $this->assertSame
+        (
+            hydrateDeliveryRouteAssignment( [] ) ,
+            $site->deliveryRoute
+        ) ;
+    }
+
+    /**
+     * A reference nobody joined yet stays what it was : hydration reads what the
+     * payload holds, it never rewrites a value it cannot resolve.
+     *
+     * @throws ReflectionException
+     */
+    public function testLeavesUnresolvedReferencesUntouched(): void
+    {
+        $address = new PostalAddress( [ 'streetAddress' => '13 allée Gabrielle Dorziat' ] ) ;
+
+        $site = hydrateCustomerSite
+        ([
+            'name'           => 'Chantier référencé' ,
+            'address'        => $address ,
+            'deliveryMethod' => 'delivery-method-ref-42' ,
+        ]) ;
+
+        $this->assertInstanceOf( CustomerSite::class , $site ) ;
+
+        $this->assertSame( $address                , $site->address        ) ;
+        $this->assertSame( 'delivery-method-ref-42' , $site->deliveryMethod ) ;
+    }
+
+    /**
+     * Hydration resolves what the payload carries ; it does not invent properties the
+     * payload never mentioned. A site that says nothing about its geo, its delivery
+     * method or its routes comes out with those properties left uninitialized, and so
+     * absent from the serialized shape — not materialized to `null`.
+     *
+     * @throws ReflectionException
+     */
+    public function testDoesNotMaterializePropertiesThePayloadNeverCarried(): void
+    {
+        $site = hydrateCustomerSite( [ 'name' => 'Chantier minimal' ] ) ;
+
+        $this->assertInstanceOf( CustomerSite::class , $site ) ;
+
+        $serialized = $site->jsonSerialize() ;
+
+        $this->assertArrayNotHasKey( 'geo'            , $serialized ) ;
+        $this->assertArrayNotHasKey( 'deliveryMethod' , $serialized ) ;
+        $this->assertArrayNotHasKey( 'deliveryRoute'  , $serialized ) ;
     }
 }

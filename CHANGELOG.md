@@ -400,6 +400,32 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Changed
 
+- **Behavior change.** The hydration helpers that resolve nested references now
+  write the nested helper's answer as is, `null` included. Where the payload
+  held an array that resolves to nothing — an empty list, a list of unhydratable
+  entries — the property was left holding that raw array; it now holds `null`.
+  Affects `hydrateCustomer`, `hydrateCustomerEmployee`, `hydrateCustomerSite`,
+  `hydrateDeliveryRouteAssignment`, `hydrateBusinessDocument` and
+  `hydrateDocumentLine`, across every nested reference they resolve.
+
+  A consumer that received `[]` will now receive `null`. Concretely, a site
+  served by no delivery route used to answer `deliveryRoute => []` when read
+  through `hydrateCustomerSite()` but `null` when read through
+  `hydrateDeliveryRouteAssignment()` directly — the same fact in two shapes,
+  depending on the path taken. Code that iterated the result without a guard was
+  working by accident on one path and broken on the other; `null` is now the
+  single answer both paths give.
+
+  The cause was a `if ( $result !== null )` guard wrapping each assignment. It
+  never protected a well-formed value — no nested helper returns `null` on data
+  it can hydrate — so its only effect was to restore the raw array the helper
+  had just refused. The guard is now on the input instead: a nested reference is
+  hydrated only when the raw value is an array, which also means a string
+  reference or an already typed instance is no longer passed through the helper
+  at all, and a property the payload never carried is not materialized to
+  `null`. This is the idiom `hydrateWarehouse`, `hydrateStockLevel` and
+  `hydrateAggregateOffer` already used.
+
 - Renames `org\schema\enumerations\PriceTypeEnumeration::MinimumAdvertisedPrice`
   to `MINIMUM_ADVERTISED_PRICE`, the last camel-cased constant of the class,
   now aligned on the SCREAMING_SNAKE_CASE convention every other enumeration

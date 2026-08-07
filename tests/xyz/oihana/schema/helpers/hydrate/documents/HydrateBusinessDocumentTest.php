@@ -232,4 +232,50 @@ final class HydrateBusinessDocumentTest extends TestCase
         $this->assertNull( hydrateBusinessDocument() ) ;
         $this->assertSame( 'raw' , hydrateBusinessDocument( 'raw' ) ) ;
     }
+
+    /**
+     * An empty list is not a list of things : it says "nothing here". A party the
+     * payload declares empty comes out `null`, not as the empty-ish entity a blind
+     * hydration would build out of nothing.
+     *
+     * @throws HydrationException
+     * @throws ReflectionException
+     */
+    public function testEmptyPartiesYieldNull(): void
+    {
+        $document = hydrateBusinessDocument
+        ([
+            'currency' => 'EUR' ,
+            'customer' => [] ,
+            'seller'   => [] ,
+            'author'   => [] ,
+        ]) ;
+
+        $this->assertInstanceOf( BusinessDocument::class , $document ) ;
+
+        $this->assertNull( $document->customer ) ;
+        $this->assertNull( $document->seller   ) ;
+        $this->assertNull( $document->author   ) ;
+    }
+
+    /**
+     * The carrier of the delivery follows the same rule, one level down.
+     *
+     * @throws HydrationException
+     * @throws ReflectionException
+     */
+    public function testAnEmptyDeliveryProviderYieldsNull(): void
+    {
+        $document = hydrateBusinessDocument
+        ([
+            'currency'      => 'EUR' ,
+            'orderDelivery' => [ 'trackingNumber' => 'AB-42' , 'provider' => [] ] ,
+        ]) ;
+
+        $this->assertInstanceOf( BusinessDocument::class , $document ) ;
+        $this->assertInstanceOf( ParcelDelivery::class , $document->orderDelivery ) ;
+
+        $this->assertNull( $document->orderDelivery->provider ) ;
+        $this->assertSame( 'AB-42' , $document->orderDelivery->trackingNumber ) ;
+    }
 }
