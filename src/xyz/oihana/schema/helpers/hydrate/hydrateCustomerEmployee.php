@@ -2,6 +2,7 @@
 
 namespace xyz\oihana\schema\helpers\hydrate;
 
+use org\schema\DefinedTerm;
 use ReflectionException;
 
 use xyz\oihana\schema\people\CustomerEmployee;
@@ -10,6 +11,7 @@ use function oihana\core\arrays\isIndexed;
 
 use function org\schema\helpers\hydrate\hydrateAdditionalProperty;
 use function org\schema\helpers\hydrate\hydrateContactPoint;
+use function org\schema\helpers\hydrate\hydrateDefinedTerm;
 
 /**
  * Hydrate an array definition with the CustomerEmployee class.
@@ -65,6 +67,14 @@ function hydrateCustomerEmployee( mixed $init = null  ):mixed
     if ( is_array( $contactPoint ) )
     {
         $employee->contactPoint = hydrateContactPoint( $contactPoint ) ;
+    }
+
+    // ------- jobTitle
+
+    $jobTitle = $employee->jobTitle ?? null ;
+    if ( is_array( $jobTitle ) )
+    {
+        $employee->jobTitle = hydrateDefinedTerm( $jobTitle ) ;
     }
 
     // ------- workLocation

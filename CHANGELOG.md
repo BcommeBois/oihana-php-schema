@@ -543,10 +543,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   The thesaurus wiki page trait link is updated (FR + EN).
 - Removes the redundant `$active` property redeclarations from `WebApplication`,
   `ThesaurusScheme` and `ThesaurusDomain`: the flag is already declared on the
-  root `Thing`, so every entity inherits it. Behaviour is unchanged (the types
+  root `Thing`, so every entity inherits it. Behavior is unchanged (the types
   were compatible); the property is simply no longer shadowed.
 
 ### Fixed
+
+ - Fixed - fix(hydrate): a job title was the one nested reference left behind (2026-08-08) : 
+ `hydrateCustomerEmployee()` resolved the three other nested references of an employee — its
+  properties, its contact points, the site it works at — and walked past `jobTitle`. A caller
+  joining the term against its own reference data got the whole row back, and a plain array
+  where every sibling answered a typed instance.
+- It is now hydrated into a `DefinedTerm`, under the same input guard as the others: a bare code,
+  the shape a payload carries before any join, is not an array and travels through untouched.
 
 - Fixes the URL of `org\schema\enumerations\PriceTypeEnumeration::STRIKE_THROUGH_PRICE` :
   it read `http://schema/org/StrikethroughPrice` — plain `http`, and a slash

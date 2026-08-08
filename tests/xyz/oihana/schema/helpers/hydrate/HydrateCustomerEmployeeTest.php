@@ -2,6 +2,7 @@
 
 namespace tests\xyz\oihana\schema\helpers\hydrate ;
 
+use org\schema\DefinedTerm;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
 
@@ -26,13 +27,24 @@ final class HydrateCustomerEmployeeTest extends TestCase
             'name'               => 'Jean Dupont' ,
             'additionalProperty' => [ [ 'propertyID' => 'civility' , 'value' => 'M.' ] ] ,
             'contactPoint'       => [ [ 'telephone' => '06 00 00 00 00' ] ] ,
+            'jobTitle'           => [ 'id' => 1 , 'name' => 'Gérant' ] ,
             'workLocation'       => [ 'name' => 'Chantier A' ] ,
         ]) ;
 
         $this->assertInstanceOf( CustomerEmployee::class , $employee ) ;
         $this->assertContainsOnlyInstancesOf( PropertyValue::class , $employee->additionalProperty ) ;
         $this->assertContainsOnlyInstancesOf( ContactPoint::class  , $employee->contactPoint ) ;
+        $this->assertInstanceOf( DefinedTerm::class  , $employee->jobTitle ) ;
         $this->assertInstanceOf( CustomerSite::class , $employee->workLocation ) ;
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testLeavesABareJobTitleCodeUntouched(): void
+    {
+        $employee = hydrateCustomerEmployee( [ 'name' => 'Jean Dupont' , 'jobTitle' => 1 ] ) ;
+        $this->assertSame( 1 , $employee->jobTitle ) ;
     }
 
     /**
