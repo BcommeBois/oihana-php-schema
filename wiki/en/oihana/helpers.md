@@ -90,8 +90,10 @@ A hydrator that resolves nested references (`hydrateCustomer`, `hydrateCustomerS
 - **the nested hydrator's answer is then written as is, `null` included.** An array that
   resolves to nothing — an empty list, a list of unhydratable entries — becomes `null`,
   never a leftover raw array;
-- **a property the payload never carried is not invented.** It stays uninitialized, and
-  so absent from the serialized shape.
+- **a property the payload never carried is not invented.** Hydration leaves it in
+  whatever state its declaration gives it: declared without a default, it stays
+  uninitialized and so absent from the serialized shape; declared `= null`, it stays
+  `null` and is serialized as such. Either way hydration does not touch it.
 
 The second point is what makes the two paths agree: a nested reference answers the same
 thing through its parent as through the nested hydrator called on its own.

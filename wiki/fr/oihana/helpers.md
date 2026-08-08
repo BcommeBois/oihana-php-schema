@@ -91,8 +91,11 @@ Un hydrateur qui résout des références imbriquées (`hydrateCustomer`, `hydra
 - **la réponse de l'hydrateur imbriqué est ensuite écrite telle quelle, `null` compris.**
   Un tableau qui ne résout rien — liste vide, liste d'entrées non hydratables — devient
   `null`, jamais un tableau brut résiduel ;
-- **une propriété que la charge utile n'a jamais portée n'est pas inventée.** Elle reste
-  non initialisée, donc absente de la forme sérialisée.
+- **une propriété que la charge utile n'a jamais portée n'est pas inventée.** L'hydratation
+  la laisse dans l'état que lui donne sa déclaration : déclarée sans valeur par défaut,
+  elle reste non initialisée, donc absente de la forme sérialisée ; déclarée `= null`, elle
+  reste à `null` et est sérialisée comme telle. Dans les deux cas, l'hydratation n'y touche
+  pas.
 
 C'est le deuxième point qui met les deux chemins d'accord : une référence imbriquée répond
 la même chose à travers son parent qu'à travers l'hydrateur imbriqué appelé seul.
