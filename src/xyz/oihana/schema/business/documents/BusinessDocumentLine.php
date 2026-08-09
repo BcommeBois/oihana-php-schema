@@ -6,6 +6,7 @@ use oihana\reflect\attributes\HydrateAs;
 use oihana\reflect\attributes\HydrateWith;
 
 use org\schema\CompoundPriceSpecification;
+use org\schema\DefinedTerm;
 use org\schema\MonetaryAmount;
 use org\schema\PriceSpecification;
 use org\schema\Product;
@@ -59,6 +60,26 @@ class BusinessDocumentLine extends StructuredValue
     public null|array|Adjustment $adjustments ;
 
     /**
+     * Why the goods on this line leave without being invoiced — a gift, a
+     * breakage, a sample, goods that were the customer's to begin with.
+     *
+     * 🔑 **Its presence is what says the line is offered.** There is deliberately
+     * no boolean beside it : an ERP carrying both a flag and a reason has been
+     * observed with the two drifting apart, and a line claiming to be a gift
+     * while still charging money is the one thing this property exists to prevent.
+     *
+     * The term is frozen by its code and its label (`id` + `name`), never by its
+     * storage key : a controlled vocabulary re-harvested into a fresh collection
+     * is renumbered, and a line pointing at a key would silently designate
+     * another term.
+     *
+     * @var DefinedTerm|array|null
+     * @since 1.4.0
+     */
+    #[HydrateAs(DefinedTerm::class)]
+    public null|array|DefinedTerm $freeReason = null ;
+
+    /**
      * The product or service sold on this line.
      *
      * The `Product|Service` union is resolved from the payload's `@type` : a raw
@@ -108,6 +129,20 @@ class BusinessDocumentLine extends StructuredValue
      */
     #[HydrateWith(TaxDetail::class)]
     public null|array|TaxDetail $taxes ;
+
+    /**
+     * A note meant for whoever prepares the goods, never for the customer.
+     *
+     * The sibling of the inherited `description`, which is what the customer
+     * reads on the document : « reprendre les 3 colis palette 12, ne pas remettre
+     * en stock » belongs on the picking slip and nowhere else. Keeping the two
+     * apart is what lets a document be printed twice, for two audiences, from a
+     * single line.
+     *
+     * @var string|null
+     * @since 1.4.0
+     */
+    public ?string $technicalNote = null ;
 
     /**
      * The line total including tax.

@@ -2,6 +2,7 @@
 
 namespace tests\xyz\oihana\schema\business\documents ;
 
+use org\schema\DefinedTerm;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
 
@@ -37,12 +38,14 @@ class BusinessDocumentLineTest extends TestCase
         $this->assertSame( 'additionalProperty' , BusinessDocumentLine::ADDITIONAL_PROPERTY );
         $this->assertSame( 'adjustments'        , BusinessDocumentLine::ADJUSTMENTS         );
         $this->assertSame( 'color'              , BusinessDocumentLine::COLOR               );
+        $this->assertSame( 'freeReason'         , BusinessDocumentLine::FREE_REASON         );
         $this->assertSame( 'item'               , BusinessDocumentLine::ITEM                );
         $this->assertSame( 'position'           , BusinessDocumentLine::POSITION            );
         $this->assertSame( 'price'              , BusinessDocumentLine::PRICE               );
         $this->assertSame( 'quantity'           , BusinessDocumentLine::QUANTITY            );
         $this->assertSame( 'subtotal'           , BusinessDocumentLine::SUBTOTAL            );
         $this->assertSame( 'taxes'              , BusinessDocumentLine::TAXES               );
+        $this->assertSame( 'technicalNote'      , BusinessDocumentLine::TECHNICAL_NOTE      );
         $this->assertSame( 'total'              , BusinessDocumentLine::TOTAL               );
         $this->assertSame( 'unit'               , BusinessDocumentLine::UNIT                );
 
@@ -56,12 +59,14 @@ class BusinessDocumentLineTest extends TestCase
         $this->assertNull( $line->additionalProperty ?? null );
         $this->assertNull( $line->adjustments        ?? null );
         $this->assertNull( $line->color              ?? null );
+        $this->assertNull( $line->freeReason         ?? null );
         $this->assertNull( $line->item               ?? null );
         $this->assertNull( $line->position           ?? null );
         $this->assertNull( $line->price              ?? null );
         $this->assertNull( $line->quantity           ?? null );
         $this->assertNull( $line->subtotal           ?? null );
         $this->assertNull( $line->taxes              ?? null );
+        $this->assertNull( $line->technicalNote      ?? null );
         $this->assertNull( $line->total              ?? null );
         $this->assertNull( $line->unit               ?? null );
     }
@@ -88,14 +93,48 @@ class BusinessDocumentLineTest extends TestCase
     {
         $line = new BusinessDocumentLine
         ([
-            BusinessDocumentLine::POSITION => 1 ,
-            BusinessDocumentLine::QUANTITY => 5 ,
-            BusinessDocumentLine::UNIT     => UnitOfSaleType::UNIT ,
+            BusinessDocumentLine::POSITION       => 1 ,
+            BusinessDocumentLine::QUANTITY       => 5 ,
+            BusinessDocumentLine::TECHNICAL_NOTE => 'ne pas remettre en stock' ,
+            BusinessDocumentLine::UNIT           => UnitOfSaleType::UNIT ,
         ]);
 
         $this->assertSame( 1 , $line->position ) ;
         $this->assertSame( 5 , $line->quantity ) ;
+        $this->assertSame( 'ne pas remettre en stock' , $line->technicalNote ) ;
         $this->assertSame( UnitOfSaleType::UNIT , $line->unit ) ;
+    }
+
+    /**
+     * The technical note is a sibling of the inherited `description`, not a
+     * replacement : the two must survive side by side on the same line.
+     * @return void
+     * @throws ReflectionException
+     */
+    public function testTechnicalNoteAndDescriptionCoexist(): void
+    {
+        $line = new BusinessDocumentLine
+        ([
+            'description'                        => 'Palette de 12 bouteilles' ,
+            BusinessDocumentLine::TECHNICAL_NOTE => 'reprendre les 3 colis'    ,
+        ]);
+
+        $this->assertSame( 'Palette de 12 bouteilles' , $line->description   ) ;
+        $this->assertSame( 'reprendre les 3 colis'    , $line->technicalNote ) ;
+    }
+
+    /**
+     * @return void
+     * @throws ReflectionException
+     */
+    public function testConstructorKeepsFreeReasonAsRawArray(): void
+    {
+        $line = new BusinessDocumentLine
+        ([
+            BusinessDocumentLine::FREE_REASON => [ Oihana::ID => 'DEF' , Oihana::NAME => 'Défaut' ] ,
+        ]);
+
+        $this->assertIsArray( $line->freeReason ) ;
     }
 
     /**
@@ -172,6 +211,30 @@ class BusinessDocumentLineTest extends TestCase
 
         $this->assertInstanceOf( QuantitativeValue::class , $line->quantity ) ;
         $this->assertSame( 5 , $line->quantity->value ) ;
+    }
+
+    /**
+     * The term is designated by its code and its label — the pair the class
+     * documents as what freezes the reason.
+     * @throws ReflectionException
+     */
+    public function testReflectionHydratesFreeReasonIntoADefinedTerm(): void
+    {
+        $line = new Reflection()->hydrate
+        (
+            [
+                BusinessDocumentLine::FREE_REASON =>
+                [
+                    Oihana::ID   => 'DEF'    ,
+                    Oihana::NAME => 'Défaut' ,
+                ] ,
+            ],
+            BusinessDocumentLine::class
+        );
+
+        $this->assertInstanceOf( DefinedTerm::class , $line->freeReason ) ;
+        $this->assertSame( 'DEF'    , $line->freeReason->id   ) ;
+        $this->assertSame( 'Défaut' , $line->freeReason->name ) ;
     }
 
     /**

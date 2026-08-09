@@ -8,6 +8,36 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds `xyz\oihana\schema\business\documents\BusinessDocumentLine::$freeReason`
+  (`null|array|DefinedTerm`, `#[HydrateAs(DefinedTerm::class)]`), why the goods
+  on a line leave without being invoiced — a gift, a breakage, a sample, goods
+  that were the customer's to begin with. Its presence is what says the line is
+  offered : there is deliberately no boolean beside it, since an ERP carrying
+  both a flag and a reason has been observed with the two drifting apart, and a
+  line claiming to be a gift while still charging money is the one thing the
+  property exists to prevent. The term is designated by its code and its label
+  (`id` + `name`), never by its storage key — a controlled vocabulary
+  re-harvested into a fresh collection is renumbered, and a line pointing at a
+  key would silently designate another term. The shape reuses
+  `PricingCondition::$category` exactly, so a consumer reads a resolved term the
+  same way in both places : a joined row hydrates into a `DefinedTerm` through
+  `Reflection::hydrate`, a raw array passed to the constructor stays as read.
+
+- Adds `xyz\oihana\schema\business\documents\BusinessDocumentLine::$technicalNote`
+  (`?string`), a note meant for whoever prepares the goods, never for the
+  customer. It is the sibling of the inherited `description`, which is what the
+  customer reads on the document : « reprendre les 3 colis palette 12, ne pas
+  remettre en stock » belongs on the picking slip and nowhere else, and keeping
+  the two apart is what lets a document be printed twice, for two audiences,
+  from a single line. Note that the property serializes like any other — a
+  renderer addressing the customer is what must leave it out, the type does not
+  do it on its own.
+
+  `FREE_REASON` and `TECHNICAL_NOTE` join `BusinessDocumentLineTrait`, and the
+  suite covers the constants, the defaults, the constructor path of both, the
+  Reflection hydration of the reason into a `DefinedTerm`, and the coexistence
+  of the technical note with the `description` it must not replace.
+
 - Adds delivery routes — the recurring circuits an own-fleet vehicle runs — as a
   new `xyz\oihana\schema\shipping` namespace plus one thesaurus term, filling a
   gap the library only half covered : `DeliveryMethodTerm` said *how* an order

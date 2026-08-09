@@ -14,12 +14,14 @@ trait BusinessDocumentLineTrait
     const string ADDITIONAL_PROPERTY = 'additionalProperty' ;
     const string ADJUSTMENTS         = 'adjustments' ;
     const string COLOR               = 'color' ;
+    const string FREE_REASON         = 'freeReason' ;
     const string ITEM                = 'item' ;
     const string POSITION            = 'position' ;
     const string PRICE               = 'price' ;
     const string QUANTITY            = 'quantity' ;
     const string SUBTOTAL            = 'subtotal' ;
     const string TAXES               = 'taxes' ;
+    const string TECHNICAL_NOTE      = 'technicalNote' ;
     const string TOTAL               = 'total' ;
     const string UNIT                = 'unit' ;
 }
