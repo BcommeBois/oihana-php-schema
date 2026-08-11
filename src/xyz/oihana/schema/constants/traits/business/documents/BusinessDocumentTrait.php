@@ -15,6 +15,7 @@ trait BusinessDocumentTrait
     public const string ASSIGNED_SELLER = 'assignedSeller' ;
     public const string ATTACHMENTS     = 'attachments' ;
     public const string AUTHOR          = 'author' ;
+    public const string AUTHORITY       = 'authority' ;
     public const string BILLING_ADDRESS = 'billingAddress' ;
     public const string CONTACT         = 'contact' ;
     public const string CURRENCY        = 'currency' ;

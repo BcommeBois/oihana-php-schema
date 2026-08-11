@@ -8,6 +8,62 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds `xyz\oihana\schema\business\documents\BusinessDocumentLine::$includedInTotal`,
+  which says whether a line counts towards the document totals.
+
+  **An absent value means the line counts**, so every document stored before this
+  property existed keeps summing exactly as it did ; only a line left out says so,
+  with `false`.
+
+  A priced line is not always a line to pay for. A quote may offer the same work
+  twice — two floorings, two finishes — and expect the customer to keep one : both
+  are printed, both are costed, one is billed. The lines of the discarded option
+  are **ordinary lines**, with an item, a quantity and a price ; nothing about
+  their content sets them apart, which is what makes the omission expensive.
+  Summing them anyway has been measured, on a real quote, to overstate it by a
+  factor of two. The same slot serves anything shown but not owed.
+
+  ⚠️ It records **that** a line is out, never **why** : reading it as « this line
+  is a variant » would narrow a fact that also covers informational fees and
+  amounts quoted for reference.
+
+- Adds `xyz\oihana\schema\business\documents\BusinessDocumentLine::$section`, the
+  heading a line belongs to when a document is written in chapters — « roof
+  frame », « oak flooring », « laying ».
+
+  A plain label, repeated on every line of the same group, and deliberately
+  nothing more : no section class, no nesting, no subtotal of its own. The
+  grouping is whatever shares the label. That is enough to print a document in
+  chapters, and cheap enough to be worth carrying even while nothing reads it —
+  the alternative being to drop, at read time, a structure the source states.
+
+  🚨 **The group's subtotal is never stored** — here or beside it. A recap amount
+  living next to the lines it recaps is the shortest path to counting the same
+  goods twice ; it is derived, and it stays derived.
+
+  Distinct from the inherited `description`, which names the item : a description
+  belongs to one line, a heading is shared by several.
+
+- Adds `xyz\oihana\schema\business\documents\BusinessDocument::$authority` and its
+  `xyz\oihana\schema\enumerations\BusinessDocumentAuthority` enumeration
+  (`OWNED` / `MIRRORED`) — which system holds the truth about a document : ours,
+  or the one it was harvested from.
+
+  **An absent value means the document is ours.** Only what comes from elsewhere
+  states it, so nothing stored before this property existed changes meaning.
+
+  It answers a question no other property does. The class says what the document
+  *is*, `direction` says which side of the trade we stand on, `status` says where
+  it stands in its lifecycle — none of them says **who may change it**. The
+  distinction only becomes visible once documents of both origins share a
+  collection : a quote drafted here and an invoice mirrored from an ERP look
+  alike, yet a write on the second is a correction the next refresh erases without
+  a word, and whoever made it never learns that it was lost.
+
+  ⚠️ **The enumeration states the fact ; it does not enforce it.** Refusing the
+  write belongs to whoever exposes the document — a schema carries meaning, not
+  permissions.
+
 - Adds three hydration helpers, closing the last header slots of a business
   document that came back as raw arrays :
   `xyz\oihana\schema\helpers\hydrate\documents\hydrateDocumentTotals()`,

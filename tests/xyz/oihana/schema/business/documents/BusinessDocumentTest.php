@@ -21,6 +21,7 @@ use xyz\oihana\schema\business\documents\DocumentTotals;
 use xyz\oihana\schema\business\documents\PaymentSchedule;
 use xyz\oihana\schema\business\documents\TaxDetail;
 use xyz\oihana\schema\constants\Oihana;
+use xyz\oihana\schema\enumerations\BusinessDocumentAuthority;
 use xyz\oihana\schema\enumerations\BusinessDocumentDirection;
 use xyz\oihana\schema\enumerations\BusinessDocumentStatus;
 
@@ -42,6 +43,7 @@ class BusinessDocumentTest extends TestCase
         $this->assertSame( 'assignedSeller' , BusinessDocument::ASSIGNED_SELLER );
         $this->assertSame( 'attachments'    , BusinessDocument::ATTACHMENTS     );
         $this->assertSame( 'author'         , BusinessDocument::AUTHOR          );
+        $this->assertSame( 'authority'      , BusinessDocument::AUTHORITY       );
         $this->assertSame( 'billingAddress' , BusinessDocument::BILLING_ADDRESS );
         $this->assertSame( 'contact'        , BusinessDocument::CONTACT         );
         $this->assertSame( 'currency'       , BusinessDocument::CURRENCY        );
@@ -78,6 +80,7 @@ class BusinessDocumentTest extends TestCase
         $this->assertNull( $document->assignedSeller ?? null );
         $this->assertNull( $document->attachments    ?? null );
         $this->assertNull( $document->author         ?? null );
+        $this->assertNull( $document->authority      ?? null );
         $this->assertNull( $document->billingAddress ?? null );
         $this->assertNull( $document->contact        ?? null );
         $this->assertNull( $document->currency       ?? null );
@@ -115,6 +118,40 @@ class BusinessDocumentTest extends TestCase
         $this->assertInstanceOf( Person::class , $document->customer ) ;
         $this->assertInstanceOf( Organization::class , $document->seller ) ;
         $this->assertInstanceOf( Organization::class , $document->author ) ;
+    }
+
+    /**
+     * A document that says nothing about its authority is ours : the property
+     * only ever states the exception.
+     * @throws ReflectionException
+     */
+    public function testAuthorityIsAbsentOnAnOwnDocument(): void
+    {
+        $document = new BusinessDocument
+        ([
+            BusinessDocument::STATUS => BusinessDocumentStatus::DRAFT ,
+        ]);
+
+        $this->assertNull( $document->authority ) ;
+    }
+
+    /**
+     * A harvested document says it explicitly, and the value survives beside
+     * the direction and the status it is orthogonal to.
+     * @throws ReflectionException
+     */
+    public function testAuthorityHydratesMirrored(): void
+    {
+        $document = new BusinessDocument
+        ([
+            BusinessDocument::AUTHORITY => BusinessDocumentAuthority::MIRRORED ,
+            BusinessDocument::DIRECTION => BusinessDocumentDirection::SALE     ,
+            BusinessDocument::STATUS    => BusinessDocumentStatus::ACCEPTED    ,
+        ]);
+
+        $this->assertSame( BusinessDocumentAuthority::MIRRORED , $document->authority ) ;
+        $this->assertSame( BusinessDocumentDirection::SALE     , $document->direction ) ;
+        $this->assertSame( BusinessDocumentStatus::ACCEPTED    , $document->status    ) ;
     }
 
     /**

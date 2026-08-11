@@ -39,10 +39,12 @@ class BusinessDocumentLineTest extends TestCase
         $this->assertSame( 'adjustments'        , BusinessDocumentLine::ADJUSTMENTS         );
         $this->assertSame( 'color'              , BusinessDocumentLine::COLOR               );
         $this->assertSame( 'freeReason'         , BusinessDocumentLine::FREE_REASON         );
+        $this->assertSame( 'includedInTotal'    , BusinessDocumentLine::INCLUDED_IN_TOTAL   );
         $this->assertSame( 'item'               , BusinessDocumentLine::ITEM                );
         $this->assertSame( 'position'           , BusinessDocumentLine::POSITION            );
         $this->assertSame( 'price'              , BusinessDocumentLine::PRICE               );
         $this->assertSame( 'quantity'           , BusinessDocumentLine::QUANTITY            );
+        $this->assertSame( 'section'            , BusinessDocumentLine::SECTION             );
         $this->assertSame( 'subtotal'           , BusinessDocumentLine::SUBTOTAL            );
         $this->assertSame( 'taxes'              , BusinessDocumentLine::TAXES               );
         $this->assertSame( 'technicalNote'      , BusinessDocumentLine::TECHNICAL_NOTE      );
@@ -60,10 +62,12 @@ class BusinessDocumentLineTest extends TestCase
         $this->assertNull( $line->adjustments        ?? null );
         $this->assertNull( $line->color              ?? null );
         $this->assertNull( $line->freeReason         ?? null );
+        $this->assertNull( $line->includedInTotal    ?? null );
         $this->assertNull( $line->item               ?? null );
         $this->assertNull( $line->position           ?? null );
         $this->assertNull( $line->price              ?? null );
         $this->assertNull( $line->quantity           ?? null );
+        $this->assertNull( $line->section            ?? null );
         $this->assertNull( $line->subtotal           ?? null );
         $this->assertNull( $line->taxes              ?? null );
         $this->assertNull( $line->technicalNote      ?? null );
@@ -121,6 +125,58 @@ class BusinessDocumentLineTest extends TestCase
 
         $this->assertSame( 'Palette de 12 bouteilles' , $line->description   ) ;
         $this->assertSame( 'reprendre les 3 colis'    , $line->technicalNote ) ;
+    }
+
+    /**
+     * An absent flag means the line counts : a document written before the
+     * property existed must keep summing exactly as it did.
+     * @return void
+     * @throws ReflectionException
+     */
+    public function testIncludedInTotalIsAbsentOnAnOrdinaryLine(): void
+    {
+        $line = new BusinessDocumentLine
+        ([
+            BusinessDocumentLine::POSITION => 325 ,
+            BusinessDocumentLine::QUANTITY => 42  ,
+        ]);
+
+        $this->assertNull( $line->includedInTotal ) ;
+    }
+
+    /**
+     * Only a line left out of the totals says so, and it says so with `false` —
+     * the quote that offers two floorings and bills one.
+     * @return void
+     * @throws ReflectionException
+     */
+    public function testIncludedInTotalHydratesFalse(): void
+    {
+        $line = new BusinessDocumentLine
+        ([
+            BusinessDocumentLine::POSITION          => 400   ,
+            BusinessDocumentLine::INCLUDED_IN_TOTAL => false ,
+        ]);
+
+        $this->assertFalse( $line->includedInTotal ) ;
+    }
+
+    /**
+     * The heading is shared by several lines, the description names one item :
+     * the two must survive side by side.
+     * @return void
+     * @throws ReflectionException
+     */
+    public function testSectionAndDescriptionCoexist(): void
+    {
+        $line = new BusinessDocumentLine
+        ([
+            'description'                 => 'Parquet chêne fumé léger' ,
+            BusinessDocumentLine::SECTION => 'PARQUET CHENE FUME'       ,
+        ]);
+
+        $this->assertSame( 'Parquet chêne fumé léger' , $line->description ) ;
+        $this->assertSame( 'PARQUET CHENE FUME'       , $line->section     ) ;
     }
 
     /**

@@ -15,6 +15,7 @@ use org\schema\PostalAddress;
 
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\constants\traits\business\documents\BusinessDocumentTrait;
+use xyz\oihana\schema\enumerations\BusinessDocumentAuthority;
 use xyz\oihana\schema\enumerations\BusinessDocumentDirection;
 use xyz\oihana\schema\enumerations\BusinessDocumentStatus;
 
@@ -93,6 +94,29 @@ class BusinessDocument extends Intangible
      */
     #[HydrateWith(Organization::class, Person::class)]
     public null|Organization|Person|array $author ;
+
+    /**
+     * Which system holds the truth about this document — ours, or the one it
+     * was harvested from.
+     *
+     * 🔑 **Its absence means the document is ours.** Only what comes from
+     * elsewhere states it, so nothing stored before this property existed
+     * changes meaning.
+     *
+     * Answers a question no other property does : the class says what the
+     * document is, `direction` says which side of the trade we stand on,
+     * `status` says where it stands in its lifecycle — none of them says who
+     * may change it. The distinction matters as soon as documents of both
+     * origins share a collection : editing a mirrored one is a correction the
+     * next refresh erases without a word.
+     *
+     * ⚠️ Carrying the fact is not enforcing it — refusing the write belongs to
+     * whoever exposes the document.
+     *
+     * @var null|string|BusinessDocumentAuthority
+     * @since 1.4.0
+     */
+    public null|string|BusinessDocumentAuthority $authority = null ;
 
     /**
      * The address the document is billed to — stored as a frozen copy so the

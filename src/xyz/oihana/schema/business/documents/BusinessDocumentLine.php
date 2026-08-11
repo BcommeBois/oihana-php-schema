@@ -80,6 +80,31 @@ class BusinessDocumentLine extends StructuredValue
     public null|array|DefinedTerm $freeReason = null ;
 
     /**
+     * Whether this line counts towards the document totals.
+     *
+     * 🔑 **Its absence means the line counts.** Only a line left out says so,
+     * which keeps every document written before this property existed exactly
+     * as true as it was.
+     *
+     * A priced line is not always a line to pay for. A quote may offer the same
+     * work twice — two floorings, two finishes — and expect the customer to keep
+     * one : both are printed, both are costed, one is billed. The lines of the
+     * discarded option are ordinary lines, with an item, a quantity and a price ;
+     * nothing about their content sets them apart. Summing them anyway has been
+     * measured to overstate a real quote by a factor of two.
+     *
+     * The same slot serves anything shown but not owed — an informational fee,
+     * a figure quoted for reference.
+     *
+     * ⚠️ Do not read it as « this line is a variant » : the reason a line is left
+     * out is not its business, only the fact is.
+     *
+     * @var bool|null
+     * @since 1.4.0
+     */
+    public ?bool $includedInTotal = null ;
+
+    /**
      * The product or service sold on this line.
      *
      * The `Product|Service` union is resolved from the payload's `@type` : a raw
@@ -115,6 +140,28 @@ class BusinessDocumentLine extends StructuredValue
      */
     #[HydrateAs(QuantitativeValue::class)]
     public null|array|int|float|QuantitativeValue $quantity ;
+
+    /**
+     * The heading this line belongs to, when the document is written in
+     * chapters — « roof frame », « oak flooring », « laying ».
+     *
+     * A plain label, repeated on every line of the same group, and deliberately
+     * nothing more : no section class, no nesting, no subtotal of its own. The
+     * grouping is whatever shares the label, which is enough to print a document
+     * in chapters and cheap enough to be worth carrying even when nothing reads
+     * it yet.
+     *
+     * 🚨 **Never store the group's subtotal here or beside it.** A recap amount
+     * living next to the lines it recaps is the shortest path to counting the
+     * same goods twice — it is derived, and it stays derived.
+     *
+     * Distinct from the inherited `description`, which names the item itself :
+     * a description belongs to one line, a heading is shared by several.
+     *
+     * @var string|null
+     * @since 1.4.0
+     */
+    public ?string $section = null ;
 
     /**
      * The line total before tax (quantity × price, adjustments applied).
