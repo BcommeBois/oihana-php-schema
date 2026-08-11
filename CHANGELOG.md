@@ -8,6 +8,54 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds three hydration helpers, closing the last header slots of a business
+  document that came back as raw arrays :
+  `xyz\oihana\schema\helpers\hydrate\documents\hydrateDocumentTotals()`,
+  `xyz\oihana\schema\helpers\hydrate\documents\hydrateAdjustment()` and
+  `xyz\oihana\schema\helpers\hydrate\hydrateParcelDelivery()`.
+
+  They answer one limit, the same one `hydrateDocumentLine()` was written for :
+  a constructor **assigns flat**, so a class built that way never types anything
+  nested. `DocumentTotals`, `Adjustment` and `TaxDetail` all descend from
+  `Thing`, which is precisely what sends them down the constructor path — and
+  leaves an amount as `[ 'value' => 62.4 , 'currency' => 'EUR' ]` where the class
+  declares a `MonetaryAmount`.
+
+  **`hydrateDocumentTotals()` and `hydrateAdjustment()` go through
+  `Reflection::hydrate()`**, which honors the `#[HydrateAs]` / `#[HydrateWith]`
+  attributes — and honors them **at every depth**, since it recurses into each
+  nested class in its turn. One call on an adjustment therefore types its
+  `amount`, its `taxes`, and the `basisAmount` / `taxAmount` each `TaxDetail`
+  declares of its own. Nothing had to be added for `TaxDetail` or
+  `MonetaryAmount`: the attributes were already there, only the path that reads
+  them was missing.
+
+  **`hydrateParcelDelivery()` takes the other route** — the constructor, then its
+  references one by one — because reflection would bring nothing here :
+  `ParcelDelivery` declares no attribute on `deliveryAddress`,
+  `hasDeliveryMethod` or `hasDeliveryRoute`, so the three would stay raw while
+  the strictness of reflection dropped whatever a stored delivery carries beyond
+  the Schema.org names. It resolves both addresses through
+  `hydratePostalAddress()`, the two travel terms through `hydrateDefinedTerm()`,
+  and the carrier through `hydrateOrganizationOrPerson()` — the `Organization|Person`
+  union a property type cannot settle alone.
+
+  `hydrateAdjustment()` is born with one rule of its own : an **empty list is
+  kept as an empty list**, where the rest of the family answers `null`. « This
+  document has no adjustment » is an answer worth serving, and a consumer
+  mapping over the value deserves the empty list it can map over. The rule stops
+  at the top-level list handed to the helper — a non-empty list that hydrates to
+  nothing still answers `null`, « nothing here was readable » being a different
+  statement from « there is nothing here ».
+
+  🔑 **The two travel terms are parameters, not hard-wired classes**
+  (`class-string<DefinedTerm>`, defaulting to `DeliveryMethodTerm` and
+  `DeliveryRouteTerm`), and that is why the helper lives under `xyz\oihana`
+  while `ParcelDelivery` stays plain `org\schema`. Declaring the thesaurus
+  classes as attributes on the Schema.org class would have made the lower layer
+  depend on the upper one; a parameter keeps the dependency pointing the right
+  way, and lets any `DefinedTerm` subclass take their place.
+
 - Adds `xyz\oihana\schema\business\documents\BusinessDocument::$assignedSeller`
   (`null|int|string|array|Person`), the salesperson a document is assigned to —
   who carries the deal, as opposed to the `seller` who issues it. The two were
