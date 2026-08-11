@@ -8,6 +8,53 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds `xyz\oihana\schema\business\documents\DeliveryNote::$referencesOrder`, the
+  purchase order(s) a delivery note answers to.
+
+  A delivery is not the shipment of one order. A round trip loads whatever is
+  ready for a customer that day, and what is ready rarely belongs to a single
+  order : a note commonly carries a few lines of one order and a few of another,
+  while the rest of both waits for the next departure.
+
+  Without it the note was **the one document of the cycle with no upstream
+  link** : `referencesQuote` walks a quote up to its order, `referencesOrder`
+  walks an order up to its invoice, and the delivery sat outside that chain.
+
+  ⚠️ It names the orders the note touches, not how much of each — that belongs
+  to `DeliveryLine`, one line at a time.
+
+- Adds `xyz\oihana\schema\business\documents\DeliveryLine::$referencesOrder`, the
+  order a delivery line comes from, and states on `$position` that it is read
+  relative to it.
+
+  A delivery line is a fact of its own, neither a copy of the order's line nor a
+  pointer to it : it says what left **on this note**, of that line, on that day.
+  The quantity belongs to the delivery — which is why a line can go out in
+  halves, and why a document that merely pointed at the order's lines could not
+  express it.
+
+  🔑 **Not a navigation convenience.** As soon as a note mixes several orders a
+  position on its own names nothing — line 325 of which order ? — and
+  `orderedQuantity` cannot even be filled when the source states the ordered
+  quantity on the order alone.
+
+  Holds the raw reference as read, or the resolved `PurchaseOrder` : the union
+  names a single class, so `Reflection::hydrate()` resolves a joined row on its
+  own while a bare key is left as read.
+
+- Adds `xyz\oihana\schema\business\documents\Invoice::$referencesDeliveryNote`,
+  the delivery note(s) an invoice bills.
+
+  🔑 **Often the only way to the invoice's lines.** An end-of-month invoice is
+  built from what left the warehouse during the period, and a source that stamps
+  the invoice number on the delivery — not on each line — leaves this link as the
+  sole path back to what was actually billed.
+
+  The sibling of `referencesOrder`, and not a substitute for it : orders say what
+  was committed to, deliveries say what went out. An order can be invoiced across
+  two months, and one invoice can settle deliveries belonging to several orders ;
+  neither reference alone describes that.
+
 - Adds `xyz\oihana\schema\business\documents\BusinessDocumentLine::$includedInTotal`,
   which says whether a line counts towards the document totals.
 

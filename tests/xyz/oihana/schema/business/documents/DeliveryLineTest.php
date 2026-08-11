@@ -12,6 +12,7 @@ use org\schema\QuantitativeValue;
 use org\schema\StructuredValue;
 
 use xyz\oihana\schema\business\documents\DeliveryLine;
+use xyz\oihana\schema\business\documents\PurchaseOrder;
 use xyz\oihana\schema\constants\Oihana;
 
 class DeliveryLineTest extends TestCase
@@ -35,6 +36,7 @@ class DeliveryLineTest extends TestCase
         $this->assertSame( 'item'              , DeliveryLine::ITEM               );
         $this->assertSame( 'orderedQuantity'   , DeliveryLine::ORDERED_QUANTITY   );
         $this->assertSame( 'position'          , DeliveryLine::POSITION           );
+        $this->assertSame( 'referencesOrder'   , DeliveryLine::REFERENCES_ORDER   );
         $this->assertSame( 'serialNumbers'     , DeliveryLine::SERIAL_NUMBERS     );
 
         $this->assertSame( Oihana::POSITION , DeliveryLine::POSITION );
@@ -51,6 +53,7 @@ class DeliveryLineTest extends TestCase
         $this->assertNull( $line->item              ?? null );
         $this->assertNull( $line->orderedQuantity   ?? null );
         $this->assertNull( $line->position          ?? null );
+        $this->assertNull( $line->referencesOrder   ?? null );
         $this->assertNull( $line->serialNumbers     ?? null );
     }
 
@@ -95,5 +98,38 @@ class DeliveryLineTest extends TestCase
         $this->assertInstanceOf( QuantitativeValue::class , $line->orderedQuantity ) ;
         $this->assertInstanceOf( QuantitativeValue::class , $line->deliveredQuantity ) ;
         $this->assertSame( 100 , $line->orderedQuantity->value ) ;
+    }
+
+    /**
+     * A bare order reference is left as read : a note that mixes several orders
+     * needs to name one per line, and a key is often all the source gives.
+     * @throws ReflectionException
+     */
+    public function testReferencesOrderKeepsABareReference(): void
+    {
+        $line = new DeliveryLine
+        ([
+            DeliveryLine::POSITION         => 325       ,
+            DeliveryLine::REFERENCES_ORDER => '1142229' ,
+        ]);
+
+        $this->assertSame( '1142229' , $line->referencesOrder ) ;
+        $this->assertSame( 325       , $line->position        ) ;
+    }
+
+    /**
+     * The union names a single class, so a joined row resolves on its own.
+     * @throws ReflectionException
+     */
+    public function testReflectionResolvesTheOriginatingOrder(): void
+    {
+        $line = new Reflection()->hydrate
+        (
+            [ DeliveryLine::REFERENCES_ORDER => [ 'identifier' => '1142229' ] ],
+            DeliveryLine::class
+        );
+
+        $this->assertInstanceOf( PurchaseOrder::class , $line->referencesOrder ) ;
+        $this->assertSame( '1142229' , $line->referencesOrder->identifier ) ;
     }
 }

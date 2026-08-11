@@ -14,4 +14,5 @@ trait DeliveryNoteTrait
     const string LINES             = 'lines' ;
     const string ORDER_DELIVERY    = 'orderDelivery' ;
     const string PROOF_OF_DELIVERY = 'proofOfDelivery' ;
+    const string REFERENCES_ORDER  = 'referencesOrder' ;
 }

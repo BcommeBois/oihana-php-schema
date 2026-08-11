@@ -54,4 +54,27 @@ class DeliveryNote extends BusinessDocument
      */
     #[HydrateAs(ProofOfDelivery::class)]
     public null|array|ProofOfDelivery $proofOfDelivery ;
+
+    /**
+     * The purchase order(s) this note delivers. One or more orders may be
+     * combined into a single delivery.
+     *
+     * A delivery is not the shipment of one order. A round trip loads whatever
+     * is ready for a customer that day, and what is ready rarely belongs to a
+     * single order : a note commonly carries a few lines of one order and a few
+     * of another, while the rest of both waits for the next departure.
+     *
+     * Without it the note is the one document of the cycle that cannot say what
+     * it answers to — `referencesQuote` walks a quote up to its order,
+     * `referencesOrder` walks an order up to its invoice, and the delivery sat
+     * outside that chain.
+     *
+     * ⚠️ It names the orders the note touches, not how much of each : that
+     * belongs to {@see DeliveryLine}, one line at a time.
+     *
+     * @var null|array|PurchaseOrder
+     * @since 1.4.0
+     */
+    #[HydrateWith(PurchaseOrder::class)]
+    public null|array|PurchaseOrder $referencesOrder ;
 }

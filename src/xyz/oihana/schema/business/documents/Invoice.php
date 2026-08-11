@@ -108,6 +108,27 @@ class Invoice extends BusinessDocument
     public null|array|Organization|Person $provider ;
 
     /**
+     * The delivery note(s) this invoice bills. One or more notes may be combined
+     * into a single invoice.
+     *
+     * 🔑 **Often the only way to the invoice's lines.** An end-of-month invoice
+     * is built from what left the warehouse during the period, and a source that
+     * stamps the invoice number on the delivery — not on each line — leaves this
+     * link as the sole path back to what was actually billed.
+     *
+     * The sibling of {@see Invoice::$referencesOrder}, and not a substitute for
+     * it : orders say what was committed to, deliveries say what went out. An
+     * order can be invoiced across two months, and one invoice can settle
+     * deliveries belonging to several orders — neither reference alone describes
+     * that.
+     *
+     * @var null|array|DeliveryNote
+     * @since 1.4.0
+     */
+    #[HydrateWith(DeliveryNote::class)]
+    public null|array|DeliveryNote $referencesDeliveryNote ;
+
+    /**
      * The purchase order(s) this invoice bills. One or more purchase orders may be combined into a single invoice.
      * @var null|array|PurchaseOrder
      */

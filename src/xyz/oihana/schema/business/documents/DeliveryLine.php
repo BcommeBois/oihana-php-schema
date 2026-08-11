@@ -90,9 +90,37 @@ class DeliveryLine extends StructuredValue
     /**
      * The position of the originating {@see BusinessDocumentLine} this
      * delivery line reconciles against (e.g. the purchase order's line 1, 2, 3...).
+     *
+     * ⚠️ **Read relative to {@see DeliveryLine::$referencesOrder}.** As soon as a
+     * note delivers more than one order, a position on its own names nothing —
+     * line 325 of which order ?
+     *
      * @var int|string|null
      */
     public null|int|string $position ;
+
+    /**
+     * The purchase order this line comes from.
+     *
+     * A delivery line is a fact of its own, not a copy of the order's line and
+     * not a pointer to it : it says what left **on this note**, of that line, on
+     * that day. The quantity belongs to the delivery — which is why a line can
+     * be delivered in halves, and why a document that merely pointed at the
+     * order's lines could not express it.
+     *
+     * 🔑 **Without it, `orderedQuantity` cannot even be filled.** A source that
+     * leaves the ordered quantity off the delivery only states it on the order,
+     * and there is no way back to it from a position alone.
+     *
+     * Holds the raw order reference as read from the source, or the resolved
+     * {@see PurchaseOrder}. No `#[HydrateAs]` is needed : the union names a
+     * single class, so {@see \oihana\reflect\Reflection::hydrate()} resolves a
+     * joined row on its own, while a bare key is left as read.
+     *
+     * @var null|string|PurchaseOrder
+     * @since 1.4.0
+     */
+    public null|string|PurchaseOrder $referencesOrder ;
 
     /**
      * The serial numbers of the delivered items, when the goods are serialized.

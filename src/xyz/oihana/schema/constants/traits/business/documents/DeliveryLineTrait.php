@@ -18,5 +18,6 @@ trait DeliveryLineTrait
     const string ITEM               = 'item' ;
     const string ORDERED_QUANTITY   = 'orderedQuantity' ;
     const string POSITION           = 'position' ;
+    const string REFERENCES_ORDER   = 'referencesOrder' ;
     const string SERIAL_NUMBERS     = 'serialNumbers' ;
 }

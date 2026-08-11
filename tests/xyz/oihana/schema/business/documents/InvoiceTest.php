@@ -13,6 +13,7 @@ use org\schema\Person;
 use org\schema\enumerations\status\PaymentComplete;
 
 use xyz\oihana\schema\business\documents\BusinessDocument;
+use xyz\oihana\schema\business\documents\DeliveryNote;
 use xyz\oihana\schema\business\documents\Invoice;
 use xyz\oihana\schema\business\documents\PurchaseOrder;
 use xyz\oihana\schema\constants\Oihana;
@@ -31,16 +32,17 @@ class InvoiceTest extends TestCase
 
     public function testTraitConstants(): void
     {
-        $this->assertSame( 'accountId'            , Invoice::ACCOUNT_ID             );
-        $this->assertSame( 'billingPeriod'        , Invoice::BILLING_PERIOD         );
-        $this->assertSame( 'broker'               , Invoice::BROKER                 );
-        $this->assertSame( 'category'             , Invoice::CATEGORY               );
-        $this->assertSame( 'confirmationNumber'   , Invoice::CONFIRMATION_NUMBER    );
-        $this->assertSame( 'paymentDueDate'       , Invoice::PAYMENT_DUE_DATE       );
-        $this->assertSame( 'paymentStatus'        , Invoice::PAYMENT_STATUS         );
-        $this->assertSame( 'provider'             , Invoice::PROVIDER               );
-        $this->assertSame( 'referencesOrder'      , Invoice::REFERENCES_ORDER       );
-        $this->assertSame( 'scheduledPaymentDate' , Invoice::SCHEDULED_PAYMENT_DATE );
+        $this->assertSame( 'accountId'              , Invoice::ACCOUNT_ID               );
+        $this->assertSame( 'billingPeriod'          , Invoice::BILLING_PERIOD           );
+        $this->assertSame( 'broker'                 , Invoice::BROKER                   );
+        $this->assertSame( 'category'               , Invoice::CATEGORY                 );
+        $this->assertSame( 'confirmationNumber'     , Invoice::CONFIRMATION_NUMBER      );
+        $this->assertSame( 'paymentDueDate'         , Invoice::PAYMENT_DUE_DATE         );
+        $this->assertSame( 'paymentStatus'          , Invoice::PAYMENT_STATUS           );
+        $this->assertSame( 'provider'               , Invoice::PROVIDER                 );
+        $this->assertSame( 'referencesDeliveryNote' , Invoice::REFERENCES_DELIVERY_NOTE );
+        $this->assertSame( 'referencesOrder'        , Invoice::REFERENCES_ORDER         );
+        $this->assertSame( 'scheduledPaymentDate'   , Invoice::SCHEDULED_PAYMENT_DATE   );
 
         $this->assertSame( Oihana::ACCOUNT_ID , Invoice::ACCOUNT_ID );
         $this->assertSame( Oihana::PROVIDER   , Invoice::PROVIDER   );
@@ -57,8 +59,9 @@ class InvoiceTest extends TestCase
         $this->assertNull( $invoice->confirmationNumber   ?? null );
         $this->assertNull( $invoice->paymentDueDate       ?? null );
         $this->assertNull( $invoice->paymentStatus        ?? null );
-        $this->assertNull( $invoice->provider             ?? null );
-        $this->assertNull( $invoice->referencesOrder      ?? null );
+        $this->assertNull( $invoice->provider               ?? null );
+        $this->assertNull( $invoice->referencesDeliveryNote ?? null );
+        $this->assertNull( $invoice->referencesOrder        ?? null );
         $this->assertNull( $invoice->scheduledPaymentDate ?? null );
     }
 
@@ -140,6 +143,30 @@ class InvoiceTest extends TestCase
         $this->assertInstanceOf( PurchaseOrder::class , $invoice->referencesOrder[ 0 ] ) ;
         $this->assertInstanceOf( PurchaseOrder::class , $invoice->referencesOrder[ 1 ] ) ;
         $this->assertSame( 'USD' , $invoice->referencesOrder[ 1 ]->currency ) ;
+    }
+
+    /**
+     * An end-of-month invoice settles what left the warehouse over the period :
+     * several notes, and orders neither of them covers on its own.
+     * @throws ReflectionException
+     */
+    public function testReferencesSeveralDeliveryNotesBesideItsOrders(): void
+    {
+        $invoice = ( new Reflection() )->hydrate
+        ([
+            Invoice::REFERENCES_DELIVERY_NOTE =>
+            [
+                [ 'identifier' => '1066599' ] ,
+                [ 'identifier' => '1067459' ] ,
+            ],
+            Invoice::REFERENCES_ORDER => [ [ 'identifier' => '1142229' ] ] ,
+        ], Invoice::class );
+
+        $this->assertCount( 2 , $invoice->referencesDeliveryNote ) ;
+        $this->assertInstanceOf( DeliveryNote::class , $invoice->referencesDeliveryNote[ 0 ] ) ;
+        $this->assertSame( '1067459' , $invoice->referencesDeliveryNote[ 1 ]->identifier ) ;
+
+        $this->assertInstanceOf( PurchaseOrder::class , $invoice->referencesOrder[ 0 ] ) ;
     }
 
     public function testInheritsBusinessDocumentProperties(): void
