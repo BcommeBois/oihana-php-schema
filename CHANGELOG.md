@@ -457,6 +457,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Changed
 
+- Replaces `cacheResult="false"` with `recordTestRunHistory="false"` in
+  `phpunit.xml` : the former is deprecated and removed in PHPUnit 14. The
+  attribute is set rather than dropped, because PHPUnit defaults it to `true`
+  when neither attribute is present — deleting the line would have turned the
+  run history on instead of preserving the current behavior. `false` is the
+  value that matches this suite : it declares no `executionOrder`, so nothing
+  reads the history it would write. The run is back to a clean
+  `OK (1799 tests, 6118 assertions)`.
+
 - **Behavior change.** The hydration helpers that resolve nested references now
   write the nested helper's answer as is, `null` included. Where the payload
   held an array that resolves to nothing — an empty list, a list of unhydratable
