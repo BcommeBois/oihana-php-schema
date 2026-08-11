@@ -94,6 +94,8 @@ For exhaustive property lists, browse the source under [`src/xyz/oihana/schema/s
 
 The helper is called by [`hydrateCustomerSite()`](helpers.md), so an address comes out with its routes already typed. On the reflection path, `#[HydrateWith]` on `Site::$deliveryRoute` does the same work.
 
+On the delivery side, [`hydrateParcelDelivery()`](../../src/xyz/oihana/schema/helpers/hydrate/hydrateParcelDelivery.php) is what types the two properties named above: `ParcelDelivery::$hasDeliveryMethod` into a `DeliveryMethodTerm`, `ParcelDelivery::$hasDeliveryRoute` into a `DeliveryRouteTerm` — and the delivery address into a `PostalAddress` along the way. Reflection **cannot** do it here: `ParcelDelivery` belongs to `org\schema` and declares no attribute on those properties, precisely because an attribute naming our thesaurus terms would make the Schema.org mirror depend on the business layer. The two target classes are therefore **parameters** of the helper, with the business terms as defaults.
+
 ---
 
 ## Related constants

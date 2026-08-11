@@ -94,6 +94,8 @@ Pour la liste exhaustive des propriétés, parcourez les sources sous [`src/xyz/
 
 L'assistant est appelé par [`hydrateCustomerSite()`](helpers.md), si bien qu'une adresse ressort avec ses tournées déjà typées. Par la voie de la réflexion, l'attribut `#[HydrateWith]` posé sur `Site::$deliveryRoute` fait le même travail.
 
+Côté livraison, c'est [`hydrateParcelDelivery()`](../../src/xyz/oihana/schema/helpers/hydrate/hydrateParcelDelivery.php) qui type les deux propriétés nommées plus haut : `ParcelDelivery::$hasDeliveryMethod` en `DeliveryMethodTerm`, `ParcelDelivery::$hasDeliveryRoute` en `DeliveryRouteTerm` — et l'adresse de livraison en `PostalAddress` au passage. La réflexion **ne peut pas** s'en charger ici : `ParcelDelivery` appartient à `org\schema` et ne déclare aucun attribut sur ces propriétés, précisément parce qu'un attribut nommant nos termes de thésaurus ferait dépendre le miroir Schema.org de la couche métier. Les deux classes cibles sont donc des **paramètres** de l'assistant, avec les termes maison par défaut.
+
 ---
 
 ## Constantes associées

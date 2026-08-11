@@ -41,8 +41,8 @@ La couche respecte la règle de la bibliothèque : `org\schema` est le miroir pu
 | Namespace                                     | Contenu                             | Dépend de              |
 |-----------------------------------------------|-------------------------------------|------------------------|
 | `org\schema\helpers\hydrate`                  | Les 7 hydrateurs Schema.org purs    | `org\schema` seulement |
-| `xyz\oihana\schema\helpers\hydrate`           | Les 6 hydrateurs métier             | `xyz` + `org`          |
-| `xyz\oihana\schema\helpers\hydrate\documents` | Les 3 hydrateurs de documents       | `xyz` + `org`          |
+| `xyz\oihana\schema\helpers\hydrate`           | Les 7 hydrateurs métier             | `xyz` + `org`          |
+| `xyz\oihana\schema\helpers\hydrate\documents` | Les 5 hydrateurs de documents       | `xyz` + `org`          |
 | `xyz\oihana\schema\helpers\pivots`            | Les 3 pivots de compte              | `xyz` + `org`          |
 
 Les hydrateurs métier appellent les hydrateurs purs pour leurs références imbriquées (`hydrateCustomer` délègue à `hydrateContactPoint` et `hydratePostalAddress`) — le sens de la flèche est toujours `xyz` → `org`.
@@ -50,6 +50,8 @@ Les hydrateurs métier appellent les hydrateurs purs pour leurs références imb
 Le sous-dossier `hydrate/documents` regroupe les hydrateurs des [documents commerciaux](business-documents.md). Ils se distinguent des autres sur un point : au lieu d'appeler le constructeur puis de recâbler chaque référence imbriquée à la main, ils passent par `Reflection::hydrate()` — le seul chemin qui honore les attributs `#[HydrateAs]` / `#[HydrateWith]` déjà portés par `BusinessDocumentLine`/`BusinessDocument`. La correspondance reste donc déclarée une seule fois, sur la classe.
 
 `hydrateOrganizationOrPerson`, lui, vit dans `org\schema\helpers\hydrate` : n'ayant besoin que des classes `org\schema\Organization`/`org\schema\Person`, il reste un hydrateur pur. Il résout une union `Organization|Person` d'après le `@type` du contenu, et accepte deux classes cibles personnalisées (`$organizationClass`/`$personClass`) pour viser un sous-type métier.
+
+`hydrateParcelDelivery` est le contre-exemple qui montre le mieux à quoi sert cet étagement. La livraison d'un document est une `org\schema\ParcelDelivery`, mais son mode et sa tournée sont des termes de thésaurus **maison** (`DeliveryMethodTerm`, `DeliveryRouteTerm`). Les nommer dans un `#[HydrateAs]` posé sur `ParcelDelivery` aurait retourné la flèche : la classe Schema.org se serait mise à dépendre de la couche métier. L'hydrateur les prend donc en **paramètres** (`class-string<DefinedTerm>`, avec les termes maison par défaut), et vit du côté `xyz` où cette connaissance a le droit d'exister. C'est aussi pourquoi il est le seul de la famille documentaire à passer par le constructeur plutôt que par `Reflection::hydrate()` : sans attribut à honorer sur ces trois propriétés, la réflexion n'apporterait rien — et sa sévérité écarterait au passage tout ce qu'une livraison stockée porte au-delà du vocabulaire Schema.org.
 
 > **Note.** Les unions ambiguës des documents (`customer`/`seller`/`author`, `broker`/`provider`, `item`, `ownedBy`) sont désormais tranchées **déclarativement**, par un `#[HydrateWith(A::class, B::class)]` posé sur la propriété : `Reflection::hydrate()` choisit alors la bonne classe d'après le discriminateur (`@type`, `atType` ou `type`) et, à défaut, d'après les propriétés présentes. La résolution est donc correcte **même sans passer par un helper**. Les hydrateurs de cette couche restent utiles pour ce que la réflexion ne fait pas : accepter indifféremment une définition simple, une liste indexée ou une valeur quelconque rendue telle quelle.
 
@@ -107,6 +109,23 @@ $site = hydrateCustomerSite( [ 'name' => 'A' , 'deliveryRoute' => [] ] ) ;
 $site->deliveryRoute ;                                                // null — la même réponse
 ```
 
+#### L'exception : les lignes et les ajustements d'un document
+
+Deux hydrateurs échappent à ce `null` — mais **sur leur argument de premier niveau seulement**, jamais sur les références qu'ils résolvent en dessous. `hydrateDocumentLine()` et `hydrateAdjustment()` rendent une **liste vide telle quelle** :
+
+```php
+hydrateDocumentLine( [] ) ;   // []  — « ce document n'a aucune ligne »
+hydrateAdjustment  ( [] ) ;   // []  — « ce document n'a aucun ajustement »
+
+hydrateDocumentLine( [ 'brut' ] ) ; // null — rien n'était lisible : ce n'est pas la même réponse
+```
+
+Les lignes et les ajustements sont les deux endroits où « il n'y en a pas » est une réponse qui vaut la peine d'être servie : un brouillon naît couramment sans une seule ligne, et un `null` fait disparaître la clé de la forme sérialisée — le consommateur qui parcourt la valeur tombe alors sur une absence au lieu de la liste vide qu'il pouvait parcourir.
+
+C'est aussi ce qui **remet les deux chemins d'accord** ici : par la réflexion, un `documentLines` vide reste `[]` (l'attribut `#[HydrateWith]` parcourt une liste vide et rend une liste vide). Avant, l'hydrateur appelé seul répondait `null` là où le parent répondait `[]`.
+
+Aucun autre hydrateur ne change : une liste vide passée à `hydrateCustomer`, `hydrateCustomerSite`, `hydrateDeliveryRouteAssignment` — ou trouvée dans une référence imbriquée, quelle qu'elle soit — répond toujours `null`.
+
 ---
 
 ## Exemple express — hydrater les lignes d'un document
@@ -131,6 +150,32 @@ $line->item->name ;                     // 'Peinture blanche' (Product)
 Le constructeur de `BusinessDocument` ne fait qu'une affectation superficielle : sans cet appel, `documentLines` reste un tableau de tableaux, et le prix, la quantité, les taxes et les totaux d'une ligne ne deviennent jamais des objets.
 
 L'`item` d'une ligne est une union `Product|Service` : c'est le `@type` du contenu qui décide de sa classe — `Service` pour une prestation, le `Product` enrichi commerce sinon — grâce au `#[HydrateWith(Product::class, Service::class)]` porté par la propriété.
+
+---
+
+## Exemple express — hydrater le reste de l'en-tête
+
+Le même besoin se pose, slot par slot, quand le document a été construit ailleurs : ses montants, ses ajustements et sa livraison sont alors des tableaux bruts.
+
+```php
+use function xyz\oihana\schema\helpers\hydrate\documents\hydrateAdjustment;
+use function xyz\oihana\schema\helpers\hydrate\documents\hydrateDocumentTotals;
+use function xyz\oihana\schema\helpers\hydrate\hydrateParcelDelivery;
+
+$document->totals        = hydrateDocumentTotals( $document->totals        ) ;
+$document->adjustments   = hydrateAdjustment    ( $document->adjustments   ) ;
+$document->orderDelivery = hydrateParcelDelivery( $document->orderDelivery ) ;
+
+$document->totals->total->value ;                          // 62.4  (MonetaryAmount)
+$document->adjustments[0]->amount->value ;                 // 52.0  (MonetaryAmount)
+$document->adjustments[0]->taxes[0]->taxAmount->value ;    // 10.4  (MonetaryAmount)
+$document->orderDelivery->deliveryAddress->postalCode ;    // '33270' (PostalAddress)
+$document->orderDelivery->hasDeliveryMethod->id ;          // 'F13'   (DeliveryMethodTerm)
+```
+
+Les deux premiers passent par `Reflection::hydrate()` : `DocumentTotals`, `Adjustment` et `TaxDetail` déclarent tous leurs montants par un `#[HydrateAs(MonetaryAmount::class)]`, et la réflexion **descend** — un seul appel sur un ajustement type donc son `amount`, ses `taxes`, et le `basisAmount`/`taxAmount` que chaque `TaxDetail` déclare à son tour. Rien n'a eu à être ajouté pour `TaxDetail` ni pour `MonetaryAmount` : les attributs étaient déjà là, seul manquait le chemin qui les lit.
+
+Le troisième prend l'autre voie, pour la raison d'étagement dite [plus haut](#létagement-des-namespaces).
 
 ---
 
@@ -196,6 +241,7 @@ Un compte porte zéro, une ou plusieurs identités métier (voir [`BusinessIdent
 | `hydrateCustomerEmployee` | `CustomerEmployee` ou liste | `additionalProperty`, `contactPoint`, `workLocation` (CustomerSite) |
 | `hydrateCustomerSite`     | `CustomerSite` ou liste | `additionalProperty`, `address`, `geo`, `deliveryMethod` (DeliveryMethodTerm), `deliveryRoute` (DeliveryRouteAssignment[]) |
 | `hydrateDeliveryRouteAssignment` | `DeliveryRouteAssignment` ou liste | `route` (DeliveryRouteTerm, lorsque la ligne de référence jointe est présente — un code nu est laissé tel quel) |
+| `hydrateParcelDelivery`   | `ParcelDelivery` ou liste | `deliveryAddress` et `originAddress` (PostalAddress), `hasDeliveryMethod` et `hasDeliveryRoute` (classes cibles personnalisables via `$deliveryMethodClass`/`$deliveryRouteClass`, par défaut `DeliveryMethodTerm`/`DeliveryRouteTerm`), `provider` (résolu par `hydrateOrganizationOrPerson`) |
 | `hydrateStockLevel`       | `StockLevel`        | `assignedPOS` (Warehouse)                                |
 | `hydrateWarehouse`        | `Warehouse` ou liste | `ownedBy` (Subsidiary)                                  |
 
@@ -203,9 +249,11 @@ Un compte porte zéro, une ou plusieurs identités métier (voir [`BusinessIdent
 
 | Fonction                    | Produit                          | Références imbriquées hydratées                          |
 |-----------------------------|-----------------------------------|----------------------------------------------------------|
+| `hydrateAdjustment`       | `Adjustment` ou liste            | `amount` (MonetaryAmount), `taxes` (TaxDetail[], avec leurs propres `basisAmount`/`taxAmount`) — **une liste vide est rendue telle quelle** |
 | `hydrateBusinessDocument` | `BusinessDocument` (ou sous-classe via `$class`), ou liste | `customer`, `seller`, `author` (et `broker`/`provider` sur `Invoice`), résolus par `hydrateOrganizationOrPerson` — le reste (`documentLines`, `taxes`, `totals`…) vient de `Reflection::hydrate()` |
-| `hydrateDocumentLine`     | `BusinessDocumentLine` ou liste  | `adjustments` (Adjustment[]), `price` (CompoundPriceSpecification + son `priceComponent`), `quantity`, `subtotal`, `taxes` (TaxDetail[]), `total`, `item` (délégué ci-dessous) |
+| `hydrateDocumentLine`     | `BusinessDocumentLine` ou liste  | `adjustments` (Adjustment[]), `price` (CompoundPriceSpecification + son `priceComponent`), `quantity`, `subtotal`, `taxes` (TaxDetail[]), `total`, `item` (délégué ci-dessous) — **une liste vide est rendue telle quelle** |
 | `hydrateDocumentLineItem` | `Product` ou `Service`, ou liste | Résout l'union d'après le `@type` : suffixe `Service` → `Service`, sinon `Product` (avec ses `eligibleQuantity` et `inventoryLevel`) |
+| `hydrateDocumentTotals`   | `DocumentTotals` ou liste        | Les sept montants déclarés (`allowanceTotal`, `balanceDue`, `chargeTotal`, `prepaidAmount`, `subtotal`, `total`, `totalTax`) en `MonetaryAmount` — une liste vide répond `null`, des totaux absents se disant par une valeur absente |
 
 ### `xyz\oihana\schema\helpers\pivots` — les pivots de compte
 
