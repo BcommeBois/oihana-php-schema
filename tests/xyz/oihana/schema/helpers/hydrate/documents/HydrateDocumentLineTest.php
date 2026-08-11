@@ -137,7 +137,20 @@ final class HydrateDocumentLineTest extends TestCase
         $this->assertInstanceOf( MonetaryAmount::class    , $lines[ 1 ]->total    ) ;
 
         $this->assertNull( hydrateDocumentLine( [ 'raw' ] ) ) ;
-        $this->assertNull( hydrateDocumentLine( [] ) ) ;
+    }
+
+    /**
+     * 🔑 « No line » is an answer, and it is not the answer « nothing here was
+     * readable ». A draft is commonly born empty, so the empty list survives for a
+     * consumer to map over; a non-empty list that hydrates to nothing keeps the
+     * family's `null`.
+     *
+     * @throws HydrationException
+     * @throws ReflectionException
+     */
+    public function testAnEmptyListStaysAnEmptyList(): void
+    {
+        $this->assertSame( [] , hydrateDocumentLine( [] ) ) ;
     }
 
     /**

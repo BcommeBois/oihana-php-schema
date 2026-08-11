@@ -505,6 +505,25 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Changed
 
+- **Behavior change.** `hydrateDocumentLine()` now keeps an **empty list as an
+  empty list**, where it used to answer `null` — aligning it with
+  `hydrateAdjustment()`, born with that rule. The lines and the adjustments of a
+  document are the two places where « there are none » is an answer worth
+  serving : a draft is commonly born without a single line, and the key vanished
+  from the serialized shape, so a consumer mapping over it fell on an absent
+  value rather than on the empty list it could map over.
+
+  The rule is narrow, and stays narrow on purpose. It applies to the **top-level
+  list handed to the helper**, not to the nested references it resolves : a
+  non-empty list that hydrates to nothing still answers `null`, because « nothing
+  here was readable » is a different statement from « there is nothing here ».
+  And no other helper of the family changes — the uniform `[] => null` settled
+  below still holds for `hydrateCustomer`, `hydrateCustomerSite`,
+  `hydrateDeliveryRouteAssignment` and the rest, nested references included.
+
+  A consumer that received `null` from `hydrateDocumentLine( [] )` now receives
+  `[]`. Every other input answers exactly as before.
+
 - Replaces `cacheResult="false"` with `recordTestRunHistory="false"` in
   `phpunit.xml` : the former is deprecated and removed in PHPUnit 14. The
   attribute is set rather than dropped, because PHPUnit defaults it to `true`

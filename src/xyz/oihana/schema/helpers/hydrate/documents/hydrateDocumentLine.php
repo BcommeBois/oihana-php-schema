@@ -32,6 +32,14 @@ use function oihana\core\arrays\isIndexed;
  * array that resolves to nothing becomes `null`, never a leftover raw array. Anything
  * else is left to whatever {@see Reflection::hydrate()} made of it.
  *
+ * 🔑 An **empty list is kept as an empty list**, where the rest of the family
+ * answers `null`. « This document has no line » is an answer, and it is not the
+ * answer « nothing here was readable » : a consumer mapping over the value
+ * deserves the empty list it can map over, and a document born empty is the
+ * ordinary state of a draft rather than an anomaly. A non-empty list that
+ * hydrates to nothing keeps the family's `null` — there, nothing usable was
+ * found, which is a different statement.
+ *
  * @param mixed $init Single line data or array of line data.
  *
  * @return mixed
@@ -48,6 +56,11 @@ function hydrateDocumentLine( mixed $init = null ) :mixed
 
     if( isIndexed( $init ) )
     {
+        if( count( $init ) === 0 )
+        {
+            return $init ;
+        }
+
         $lines = array_map
         (
             fn( $line ) => hydrateDocumentLine( $line ) ,
