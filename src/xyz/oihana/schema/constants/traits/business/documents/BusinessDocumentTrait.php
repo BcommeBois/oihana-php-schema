@@ -11,22 +11,23 @@ namespace xyz\oihana\schema\constants\traits\business\documents;
  */
 trait BusinessDocumentTrait
 {
-    const string ADJUSTMENTS     = 'adjustments' ;
-    const string ATTACHMENTS     = 'attachments' ;
-    const string AUTHOR          = 'author' ;
-    const string BILLING_ADDRESS = 'billingAddress' ;
-    const string CONTACT         = 'contact' ;
-    const string CURRENCY        = 'currency' ;
-    const string CUSTOMER        = 'customer' ;
-    const string DIRECTION       = 'direction' ;
-    const string DOCUMENT_LINES  = 'documentLines' ;
-    const string ISSUE_DATE      = 'issueDate' ;
-    const string ORDER_DELIVERY  = 'orderDelivery' ;
-    const string PAYMENT_TERMS   = 'paymentTerms' ;
-    const string POINT_OF_SALE   = 'pointOfSale' ;
-    const string REFERENCES      = 'references' ;
-    const string SELLER          = 'seller' ;
-    const string STATUS          = 'status' ;
-    const string TAXES           = 'taxes' ;
-    const string TOTALS          = 'totals' ;
+    public const string ADJUSTMENTS     = 'adjustments' ;
+    public const string ASSIGNED_SELLER = 'assignedSeller' ;
+    public const string ATTACHMENTS     = 'attachments' ;
+    public const string AUTHOR          = 'author' ;
+    public const string BILLING_ADDRESS = 'billingAddress' ;
+    public const string CONTACT         = 'contact' ;
+    public const string CURRENCY        = 'currency' ;
+    public const string CUSTOMER        = 'customer' ;
+    public const string DIRECTION       = 'direction' ;
+    public const string DOCUMENT_LINES  = 'documentLines' ;
+    public const string ISSUE_DATE      = 'issueDate' ;
+    public const string ORDER_DELIVERY  = 'orderDelivery' ;
+    public const string PAYMENT_TERMS   = 'paymentTerms' ;
+    public const string POINT_OF_SALE   = 'pointOfSale' ;
+    public const string REFERENCES      = 'references' ;
+    public const string SELLER          = 'seller' ;
+    public const string STATUS          = 'status' ;
+    public const string TAXES           = 'taxes' ;
+    public const string TOTALS          = 'totals' ;
 }

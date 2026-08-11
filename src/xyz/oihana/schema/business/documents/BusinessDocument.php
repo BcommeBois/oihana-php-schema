@@ -56,6 +56,31 @@ class BusinessDocument extends Intangible
     public null|array|Adjustment $adjustments ;
 
     /**
+     * The seller(s) the document is assigned to — the salesperson who carries
+     * the deal, not the party issuing it.
+     *
+     * Distinct from {@see BusinessDocument::$seller}, the organization (or
+     * person) the document is issued by : one seller issues every document of a
+     * sales cycle, while the person answering for a given one is the pivot a
+     * salesperson's own resources are scoped by (see
+     * {@see \xyz\oihana\schema\helpers\pivots\sellerKey()}). Reuses the name,
+     * the shape and the meaning {@see \xyz\oihana\schema\organizations\Customer::$assignedSeller}
+     * already carries for the seller a customer is attached to — a document
+     * commonly gets its own from there and then keeps it : a customer reassigned
+     * later must not rewrite who took the order.
+     *
+     * Holds the raw seller reference as read from the source (a key, or the
+     * joined row), or the resolved {@see Person}. No `#[HydrateAs]` is needed :
+     * the union names a single class, so {@see \oihana\reflect\Reflection::hydrate()}
+     * resolves a joined row — and each entry of a joined list — on its own,
+     * while a bare key is left as read.
+     *
+     * @var string|int|array|Person|null
+     * @since 1.4.0
+     */
+    public null|int|string|array|Person $assignedSeller ;
+
+    /**
      * Files attached to the document (e.g. a signed PDF, supporting documents).
      * @var null|array|string|MediaObject
      */

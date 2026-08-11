@@ -8,6 +8,33 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds `xyz\oihana\schema\business\documents\BusinessDocument::$assignedSeller`
+  (`null|int|string|array|Person`), the salesperson a document is assigned to —
+  who carries the deal, as opposed to the `seller` who issues it. The two were
+  conflated until now, and the conflation had a cost : one organization issues
+  every document of a sales cycle, so `seller` cannot answer « whose quotes are
+  these ». That question is the one a salesperson's own resources are scoped by,
+  through `sellerKey()` — the same pivot `Customer::$assignedSeller` already
+  serves on the customer side.
+
+  The name, the shape and the meaning are taken from
+  `xyz\oihana\schema\organizations\Customer::$assignedSeller` unchanged, because
+  a document commonly gets its own from the customer's — and then keeps it : a
+  customer reassigned next quarter must not rewrite who took last quarter's
+  order, which is exactly why the value is carried on the document rather than
+  read back through the customer.
+
+  No `#[HydrateAs]` is declared, and none is needed : the union names a single
+  class, so `Reflection::hydrate()` resolves a joined row into a `Person` on its
+  own — and each entry of a joined list, the plural the property name announces
+  — while a bare key (string or integer) is left as read. The constructor path
+  keeps assigning raw, as everywhere else. `ASSIGNED_SELLER` joins
+  `BusinessDocumentTrait`, whose constants are now explicitly `public` like
+  every other constants trait, and the suite covers the constant (including its
+  agreement with `Oihana::ASSIGNED_SELLER`), the default, the three shapes on
+  the constructor path, the single/list/bare-key resolution on the reflection
+  path, and the coexistence with the `seller` it must not replace.
+
 - Adds `xyz\oihana\schema\business\documents\BusinessDocumentLine::$freeReason`
   (`null|array|DefinedTerm`, `#[HydrateAs(DefinedTerm::class)]`), why the goods
   on a line leave without being invoiced — a gift, a breakage, a sample, goods

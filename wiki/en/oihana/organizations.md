@@ -72,6 +72,8 @@ $customer->defaultTelephone = '05 56 00 00 00' ;    // → $customer->contactPoi
 
 The references (`assignedSeller`, `carrier`, `priceSegmentation`, …) are **resolved**: each accepts a hydrated object, a scalar reference (key), or a raw associative `array` — never a forced class.
 
+`assignedSeller` appears unchanged on [`BusinessDocument`](business-documents.md#businessdocument) — same name, same shape, same meaning. A document commonly gets its value from the customer record and then keeps its own: reassigning a customer must not rewrite who took their past orders.
+
 ---
 
 ## See also

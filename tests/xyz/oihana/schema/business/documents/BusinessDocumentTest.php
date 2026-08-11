@@ -39,6 +39,7 @@ class BusinessDocumentTest extends TestCase
     public function testTraitConstants(): void
     {
         $this->assertSame( 'adjustments'    , BusinessDocument::ADJUSTMENTS     );
+        $this->assertSame( 'assignedSeller' , BusinessDocument::ASSIGNED_SELLER );
         $this->assertSame( 'attachments'    , BusinessDocument::ATTACHMENTS     );
         $this->assertSame( 'author'         , BusinessDocument::AUTHOR          );
         $this->assertSame( 'billingAddress' , BusinessDocument::BILLING_ADDRESS );
@@ -64,6 +65,9 @@ class BusinessDocumentTest extends TestCase
         $this->assertSame( Oihana::ORDER_DELIVERY  , BusinessDocument::ORDER_DELIVERY  );
         $this->assertSame( Oihana::POINT_OF_SALE   , BusinessDocument::POINT_OF_SALE   );
         $this->assertSame( Oihana::TOTALS          , BusinessDocument::TOTALS          );
+
+        // the document names the salesperson the same way an organization does
+        $this->assertSame( Oihana::ASSIGNED_SELLER , BusinessDocument::ASSIGNED_SELLER );
     }
 
     public function testDefaults(): void
@@ -71,6 +75,7 @@ class BusinessDocumentTest extends TestCase
         $document = new BusinessDocument() ;
 
         $this->assertNull( $document->adjustments    ?? null );
+        $this->assertNull( $document->assignedSeller ?? null );
         $this->assertNull( $document->attachments    ?? null );
         $this->assertNull( $document->author         ?? null );
         $this->assertNull( $document->billingAddress ?? null );
@@ -177,6 +182,81 @@ class BusinessDocumentTest extends TestCase
         $document = new BusinessDocument([ BusinessDocument::PAYMENT_TERMS => 'Net 30 days' ]) ;
 
         $this->assertSame( 'Net 30 days' , $document->paymentTerms ) ;
+    }
+
+    public function testConstructorKeepsAssignedSellerAsRead(): void
+    {
+        $key = new BusinessDocument([ BusinessDocument::ASSIGNED_SELLER => '147737218' ]) ;
+        $this->assertSame( '147737218' , $key->assignedSeller ) ;
+
+        $id = new BusinessDocument([ BusinessDocument::ASSIGNED_SELLER => 147737218 ]) ;
+        $this->assertSame( 147737218 , $id->assignedSeller ) ;
+
+        // the constructor assigns raw : a joined row stays an array on this path
+        $joined = new BusinessDocument([ BusinessDocument::ASSIGNED_SELLER => [ 'name' => 'Paul Vendeur' ] ]) ;
+        $this->assertIsArray( $joined->assignedSeller ) ;
+        $this->assertSame( 'Paul Vendeur' , $joined->assignedSeller[ 'name' ] ) ;
+
+        $person = new BusinessDocument([ BusinessDocument::ASSIGNED_SELLER => new Person([ 'name' => 'Paul Vendeur' ]) ]) ;
+        $this->assertInstanceOf( Person::class , $person->assignedSeller ) ;
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testReflectionResolvesAssignedSeller(): void
+    {
+        $document = new Reflection()->hydrate
+        (
+            [ BusinessDocument::ASSIGNED_SELLER => [ 'name' => 'Paul Vendeur' , '_key' => '147737218' ] ] ,
+            BusinessDocument::class
+        );
+
+        $this->assertInstanceOf( Person::class , $document->assignedSeller ) ;
+        $this->assertSame( 'Paul Vendeur' , $document->assignedSeller->name ) ;
+        $this->assertSame( '147737218' , $document->assignedSeller->_key ) ;
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testReflectionResolvesEveryAssignedSellerOfAList(): void
+    {
+        $document = new Reflection()->hydrate
+        (
+            [ BusinessDocument::ASSIGNED_SELLER => [ [ 'name' => 'Paul Vendeur' ] , [ 'name' => 'Marie Vendeuse' ] ] ] ,
+            BusinessDocument::class
+        );
+
+        $this->assertIsArray( $document->assignedSeller ) ;
+        $this->assertContainsOnlyInstancesOf( Person::class , $document->assignedSeller ) ;
+        $this->assertSame( 'Marie Vendeuse' , $document->assignedSeller[ 1 ]->name ) ;
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testReflectionLeavesAnUnjoinedAssignedSellerReferenceAsRead(): void
+    {
+        $document = new Reflection()->hydrate
+        (
+            [ BusinessDocument::ASSIGNED_SELLER => '147737218' ] ,
+            BusinessDocument::class
+        );
+
+        $this->assertSame( '147737218' , $document->assignedSeller ) ;
+    }
+
+    public function testAssignedSellerIsNotTheIssuingSeller(): void
+    {
+        $document = new BusinessDocument
+        ([
+            BusinessDocument::SELLER          => new Organization([ 'name' => 'ACME Supplies' ]) ,
+            BusinessDocument::ASSIGNED_SELLER => '147737218' ,
+        ]);
+
+        $this->assertInstanceOf( Organization::class , $document->seller ) ;
+        $this->assertSame( '147737218' , $document->assignedSeller ) ;
     }
 
     public function testConstructorKeepsPartiesAsRawArrays(): void
