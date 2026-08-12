@@ -7,11 +7,13 @@ use oihana\reflect\attributes\HydrateWith;
 
 use org\schema\creativeWork\MediaObject;
 use org\schema\Intangible;
+use org\schema\Mass;
 use org\schema\Organization;
 use org\schema\ParcelDelivery;
 use org\schema\Person;
 use org\schema\Place;
 use org\schema\PostalAddress;
+use org\schema\QuantitativeValue;
 
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\constants\traits\business\documents\BusinessDocumentTrait;
@@ -229,4 +231,31 @@ class BusinessDocument extends Intangible
      */
     #[HydrateAs(DocumentTotals::class)]
     public null|array|DocumentTotals $totals ;
+
+    /**
+     * What the goods the document covers weigh — the figure printed on a
+     * delivery note or a quote, and the one a carrier is quoted from.
+     *
+     * Usually the sum, over the lines, of the quantity by the weight of the
+     * unit it is expressed in. A plain number carries it when the unit is
+     * implicit, a {@see QuantitativeValue} when the unit is stated
+     * (`{ value: 326.5456, unitCode: "KGM" }`) ; an array is hydrated as the
+     * latter. The same union as {@see \org\schema\OfferShippingDetails::$weight},
+     * so a weight reads the same wherever it is met.
+     *
+     * ⚠️ **Not part of {@see BusinessDocument::$totals}** despite the pull of
+     * the name : that class is the *monetary* summary and every one of its
+     * properties is a {@see \org\schema\MonetaryAmount}. A mass sitting among
+     * them would blur what it is.
+     *
+     * Deliberately neutral about gross and net. Should the distinction ever
+     * be needed, it belongs to the `additionalType` of a `QuantitativeValue`,
+     * never to a second property — two weights held in parallel eventually
+     * disagree.
+     *
+     * @var null|int|float|QuantitativeValue|Mass
+     * @since 1.4.0
+     */
+    #[HydrateAs(QuantitativeValue::class)]
+    public null|int|float|QuantitativeValue|Mass $weight ;
 }

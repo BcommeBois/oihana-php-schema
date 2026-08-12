@@ -8,6 +8,33 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds `xyz\oihana\schema\business\documents\BusinessDocument::$weight`, what the
+  goods a document covers weigh.
+
+  A document says at length what its goods cost and nothing about what they
+  weigh, yet the figure is printed on delivery notes and quotes alike, and it is
+  the one a carrier is quoted from. Usually the sum, over the lines, of the
+  quantity by the weight of the unit it is expressed in — the quantity already
+  being in that unit, no conversion takes place, which is why a plain weight is
+  enough and a calculation structure would be a burden.
+
+  The union is the one `org\schema\OfferShippingDetails::$weight` already
+  carries : a plain number when the unit is implicit, a `QuantitativeValue` when
+  it is stated (`{ value: 326.5456, unitCode: "KGM" }`). An array hydrates as the
+  latter, `#[HydrateAs(QuantitativeValue::class)]` being declared for it.
+  Borrowing the union rather than inventing one means a weight reads the same
+  wherever it is met.
+
+  ⚠️ **Not filed under `DocumentTotals`** despite the pull of the name. That
+  class is the *monetary* summary and every one of its properties is a
+  `MonetaryAmount` ; a mass sitting among them would blur what the class is.
+  Nor on `org\schema\ParcelDelivery`, a mirror class this hierarchy does not
+  modify.
+
+  Deliberately neutral between gross and net. Should the distinction ever be
+  needed, it belongs to the `additionalType` of a `QuantitativeValue`, never to
+  a second property — two weights held in parallel eventually disagree.
+
 - Adds `xyz\oihana\schema\business\documents\DeliveryNote::$referencesOrder`, the
   purchase order(s) a delivery note answers to.
 

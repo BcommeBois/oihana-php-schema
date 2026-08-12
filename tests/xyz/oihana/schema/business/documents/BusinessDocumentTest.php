@@ -13,6 +13,7 @@ use org\schema\ParcelDelivery;
 use org\schema\Person;
 use org\schema\Place;
 use org\schema\PostalAddress;
+use org\schema\QuantitativeValue;
 
 use xyz\oihana\schema\business\documents\Adjustment;
 use xyz\oihana\schema\business\documents\BusinessDocument;
@@ -59,6 +60,7 @@ class BusinessDocumentTest extends TestCase
         $this->assertSame( 'status'         , BusinessDocument::STATUS          );
         $this->assertSame( 'taxes'          , BusinessDocument::TAXES           );
         $this->assertSame( 'totals'         , BusinessDocument::TOTALS          );
+        $this->assertSame( 'weight'         , BusinessDocument::WEIGHT          );
 
         $this->assertSame( Oihana::ADJUSTMENTS     , BusinessDocument::ADJUSTMENTS     );
         $this->assertSame( Oihana::BILLING_ADDRESS , BusinessDocument::BILLING_ADDRESS );
@@ -67,6 +69,7 @@ class BusinessDocumentTest extends TestCase
         $this->assertSame( Oihana::ORDER_DELIVERY  , BusinessDocument::ORDER_DELIVERY  );
         $this->assertSame( Oihana::POINT_OF_SALE   , BusinessDocument::POINT_OF_SALE   );
         $this->assertSame( Oihana::TOTALS          , BusinessDocument::TOTALS          );
+        $this->assertSame( Oihana::WEIGHT          , BusinessDocument::WEIGHT          );
 
         // the document names the salesperson the same way an organization does
         $this->assertSame( Oihana::ASSIGNED_SELLER , BusinessDocument::ASSIGNED_SELLER );
@@ -96,6 +99,7 @@ class BusinessDocumentTest extends TestCase
         $this->assertNull( $document->status         ?? null );
         $this->assertNull( $document->taxes          ?? null );
         $this->assertNull( $document->totals         ?? null );
+        $this->assertNull( $document->weight         ?? null );
     }
 
     public function testConstructorHydratesScalarProperties(): void
@@ -313,5 +317,53 @@ class BusinessDocumentTest extends TestCase
 
         $this->assertIsArray( $document->author ) ;
         $this->assertSame( 'ACME Supplies' , $document->author[ 'name' ] ) ;
+    }
+
+    /**
+     * A weight travels as the plain number it usually is, without being cast
+     * to a structure it does not need.
+     */
+    public function testWeightKeepsAPlainNumberAsRead(): void
+    {
+        $float = new BusinessDocument([ BusinessDocument::WEIGHT => 326.5456 ]) ;
+        $this->assertSame( 326.5456 , $float->weight ) ;
+
+        $int = new BusinessDocument([ BusinessDocument::WEIGHT => 42 ]) ;
+        $this->assertSame( 42 , $int->weight ) ;
+    }
+
+    /**
+     * A weight that states its unit comes back typed, so a consumer reads the
+     * unit instead of assuming one.
+     * @throws ReflectionException
+     */
+    public function testReflectionHydratesAWeightThatStatesItsUnit(): void
+    {
+        $document = new Reflection()->hydrate
+        (
+            [ BusinessDocument::WEIGHT => [ 'value' => 326.5456 , 'unitCode' => 'KGM' ] ] ,
+            BusinessDocument::class
+        );
+
+        $this->assertInstanceOf( QuantitativeValue::class , $document->weight ) ;
+        $this->assertSame( 326.5456 , $document->weight->value ) ;
+        $this->assertSame( 'KGM' , $document->weight->unitCode ) ;
+    }
+
+    /**
+     * The weight is not part of the monetary summary : both live on the
+     * document, and neither reaches into the other.
+     */
+    public function testWeightStandsBesideTheMonetaryTotals(): void
+    {
+        $document = new BusinessDocument
+        ([
+            BusinessDocument::TOTALS => new DocumentTotals([ 'total' => [ 'value' => 100 , 'currency' => 'EUR' ] ]) ,
+            BusinessDocument::WEIGHT => 326.5456 ,
+        ]);
+
+        $this->assertInstanceOf( DocumentTotals::class , $document->totals ) ;
+        $this->assertSame( 326.5456 , $document->weight ) ;
+        $this->assertFalse( property_exists( $document->totals , BusinessDocument::WEIGHT ) ) ;
     }
 }
