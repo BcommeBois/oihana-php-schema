@@ -57,6 +57,35 @@ $package->volume ;  // 0.0312
 
 Les deux propriétés acceptent un nombre nu quand l'unité est implicite, ou une `QuantitativeValue` quand elle est déclarée (`{ "value": 15.419, "unitCode": "KGM" }`) — un tableau s'hydrate en `QuantitativeValue`.
 
+### Les renseigner à l'hydratation
+
+Chaque étage a ses **clés plates**, sur le patron des codes et des quantités — il suffit qu'un jeu de données les porte pour que l'arbre se construise avec ses mesures :
+
+| Étage | Code | Quantité | Poids | Volume |
+| :--- | :--- | :--- | :--- | :--- |
+| unité | `eligibleUnitQuantityCode` | — | `eligibleUnitQuantityWeight` | `eligibleUnitQuantityVolume` |
+| colis | `eligiblePackageQuantityCode` | `eligiblePackageQuantityValue` | `eligiblePackageQuantityWeight` | `eligiblePackageQuantityVolume` |
+| palette | `eligiblePalletQuantityCode` | `eligiblePalletQuantityValue` | `eligiblePalletQuantityWeight` | `eligiblePalletQuantityVolume` |
+
+```php
+$product->eligibleUnitQuantityCode      = 'MTK' ;
+$product->eligibleUnitQuantityWeight    = 6.4 ;
+
+$product->eligiblePackageQuantityCode   = 'PK' ;
+$product->eligiblePackageQuantityValue  = 0.456 ;
+$product->eligiblePackageQuantityWeight = 2.9184 ;
+
+$product->eligiblePalletQuantityCode    = 'PX' ;
+$product->eligiblePalletQuantityValue   = 38.304 ;
+$product->eligiblePalletQuantityWeight  = 245.1456 ;
+
+$product->findEligibleQuantityByType( UnitOfSaleType::PARCEL )->weight ;  // 245.1456
+```
+
+🔑 **Rien n'est calculé.** Un étage qui ne déclare pas son poids n'en reçoit pas — jamais un zéro, qui se lirait « sans poids » là où la vérité est « inconnu ». Déduire une mesure absente d'un volume et d'une densité produirait un nombre impossible à distinguer d'un nombre déclaré ; c'est l'affaire de qui l'affiche, pas de la classe qui le porte.
+
+⚠️ **Un étage sans code d'unité n'assemble rien**, poids ou pas : une mesure sans étage pour la nommer n'a nulle part où aller.
+
 🔑 **Le rapport entre deux niveaux redonne la chaîne de conditionnement** — combien de pièces dans un colis, combien de colis sur une palette — sans qu'aucune de ces valeurs soit stockée deux fois.
 
 ⚠️ **À distinguer de `Product::$weight`**, hérité du miroir Schema.org : celui-là est le poids de l'unité facturée, sans unité déclarée ni niveau rattaché. Il ne change pas.

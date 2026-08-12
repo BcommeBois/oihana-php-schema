@@ -342,6 +342,19 @@ class Product extends SomeProducts
      /**
       * Set the optional eligibleQuantity property with the magic _set method.
       *
+      * Builds the *unit → package → pallet* chain from the flat keys a source
+      * hands over one at a time — the codes and quantities of each level, plus
+      * what that level weighs and what it occupies. Every node is a
+      * {@see PhysicalQuantity}, so a measure has somewhere to sit.
+      *
+      * 🔑 **Nothing is computed here.** A level that states no weight keeps
+      * none : deriving one from a volume and a density would produce a figure
+      * indistinguishable from a stated one, and this class has no way to say
+      * which is which.
+      *
+      * ⚠️ **A level with no unit code assembles nothing**, weight or no weight :
+      * a measure with no level to name it has nowhere to go.
+      *
       * @param string $property Property name
       * @param mixed  $value    Value of the property.
       *
@@ -351,13 +364,21 @@ class Product extends SomeProducts
       */
     public function setEligibleQuantityProperty( string $property , mixed $value ) :bool
     {
+        // Each entry names the level the key feeds — unit, package, pallet — and
+        // the slot it fills in that level's buffer, described below.
         $mapping =
         [
-            Oihana::ELIGIBLE_UNIT_QUANTITY_CODE     => [ 0 , 0 ] ,
-            Oihana::ELIGIBLE_PACKAGE_QUANTITY_CODE  => [ 1 , 0 ] ,
-            Oihana::ELIGIBLE_PACKAGE_QUANTITY_VALUE => [ 1 , 1 ] ,
-            Oihana::ELIGIBLE_PALLET_QUANTITY_CODE   => [ 2 , 0 ] ,
-            Oihana::ELIGIBLE_PALLET_QUANTITY_VALUE  => [ 2 , 1 ] ,
+            Oihana::ELIGIBLE_UNIT_QUANTITY_CODE      => [ 0 , 0 ] ,
+            Oihana::ELIGIBLE_UNIT_QUANTITY_WEIGHT    => [ 0 , 3 ] ,
+            Oihana::ELIGIBLE_UNIT_QUANTITY_VOLUME    => [ 0 , 4 ] ,
+            Oihana::ELIGIBLE_PACKAGE_QUANTITY_CODE   => [ 1 , 0 ] ,
+            Oihana::ELIGIBLE_PACKAGE_QUANTITY_VALUE  => [ 1 , 1 ] ,
+            Oihana::ELIGIBLE_PACKAGE_QUANTITY_WEIGHT => [ 1 , 3 ] ,
+            Oihana::ELIGIBLE_PACKAGE_QUANTITY_VOLUME => [ 1 , 4 ] ,
+            Oihana::ELIGIBLE_PALLET_QUANTITY_CODE    => [ 2 , 0 ] ,
+            Oihana::ELIGIBLE_PALLET_QUANTITY_VALUE   => [ 2 , 1 ] ,
+            Oihana::ELIGIBLE_PALLET_QUANTITY_WEIGHT  => [ 2 , 3 ] ,
+            Oihana::ELIGIBLE_PALLET_QUANTITY_VOLUME  => [ 2 , 4 ] ,
         ];
 
         if ( !isset( $mapping[ $property ] ) )
@@ -365,36 +386,42 @@ class Product extends SomeProducts
             return false ;
         }
 
-        [ $level , $type ] = $mapping[ $property ] ;
+        [ $level , $slot ] = $mapping[ $property ] ;
 
         $this->_eligibleQuantityDefinition ??=
         [
-            [ null , 1    , UnitOfSaleType::UNIT    ] , // unit
-            [ null , null , UnitOfSaleType::PACKAGE ] , // package
-            [ null , null , UnitOfSaleType::PARCEL  ] , // pallet
+            //  code , value , additionalType          , weight , volume
+            [ null , 1    , UnitOfSaleType::UNIT    , null , null ] , // unit
+            [ null , null , UnitOfSaleType::PACKAGE , null , null ] , // package
+            [ null , null , UnitOfSaleType::PARCEL  , null , null ] , // pallet
         ];
 
-        if ( $type === 0 && !empty( $value ) )
+        if ( $slot === 0 )
         {
-            $this->_eligibleQuantityDefinition[ $level ][0] = $this->resolveUnitCode( $value ) ;
+            // The keys arrive one at a time and the source leaves the unused
+            // levels blank : an empty code must never erase one already resolved.
+            if ( !empty( $value ) )
+            {
+                $this->_eligibleQuantityDefinition[ $level ][ 0 ] = $this->resolveUnitCode( $value ) ;
+            }
         }
-        else if ($type === 1 )
+        else
         {
-            $this->_eligibleQuantityDefinition[ $level ][1] = $value ;
+            $this->_eligibleQuantityDefinition[ $level ][ $slot ] = $value ;
         }
 
         $this->eligibleQuantity = null ;
 
-        [ $unitCode    , $unitValue    , $unitType    ] = $this->_eligibleQuantityDefinition[0] ;
-        [ $packageCode , $packageValue , $packageType ] = $this->_eligibleQuantityDefinition[1] ;
-        [ $palletCode  , $palletValue  , $palletType  ] = $this->_eligibleQuantityDefinition[2] ;
+        [ $unitCode    , $unitValue    , $unitType    , $unitWeight    , $unitVolume    ] = $this->_eligibleQuantityDefinition[0] ;
+        [ $packageCode , $packageValue , $packageType , $packageWeight , $packageVolume ] = $this->_eligibleQuantityDefinition[1] ;
+        [ $palletCode  , $palletValue  , $palletType  , $palletWeight  , $palletVolume  ] = $this->_eligibleQuantityDefinition[2] ;
 
         if ( empty( $unitCode ) && empty( $packageCode ) && empty( $palletCode ) )
         {
             return false ;
         }
 
-        $createQV = function( ?string $code, mixed $val , string $type ) :?PhysicalQuantity
+        $createQV = function( ?string $code , mixed $val , string $type , mixed $weight , mixed $volume ) :?PhysicalQuantity
         {
             if ( empty( $code ) && empty( $val ) )
             {
@@ -408,13 +435,18 @@ class Product extends SomeProducts
                 // meaningless 0.0 (or raise on an object) instead of saying "unknown".
                 Schema::VALUE           => is_numeric( $val ) ? (float) $val : null,
                 Schema::UNIT_CODE       => $code,
-                Schema::UNIT_TEXT       => $code ? ( MeasureCode::getName( $code ) ?? PackageCode::getName( $code ) ) : null
+                Schema::UNIT_TEXT       => $code ? ( MeasureCode::getName( $code ) ?? PackageCode::getName( $code ) ) : null,
+                // Same rule for the measures, and for the same reason : a level
+                // that states no weight stays without one. A zero would read as
+                // « weightless » where the truth is « unknown ».
+                Oihana::WEIGHT          => is_numeric( $weight ) ? (float) $weight : null,
+                Oihana::VOLUME          => is_numeric( $volume ) ? (float) $volume : null,
             ]);
         };
 
-        $unitQV    = $createQV( $unitCode    , $unitValue    , $unitType    ) ;
-        $packageQV = $createQV( $packageCode , $packageValue , $packageType ) ;
-        $palletQV  = $createQV( $palletCode  , $palletValue  , $palletType  ) ;
+        $unitQV    = $createQV( $unitCode    , $unitValue    , $unitType    , $unitWeight    , $unitVolume    ) ;
+        $packageQV = $createQV( $packageCode , $packageValue , $packageType , $packageWeight , $packageVolume ) ;
+        $palletQV  = $createQV( $palletCode  , $palletValue  , $palletType  , $palletWeight  , $palletVolume  ) ;
 
         if ( $packageQV && $palletQV )
         {
@@ -453,6 +485,14 @@ class Product extends SomeProducts
     }
 
     /**
+     * The buffer the flat keys fill in, one at a time, before the chain is
+     * rebuilt : three levels — unit, package, pallet — of five slots each.
+     *
+     *     [ 0 ] unitCode  [ 1 ] value  [ 2 ] additionalType  [ 3 ] weight  [ 4 ] volume
+     *
+     * Only slot 2 is never written from outside : the level a slot belongs to
+     * is what names it.
+     *
      * @var array|null
      */
     private ?array $_eligibleQuantityDefinition = null;

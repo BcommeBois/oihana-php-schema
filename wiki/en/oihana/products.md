@@ -57,6 +57,35 @@ $package->volume ;  // 0.0312
 
 Both properties accept a plain number when the unit is implicit, or a `QuantitativeValue` when it is stated (`{ "value": 15.419, "unitCode": "KGM" }`) — an array is hydrated as the latter.
 
+### Filling them at hydration time
+
+Each level has its **flat keys**, on the pattern of the codes and quantities — a dataset carrying them is all it takes for the tree to build itself with its measures:
+
+| Level | Code | Quantity | Weight | Volume |
+| :--- | :--- | :--- | :--- | :--- |
+| unit | `eligibleUnitQuantityCode` | — | `eligibleUnitQuantityWeight` | `eligibleUnitQuantityVolume` |
+| package | `eligiblePackageQuantityCode` | `eligiblePackageQuantityValue` | `eligiblePackageQuantityWeight` | `eligiblePackageQuantityVolume` |
+| pallet | `eligiblePalletQuantityCode` | `eligiblePalletQuantityValue` | `eligiblePalletQuantityWeight` | `eligiblePalletQuantityVolume` |
+
+```php
+$product->eligibleUnitQuantityCode      = 'MTK' ;
+$product->eligibleUnitQuantityWeight    = 6.4 ;
+
+$product->eligiblePackageQuantityCode   = 'PK' ;
+$product->eligiblePackageQuantityValue  = 0.456 ;
+$product->eligiblePackageQuantityWeight = 2.9184 ;
+
+$product->eligiblePalletQuantityCode    = 'PX' ;
+$product->eligiblePalletQuantityValue   = 38.304 ;
+$product->eligiblePalletQuantityWeight  = 245.1456 ;
+
+$product->findEligibleQuantityByType( UnitOfSaleType::PARCEL )->weight ;  // 245.1456
+```
+
+🔑 **Nothing is computed.** A level that states no weight receives none — never a zero, which would read as "weightless" where the truth is "unknown". Deriving a missing measure from a volume and a density would produce a figure indistinguishable from a stated one; that belongs to whoever displays it, not to the class that carries it.
+
+⚠️ **A level with no unit code assembles nothing**, weight or no weight: a measure with no level to name it has nowhere to go.
+
 🔑 **The ratio between two levels restates the packaging chain** — how many pieces fit a package, how many packages fit a pallet — without any of those values being stored twice.
 
 ⚠️ **Distinct from `Product::$weight`**, inherited from the Schema.org mirror: that one is the weight of the billed unit, with no unit stated and no level attached. It does not change.

@@ -128,6 +128,32 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- A packaging chain can now be **filled** with what each of its levels weighs and
+  occupies, through six flat keys the magic setter of
+  `xyz\oihana\schema\products\Product` understands :
+  `eligibleUnitQuantityWeight` / `…Volume`, `eligiblePackageQuantityWeight` /
+  `…Volume`, `eligiblePalletQuantityWeight` / `…Volume`.
+
+  `PhysicalQuantity` gave the chain somewhere to carry a measure ; this gives it
+  a way to receive one. The chain assembles itself at hydration time from flat
+  dataset keys, inside `setEligibleQuantityProperty()` — there is no seam
+  outside the class where a caller could set a measure on a node, which is why
+  the keys belong here rather than in whoever reads the dataset.
+
+  The per-level buffer grows from three slots to five ; nothing else about the
+  assembly changes, and the twelve existing tests of the magic setter pass
+  untouched.
+
+  🔑 **Nothing is computed.** A level that states no weight receives none —
+  never a zero, which would read as « weightless » where the truth is
+  « unknown ». Deriving a missing measure from a volume and a density would
+  produce a figure indistinguishable from a stated one, and this class has no
+  way to say which is which ; that belongs to whoever displays it.
+
+  ⚠️ **A level with no unit code still assembles nothing**, weight or no weight :
+  a measure with no level to name it has nowhere to go. A non-numeric measure
+  reads as unknown, the same rule the quantity already followed.
+
 - Adds `xyz\oihana\schema\products\FeeSpecification` — a fee an item owes on top
   of its price — its `xyz\oihana\schema\enumerations\FeeUnresolvedReason`
   enumeration, and `xyz\oihana\schema\products\Product::$fees` carrying them.

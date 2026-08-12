@@ -63,6 +63,10 @@ class ProductTest extends TestCase
         $this->assertNull( $product->eligibleQuantity ) ;
     }
 
+    /**
+     * @return void
+     * @throws ReflectionException
+     */
     public function testSetAdditionalPropertiesRejectsUnknownProperty(): void
     {
         $product = new Product() ;
@@ -70,6 +74,10 @@ class ProductTest extends TestCase
         $this->assertFalse( $product->setAdditionalProperties( 'unknownProperty' , 'value' ) ) ;
     }
 
+    /**
+     * @return void
+     * @throws ReflectionException
+     */
     public function testSetAdditionalPropertiesNullifiesEmptyStrings(): void
     {
         $product = new Product() ;
@@ -80,9 +88,6 @@ class ProductTest extends TestCase
 
     // ---- setEligibleQuantityProperty
 
-    /**
-     * @throws ReflectionException
-     */
     public function testEligibleQuantityBuildsTheUnitLevel(): void
     {
         $product = new Product() ;
@@ -96,9 +101,6 @@ class ProductTest extends TestCase
         $this->assertSame( 1.0            , $product->eligibleQuantity->value    ) ;
     }
 
-    /**
-     * @throws ReflectionException
-     */
     public function testEligibleQuantityChainsUnitPackageAndPallet(): void
     {
         $product = new Product() ;
@@ -149,9 +151,6 @@ class ProductTest extends TestCase
 
     // ---- resolveUnitCode
 
-    /**
-     * @throws ReflectionException
-     */
     public function testResolveUnitCodeCanBeOverridenToMapProprietaryCodes(): void
     {
         $product = new class extends Product
@@ -309,8 +308,7 @@ class ProductTest extends TestCase
     /**
      * Only a scalar names a unit. An array used to be cast to the literal string
      * `"Array"` — a silent corruption — and an object raised a fatal Error.
-     *
-     * @throws ReflectionException
+     * @return void
      */
     public function testResolveUnitCodeRejectsNonScalarValues(): void
     {
@@ -351,6 +349,131 @@ class ProductTest extends TestCase
                 sprintf( 'A %s value should read as unknown, not divide.' , get_debug_type( $raw ) )
             ) ;
         }
+    }
+
+    // ---- each level carries what it weighs
+
+    /**
+     * The three levels each receive their own measures, on the node they
+     * describe — a product sold by the box does not weigh what the same
+     * product weighs by the piece.
+     *
+     * @throws ReflectionException
+     */
+    public function testEachLevelOfTheChainReceivesItsOwnMeasures(): void
+    {
+        $product = new Product() ;
+
+        $product->eligibleUnitQuantityCode      = 'MTK' ;
+        $product->eligibleUnitQuantityWeight    = 6.4 ;
+        $product->eligibleUnitQuantityVolume    = 0.0128 ;
+
+        $product->eligiblePackageQuantityCode   = 'PK' ;
+        $product->eligiblePackageQuantityValue  = 0.456 ;
+        $product->eligiblePackageQuantityWeight = 2.9184 ;
+
+        $product->eligiblePalletQuantityCode    = 'PX' ;
+        $product->eligiblePalletQuantityValue   = 38.304 ;
+        $product->eligiblePalletQuantityWeight  = 245.1456 ;
+
+        $unit    = $product->eligibleQuantity ;
+        $package = $unit->valueReference ;
+        $pallet  = $package->valueReference ;
+
+        $this->assertInstanceOf( PhysicalQuantity::class , $unit    ) ;
+        $this->assertInstanceOf( PhysicalQuantity::class , $package ) ;
+        $this->assertInstanceOf( PhysicalQuantity::class , $pallet  ) ;
+
+        $this->assertSame( 6.4      , $unit->weight    ) ;
+        $this->assertSame( 0.0128   , $unit->volume    ) ;
+        $this->assertSame( 2.9184   , $package->weight ) ;
+        $this->assertSame( 245.1456 , $pallet->weight  ) ;
+
+        // the ratio between two levels restates the packaging chain :
+        // 245.1456 / 2.9184 = 84 boards to a pallet
+        $this->assertEqualsWithDelta( 84 , $pallet->weight / $package->weight , 0.001 ) ;
+    }
+
+    /**
+     * 🔑 **A level that states no weight keeps none.** A zero would read as
+     * « weightless » where the truth is « unknown » — and nothing here derives
+     * a missing measure from a volume and a density.
+     *
+     * @throws ReflectionException
+     */
+    public function testALevelWithoutMeasuresStaysWithoutThem(): void
+    {
+        $product = new Product() ;
+
+        $product->eligibleUnitQuantityCode      = 'MTK' ;
+        $product->eligibleUnitQuantityWeight    = 6.4 ;
+        $product->eligiblePackageQuantityCode   = 'PK' ;
+        $product->eligiblePackageQuantityValue  = 12 ;
+
+        $package = $product->eligibleQuantity->valueReference ;
+
+        $this->assertSame( 6.4 , $product->eligibleQuantity->weight ) ;
+
+        $this->assertNull( $package->weight , 'an unstated weight is absent, never zero' ) ;
+        $this->assertNull( $package->volume ) ;
+    }
+
+    /**
+     * A measure that is not a number is not a measure — the same rule the
+     * quantity already follows.
+     *
+     * @throws ReflectionException
+     */
+    public function testANonNumericMeasureReadsAsUnknown(): void
+    {
+        $product = new Product() ;
+
+        $product->eligibleUnitQuantityCode   = 'MTK' ;
+        $product->eligibleUnitQuantityWeight = 'n/a' ;
+
+        $this->assertNull( $product->eligibleQuantity->weight ) ;
+    }
+
+    /**
+     * ⚠️ **A level with no unit code assembles nothing**, weight or no weight :
+     * a measure with no level to name it has nowhere to go.
+     *
+     * @throws ReflectionException
+     */
+    public function testAMeasureAloneBuildsNoChain(): void
+    {
+        $product = new Product() ;
+
+        $this->assertFalse
+        (
+            $product->setEligibleQuantityProperty( Oihana::ELIGIBLE_UNIT_QUANTITY_WEIGHT , 6.4 )
+        );
+
+        $this->assertNull( $product->eligibleQuantity ) ;
+    }
+
+    /**
+     * The measures reach the reading seam the rest of the code goes through :
+     * the deeper levels arrive there as raw arrays, so the node has to be
+     * rebuilt with them.
+     *
+     * @throws ReflectionException
+     */
+    public function testFindEligibleQuantityByTypeCarriesTheMeasuresOfTheLevel(): void
+    {
+        $product = new Product() ;
+
+        $product->eligibleUnitQuantityCode      = 'MTK' ;
+        $product->eligiblePackageQuantityCode   = 'PK' ;
+        $product->eligiblePackageQuantityValue  = 0.456 ;
+        $product->eligiblePackageQuantityWeight = 2.9184 ;
+        $product->eligiblePackageQuantityVolume = 0.0058 ;
+
+        $package = $product->findEligibleQuantityByType( UnitOfSaleType::PACKAGE ) ;
+
+        $this->assertInstanceOf( PhysicalQuantity::class , $package ) ;
+        $this->assertSame( 2.9184 , $package->weight ) ;
+        $this->assertSame( 0.0058 , $package->volume ) ;
     }
 
     // ---- fees

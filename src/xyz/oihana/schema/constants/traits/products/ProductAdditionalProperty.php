@@ -30,10 +30,16 @@ trait ProductAdditionalProperty
 
     // ---- Magic Properties used to defines the eligibleQuantity property
 
-    public const string ELIGIBLE_PACKAGE_QUANTITY_VALUE = 'eligiblePackageQuantityValue' ;
-    public const string ELIGIBLE_PACKAGE_QUANTITY_CODE  = 'eligiblePackageQuantityCode'  ;
-    public const string ELIGIBLE_PALLET_QUANTITY_VALUE  = 'eligiblePalletQuantityValue'  ;
-    public const string ELIGIBLE_PALLET_QUANTITY_CODE   = 'eligiblePalletQuantityCode'   ;
-    public const string ELIGIBLE_UNIT_QUANTITY_CODE     = 'eligibleUnitQuantityCode'     ;
+    public const string ELIGIBLE_PACKAGE_QUANTITY_CODE   = 'eligiblePackageQuantityCode'   ;
+    public const string ELIGIBLE_PACKAGE_QUANTITY_VALUE  = 'eligiblePackageQuantityValue'  ;
+    public const string ELIGIBLE_PACKAGE_QUANTITY_VOLUME = 'eligiblePackageQuantityVolume' ;
+    public const string ELIGIBLE_PACKAGE_QUANTITY_WEIGHT = 'eligiblePackageQuantityWeight' ;
+    public const string ELIGIBLE_PALLET_QUANTITY_CODE    = 'eligiblePalletQuantityCode'    ;
+    public const string ELIGIBLE_PALLET_QUANTITY_VALUE   = 'eligiblePalletQuantityValue'   ;
+    public const string ELIGIBLE_PALLET_QUANTITY_VOLUME  = 'eligiblePalletQuantityVolume'  ;
+    public const string ELIGIBLE_PALLET_QUANTITY_WEIGHT  = 'eligiblePalletQuantityWeight'  ;
+    public const string ELIGIBLE_UNIT_QUANTITY_CODE      = 'eligibleUnitQuantityCode'      ;
+    public const string ELIGIBLE_UNIT_QUANTITY_VOLUME    = 'eligibleUnitQuantityVolume'    ;
+    public const string ELIGIBLE_UNIT_QUANTITY_WEIGHT    = 'eligibleUnitQuantityWeight'    ;
 
 }
