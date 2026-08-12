@@ -234,7 +234,7 @@ An account carries zero, one or several business identities (see [`BusinessIdent
 
 | Function                  | Produces            | Hydrated nested references                               |
 |---------------------------|---------------------|----------------------------------------------------------|
-| `hydrateAggregateOffer`   | `AggregateOffer`    | `availableAtOrFrom` (Warehouse), `eligibleQuantity`, `offers` (OfferForPurchase[]), `provider` |
+| `hydrateAggregateOffer`   | `AggregateOffer`    | `availableAtOrFrom` (Warehouse), `eligibleQuantity` (`PhysicalQuantity` — the level keeps its `weight` and its `volume`), `offers` (OfferForPurchase[]), `provider` |
 | `hydrateCustomer`         | `Customer` or list  | `contactPoint`, `address`                                |
 | `hydrateCustomerEmployee` | `CustomerEmployee` or list | `additionalProperty`, `contactPoint`, `workLocation` (CustomerSite) |
 | `hydrateCustomerSite`     | `CustomerSite` or list | `additionalProperty`, `address`, `geo`, `deliveryMethod` (DeliveryMethodTerm), `deliveryRoute` (DeliveryRouteAssignment[]) |

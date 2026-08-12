@@ -236,7 +236,7 @@ Un compte porte zéro, une ou plusieurs identités métier (voir [`BusinessIdent
 
 | Fonction                  | Produit             | Références imbriquées hydratées                          |
 |---------------------------|---------------------|----------------------------------------------------------|
-| `hydrateAggregateOffer`   | `AggregateOffer`    | `availableAtOrFrom` (Warehouse), `eligibleQuantity`, `offers` (OfferForPurchase[]), `provider` |
+| `hydrateAggregateOffer`   | `AggregateOffer`    | `availableAtOrFrom` (Warehouse), `eligibleQuantity` (`PhysicalQuantity` — le niveau garde son `weight` et son `volume`), `offers` (OfferForPurchase[]), `provider` |
 | `hydrateCustomer`         | `Customer` ou liste | `contactPoint`, `address`                                |
 | `hydrateCustomerEmployee` | `CustomerEmployee` ou liste | `additionalProperty`, `contactPoint`, `workLocation` (CustomerSite) |
 | `hydrateCustomerSite`     | `CustomerSite` ou liste | `additionalProperty`, `address`, `geo`, `deliveryMethod` (DeliveryMethodTerm), `deliveryRoute` (DeliveryRouteAssignment[]) |

@@ -6,6 +6,24 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+### Fixed
+
+- `xyz\oihana\schema\helpers\hydrate\hydrateAggregateOffer()` now types
+  `eligibleQuantity` as a `xyz\oihana\schema\products\PhysicalQuantity`, so a
+  packaging level keeps what it weighs and what it occupies.
+
+  A class discards the keys it does not declare : a `weight` sitting on the
+  level left here without an error, without a dynamic property, and without a
+  trace in the payload. Worse, it left **only from the first level** — the
+  deeper ones stay raw arrays nobody rebuilds, so their measures survived. A
+  chain losing its head measure and keeping the rest is the hardest possible
+  shape to account for afterwards : the stored document is right, and the read
+  is wrong.
+
+  Nothing changes for an offer that states no measure : a `PhysicalQuantity` is
+  a `QuantitativeValue`, the property is typed on the mirror class, and a
+  consumer reading `value` and `unitCode` sees exactly what it saw before.
+
 ### Added
 
 - Adds `xyz\oihana\schema\products\PhysicalQuantity`, a `QuantitativeValue` that

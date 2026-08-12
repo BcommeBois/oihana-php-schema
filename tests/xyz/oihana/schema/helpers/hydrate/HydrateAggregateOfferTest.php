@@ -12,6 +12,7 @@ use org\schema\QuantitativeValue;
 use xyz\oihana\schema\organizations\Provider;
 use xyz\oihana\schema\organizations\Subsidiary;
 use xyz\oihana\schema\places\Warehouse;
+use xyz\oihana\schema\products\PhysicalQuantity;
 
 use function xyz\oihana\schema\helpers\hydrate\hydrateAggregateOffer;
 
@@ -50,6 +51,49 @@ final class HydrateAggregateOfferTest extends TestCase
 
         $this->assertInstanceOf( AggregateOffer::class , $offer ) ;
         $this->assertSame( 9.9 , $offer->lowPrice ) ;
+    }
+
+    /**
+     * The unit of a packaging level keeps what that level weighs. A plain
+     * `QuantitativeValue` declares no `weight`, and a class discards the keys
+     * it does not declare : the measure would leave without an error and
+     * without a trace in the payload.
+     *
+     * @throws ReflectionException
+     */
+    public function testTheEligibleQuantityKeepsWhatTheLevelWeighs(): void
+    {
+        $offer = hydrateAggregateOffer(
+        [
+            'eligibleQuantity' =>
+            [
+                'value'    => 1.403 ,
+                'unitCode' => 'PK'  ,
+                'weight'   => 15.419 ,
+                'volume'   => 0.0312 ,
+            ] ,
+        ]) ;
+
+        $this->assertInstanceOf( PhysicalQuantity::class , $offer->eligibleQuantity ) ;
+        $this->assertSame( 1.403  , $offer->eligibleQuantity->value  ) ;
+        $this->assertSame( 15.419 , $offer->eligibleQuantity->weight ) ;
+        $this->assertSame( 0.0312 , $offer->eligibleQuantity->volume ) ;
+    }
+
+    /**
+     * A level that states nothing about its mass hydrates exactly as it always
+     * did, and stays readable through the mirror type.
+     *
+     * @throws ReflectionException
+     */
+    public function testTheEligibleQuantityWithoutAnyMeasureIsUnchanged(): void
+    {
+        $offer = hydrateAggregateOffer( [ 'eligibleQuantity' => [ 'value' => 1 , 'unitCode' => 'C62' ] ] ) ;
+
+        $this->assertInstanceOf( QuantitativeValue::class , $offer->eligibleQuantity ) ;
+        $this->assertSame( 1     , $offer->eligibleQuantity->value    ) ;
+        $this->assertSame( 'C62' , $offer->eligibleQuantity->unitCode ) ;
+        $this->assertNull( $offer->eligibleQuantity->weight ?? null ) ;
     }
 
     /**
