@@ -92,9 +92,49 @@ class MyProduct extends Product
 | `priceCategory` / `webCategory` / `productType` | références de termes | Les classifications tarifaire, de navigation et fonctionnelle. |
 | `vat` | `TaxRate` ou référence | Le régime de TVA. |
 | `density` / `length` / `volume` | numériques | Les caractéristiques physiques. |
+| `fees` | `FeeSpecification[]` | Les frais dus **en plus du prix** — contribution environnementale, consigne, emballage, port (voir ci-dessous). |
 | `status` | `int` | Le statut applicatif. |
 
 Le trait descriptif `ProductProperty` (essence, apparence, certification, couleurs, …) et les propriétés additionnelles normalisées (`ProductAdditionalProperty::normalize()`) complètent la fiche — voir [Ingestion](ingestion.md).
+
+### Les frais — `fees`
+
+Certains articles doivent une somme **en plus de leur prix** : une contribution environnementale, une consigne, un emballage, un port. Chacune est une `FeeSpecification`, c'est-à-dire une `UnitPriceSpecification` à laquelle on ajoute le **barème publié** dont elle dérive.
+
+```json
+{
+  "@type": "FeeSpecification",
+  "priceComponentType": "https://schema.oihana.xyz/EnvironmentalFee",
+  "price": 0.0157,
+  "priceCurrency": "EUR",
+  "unitCode": "C62",
+  "identifier": "P4CHANT01",
+  "publisher": { "@type": "Organization", "name": "Recycling Body" },
+  "rate": { "@type": "UnitPriceSpecification", "price": 215, "priceCurrency": "EUR", "unitCode": "TNE" }
+}
+```
+
+🔑 **`price` est exprimé dans l'unité où l'article est facturé**, jamais dans celle du barème. Appliquer un frais tient donc en une multiplication — `montant = quantité de la ligne × price` — sans aucune table de correspondance côté client.
+
+`rate` conserve à côté le barème tel qu'il est publié, dans **son** unité : ici 215 € la tonne pour un article facturé à la pièce. Les deux cohabitent volontairement — l'un calcule, l'autre explique — exactement comme une offre expose un `price` final à côté de son `priceComponent[]`. Un montant facturé reste ainsi justifiable sans aller le chercher ailleurs.
+
+**Une liste, et non un champ par nature de frais** : `PriceComponentType` en énumère déjà plusieurs, elles se comportent toutes pareil, et un article peut relever de plusieurs filières à la fois.
+
+#### Quand le frais n'est pas chiffrable
+
+Un barème à la tonne réclame un poids ; un barème à la pièce réclame de savoir combien de pièces tient un conditionnement. Quand le catalogue ne le dit pas, **le frais reste dû** — il n'est simplement pas quantifiable.
+
+L'entrée existe alors **sans `price`**, avec son `rate` et un `unresolvedReason` (→ `FeeUnresolvedReason`) :
+
+| Valeur | Ce qu'elle dit |
+| :--- | :--- |
+| `MISSING_FEE_RATE` | aucun barème n'est rattaché à l'article |
+| `MISSING_PRODUCT_MEASURE` | la mesure sur laquelle porte le barème — poids, volume, épaisseur — est absente ou nulle |
+| `UNKNOWN_PACKAGE_CONTENT` | l'article est facturé au conditionnement, dont le contenu est inconnu |
+
+🔑 **Se lit avec l'absence de `price`** : « c'est dû, voici le barème, et voici ce qui nous empêche de le chiffrer ». Un zéro dirait « rien n'est dû », ce qui est faux. Un consommateur qui multiplie une quantité par un `price` absent obtient zéro ou une erreur — **jamais un montant faux**.
+
+⚠️ **À ne pas confondre avec `ExtraPriceSpecification`**, qui dérive aussi d'`UnitPriceSpecification` mais sert la segmentation tarifaire et n'a rien à voir avec les frais.
 
 ---
 
@@ -176,6 +216,7 @@ Le `priceSpecification` est typiquement un `CompoundPriceSpecification` dont les
 | `TaxRate` | Le taux de TVA. |
 | `PriceSegmentation` | La segmentation tarifaire d'un client ou d'un produit. |
 | `ExtraPriceSpecification` | Une majoration/minoration, convertible en `UnitPriceSpecification` (`toUnitPriceSpecification()`). |
+| `FeeSpecification` | Un frais dû en plus du prix, avec le barème publié dont il dérive (`rate`) et, s'il n'est pas chiffrable, la raison (`unresolvedReason`). |
 | `PhysicalQuantity` | Un niveau de l'arbre des quantités éligibles : une `QuantitativeValue` qui dit en plus ce qu'elle pèse (`weight`) et ce qu'elle occupe (`volume`). |
 | `PriceQuantityDiscount` | La remise par quantité. |
 | `PricingCondition` / `PricingConditionSelector` | La condition tarifaire (remise ou substitution) et son périmètre (voir ci-dessus). |
@@ -191,6 +232,7 @@ Le `priceSpecification` est typiquement un `CompoundPriceSpecification` dont les
 | Énumération | Valeurs | Usage |
 |---|---|---|
 | `UnitOfSaleType` | `UNIT` , `PACKAGE` , `PARCEL` | Les niveaux de l'arbre des quantités et l'unité de vente (URLs `…#Unit`, `…#Package`, `…#Parcel`). |
+| `FeeUnresolvedReason` | `MISSING_FEE_RATE` , `MISSING_PRODUCT_MEASURE` , `UNKNOWN_PACKAGE_CONTENT` | Pourquoi un frais dû n'a pas pu être chiffré — porté par `FeeSpecification::$unresolvedReason`, à lire avec l'absence de `price`. |
 | `PriceType` | prix d'achat, de vente, de référence… | Le type d'un prix dans une spécification. |
 | `PriceComponentType` | les composantes d'un prix | La décomposition d'un prix (base, majorations, frais) — inclut aussi remise, majoration, marge de vente, éco-participation, consigne et emballage. |
 | `BusinessEntityType` | professionnel, particulier… | La segmentation de clientèle d'une offre. |

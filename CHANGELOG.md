@@ -6,6 +6,23 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+### Changed
+
+- **Breaking** — `xyz\oihana\schema\business\documents\EcoFeeRule::$rate` is now a
+  `org\schema\UnitPriceSpecification` instead of a `org\schema\MonetaryAmount`.
+
+  A contribution is charged on a **physical measure** — a weight, a surface, a
+  volume, a count — never on a price. The unit is therefore not decoration : it
+  is half the rule. A `MonetaryAmount` has nowhere to put it and could only say
+  « 215 EUR » where the rule says « 215 EUR **per tonne** », which is the one
+  thing the class exists to state.
+
+  The two classes do not name their fields alike — `value`/`currency` against
+  `price`/`priceCurrency` — so keeping both in the union would have pushed a
+  branch into every consumer, forever, for a compatibility no one needs :
+  nothing in this library assigns a rate, and the property has never been able
+  to carry a rate in the first place.
+
 ### Fixed
 
 - A packaging chain now types itself **down every level**, on both the paths a
@@ -46,6 +63,41 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   consumer reading `value` and `unitCode` sees exactly what it saw before.
 
 ### Added
+
+- Adds `xyz\oihana\schema\products\FeeSpecification` — a fee an item owes on top
+  of its price — its `xyz\oihana\schema\enumerations\FeeUnresolvedReason`
+  enumeration, and `xyz\oihana\schema\products\Product::$fees` carrying them.
+
+  A `UnitPriceSpecification` augmented with the two things a fee needs and a
+  price does not : the **published rate** it derives from (`rate`, itself a
+  `UnitPriceSpecification` so the rate keeps its own unit — « 215 EUR per
+  tonne »), and the reason it could not be priced (`unresolvedReason`).
+  Everything else is inherited : `price`, `unitCode`, `priceComponentType`,
+  and `identifier` / `publisher` / `url` / `description` from `Thing`.
+
+  🔑 **`price` is expressed in the unit the item is billed in**, never in the
+  unit of the rate, so applying a fee is one multiplication — `quantity ×
+  price` — with no lookup table on the consumer side. `rate` sits beside it and
+  explains where the figure came from : one computes, the other accounts for
+  itself, the same way an offer exposes a final price next to its
+  `priceComponent[]` breakdown.
+
+  **A list on the product, not one property per kind of fee.**
+  `PriceComponentType` already enumerates several — environmental fee, deposit,
+  packaging, carriage — they all behave alike, and one item may fall under more
+  than one scheme.
+
+  🔑 **A fee that cannot be priced still exists.** A rate stated per tonne needs
+  a weight ; a rate stated per piece needs to know what a package holds. Where
+  the catalogue is silent the entry is stored **without a `price`**, with its
+  `rate` and one of `MISSING_FEE_RATE` / `MISSING_PRODUCT_MEASURE` /
+  `UNKNOWN_PACKAGE_CONTENT`. « To be determined » is an answer ; a zero would
+  say « nothing is owed » and be false. A consumer multiplying a quantity by an
+  absent price gets zero or an error, never a wrong amount.
+
+  ⚠️ **Not to be confused with `ExtraPriceSpecification`**, which also extends
+  `UnitPriceSpecification` but serves price segmentation and has nothing to do
+  with fees.
 
 - Adds `xyz\oihana\schema\products\PhysicalQuantity`, a `QuantitativeValue` that
   also says what it weighs (`weight`) and what space it takes (`volume`), and

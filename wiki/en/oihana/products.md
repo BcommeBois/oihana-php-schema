@@ -92,9 +92,49 @@ class MyProduct extends Product
 | `priceCategory` / `webCategory` / `productType` | term references | The pricing, navigation and functional classifications. |
 | `vat` | `TaxRate` or reference | The VAT regime. |
 | `density` / `length` / `volume` | numerics | The physical characteristics. |
+| `fees` | `FeeSpecification[]` | The fees owed **on top of the price** — environmental contribution, deposit, packaging, carriage (see below). |
 | `status` | `int` | The applicative status. |
 
 The descriptive `ProductProperty` trait (essence, appearance, certification, colors, …) and the normalized additional properties (`ProductAdditionalProperty::normalize()`) complete the record — see [Ingestion](ingestion.md).
+
+### The fees — `fees`
+
+Some items owe an amount **on top of their price**: an environmental contribution, a deposit, packaging, carriage. Each one is a `FeeSpecification` — a `UnitPriceSpecification` augmented with the **published rate** it derives from.
+
+```json
+{
+  "@type": "FeeSpecification",
+  "priceComponentType": "https://schema.oihana.xyz/EnvironmentalFee",
+  "price": 0.0157,
+  "priceCurrency": "EUR",
+  "unitCode": "C62",
+  "identifier": "P4CHANT01",
+  "publisher": { "@type": "Organization", "name": "Recycling Body" },
+  "rate": { "@type": "UnitPriceSpecification", "price": 215, "priceCurrency": "EUR", "unitCode": "TNE" }
+}
+```
+
+🔑 **`price` is expressed in the unit the item is billed in**, never in the unit of the rate. Applying a fee is therefore one multiplication — `amount = quantity of the line × price` — with no lookup table on the consumer side.
+
+`rate` keeps the published rate beside it, in **its own** unit: here 215 EUR per tonne for an item billed by the piece. The two coexist on purpose — one computes, the other explains — exactly as an offer exposes a final `price` next to its `priceComponent[]`. A charged amount stays accountable without looking anywhere else.
+
+**A list, not one property per kind of fee**: `PriceComponentType` already enumerates several, they all behave the same way, and one item may fall under more than one scheme.
+
+#### When the fee cannot be priced
+
+A rate stated per tonne needs a weight; a rate stated per piece needs to know how many pieces a package holds. When the catalogue does not say, **the fee is still owed** — it simply cannot be quantified.
+
+The entry then exists **without a `price`**, carrying its `rate` and an `unresolvedReason` (→ `FeeUnresolvedReason`):
+
+| Value | What it says |
+| :--- | :--- |
+| `MISSING_FEE_RATE` | no published rate is attached to the item |
+| `MISSING_PRODUCT_MEASURE` | the measure the rate is stated in — weight, volume, thickness — is absent or zero |
+| `UNKNOWN_PACKAGE_CONTENT` | the item is billed by the package, whose content is unknown |
+
+🔑 **Read it together with the absence of `price`**: "this is owed, here is the published rate, and here is what stops us from quantifying it". A zero would say "nothing is owed", which is false. A consumer multiplying a quantity by an absent `price` gets zero or an error — **never a wrong amount**.
+
+⚠️ **Not to be confused with `ExtraPriceSpecification`**, which also derives from `UnitPriceSpecification` but serves price segmentation and has nothing to do with fees.
 
 ---
 
@@ -176,6 +216,7 @@ The `priceSpecification` is typically a `CompoundPriceSpecification` whose compo
 | `TaxRate` | The VAT rate. |
 | `PriceSegmentation` | The price segmentation of a customer or a product. |
 | `ExtraPriceSpecification` | A surcharge/discount, convertible into a `UnitPriceSpecification` (`toUnitPriceSpecification()`). |
+| `FeeSpecification` | A fee owed on top of the price, with the published rate it derives from (`rate`) and, when it cannot be priced, the reason (`unresolvedReason`). |
 | `PhysicalQuantity` | A level of the eligible-quantity tree: a `QuantitativeValue` that also says what it weighs (`weight`) and what space it takes (`volume`). |
 | `PriceQuantityDiscount` | The quantity discount. |
 | `PricingCondition` / `PricingConditionSelector` | The pricing condition (discount or substitution) and its scope (see above). |
@@ -191,6 +232,7 @@ The `priceSpecification` is typically a `CompoundPriceSpecification` whose compo
 | Enumeration | Values | Usage |
 |---|---|---|
 | `UnitOfSaleType` | `UNIT` , `PACKAGE` , `PARCEL` | The levels of the quantity tree and the unit of sale (`…#Unit`, `…#Package`, `…#Parcel` URLs). |
+| `FeeUnresolvedReason` | `MISSING_FEE_RATE` , `MISSING_PRODUCT_MEASURE` , `UNKNOWN_PACKAGE_CONTENT` | Why a fee that is owed could not be priced — carried by `FeeSpecification::$unresolvedReason`, read together with the absence of `price`. |
 | `PriceType` | buying, selling, reference prices… | The type of a price in a specification. |
 | `PriceComponentType` | the components of a price | The decomposition of a price (base, surcharges, fees) — also covers discount, surcharge, selling margin, environmental fee, deposit and packaging. |
 | `BusinessEntityType` | professional, individual… | The customer segmentation of an offer. |

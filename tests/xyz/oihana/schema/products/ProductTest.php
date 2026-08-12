@@ -12,7 +12,9 @@ use org\schema\SomeProducts;
 
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\constants\ProductAdditionalProperty;
+use xyz\oihana\schema\enumerations\FeeUnresolvedReason;
 use xyz\oihana\schema\enumerations\UnitOfSaleType;
+use xyz\oihana\schema\products\FeeSpecification;
 use xyz\oihana\schema\products\PhysicalQuantity;
 use xyz\oihana\schema\products\Product;
 use xyz\oihana\schema\products\StockLevel;
@@ -349,6 +351,42 @@ class ProductTest extends TestCase
                 sprintf( 'A %s value should read as unknown, not divide.' , get_debug_type( $raw ) )
             ) ;
         }
+    }
+
+    // ---- fees
+
+    /**
+     * A list, and every entry typed : several kinds of fee may sit on one
+     * product, and they all read the same way.
+     *
+     * @throws ReflectionException
+     */
+    public function testReflectionHydratesEveryFeeOfTheList(): void
+    {
+        $product = new Reflection()->hydrate
+        (
+            [
+                Oihana::FEES =>
+                [
+                    [ Oihana::PRICE => 0.35 , Oihana::UNIT_CODE => 'MTK' ] ,
+                    [ Oihana::UNIT_CODE => 'C62' , Oihana::UNRESOLVED_REASON => FeeUnresolvedReason::MISSING_FEE_RATE ] ,
+                ]
+            ],
+            Product::class
+        );
+
+        $this->assertIsArray( $product->fees ) ;
+        $this->assertContainsOnlyInstancesOf( FeeSpecification::class , $product->fees ) ;
+
+        $this->assertSame( 0.35 , $product->fees[ 0 ]->price ) ;
+
+        $this->assertNull( $product->fees[ 1 ]->price ?? null ) ;
+        $this->assertSame( FeeUnresolvedReason::MISSING_FEE_RATE , $product->fees[ 1 ]->unresolvedReason ) ;
+    }
+
+    public function testFeesAreAbsentByDefault(): void
+    {
+        $this->assertNull( new Product()->fees ?? null ) ;
     }
 
     // ---- the packaging chain carries its weight

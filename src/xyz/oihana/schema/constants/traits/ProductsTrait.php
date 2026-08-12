@@ -4,6 +4,7 @@ namespace xyz\oihana\schema\constants\traits;
 
 use xyz\oihana\schema\constants\traits\products\CustomerOffer;
 use xyz\oihana\schema\constants\traits\products\ExtraPriceSpecification;
+use xyz\oihana\schema\constants\traits\products\FeeSpecification;
 use xyz\oihana\schema\constants\traits\products\PaymentCondition;
 use xyz\oihana\schema\constants\traits\products\PaymentMethod;
 use xyz\oihana\schema\constants\traits\products\PhysicalQuantity;
@@ -12,6 +13,7 @@ use xyz\oihana\schema\constants\traits\products\PriceSegmentation;
 use xyz\oihana\schema\constants\traits\products\PriceSegmentationFactor;
 use xyz\oihana\schema\constants\traits\products\PricingCondition;
 use xyz\oihana\schema\constants\traits\products\PricingConditionSelector;
+use xyz\oihana\schema\constants\traits\products\Product;
 use xyz\oihana\schema\constants\traits\products\ProductAdditionalProperty;
 use xyz\oihana\schema\constants\traits\products\ProductProviderInfo;
 use xyz\oihana\schema\constants\traits\products\ProductType;
@@ -30,6 +32,7 @@ trait ProductsTrait
 {
     use CustomerOffer                ,
         ExtraPriceSpecification      ,
+        FeeSpecification             ,
         PaymentCondition             ,
         PaymentMethod                ,
         PhysicalQuantity             ,
@@ -38,6 +41,7 @@ trait ProductsTrait
         PriceSegmentationFactor      ,
         PricingCondition             ,
         PricingConditionSelector     ,
+        Product                      ,
         ProductAdditionalProperty    ,
         ProductProviderInfo          ,
         ProductType                  ,

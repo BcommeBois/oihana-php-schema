@@ -7,8 +7,9 @@ use ReflectionException;
 
 use oihana\reflect\Reflection;
 
-use org\schema\MonetaryAmount;
+use org\schema\Product;
 use org\schema\StructuredValue;
+use org\schema\UnitPriceSpecification;
 
 use xyz\oihana\schema\business\documents\EcoFeeRule;
 use xyz\oihana\schema\constants\Oihana;
@@ -60,18 +61,24 @@ class EcoFeeRuleTest extends TestCase
     }
 
     /**
+     * A rate is charged on a physical measure — a weight, a surface, a count —
+     * so the unit is half of it. `MonetaryAmount` had no place to put the unit
+     * and could only say « 215 EUR » where the rule says « 215 EUR per tonne ».
+     *
      * @throws ReflectionException
      */
-    public function testReflectionHydratesRateIntoMonetaryAmount(): void
+    public function testReflectionHydratesRateIntoUnitPriceSpecification(): void
     {
         $rule = new Reflection()->hydrate
         (
-            [ EcoFeeRule::RATE => [ 'value' => 0.25 , 'currency' => 'EUR' ] ],
+            [ EcoFeeRule::RATE => [ 'price' => 215 , 'priceCurrency' => 'EUR' , 'unitCode' => 'TNE' ] ],
             EcoFeeRule::class
         );
 
-        $this->assertInstanceOf( MonetaryAmount::class , $rule->rate ) ;
-        $this->assertSame( 0.25 , $rule->rate->value ) ;
+        $this->assertInstanceOf( UnitPriceSpecification::class , $rule->rate ) ;
+        $this->assertSame( 215   , $rule->rate->price         ) ;
+        $this->assertSame( 'EUR' , $rule->rate->priceCurrency ) ;
+        $this->assertSame( 'TNE' , $rule->rate->unitCode      ) ;
     }
 
     public function testConstructorKeepsCategoryAsRawArray(): void
@@ -80,5 +87,20 @@ class EcoFeeRuleTest extends TestCase
 
         $this->assertIsArray( $rule->category ) ;
         $this->assertSame( 'EEE' , $rule->category[ 'codeValue' ] ) ;
+    }
+
+    /**
+     * The name says category because that is the common case, but a rule may
+     * concern exactly one item — a source publishing its rates item by item is
+     * the ordinary way of saying so, not an exception to model around.
+     *
+     * @throws ReflectionException
+     */
+    public function testTheRuleCanAlsoTargetASingleItem(): void
+    {
+        $rule = new EcoFeeRule([ EcoFeeRule::CATEGORY => new Product([ 'name' => 'Oak flooring' ]) ]) ;
+
+        $this->assertInstanceOf( Product::class , $rule->category ) ;
+        $this->assertSame( 'Oak flooring' , $rule->category->name ) ;
     }
 }

@@ -92,6 +92,25 @@ class Product extends SomeProducts
     public null|array|QuantitativeValue $eligibleQuantity = null ;
 
     /**
+     * The fees this product owes on top of its price — an environmental
+     * contribution, a deposit, packaging, carriage.
+     *
+     * A list rather than one property per kind : {@see PriceComponentType}
+     * already enumerates several, they all behave the same way — a rate, a
+     * unit, sometimes an issuing body — and one product may owe more than one.
+     *
+     * 🔑 **Each `price` is expressed in the unit the product is billed in**, so
+     * applying a fee is `quantity × price` and nothing else. An entry without a
+     * price says the fee is due but could not be quantified, and
+     * {@see FeeSpecification::$unresolvedReason} says why.
+     *
+     * @var null|array|FeeSpecification
+     * @since 1.4.0
+     */
+    #[HydrateWith(FeeSpecification::class)]
+    public null|array|FeeSpecification $fees ;
+
+    /**
      * Indicates if the product is managed in stock.
      * @var null|bool
      */

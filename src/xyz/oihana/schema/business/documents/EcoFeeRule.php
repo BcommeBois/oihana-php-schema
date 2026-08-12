@@ -5,9 +5,9 @@ namespace xyz\oihana\schema\business\documents;
 use oihana\reflect\attributes\HydrateAs;
 
 use org\schema\CategoryCode;
-use org\schema\MonetaryAmount;
 use org\schema\StructuredValue;
 use org\schema\Thing;
+use org\schema\UnitPriceSpecification;
 
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\constants\traits\business\documents\EcoFeeRuleTrait;
@@ -36,17 +36,36 @@ class EcoFeeRule extends StructuredValue
     public const string CONTEXT = Oihana::SCHEMA ;
 
     /**
-     * The product category this rule applies to.
+     * What this rule applies to.
+     *
+     * 🔑 **A category or a single item.** The name says category because that
+     * is the common case, but the union accepts any {@see Thing} — a product
+     * included — and a rule attached to one item is as legitimate as one
+     * attached to a family. A source that publishes its rates item by item is
+     * not an exception to model around ; it is the ordinary way of stating
+     * that a rule concerns exactly one thing.
+     *
+     * A bare string names it by reference, without joining the record.
+     *
      * @var null|array|string|CategoryCode|Thing
      */
     public null|array|string|CategoryCode|Thing $category ;
 
     /**
-     * The fee amount charged per unit.
-     * @var MonetaryAmount|array|null
+     * The rate this rule charges, expressed in its own unit — « 215 EUR per
+     * tonne ».
+     *
+     * A {@see UnitPriceSpecification} and not a `MonetaryAmount` precisely so
+     * the unit survives : an amount alone would say « 215 EUR » and lose the
+     * tonne the whole rule turns on. A rate is charged on a physical measure —
+     * a weight, a surface, a volume, a count — never on a price, so the unit is
+     * not decoration : it is half the rule.
+     *
+     * @var null|array|UnitPriceSpecification
+     * @since 1.4.0
      */
-    #[HydrateAs(MonetaryAmount::class)]
-    public null|array|MonetaryAmount $rate ;
+    #[HydrateAs(UnitPriceSpecification::class)]
+    public null|array|UnitPriceSpecification $rate ;
 
     /**
      * The date from which the rule applies.
