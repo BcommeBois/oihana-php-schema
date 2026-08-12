@@ -19,11 +19,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   enough and a calculation structure would be a burden.
 
   The union is the one `org\schema\OfferShippingDetails::$weight` already
-  carries : a plain number when the unit is implicit, a `QuantitativeValue` when
-  it is stated (`{ value: 326.5456, unitCode: "KGM" }`). An array hydrates as the
-  latter, `#[HydrateAs(QuantitativeValue::class)]` being declared for it.
-  Borrowing the union rather than inventing one means a weight reads the same
-  wherever it is met.
+  carries, widened with `array` : a plain number when the unit is implicit, a
+  `QuantitativeValue` when it is stated (`{ value: 326.5456, unitCode: "KGM" }`).
+  An array hydrates as the latter, `#[HydrateAs(QuantitativeValue::class)]` being
+  declared for it. Borrowing the union rather than inventing one means a weight
+  reads the same wherever it is met ; widening it is what lets a raw row sit in
+  the property until hydration replaces it, `#[HydrateAs]` acting through
+  `Reflection::hydrate()` and never through the constructor. The mirror's union
+  predates that convention, and the mirror is left untouched.
 
   ⚠️ **Not filed under `DocumentTotals`** despite the pull of the name. That
   class is the *monetary* summary and every one of its properties is a

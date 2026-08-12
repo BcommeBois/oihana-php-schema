@@ -333,6 +333,20 @@ class BusinessDocumentTest extends TestCase
     }
 
     /**
+     * The constructor assigns raw, `#[HydrateAs]` acting through
+     * `Reflection::hydrate()` alone : a weight read as a row sits in the
+     * property until hydration replaces it, exactly like the other properties
+     * of the class.
+     */
+    public function testConstructorKeepsAStructuredWeightAsRawArray(): void
+    {
+        $document = new BusinessDocument([ BusinessDocument::WEIGHT => [ 'value' => 326.5456 , 'unitCode' => 'KGM' ] ]) ;
+
+        $this->assertIsArray( $document->weight ) ;
+        $this->assertSame( 326.5456 , $document->weight[ 'value' ] ) ;
+    }
+
+    /**
      * A weight that states its unit comes back typed, so a consumer reads the
      * unit instead of assuming one.
      * @throws ReflectionException

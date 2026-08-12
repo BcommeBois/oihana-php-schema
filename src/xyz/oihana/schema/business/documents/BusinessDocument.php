@@ -240,8 +240,10 @@ class BusinessDocument extends Intangible
      * unit it is expressed in. A plain number carries it when the unit is
      * implicit, a {@see QuantitativeValue} when the unit is stated
      * (`{ value: 326.5456, unitCode: "KGM" }`) ; an array is hydrated as the
-     * latter. The same union as {@see \org\schema\OfferShippingDetails::$weight},
-     * so a weight reads the same wherever it is met.
+     * latter. The union of {@see \org\schema\OfferShippingDetails::$weight}
+     * widened with `array`, so a weight reads the same wherever it is met and
+     * a raw row can still sit here until hydration replaces it — the mirror's
+     * union predates that convention.
      *
      * ⚠️ **Not part of {@see BusinessDocument::$totals}** despite the pull of
      * the name : that class is the *monetary* summary and every one of its
@@ -253,9 +255,9 @@ class BusinessDocument extends Intangible
      * never to a second property — two weights held in parallel eventually
      * disagree.
      *
-     * @var null|int|float|QuantitativeValue|Mass
+     * @var null|array|int|float|QuantitativeValue|Mass
      * @since 1.4.0
      */
     #[HydrateAs(QuantitativeValue::class)]
-    public null|int|float|QuantitativeValue|Mass $weight ;
+    public null|array|int|float|QuantitativeValue|Mass $weight ;
 }
