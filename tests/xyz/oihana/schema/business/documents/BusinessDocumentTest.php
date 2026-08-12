@@ -60,6 +60,7 @@ class BusinessDocumentTest extends TestCase
         $this->assertSame( 'status'         , BusinessDocument::STATUS          );
         $this->assertSame( 'taxes'          , BusinessDocument::TAXES           );
         $this->assertSame( 'totals'         , BusinessDocument::TOTALS          );
+        $this->assertSame( 'volume'         , BusinessDocument::VOLUME          );
         $this->assertSame( 'weight'         , BusinessDocument::WEIGHT          );
 
         $this->assertSame( Oihana::ADJUSTMENTS     , BusinessDocument::ADJUSTMENTS     );
@@ -69,6 +70,7 @@ class BusinessDocumentTest extends TestCase
         $this->assertSame( Oihana::ORDER_DELIVERY  , BusinessDocument::ORDER_DELIVERY  );
         $this->assertSame( Oihana::POINT_OF_SALE   , BusinessDocument::POINT_OF_SALE   );
         $this->assertSame( Oihana::TOTALS          , BusinessDocument::TOTALS          );
+        $this->assertSame( Oihana::VOLUME          , BusinessDocument::VOLUME          );
         $this->assertSame( Oihana::WEIGHT          , BusinessDocument::WEIGHT          );
 
         // the document names the salesperson the same way an organization does
@@ -99,6 +101,7 @@ class BusinessDocumentTest extends TestCase
         $this->assertNull( $document->status         ?? null );
         $this->assertNull( $document->taxes          ?? null );
         $this->assertNull( $document->totals         ?? null );
+        $this->assertNull( $document->volume         ?? null );
         $this->assertNull( $document->weight         ?? null );
     }
 
@@ -362,6 +365,28 @@ class BusinessDocumentTest extends TestCase
         $this->assertInstanceOf( QuantitativeValue::class , $document->weight ) ;
         $this->assertSame( 326.5456 , $document->weight->value ) ;
         $this->assertSame( 'KGM' , $document->weight->unitCode ) ;
+    }
+
+    /**
+     * The volume travels beside the weight and reads exactly the same way —
+     * a plain number, or a quantity stating its unit.
+     *
+     * @throws ReflectionException
+     */
+    public function testVolumeIsReadLikeTheWeight(): void
+    {
+        $plain = new BusinessDocument([ BusinessDocument::VOLUME => 3.412 ]) ;
+        $this->assertSame( 3.412 , $plain->volume ) ;
+
+        $stated = new Reflection()->hydrate
+        (
+            [ BusinessDocument::VOLUME => [ 'value' => 3.412 , 'unitCode' => 'MTQ' ] ] ,
+            BusinessDocument::class
+        );
+
+        $this->assertInstanceOf( QuantitativeValue::class , $stated->volume ) ;
+        $this->assertSame( 3.412 , $stated->volume->value    ) ;
+        $this->assertSame( 'MTQ' , $stated->volume->unitCode ) ;
     }
 
     /**

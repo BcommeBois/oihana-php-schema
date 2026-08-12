@@ -12,6 +12,7 @@ use org\schema\QuantitativeValue;
 use org\schema\StructuredValue;
 
 use xyz\oihana\schema\business\documents\DeliveryLine;
+use xyz\oihana\schema\business\documents\Invoice;
 use xyz\oihana\schema\business\documents\PurchaseOrder;
 use xyz\oihana\schema\constants\Oihana;
 
@@ -36,8 +37,10 @@ class DeliveryLineTest extends TestCase
         $this->assertSame( 'item'              , DeliveryLine::ITEM               );
         $this->assertSame( 'orderedQuantity'   , DeliveryLine::ORDERED_QUANTITY   );
         $this->assertSame( 'position'          , DeliveryLine::POSITION           );
+        $this->assertSame( 'referencesInvoice' , DeliveryLine::REFERENCES_INVOICE );
         $this->assertSame( 'referencesOrder'   , DeliveryLine::REFERENCES_ORDER   );
         $this->assertSame( 'serialNumbers'     , DeliveryLine::SERIAL_NUMBERS     );
+        $this->assertSame( 'weight'            , DeliveryLine::WEIGHT             );
 
         $this->assertSame( Oihana::POSITION , DeliveryLine::POSITION );
     }
@@ -53,8 +56,10 @@ class DeliveryLineTest extends TestCase
         $this->assertNull( $line->item              ?? null );
         $this->assertNull( $line->orderedQuantity   ?? null );
         $this->assertNull( $line->position          ?? null );
+        $this->assertNull( $line->referencesInvoice ?? null );
         $this->assertNull( $line->referencesOrder   ?? null );
         $this->assertNull( $line->serialNumbers     ?? null );
+        $this->assertNull( $line->weight            ?? null );
     }
 
     public function testConstructorHydratesScalarProperties(): void
@@ -144,5 +149,106 @@ class DeliveryLineTest extends TestCase
 
         $this->assertIsArray( $line->referencesOrder ) ;
         $this->assertSame( '1142229' , $line->referencesOrder[ 'identifier' ] ) ;
+    }
+
+    /**
+     * The invoice sits on the line and not on the note, so two lines of the
+     * same note can answer to two invoices — which is what a note delivering
+     * several orders does.
+     *
+     * @throws ReflectionException
+     */
+    public function testTwoLinesOfOneNoteCanBeBilledByTwoInvoices(): void
+    {
+        $first = new Reflection()->hydrate
+        (
+            [
+                DeliveryLine::POSITION           => 1 ,
+                DeliveryLine::REFERENCES_ORDER   => [ 'identifier' => 'CDE-1148902' ] ,
+                DeliveryLine::REFERENCES_INVOICE => [ 'identifier' => 'INV-2026-04417' ] ,
+            ],
+            DeliveryLine::class
+        );
+
+        $second = new Reflection()->hydrate
+        (
+            [
+                DeliveryLine::POSITION           => 1 ,
+                DeliveryLine::REFERENCES_ORDER   => [ 'identifier' => 'CDE-1149355' ] ,
+                DeliveryLine::REFERENCES_INVOICE => [ 'identifier' => 'INV-2026-04418' ] ,
+            ],
+            DeliveryLine::class
+        );
+
+        $this->assertInstanceOf( Invoice::class , $first->referencesInvoice  ) ;
+        $this->assertInstanceOf( Invoice::class , $second->referencesInvoice ) ;
+
+        // same position, two orders, two invoices : the position alone names nothing
+        $this->assertSame( $first->position , $second->position ) ;
+        $this->assertNotSame
+        (
+            $first->referencesInvoice->identifier ,
+            $second->referencesInvoice->identifier
+        ) ;
+    }
+
+    /**
+     * A bare invoice reference is left as read, like a bare order reference.
+     */
+    public function testReferencesInvoiceKeepsABareReference(): void
+    {
+        $line = new DeliveryLine([ DeliveryLine::REFERENCES_INVOICE => 'INV-2026-04417' ]) ;
+
+        $this->assertSame( 'INV-2026-04417' , $line->referencesInvoice ) ;
+    }
+
+    /**
+     * The weight of a line is the weight of what LEFT, not of what was ordered :
+     * a line delivering 84 of the 120 square meters ordered weighs the 84.
+     *
+     * @throws ReflectionException
+     */
+    public function testTheLineWeighsWhatWasDeliveredAndSumsToTheNote(): void
+    {
+        $lines =
+        [
+            new DeliveryLine
+            ([
+                DeliveryLine::ORDERED_QUANTITY   => 120 ,
+                DeliveryLine::DELIVERED_QUANTITY => 84 ,
+                DeliveryLine::WEIGHT             => 537.6 ,   // 84 × 6.4, not 120 × 6.4
+            ]) ,
+            new DeliveryLine
+            ([
+                DeliveryLine::DELIVERED_QUANTITY => 1467 ,
+                DeliveryLine::WEIGHT             => 1193.775 ,
+            ]) ,
+        ];
+
+        $this->assertSame( 537.6    , $lines[ 0 ]->weight ) ;
+        $this->assertSame( 1193.775 , $lines[ 1 ]->weight ) ;
+
+        $total = array_sum( array_map( fn( $line ) => $line->weight , $lines ) ) ;
+
+        $this->assertSame( 1731.375 , $total ) ;
+    }
+
+    /**
+     * A weight that states its unit comes back typed, so a consumer reads the
+     * unit instead of assuming one.
+     *
+     * @throws ReflectionException
+     */
+    public function testReflectionHydratesALineWeightThatStatesItsUnit(): void
+    {
+        $line = new Reflection()->hydrate
+        (
+            [ DeliveryLine::WEIGHT => [ 'value' => 537.6 , 'unitCode' => 'KGM' ] ],
+            DeliveryLine::class
+        );
+
+        $this->assertInstanceOf( QuantitativeValue::class , $line->weight ) ;
+        $this->assertSame( 537.6 , $line->weight->value    ) ;
+        $this->assertSame( 'KGM' , $line->weight->unitCode ) ;
     }
 }

@@ -233,6 +233,24 @@ class BusinessDocument extends Intangible
     public null|array|DocumentTotals $totals ;
 
     /**
+     * The space the goods the document covers take up.
+     *
+     * The twin of {@see BusinessDocument::$weight}, and read the same way : a
+     * plain number when the unit is implicit, a {@see QuantitativeValue} when
+     * it is stated (`{ value: 3.412, unitCode: "MTQ" }`) ; an array is hydrated
+     * as the latter and sits there until it is.
+     *
+     * ⚠️ **Not part of {@see BusinessDocument::$totals}**, for the same reason
+     * the weight is not : that class is the *monetary* summary and every one of
+     * its properties is a {@see \org\schema\MonetaryAmount}.
+     *
+     * @var null|array|int|float|QuantitativeValue
+     * @since 1.4.0
+     */
+    #[HydrateAs(QuantitativeValue::class)]
+    public null|array|int|float|QuantitativeValue $volume ;
+
+    /**
      * What the goods the document covers weigh — the figure printed on a
      * delivery note or a quote, and the one a carrier is quoted from.
      *

@@ -5,6 +5,7 @@ namespace xyz\oihana\schema\business\documents;
 use oihana\reflect\attributes\HydrateAs;
 use oihana\reflect\attributes\HydrateWith;
 
+use org\schema\Mass;
 use org\schema\Product;
 use org\schema\QuantitativeValue;
 use org\schema\Service;
@@ -100,6 +101,25 @@ class DeliveryLine extends StructuredValue
     public null|int|string $position ;
 
     /**
+     * The invoice that bills this line.
+     *
+     * 🔑 **The link lives here and not on the note.** A note can be billed by
+     * more than one invoice — it delivers several orders, and each is invoiced
+     * on its own — so an invoice reference on the header would have to choose
+     * between them. At the line grain the question does not arise : a line
+     * belongs to one order, hence to one invoice.
+     *
+     * The sibling of {@see DeliveryLine::$referencesOrder}, and it follows the
+     * same rule : the union names a single class, so
+     * {@see \oihana\reflect\Reflection::hydrate()} resolves a joined row on its
+     * own, while a bare key is left as read.
+     *
+     * @var null|array|string|Invoice
+     * @since 1.4.0
+     */
+    public null|array|string|Invoice $referencesInvoice ;
+
+    /**
      * The purchase order this line comes from.
      *
      * A delivery line is a fact of its own, not a copy of the order's line and
@@ -128,4 +148,23 @@ class DeliveryLine extends StructuredValue
      * @var null|array|string
      */
     public null|array|string $serialNumbers ;
+
+    /**
+     * What this line actually weighs — the weight of the goods that left, not
+     * the weight of what was ordered.
+     *
+     * A line delivered in halves weighs what went out that day, which is why
+     * the figure belongs to the delivery line and not to the order's line : a
+     * line delivering 84 of the 120 square meters ordered weighs the 84.
+     * Sums, across the lines, to {@see BusinessDocument::$weight} on the note.
+     *
+     * The same union as that one, so a weight reads the same wherever it is
+     * met : a plain number when the unit is implicit, a
+     * {@see QuantitativeValue} when it is stated.
+     *
+     * @var null|array|int|float|QuantitativeValue|Mass
+     * @since 1.4.0
+     */
+    #[HydrateAs(QuantitativeValue::class)]
+    public null|array|int|float|QuantitativeValue|Mass $weight ;
 }

@@ -23,6 +23,34 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   nothing in this library assigns a rate, and the property has never been able
   to carry a rate in the first place.
 
+- Adds three properties a delivery note could not carry :
+  `xyz\oihana\schema\business\documents\BusinessDocument::$volume`,
+  `xyz\oihana\schema\business\documents\DeliveryLine::$referencesInvoice` and
+  `xyz\oihana\schema\business\documents\DeliveryLine::$weight`.
+
+  **`$volume`** is the twin of `$weight` : the space the goods a document
+  covers take up, read exactly the same way — a plain number when the unit is
+  implicit, a `QuantitativeValue` when it is stated. Kept out of
+  `DocumentTotals` for the same reason the weight is : that class is the
+  *monetary* summary.
+
+  **`$referencesInvoice`** says which invoice bills a delivery line. 🔑 **The
+  link lives on the line and not on the note** : a note can be billed by more
+  than one invoice — it delivers several orders, each invoiced on its own — so
+  a reference on the header would have to choose between them. At the line
+  grain the question does not arise, a line belonging to one order and hence to
+  one invoice. The sibling of `$referencesOrder`, and it follows the same rule.
+
+  **`$weight`** is what a line actually weighs — the goods that left, not the
+  goods that were ordered. A line delivering 84 of the 120 square meters
+  ordered weighs the 84, which is why the figure belongs to the delivery line
+  and not to the order's line ; the lines sum to the note's own weight.
+
+  The wiki gains a full harvested delivery note in both languages, where two
+  lines carry the same `position` for two orders and two invoices — the shape
+  that makes the three properties necessary, and that no description conveys as
+  quickly.
+
 ### Fixed
 
 - `xyz\oihana\schema\business\documents\DeliveryLine::$referencesOrder` accepts
