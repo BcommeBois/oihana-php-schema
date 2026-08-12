@@ -16,7 +16,7 @@ Choisissez `Product` dès qu'un article porte une dimension commerciale : une un
 
 ## L'arbre des quantités éligibles
 
-Un produit se vend à l'unité, au colis ou à la palette (`unitOfSale`, valeurs de l'énumération `UnitOfSaleType`). L'arbre `eligibleQuantity` décrit la chaîne complète : chaque niveau est une `QuantitativeValue` (quantité, code d'unité UN/CEFACT, libellé) dont le `valueReference` pointe le niveau supérieur.
+Un produit se vend à l'unité, au colis ou à la palette (`unitOfSale`, valeurs de l'énumération `UnitOfSaleType`). L'arbre `eligibleQuantity` décrit la chaîne complète : chaque niveau est une `PhysicalQuantity` (quantité, code d'unité UN/CEFACT, libellé, plus `weight` et `volume`) dont le `valueReference` pointe le niveau supérieur. `PhysicalQuantity` étend `QuantitativeValue` : tout ce qui est typé sur la classe miroir — `Offer::$eligibleQuantity`, par exemple — l'accepte sans changement, et un consommateur qui ne lit que `value` et `unitCode` ne voit pas la différence.
 
 L'arbre se construit **tout seul à l'hydratation** : les clés plates d'un jeu de données (`eligibleUnitQuantityCode`, `eligiblePackageQuantityCode`, `eligiblePackageQuantityValue`, …) passent par le `__set` magique de la classe et assemblent la chaîne.
 
@@ -41,7 +41,27 @@ $product->getUnitOfSaleConversionFactor() ;       // 12.0
 |---|---|---|
 | `getUnitOfSaleConversionFactor()` | `float` | Le facteur multiplicatif entre l'unité de base et l'unité de vente (1.0 pour l'unité). |
 | `getInventoryLevelInUnitOfSale( $level )` | `float` ou `null` | Le stock converti dans l'unité de vente. |
-| `findEligibleQuantityByType( $type )` | `QuantitativeValue` ou `null` | Le niveau de l'arbre correspondant à un `UnitOfSaleType`. |
+| `findEligibleQuantityByType( $type )` | `PhysicalQuantity` ou `null` | Le niveau de l'arbre correspondant à un `UnitOfSaleType`. |
+
+### Le poids et le volume de chaque niveau
+
+Un produit vendu au colis ne pèse pas ce qu'il pèse à la pièce. Chaque niveau de l'arbre porte donc **sa propre masse et son propre encombrement**, sur le nœud qu'ils décrivent et jamais à côté :
+
+```php
+$package = $product->findEligibleQuantityByType( UnitOfSaleType::PACKAGE ) ;
+
+$package->value  ;  // 1.403 — la quantité du niveau
+$package->weight ;  // 15.419
+$package->volume ;  // 0.0312
+```
+
+Les deux propriétés acceptent un nombre nu quand l'unité est implicite, ou une `QuantitativeValue` quand elle est déclarée (`{ "value": 15.419, "unitCode": "KGM" }`) — un tableau s'hydrate en `QuantitativeValue`.
+
+🔑 **Le rapport entre deux niveaux redonne la chaîne de conditionnement** — combien de pièces dans un colis, combien de colis sur une palette — sans qu'aucune de ces valeurs soit stockée deux fois.
+
+⚠️ **À distinguer de `Product::$weight`**, hérité du miroir Schema.org : celui-là est le poids de l'unité facturée, sans unité déclarée ni niveau rattaché. Il ne change pas.
+
+⚠️ **Seul le premier niveau est typé à l'hydratation** : `valueReference` est déclaré `mixed`, donc les niveaux suivants restent des tableaux bruts. `findEligibleQuantityByType()` est le chemin de lecture typé — il reconstruit le nœud demandé, poids et volume compris, quel que soit son étage.
 
 ### Le point d'extension : `resolveUnitCode()`
 
@@ -152,6 +172,7 @@ Le `priceSpecification` est typiquement un `CompoundPriceSpecification` dont les
 | `TaxRate` | Le taux de TVA. |
 | `PriceSegmentation` | La segmentation tarifaire d'un client ou d'un produit. |
 | `ExtraPriceSpecification` | Une majoration/minoration, convertible en `UnitPriceSpecification` (`toUnitPriceSpecification()`). |
+| `PhysicalQuantity` | Un niveau de l'arbre des quantités éligibles : une `QuantitativeValue` qui dit en plus ce qu'elle pèse (`weight`) et ce qu'elle occupe (`volume`). |
 | `PriceQuantityDiscount` | La remise par quantité. |
 | `PricingCondition` / `PricingConditionSelector` | La condition tarifaire (remise ou substitution) et son périmètre (voir ci-dessus). |
 | `CustomerOffer` | L'offre de vente au tarif d'un client précis (segment × dépôt, condition éventuelle) ; spécialise `OfferForPurchase` (voir ci-dessus). |

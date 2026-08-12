@@ -8,6 +8,42 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds `xyz\oihana\schema\products\PhysicalQuantity`, a `QuantitativeValue` that
+  also says what it weighs (`weight`) and what space it takes (`volume`), and
+  hydrates the nodes of `xyz\oihana\schema\products\Product::$eligibleQuantity`.
+
+  A quantity states how much of something there is — one pallet, one box, one
+  square meter — and nothing about what that amount weighs. A packaging chain
+  needs it at every step : a product sold by the box does not weigh what the
+  same product weighs by the piece, and a weight that cannot name the level it
+  describes is a weight nobody can use.
+
+  ```
+  eligibleQuantity : 1 parcel — weight 15.419 kg
+    └ valueReference : 1.403 m² — weight 10.99 kg
+  ```
+
+  🔑 **The ratio between two levels restates the packaging chain** — how many
+  pieces fit a box, how many boxes fit a pallet — without any of it being
+  stored twice. Which is also why a flat list of weights beside the chain was
+  turned down : nothing would keep a weight and the level it describes together.
+
+  **Nothing narrows.** A `PhysicalQuantity` *is* a `QuantitativeValue`, so
+  `$eligibleQuantity` keeps its declared `null|array|QuantitativeValue` — a
+  consumer assigning a plain `QuantitativeValue` is unaffected — and
+  `findEligibleQuantityByType()` keeps its `?QuantitativeValue` return. Only the
+  hydration attribute and the three places building a node change.
+
+  ⚠️ `Product::$weight`, inherited from the Schema.org mirror, is untouched : it
+  remains the plain weight of the billed unit, with no unit stated and no level
+  attached.
+
+  ⚠️ **Only the first level is typed at hydration time**, `valueReference` being
+  declared `mixed` — the deeper levels stay raw arrays.
+  `findEligibleQuantityByType()` is the typed reading path and now rebuilds the
+  requested node as a `PhysicalQuantity`, weight and volume included, whatever
+  its level ; without that it would have dropped them silently.
+
 - Adds `xyz\oihana\schema\business\documents\BusinessDocument::$weight`, what the
   goods a document covers weigh.
 

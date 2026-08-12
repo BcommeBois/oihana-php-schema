@@ -6,6 +6,7 @@ use xyz\oihana\schema\constants\traits\products\CustomerOffer;
 use xyz\oihana\schema\constants\traits\products\ExtraPriceSpecification;
 use xyz\oihana\schema\constants\traits\products\PaymentCondition;
 use xyz\oihana\schema\constants\traits\products\PaymentMethod;
+use xyz\oihana\schema\constants\traits\products\PhysicalQuantity;
 use xyz\oihana\schema\constants\traits\products\PriceQuantityDiscount;
 use xyz\oihana\schema\constants\traits\products\PriceSegmentation;
 use xyz\oihana\schema\constants\traits\products\PriceSegmentationFactor;
@@ -31,6 +32,7 @@ trait ProductsTrait
         ExtraPriceSpecification      ,
         PaymentCondition             ,
         PaymentMethod                ,
+        PhysicalQuantity             ,
         PriceQuantityDiscount        ,
         PriceSegmentation            ,
         PriceSegmentationFactor      ,

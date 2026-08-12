@@ -79,9 +79,16 @@ class Product extends SomeProducts
      *     }
      * }
      * ```
+     *
+     * Each node is hydrated as a {@see PhysicalQuantity}, the specialization
+     * that lets a level carry its own weight and volume. It remains a
+     * `QuantitativeValue`, so the declared type is left as it is : narrowing
+     * it would reject the plain `QuantitativeValue` a consumer may still
+     * assign.
+     *
      * @var null|array|QuantitativeValue
      */
-    #[HydrateAs(QuantitativeValue::class)]
+    #[HydrateAs(PhysicalQuantity::class)]
     public null|array|QuantitativeValue $eligibleQuantity = null ;
 
     /**
@@ -368,14 +375,14 @@ class Product extends SomeProducts
             return false ;
         }
 
-        $createQV = function( ?string $code, mixed $val , string $type ) :?QuantitativeValue
+        $createQV = function( ?string $code, mixed $val , string $type ) :?PhysicalQuantity
         {
             if ( empty( $code ) && empty( $val ) )
             {
                 return null ;
             }
 
-            return new QuantitativeValue
+            return new PhysicalQuantity
             ([
                 Schema::ADDITIONAL_TYPE => $type ,
                 // Only a numeric value converts : anything else would cast to a
@@ -456,11 +463,14 @@ class Product extends SomeProducts
         {
             // Always a fresh instance : the conversion above leaves $qv an array
             // whichever way it came in, so there is no object left to hand back.
-            return new QuantitativeValue( $qv ) ;
+            // A PhysicalQuantity, so a level found below the first — where
+            // hydration leaves raw arrays — hands back its weight and volume
+            // rather than dropping them.
+            return new PhysicalQuantity( $qv ) ;
         }
 
         $qv = $this->searchEligibleQuantityByType( $type , $qv[ Schema::VALUE_REFERENCE ] ?? null ) ;
 
-        return $qv == null ? null : new QuantitativeValue( $qv ) ;
+        return $qv == null ? null : new PhysicalQuantity( $qv ) ;
     }
 }

@@ -5,12 +5,15 @@ namespace tests\xyz\oihana\schema\products ;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
 
+use oihana\reflect\Reflection;
+
 use org\schema\QuantitativeValue;
 use org\schema\SomeProducts;
 
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\constants\ProductAdditionalProperty;
 use xyz\oihana\schema\enumerations\UnitOfSaleType;
+use xyz\oihana\schema\products\PhysicalQuantity;
 use xyz\oihana\schema\products\Product;
 use xyz\oihana\schema\products\StockLevel;
 
@@ -348,4 +351,113 @@ class ProductTest extends TestCase
         }
     }
 
+    // ---- the packaging chain carries its weight
+
+    /**
+     * Every level the chain builds is a `PhysicalQuantity`, so a weight has a
+     * node to sit on wherever it is stated.
+     *
+     * @throws ReflectionException
+     */
+    public function testEligibleQuantityBuildsPhysicalQuantities(): void
+    {
+        $product = new Product() ;
+
+        $product->eligibleUnitQuantityCode     = 'MTK' ;
+        $product->eligiblePackageQuantityCode  = 'PK'  ;
+        $product->eligiblePackageQuantityValue = 12    ;
+        $product->eligiblePalletQuantityCode   = 'PF'  ;
+        $product->eligiblePalletQuantityValue  = 48    ;
+
+        $unit = $product->eligibleQuantity ;
+
+        $this->assertInstanceOf( PhysicalQuantity::class , $unit ) ;
+        $this->assertInstanceOf( PhysicalQuantity::class , $unit->valueReference ) ;
+        $this->assertInstanceOf( PhysicalQuantity::class , $unit->valueReference->valueReference ) ;
+    }
+
+    /**
+     * Hydration types the first level, and nothing below it : `valueReference`
+     * is `mixed`, so the deeper levels stay raw arrays.
+     *
+     * @throws ReflectionException
+     */
+    public function testReflectionHydratesTheFirstLevelAsAPhysicalQuantity(): void
+    {
+        $product = new Reflection()->hydrate( $this->chainWithWeights() , Product::class ) ;
+
+        $this->assertInstanceOf( PhysicalQuantity::class , $product->eligibleQuantity ) ;
+        $this->assertSame( 10.99 , $product->eligibleQuantity->weight ) ;
+
+        $this->assertIsArray( $product->eligibleQuantity->valueReference ) ;
+    }
+
+    /**
+     * The typed way to read any level is `findEligibleQuantityByType()`, which
+     * rebuilds the node : it must hand back the weight and the volume, not
+     * only the quantity — the deeper levels reach it as raw arrays.
+     *
+     * @throws ReflectionException
+     */
+    public function testFindEligibleQuantityByTypeCarriesTheWeightOfEveryLevel(): void
+    {
+        $product = new Reflection()->hydrate( $this->chainWithWeights() , Product::class ) ;
+
+        $unit = $product->findEligibleQuantityByType( UnitOfSaleType::UNIT ) ;
+
+        $this->assertInstanceOf( PhysicalQuantity::class , $unit ) ;
+        $this->assertSame( 10.99 , $unit->weight ) ;
+
+        $package = $product->findEligibleQuantityByType( UnitOfSaleType::PACKAGE ) ;
+
+        $this->assertInstanceOf( PhysicalQuantity::class , $package ) ;
+        $this->assertSame( 15.419 , $package->weight ) ;
+        $this->assertSame( 0.0312 , $package->volume ) ;
+
+        // the ratio between two levels restates the packaging chain
+        $this->assertEqualsWithDelta( 1.403 , $package->weight / $unit->weight , 0.001 ) ;
+    }
+
+    /**
+     * The weights ride along without disturbing what the chain already
+     * answered : the conversion factor is the one measured before they existed.
+     *
+     * @throws ReflectionException
+     */
+    public function testWeightsLeaveTheConversionFactorUntouched(): void
+    {
+        $product = new Reflection()->hydrate( $this->chainWithWeights() , Product::class ) ;
+
+        $product->unitOfSale = UnitOfSaleType::PACKAGE ;
+
+        $this->assertSame( 1.403 , $product->getUnitOfSaleConversionFactor() ) ;
+    }
+
+    /**
+     * A two-level chain whose every node states what it weighs — the unit
+     * level in square meters, the package level as the parcel it ships in.
+     *
+     * @return array<string,mixed>
+     */
+    private function chainWithWeights() :array
+    {
+        return
+        [
+            Oihana::ELIGIBLE_QUANTITY =>
+            [
+                Oihana::ADDITIONAL_TYPE => UnitOfSaleType::UNIT ,
+                Oihana::VALUE           => 1 ,
+                Oihana::UNIT_CODE       => 'MTK' ,
+                Oihana::WEIGHT          => 10.99 ,
+                Oihana::VALUE_REFERENCE =>
+                [
+                    Oihana::ADDITIONAL_TYPE => UnitOfSaleType::PACKAGE ,
+                    Oihana::VALUE           => 1.403 ,
+                    Oihana::UNIT_CODE       => 'PK' ,
+                    Oihana::WEIGHT          => 15.419 ,
+                    Oihana::VOLUME          => 0.0312 ,
+                ]
+            ]
+        ];
+    }
 }

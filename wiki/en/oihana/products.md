@@ -16,7 +16,7 @@ Reach for `Product` as soon as an article carries a commercial dimension: a unit
 
 ## The eligible-quantity tree
 
-A product sells by the unit, the package or the pallet (`unitOfSale`, values of the `UnitOfSaleType` enumeration). The `eligibleQuantity` tree describes the full chain: each level is a `QuantitativeValue` (quantity, UN/CEFACT unit code, label) whose `valueReference` points to the upper level.
+A product sells by the unit, the package or the pallet (`unitOfSale`, values of the `UnitOfSaleType` enumeration). The `eligibleQuantity` tree describes the full chain: each level is a `PhysicalQuantity` (quantity, UN/CEFACT unit code, label, plus `weight` and `volume`) whose `valueReference` points to the upper level. `PhysicalQuantity` extends `QuantitativeValue`: anything typed on the mirror class — `Offer::$eligibleQuantity`, for one — accepts it unchanged, and a consumer reading only `value` and `unitCode` never notices the difference.
 
 The tree **builds itself at hydration time**: the flat dataset keys (`eligibleUnitQuantityCode`, `eligiblePackageQuantityCode`, `eligiblePackageQuantityValue`, …) go through the class's magic `__set` and assemble the chain.
 
@@ -41,7 +41,27 @@ $product->getUnitOfSaleConversionFactor() ;       // 12.0
 |---|---|---|
 | `getUnitOfSaleConversionFactor()` | `float` | The multiplication factor between the base unit and the unit of sale (1.0 for the unit). |
 | `getInventoryLevelInUnitOfSale( $level )` | `float` or `null` | The stock converted into the unit of sale. |
-| `findEligibleQuantityByType( $type )` | `QuantitativeValue` or `null` | The tree level matching a `UnitOfSaleType`. |
+| `findEligibleQuantityByType( $type )` | `PhysicalQuantity` or `null` | The tree level matching a `UnitOfSaleType`. |
+
+### The weight and the volume of each level
+
+A product sold by the package does not weigh what the same product weighs by the piece. Each level of the tree therefore carries **its own mass and its own bulk**, on the node they describe and never beside it:
+
+```php
+$package = $product->findEligibleQuantityByType( UnitOfSaleType::PACKAGE ) ;
+
+$package->value  ;  // 1.403 — the quantity of the level
+$package->weight ;  // 15.419
+$package->volume ;  // 0.0312
+```
+
+Both properties accept a plain number when the unit is implicit, or a `QuantitativeValue` when it is stated (`{ "value": 15.419, "unitCode": "KGM" }`) — an array is hydrated as the latter.
+
+🔑 **The ratio between two levels restates the packaging chain** — how many pieces fit a package, how many packages fit a pallet — without any of those values being stored twice.
+
+⚠️ **Distinct from `Product::$weight`**, inherited from the Schema.org mirror: that one is the weight of the billed unit, with no unit stated and no level attached. It does not change.
+
+⚠️ **Only the first level is typed at hydration time**: `valueReference` is declared `mixed`, so the deeper levels stay raw arrays. `findEligibleQuantityByType()` is the typed reading path — it rebuilds the requested node, weight and volume included, whatever its level.
 
 ### The extension point: `resolveUnitCode()`
 
@@ -152,6 +172,7 @@ The `priceSpecification` is typically a `CompoundPriceSpecification` whose compo
 | `TaxRate` | The VAT rate. |
 | `PriceSegmentation` | The price segmentation of a customer or a product. |
 | `ExtraPriceSpecification` | A surcharge/discount, convertible into a `UnitPriceSpecification` (`toUnitPriceSpecification()`). |
+| `PhysicalQuantity` | A level of the eligible-quantity tree: a `QuantitativeValue` that also says what it weighs (`weight`) and what space it takes (`volume`). |
 | `PriceQuantityDiscount` | The quantity discount. |
 | `PricingCondition` / `PricingConditionSelector` | The pricing condition (discount or substitution) and its scope (see above). |
 | `CustomerOffer` | The sell offer at one specific customer's tariff (segment × warehouse, optional condition); specializes `OfferForPurchase` (see above). |
