@@ -132,4 +132,17 @@ class DeliveryLineTest extends TestCase
         $this->assertInstanceOf( PurchaseOrder::class , $line->referencesOrder ) ;
         $this->assertSame( '1142229' , $line->referencesOrder->identifier ) ;
     }
+
+    /**
+     * The constructor assigns raw — `Reflection::hydrate()` alone resolves the
+     * union — so a joined row has to be able to sit in the property until it
+     * does, exactly as it does on every sibling reference of the namespace.
+     */
+    public function testConstructorKeepsAJoinedOrderAsRawArray(): void
+    {
+        $line = new DeliveryLine([ DeliveryLine::REFERENCES_ORDER => [ 'identifier' => '1142229' ] ]) ;
+
+        $this->assertIsArray( $line->referencesOrder ) ;
+        $this->assertSame( '1142229' , $line->referencesOrder[ 'identifier' ] ) ;
+    }
 }

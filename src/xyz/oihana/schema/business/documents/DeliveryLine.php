@@ -115,12 +115,13 @@ class DeliveryLine extends StructuredValue
      * Holds the raw order reference as read from the source, or the resolved
      * {@see PurchaseOrder}. No `#[HydrateAs]` is needed : the union names a
      * single class, so {@see \oihana\reflect\Reflection::hydrate()} resolves a
-     * joined row on its own, while a bare key is left as read.
+     * joined row on its own, while a bare key is left as read — and `array`
+     * is what lets that row sit here until it is resolved.
      *
-     * @var null|string|PurchaseOrder
+     * @var null|array|string|PurchaseOrder
      * @since 1.4.0
      */
-    public null|string|PurchaseOrder $referencesOrder ;
+    public null|array|string|PurchaseOrder $referencesOrder ;
 
     /**
      * The serial numbers of the delivered items, when the goods are serialized.

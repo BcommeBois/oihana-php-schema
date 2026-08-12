@@ -25,6 +25,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Fixed
 
+- `xyz\oihana\schema\business\documents\DeliveryLine::$referencesOrder` accepts
+  an `array` again, like every other reference of the namespace.
+
+  The union named the class and the bare key but not the raw row, so
+  `new DeliveryLine([ 'referencesOrder' => [ ... ] ])` raised a `TypeError`
+  where `DeliveryNote`, `Invoice`, `PurchaseOrder` and
+  `GoodsReceiptConfirmation` all accept the same shape and wait for hydration.
+  It was the only one of the seven out of line.
+
+  `#[HydrateAs]` acts through `Reflection::hydrate()` and never through the
+  constructor, which assigns raw : `array` is what lets a joined row sit in the
+  property until the union is resolved.
+
 - A packaging chain now types itself **down every level**, on both the paths a
   chain can arrive by : `xyz\oihana\schema\products\PhysicalQuantity::$valueReference`
   declares the hydration attribute, and the new
