@@ -4,7 +4,6 @@ namespace xyz\oihana\schema\helpers\hydrate;
 
 use xyz\oihana\schema\organizations\Provider;
 use xyz\oihana\schema\places\Warehouse;
-use xyz\oihana\schema\products\PhysicalQuantity;
 
 use org\schema\AggregateOffer;
 use org\schema\QuantitativeValue;
@@ -37,16 +36,17 @@ function hydrateAggregateOffer( ?array $init = null  ):?AggregateOffer
             $offer->availableAtOrFrom = hydrateWarehouse( $availableAtOrFrom ) ;
         }
 
-        // A PhysicalQuantity, so a packaging level keeps what it weighs and what
-        // it occupies. A plain QuantitativeValue declares neither, and a class
-        // discards the keys it does not declare : the weight would leave here
-        // without an error, without a trace in the payload, and — since the
-        // deeper levels stay raw arrays nobody rebuilds — only on the first
-        // level, which is the hardest shape of all to account for afterwards.
+        // PhysicalQuantity all the way down, so every packaging level keeps what
+        // it weighs and what it occupies. A plain QuantitativeValue declares
+        // neither, and a class discards the keys it does not declare : the weight
+        // would leave here without an error and without a trace in the payload.
+        // The whole chain, not only its head : a structure whose point is the
+        // ratio between two levels cannot be read `->weight` on one and
+        // `['weight']` on the next.
         $eligibleQuantity = $offer->eligibleQuantity ?? null ;
         if( !( $eligibleQuantity instanceof QuantitativeValue ) && is_array( $eligibleQuantity ) )
         {
-            $offer->eligibleQuantity = new PhysicalQuantity( $eligibleQuantity ) ;
+            $offer->eligibleQuantity = hydratePhysicalQuantity( $eligibleQuantity ) ;
         }
 
         $offers = $offer->offers ?? null ;

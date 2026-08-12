@@ -71,6 +71,7 @@ final class HydrateAggregateOfferTest extends TestCase
                 'unitCode' => 'PK'  ,
                 'weight'   => 15.419 ,
                 'volume'   => 0.0312 ,
+                'valueReference' => [ 'value' => 84 , 'unitCode' => 'PF' , 'weight' => 1295.2 ] ,
             ] ,
         ]) ;
 
@@ -78,6 +79,13 @@ final class HydrateAggregateOfferTest extends TestCase
         $this->assertSame( 1.403  , $offer->eligibleQuantity->value  ) ;
         $this->assertSame( 15.419 , $offer->eligibleQuantity->weight ) ;
         $this->assertSame( 0.0312 , $offer->eligibleQuantity->volume ) ;
+
+        // the whole chain, not only its head : a level below the first must be
+        // read exactly like the first one
+        $pallet = $offer->eligibleQuantity->valueReference ;
+
+        $this->assertInstanceOf( PhysicalQuantity::class , $pallet ) ;
+        $this->assertSame( 1295.2 , $pallet->weight ) ;
     }
 
     /**

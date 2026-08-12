@@ -8,6 +8,27 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Fixed
 
+- A packaging chain now types itself **down every level**, on both the paths a
+  chain can arrive by : `xyz\oihana\schema\products\PhysicalQuantity::$valueReference`
+  declares the hydration attribute, and the new
+  `xyz\oihana\schema\helpers\hydrate\hydratePhysicalQuantity()` walks the chain
+  for the constructor path — `hydrateAggregateOffer()` now goes through it.
+
+  Typing the head alone left a consumer reading `->weight` on the first level
+  and `['weight']` on the second, on a structure whose entire point is the
+  **ratio between two levels**. Half a fix reads worse than none : it is the
+  kind of asymmetry one debugs by disbelieving the data.
+
+  Two paths because there are two doors. `#[HydrateAs]` acts through
+  `Reflection::hydrate()` and never through the constructor, which assigns raw,
+  so an attribute alone would have left every constructor-built chain untyped —
+  and that is the one the offers of a product arrive by.
+
+  ⚠️ **A decision worth stating** : Schema.org lets `valueReference` hold things
+  that are not quantities at all — an enumeration, a qualitative value. On
+  `PhysicalQuantity` it is the next packaging level, and nothing else. That is
+  what the class exists for.
+
 - `xyz\oihana\schema\helpers\hydrate\hydrateAggregateOffer()` now types
   `eligibleQuantity` as a `xyz\oihana\schema\products\PhysicalQuantity`, so a
   packaging level keeps what it weighs and what it occupies.

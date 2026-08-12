@@ -52,6 +52,32 @@ class PhysicalQuantity extends QuantitativeValue
     public const string CONTEXT = Oihana::SCHEMA ;
 
     /**
+     * The next level of the chain — what one package holds of this level, what
+     * one pallet holds of packages.
+     *
+     * Redeclared from {@see \org\schema\traits\ValueTrait} for the sole purpose
+     * of the attribute : without it `Reflection::hydrate()` types the head of
+     * the chain and leaves everything below it a raw array, so a consumer would
+     * read `->weight` at the first level and `['weight']` at the second — on a
+     * structure whose whole point is the ratio between two levels. The type is
+     * left as `mixed`, exactly as inherited.
+     *
+     * ⚠️ **A decision, stated plainly** : Schema.org lets `valueReference` hold
+     * things that are not quantities at all — an enumeration, a qualitative
+     * value. On this class it is the next packaging level, and nothing else.
+     * That is what the class exists for.
+     *
+     * ⚠️ The constructor assigns raw and honours no attribute : use
+     * {@see \xyz\oihana\schema\helpers\hydrate\hydratePhysicalQuantity()} on
+     * that path.
+     *
+     * @var mixed
+     * @since 1.4.0
+     */
+    #[HydrateAs(PhysicalQuantity::class)]
+    public mixed $valueReference ;
+
+    /**
      * The space this quantity takes.
      *
      * A plain number when the unit is implicit, a {@see QuantitativeValue}

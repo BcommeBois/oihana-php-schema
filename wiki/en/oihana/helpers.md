@@ -234,12 +234,13 @@ An account carries zero, one or several business identities (see [`BusinessIdent
 
 | Function                  | Produces            | Hydrated nested references                               |
 |---------------------------|---------------------|----------------------------------------------------------|
-| `hydrateAggregateOffer`   | `AggregateOffer`    | `availableAtOrFrom` (Warehouse), `eligibleQuantity` (`PhysicalQuantity` — the level keeps its `weight` and its `volume`), `offers` (OfferForPurchase[]), `provider` |
+| `hydrateAggregateOffer`   | `AggregateOffer`    | `availableAtOrFrom` (Warehouse), `eligibleQuantity` (through `hydratePhysicalQuantity`), `offers` (OfferForPurchase[]), `provider` |
 | `hydrateCustomer`         | `Customer` or list  | `contactPoint`, `address`                                |
 | `hydrateCustomerEmployee` | `CustomerEmployee` or list | `additionalProperty`, `contactPoint`, `workLocation` (CustomerSite) |
 | `hydrateCustomerSite`     | `CustomerSite` or list | `additionalProperty`, `address`, `geo`, `deliveryMethod` (DeliveryMethodTerm), `deliveryRoute` (DeliveryRouteAssignment[]) |
 | `hydrateDeliveryRouteAssignment` | `DeliveryRouteAssignment` or list | `route` (DeliveryRouteTerm, when the joined reference row is present — a bare code is left alone) |
 | `hydrateParcelDelivery`   | `ParcelDelivery` or list | `deliveryAddress` and `originAddress` (PostalAddress), `hasDeliveryMethod` and `hasDeliveryRoute` (target classes customizable through `$deliveryMethodClass`/`$deliveryRouteClass`, defaulting to `DeliveryMethodTerm`/`DeliveryRouteTerm`), `provider` (resolved by `hydrateOrganizationOrPerson`) |
+| `hydratePhysicalQuantity` | `PhysicalQuantity`  | `valueReference` — **recursively**, every packaging level keeping its `weight` and its `volume`. A level already typed is handed back as it stands. For the **constructor** path only: `Reflection::hydrate()` walks the chain on its own, the attribute being declared on the property. |
 | `hydrateStockLevel`       | `StockLevel`        | `assignedPOS` (Warehouse)                                |
 | `hydrateWarehouse`        | `Warehouse` or list | `ownedBy` (Subsidiary)                                   |
 

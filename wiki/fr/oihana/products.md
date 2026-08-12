@@ -61,7 +61,11 @@ Les deux propriétés acceptent un nombre nu quand l'unité est implicite, ou un
 
 ⚠️ **À distinguer de `Product::$weight`**, hérité du miroir Schema.org : celui-là est le poids de l'unité facturée, sans unité déclarée ni niveau rattaché. Il ne change pas.
 
-⚠️ **Seul le premier niveau est typé à l'hydratation** : `valueReference` est déclaré `mixed`, donc les niveaux suivants restent des tableaux bruts. `findEligibleQuantityByType()` est le chemin de lecture typé — il reconstruit le nœud demandé, poids et volume compris, quel que soit son étage.
+🔑 **La chaîne se type sur toute sa hauteur.** `PhysicalQuantity::$valueReference` porte l'attribut d'hydratation, donc `Reflection::hydrate()` descend jusqu'au dernier étage : un poids se lit `->weight` partout, jamais `['weight']` un cran plus bas. `findEligibleQuantityByType()` reste le chemin d'accès direct à un étage donné.
+
+⚠️ **Le constructeur, lui, assigne brut** — aucun attribut n'y agit. Sur ce chemin, passez par [`hydratePhysicalQuantity()`](helpers.md), qui descend la chaîne explicitement ; c'est ce que fait `hydrateAggregateOffer()`.
+
+⚠️ Chez Schema.org, `valueReference` accepte autre chose qu'une quantité — une énumération, une valeur qualitative. **Sur `PhysicalQuantity`, c'est le niveau de conditionnement suivant, et rien d'autre** : c'est la raison d'être de la classe.
 
 ### Le point d'extension : `resolveUnitCode()`
 

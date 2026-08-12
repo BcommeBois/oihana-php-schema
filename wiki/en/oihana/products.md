@@ -61,7 +61,11 @@ Both properties accept a plain number when the unit is implicit, or a `Quantitat
 
 ⚠️ **Distinct from `Product::$weight`**, inherited from the Schema.org mirror: that one is the weight of the billed unit, with no unit stated and no level attached. It does not change.
 
-⚠️ **Only the first level is typed at hydration time**: `valueReference` is declared `mixed`, so the deeper levels stay raw arrays. `findEligibleQuantityByType()` is the typed reading path — it rebuilds the requested node, weight and volume included, whatever its level.
+🔑 **The chain types itself all the way down.** `PhysicalQuantity::$valueReference` carries the hydration attribute, so `Reflection::hydrate()` walks to the last level: a weight reads `->weight` everywhere, never `['weight']` one step below. `findEligibleQuantityByType()` remains the direct way to a given level.
+
+⚠️ **The constructor assigns raw** — no attribute acts on that path. Use [`hydratePhysicalQuantity()`](helpers.md) there, which walks the chain explicitly; that is what `hydrateAggregateOffer()` does.
+
+⚠️ Schema.org lets `valueReference` hold things that are not quantities — an enumeration, a qualitative value. **On `PhysicalQuantity` it is the next packaging level, and nothing else**: that is what the class exists for.
 
 ### The extension point: `resolveUnitCode()`
 

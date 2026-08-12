@@ -11,6 +11,7 @@ namespace xyz\oihana\schema\constants\traits\products ;
  */
 trait PhysicalQuantity
 {
-    public const string VOLUME = 'volume' ;
-    public const string WEIGHT = 'weight' ;
+    public const string VALUE_REFERENCE = 'valueReference' ;
+    public const string VOLUME          = 'volume' ;
+    public const string WEIGHT          = 'weight' ;
 }

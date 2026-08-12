@@ -30,8 +30,9 @@ class PhysicalQuantityTest extends TestCase
 
     public function testTraitConstants(): void
     {
-        $this->assertSame( 'volume' , Oihana::VOLUME );
-        $this->assertSame( 'weight' , Oihana::WEIGHT );
+        $this->assertSame( 'valueReference' , Oihana::VALUE_REFERENCE );
+        $this->assertSame( 'volume'         , Oihana::VOLUME          );
+        $this->assertSame( 'weight'         , Oihana::WEIGHT          );
     }
 
     public function testDefaults(): void
@@ -111,5 +112,37 @@ class PhysicalQuantityTest extends TestCase
         $this->assertInstanceOf( QuantitativeValue::class , $quantity->weight ) ;
         $this->assertSame( 15.419 , $quantity->weight->value    ) ;
         $this->assertSame( 'KGM'  , $quantity->weight->unitCode ) ;
+    }
+
+    /**
+     * A level points at the next one, and hydration follows the chain all the
+     * way down : a weight is read the same way wherever it sits.
+     * @throws ReflectionException
+     */
+    public function testReflectionHydratesTheWholeChain(): void
+    {
+        $quantity = new Reflection()->hydrate
+        (
+            [
+                Oihana::VALUE  => 1 ,
+                Oihana::WEIGHT => 10.99 ,
+                Oihana::VALUE_REFERENCE =>
+                [
+                    Oihana::VALUE  => 1.403 ,
+                    Oihana::WEIGHT => 15.419 ,
+                    Oihana::VALUE_REFERENCE => [ Oihana::VALUE => 84 , Oihana::WEIGHT => 1295.2 ] ,
+                ]
+            ],
+            PhysicalQuantity::class
+        );
+
+        $package = $quantity->valueReference ;
+        $pallet  = $package->valueReference ;
+
+        $this->assertInstanceOf( PhysicalQuantity::class , $package ) ;
+        $this->assertInstanceOf( PhysicalQuantity::class , $pallet  ) ;
+
+        $this->assertSame( 15.419 , $package->weight ) ;
+        $this->assertSame( 1295.2 , $pallet->weight  ) ;
     }
 }

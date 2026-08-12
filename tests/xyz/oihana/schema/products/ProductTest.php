@@ -377,19 +377,26 @@ class ProductTest extends TestCase
     }
 
     /**
-     * Hydration types the first level, and nothing below it : `valueReference`
-     * is `mixed`, so the deeper levels stay raw arrays.
+     * Hydration types the chain down every level, so a weight is read the same
+     * way wherever it sits — never `->weight` on one level and `['weight']` on
+     * the next, on a structure whose point is the ratio between two of them.
      *
      * @throws ReflectionException
      */
-    public function testReflectionHydratesTheFirstLevelAsAPhysicalQuantity(): void
+    public function testReflectionHydratesEveryLevelAsAPhysicalQuantity(): void
     {
         $product = new Reflection()->hydrate( $this->chainWithWeights() , Product::class ) ;
 
-        $this->assertInstanceOf( PhysicalQuantity::class , $product->eligibleQuantity ) ;
-        $this->assertSame( 10.99 , $product->eligibleQuantity->weight ) ;
+        $unit = $product->eligibleQuantity ;
 
-        $this->assertIsArray( $product->eligibleQuantity->valueReference ) ;
+        $this->assertInstanceOf( PhysicalQuantity::class , $unit ) ;
+        $this->assertSame( 10.99 , $unit->weight ) ;
+
+        $package = $unit->valueReference ;
+
+        $this->assertInstanceOf( PhysicalQuantity::class , $package ) ;
+        $this->assertSame( 15.419 , $package->weight ) ;
+        $this->assertSame( 0.0312 , $package->volume ) ;
     }
 
     /**
