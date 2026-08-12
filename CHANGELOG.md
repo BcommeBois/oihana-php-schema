@@ -23,6 +23,29 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   nothing in this library assigns a rate, and the property has never been able
   to carry a rate in the first place.
 
+- Adds `xyz\oihana\schema\business\documents\Adjustment::$includedInTotal`,
+  which says whether an adjustment counts towards the document totals.
+
+  **An absent value means it counts**, so every document stored before this
+  property existed keeps summing exactly as it did ; only an adjustment left
+  out says so, with `false`.
+
+  A source may show a charge on a document and deliberately leave it out of the
+  amount due — a fee shown for information, or one it refuses to commit to
+  while an option is still open. Summing it anyway overstates what is owed.
+
+  ⚠️ **Not to be confused with the neighbouring `$includedInBase`**, which
+  answers something else entirely : that one says the amount is *already
+  inside* the base price rather than added on top of it ; this one says whether
+  it reaches the totals at all. An adjustment can be added to the price **and**
+  left out of the total.
+
+  🔑 **The same name, the same default and the same meaning as
+  `BusinessDocumentLine::$includedInTotal`.** A flag calling itself something
+  else on the grounds that it lives on another class would be a missed
+  opportunity : a consumer learns the rule once, and a test now pins the two
+  constants to the same value.
+
 - Adds three properties a delivery note could not carry :
   `xyz\oihana\schema\business\documents\BusinessDocument::$volume`,
   `xyz\oihana\schema\business\documents\DeliveryLine::$referencesInvoice` and

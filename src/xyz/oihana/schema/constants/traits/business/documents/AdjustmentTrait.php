@@ -11,10 +11,11 @@ namespace xyz\oihana\schema\constants\traits\business\documents;
  */
 trait AdjustmentTrait
 {
-    const string AMOUNT           = 'amount' ;
-    const string INCLUDED_IN_BASE = 'includedInBase' ;
-    const string PERCENTAGE       = 'percentage' ;
-    const string REASON           = 'reason' ;
-    const string TAXES            = 'taxes' ;
-    const string TYPE             = 'type' ;
+    const string AMOUNT            = 'amount' ;
+    const string INCLUDED_IN_BASE  = 'includedInBase' ;
+    const string INCLUDED_IN_TOTAL = 'includedInTotal' ;
+    const string PERCENTAGE        = 'percentage' ;
+    const string REASON            = 'reason' ;
+    const string TAXES             = 'taxes' ;
+    const string TYPE              = 'type' ;
 }

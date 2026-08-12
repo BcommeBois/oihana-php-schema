@@ -58,6 +58,33 @@ class Adjustment extends StructuredValue
     public ?bool $includedInBase ;
 
     /**
+     * Whether this adjustment counts towards the document totals.
+     *
+     * 🔑 **Its absence means it counts.** Only an adjustment left out says so,
+     * which keeps every document written before this property existed exactly
+     * as true as it was.
+     *
+     * ⚠️ **Not to be confused with {@see Adjustment::$includedInBase}**, which
+     * says something else entirely : that one tells whether the adjustment is
+     * *already inside* the base price rather than added on top of it. This one
+     * tells whether it reaches the totals at all.
+     *
+     * The case it answers is real and measured : a source may show a charge on
+     * a document and deliberately leave it out of the amount due — a fee shown
+     * for information, or one it refuses to commit to while an option is still
+     * open. Summing it anyway overstates what is owed.
+     *
+     * 🔑 **The same name, the same default and the same meaning as
+     * {@see BusinessDocumentLine::$includedInTotal}.** A flag that called
+     * itself something else on the grounds that it lives on another class
+     * would be a missed opportunity : a consumer learns the rule once.
+     *
+     * @var bool|null
+     * @since 1.4.0
+     */
+    public ?bool $includedInTotal = null ;
+
+    /**
      * The adjustment expressed as a percentage of the amount it applies to (e.g. 10 for 10%).
      * @var int|float|null
      */
