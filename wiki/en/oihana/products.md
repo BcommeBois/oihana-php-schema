@@ -149,6 +149,10 @@ Some items owe an amount **on top of their price**: an environmental contributio
 
 **A list, not one property per kind of fee**: `PriceComponentType` already enumerates several, they all behave the same way, and one item may fall under more than one scheme.
 
+🔑 **The rate is typed like the fee itself.** `FeeSpecification::$rate` carries the hydration attribute, so `Reflection::hydrate()` reads `->rate->price` where a raw array would read `['price']` — on a pair whose whole point is that both are read together.
+
+⚠️ **The constructor assigns raw** — no attribute acts on that path. Use [`hydrateFeeSpecification()`](helpers.md) there: it types the `rate` and resolves the `publisher` from its `@type`, and leaves a rate already typed exactly as it stands.
+
 #### When the fee cannot be priced
 
 A rate stated per tonne needs a weight; a rate stated per piece needs to know how many pieces a package holds. When the catalogue does not say, **the fee is still owed** — it simply cannot be quantified.

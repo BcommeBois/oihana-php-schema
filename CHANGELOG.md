@@ -128,6 +128,28 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds `xyz\oihana\schema\helpers\hydrate\hydrateFeeSpecification()`, which types
+  a `xyz\oihana\schema\products\FeeSpecification` down to the rate it derives
+  from.
+
+  A fee is read in two places at once — `price` to compute an amount, `rate` to
+  explain it — and the two carry different units on purpose. Typing the head
+  alone would leave a consumer reading `->price` on the fee and `['price']` on
+  the rate beside it, on a pair whose whole point is that both are read
+  together. The issuing body is typed too, through
+  `hydrateOrganizationOrPerson()`, which reads the payload's `@type` rather than
+  guessing from the declared union — a plain reference (a key, a URL) is handed
+  back as it stands.
+
+  🔑 **A rate already typed is left alone**, never re-wrapped : rebuilding it
+  would throw away whatever a caller has already enriched. An instance passed in
+  is completed in place and handed back, so whoever holds it keeps holding it.
+
+  ⚠️ **Only the constructor path needs this.** `Reflection::hydrate()` types both
+  on its own, `FeeSpecification::$rate` declaring the attribute for it. Use the
+  helper in the `products` definition of the DI container, the same way
+  `hydratePhysicalQuantity()` is used for the packaging chain.
+
 - A packaging chain can now be **filled** with what each of its levels weighs and
   occupies, through six flat keys the magic setter of
   `xyz\oihana\schema\products\Product` understands :

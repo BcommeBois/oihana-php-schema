@@ -55,6 +55,7 @@
             "src/xyz/oihana/schema/helpers/hydrate/hydrateCustomerEmployee.php" ,
             "src/xyz/oihana/schema/helpers/hydrate/hydrateCustomerSite.php" ,
             "src/xyz/oihana/schema/helpers/hydrate/hydrateDeliveryRouteAssignment.php" ,
+            "src/xyz/oihana/schema/helpers/hydrate/hydrateFeeSpecification.php" ,
             "src/xyz/oihana/schema/helpers/hydrate/hydrateParcelDelivery.php" ,
             "src/xyz/oihana/schema/helpers/hydrate/hydratePhysicalQuantity.php" ,
             "src/xyz/oihana/schema/helpers/hydrate/hydrateStockLevel.php" ,

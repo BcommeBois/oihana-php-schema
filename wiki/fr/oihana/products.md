@@ -149,6 +149,10 @@ Certains articles doivent une somme **en plus de leur prix** : une contribution 
 
 **Une liste, et non un champ par nature de frais** : `PriceComponentType` en énumère déjà plusieurs, elles se comportent toutes pareil, et un article peut relever de plusieurs filières à la fois.
 
+🔑 **Le barème se type comme le frais lui-même.** `FeeSpecification::$rate` porte l'attribut d'hydratation, donc `Reflection::hydrate()` donne `->rate->price` là où un tableau brut se lirait `['price']` — sur un couple dont tout l'intérêt est d'être lu des deux côtés à la fois.
+
+⚠️ **Le constructeur, lui, assigne brut** — aucun attribut n'y agit. Sur ce chemin, passez par [`hydrateFeeSpecification()`](helpers.md) : il type le `rate`, résout le `publisher` d'après son `@type`, et laisse tel quel un barème déjà typé.
+
 #### Quand le frais n'est pas chiffrable
 
 Un barème à la tonne réclame un poids ; un barème à la pièce réclame de savoir combien de pièces tient un conditionnement. Quand le catalogue ne le dit pas, **le frais reste dû** — il n'est simplement pas quantifiable.
