@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Changed
 
+- The **business documents guide** (FR canonical + EN mirror) documents the pair
+  on the three line classes and on the trait they take it from. The worked
+  delivery note now measures its lines both ways : `1.176 + 2.236 = 3.412` reads
+  as plainly as the weights already did, and the note's own `volume` — printed
+  in that example since it existed — stops being a figure with nothing under it.
+
 - `xyz\oihana\schema\business\documents\DeliveryLine` and
   `GoodsReceiptLine` carry the same pair, from the same trait. The receipt line
   had **neither** while being the mirror of the delivery line, and a receipt that
