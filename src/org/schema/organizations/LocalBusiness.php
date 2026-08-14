@@ -22,7 +22,7 @@ class LocalBusiness extends Organization
      *
      * @var string|null
      */
-    public null|string $currencyAccepted ;
+    public null|string $currenciesAccepted ;
 
     /**
      * The general opening hours for a business. Opening hours can be specified as a weekly time range, starting with days, then times per day.

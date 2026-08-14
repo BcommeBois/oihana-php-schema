@@ -43,9 +43,9 @@ class WebPage extends CreativeWork
 
     /**
      * A link related to this web page, for example to other related web pages.
-     * @var string|null
+     * @var array|string|null
      */
-    public ?string $relateLink ;
+    public null|array|string $relatedLink ;
 
     /**
      * People or organizations that have reviewed the content on this web page for accuracy and/or completeness.

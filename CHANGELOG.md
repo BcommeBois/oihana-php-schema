@@ -8,6 +8,24 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Changed
 
+- **The coverage is now complete, and a test holds it there.** The remaining
+  sub-namespaces get their traits — `creativeWork` (`Article`, `Book`, `Comment`,
+  `HowTo`, `SoftwareApplication`, `WebPage`, the media objects, the comments),
+  `items`, `organizations`, `places` (`Accommodation` first among them) and
+  `services` (`BankAccount`, `FinancialProduct`, `LoanOrCredit`, `PaymentCard`) —
+  142 further properties.
+
+  `SchemaCoverageTest` walks the source tree and fails on any property of any
+  `org\schema` class that no `Schema` constant names. It reads the tree rather
+  than a list, so a class added later is covered the day it lands : the gap this
+  closes took 67 classes to accumulate precisely because nothing was watching.
+
+- **Breaking** — two more properties are renamed to the spelling schema.org
+  publishes : `org\schema\organizations\LocalBusiness::$currencyAccepted` →
+  **`$currenciesAccepted`** (which its `places` twin already spelled correctly,
+  and the two now share one constants trait) and
+  `org\schema\creativeWork\WebPage::$relateLink` → **`$relatedLink`**.
+
 - **Every property of `org\schema` itself is now reachable through a `Schema`
   constant.** Twenty-one traits are added — `MonetaryAmount`, `OrderItem`,
   `OwnershipInfo`, `PaymentMethod`, `Permit`, `PostalCodeRangeSpecification`,
