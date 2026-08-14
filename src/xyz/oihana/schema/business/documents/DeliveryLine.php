@@ -5,7 +5,6 @@ namespace xyz\oihana\schema\business\documents;
 use oihana\reflect\attributes\HydrateAs;
 use oihana\reflect\attributes\HydrateWith;
 
-use org\schema\Mass;
 use org\schema\Product;
 use org\schema\QuantitativeValue;
 use org\schema\Service;
@@ -14,6 +13,7 @@ use org\schema\StructuredValue;
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\constants\traits\business\documents\DeliveryLineTrait;
 use xyz\oihana\schema\products\Product as OihanaProduct;
+use xyz\oihana\schema\traits\HasPhysicalMeasures;
 
 /**
  * A single line of a {@see DeliveryNote} : how much of a given
@@ -30,13 +30,22 @@ use xyz\oihana\schema\products\Product as OihanaProduct;
  * (food, pharma, warranty, product recalls) — both optional, since most
  * goods need neither.
  *
+ * 🔑 **Everything this line measures describes what actually left**, never what
+ * was ordered : `deliveredQuantity` against `orderedQuantity`, and the
+ * `weight`/`volume` it takes from {@see HasPhysicalMeasures}. A line delivering
+ * 84 of the 120 square meters ordered weighs the 84, which is why those figures
+ * belong to the delivery line and not to the order's line — and why the lines
+ * sum to {@see BusinessDocument::$weight} and {@see BusinessDocument::$volume}
+ * on the note itself.
+ *
  * @package xyz\oihana\schema\business\documents
  * @author  Marc Alcaraz (eKameleon)
  * @since   1.3.0
  */
 class DeliveryLine extends StructuredValue
 {
-    use DeliveryLineTrait ;
+    use DeliveryLineTrait     ,
+        HasPhysicalMeasures   ;
 
     /**
      * The @context of the json-ld representation of the thing.
@@ -148,23 +157,4 @@ class DeliveryLine extends StructuredValue
      * @var null|array|string
      */
     public null|array|string $serialNumbers ;
-
-    /**
-     * What this line actually weighs — the weight of the goods that left, not
-     * the weight of what was ordered.
-     *
-     * A line delivered in halves weighs what went out that day, which is why
-     * the figure belongs to the delivery line and not to the order's line : a
-     * line delivering 84 of the 120 square meters ordered weighs the 84.
-     * Sums, across the lines, to {@see BusinessDocument::$weight} on the note.
-     *
-     * The same union as that one, so a weight reads the same wherever it is
-     * met : a plain number when the unit is implicit, a
-     * {@see QuantitativeValue} when it is stated.
-     *
-     * @var null|array|int|float|QuantitativeValue|Mass
-     * @since 1.4.0
-     */
-    #[HydrateAs(QuantitativeValue::class)]
-    public null|array|int|float|QuantitativeValue|Mass $weight ;
 }

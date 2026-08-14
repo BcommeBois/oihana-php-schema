@@ -21,5 +21,6 @@ trait DeliveryLineTrait
     const string REFERENCES_INVOICE = 'referencesInvoice' ;
     const string REFERENCES_ORDER   = 'referencesOrder' ;
     const string SERIAL_NUMBERS     = 'serialNumbers' ;
+    const string VOLUME             = 'volume' ;
     const string WEIGHT             = 'weight' ;
 }

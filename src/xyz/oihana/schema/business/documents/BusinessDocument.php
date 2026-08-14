@@ -244,6 +244,9 @@ class BusinessDocument extends Intangible
      * the weight is not : that class is the *monetary* summary and every one of
      * its properties is a {@see \org\schema\MonetaryAmount}.
      *
+     * The header's side of {@see \xyz\oihana\schema\traits\HasPhysicalMeasures::$volume},
+     * which the lines carry : usually the sum of theirs.
+     *
      * @var null|array|int|float|QuantitativeValue
      * @since 1.4.0
      */
@@ -272,6 +275,12 @@ class BusinessDocument extends Intangible
      * be needed, it belongs to the `additionalType` of a `QuantitativeValue`,
      * never to a second property — two weights held in parallel eventually
      * disagree.
+     *
+     * The header's side of {@see \xyz\oihana\schema\traits\HasPhysicalMeasures::$weight},
+     * which the lines carry. Declared here rather than taken from that trait :
+     * the ⚠️ above is an argument about `totals`, a header-level property a
+     * line does not have, and a trait absorbing it would either impose the
+     * discussion on every line or lose it.
      *
      * @var null|array|int|float|QuantitativeValue|Mass
      * @since 1.4.0

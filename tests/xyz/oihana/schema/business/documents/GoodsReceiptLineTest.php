@@ -34,6 +34,8 @@ class GoodsReceiptLineTest extends TestCase
         $this->assertSame( 'item'             , GoodsReceiptLine::ITEM              );
         $this->assertSame( 'position'         , GoodsReceiptLine::POSITION          );
         $this->assertSame( 'receivedQuantity' , GoodsReceiptLine::RECEIVED_QUANTITY );
+        $this->assertSame( 'volume'           , GoodsReceiptLine::VOLUME            );
+        $this->assertSame( 'weight'           , GoodsReceiptLine::WEIGHT            );
 
         $this->assertSame( Oihana::POSITION , GoodsReceiptLine::POSITION );
     }
@@ -48,6 +50,8 @@ class GoodsReceiptLineTest extends TestCase
         $this->assertNull( $line->item             ?? null );
         $this->assertNull( $line->position         ?? null );
         $this->assertNull( $line->receivedQuantity ?? null );
+        $this->assertNull( $line->volume           ?? null );
+        $this->assertNull( $line->weight           ?? null );
     }
 
     public function testConstructorHydratesScalarProperties(): void
@@ -83,5 +87,73 @@ class GoodsReceiptLineTest extends TestCase
         $this->assertInstanceOf( QuantitativeValue::class , $line->expectedQuantity ) ;
         $this->assertInstanceOf( QuantitativeValue::class , $line->receivedQuantity ) ;
         $this->assertSame( 98 , $line->receivedQuantity->value ) ;
+    }
+
+    // ---- HasPhysicalMeasures
+
+    /**
+     * The receipt measures what was received, the note measures what left. Both
+     * sides carry the pair, which is what lets a short delivery be seen as one :
+     * 98 of the 100 announced weigh less than the note claimed.
+     *
+     * @throws ReflectionException
+     */
+    public function testTheLineMeasuresWhatWasReceived(): void
+    {
+        $line = new GoodsReceiptLine
+        ([
+            GoodsReceiptLine::EXPECTED_QUANTITY => 100 ,
+            GoodsReceiptLine::RECEIVED_QUANTITY => 98 ,
+            GoodsReceiptLine::WEIGHT            => 627.2 ,  // 98 × 6.4, not 100 × 6.4
+            GoodsReceiptLine::VOLUME            => 1.372 ,  // 98 × 0.014
+        ]);
+
+        $this->assertSame( 627.2 , $line->weight ) ;
+        $this->assertSame( 1.372 , $line->volume ) ;
+    }
+
+    /**
+     * A measure that states its unit comes back typed, so a consumer reads the
+     * unit instead of assuming one.
+     *
+     * @throws ReflectionException
+     */
+    public function testReflectionHydratesLineMeasuresThatStateTheirUnit(): void
+    {
+        $line = new Reflection()->hydrate
+        (
+            [
+                GoodsReceiptLine::WEIGHT => [ 'value' => 627.2 , 'unitCode' => 'KGM' ] ,
+                GoodsReceiptLine::VOLUME => [ 'value' => 1.372 , 'unitCode' => 'MTQ' ] ,
+            ],
+            GoodsReceiptLine::class
+        );
+
+        $this->assertInstanceOf( QuantitativeValue::class , $line->weight ) ;
+        $this->assertSame( 627.2 , $line->weight->value    ) ;
+        $this->assertSame( 'KGM' , $line->weight->unitCode ) ;
+
+        $this->assertInstanceOf( QuantitativeValue::class , $line->volume ) ;
+        $this->assertSame( 1.372 , $line->volume->value    ) ;
+        $this->assertSame( 'MTQ' , $line->volume->unitCode ) ;
+    }
+
+    /**
+     * The two are independent : a receipt that weighs its lines without
+     * measuring their bulk leaves the volume absent, rather than reading as a
+     * zero.
+     *
+     * @throws ReflectionException
+     */
+    public function testAMeasureLeftOutStaysAbsent(): void
+    {
+        $line = new Reflection()->hydrate
+        (
+            [ GoodsReceiptLine::WEIGHT => 627.2 ],
+            GoodsReceiptLine::class
+        );
+
+        $this->assertSame( 627.2 , $line->weight ) ;
+        $this->assertNull( $line->volume ?? null ) ;
     }
 }

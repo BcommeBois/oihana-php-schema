@@ -8,6 +8,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Changed
 
+- `xyz\oihana\schema\business\documents\DeliveryLine` and
+  `GoodsReceiptLine` carry the same pair, from the same trait. The receipt line
+  had **neither** while being the mirror of the delivery line, and a receipt that
+  cannot be weighed cannot be compared to the note it answers — a short delivery
+  is exactly the discrepancy that class exists to record. The delivery line had
+  the weight and not the volume.
+
+  `DeliveryLine::$weight` **loses its own declaration** and takes the trait's.
+  What it said — the figure is what actually left, not what was ordered — now
+  opens the class docblock, where it covers `deliveredQuantity` and the volume
+  just as well : it was never a fact about the weight, it is a fact about the
+  class. `GoodsReceiptLine` states the mirror image for what was received.
+
 - `xyz\oihana\schema\business\documents\BusinessDocumentLine` says **what it
   weighs and what it occupies** : `weight` and `volume`, the quantity by what
   the unit the line is counted in weighs and occupies. Summed over the lines,

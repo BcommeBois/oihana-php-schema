@@ -17,4 +17,6 @@ trait GoodsReceiptLineTrait
     const string ITEM              = 'item' ;
     const string POSITION          = 'position' ;
     const string RECEIVED_QUANTITY = 'receivedQuantity' ;
+    const string VOLUME            = 'volume' ;
+    const string WEIGHT            = 'weight' ;
 }

@@ -40,6 +40,7 @@ class DeliveryLineTest extends TestCase
         $this->assertSame( 'referencesInvoice' , DeliveryLine::REFERENCES_INVOICE );
         $this->assertSame( 'referencesOrder'   , DeliveryLine::REFERENCES_ORDER   );
         $this->assertSame( 'serialNumbers'     , DeliveryLine::SERIAL_NUMBERS     );
+        $this->assertSame( 'volume'            , DeliveryLine::VOLUME             );
         $this->assertSame( 'weight'            , DeliveryLine::WEIGHT             );
 
         $this->assertSame( Oihana::POSITION , DeliveryLine::POSITION );
@@ -59,6 +60,7 @@ class DeliveryLineTest extends TestCase
         $this->assertNull( $line->referencesInvoice ?? null );
         $this->assertNull( $line->referencesOrder   ?? null );
         $this->assertNull( $line->serialNumbers     ?? null );
+        $this->assertNull( $line->volume            ?? null );
         $this->assertNull( $line->weight            ?? null );
     }
 
@@ -203,12 +205,13 @@ class DeliveryLineTest extends TestCase
     }
 
     /**
-     * The weight of a line is the weight of what LEFT, not of what was ordered :
-     * a line delivering 84 of the 120 square meters ordered weighs the 84.
+     * What a line weighs and what it occupies is what LEFT, not what was
+     * ordered : a line delivering 84 of the 120 square meters ordered weighs
+     * the 84.
      *
      * @throws ReflectionException
      */
-    public function testTheLineWeighsWhatWasDeliveredAndSumsToTheNote(): void
+    public function testTheLineMeasuresWhatWasDeliveredAndSumsToTheNote(): void
     {
         $lines =
         [
@@ -217,38 +220,66 @@ class DeliveryLineTest extends TestCase
                 DeliveryLine::ORDERED_QUANTITY   => 120 ,
                 DeliveryLine::DELIVERED_QUANTITY => 84 ,
                 DeliveryLine::WEIGHT             => 537.6 ,   // 84 × 6.4, not 120 × 6.4
+                DeliveryLine::VOLUME             => 1.176 ,   // 84 × 0.014, not 120 × 0.014
             ]) ,
             new DeliveryLine
             ([
                 DeliveryLine::DELIVERED_QUANTITY => 1467 ,
                 DeliveryLine::WEIGHT             => 1193.775 ,
+                DeliveryLine::VOLUME             => 2.236 ,
             ]) ,
         ];
 
         $this->assertSame( 537.6    , $lines[ 0 ]->weight ) ;
+        $this->assertSame( 1.176    , $lines[ 0 ]->volume ) ;
         $this->assertSame( 1193.775 , $lines[ 1 ]->weight ) ;
+        $this->assertSame( 2.236    , $lines[ 1 ]->volume ) ;
 
-        $total = array_sum( array_map( fn( $line ) => $line->weight , $lines ) ) ;
-
-        $this->assertSame( 1731.375 , $total ) ;
+        $this->assertSame( 1731.375 , array_sum( array_map( fn( $line ) => $line->weight , $lines ) ) ) ;
+        $this->assertSame( 3.412    , array_sum( array_map( fn( $line ) => $line->volume , $lines ) ) ) ;
     }
 
     /**
-     * A weight that states its unit comes back typed, so a consumer reads the
+     * A measure that states its unit comes back typed, so a consumer reads the
      * unit instead of assuming one.
      *
      * @throws ReflectionException
      */
-    public function testReflectionHydratesALineWeightThatStatesItsUnit(): void
+    public function testReflectionHydratesLineMeasuresThatStateTheirUnit(): void
     {
         $line = new Reflection()->hydrate
         (
-            [ DeliveryLine::WEIGHT => [ 'value' => 537.6 , 'unitCode' => 'KGM' ] ],
+            [
+                DeliveryLine::WEIGHT => [ 'value' => 537.6 , 'unitCode' => 'KGM' ] ,
+                DeliveryLine::VOLUME => [ 'value' => 1.176 , 'unitCode' => 'MTQ' ] ,
+            ],
             DeliveryLine::class
         );
 
         $this->assertInstanceOf( QuantitativeValue::class , $line->weight ) ;
         $this->assertSame( 537.6 , $line->weight->value    ) ;
         $this->assertSame( 'KGM' , $line->weight->unitCode ) ;
+
+        $this->assertInstanceOf( QuantitativeValue::class , $line->volume ) ;
+        $this->assertSame( 1.176 , $line->volume->value    ) ;
+        $this->assertSame( 'MTQ' , $line->volume->unitCode ) ;
+    }
+
+    /**
+     * The two are independent : a note that weighs its lines without measuring
+     * their bulk leaves the volume absent, rather than reading as a zero.
+     *
+     * @throws ReflectionException
+     */
+    public function testAMeasureLeftOutStaysAbsent(): void
+    {
+        $line = new Reflection()->hydrate
+        (
+            [ DeliveryLine::WEIGHT => 537.6 ],
+            DeliveryLine::class
+        );
+
+        $this->assertSame( 537.6 , $line->weight ) ;
+        $this->assertNull( $line->volume ?? null ) ;
     }
 }
