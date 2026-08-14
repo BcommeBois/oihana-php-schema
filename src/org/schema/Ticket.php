@@ -16,16 +16,16 @@ class Ticket extends Intangible
 
     /**
      * The organization issuing the item, for example a Permit, Ticket, or Certification.
-     * @var Organization|null
+     * @var array|Organization|null
      */
-    public ?Organization $issuedBy ;
+    public null|array|Organization $issuedBy ;
 
     /**
      * The currency of the price, or a price component when attached to PriceSpecification and its subtypes.
      * Use standard formats: ISO 4217 currency format, e.g. "USD"; Ticker symbol for cryptocurrencies, e.g. "BTC"; well known names for Local Exchange Trading Systems (LETS) and other currency types, e.g. "Ithaca HOUR".
-     * @var string|DefinedTerm|null
+     * @var string|array|DefinedTerm|null
      */
-    public null|string|DefinedTerm $priceCurrency ;
+    public null|string|array|DefinedTerm $priceCurrency ;
 
     /**
      * The unique identifier for the ticket.
@@ -50,13 +50,13 @@ class Ticket extends Intangible
      * Usage guidelines:
      * Use values from 0123456789 (Unicode 'DIGIT ZERO' (U+0030) to 'DIGIT NINE' (U+0039)) rather than superficially similar Unicode symbols.
      * Use '.' (Unicode 'FULL STOP' (U+002E)) rather than ',' to indicate a decimal point. Avoid using these symbols as a readability separator.
-     * @var null|float|int|PriceSpecification|string
+     * @var null|array|float|int|PriceSpecification|string
      */
-    public null|float|int|PriceSpecification|string $totalPrice ;
+    public null|array|float|int|PriceSpecification|string $totalPrice ;
 
     /**
      * The person or organization the reservation or ticket is for.
-     * @var Organization|Person|null
+     * @var array|Organization|Person|null
      */
-    public null|Organization|Person $underName ;
+    public null|array|Organization|Person $underName ;
 }

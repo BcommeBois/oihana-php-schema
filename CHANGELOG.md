@@ -8,6 +8,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Changed
 
+- `org\schema\Ticket` accepts a **raw array** on `$issuedBy`, `$priceCurrency`,
+  `$totalPrice` and `$underName`, the same widening `ProgramMembership` received.
+
+  A ticket is reached through the reservation carrying it, and a reservation read
+  from storage arrives as nested arrays all the way down : the class it points at
+  had to be assignable the same way, or the seam broke one level below where it
+  was fixed.
+
 - `org\schema\ProgramMembership` and `org\schema\MemberProgram` accept a **raw
   array** wherever they used to accept an instance only : `$hostingOrganization`,
   `$member`, `$membershipPointsEarned` and `$program`.
