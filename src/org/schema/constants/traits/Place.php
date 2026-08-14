@@ -8,6 +8,7 @@ trait Place
     const string PLACE    = 'place' ;
     const string PLACES   = 'places' ;
 
+    const string ADDITIONAL                          = 'additional' ;
     const string ADDITIONAL_PROPERTY                 = 'additionalProperty' ;
     const string ADDRESS                             = 'address' ;
     const string AGGREGATE_RATING                    = 'aggregateRating' ;
@@ -19,11 +20,22 @@ trait Place
     const string EVENT                               = 'event' ;
     const string FAX_NUMBER                          = 'faxNumber' ;
     const string GEO                                 = 'geo' ;
+    const string GEO_CONTAINS                        = 'geoContains' ;
+    const string GEO_COVERED_BY                      = 'geoCoveredBy' ;
+    const string GEO_COVERS                          = 'geoCovers' ;
+    const string GEO_CROSSES                         = 'geoCrosses' ;
+    const string GEO_DISJOINT                        = 'geoDisjoint' ;
+    const string GEO_EQUALS                          = 'geoEquals' ;
+    const string GEO_INTERSECTS                      = 'geoIntersects' ;
+    const string GEO_OVERLAPS                        = 'geoOverlaps' ;
+    const string GEO_TOUCHES                         = 'geoTouches' ;
+    const string GEO_WITHIN                          = 'geoWithin' ;
     const string GLOBAL_LOCATION_NUMBER              = 'globalLocationNumber' ;
     const string HAS_CERTIFICATION                   = 'hasCertification' ;
     const string HAS_DRIVE_THROUGH_SERVICE           = 'hasDriveThroughService' ;
     const string HAS_GS_1_DIGITAL_LINK               = 'hasGS1DigitalLink' ;
     const string HAS_MAP                             = 'hasMap' ;
+    const string IMAGES                              = 'images' ;
     const string IS_ACCESSIBLE_FOR_FREE              = 'isAccessibleForFree' ;
     const string ISIC_V4                             = 'isicV4' ;
     const string KEYWORDS                            = 'keywords' ;
@@ -31,6 +43,7 @@ trait Place
     const string LOGO                                = 'logo' ;
     const string LONGITUDE                           = 'longitude' ;
     const string MAXIMUM_ATTENDEE_CAPACITY           = 'maximumAttendeeCapacity' ;
+    const string OFFERS                              = 'offers' ;
     const string OPENING_HOURS_SPECIFICATION         = 'openingHoursSpecification' ;
     const string PERMITS                             = 'permits' ;
     const string PHOTO                               = 'photo' ;

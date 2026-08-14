@@ -8,6 +8,28 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Changed
 
+- **Every property of `org\schema` itself is now reachable through a `Schema`
+  constant.** Twenty-one traits are added — `MonetaryAmount`, `OrderItem`,
+  `OwnershipInfo`, `PaymentMethod`, `Permit`, `PostalCodeRangeSpecification`,
+  `ProductCollection`, `Property`, `QualitativeValue`, `RepaymentSpecification`,
+  `Schedule`, `Seat`, `ServiceChannel`, `ServicePeriod`, `ShippingConditions`,
+  `ShippingDeliveryTime`, `ShippingRateSettings`, `SizeSpecification`,
+  `StatisticalVariable`, `Taxon`, `TypeAndQuantityNode` — and six existing ones
+  are completed (`Brand`, `CreativeWork`, `Offer`, `Organization`, `Place`,
+  `Product`). Eighty properties that could only be spelled by hand now have a
+  name the IDE completes and the refactoring follows.
+
+- **Breaking** — three properties are renamed to the spelling schema.org
+  publishes : `org\schema\Offer::$addon` → **`$addOn`**,
+  `org\schema\TypeAndQuantityNode::$typeofGood` → **`$typeOfGood`**, and the
+  `Schema::CHECKOUT_PAGE_URL_TEMPLATE` constant now reads
+  `'checkoutPageURLTemplate'` instead of `'checkoutPageUrlTemplate'`.
+
+  None of the three could carry data from a valid payload : a key that matches
+  no schema.org term is dropped on the way in, and `ADD_ON` was already declared
+  beside a property spelled otherwise — the constant and the property it was
+  meant to name had never agreed. Renaming is what makes them meet.
+
 - The wiki gains a **reservations guide** (FR canonical + EN mirror), listed in
   both indexes and in the core catalogue, and the events page now documents the
   attendance modes and the capacities that go with them.

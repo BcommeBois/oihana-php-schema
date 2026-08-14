@@ -33,7 +33,7 @@ class Offer extends Intangible
      * An additional offer that can only be obtained in combination with the first base offer (e.g. supplements and extensions that are available for a surcharge).
      * @var array|Offer|null
      */
-    public null|array|Offer $addon ;
+    public null|array|Offer $addOn ;
 
     /**
      * The amount of time that is required between accepting the offer and the actual usage of the resource or service.

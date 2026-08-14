@@ -26,9 +26,12 @@ trait Organization
     const string DISSOLUTION_DATE            = 'dissolutionDate' ;
     const string DIVERSITY_POLICY            = 'diversityPolicy' ;
     const string DIVERSITY_STAFFING_REPORT   = 'diversityStaffingReport' ;
+    const string DUNS                        = 'duns' ;
     const string EMAIL                       = 'email' ;
     const string EMPLOYEE                    = 'employee' ;
     const string ETHICS_POLICY               = 'ethicsPolicy' ;
+    const string EVENT                       = 'event' ;
+    const string FAX_NUMBER                  = 'faxNumber' ;
     const string FOUNDER                     = 'founder' ;
     const string FOUNDING_DATE               = 'foundingDate' ;
     const string FOUNDING_LOCATION           = 'foundingLocation' ;
@@ -47,6 +50,7 @@ trait Organization
     const string ISIC_V4                     = 'isicV4' ;
     const string ISO_6523_CODE               = 'iso6523Code' ;
     const string KEYWORDS                    = 'keywords' ;
+    const string IMAGES                      = 'images' ;
     const string KNOWS_ABOUT                 = 'knowsAbout' ;
     const string KNOWS_LANGUAGE              = 'knowsLanguage' ;
     const string LEGAL_ADDRESS               = 'legalAddress' ;
@@ -67,6 +71,7 @@ trait Organization
     const string OWNERSHIP_FUNDING_INFO      = 'ownershipFundingInfo' ;
     const string OWNS                        = 'owns' ;
     const string PARENT_ORGANIZATION         = 'parentOrganization' ;
+    const string PHOTOS                      = 'photos' ;
     const string PRODUCER                    = 'producer' ;
     const string PROVIDER                    = 'provider' ;
     const string PROVIDERS                   = 'providers' ;

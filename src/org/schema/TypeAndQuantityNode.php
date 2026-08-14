@@ -33,9 +33,9 @@ class TypeAndQuantityNode extends StructuredValue
 
     /**
      * The product that this structured value is referring to.
-     * @var Product|Service|null
+     * @var array|Product|Service|null
      */
-    public null|Product|Service $typeofGood ;
+    public null|array|Product|Service $typeOfGood ;
 
     /**
      * The unit of measurement given using the UN/CEFACT Common Code (3 characters) or a URL.

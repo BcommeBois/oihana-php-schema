@@ -38,6 +38,7 @@ trait CreativeWork
     const string COPYRIGHT_YEAR         = 'copyrightYear' ;
     const string CORRECTION             = 'correction' ;
     const string COUNTRY_OF_ORIGIN      = 'countryOfOrigin' ;
+    const string CREATIVE_WORK_STATUS   = 'creativeWorkStatus' ;
     const string CREATOR                = 'creator' ;
     const string CREDIT_TEXT            = 'creditText' ;
     const string DATE_CREATED           = 'dateCreated' ;
@@ -52,6 +53,7 @@ trait CreativeWork
     const string EDUCATIONAL_USE        = 'educationalUse' ;
     const string ENCODING               = 'encoding' ;
     const string ENCODING_FORMAT        = 'encodingFormat' ;
+    const string EXAMPLE_OF_WORK        = 'exampleOfWork' ;
     const string EXPIRES                = 'expires' ;
     const string FUNDER                 = 'funder' ;
     const string FUNDING                = 'funding' ;

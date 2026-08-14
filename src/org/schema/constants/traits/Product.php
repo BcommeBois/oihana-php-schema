@@ -22,6 +22,8 @@ trait Product
     const string COUNTRY_OF_LAST_PROCESSING      = 'countryOfLastProcessing'   ;
     const string COUNTRY_OF_ORIGIN               = 'countryOfOrigin'           ;
     const string DEPTH                           = 'depth'                     ;
+    const string DISPLAY_LOCATION                = 'displayLocation'           ;
+    const string FUNDING                         = 'funding'                   ;
     const string GTIN                            = 'gtin'                      ;
     const string GTIN12                          = 'gtin12'                    ;
     const string GTIN13                          = 'gtin13'                    ;
@@ -29,7 +31,9 @@ trait Product
     const string GTIN8                           = 'gtin8'                     ;
     const string HAS_ADULT_CONSIDERATION         = 'hasAdultConsideration'     ;
     const string HAS_CERTIFICATION               = 'hasCertification'          ;
+    const string HAS_GS1_DIGITAL_LINK            = 'hasGS1DigitalLink'         ;
     const string HAS_MEASUREMENT                 = 'hasMeasurement'            ;
+    const string HAS_MERCHANT_RETURN_POLICY      = 'hasMerchantReturnPolicy'   ;
     const string HEIGHT                          = 'height'                    ;
     const string IN_PRODUCT_GROUP_WITH_ID        = 'inProductGroupWithID'      ;
     const string INVENTORY_LEVEL                 = 'inventoryLevel'            ;

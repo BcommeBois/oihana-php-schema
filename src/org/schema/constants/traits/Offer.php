@@ -18,7 +18,7 @@ trait Offer
     const string AVAILABLE_DELIVERY_METHOD   = 'availableDeliveryMethod' ;
     const string BUSINESS_FUNCTION           = 'businessFunction' ;
     const string CATEGORY                    = 'category' ;
-    const string CHECKOUT_PAGE_URL_TEMPLATE  = 'checkoutPageUrlTemplate' ;
+    const string CHECKOUT_PAGE_URL_TEMPLATE  = 'checkoutPageURLTemplate' ;
     const string DELIVERY_LEAD_TIME          = 'deliveryLeadTime' ;
     const string ELIGIBLE_CUSTOMER_TYPE      = 'eligibleCustomerType' ;
     const string ELIGIBLE_DURATION           = 'eligibleDuration' ;
