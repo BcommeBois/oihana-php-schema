@@ -139,6 +139,33 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- Adds the **reservation family** : `org\schema\Reservation`, its ten sub-types
+  under `org\schema\reservations` (`BoatReservation`, `BusReservation`,
+  `EventReservation`, `FlightReservation`, `FoodEstablishmentReservation`,
+  `LodgingReservation`, `RentalCarReservation`, `ReservationPackage`,
+  `TaxiReservation`, `TrainReservation`) and the
+  `org\schema\enumerations\ReservationStatusType` enumeration carrying the four
+  members schema.org publishes.
+
+  A reservation is what a confirmation email actually contains — who booked,
+  what was booked, under which name, for how much, and with which status — and
+  the library had nowhere to put any of it. The sub-types add only what their
+  domain needs : a boarding group for a flight, a check-in time for a room, a
+  pickup location for a taxi, everything else inherited.
+
+  🔑 **`$reservationFor` carries a `Thing`**, not a party to the booking : the
+  one property saying *what* was reserved has to hold a flight, an event, a
+  restaurant or a car, which is exactly the shape schema.org gives it.
+
+  ⚠️ **The ticket property is `$reservedTicket`**, the spelling schema.org
+  publishes — a payload written with any other key is dropped on the way in,
+  silently, which is why a test now pins every constant of every reservation
+  trait to a property that really exists.
+
+  Property name constants ship with them : `Schema::RESERVATION_ID`,
+  `Schema::UNDER_NAME`, `Schema::PARTY_SIZE`, `Schema::PICKUP_LOCATION`, … and a
+  `Ticket` trait completing `org\schema\Ticket`, which had none.
+
 - `org\schema\Event` gains the eleven properties it was missing —
   `$date`, `$funding`, `$hasParticipationOffer`, `$hasSponsorshipOffer`,
   `$performer`, `$previousStartDate`, `$recordedIn`, `$sponsor`, `$superEvent`,
