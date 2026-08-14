@@ -8,6 +8,14 @@ use org\schema\Organization;
  * A particular physical business or branch of an organization. Examples of LocalBusiness include a restaurant,
  * a particular branch of a restaurant chain, a branch of a bank, a medical practice, a club, a bowling alley, etc.
  *
+ * Schema.org publishes a single LocalBusiness term with two parents — Thing > Organization > LocalBusiness and
+ * Thing > Place > LocalBusiness. PHP has no multiple inheritance, so the term is written twice, once under each
+ * parent : this one, and {@see \org\schema\places\LocalBusiness}. They are one type seen from its two parents,
+ * not two types — both serialize to the same "@type": "LocalBusiness", and both draw their property constants
+ * from the same {@see \org\schema\constants\traits\LocalBusiness} trait.
+ *
+ * Pick the one whose parent your data already is. Import both with an alias when a single file needs the two.
+ *
  * @see https://schema.org/LocalBusiness
  */
 class LocalBusiness extends Organization

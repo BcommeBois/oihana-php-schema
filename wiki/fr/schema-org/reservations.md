@@ -19,7 +19,7 @@ use org\schema\constants\Schema;
 use org\schema\Event;
 use org\schema\Person;
 use org\schema\Ticket;
-use org\schema\enumerations\ReservationStatusType;
+use org\schema\enumerations\status\ReservationStatusType;
 use org\schema\reservations\EventReservation;
 
 $reservation = new EventReservation
@@ -78,10 +78,10 @@ $reservation = new EventReservation
 
 ## États
 
-`org\schema\enumerations\ReservationStatusType` porte les quatre membres publiés par Schema.org :
+`org\schema\enumerations\status\ReservationStatusType` porte les quatre membres publiés par Schema.org :
 
 ```php
-use org\schema\enumerations\ReservationStatusType;
+use org\schema\enumerations\status\ReservationStatusType;
 
 ReservationStatusType::RESERVATION_CANCELLED ; // 'https://schema.org/ReservationCancelled'
 ReservationStatusType::RESERVATION_CONFIRMED ; // 'https://schema.org/ReservationConfirmed'
@@ -90,6 +90,8 @@ ReservationStatusType::RESERVATION_PENDING   ; // 'https://schema.org/Reservatio
 
 ReservationStatusType::includes( $reservation->reservationStatus ) ; // valide une valeur reçue
 ```
+
+Chaque membre existe aussi comme **classe**, dans le même dossier `enumerations/status/` — `ReservationCancelled`, `ReservationConfirmed`, `ReservationHold`, `ReservationPending`. Les deux formes disent la même chose : le `@type` sérialisé d'une classe membre est exactement l'URI que porte la constante. Prenez la constante pour renseigner un statut, la classe quand vous décrivez le statut lui-même comme une entité.
 
 ---
 

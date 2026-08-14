@@ -1,10 +1,14 @@
 <?php
 
-namespace tests\org\schema\enumerations ;
+namespace tests\org\schema\enumerations\status ;
 
 use PHPUnit\Framework\TestCase;
 
-use org\schema\enumerations\ReservationStatusType;
+use org\schema\enumerations\status\ReservationCancelled;
+use org\schema\enumerations\status\ReservationConfirmed;
+use org\schema\enumerations\status\ReservationHold;
+use org\schema\enumerations\status\ReservationPending;
+use org\schema\enumerations\status\ReservationStatusType;
 use org\schema\enumerations\StatusEnumeration;
 
 class ReservationStatusTypeTest extends TestCase
@@ -12,6 +16,35 @@ class ReservationStatusTypeTest extends TestCase
     public function testIsStatusEnumeration(): void
     {
         $this->assertInstanceOf( StatusEnumeration::class , new ReservationStatusType() );
+    }
+
+    public function testMembersExtendReservationStatusType(): void
+    {
+        $this->assertInstanceOf( ReservationStatusType::class , new ReservationCancelled() );
+        $this->assertInstanceOf( ReservationStatusType::class , new ReservationConfirmed() );
+        $this->assertInstanceOf( ReservationStatusType::class , new ReservationHold()      );
+        $this->assertInstanceOf( ReservationStatusType::class , new ReservationPending()   );
+    }
+
+    /**
+     * Each member class serializes to the `@type` its constant names : the class
+     * and the string are two ways of saying the same status, and a consumer
+     * reading one has to recognise what the other wrote.
+     */
+    public function testEachMemberSerializesToTheTypeItsConstantNames(): void
+    {
+        $pairs =
+        [
+            [ new ReservationCancelled() , ReservationStatusType::RESERVATION_CANCELLED ] ,
+            [ new ReservationConfirmed() , ReservationStatusType::RESERVATION_CONFIRMED ] ,
+            [ new ReservationHold()      , ReservationStatusType::RESERVATION_HOLD      ] ,
+            [ new ReservationPending()   , ReservationStatusType::RESERVATION_PENDING   ] ,
+        ];
+
+        foreach ( $pairs as [ $member , $constant ] )
+        {
+            $this->assertSame( $constant , $member->getSchemaType() );
+        }
     }
 
     public function testConstants(): void

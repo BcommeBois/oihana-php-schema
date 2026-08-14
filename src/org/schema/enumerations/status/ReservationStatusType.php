@@ -1,14 +1,17 @@
 <?php
 
-namespace org\schema\enumerations;
+namespace org\schema\enumerations\status;
+
+use org\schema\enumerations\StatusEnumeration;
 
 /**
  * Enumerated status values for Reservation.
- *
- * The following legacy values should be accepted:
- * - https://schema.org/ReservationCancelled
- * - https://schema.org/ReservationConfirmed
- * - https://schema.org/ReservationHold
+ * Members :
+ * - ReservationCancelled
+ * - ReservationConfirmed
+ * - ReservationHold
+ * - ReservationPending
+ * @see https://schema.org/ReservationStatusType
  */
 class ReservationStatusType extends StatusEnumeration
 {

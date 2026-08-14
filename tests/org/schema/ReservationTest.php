@@ -17,7 +17,7 @@ use org\schema\constants\traits\RentalCarReservation as RentalCarReservationProp
 use org\schema\constants\traits\Reservation as ReservationProperties;
 use org\schema\constants\traits\ReservationPackage as ReservationPackageProperties;
 use org\schema\constants\traits\TaxiReservation as TaxiReservationProperties;
-use org\schema\enumerations\ReservationStatusType;
+use org\schema\enumerations\status\ReservationStatusType;
 use org\schema\Event;
 use org\schema\Intangible;
 use org\schema\Organization;

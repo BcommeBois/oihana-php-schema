@@ -2,7 +2,7 @@
 
 namespace org\schema;
 
-use org\schema\enumerations\ReservationStatusType;
+use org\schema\enumerations\status\ReservationStatusType;
 
 /**
  * Describes a reservation for travel, dining or an event.

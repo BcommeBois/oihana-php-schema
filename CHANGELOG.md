@@ -8,6 +8,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Changed
 
+- The two `LocalBusiness` classes **keep their name**, and each now says why in
+  its docblock.
+
+  Schema.org publishes a single `LocalBusiness` term with two parents —
+  `Thing > Organization > LocalBusiness` and `Thing > Place > LocalBusiness`.
+  PHP has no multiple inheritance, so the term is written once under each parent.
+  🔑 **They are one type seen from its two parents, not two types** : both
+  serialize to `"@type": "LocalBusiness"`, and both now draw their constants from
+  the same trait. Renaming either would put a term schema.org does not publish
+  into the JSON-LD, since the type is derived from the class short name.
+
 - **The coverage is now complete, and a test holds it there.** The remaining
   sub-namespaces get their traits — `creativeWork` (`Article`, `Book`, `Comment`,
   `HowTo`, `SoftwareApplication`, `WebPage`, the media objects, the comments),
@@ -203,8 +214,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   `EventReservation`, `FlightReservation`, `FoodEstablishmentReservation`,
   `LodgingReservation`, `RentalCarReservation`, `ReservationPackage`,
   `TaxiReservation`, `TrainReservation`) and the
-  `org\schema\enumerations\ReservationStatusType` enumeration carrying the four
-  members schema.org publishes.
+  `org\schema\enumerations\status\ReservationStatusType` enumeration, carrying
+  the four members schema.org publishes both as constants and as the member
+  classes `ReservationCancelled`, `ReservationConfirmed`, `ReservationHold` and
+  `ReservationPending` — the same pairing `OrderStatus` and
+  `EventAttendanceModeEnumeration` already follow. A test pins each member class
+  to the constant naming it : the serialized `@type` and the constant are the
+  same URI, so a consumer reading one recognises what the other wrote.
 
   A reservation is what a confirmation email actually contains — who booked,
   what was booked, under which name, for how much, and with which status — and

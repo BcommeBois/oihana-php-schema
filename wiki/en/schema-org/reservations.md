@@ -19,7 +19,7 @@ use org\schema\constants\Schema;
 use org\schema\Event;
 use org\schema\Person;
 use org\schema\Ticket;
-use org\schema\enumerations\ReservationStatusType;
+use org\schema\enumerations\status\ReservationStatusType;
 use org\schema\reservations\EventReservation;
 
 $reservation = new EventReservation
@@ -78,10 +78,10 @@ $reservation = new EventReservation
 
 ## Statuses
 
-`org\schema\enumerations\ReservationStatusType` carries the four members Schema.org publishes:
+`org\schema\enumerations\status\ReservationStatusType` carries the four members Schema.org publishes:
 
 ```php
-use org\schema\enumerations\ReservationStatusType;
+use org\schema\enumerations\status\ReservationStatusType;
 
 ReservationStatusType::RESERVATION_CANCELLED ; // 'https://schema.org/ReservationCancelled'
 ReservationStatusType::RESERVATION_CONFIRMED ; // 'https://schema.org/ReservationConfirmed'
@@ -90,6 +90,8 @@ ReservationStatusType::RESERVATION_PENDING   ; // 'https://schema.org/Reservatio
 
 ReservationStatusType::includes( $reservation->reservationStatus ) ; // validates an incoming value
 ```
+
+Each member also exists as a **class**, in the same `enumerations/status/` folder — `ReservationCancelled`, `ReservationConfirmed`, `ReservationHold`, `ReservationPending`. Both forms say the same thing: the serialized `@type` of a member class is exactly the URI its constant carries. Reach for the constant to set a status, for the class when you describe the status itself as an entity.
 
 ---
 
