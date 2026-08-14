@@ -8,6 +8,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Changed
 
+- `org\schema\ProgramMembership` and `org\schema\MemberProgram` accept a **raw
+  array** wherever they used to accept an instance only : `$hostingOrganization`,
+  `$member`, `$membershipPointsEarned` and `$program`.
+
+  The constructor assigns what it is handed without typing it — only
+  `Reflection::hydrate()` builds instances — so a membership read from storage
+  arrives as nested arrays and could not be assigned at all : a union naming the
+  class alone threw a `TypeError` on the way in, on the exact path a stored
+  document takes. Widening, never narrowing : an instance is still assignable,
+  and nothing that used to work stops working.
+
 - **Breaking** — `xyz\oihana\schema\business\documents\EcoFeeRule::$rate` is now a
   `org\schema\UnitPriceSpecification` instead of a `org\schema\MonetaryAmount`.
 

@@ -70,6 +70,7 @@ trait Properties
         Product ,
         ProductGroup ,
         ProductModel ,
+        ProgramMembership ,
         Rating ,
         Review ,
         Service ,

@@ -17,7 +17,7 @@ class MemberProgram extends Intangible
 
     /**
      * The Organization (airline, travelers' club, retailer, etc.) the membership is made with or which offers the MemberProgram.
-     * @var null|Organization
+     * @var null|array|Organization
      */
-    public null|Organization $hostingOrganization ;
+    public null|array|Organization $hostingOrganization ;
 }
