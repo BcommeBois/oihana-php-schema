@@ -11,7 +11,7 @@ The `org\schema\events` namespace is **deliberately small**: most event classes 
 For most event use cases, reach for the top-level `Event` class documented in [core types](core.md). Drop into `org\schema\events` only when you need:
 
 - `DeliveryEvent` — a delivery touchpoint along a parcel's journey,
-- the dedicated event enumerations under [`events/enumerations/`](../../../src/org/schema/events/enumerations) (event statuses, attendance modes, music album types, …).
+- the dedicated event enumerations under [`enumerations/events/`](../../../src/org/schema/enumerations/events) (event statuses, attendance modes, music album types, …).
 
 The complete Schema.org event hierarchy (`BusinessEvent`, `EducationEvent`, `MusicEvent`, `ScreeningEvent`, `SportsEvent`, …) lives directly under `org\schema` so it stays as discoverable as `Person` or `Place`.
 
@@ -43,13 +43,33 @@ $delivery = new DeliveryEvent
 
 ---
 
+## Attendance mode
+
+`Event::$eventAttendanceMode` says whether the event happens on site, online, or both. The three values are carried by `EventAttendanceModeEnumeration` — no need to spell the URI by hand:
+
+```php
+use org\schema\enumerations\events\EventAttendanceModeEnumeration;
+
+EventAttendanceModeEnumeration::MIXED_EVENT_ATTENDANCE_MODE   ; // 'https://schema.org/MixedEventAttendanceMode'
+EventAttendanceModeEnumeration::OFFLINE_EVENT_ATTENDANCE_MODE ; // 'https://schema.org/OfflineEventAttendanceMode'
+EventAttendanceModeEnumeration::ONLINE_EVENT_ATTENDANCE_MODE  ; // 'https://schema.org/OnlineEventAttendanceMode'
+
+EventAttendanceModeEnumeration::includes( $event->eventAttendanceMode ) ; // validates an incoming value
+```
+
+⚠️ These are the `https://` URIs. The legacy `http://` spelling Schema.org still serves is a **different string**: `includes()` rejects it.
+
+The capacities follow the same split — `maximumPhysicalAttendeeCapacity` for the room, `maximumVirtualAttendeeCapacity` for the stream, `maximumAttendeeCapacity` for the total.
+
+---
+
 ## Class catalog
 
 | Class           | Role                                                                    |
 |-----------------|-------------------------------------------------------------------------|
 | `DeliveryEvent` | A delivery touchpoint along a parcel's journey.                          |
 
-For the enumerations attached to events (status, attendance mode, music album type, …), browse [`src/org/schema/events/enumerations/`](../../../src/org/schema/events/enumerations).
+For the enumerations attached to events (status, attendance mode, music album type, …), browse [`src/org/schema/enumerations/events/`](../../../src/org/schema/enumerations/events).
 
 ---
 

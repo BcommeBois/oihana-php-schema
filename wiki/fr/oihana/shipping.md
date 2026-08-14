@@ -84,23 +84,23 @@ Les deux emploient le vocabulaire `DayOfWeek` de `Schedule::$byDay` : un consomm
 |---|---|---|
 | `DeliveryRouteAssignment` | `StructuredValue` | L'appariement d'une tournée et d'une adresse : `route` (référence ou terme résolu), `byDay`, `position` (ordre de passage), `startTime` / `endTime` (bornes `HH:MM`), `weekFrom` / `weekThrough` (numéros de semaine ISO, pour un arrêt qui n'existe qu'une partie de l'année). |
 
-Pour la liste exhaustive des propriétés, parcourez les sources sous [`src/xyz/oihana/schema/shipping/`](../../src/xyz/oihana/schema/shipping) ou la [référence d'API](../../../docs).
+Pour la liste exhaustive des propriétés, parcourez les sources sous [`src/xyz/oihana/schema/shipping/`](../../../src/xyz/oihana/schema/shipping) ou la [référence d'API](../../../docs).
 
 ---
 
 ## Hydratation
 
-[`hydrateDeliveryRouteAssignment()`](../../src/xyz/oihana/schema/helpers/hydrate/hydrateDeliveryRouteAssignment.php) transforme les lignes stockées en affectations — une seule, ou la liste qui est la forme habituelle — et résout chaque `route` imbriquée en `DeliveryRouteTerm` lorsqu'elle porte une ligne de référence jointe. Un code nu est laissé tel quel : rien n'a été joint, et fabriquer un terme à partir d'une chaîne reviendrait à prétendre un libellé que personne n'a lu.
+[`hydrateDeliveryRouteAssignment()`](../../../src/xyz/oihana/schema/helpers/hydrate/hydrateDeliveryRouteAssignment.php) transforme les lignes stockées en affectations — une seule, ou la liste qui est la forme habituelle — et résout chaque `route` imbriquée en `DeliveryRouteTerm` lorsqu'elle porte une ligne de référence jointe. Un code nu est laissé tel quel : rien n'a été joint, et fabriquer un terme à partir d'une chaîne reviendrait à prétendre un libellé que personne n'a lu.
 
 L'assistant est appelé par [`hydrateCustomerSite()`](helpers.md), si bien qu'une adresse ressort avec ses tournées déjà typées. Par la voie de la réflexion, l'attribut `#[HydrateWith]` posé sur `Site::$deliveryRoute` fait le même travail.
 
-Côté livraison, c'est [`hydrateParcelDelivery()`](../../src/xyz/oihana/schema/helpers/hydrate/hydrateParcelDelivery.php) qui type les deux propriétés nommées plus haut : `ParcelDelivery::$hasDeliveryMethod` en `DeliveryMethodTerm`, `ParcelDelivery::$hasDeliveryRoute` en `DeliveryRouteTerm` — et l'adresse de livraison en `PostalAddress` au passage. La réflexion **ne peut pas** s'en charger ici : `ParcelDelivery` appartient à `org\schema` et ne déclare aucun attribut sur ces propriétés, précisément parce qu'un attribut nommant nos termes de thésaurus ferait dépendre le miroir Schema.org de la couche métier. Les deux classes cibles sont donc des **paramètres** de l'assistant, avec les termes maison par défaut.
+Côté livraison, c'est [`hydrateParcelDelivery()`](../../../src/xyz/oihana/schema/helpers/hydrate/hydrateParcelDelivery.php) qui type les deux propriétés nommées plus haut : `ParcelDelivery::$hasDeliveryMethod` en `DeliveryMethodTerm`, `ParcelDelivery::$hasDeliveryRoute` en `DeliveryRouteTerm` — et l'adresse de livraison en `PostalAddress` au passage. La réflexion **ne peut pas** s'en charger ici : `ParcelDelivery` appartient à `org\schema` et ne déclare aucun attribut sur ces propriétés, précisément parce qu'un attribut nommant nos termes de thésaurus ferait dépendre le miroir Schema.org de la couche métier. Les deux classes cibles sont donc des **paramètres** de l'assistant, avec les termes maison par défaut.
 
 ---
 
 ## Constantes associées
 
-Les clés de propriétés sont exposées par le trait de constantes [`DeliveryRouteAssignment`](../../src/xyz/oihana/schema/constants/traits/shipping/DeliveryRouteAssignment.php), agrégé via [`ShippingTrait`](../../src/xyz/oihana/schema/constants/traits/ShippingTrait.php) dans la classe maîtresse [`Oihana`](../../src/xyz/oihana/schema/constants/Oihana.php) — chaque clé est donc joignable en `Oihana::ROUTE`, `Oihana::BY_DAY`, `Oihana::WEEK_FROM`, etc.
+Les clés de propriétés sont exposées par le trait de constantes [`DeliveryRouteAssignment`](../../../src/xyz/oihana/schema/constants/traits/shipping/DeliveryRouteAssignment.php), agrégé via [`ShippingTrait`](../../../src/xyz/oihana/schema/constants/traits/ShippingTrait.php) dans la classe maîtresse [`Oihana`](../../../src/xyz/oihana/schema/constants/Oihana.php) — chaque clé est donc joignable en `Oihana::ROUTE`, `Oihana::BY_DAY`, `Oihana::WEEK_FROM`, etc.
 
 Quatre des sept clés (`byDay`, `position`, `startTime`, `endTime`) sont redéclarées avec la valeur qu'elles portent déjà ailleurs dans la bibliothèque. C'est le motif maison : une redéclaration identique se compose sans conflit, et chaque entité garde un vocabulaire autonome. Une valeur **différente**, elle, serait fatale dès que les deux traits se rencontrent dans l'agrégateur.
 

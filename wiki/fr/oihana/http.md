@@ -60,15 +60,15 @@ echo json_encode( $info , JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
 | `isBot`          | `bool\|null`   | Indique si l'agent est un bot, un crawler ou un autre client automatisé.          |
 | `raw`            | `string\|null` | La valeur originale de l'en-tête `User-Agent`, conservée telle quelle pour l'audit / la forensique. |
 
-Pour la liste exhaustive des propriétés, parcourez le code source sous [`src/xyz/oihana/schema/http/`](../../src/xyz/oihana/schema/http) ou la [référence d'API](../../../docs).
+Pour la liste exhaustive des propriétés, parcourez le code source sous [`src/xyz/oihana/schema/http/`](../../../src/xyz/oihana/schema/http) ou la [référence d'API](../../../docs).
 
 ---
 
 ## Constantes associées
 
-Les clés de propriétés sont exposées par le trait [`UserAgentInfoTrait`](../../src/xyz/oihana/schema/constants/traits/http/UserAgentInfoTrait.php), composé dans l'agrégateur de domaine [`HttpTrait`](../../src/xyz/oihana/schema/constants/traits/HttpTrait.php) et câblé dans la classe maîtresse [`Oihana`](../../src/xyz/oihana/schema/constants/Oihana.php). Vous pouvez donc y accéder via `Oihana::BROWSER`, `Oihana::DEVICE_TYPE`, `Oihana::IS_BOT`, etc.
+Les clés de propriétés sont exposées par le trait [`UserAgentInfoTrait`](../../../src/xyz/oihana/schema/constants/traits/http/UserAgentInfoTrait.php), composé dans l'agrégateur de domaine [`HttpTrait`](../../../src/xyz/oihana/schema/constants/traits/HttpTrait.php) et câblé dans la classe maîtresse [`Oihana`](../../../src/xyz/oihana/schema/constants/Oihana.php). Vous pouvez donc y accéder via `Oihana::BROWSER`, `Oihana::DEVICE_TYPE`, `Oihana::IS_BOT`, etc.
 
-Les valeurs de `deviceType` proviennent de la classe de constantes [`DeviceType`](../../src/xyz/oihana/schema/constants/http/DeviceType.php) : `bot`, `desktop`, `mobile`, `tablet`, `unknown`.
+Les valeurs de `deviceType` proviennent de la classe de constantes [`DeviceType`](../../../src/xyz/oihana/schema/constants/http/DeviceType.php) : `bot`, `desktop`, `mobile`, `tablet`, `unknown`.
 
 ---
 

@@ -71,15 +71,15 @@ Helpers neutres pour naviguer le lien sans réimplémenter la résolution — ch
 
 Côté compte, [`User`](auth.md) expose `firstIdentityBySubjectType()` et `identitiesBySubjectType()` pour filtrer ses `identities` par type de sujet.
 
-Pour la liste exhaustive des propriétés, parcourez le code source sous [`src/xyz/oihana/schema/business/`](../../src/xyz/oihana/schema/business) ou la [référence d'API](../../../docs).
+Pour la liste exhaustive des propriétés, parcourez le code source sous [`src/xyz/oihana/schema/business/`](../../../src/xyz/oihana/schema/business) ou la [référence d'API](../../../docs).
 
 ---
 
 ## Constantes associées
 
-Les clés de propriétés sont exposées par deux traits — [`BusinessIdentityTrait`](../../src/xyz/oihana/schema/constants/traits/business/BusinessIdentityTrait.php) (`SUBJECT`) et [`UserProfileTrait`](../../src/xyz/oihana/schema/constants/traits/business/UserProfileTrait.php) (`COLOR`, `EXPECTED_TYPE`, `ROLE`).
+Les clés de propriétés sont exposées par deux traits — [`BusinessIdentityTrait`](../../../src/xyz/oihana/schema/constants/traits/business/BusinessIdentityTrait.php) (`SUBJECT`) et [`UserProfileTrait`](../../../src/xyz/oihana/schema/constants/traits/business/UserProfileTrait.php) (`COLOR`, `EXPECTED_TYPE`, `ROLE`).
 
-Contrairement aux traits `places` et `http`, ils ne sont **volontairement pas** agrégés dans la classe maîtresse [`Oihana`](../../src/xyz/oihana/schema/constants/Oihana.php) : `BusinessIdentityTrait::SUBJECT` entrerait en collision avec `auth\PermissionTrait::SUBJECT` déjà agrégé. Les deux sont composés dans l'agrégateur [`BusinessTrait`](../../src/xyz/oihana/schema/constants/traits/BusinessTrait.php), et atteints directement via les constantes de classe (par ex. `UserProfile::ROLE`, `BusinessIdentity::SUBJECT`).
+Contrairement aux traits `places` et `http`, ils ne sont **volontairement pas** agrégés dans la classe maîtresse [`Oihana`](../../../src/xyz/oihana/schema/constants/Oihana.php) : `BusinessIdentityTrait::SUBJECT` entrerait en collision avec `auth\PermissionTrait::SUBJECT` déjà agrégé. Les deux sont composés dans l'agrégateur [`BusinessTrait`](../../../src/xyz/oihana/schema/constants/traits/BusinessTrait.php), et atteints directement via les constantes de classe (par ex. `UserProfile::ROLE`, `BusinessIdentity::SUBJECT`).
 
 ---
 

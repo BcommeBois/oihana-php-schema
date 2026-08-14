@@ -13,6 +13,7 @@ Pratiquement tous les documents JSON-LD que vous produirez démarreront ici. Les
 - **Acteurs** — `Person`, `Organization`, `Audience`, `Brand`,
 - **Lieux** — `Place`, `PostalAddress`, `GeoCoordinates`, `GeoShape`, `GeoCircle`,
 - **Événements** — `Event` (type de base pour le [guide des événements](events.md)),
+- **Réservations & billets** — `Reservation` (type de base pour le [guide des réservations](reservations.md)), `Ticket`, `Seat`,
 - **Commerce** — `Product`, `Offer`, `Order`, `OrderItem`, `PriceSpecification`, `MerchantReturnPolicy`,
 - **Quantités & unités** — `Quantity`, `QuantitativeValue`, `Duration`, `Distance`, `Mass`, `Energy`,
 - **Identifiants & termes** — `Thing` (racine), `Intangible`, `DefinedTerm`, `Keyword`, `Language`,
@@ -58,6 +59,7 @@ $product = new Product
 | Acteurs               | `Person`, `Organization`, `Audience`, `Brand`, `OwnershipInfo`                            |
 | Lieux & géo           | `Place`, `PostalAddress`, `GeoCoordinates`, `GeoShape`, `GeoCircle`, `GeospatialGeometry`, `LocationFeatureSpecification` |
 | Événements            | `Event` (base — enfants spécialisés sous [events](events.md))                              |
+| Réservations & billets | `Reservation` (base — sous-types sous [reservations](reservations.md)), `Ticket`, `Seat`   |
 | Commerce              | `Product`, `Offer`, `OfferShippingDetails`, `OfferForPurchase`, `OfferCatalog`, `AggregateOffer`, `Order`, `OrderItem`, `Demand`, `ContactPoint`, `MerchantReturnPolicy`, `ParcelDelivery` |
 | Tarification & paiement | `PriceSpecification`, `CompoundPriceSpecification`, `DeliveryChargeSpecification`, `MonetaryAmount`, `PaymentMethod`, `RepaymentSpecification`, `Invoice` |
 | Quantités & unités    | `Quantity`, `QuantitativeValue`, `QualitativeValue`, `Duration`, `Distance`, `Mass`, `Energy`, `SizeSpecification` |

@@ -71,15 +71,15 @@ Neutral helpers so consumers navigate the link without re-implementing the looku
 
 On the account side, [`User`](auth.md) exposes `firstIdentityBySubjectType()` and `identitiesBySubjectType()` to filter its `identities` by subject type.
 
-For exhaustive property lists, browse the source under [`src/xyz/oihana/schema/business/`](../../src/xyz/oihana/schema/business) or the [API reference](../../../docs).
+For exhaustive property lists, browse the source under [`src/xyz/oihana/schema/business/`](../../../src/xyz/oihana/schema/business) or the [API reference](../../../docs).
 
 ---
 
 ## Related constants
 
-Property keys are exposed by two traits — [`BusinessIdentityTrait`](../../src/xyz/oihana/schema/constants/traits/business/BusinessIdentityTrait.php) (`SUBJECT`) and [`UserProfileTrait`](../../src/xyz/oihana/schema/constants/traits/business/UserProfileTrait.php) (`COLOR`, `EXPECTED_TYPE`, `ROLE`).
+Property keys are exposed by two traits — [`BusinessIdentityTrait`](../../../src/xyz/oihana/schema/constants/traits/business/BusinessIdentityTrait.php) (`SUBJECT`) and [`UserProfileTrait`](../../../src/xyz/oihana/schema/constants/traits/business/UserProfileTrait.php) (`COLOR`, `EXPECTED_TYPE`, `ROLE`).
 
-Unlike the `places` and `http` traits, these are **intentionally not** aggregated into the master [`Oihana`](../../src/xyz/oihana/schema/constants/Oihana.php) class : `BusinessIdentityTrait::SUBJECT` would collide with the already-aggregated `auth\PermissionTrait::SUBJECT`. Both are composed into the [`BusinessTrait`](../../src/xyz/oihana/schema/constants/traits/BusinessTrait.php) aggregator instead, and reached through the class constants directly (e.g. `UserProfile::ROLE`, `BusinessIdentity::SUBJECT`).
+Unlike the `places` and `http` traits, these are **intentionally not** aggregated into the master [`Oihana`](../../../src/xyz/oihana/schema/constants/Oihana.php) class : `BusinessIdentityTrait::SUBJECT` would collide with the already-aggregated `auth\PermissionTrait::SUBJECT`. Both are composed into the [`BusinessTrait`](../../../src/xyz/oihana/schema/constants/traits/BusinessTrait.php) aggregator instead, and reached through the class constants directly (e.g. `UserProfile::ROLE`, `BusinessIdentity::SUBJECT`).
 
 ---
 

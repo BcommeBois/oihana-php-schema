@@ -13,8 +13,8 @@ The top of the `xyz\oihana\schema` namespace gathers the **cross-cutting Oihana 
 | Describe pagination of a list endpoint or query.  | [`Pagination`](#pagination)              |
 | Persist or transport a structured log entry.      | [`Log`](#log)                            |
 | Record an auditable action (create / update / delete / login / logout). | [`AuditAction`](#auditaction) |
-| Enumerate audit action types.                     | [`AuditActionType`](../../src/xyz/oihana/schema/enumerations/AuditActionType.php) |
-| Enumerate contact channel types.                  | [`ContactType`](../../src/xyz/oihana/schema/enumerations/ContactType.php) |
+| Enumerate audit action types.                     | [`AuditActionType`](../../../src/xyz/oihana/schema/enumerations/AuditActionType.php) |
+| Enumerate contact channel types.                  | [`ContactType`](../../../src/xyz/oihana/schema/enumerations/ContactType.php) |
 | Enumerate the lifecycle status of a business document. | [`BusinessDocumentStatus`](#businessdocumentstatus) |
 | Enumerate the commercial direction of a business document (sale / purchase). | [`BusinessDocumentDirection`](#businessdocumentdirection) |
 
@@ -76,9 +76,9 @@ It carries:
 - the actor and the request that triggered the action,
 - a business `event` tag (created by the caller),
 - a machine-readable `outcome` (success / denied / error / …),
-- the action `type` (`CREATE`, `UPDATE`, `DELETE`, `ADD`, `LOGIN`, `LOGOUT`, `REJECT`) — see the [`AuditActionType`](../../src/xyz/oihana/schema/enumerations/AuditActionType.php) enumeration.
+- the action `type` (`CREATE`, `UPDATE`, `DELETE`, `ADD`, `LOGIN`, `LOGOUT`, `REJECT`) — see the [`AuditActionType`](../../../src/xyz/oihana/schema/enumerations/AuditActionType.php) enumeration.
 
-Constants for the `AuditAction` property keys are exposed via the [`AuditTrait`](../../src/xyz/oihana/schema/constants/traits/AuditTrait.php) and reachable through the global `Oihana` aggregator.
+Constants for the `AuditAction` property keys are exposed via the [`AuditTrait`](../../../src/xyz/oihana/schema/constants/traits/AuditTrait.php) and reachable through the global `Oihana` aggregator.
 
 ---
 

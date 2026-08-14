@@ -63,7 +63,7 @@ echo json_encode( $site , JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
 | `Warehouse` | `Place`   | Storage facility — typically with delivery methods, capacity and operating hours.                   |
 | `JobSite`   | `Place`   | Project-tied location (construction, on-site intervention, temporary deployment).                   |
 
-For exhaustive property lists, browse the source under [`src/xyz/oihana/schema/places/`](../../src/xyz/oihana/schema/places) or the [API reference](../../../docs).
+For exhaustive property lists, browse the source under [`src/xyz/oihana/schema/places/`](../../../src/xyz/oihana/schema/places) or the [API reference](../../../docs).
 
 ### Which routes serve a site
 
@@ -75,7 +75,7 @@ Only the route **reference** is carried, never a copy of its label : renaming a 
 
 ## Related constants
 
-Site-specific property keys are exposed by the [`SiteTrait`](../../src/xyz/oihana/schema/constants/traits/places/SiteTrait.php) trait, composed into the master [`Oihana`](../../src/xyz/oihana/schema/constants/Oihana.php) aggregator. You can therefore reach them through `Oihana::DELIVERY_METHOD`, `Oihana::DELIVERY_ROUTE`, `Oihana::OWNED_BY`, `Oihana::POSITION`, etc.
+Site-specific property keys are exposed by the [`Site`](../../../src/xyz/oihana/schema/constants/traits/places/Site.php) trait, composed into the master [`Oihana`](../../../src/xyz/oihana/schema/constants/Oihana.php) aggregator. You can therefore reach them through `Oihana::DELIVERY_METHOD`, `Oihana::DELIVERY_ROUTE`, `Oihana::OWNED_BY`, `Oihana::POSITION`, etc.
 
 ---
 

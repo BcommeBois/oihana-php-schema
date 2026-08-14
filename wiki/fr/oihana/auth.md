@@ -99,7 +99,7 @@ echo json_encode( $application , JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
 | `xyz\oihana\schema\constants\auth\TokenRequestField` / `TokenRequestValue` | Champs et valeurs canoniques du formulaire d'endpoint OAuth2 token. |
 | `xyz\oihana\schema\constants\auth\TokenResponseField` | Noms des champs de réponse RFC 6749 §5.1. |
 
-La bibliothèque de traits sous [`xyz\oihana\schema\constants\traits\auth/`](../../src/xyz/oihana/schema/constants/traits/auth) compose les clés de propriétés par ressource (`ApplicationTrait`, `KeyfileTrait`, `PolicyTrait`, `SessionTrait`, `UserTrait`, …) dans le trait global `AuthTrait`, lui-même composé dans [`Oihana`](../../src/xyz/oihana/schema/constants/Oihana.php).
+La bibliothèque de traits sous [`xyz\oihana\schema\constants\traits\auth/`](../../../src/xyz/oihana/schema/constants/traits/auth) compose les clés de propriétés par ressource (`ApplicationTrait`, `KeyfileTrait`, `PolicyTrait`, `SessionTrait`, `UserTrait`, …) dans le trait global `AuthTrait`, lui-même composé dans [`Oihana`](../../../src/xyz/oihana/schema/constants/Oihana.php).
 
 ---
 

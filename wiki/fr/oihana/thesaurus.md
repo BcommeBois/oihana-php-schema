@@ -150,7 +150,7 @@ Au-dessus du cœur SKOS, le namespace modélise la vue **registre** d'un catalog
 
 `skos:definition` est volontairement mappé sur le `description` hérité, non dupliqué. **SKOS-XL** (libellés réifiés) et les super-propriétés abstraites (`skos:semanticRelation`, `skos:mappingRelation`) sont volontairement hors périmètre.
 
-Pour la liste exhaustive des propriétés, parcourez le code source sous [`src/xyz/oihana/schema/thesaurus/`](../../src/xyz/oihana/schema/thesaurus) ou la [référence d'API](../../../docs).
+Pour la liste exhaustive des propriétés, parcourez le code source sous [`src/xyz/oihana/schema/thesaurus/`](../../../src/xyz/oihana/schema/thesaurus) ou la [référence d'API](../../../docs).
 
 ---
 
@@ -160,19 +160,19 @@ Chaque classe associe un **trait porteur de propriétés** à son **trait de con
 
 | Trait de propriétés                                                                                  | Porte                                                             |
 |-----------------------------------------------------------------------------------------------------|------------------------------------------------------------------|
-| [`HasColor`](../../src/xyz/oihana/schema/traits/HasColor.php)                                        | `color` (partagé par `ThesaurusTerm`, `ProductCategoryTerm`, `ProductPriceCategoryTerm`, `ThesaurusDomain` et `ThesaurusScheme` — et, hors thésaurus, par [`ProductType`](products.md)) |
-| [`HasSkosRelations`](../../src/xyz/oihana/schema/thesaurus/traits/HasSkosRelations.php)              | `broader`, `narrower`, les formes transitives, `related`         |
-| [`HasSkosNotes`](../../src/xyz/oihana/schema/thesaurus/traits/HasSkosNotes.php)                      | les six notes documentaires SKOS                                 |
-| [`HasSkosMappings`](../../src/xyz/oihana/schema/thesaurus/traits/HasSkosMappings.php)                | les cinq relations d'alignement `*Match` inter-schémas           |
-| [`HasSkosMembers`](../../src/xyz/oihana/schema/thesaurus/traits/HasSkosMembers.php)                  | `member` — l'appartenance polymorphe à une collection            |
+| [`HasColor`](../../../src/xyz/oihana/schema/traits/HasColor.php)                                        | `color` (partagé par `ThesaurusTerm`, `ProductCategoryTerm`, `ProductPriceCategoryTerm`, `ThesaurusDomain` et `ThesaurusScheme` — et, hors thésaurus, par [`ProductType`](products.md)) |
+| [`HasSkosRelations`](../../../src/xyz/oihana/schema/thesaurus/traits/HasSkosRelations.php)              | `broader`, `narrower`, les formes transitives, `related`         |
+| [`HasSkosNotes`](../../../src/xyz/oihana/schema/thesaurus/traits/HasSkosNotes.php)                      | les six notes documentaires SKOS                                 |
+| [`HasSkosMappings`](../../../src/xyz/oihana/schema/thesaurus/traits/HasSkosMappings.php)                | les cinq relations d'alignement `*Match` inter-schémas           |
+| [`HasSkosMembers`](../../../src/xyz/oihana/schema/thesaurus/traits/HasSkosMembers.php)                  | `member` — l'appartenance polymorphe à une collection            |
 
 ---
 
 ## Constantes associées
 
-Les clés de propriétés sont exposées par les traits de constantes sous [`constants/traits/thesaurus/`](../../src/xyz/oihana/schema/constants/traits/thesaurus) — `ThesaurusTermTrait` (`COLOR`), `DeliveryMethodTermTrait` (`CHARGE_TIMING`, `FREE_SHIPPING_THRESHOLD`, `SHIPPING_RATE`, `VAT`), `DeliveryRouteTermTrait` (`ASSIGNED_POS`, `BY_DAY`), `ConceptTrait` (`BROADER`, `NARROWER`, …, `HIDDEN_LABEL`, `RELATED`, `TOP_CONCEPT_OF`), `SkosNotesTrait`, `ConceptSchemeTrait` (`HAS_TOP_CONCEPT`), `SkosMappingsTrait`, `CollectionTrait` (`MEMBER`, `MEMBER_LIST`) et `ThesaurusSchemeTrait` (`ACTIVE`, `DOMAIN`, `HARVESTED`, `ORDER`, `PATH`, `SYSTEM` — les clés `ACTIVE`/`ORDER` sont partagées avec `ThesaurusDomain`).
+Les clés de propriétés sont exposées par les traits de constantes sous [`constants/traits/thesaurus/`](../../../src/xyz/oihana/schema/constants/traits/thesaurus) — `ThesaurusTermTrait` (`COLOR`), `DeliveryMethodTermTrait` (`CHARGE_TIMING`, `FREE_SHIPPING_THRESHOLD`, `SHIPPING_RATE`, `VAT`), `DeliveryRouteTermTrait` (`ASSIGNED_POS`, `BY_DAY`), `ConceptTrait` (`BROADER`, `NARROWER`, …, `HIDDEN_LABEL`, `RELATED`, `TOP_CONCEPT_OF`), `SkosNotesTrait`, `ConceptSchemeTrait` (`HAS_TOP_CONCEPT`), `SkosMappingsTrait`, `CollectionTrait` (`MEMBER`, `MEMBER_LIST`) et `ThesaurusSchemeTrait` (`ACTIVE`, `DOMAIN`, `HARVESTED`, `ORDER`, `PATH`, `SYSTEM` — les clés `ACTIVE`/`ORDER` sont partagées avec `ThesaurusDomain`).
 
-Contrairement aux traits `business`, ils **sont** agrégés — via l'agrégateur de domaine [`ThesaurusTrait`](../../src/xyz/oihana/schema/constants/traits/ThesaurusTrait.php) — dans la classe maîtresse [`Oihana`](../../src/xyz/oihana/schema/constants/Oihana.php), si bien que chaque clé est atteignable via `Oihana::BROADER`, `Oihana::HAS_TOP_CONCEPT`, etc. (la valeur partagée `COLOR` coïncide avec celle déjà exposée par les traits d'auth).
+Contrairement aux traits `business`, ils **sont** agrégés — via l'agrégateur de domaine [`ThesaurusTrait`](../../../src/xyz/oihana/schema/constants/traits/ThesaurusTrait.php) — dans la classe maîtresse [`Oihana`](../../../src/xyz/oihana/schema/constants/Oihana.php), si bien que chaque clé est atteignable via `Oihana::BROADER`, `Oihana::HAS_TOP_CONCEPT`, etc. (la valeur partagée `COLOR` coïncide avec celle déjà exposée par les traits d'auth).
 
 ---
 

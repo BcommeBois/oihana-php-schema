@@ -361,7 +361,7 @@ Trois lectures que le document rend évidentes :
 
 ## Constantes associées
 
-Chaque classe expose ses constantes de propriétés via un trait dédié sous [`constants/traits/business/documents/`](../../src/xyz/oihana/schema/constants/traits/business/documents), agrégés dans [`DocumentsTrait`](../../src/xyz/oihana/schema/constants/traits/business/DocumentsTrait.php), lui-même composé dans [`BusinessTrait`](../../src/xyz/oihana/schema/constants/traits/BusinessTrait.php) puis dans l'agrégateur global [`Oihana`](../../src/xyz/oihana/schema/constants/Oihana.php) — contrairement à `BusinessIdentityTrait`/`UserProfileTrait`, aucune collision de nom n'a été détectée, donc ces constantes sont directement accessibles via `Oihana::RATE`, `Oihana::AMOUNT`, etc., en plus des constantes de classe (`TaxDetail::RATE`, `Adjustment::AMOUNT`…).
+Chaque classe expose ses constantes de propriétés via un trait dédié sous [`constants/traits/business/documents/`](../../../src/xyz/oihana/schema/constants/traits/business/documents), agrégés dans [`DocumentsTrait`](../../../src/xyz/oihana/schema/constants/traits/business/DocumentsTrait.php), lui-même composé dans [`BusinessTrait`](../../../src/xyz/oihana/schema/constants/traits/BusinessTrait.php) puis dans l'agrégateur global [`Oihana`](../../../src/xyz/oihana/schema/constants/Oihana.php) — contrairement à `BusinessIdentityTrait`/`UserProfileTrait`, aucune collision de nom n'a été détectée, donc ces constantes sont directement accessibles via `Oihana::RATE`, `Oihana::AMOUNT`, etc., en plus des constantes de classe (`TaxDetail::RATE`, `Adjustment::AMOUNT`…).
 
 ---
 
@@ -369,7 +369,7 @@ Chaque classe expose ses constantes de propriétés via un trait dédié sous [`
 
 - [`xyz\oihana\schema\business`](business.md) — `BusinessIdentity`, `UserProfile`.
 - [`xyz\oihana\schema\products`](products.md) — `PriceComponentType`, réutilisée par `Adjustment::$type`.
-- [`xyz\oihana\schema\enumerations`](../../src/xyz/oihana/schema/enumerations) — `BusinessDocumentAuthority`, réutilisée par `BusinessDocument::$authority` ; `PaymentReminderLevel`/`PaymentReminderChannel`, réutilisées par `PaymentReminder` ; `StatementEntryType`, réutilisée par `StatementEntry` ; `CreditNoteReasonCode`/`CreditNoteDisposition`, réutilisées par `CreditNote`.
+- [`xyz\oihana\schema\enumerations`](../../../src/xyz/oihana/schema/enumerations) — `BusinessDocumentAuthority`, réutilisée par `BusinessDocument::$authority` ; `PaymentReminderLevel`/`PaymentReminderChannel`, réutilisées par `PaymentReminder` ; `StatementEntryType`, réutilisée par `StatementEntry` ; `CreditNoteReasonCode`/`CreditNoteDisposition`, réutilisées par `CreditNote`.
 - [`org\schema`](../schema-org/README.md) — `MonetaryAmount`, `PriceSpecification`, `StructuredValue`.
 - [Démarrage rapide](../demarrage.md) — installation, hydratation, bases du JSON-LD.
 - [Référence d'API](../../../docs).

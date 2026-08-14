@@ -53,6 +53,7 @@ Le vocabulaire est éclaté en sous-namespaces logiques. Chaque lien ci-dessous 
 | [Actions](actions.md)                  | `org\schema\actions`         | ~115    | Hiérarchie `Action` complète de Schema.org (BuyAction, LikeAction, RegisterAction, ShareAction, …). |
 | [Œuvres créatives](creative-work.md)   | `org\schema\creativeWork`    | ~60     | `Article`, `Book`, `ImageObject`, `VideoObject`, `Certification`, `Comment`. |
 | [Événements](events.md)                | `org\schema\events`          | ~2      | Types d'événements spécialisés au-delà de l'`Event` de premier niveau. |
+| [Réservations](reservations.md)        | `org\schema\reservations`    | ~10     | `FlightReservation`, `LodgingReservation`, `TaxiReservation`, `ReservationPackage`, billets et statuts. |
 | [Lieux](places.md)                     | `org\schema\places`          | ~26     | `Country`, `City`, `Restaurant`, `Accommodation`, monuments. |
 | [Organisations](organizations.md)      | `org\schema\organizations`   | ~18     | `EducationalOrganization`, `LocalBusiness`, `MedicalOrganization`, ONG. |
 | [Services](services.md)                | `org\schema\services`        | ~7      | Produits financiers, services de paiement, conversion de devises. |

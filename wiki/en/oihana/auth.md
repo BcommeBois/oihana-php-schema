@@ -99,7 +99,7 @@ echo json_encode( $application , JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
 | `xyz\oihana\schema\constants\auth\TokenRequestField` / `TokenRequestValue` | OAuth2 token endpoint form fields and canonical values. |
 | `xyz\oihana\schema\constants\auth\TokenResponseField` | RFC 6749 §5.1 token response field names. |
 
-The trait library under [`xyz\oihana\schema\constants\traits\auth/`](../../src/xyz/oihana/schema/constants/traits/auth) composes per-resource property keys (`ApplicationTrait`, `KeyfileTrait`, `PolicyTrait`, `SessionTrait`, `UserTrait`, …) into the global `AuthTrait`, which is itself composed into [`Oihana`](../../src/xyz/oihana/schema/constants/Oihana.php).
+The trait library under [`xyz\oihana\schema\constants\traits\auth/`](../../../src/xyz/oihana/schema/constants/traits/auth) composes per-resource property keys (`ApplicationTrait`, `KeyfileTrait`, `PolicyTrait`, `SessionTrait`, `UserTrait`, …) into the global `AuthTrait`, which is itself composed into [`Oihana`](../../../src/xyz/oihana/schema/constants/Oihana.php).
 
 ---
 

@@ -8,6 +8,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Changed
 
+- The wiki gains a **reservations guide** (FR canonical + EN mirror), listed in
+  both indexes and in the core catalogue, and the events page now documents the
+  attendance modes and the capacities that go with them.
+
+  **Every relative link in the wiki now resolves.** The `org\schema\events`
+  guide pointed at `src/org/schema/events/enumerations`, a directory that has
+  never existed — the enumerations live under `enumerations/events` — and the
+  whole `oihana` section linked its sources one directory short (`../../src`
+  from a page two levels deep), which is 78 links that led nowhere. A link that
+  404s in a guide reads as a class that no longer exists.
+
 - `org\schema\Ticket` accepts a **raw array** on `$issuedBy`, `$priceCurrency`,
   `$totalPrice` and `$underName`, the same widening `ProgramMembership` received.
 

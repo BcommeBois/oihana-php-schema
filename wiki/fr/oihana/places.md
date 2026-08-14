@@ -63,7 +63,7 @@ echo json_encode( $site , JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
 | `Warehouse` | `Place`   | Entrepôt — généralement avec méthodes de livraison, capacité et horaires d'ouverture.             |
 | `JobSite`   | `Place`   | Lieu rattaché à un projet (chantier, intervention sur site, déploiement temporaire).              |
 
-Pour la liste exhaustive des propriétés, parcourez le code source sous [`src/xyz/oihana/schema/places/`](../../src/xyz/oihana/schema/places) ou la [référence d'API](../../../docs).
+Pour la liste exhaustive des propriétés, parcourez le code source sous [`src/xyz/oihana/schema/places/`](../../../src/xyz/oihana/schema/places) ou la [référence d'API](../../../docs).
 
 ### Quelles tournées desservent un site
 
@@ -75,7 +75,7 @@ Seule la **référence** de la tournée est portée, jamais une copie de son lib
 
 ## Constantes associées
 
-Les clés de propriétés spécifiques aux sites sont exposées par le trait [`SiteTrait`](../../src/xyz/oihana/schema/constants/traits/places/SiteTrait.php), composé dans l'agrégateur principal [`Oihana`](../../src/xyz/oihana/schema/constants/Oihana.php). Vous pouvez donc y accéder via `Oihana::DELIVERY_METHOD`, `Oihana::DELIVERY_ROUTE`, `Oihana::OWNED_BY`, `Oihana::POSITION`, etc.
+Les clés de propriétés spécifiques aux sites sont exposées par le trait [`Site`](../../../src/xyz/oihana/schema/constants/traits/places/Site.php), composé dans l'agrégateur principal [`Oihana`](../../../src/xyz/oihana/schema/constants/Oihana.php). Vous pouvez donc y accéder via `Oihana::DELIVERY_METHOD`, `Oihana::DELIVERY_ROUTE`, `Oihana::OWNED_BY`, `Oihana::POSITION`, etc.
 
 ---
 

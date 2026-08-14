@@ -60,15 +60,15 @@ echo json_encode( $info , JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
 | `isBot`          | `bool\|null`   | Whether the agent is a bot, crawler or other automated client.                    |
 | `raw`            | `string\|null` | The original `User-Agent` header value, preserved verbatim for audit / forensics. |
 
-For exhaustive property lists, browse the source under [`src/xyz/oihana/schema/http/`](../../src/xyz/oihana/schema/http) or the [API reference](../../../docs).
+For exhaustive property lists, browse the source under [`src/xyz/oihana/schema/http/`](../../../src/xyz/oihana/schema/http) or the [API reference](../../../docs).
 
 ---
 
 ## Related constants
 
-Property keys are exposed by the [`UserAgentInfoTrait`](../../src/xyz/oihana/schema/constants/traits/http/UserAgentInfoTrait.php) trait, composed into the domain-level [`HttpTrait`](../../src/xyz/oihana/schema/constants/traits/HttpTrait.php) aggregator and wired into the master [`Oihana`](../../src/xyz/oihana/schema/constants/Oihana.php) class. You can therefore reach them through `Oihana::BROWSER`, `Oihana::DEVICE_TYPE`, `Oihana::IS_BOT`, etc.
+Property keys are exposed by the [`UserAgentInfoTrait`](../../../src/xyz/oihana/schema/constants/traits/http/UserAgentInfoTrait.php) trait, composed into the domain-level [`HttpTrait`](../../../src/xyz/oihana/schema/constants/traits/HttpTrait.php) aggregator and wired into the master [`Oihana`](../../../src/xyz/oihana/schema/constants/Oihana.php) class. You can therefore reach them through `Oihana::BROWSER`, `Oihana::DEVICE_TYPE`, `Oihana::IS_BOT`, etc.
 
-The `deviceType` values come from the [`DeviceType`](../../src/xyz/oihana/schema/constants/http/DeviceType.php) constant class : `bot`, `desktop`, `mobile`, `tablet`, `unknown`.
+The `deviceType` values come from the [`DeviceType`](../../../src/xyz/oihana/schema/constants/http/DeviceType.php) constant class : `bot`, `desktop`, `mobile`, `tablet`, `unknown`.
 
 ---
 

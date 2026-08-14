@@ -84,23 +84,23 @@ Both use the `DayOfWeek` vocabulary of `Schedule::$byDay`, so a consumer that al
 |---|---|---|
 | `DeliveryRouteAssignment` | `StructuredValue` | The pairing of a delivery route with one address : `route` (reference or resolved term), `byDay`, `position` (order of passage), `startTime` / `endTime` (`HH:MM` bounds), `weekFrom` / `weekThrough` (ISO week numbers, for a stop that only exists part of the year). |
 
-For exhaustive property lists, browse the source under [`src/xyz/oihana/schema/shipping/`](../../src/xyz/oihana/schema/shipping) or the [API reference](../../../docs).
+For exhaustive property lists, browse the source under [`src/xyz/oihana/schema/shipping/`](../../../src/xyz/oihana/schema/shipping) or the [API reference](../../../docs).
 
 ---
 
 ## Hydration
 
-[`hydrateDeliveryRouteAssignment()`](../../src/xyz/oihana/schema/helpers/hydrate/hydrateDeliveryRouteAssignment.php) turns stored rows into assignments — a single one, or the list that is the usual shape — and resolves each nested `route` into a `DeliveryRouteTerm` when it holds a joined reference row. A bare code is left alone : nothing has been joined, and building a term out of a string would claim a label nobody read.
+[`hydrateDeliveryRouteAssignment()`](../../../src/xyz/oihana/schema/helpers/hydrate/hydrateDeliveryRouteAssignment.php) turns stored rows into assignments — a single one, or the list that is the usual shape — and resolves each nested `route` into a `DeliveryRouteTerm` when it holds a joined reference row. A bare code is left alone : nothing has been joined, and building a term out of a string would claim a label nobody read.
 
 The helper is called by [`hydrateCustomerSite()`](helpers.md), so an address comes out with its routes already typed. On the reflection path, `#[HydrateWith]` on `Site::$deliveryRoute` does the same work.
 
-On the delivery side, [`hydrateParcelDelivery()`](../../src/xyz/oihana/schema/helpers/hydrate/hydrateParcelDelivery.php) is what types the two properties named above: `ParcelDelivery::$hasDeliveryMethod` into a `DeliveryMethodTerm`, `ParcelDelivery::$hasDeliveryRoute` into a `DeliveryRouteTerm` — and the delivery address into a `PostalAddress` along the way. Reflection **cannot** do it here: `ParcelDelivery` belongs to `org\schema` and declares no attribute on those properties, precisely because an attribute naming our thesaurus terms would make the Schema.org mirror depend on the business layer. The two target classes are therefore **parameters** of the helper, with the business terms as defaults.
+On the delivery side, [`hydrateParcelDelivery()`](../../../src/xyz/oihana/schema/helpers/hydrate/hydrateParcelDelivery.php) is what types the two properties named above: `ParcelDelivery::$hasDeliveryMethod` into a `DeliveryMethodTerm`, `ParcelDelivery::$hasDeliveryRoute` into a `DeliveryRouteTerm` — and the delivery address into a `PostalAddress` along the way. Reflection **cannot** do it here: `ParcelDelivery` belongs to `org\schema` and declares no attribute on those properties, precisely because an attribute naming our thesaurus terms would make the Schema.org mirror depend on the business layer. The two target classes are therefore **parameters** of the helper, with the business terms as defaults.
 
 ---
 
 ## Related constants
 
-Property keys are exposed by the [`DeliveryRouteAssignment`](../../src/xyz/oihana/schema/constants/traits/shipping/DeliveryRouteAssignment.php) constant trait, aggregated through [`ShippingTrait`](../../src/xyz/oihana/schema/constants/traits/ShippingTrait.php) into the master [`Oihana`](../../src/xyz/oihana/schema/constants/Oihana.php) class — so every key is reachable as `Oihana::ROUTE`, `Oihana::BY_DAY`, `Oihana::WEEK_FROM`, etc.
+Property keys are exposed by the [`DeliveryRouteAssignment`](../../../src/xyz/oihana/schema/constants/traits/shipping/DeliveryRouteAssignment.php) constant trait, aggregated through [`ShippingTrait`](../../../src/xyz/oihana/schema/constants/traits/ShippingTrait.php) into the master [`Oihana`](../../../src/xyz/oihana/schema/constants/Oihana.php) class — so every key is reachable as `Oihana::ROUTE`, `Oihana::BY_DAY`, `Oihana::WEEK_FROM`, etc.
 
 Four of the seven keys (`byDay`, `position`, `startTime`, `endTime`) are redeclared with the value they already carry elsewhere in the library. That is the house pattern : an identical redeclaration composes without conflict, and each entity keeps a self-contained vocabulary. A **different** value would be fatal the moment both traits meet in the aggregator.
 

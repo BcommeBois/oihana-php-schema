@@ -13,8 +13,8 @@ Le sommet du namespace `xyz\oihana\schema` regroupe les **extensions Oihana tran
 | Décrire la pagination d'un endpoint ou d'une requête.                       | [`Pagination`](#pagination)              |
 | Persister ou transporter une entrée de log structurée.                      | [`Log`](#log)                            |
 | Enregistrer une action auditable (create / update / delete / login / logout). | [`AuditAction`](#auditaction)         |
-| Énumérer les types d'actions d'audit.                                       | [`AuditActionType`](../../src/xyz/oihana/schema/enumerations/AuditActionType.php) |
-| Énumérer les types de canaux de contact.                                    | [`ContactType`](../../src/xyz/oihana/schema/enumerations/ContactType.php) |
+| Énumérer les types d'actions d'audit.                                       | [`AuditActionType`](../../../src/xyz/oihana/schema/enumerations/AuditActionType.php) |
+| Énumérer les types de canaux de contact.                                    | [`ContactType`](../../../src/xyz/oihana/schema/enumerations/ContactType.php) |
 | Énumérer le statut de cycle de vie d'un document métier.                    | [`BusinessDocumentStatus`](#businessdocumentstatus) |
 | Énumérer la direction commerciale d'un document métier (vente / achat).     | [`BusinessDocumentDirection`](#businessdocumentdirection) |
 
@@ -76,9 +76,9 @@ Elle porte :
 - l'acteur et la requête qui a déclenché l'action,
 - un tag `event` métier (créé par l'appelant),
 - un `outcome` lisible machine (success / denied / error / …),
-- le `type` d'action (`CREATE`, `UPDATE`, `DELETE`, `ADD`, `LOGIN`, `LOGOUT`, `REJECT`) — voir l'énumération [`AuditActionType`](../../src/xyz/oihana/schema/enumerations/AuditActionType.php).
+- le `type` d'action (`CREATE`, `UPDATE`, `DELETE`, `ADD`, `LOGIN`, `LOGOUT`, `REJECT`) — voir l'énumération [`AuditActionType`](../../../src/xyz/oihana/schema/enumerations/AuditActionType.php).
 
-Les constantes des clés de propriétés `AuditAction` sont exposées par le trait [`AuditTrait`](../../src/xyz/oihana/schema/constants/traits/AuditTrait.php) et accessibles via l'agrégateur global `Oihana`.
+Les constantes des clés de propriétés `AuditAction` sont exposées par le trait [`AuditTrait`](../../../src/xyz/oihana/schema/constants/traits/AuditTrait.php) et accessibles via l'agrégateur global `Oihana`.
 
 ---
 
