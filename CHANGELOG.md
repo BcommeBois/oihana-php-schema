@@ -8,6 +8,26 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Changed
 
+- Adds `xyz\oihana\schema\helpers\hydrate\findPhysicalQuantityByType()`, which
+  walks **any** packaging chain and hands back the level whose `additionalType`
+  matches, as a `PhysicalQuantity` — weight and volume included.
+
+  The walk existed already, private on `xyz\oihana\schema\products\Product`, and
+  its only public entry knew a single chain : the product's own. That one is
+  `null` on any product read back from a base — the tree is built at import
+  time, copied onto the offers, and it is that copy which is stored. So the
+  consumer holding a chain had no way to use the walk, and wrote a second one ;
+  a walk written by hand rebuilds the levels as plain `QuantitativeValue`, a
+  class that declares neither weight nor volume and therefore **discards both,
+  without an error and without a trace**. Exposing the walk is what makes that
+  loss impossible rather than repairable.
+
+  `Product::findEligibleQuantityByType()` keeps its signature and delegates ;
+  the private method is gone. Two things were repaired on the way : the found
+  level was re-wrapped once per level climbed back up, and a `valueReference`
+  holding something that is not a quantity — a bare code, an enumeration, both
+  of which Schema.org allows — **crashed the walk** instead of ending it.
+
 - The **business documents guide** (FR canonical + EN mirror) documents the pair
   on the three line classes and on the trait they take it from. The worked
   delivery note now measures its lines both ways : `1.176 + 2.236 = 3.412` reads

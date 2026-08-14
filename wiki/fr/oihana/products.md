@@ -92,6 +92,27 @@ $product->findEligibleQuantityByType( UnitOfSaleType::PARCEL )->weight ;  // 245
 
 🔑 **La chaîne se type sur toute sa hauteur.** `PhysicalQuantity::$valueReference` porte l'attribut d'hydratation, donc `Reflection::hydrate()` descend jusqu'au dernier étage : un poids se lit `->weight` partout, jamais `['weight']` un cran plus bas. `findEligibleQuantityByType()` reste le chemin d'accès direct à un étage donné.
 
+### Parcourir un arbre qu'on n'a pas construit
+
+`findEligibleQuantityByType()` ne sait parcourir qu'un arbre : celui du produit. Or **cet arbre est `null` sur tout produit relu depuis une base** — il est construit par le setter magique au moment de l'import, recopié sur chaque offre, et c'est cette copie qui est stockée. Le consommateur qui tient l'arbre tient donc celui de l'offre, pas celui du produit.
+
+Le parcours se prend alors comme fonction, sur n'importe quel arbre :
+
+```php
+use function xyz\oihana\schema\helpers\hydrate\findPhysicalQuantityByType;
+
+$parcel = findPhysicalQuantityByType( UnitOfSaleType::PARCEL , $offer->eligibleQuantity ) ;
+
+$parcel?->weight ;  // 245.1456
+$parcel?->volume ;  // 2.6208
+```
+
+L'arbre passé peut être **typé ou brut** — les lignes telles qu'une lecture de base les laisse — et l'étage rendu est toujours une `PhysicalQuantity`.
+
+🚨 **C'est ce qui rend la perte du poids impossible plutôt que réparable.** Sans cette entrée, qui tient un arbre réécrit le parcours à la main, et un parcours écrit à la main reconstruit les étages en `QuantitativeValue` : cette classe ne déclare ni poids ni volume, et une classe écarte les clés qu'elle ne déclare pas. Les deux disparaissent **sans erreur et sans trace**.
+
+`Product::findEligibleQuantityByType()` n'est plus que cet appel sur son propre arbre — même signature, même résultat.
+
 ⚠️ **Le constructeur, lui, assigne brut** — aucun attribut n'y agit. Sur ce chemin, passez par [`hydratePhysicalQuantity()`](helpers.md), qui descend la chaîne explicitement ; c'est ce que fait `hydrateAggregateOffer()`.
 
 ⚠️ Chez Schema.org, `valueReference` accepte autre chose qu'une quantité — une énumération, une valeur qualitative. **Sur `PhysicalQuantity`, c'est le niveau de conditionnement suivant, et rien d'autre** : c'est la raison d'être de la classe.

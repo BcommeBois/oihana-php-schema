@@ -50,6 +50,7 @@
             "src/xyz/oihana/schema/helpers/hydrate/documents/hydrateDocumentLine.php" ,
             "src/xyz/oihana/schema/helpers/hydrate/documents/hydrateDocumentLineItem.php" ,
             "src/xyz/oihana/schema/helpers/hydrate/documents/hydrateDocumentTotals.php" ,
+            "src/xyz/oihana/schema/helpers/hydrate/findPhysicalQuantityByType.php" ,
             "src/xyz/oihana/schema/helpers/hydrate/hydrateAggregateOffer.php" ,
             "src/xyz/oihana/schema/helpers/hydrate/hydrateCustomer.php" ,
             "src/xyz/oihana/schema/helpers/hydrate/hydrateCustomerEmployee.php" ,

@@ -92,6 +92,27 @@ $product->findEligibleQuantityByType( UnitOfSaleType::PARCEL )->weight ;  // 245
 
 🔑 **The chain types itself all the way down.** `PhysicalQuantity::$valueReference` carries the hydration attribute, so `Reflection::hydrate()` walks to the last level: a weight reads `->weight` everywhere, never `['weight']` one step below. `findEligibleQuantityByType()` remains the direct way to a given level.
 
+### Walking a tree you did not build
+
+`findEligibleQuantityByType()` knows a single tree: the product's own. And **that tree is `null` on any product read back from a base** — it is built by the magic setter at import time, copied onto every offer, and it is that copy which is stored. The consumer holding a tree is therefore holding the offer's, not the product's.
+
+The walk is then taken as a function, over any tree:
+
+```php
+use function xyz\oihana\schema\helpers\hydrate\findPhysicalQuantityByType;
+
+$parcel = findPhysicalQuantityByType( UnitOfSaleType::PARCEL , $offer->eligibleQuantity ) ;
+
+$parcel?->weight ;  // 245.1456
+$parcel?->volume ;  // 2.6208
+```
+
+The tree handed in may be **typed or raw** — the rows a base read leaves — and the level returned is always a `PhysicalQuantity`.
+
+🚨 **This is what makes losing the weight impossible rather than repairable.** Without that entry, whoever holds a tree writes the walk again by hand, and a walk written by hand rebuilds the levels as plain `QuantitativeValue`: that class declares neither weight nor volume, and a class discards the keys it does not declare. Both leave **without an error and without a trace**.
+
+`Product::findEligibleQuantityByType()` is now that call on its own tree — same signature, same result.
+
 ⚠️ **The constructor assigns raw** — no attribute acts on that path. Use [`hydratePhysicalQuantity()`](helpers.md) there, which walks the chain explicitly; that is what `hydrateAggregateOffer()` does.
 
 ⚠️ Schema.org lets `valueReference` hold things that are not quantities — an enumeration, a qualitative value. **On `PhysicalQuantity` it is the next packaging level, and nothing else**: that is what the class exists for.

@@ -22,8 +22,9 @@ use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\constants\ProductAdditionalProperty;
 use xyz\oihana\schema\enumerations\UnitOfSaleType ;
 
-use function oihana\core\objects\toAssociativeArray;
 use function oihana\core\strings\sanitize;
+
+use function xyz\oihana\schema\helpers\hydrate\findPhysicalQuantityByType;
 
 /**
  * A generic product representation enriched with commerce metadata :
@@ -187,6 +188,12 @@ class Product extends SomeProducts
      * $this->findEligibleQuantityByType(UnitOfSaleType::PACKAGE);
      * ```
      *
+     * The walk itself is {@see \xyz\oihana\schema\helpers\hydrate\findPhysicalQuantityByType()},
+     * which takes the chain as a parameter : this product's own is only one of
+     * the chains worth walking, and it is `null` on any product read back from
+     * a base — the tree is copied onto the offers, and it is that copy which is
+     * stored.
+     *
      * @param string $type One of the UnitOfSaleType::* constants.
      *
      * @return QuantitativeValue|null
@@ -194,7 +201,7 @@ class Product extends SomeProducts
      */
     public function findEligibleQuantityByType( string $type ) :?QuantitativeValue
     {
-        return $this->searchEligibleQuantityByType( $type , $this->eligibleQuantity ?? null ) ;
+        return findPhysicalQuantityByType( $type , $this->eligibleQuantity ?? null ) ;
     }
 
     /**
@@ -496,40 +503,4 @@ class Product extends SomeProducts
      * @var array|null
      */
     private ?array $_eligibleQuantityDefinition = null;
-
-    /**
-     * Recursive internal search for a QuantitativeValue by UnitOfSaleType.
-     * @param string $type One of the UnitOfSaleType::* constants.
-     * @param array|QuantitativeValue|null $qv
-     * @return QuantitativeValue|null
-     * @throws ReflectionException
-     */
-    private function searchEligibleQuantityByType( string $type , array|QuantitativeValue|null $qv ): ?QuantitativeValue
-    {
-        if ( !$qv )
-        {
-            return null ;
-        }
-
-        if( $qv instanceof QuantitativeValue )
-        {
-            $qv = toAssociativeArray( $qv ) ; // enforce the object to be an associative array to fix the cache problem
-        }
-
-        $additionalType = $qv[ Schema::ADDITIONAL_TYPE ] ?? null ;
-
-        if ( $additionalType === $type )
-        {
-            // Always a fresh instance : the conversion above leaves $qv an array
-            // whichever way it came in, so there is no object left to hand back.
-            // A PhysicalQuantity, so a level found below the first — where
-            // hydration leaves raw arrays — hands back its weight and volume
-            // rather than dropping them.
-            return new PhysicalQuantity( $qv ) ;
-        }
-
-        $qv = $this->searchEligibleQuantityByType( $type , $qv[ Schema::VALUE_REFERENCE ] ?? null ) ;
-
-        return $qv == null ? null : new PhysicalQuantity( $qv ) ;
-    }
 }

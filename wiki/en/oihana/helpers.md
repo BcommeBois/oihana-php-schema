@@ -234,6 +234,7 @@ An account carries zero, one or several business identities (see [`BusinessIdent
 
 | Function                  | Produces            | Hydrated nested references                               |
 |---------------------------|---------------------|----------------------------------------------------------|
+| `findPhysicalQuantityByType` | `PhysicalQuantity` or `null` | Builds nothing nested: **walks** a packaging chain — handed in as a parameter, typed or raw — and returns the level whose `additionalType` matches, weight and volume included. The tree is a parameter because it is not always reachable from the product that defined it: it is copied onto the offers, and it is that copy which is stored. A `valueReference` that is not a level — a bare code, an enumeration, both of which Schema.org allows — ends the walk. `Product::findEligibleQuantityByType()` is now that call on its own tree. |
 | `hydrateAggregateOffer`   | `AggregateOffer`    | `availableAtOrFrom` (Warehouse), `eligibleQuantity` (through `hydratePhysicalQuantity`), `offers` (OfferForPurchase[]), `provider` |
 | `hydrateCustomer`         | `Customer` or list  | `contactPoint`, `address`                                |
 | `hydrateCustomerEmployee` | `CustomerEmployee` or list | `additionalProperty`, `contactPoint`, `workLocation` (CustomerSite) |

@@ -236,6 +236,7 @@ Un compte porte zéro, une ou plusieurs identités métier (voir [`BusinessIdent
 
 | Fonction                  | Produit             | Références imbriquées hydratées                          |
 |---------------------------|---------------------|----------------------------------------------------------|
+| `findPhysicalQuantityByType` | `PhysicalQuantity` ou `null` | Ne construit rien d'imbriqué : **parcourt** une chaîne de conditionnement — passée en paramètre, typée ou brute — et rend l'étage dont l'`additionalType` correspond, poids et volume compris. Le tas de l'arbre est un paramètre parce qu'il n'est pas toujours joignable depuis le produit qui l'a défini : il est recopié sur les offres, et c'est cette copie qui est stockée. Un `valueReference` qui n'est pas un étage — un code nu, une énumération, ce que Schema.org autorise — arrête le parcours. `Product::findEligibleQuantityByType()` n'est plus que cet appel sur son propre arbre. |
 | `hydrateAggregateOffer`   | `AggregateOffer`    | `availableAtOrFrom` (Warehouse), `eligibleQuantity` (par `hydratePhysicalQuantity`), `offers` (OfferForPurchase[]), `provider` |
 | `hydrateCustomer`         | `Customer` ou liste | `contactPoint`, `address`                                |
 | `hydrateCustomerEmployee` | `CustomerEmployee` ou liste | `additionalProperty`, `contactPoint`, `workLocation` (CustomerSite) |
