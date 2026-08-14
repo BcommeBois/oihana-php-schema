@@ -16,6 +16,12 @@ use function oihana\core\objects\toAssociativeArray;
  * as a {@see PhysicalQuantity} — so the level found keeps what it weighs and
  * what it occupies.
  *
+ * 🔑 **The level found is typed, and so is the chain below it.** A consumer that
+ * walks on from the level it asked for reads `->weight` at every depth, never
+ * `['weight']` one step down : the walk hands back the same shape
+ * {@see \oihana\reflect\Reflection::hydrate()} builds, not a typed head sitting
+ * over raw rows.
+ *
  * The chain is read one level at a time, `valueReference` after
  * `valueReference`, until the type is met or the chain stops.
  *
@@ -65,10 +71,10 @@ function findPhysicalQuantityByType( string $type , array|QuantitativeValue|null
     if( ( $tree[ Schema::ADDITIONAL_TYPE ] ?? null ) === $type )
     {
         // Always a fresh instance : the conversion above leaves no object to
-        // hand back. A PhysicalQuantity, so a level found below the first —
-        // where hydration leaves raw arrays — hands back its weight and its
-        // volume rather than dropping them.
-        return new PhysicalQuantity( $tree ) ;
+        // hand back. Built through hydratePhysicalQuantity(), so the level
+        // found is typed **and so is every level below it** — a weight reads
+        // `->weight` at any depth, never `['weight']` one step down.
+        return hydratePhysicalQuantity( $tree ) ;
     }
 
     $next = $tree[ Schema::VALUE_REFERENCE ] ?? null ;

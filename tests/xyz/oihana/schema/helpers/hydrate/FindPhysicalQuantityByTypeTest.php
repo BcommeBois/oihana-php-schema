@@ -69,6 +69,32 @@ final class FindPhysicalQuantityByTypeTest extends TestCase
     }
 
     /**
+     * The level found is typed, and so is everything below it : the walk hands
+     * back the shape `Reflection::hydrate()` builds, not a typed head sitting
+     * over raw rows. Read one way at the top and another one step down, a chain
+     * whose whole point is the ratio between two levels answers `null` on an
+     * ordinary `->weight`, without an error.
+     *
+     * @throws ReflectionException
+     */
+    public function testTheLevelFoundTypesTheChainBelowIt(): void
+    {
+        $unit = findPhysicalQuantityByType( UnitOfSaleType::UNIT , $this->chain() ) ;
+
+        $package = $unit->valueReference ;
+
+        $this->assertInstanceOf( PhysicalQuantity::class , $package ) ;
+        $this->assertSame( 15.419 , $package->weight ) ;
+        $this->assertSame( 0.0312 , $package->volume ) ;
+
+        $parcel = $package->valueReference ;
+
+        $this->assertInstanceOf( PhysicalQuantity::class , $parcel ) ;
+        $this->assertSame( 1295.196 , $parcel->weight ) ;
+        $this->assertSame( 2.6208   , $parcel->volume ) ;
+    }
+
+    /**
      * The same tree, typed : a chain already hydrated is walked exactly the
      * same way, and gives back the same level.
      *

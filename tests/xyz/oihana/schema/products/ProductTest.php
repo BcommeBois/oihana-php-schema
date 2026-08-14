@@ -576,6 +576,9 @@ class ProductTest extends TestCase
         $this->assertInstanceOf( PhysicalQuantity::class , $unit ) ;
         $this->assertSame( 10.99 , $unit->weight ) ;
 
+        // the level found types the chain below it : `->weight` at any depth
+        $this->assertInstanceOf( PhysicalQuantity::class , $unit->valueReference ) ;
+
         $package = $product->findEligibleQuantityByType( UnitOfSaleType::PACKAGE ) ;
 
         $this->assertInstanceOf( PhysicalQuantity::class , $package ) ;

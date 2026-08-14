@@ -90,7 +90,7 @@ $product->findEligibleQuantityByType( UnitOfSaleType::PARCEL )->weight ;  // 245
 
 ⚠️ **Distinct from `Product::$weight`**, inherited from the Schema.org mirror: that one is the weight of the billed unit, with no unit stated and no level attached. It does not change.
 
-🔑 **The chain types itself all the way down.** `PhysicalQuantity::$valueReference` carries the hydration attribute, so `Reflection::hydrate()` walks to the last level: a weight reads `->weight` everywhere, never `['weight']` one step below. `findEligibleQuantityByType()` remains the direct way to a given level.
+🔑 **The chain types itself all the way down.** `PhysicalQuantity::$valueReference` carries the hydration attribute, so `Reflection::hydrate()` walks to the last level: a weight reads `->weight` everywhere, never `['weight']` one step below. `findEligibleQuantityByType()` remains the direct way to a given level — **and the level it returns types the chain below it**, so the reading syntax does not change with the depth.
 
 ### Walking a tree you did not build
 
@@ -107,7 +107,7 @@ $parcel?->weight ;  // 245.1456
 $parcel?->volume ;  // 2.6208
 ```
 
-The tree handed in may be **typed or raw** — the rows a base read leaves — and the level returned is always a `PhysicalQuantity`.
+The tree handed in may be **typed or raw** — the rows a base read leaves — and the level returned is always a `PhysicalQuantity`, **the chain below it included**: `$parcel->valueReference->weight` reads like `$parcel->weight`, the syntax does not change with the depth.
 
 🚨 **This is what makes losing the weight impossible rather than repairable.** Without that entry, whoever holds a tree writes the walk again by hand, and a walk written by hand rebuilds the levels as plain `QuantitativeValue`: that class declares neither weight nor volume, and a class discards the keys it does not declare. Both leave **without an error and without a trace**.
 

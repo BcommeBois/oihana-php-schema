@@ -90,7 +90,7 @@ $product->findEligibleQuantityByType( UnitOfSaleType::PARCEL )->weight ;  // 245
 
 ⚠️ **À distinguer de `Product::$weight`**, hérité du miroir Schema.org : celui-là est le poids de l'unité facturée, sans unité déclarée ni niveau rattaché. Il ne change pas.
 
-🔑 **La chaîne se type sur toute sa hauteur.** `PhysicalQuantity::$valueReference` porte l'attribut d'hydratation, donc `Reflection::hydrate()` descend jusqu'au dernier étage : un poids se lit `->weight` partout, jamais `['weight']` un cran plus bas. `findEligibleQuantityByType()` reste le chemin d'accès direct à un étage donné.
+🔑 **La chaîne se type sur toute sa hauteur.** `PhysicalQuantity::$valueReference` porte l'attribut d'hydratation, donc `Reflection::hydrate()` descend jusqu'au dernier étage : un poids se lit `->weight` partout, jamais `['weight']` un cran plus bas. `findEligibleQuantityByType()` reste le chemin d'accès direct à un étage donné — **et l'étage rendu type sa descendance**, de sorte que la syntaxe de lecture ne change pas avec la profondeur.
 
 ### Parcourir un arbre qu'on n'a pas construit
 
@@ -107,7 +107,7 @@ $parcel?->weight ;  // 245.1456
 $parcel?->volume ;  // 2.6208
 ```
 
-L'arbre passé peut être **typé ou brut** — les lignes telles qu'une lecture de base les laisse — et l'étage rendu est toujours une `PhysicalQuantity`.
+L'arbre passé peut être **typé ou brut** — les lignes telles qu'une lecture de base les laisse — et l'étage rendu est toujours une `PhysicalQuantity`, **sa descendance comprise** : `$parcel->valueReference->weight` se lit comme `$parcel->weight`, la syntaxe ne change pas avec la profondeur.
 
 🚨 **C'est ce qui rend la perte du poids impossible plutôt que réparable.** Sans cette entrée, qui tient un arbre réécrit le parcours à la main, et un parcours écrit à la main reconstruit les étages en `QuantitativeValue` : cette classe ne déclare ni poids ni volume, et une classe écarte les clés qu'elle ne déclare pas. Les deux disparaissent **sans erreur et sans trace**.
 

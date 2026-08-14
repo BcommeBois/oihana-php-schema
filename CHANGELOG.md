@@ -8,6 +8,21 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Changed
 
+- **Breaking** — `findPhysicalQuantityByType()`, and therefore
+  `Product::findEligibleQuantityByType()`, types the level it returns **and the
+  chain below it**, where it used to type that one level alone.
+
+  The measures were never lost : they sat one step down as raw rows, reachable
+  as `->valueReference['weight']` while the same weight one level up read
+  `->weight`. A structure whose entire point is the ratio between two levels
+  cannot be read two different ways depending on the depth, and a `->weight`
+  that answers `null` without an error is the exact failure this walk exists to
+  prevent.
+
+  ⚠️ A consumer reading a deeper level as an array now meets an object, and must
+  read `->valueReference->weight`. Nothing in this library did, and the walk was
+  private until this release.
+
 - Adds `xyz\oihana\schema\helpers\hydrate\findPhysicalQuantityByType()`, which
   walks **any** packaging chain and hands back the level whose `additionalType`
   matches, as a `PhysicalQuantity` — weight and volume included.
