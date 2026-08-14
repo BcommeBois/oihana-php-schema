@@ -21,6 +21,7 @@ use xyz\oihana\schema\constants\traits\business\documents\BusinessDocumentLineTr
 use xyz\oihana\schema\enumerations\UnitOfSaleType;
 use xyz\oihana\schema\products\Product as OihanaProduct;
 use xyz\oihana\schema\traits\HasColor;
+use xyz\oihana\schema\traits\HasPhysicalMeasures;
 
 /**
  * A single line of a {@see BusinessDocument} : the item sold, its quantity
@@ -38,7 +39,8 @@ use xyz\oihana\schema\traits\HasColor;
 class BusinessDocumentLine extends StructuredValue
 {
     use BusinessDocumentLineTrait ,
-        HasColor                  ;
+        HasColor                  ,
+        HasPhysicalMeasures       ;
 
     /**
      * The @context of the json-ld representation of the thing.

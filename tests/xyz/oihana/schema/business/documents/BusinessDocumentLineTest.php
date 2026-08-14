@@ -50,6 +50,8 @@ class BusinessDocumentLineTest extends TestCase
         $this->assertSame( 'technicalNote'      , BusinessDocumentLine::TECHNICAL_NOTE      );
         $this->assertSame( 'total'              , BusinessDocumentLine::TOTAL               );
         $this->assertSame( 'unit'               , BusinessDocumentLine::UNIT                );
+        $this->assertSame( 'volume'             , BusinessDocumentLine::VOLUME              );
+        $this->assertSame( 'weight'             , BusinessDocumentLine::WEIGHT              );
 
         $this->assertSame( Oihana::ADJUSTMENTS , BusinessDocumentLine::ADJUSTMENTS );
     }
@@ -73,6 +75,8 @@ class BusinessDocumentLineTest extends TestCase
         $this->assertNull( $line->technicalNote      ?? null );
         $this->assertNull( $line->total              ?? null );
         $this->assertNull( $line->unit               ?? null );
+        $this->assertNull( $line->volume             ?? null );
+        $this->assertNull( $line->weight             ?? null );
     }
 
     /**
@@ -395,5 +399,90 @@ class BusinessDocumentLineTest extends TestCase
         $this->assertSame( 'CompoundPriceSpecification' , $json[ 'price' ][ '@type' ] ) ;
         $this->assertEquals( 20.0 , $json[ 'price' ][ 'price'         ] ) ;
         $this->assertSame( 'EUR'  , $json[ 'price' ][ 'priceCurrency' ] ) ;
+    }
+
+    // ---- HasPhysicalMeasures
+
+    /**
+     * What a line weighs and what it occupies : the quantity by what the unit
+     * it is counted in weighs and occupies. A plain number carries both when
+     * the unit is implicit, and the sum over the lines is the document's own.
+     *
+     * @throws ReflectionException
+     */
+    public function testTheLineCarriesItsWeightAndItsVolumeAsPlainNumbers(): void
+    {
+        $lines =
+        [
+            new BusinessDocumentLine
+            ([
+                BusinessDocumentLine::QUANTITY => 84 ,
+                BusinessDocumentLine::WEIGHT   => 537.6 ,  // 84 × 6.4
+                BusinessDocumentLine::VOLUME   => 1.176 ,  // 84 × 0.014
+            ]) ,
+            new BusinessDocumentLine
+            ([
+                BusinessDocumentLine::QUANTITY => 1467 ,
+                BusinessDocumentLine::WEIGHT   => 1193.775 ,
+                BusinessDocumentLine::VOLUME   => 2.236 ,
+            ]) ,
+        ];
+
+        $this->assertSame( 537.6    , $lines[ 0 ]->weight ) ;
+        $this->assertSame( 1.176    , $lines[ 0 ]->volume ) ;
+        $this->assertSame( 1193.775 , $lines[ 1 ]->weight ) ;
+        $this->assertSame( 2.236    , $lines[ 1 ]->volume ) ;
+
+        $this->assertSame( 1731.375 , array_sum( array_map( fn( $line ) => $line->weight , $lines ) ) ) ;
+        $this->assertSame( 3.412    , array_sum( array_map( fn( $line ) => $line->volume , $lines ) ) ) ;
+    }
+
+    /**
+     * A measure that states its unit comes back typed, so a consumer reads the
+     * unit instead of assuming one.
+     *
+     * 🔑 The two properties are declared by {@see \xyz\oihana\schema\traits\HasPhysicalMeasures},
+     * so this is also what proves the `#[HydrateAs]` carried by a **trait**
+     * property is honored by `Reflection::hydrate()` — the whole point of
+     * declaring the pair once rather than once per line class.
+     *
+     * @throws ReflectionException
+     */
+    public function testReflectionHydratesMeasuresThatStateTheirUnit(): void
+    {
+        $line = new Reflection()->hydrate
+        (
+            [
+                BusinessDocumentLine::WEIGHT => [ 'value' => 537.6 , 'unitCode' => 'KGM' ] ,
+                BusinessDocumentLine::VOLUME => [ 'value' => 1.176 , 'unitCode' => 'MTQ' ] ,
+            ],
+            BusinessDocumentLine::class
+        );
+
+        $this->assertInstanceOf( QuantitativeValue::class , $line->weight ) ;
+        $this->assertSame( 537.6 , $line->weight->value    ) ;
+        $this->assertSame( 'KGM' , $line->weight->unitCode ) ;
+
+        $this->assertInstanceOf( QuantitativeValue::class , $line->volume ) ;
+        $this->assertSame( 1.176 , $line->volume->value    ) ;
+        $this->assertSame( 'MTQ' , $line->volume->unitCode ) ;
+    }
+
+    /**
+     * The two are independent : a line stating only one of them leaves the
+     * other absent, rather than reading as a zero.
+     *
+     * @throws ReflectionException
+     */
+    public function testAMeasureLeftOutStaysAbsent(): void
+    {
+        $line = new Reflection()->hydrate
+        (
+            [ BusinessDocumentLine::WEIGHT => 537.6 ],
+            BusinessDocumentLine::class
+        );
+
+        $this->assertSame( 537.6 , $line->weight ) ;
+        $this->assertNull( $line->volume ?? null ) ;
     }
 }

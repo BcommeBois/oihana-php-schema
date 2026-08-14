@@ -26,4 +26,6 @@ trait BusinessDocumentLineTrait
     const string TECHNICAL_NOTE      = 'technicalNote' ;
     const string TOTAL               = 'total' ;
     const string UNIT                = 'unit' ;
+    const string VOLUME              = 'volume' ;
+    const string WEIGHT              = 'weight' ;
 }

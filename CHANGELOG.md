@@ -8,6 +8,27 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Changed
 
+- `xyz\oihana\schema\business\documents\BusinessDocumentLine` says **what it
+  weighs and what it occupies** : `weight` and `volume`, the quantity by what
+  the unit the line is counted in weighs and occupies. Summed over the lines,
+  they give the values the document already carried on its header.
+
+  The pair is declared once, in a new `xyz\oihana\schema\traits\HasPhysicalMeasures`,
+  rather than copied into each line class that needs it : the same union, the
+  same `#[HydrateAs]` and the same reading — a plain number when the unit is
+  implicit, a `QuantitativeValue` when it is stated — written three times would
+  have drifted, and a weight that reads one way on one line and another way on
+  the next is the thing the trait exists to prevent. Deliberately neutral about
+  gross and net : should the distinction ever be needed it belongs to the
+  `additionalType` of a `QuantitativeValue`, never to a second property.
+
+  `BusinessDocument` **keeps its own declarations** and does not compose the
+  trait. Its two docblocks carry a header-level argument — why neither value
+  belongs to `totals`, the *monetary* summary whose every property is a
+  `MonetaryAmount` — that a line cannot make, and a trait absorbing them would
+  either impose that discussion on the lines or lose it. The trait cites them
+  instead, so the argument still exists exactly once.
+
 - The two `LocalBusiness` classes **keep their name**, and each now says why in
   its docblock.
 
