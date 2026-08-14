@@ -51,6 +51,11 @@ class Event extends Thing
     public Person|Organization|string|null $contributor ;
 
     /**
+     * The date and time of the event or item (in ISO 8601 date format).
+     */
+    public null|string|int $date ;
+
+    /**
      * A director of e.g. TV, radio, movie, video gaming etc. content, or of an event.
      * Directors can be associated with individual items or with a series, episode, clip.
      */
@@ -101,6 +106,24 @@ class Event extends Thing
      * @var array|Organization|Person|null
      */
     public null|array|Organization|Person $funder ;
+
+    /**
+     * A Grant that directly or indirectly provide funding or sponsorship for this item.
+     * @var string|array|Grant|null
+     */
+    public null|string|array|Grant $funding ;
+
+    /**
+     * An offer to participate in the event, for example, Call for Proposals, Call for Speakers, or Call for Performers.
+     * @var array|Offer|null
+     */
+    public null|array|Offer $hasParticipationOffer ;
+
+    /**
+     * An offer to sponsor the event, for example, Sponsorship Prospectus, Sponsorship Opportunities, or Sponsor Packages.
+     * @var array|Offer|null
+     */
+    public null|array|Offer $hasSponsorshipOffer ;
 
     /**
      * The language of the content or performance or used in an action.
@@ -158,14 +181,30 @@ class Event extends Thing
     public array|null|Person|Organization $organizer ;
 
     /**
+     * A performer at the event—for example, a presenter, musician, musical group or actor.
+     */
+    public array|null|Person|Organization $performer ;
+
+    /**
      * Photographs of this place (legacy spelling; see singular form, photo).
      */
     public ?array $photos ;
 
     /**
+     * Used in conjunction with eventStatus for rescheduled or cancelled events.
+     * This property contains the previously scheduled start date.
+     */
+    public null|string|int $previousStartDate ;
+
+    /**
+     * The CreativeWork that captured all or part of this Event.
+     */
+    public null|array|CreativeWork $recordedIn ;
+
+    /**
      * The number of attendee places for an event that remain unallocated.
      */
-    public ?int $remainingAttendeeCapacity ;
+    public null|int $remainingAttendeeCapacity ;
 
     /**
      * The remarks about the resource.
@@ -179,6 +218,11 @@ class Event extends Thing
     public null|array|Review $review ;
 
     /**
+     * A person or organization that supports a thing through a pledge, promise, or financial contribution.
+     */
+    public null|array|Organization|Person $sponsor ;
+
+    /**
      * The start date and time of the event or item (in ISO 8601 date format).
      */
     public null|string|int $startDate ;
@@ -187,6 +231,21 @@ class Event extends Thing
      * An Event that is part of this event. For example, a conference event includes many presentations, each of which is a subEvent of the conference. Supersedes subEvents.
      */
     public Event|array|null $subEvent ;
+
+    /**
+     * An event that this event is a part of. For example, a collection of individual music performances might each have a music festival as their superEvent. Inverse property : subEvent.
+     */
+    public Event|array|null $superEvent ;
+
+    /**
+     * Organization or person who adapts a creative work to different languages, regional differences and technical requirements of a target market, or that translates during some event.
+     */
+    public null|array|Organization|Person $translator ;
+
+    /**
+     * The typical expected age range, e.g. '7-9', '11-'.
+     */
+    public string|object|null $typicalAgeRange ;
 
     /**
      * A work featured in some event, e.g. exhibited in an ExhibitionEvent.

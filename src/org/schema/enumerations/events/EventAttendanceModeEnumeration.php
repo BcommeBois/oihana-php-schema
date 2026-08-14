@@ -10,5 +10,18 @@ use org\schema\Enumeration;
  */
 class EventAttendanceModeEnumeration extends Enumeration
 {
+    /**
+     * An event that is conducted as a combination of both offline and online modes.
+     */
+    public const string MIXED_EVENT_ATTENDANCE_MODE = 'https://schema.org/MixedEventAttendanceMode' ;
 
+    /**
+     * An event that is primarily conducted offline.
+     */
+    public const string OFFLINE_EVENT_ATTENDANCE_MODE = 'https://schema.org/OfflineEventAttendanceMode' ;
+
+    /**
+     * An event that is primarily conducted online.
+     */
+    public const string ONLINE_EVENT_ATTENDANCE_MODE = 'https://schema.org/OnlineEventAttendanceMode' ;
 }

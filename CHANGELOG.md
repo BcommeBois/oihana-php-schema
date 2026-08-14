@@ -139,6 +139,22 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- `org\schema\Event` gains the eleven properties it was missing —
+  `$date`, `$funding`, `$hasParticipationOffer`, `$hasSponsorshipOffer`,
+  `$performer`, `$previousStartDate`, `$recordedIn`, `$sponsor`, `$superEvent`,
+  `$translator`, `$typicalAgeRange` — and
+  `org\schema\enumerations\events\EventAttendanceModeEnumeration` gains its three
+  members (`MIXED_`, `OFFLINE_`, `ONLINE_EVENT_ATTENDANCE_MODE`).
+
+  An event could say it was rescheduled but not from when, could say who
+  organised it but not who performed, and could name an attendance mode without
+  a single value to name it with. `$superEvent` completes the pair `$subEvent`
+  had been half of since the class existed.
+
+  The `Event` property constants follow, along with a `DeliveryEvent` trait
+  filling `Schema::ACCESS_CODE` / `AVAILABLE_FROM` / `AVAILABLE_THROUGH`, which
+  the events wiki page had been documenting without them existing.
+
 - Adds `xyz\oihana\schema\helpers\hydrate\hydrateFeeSpecification()`, which types
   a `xyz\oihana\schema\products\FeeSpecification` down to the rate it derives
   from.

@@ -29,6 +29,7 @@ trait Properties
         DefinedTerm ,
         DefinedTermSet ,
         DeliveryChargeSpecification ,
+        DeliveryEvent ,
         Demand ,
         DublinCore ,
         EndorsementRating ,
