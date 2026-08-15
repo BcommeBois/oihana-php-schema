@@ -31,6 +31,7 @@ trait BusinessDocumentTrait
     public const string STATUS          = 'status' ;
     public const string TAXES           = 'taxes' ;
     public const string TOTALS          = 'totals' ;
+    public const string TOTALS_ACCURACY = 'totalsAccuracy' ;
     public const string VOLUME          = 'volume' ;
     public const string WEIGHT          = 'weight' ;
 }

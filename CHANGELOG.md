@@ -284,6 +284,41 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- `BusinessDocument` gains `$totalsAccuracy`, and the library the
+  `xyz\oihana\schema\enumerations\DocumentTotalsAccuracy` enumeration it reads
+  from (`EXACT` / `MINIMUM`) : **how the amounts of a document are to be read** —
+  as they stand, or as a floor the final ones will exceed.
+
+  A document is not always able to price everything it carries : a line no price
+  list covers, a regulatory fee no rate covers, a carriage whose term names
+  neither a rate nor a threshold. Each of them is owed and none of them can be
+  quantified, so the summary adds nothing for them — a zero would claim that
+  nothing is due — and what comes out is true but short. Nothing in the amounts
+  themselves said so, and a reader holding the summary alone (a list, a total
+  bar, a printed recap) had no way to find out without loading every line.
+
+  🔑 **It states the consequence, not the cause.** Every reason a document has to
+  be short falls under the same word, and the reasons stay where they happened :
+  on the adjustment carrying no amount, on the line carrying no subtotal.
+
+  🔑 **The accuracy answers to the same authority as the amounts.** A mirrored
+  document states what its source billed, and its source priced everything it
+  charged — so its reading is `EXACT`, stated rather than recomputed from a
+  catalogue that is not the one the amounts came from.
+
+  ⚠️ **An absent value states nothing, and must not be read as `EXACT`.** Unlike
+  `$authority`, its immediate neighbour, whose absence carries the safe meaning,
+  silence here is only silence : a document written before this property existed
+  may well be a floor. A store adding the property is expected to pass over what
+  it already holds.
+
+  ⚠️ **The floor is stated beside the amounts rather than inside them**, though
+  `MonetaryAmount` offers `minValue` and though that is exactly how
+  `BusinessDocument::$weight` states its own. A mass is read ; an amount is also
+  filtered, sorted and bounded on — and a store doing so on `value` would have
+  dropped, silently, the very documents whose amounts stopped being final. The
+  amounts stay whole ; the new property qualifies them.
+
 - Adds the **reservation family** : `org\schema\Reservation`, its ten sub-types
   under `org\schema\reservations` (`BoatReservation`, `BusReservation`,
   `EventReservation`, `FlightReservation`, `FoodEstablishmentReservation`,

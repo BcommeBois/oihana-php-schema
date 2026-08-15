@@ -25,6 +25,7 @@ use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\enumerations\BusinessDocumentAuthority;
 use xyz\oihana\schema\enumerations\BusinessDocumentDirection;
 use xyz\oihana\schema\enumerations\BusinessDocumentStatus;
+use xyz\oihana\schema\enumerations\DocumentTotalsAccuracy;
 
 class BusinessDocumentTest extends TestCase
 {
@@ -60,6 +61,7 @@ class BusinessDocumentTest extends TestCase
         $this->assertSame( 'status'         , BusinessDocument::STATUS          );
         $this->assertSame( 'taxes'          , BusinessDocument::TAXES           );
         $this->assertSame( 'totals'         , BusinessDocument::TOTALS          );
+        $this->assertSame( 'totalsAccuracy' , BusinessDocument::TOTALS_ACCURACY );
         $this->assertSame( 'volume'         , BusinessDocument::VOLUME          );
         $this->assertSame( 'weight'         , BusinessDocument::WEIGHT          );
 
@@ -101,6 +103,7 @@ class BusinessDocumentTest extends TestCase
         $this->assertNull( $document->status         ?? null );
         $this->assertNull( $document->taxes          ?? null );
         $this->assertNull( $document->totals         ?? null );
+        $this->assertNull( $document->totalsAccuracy ?? null );
         $this->assertNull( $document->volume         ?? null );
         $this->assertNull( $document->weight         ?? null );
     }
@@ -159,6 +162,43 @@ class BusinessDocumentTest extends TestCase
         $this->assertSame( BusinessDocumentAuthority::MIRRORED , $document->authority ) ;
         $this->assertSame( BusinessDocumentDirection::SALE     , $document->direction ) ;
         $this->assertSame( BusinessDocumentStatus::ACCEPTED    , $document->status    ) ;
+    }
+
+    /**
+     * A document says nothing about the accuracy of its totals until it is told
+     * to — and that silence is only silence : it does not read as `EXACT`.
+     * @throws ReflectionException
+     */
+    public function testTotalsAccuracyIsAbsentUntilStated(): void
+    {
+        $document = new BusinessDocument
+        ([
+            BusinessDocument::TOTALS => [ 'total' => [ 'value' => 1240 , 'currency' => 'EUR' ] ] ,
+        ]);
+
+        $this->assertNull( $document->totalsAccuracy ) ;
+    }
+
+    /**
+     * A document carrying something nobody could price says its amounts are a
+     * floor — while the amounts themselves stay whole, which is the whole point
+     * of stating it beside them rather than inside them.
+     * @throws ReflectionException
+     */
+    public function testTotalsAccuracyHydratesMinimum(): void
+    {
+        $document = new Reflection()->hydrate
+        (
+            [
+                BusinessDocument::TOTALS          => [ 'total' => [ 'value' => 1240 , 'currency' => 'EUR' ] ] ,
+                BusinessDocument::TOTALS_ACCURACY => DocumentTotalsAccuracy::MINIMUM ,
+            ],
+            BusinessDocument::class
+        );
+
+        $this->assertSame( DocumentTotalsAccuracy::MINIMUM , $document->totalsAccuracy ) ;
+        $this->assertInstanceOf( DocumentTotals::class , $document->totals ) ;
+        $this->assertSame( 1240 , $document->totals->total->value ) ;
     }
 
     /**

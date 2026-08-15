@@ -20,6 +20,7 @@ use xyz\oihana\schema\constants\traits\business\documents\BusinessDocumentTrait;
 use xyz\oihana\schema\enumerations\BusinessDocumentAuthority;
 use xyz\oihana\schema\enumerations\BusinessDocumentDirection;
 use xyz\oihana\schema\enumerations\BusinessDocumentStatus;
+use xyz\oihana\schema\enumerations\DocumentTotalsAccuracy;
 
 /**
  * The common parent of the quote → purchase order → invoice cycle (and its
@@ -231,6 +232,45 @@ class BusinessDocument extends Intangible
      */
     #[HydrateAs(DocumentTotals::class)]
     public null|array|DocumentTotals $totals ;
+
+    /**
+     * How {@see BusinessDocument::$totals} is to be read — as the exact amounts,
+     * or as a floor the final ones will exceed.
+     *
+     * A document is not always able to price everything it carries : a line no
+     * price list covers, a regulatory fee no rate covers, a carriage whose term
+     * names no rate. Each of them is owed and none of them can be quantified, so
+     * the amounts add nothing for them — a zero would claim that nothing is due
+     * — and what comes out is true but short. `MINIMUM` says so ; `EXACT` says
+     * everything could be priced.
+     *
+     * 🔑 **The reasons stay where they happened** — on the adjustment carrying no
+     * amount, on the line carrying no subtotal. This property carries only the
+     * consequence, which is what a reader holding the summary alone can act on :
+     * a list, a total bar, a printed recap, none of which has the lines at hand.
+     *
+     * 🔑 **The accuracy answers to the same authority as the amounts**
+     * ({@see BusinessDocument::$authority}) : a mirrored document states what its
+     * source billed, and its source priced everything it charged, so its reading
+     * is `EXACT` — stated, never recomputed from a catalogue that is not the one
+     * the amounts came from.
+     *
+     * ⚠️ **An absent value states nothing, and must not be read as `EXACT`.**
+     * Unlike `authority`, its immediate neighbour, whose absence carries the safe
+     * meaning, silence here is only silence.
+     *
+     * ⚠️ **A floor is stated here rather than inside the amounts**, though
+     * {@see \org\schema\MonetaryAmount} offers `minValue` and though that is
+     * exactly how {@see BusinessDocument::$weight} states its own floor. A mass
+     * is read ; an amount is also filtered, sorted and bounded on — and a store
+     * doing so on `value` would have dropped, silently, the very documents whose
+     * amounts stopped being final. The amounts stay whole ; this property
+     * qualifies them.
+     *
+     * @var null|string|DocumentTotalsAccuracy
+     * @since 1.4.0
+     */
+    public null|string|DocumentTotalsAccuracy $totalsAccuracy = null ;
 
     /**
      * The space the goods the document covers take up.
