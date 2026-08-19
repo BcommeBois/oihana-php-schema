@@ -101,6 +101,8 @@ A **family** is a record whose subject is named: `CustomerStatistics` for a cust
 | `ObservationSeries`  | `org\schema\Observation` | One measure, read over the whole period and step by step.                                   |
 | `CustomerStatistics` | `Statistics` | What a **customer** traded over one year, plus the salesperson and point of sale of the time.           |
 | `ProviderStatistics` | `Statistics` | What was bought from a **supplier** over one year.                                                      |
+| `CompanyStatistics`  | `Statistics` | What a **company** traded over one year — the branch manager's and the director's view.                 |
+| `ProductStatistics`  | `Statistics` | What an **article** traded over one year, on the purchase side as on the sale side.                     |
 | `SellerStatistics`   | `Statistics` | What a **salesperson** traded over one year, possibly customer by customer.                             |
 | `SalesObjectives`    | `Statistics` | What a **salesperson** is aiming at over one year — the same measures, read as targets.                 |
 
@@ -152,6 +154,16 @@ A **family** is a record whose subject is named: `CustomerStatistics` for a cust
 | `assignedPOS`    | `int\|string\|array\|Warehouse\|null`     | The point of sale that served the customer.                        |
 
 `ProviderStatistics` names its subject a `Provider` and adds no dimension: a supplier is not attached to a salesperson or to a point of sale the way a customer is.
+
+### `CompanyStatistics` and `ProductStatistics` properties
+
+Neither adds a property: they name their subject, and that is all. `CompanyStatistics` reads it as a `Company`, `ProductStatistics` as a `Product`.
+
+🔑 **`CompanyStatistics` is the one family whose subject is the perimeter.** Elsewhere `assignedCompany` says which company a counterparty's figures were measured for; here that company **is** the subject, and the property stays unset rather than repeating it. A reader looking for the perimeter of any record therefore reads `about` first, and `assignedCompany` only when the two differ.
+
+⚠️ **A group total and the sum of its members are not interchangeable.** A record about the whole group is a reading in its own right, published as such; adding it to its members' records counts every figure twice. The subject being typed at `Company` rather than at `Subsidiary`, the same property names a member of the group and the group itself — the stored `additionalType` is what tells a reader which is which.
+
+🔑 **`ProductStatistics` is the one family where `quantity` is worth its total.** Elsewhere a quantity spanning several articles adds square metres to cubic metres to pieces; here every figure counts the same article in the same unit, and the run and its total both mean something. It carries no dimension of its own: what an article belongs to — its family, its category — lives on the article, and stays there.
 
 ### `SellerStatistics` and `SalesObjectives` properties
 
@@ -234,4 +246,4 @@ Property keys are exposed by the [`StatisticsRecordTrait`](../../../src/xyz/oiha
 
 - [Schema.org vocabulary](../schema-org/README.md) — `Observation`, `QuantitativeValue` and `StatisticalVariable`, the ground a measure stands on.
 - [Business documents](business-documents.md) — the documents these figures come from, and the `BusinessDocumentDirection` enumeration they share.
-- [Business entities](organizations.md) — `Customer` and `Provider`, the subjects of these two families.
+- [Business entities](organizations.md) — `Customer`, `Provider` and `Company`, the subjects of three of these families.

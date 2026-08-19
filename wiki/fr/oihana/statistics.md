@@ -101,6 +101,8 @@ Une **famille** est une fiche dont le sujet est nommé : `CustomerStatistics` po
 | `ObservationSeries`  | `org\schema\Observation` | Une mesure, lue sur toute la période et pas à pas.                                            |
 | `CustomerStatistics` | `Statistics`             | Ce qu'un **client** a échangé sur une année, plus le commercial et le point de vente d'alors. |
 | `ProviderStatistics` | `Statistics`             | Ce qui a été acheté à un **fournisseur** sur une année.                                       |
+| `CompanyStatistics`  | `Statistics`             | Ce qu'une **société** a échangé sur une année — la vue chef d'agence et direction.            |
+| `ProductStatistics`  | `Statistics`             | Ce qu'un **article** a échangé sur une année, à l'achat comme à la vente.                     |
 | `SellerStatistics`   | `Statistics`             | Ce qu'un **commercial** a échangé sur une année, éventuellement client par client.            |
 | `SalesObjectives`    | `Statistics`             | Ce qu'un **commercial** vise sur une année — les mêmes mesures, lues comme des cibles.        |
 
@@ -152,6 +154,16 @@ Une **famille** est une fiche dont le sujet est nommé : `CustomerStatistics` po
 | `assignedPOS`    | `int\|string\|array\|Warehouse\|null` | Le point de vente qui servait le client.              |
 
 `ProviderStatistics` nomme son sujet un `Provider` et n'ajoute aucune dimension : un fournisseur n'est pas rattaché à un commercial ni à un point de vente comme l'est un client.
+
+### Propriétés de `CompanyStatistics` et de `ProductStatistics`
+
+Ni l'une ni l'autre n'ajoute de propriété : elles nomment leur sujet, et c'est tout. `CompanyStatistics` le lit comme une `Company`, `ProductStatistics` comme un `Product`.
+
+🔑 **`CompanyStatistics` est la seule famille dont le sujet est le périmètre.** Ailleurs, `assignedCompany` dit pour quelle société les chiffres d'un tiers ont été mesurés ; ici cette société **est** le sujet, et la propriété reste absente plutôt que de le répéter. Un lecteur qui cherche le périmètre d'une fiche lit donc `about` d'abord, et `assignedCompany` seulement quand les deux diffèrent.
+
+⚠️ **Le total d'un groupe et la somme de ses membres ne sont pas interchangeables.** Une fiche portant sur le groupe entier est une lecture à part entière, publiée comme telle ; l'ajouter aux fiches de ses membres compte chaque chiffre deux fois. Le sujet étant typé `Company` et non `Subsidiary`, la même propriété nomme un membre du groupe et le groupe lui-même — c'est l'`additionalType` stocké qui dit lequel.
+
+🔑 **`ProductStatistics` est la seule famille où `quantity` vaut son total.** Ailleurs, une quantité qui traverse plusieurs articles additionne des mètres carrés à des mètres cubes et à des pièces ; ici chaque valeur compte le même article dans la même unité, et la série comme son total veulent dire quelque chose. Elle ne porte aucune dimension propre : ce à quoi un article appartient — sa famille, sa catégorie — vit sur l'article et y reste.
 
 ### Propriétés de `SellerStatistics` et de `SalesObjectives`
 
@@ -234,4 +246,4 @@ Les clés de propriétés sont exposées par les traits [`StatisticsRecordTrait`
 
 - [Vocabulaire Schema.org](../schema-org/README.md) — `Observation`, `QuantitativeValue` et `StatisticalVariable`, le socle sur lequel une mesure repose.
 - [Documents commerciaux](business-documents.md) — les documents dont ces chiffres sont issus, et l'énumération `BusinessDocumentDirection` qu'ils partagent.
-- [Entités commerciales](organizations.md) — `Customer` et `Provider`, les sujets de ces deux familles.
+- [Entités commerciales](organizations.md) — `Customer`, `Provider` et `Company`, les sujets de trois de ces familles.

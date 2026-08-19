@@ -41,6 +41,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   its catalogue, a property table for each, and the note that a target is not an
   observation even though it reads like one.
 
+### Fixed
+
+- The **statistics guide** now covers every class of the namespace. `CompanyStatistics`
+  and `ProductStatistics` were added to the library after the guide was written,
+  and the catalogue had gone on listing four classes out of six — a reader looking
+  for either one found nothing and could reasonably conclude it did not exist.
+
 ## [1.4.0] - 2026-08-19
 
 ### Changed
