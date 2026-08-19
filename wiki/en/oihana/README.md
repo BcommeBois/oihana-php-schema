@@ -10,7 +10,7 @@ The `xyz\oihana\schema` namespace is the library's **house layer**: the domain t
 
 | Guide | Namespace | Coverage |
 |---|---|---|
-| [Appointments](appointments.md) | `…\appointments` | A meeting arranged with a customer and what gets written about it: `Appointment` (an `Event`), `VisitReport`, `FollowUp`, the `AppointmentStatus` enumeration. |
+| [Appointments](appointments.md) | `…\appointments` | A meeting arranged with a customer and what gets written about it: `CustomerAppointment` (an `Event`), `VisitReport`, `FollowUp`, the `AppointmentStatus` enumeration. |
 | [Authentication & RBAC](auth.md) | `…\auth` | OAuth2/OIDC, sessions, keyfiles, users, roles, permissions, Casbin-compatible policies. |
 | [Business](business.md) | `…\business` | `BusinessIdentity` (typed account ↔ entity link) and `UserProfile` (provisioning template). |
 | [Business documents](business-documents.md) | `…\business\documents` | The quote → purchase order → invoice cycle (and its neighbors): `BusinessDocument`, `Quote`, `PurchaseOrder`, `Invoice`, `CreditNote`, `DebitNote`, `DeliveryNote`, `GoodsReceiptConfirmation`, `Receipt`, `RemittanceAdvice`, `Statement`/`StatementEntry`, the `BusinessDocumentExporter`/`JsonLdExporter` export layer, plus the cross-cutting value objects `TaxDetail`, `Adjustment`, `EcoFeeRule`/`AppliedEcoFee`, `DocumentTotals`, `BusinessDocumentLine`, `PaymentSchedule`/`PaymentInstallment`/`PaymentReminder`, `DeliveryLine`/`ProofOfDelivery`, `GoodsReceiptLine`, `AgingSummary`. |

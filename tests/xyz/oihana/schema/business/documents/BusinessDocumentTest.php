@@ -470,9 +470,9 @@ class BusinessDocumentTest extends TestCase
                 Oihana::CUSTOMER =>
                 [
                     Oihana::AT_TYPE         => Customer::getSchemaType() ,
-                    Oihana::ID              => '741278' ,
-                    Oihana::NAME            => 'Charpentes du Sud' ,
-                    Oihana::ASSIGNED_SELLER => 'ALPER' ,
+                    Oihana::ID              => '100200' ,
+                    Oihana::NAME            => 'Acme Corporation' ,
+                    Oihana::ASSIGNED_SELLER => 'JDOE' ,
                     Oihana::CREDIT_STATUS   => 'OK' ,
                 ],
             ],
@@ -480,8 +480,8 @@ class BusinessDocumentTest extends TestCase
         );
 
         $this->assertInstanceOf( Customer::class , $document->customer );
-        $this->assertSame( '741278' , $document->customer->id             );
-        $this->assertSame( 'ALPER'  , $document->customer->assignedSeller );
+        $this->assertSame( '100200' , $document->customer->id             );
+        $this->assertSame( 'JDOE'  , $document->customer->assignedSeller );
         $this->assertSame( 'OK'     , $document->customer->creditStatus   );
     }
 
@@ -502,12 +502,12 @@ class BusinessDocumentTest extends TestCase
         $document = new Reflection()->hydrate
         (
             [
-                Oihana::ASSIGNED_SELLER => [ Oihana::ID => 'MADEL' , Oihana::POSITION => 2 ] ,
-                Oihana::AUTHOR          => [ Oihana::AT_TYPE => Seller::getSchemaType()     , Oihana::ID => 'ALPER' ] ,
-                Oihana::CONTACT         => [ Oihana::AT_TYPE => CustomerEmployee::getSchemaType() , Oihana::NAME => 'Claire Martin' , Oihana::POSITION => 1 ] ,
-                Oihana::POINT_OF_SALE   => [ Oihana::AT_TYPE => Warehouse::getSchemaType()  , Oihana::NAME => 'Mérignac' , Oihana::OWNED_BY => '500' ] ,
-                Oihana::PUBLISHER       => [ Oihana::AT_TYPE => Subsidiary::getSchemaType() , Oihana::NAME => 'Bouney' , Oihana::VAT => '20' ] ,
-                Oihana::SELLER          => [ Oihana::AT_TYPE => Subsidiary::getSchemaType() , Oihana::NAME => 'Bouney' , Oihana::WEBSITE => 'https://example.org' ] ,
+                Oihana::ASSIGNED_SELLER => [ Oihana::ID => 'RROE' , Oihana::POSITION => 2 ] ,
+                Oihana::AUTHOR          => [ Oihana::AT_TYPE => Seller::getSchemaType()     , Oihana::ID => 'JDOE' ] ,
+                Oihana::CONTACT         => [ Oihana::AT_TYPE => CustomerEmployee::getSchemaType() , Oihana::NAME => 'Alice Smith' , Oihana::POSITION => 1 ] ,
+                Oihana::POINT_OF_SALE   => [ Oihana::AT_TYPE => Warehouse::getSchemaType()  , Oihana::NAME => 'Head office' , Oihana::OWNED_BY => '900' ] ,
+                Oihana::PUBLISHER       => [ Oihana::AT_TYPE => Subsidiary::getSchemaType() , Oihana::NAME => 'Acme Holdings' , Oihana::VAT => '20' ] ,
+                Oihana::SELLER          => [ Oihana::AT_TYPE => Subsidiary::getSchemaType() , Oihana::NAME => 'Acme Holdings' , Oihana::WEBSITE => 'https://example.org' ] ,
             ],
             BusinessDocument::class
         );
@@ -521,7 +521,7 @@ class BusinessDocumentTest extends TestCase
 
         $this->assertSame( 2                     , $document->assignedSeller->position );
         $this->assertSame( 1                     , $document->contact->position        );
-        $this->assertSame( '500'                 , $document->pointOfSale->ownedBy     );
+        $this->assertSame( '900'                 , $document->pointOfSale->ownedBy     );
         $this->assertSame( '20'                  , $document->publisher->vat           );
         $this->assertSame( 'https://example.org' , $document->seller->website          );
     }
@@ -534,9 +534,9 @@ class BusinessDocumentTest extends TestCase
      */
     public function testABarePartyReferenceIsLeftAsRead(): void
     {
-        $document = new Reflection()->hydrate( [ Oihana::ASSIGNED_SELLER => 'MADEL' ] , BusinessDocument::class );
+        $document = new Reflection()->hydrate( [ Oihana::ASSIGNED_SELLER => 'RROE' ] , BusinessDocument::class );
 
-        $this->assertSame( 'MADEL' , $document->assignedSeller );
+        $this->assertSame( 'RROE' , $document->assignedSeller );
     }
 
 }

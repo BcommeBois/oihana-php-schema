@@ -10,7 +10,7 @@ Le namespace `xyz\oihana\schema` est la **couche maison** de la bibliothèque : 
 
 | Guide | Namespace | Couverture |
 |---|---|---|
-| [Rendez-vous](appointments.md) | `…\appointments` | Une rencontre convenue avec un client et ce qu'on en écrit : `Appointment` (un `Event`), `VisitReport`, `FollowUp`, l'énumération `AppointmentStatus`. |
+| [Rendez-vous](appointments.md) | `…\appointments` | Une rencontre convenue avec un client et ce qu'on en écrit : `CustomerAppointment` (un `Event`), `VisitReport`, `FollowUp`, l'énumération `AppointmentStatus`. |
 | [Authentification & RBAC](auth.md) | `…\auth` | OAuth2/OIDC, sessions, keyfiles, utilisateurs, rôles, permissions, politiques compatibles Casbin. |
 | [Métier](business.md) | `…\business` | `BusinessIdentity` (lien typé compte ↔ entité) et `UserProfile` (gabarit de provisionnement). |
 | [Documents commerciaux](business-documents.md) | `…\business\documents` | Le cycle devis → bon de commande → facture (et ses à-côtés) : `BusinessDocument`, `Quote`, `PurchaseOrder`, `Invoice`, `CreditNote`, `DebitNote`, `DeliveryNote`, `GoodsReceiptConfirmation`, `Receipt`, `RemittanceAdvice`, `Statement`/`StatementEntry`, l'export `BusinessDocumentExporter`/`JsonLdExporter`, plus les objets de valeur transverses `TaxDetail`, `Adjustment`, `EcoFeeRule`/`AppliedEcoFee`, `DocumentTotals`, `BusinessDocumentLine`, `PaymentSchedule`/`PaymentInstallment`/`PaymentReminder`, `DeliveryLine`/`ProofOfDelivery`, `GoodsReceiptLine`, `AgingSummary`. |

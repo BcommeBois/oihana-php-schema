@@ -79,7 +79,7 @@ use xyz\oihana\schema\people\Seller;
 
 $seller = new Seller
 ([
-    'name'           => 'A. Perez' ,
+    'name'           => 'Jane Doe' ,
     'hoursAvailable' =>
     [
         [ 'dayOfWeek' => [ 'Monday' , 'Tuesday' , 'Thursday' ] , 'opens' => '08:30' , 'closes' => '18:00' ] ,

@@ -55,8 +55,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   every other term.
 
 - The **`xyz\oihana\schema\appointments` namespace** — a meeting arranged with a
-  customer, and what was written after it took place : `Appointment`, `VisitReport`,
-  and the `AppointmentStatus` enumeration.
+  customer, and what was written after it took place : `CustomerAppointment`,
+  `VisitReport`, and the `AppointmentStatus` enumeration.
 
   🔑 **A meeting is an `Event`, which is what every diary already reads.** Its
   place, its hours, the people expected and the one whose diary holds it are
@@ -66,12 +66,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
   🔑 **Two axes of state, and they answer different questions.** `Event::$eventStatus`
   says what became of the *slot* — scheduled, moved, postponed, called off — and
-  publishes no member for « it happened ». `Appointment::$appointmentStatus` says
+  publishes no member for « it happened ». `CustomerAppointment::$appointmentStatus` says
   what became of the *meeting* : planned, done, nobody there, cancelled. A diary
   reads the first, a report reads the second, and one axis could not carry both.
 
   🔑 **What one means to show is wrapped in offers**, one per product :
-  `Appointment::$makesOffer` reuses the name and the meaning `Organization::$makesOffer`
+  `CustomerAppointment::$makesOffer` reuses the name and the meaning `Organization::$makesOffer`
   already carries, so an intention can gain a price, a discount or a quantity the
   day it becomes a figure — without a property having to be invented for it.
 
@@ -106,8 +106,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   of when it may be offered ; saying nothing means no slot can be proposed, which is
   the safe reading rather than the permissive one.
 
-- `AppointmentTrait`, `FollowUpTrait`, `VisitReportTrait` and the `AppointmentsTrait`
+- `CustomerAppointmentTrait`, `FollowUpTrait`, `VisitReportTrait` and the `AppointmentsTrait`
   aggregator carry the property name constants and join `constants\Oihana`.
+
+- **The fixtures of the appointments and business-document tests, and the examples
+  of both guides, are generic.** They named a real cast — salesperson codes, a
+  customer, a depot — and were written half in French. A library's examples belong
+  to no one's data and read in one language ; the cast is now fictional and the
+  prose English, the French guide aside.
 
 - The **appointments guide** (FR canonical + EN mirror) : when to reach for these
   classes, why a meeting is an `Event` rather than an `Action`, the two axes of

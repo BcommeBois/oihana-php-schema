@@ -64,6 +64,6 @@ class SellerTest extends TestCase
      */
     public function testSayingNothingIsNotAnOpening(): void
     {
-        $this->assertNull( new Seller([ Schema::NAME => 'A. Perez' ] )->hoursAvailable ?? null );
+        $this->assertNull( new Seller([ Schema::NAME => 'Jane Doe' ] )->hoursAvailable ?? null );
     }
 }

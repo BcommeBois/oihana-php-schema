@@ -58,6 +58,6 @@ class FollowUp extends ScheduleAction
      * @var null|array|string|Thing
      * @since 1.5.0
      */
-    #[HydrateAs(Appointment::class)]
+    #[HydrateAs(CustomerAppointment::class)]
     public null|Thing|array|string $result ;
 }

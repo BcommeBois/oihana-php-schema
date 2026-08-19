@@ -46,13 +46,13 @@ class VisitReportTest extends TestCase
     {
         $report = new VisitReport
         ([
-            Schema::TEXT     => 'Gamme bien reçue, chiffrage attendu.' ,
+            Schema::TEXT     => 'Well received, a quotation is expected.' ,
             Oihana::OUTCOME  => 'QUOTE' ,
             Oihana::MOOD     => 'GREEN' ,
             Oihana::TOPICS   => [ 'PRICING' , 'DELIVERY' ] ,
         ]);
 
-        $this->assertSame( 'Gamme bien reçue, chiffrage attendu.' , $report->text    );
+        $this->assertSame( 'Well received, a quotation is expected.' , $report->text    );
         $this->assertSame( 'QUOTE'                                , $report->outcome );
         $this->assertSame( 'GREEN'                                , $report->mood    );
         $this->assertSame( [ 'PRICING' , 'DELIVERY' ]             , $report->topics  );
@@ -64,10 +64,10 @@ class VisitReportTest extends TestCase
      */
     public function testTheAuthorIsAPerson(): void
     {
-        $report = new VisitReport([ Schema::AUTHOR => new Seller([ Schema::NAME => 'A. Perez' ] ) ] );
+        $report = new VisitReport([ Schema::AUTHOR => new Seller([ Schema::NAME => 'Jane Doe' ] ) ] );
 
         $this->assertInstanceOf( Seller::class , $report->author       );
-        $this->assertSame( 'A. Perez'          , $report->author->name );
+        $this->assertSame( 'Jane Doe'          , $report->author->name );
     }
 
     /**
@@ -88,9 +88,9 @@ class VisitReportTest extends TestCase
      */
     public function testATextOnlyReportIsValid(): void
     {
-        $report = new VisitReport([ Schema::TEXT => 'Rien à signaler.' ] );
+        $report = new VisitReport([ Schema::TEXT => 'Nothing to report.' ] );
 
-        $this->assertSame( 'Rien à signaler.' , $report->text );
+        $this->assertSame( 'Nothing to report.' , $report->text );
         $this->assertNull( $report->outcome ?? null );
         $this->assertNull( $report->mood    ?? null );
     }
@@ -106,21 +106,21 @@ class VisitReportTest extends TestCase
         $report = new Reflection()->hydrate
         (
             [
-                Schema::ATTENDEE => [ [ Schema::NAME => 'Claire Martin' , Schema::JOB_TITLE => 'ACH' ] ] ,
+                Schema::ATTENDEE => [ [ Schema::NAME => 'Alice Smith' , Schema::JOB_TITLE => 'ACH' ] ] ,
             ],
             VisitReport::class
         );
 
         $this->assertIsArray( $report->attendee );
         $this->assertInstanceOf( CustomerEmployee::class , $report->attendee[ 0 ] );
-        $this->assertSame( 'Claire Martin' , $report->attendee[ 0 ]->name );
+        $this->assertSame( 'Alice Smith' , $report->attendee[ 0 ]->name );
     }
 
     public function testItSerializesWhatItWasGiven(): void
     {
-        $json = new VisitReport([ Oihana::MOOD => 'RED' , Schema::TEXT => 'Litige livraison.' ] )->jsonSerialize() ;
+        $json = new VisitReport([ Oihana::MOOD => 'RED' , Schema::TEXT => 'Delivery dispute.' ] )->jsonSerialize() ;
 
         $this->assertSame( 'RED'               , $json[ Oihana::MOOD ] ?? null );
-        $this->assertSame( 'Litige livraison.' , $json[ Schema::TEXT ] ?? null );
+        $this->assertSame( 'Delivery dispute.' , $json[ Schema::TEXT ] ?? null );
     }
 }

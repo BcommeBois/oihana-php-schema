@@ -15,7 +15,7 @@ use org\schema\PostalAddress;
 use org\schema\VirtualLocation;
 
 use xyz\oihana\schema\constants\Oihana;
-use xyz\oihana\schema\constants\traits\appointments\AppointmentTrait;
+use xyz\oihana\schema\constants\traits\appointments\CustomerAppointmentTrait;
 use xyz\oihana\schema\enumerations\AppointmentStatus;
 use xyz\oihana\schema\organizations\Customer;
 use xyz\oihana\schema\people\CustomerEmployee;
@@ -34,7 +34,7 @@ use xyz\oihana\schema\places\JobSite;
  * 🔑 **Two axes of state, and they are not interchangeable.** The one inherited
  * from schema.org, {@see Event::$eventStatus}, says what became of the *slot* —
  * scheduled, moved, postponed, called off — and publishes no member for « it
- * happened ». {@see Appointment::$appointmentStatus} says what became of the
+ * happened ». {@see CustomerAppointment::$appointmentStatus} says what became of the
  * *meeting* : planned, done, nobody there, cancelled. A diary reads the first, a
  * report reads the second, and a single axis could not answer both.
  *
@@ -45,8 +45,8 @@ use xyz\oihana\schema\places\JobSite;
  * yet.
  *
  * ⚠️ **What is written before, and what is written after, sit side by side.**
- * `description`, {@see Appointment::$makesOffer} and {@see Appointment::$tags}
- * are the preparation ; {@see Appointment::$report} is what came of it. Neither
+ * `description`, {@see CustomerAppointment::$makesOffer} and {@see CustomerAppointment::$tags}
+ * are the preparation ; {@see CustomerAppointment::$report} is what came of it. Neither
  * overwrites the other — a meeting is worth reading precisely for the distance
  * between the two.
  *
@@ -54,9 +54,9 @@ use xyz\oihana\schema\places\JobSite;
  * @author  Marc Alcaraz (eKameleon)
  * @since   1.5.0
  */
-class Appointment extends Event
+class CustomerAppointment extends Event
 {
-    use AppointmentTrait ;
+    use CustomerAppointmentTrait ;
 
     /**
      * The @context of the json-ld representation of the thing.
@@ -90,7 +90,7 @@ class Appointment extends Event
      *
      * A code, or the resolved person. Reuses the name, the shape and the meaning
      * {@see Customer::$assignedSeller} already carries — and may differ from
-     * {@see Appointment::$organizer}, who is whoever holds *this* meeting.
+     * {@see CustomerAppointment::$organizer}, who is whoever holds *this* meeting.
      *
      * @var null|int|string|array|Person
      * @since 1.5.0

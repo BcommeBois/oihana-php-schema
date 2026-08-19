@@ -26,24 +26,24 @@ An appointment extends `org\schema\Event`. That is what **every diary already re
 ```php
 use org\schema\constants\Schema;
 
-use xyz\oihana\schema\appointments\Appointment;
+use xyz\oihana\schema\appointments\CustomerAppointment;
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\enumerations\AppointmentStatus;
 
-$appointment = new Appointment
+$appointment = new CustomerAppointment
 ([
-    Schema::NAME               => 'Decking range review' ,
+    Schema::NAME               => 'Product range review' ,
     Schema::START_DATE         => '2026-09-03T09:30:00+02:00' ,
     Schema::END_DATE           => '2026-09-03T10:30:00+02:00' ,
-    Schema::DESCRIPTION        => 'Present the composite board, chase the open quote.' ,
+    Schema::DESCRIPTION        => 'Present the new range, chase the open quote.' ,
 
     Oihana::APPOINTMENT_TYPE   => 'VISIT' ,                       // a thesaurus term
     Oihana::APPOINTMENT_STATUS => AppointmentStatus::PLANNED ,
-    Oihana::TAGS               => [ 'MEAL' , 'JOBSITE' ] ,        // the quick qualifiers
+    Oihana::TAGS               => [ 'MEAL' , 'DEMO' ] ,        // the quick qualifiers
 
-    Schema::ORGANIZER          => [ Schema::ID => 'ALPER' , Schema::NAME => 'A. Perez' ] ,
-    Schema::CUSTOMER           => [ Schema::ID => '741278' , Schema::NAME => 'Southern Timber Frames' ] ,
-    Schema::ATTENDEE           => [ [ Schema::NAME => 'Claire Martin' ] ] ,
+    Schema::ORGANIZER          => [ Schema::ID => 'JDOE' , Schema::NAME => 'Jane Doe' ] ,
+    Schema::CUSTOMER           => [ Schema::ID => '100200' , Schema::NAME => 'Acme Corporation' ] ,
+    Schema::ATTENDEE           => [ [ Schema::NAME => 'Alice Smith' ] ] ,
 ]);
 
 echo json_encode( $appointment , JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
@@ -54,7 +54,7 @@ And reading a stored document back, which retypes the whole tree at once:
 ```php
 use oihana\reflect\Reflection;
 
-$appointment = new Reflection()->hydrate( $document , Appointment::class );
+$appointment = new Reflection()->hydrate( $document , CustomerAppointment::class );
 
 $appointment->organizer;          // xyz\oihana\schema\people\Seller
 $appointment->customer;           // xyz\oihana\schema\organizations\Customer
@@ -64,7 +64,7 @@ $appointment->report;             // xyz\oihana\schema\appointments\VisitReport
 $appointment->report->followUp;   // xyz\oihana\schema\appointments\FollowUp[]
 ```
 
-> ⚠️ **The constructor assigns raw, the hydration types.** `new Appointment([ … ])` copies what it is given as it is given; it is `Reflection::hydrate()` that reads the attributes and returns the nested objects in their class. Both paths are normal — the first writes, the second reads back.
+> ⚠️ **The constructor assigns raw, the hydration types.** `new CustomerAppointment([ … ])` copies what it is given as it is given; it is `Reflection::hydrate()` that reads the attributes and returns the nested objects in their class. Both paths are normal — the first writes, the second reads back.
 
 ---
 
@@ -72,12 +72,12 @@ $appointment->report->followUp;   // xyz\oihana\schema\appointments\FollowUp[]
 
 | Piece | What it states |
 |---|---|
-| **The meeting** (`Appointment`) | *with whom*, *when*, *where*, *of what kind*, and *what one means to present*. Written **before**. |
+| **The meeting** (`CustomerAppointment`) | *with whom*, *when*, *where*, *of what kind*, and *what one means to present*. Written **before**. |
 | **The report** (`VisitReport`) | *how it went*, *what it produced*, *who was actually there*. Written **after**. |
 | **The follow-up** (`FollowUp`) | *what is still owed*, *by when*, and the meeting booked to honour it. |
 
 ```
-                     Appointment  (Event)
+             CustomerAppointment  (Event)
                      customer · organizer · location · attendee · appointmentType
                      appointmentStatus · tags · makesOffer
                               │
@@ -86,7 +86,7 @@ $appointment->report->followUp;   // xyz\oihana\schema\appointments\FollowUp[]
                                                    │
                                                    └── followUp[] ──▶ FollowUp  (ScheduleAction)
                                                                       followUpType · scheduledTime
-                                                                      actionStatus · result ──▶ Appointment
+                                                                      actionStatus · result ──▶ CustomerAppointment
 ```
 
 What is written **before** and what is written **after** sit side by side: `description`, `makesOffer` and `tags` are the preparation, `report` is what came of it. Neither overwrites the other — a meeting is worth reading precisely for the distance between the two.
@@ -97,7 +97,7 @@ What is written **before** and what is written **after** sit side by side: `desc
 
 | Class | Extends | Role |
 |---|---|---|
-| `Appointment` | `org\schema\Event` | A meeting arranged with a customer. |
+| `CustomerAppointment` | `org\schema\Event` | A meeting arranged with a customer. |
 | `VisitReport` | `org\schema\CreativeWork` | What was written once the meeting took place. |
 | `FollowUp` | `org\schema\actions\ScheduleAction` | What comes next, and when. |
 | `AppointmentStatus` | `org\schema\enumerations\StatusEnumeration` | What became of the meeting itself. |
@@ -119,7 +119,7 @@ Schema.org **publishes no member for "it happened"**: its enumeration follows an
 
 ---
 
-## `Appointment` properties
+## `CustomerAppointment` properties
 
 | Property | Type | Description |
 |---|---|---|
@@ -132,7 +132,7 @@ Schema.org **publishes no member for "it happened"**: its enumeration follows an
 | `makesOffer` | `Offer[]\|null` | What one means to present. See below. |
 | `organizer` | `Person\|Organization\|array\|null` | The salesperson **whose diary this is**. Read back as `Seller`. |
 | `report` | `array\|VisitReport\|null` | The report. **One only**, absent until there is something to report. |
-| `tags` | `string[]\|DefinedTerm[]\|null` | The quick qualifiers — a meal with the customer, a tour of their premises, a site visit, a demonstration. Several. |
+| `tags` | `string[]\|DefinedTerm[]\|null` | The quick qualifiers — a meal with the customer, a tour of their premises, a tour of their premises, a demonstration. Several. |
 
 `name`, `description`, `startDate`, `endDate`, `duration`, `eventStatus`, `eventAttendanceMode`, `previousStartDate`, `remarks`, `about`, `subEvent`/`superEvent` are inherited from `Event`; `id`, `identifier`, `url`, `created`, `modified` from `Thing`.
 
@@ -142,10 +142,10 @@ Everything else is optional: the contacts expected, the place, what one means to
 
 ```php
 // A known customer: a reference and its frozen copy.
-Schema::CUSTOMER => [ '@type' => 'Customer' , '_key' => '137191259' , 'id' => '741278' , 'name' => 'Southern Timber Frames' ]
+Schema::CUSTOMER => [ '@type' => 'Customer' , '_key' => '137191259' , 'id' => '100200' , 'name' => 'Acme Corporation' ]
 
 // A free-form one: what is known of them, and no key.
-Schema::CUSTOMER => [ 'name' => 'Southern Timber Frames' , 'telephone' => '05 56 00 00 00' ]
+Schema::CUSTOMER => [ 'name' => 'Acme Corporation' , 'telephone' => '05 56 00 00 00' ]
 ```
 
 The library accepts both; it is up to the consumer to decide when the reference becomes mandatory, and how a free-form customer is later **attached** to a record created in the meantime.
@@ -158,9 +158,9 @@ What a salesperson means to put in front of their customer is written as **offer
 Schema::MAKES_OFFER =>
 [
     [
-        Schema::DESCRIPTION  => 'Show them the 21 mm rather than the 25.' ,
-        Schema::ITEM_OFFERED => [ 'id' => '105997' , 'name' => 'Composite board 21 mm' ,
-                                  'image' => [ '@type' => 'ImageObject' , 'contentUrl' => 'https://…/board.jpg' ] ] ,
+        Schema::DESCRIPTION  => 'Show them model A rather than B.' ,
+        Schema::ITEM_OFFERED => [ 'id' => '500100' , 'name' => 'Model A widget' ,
+                                  'image' => [ '@type' => 'ImageObject' , 'contentUrl' => 'https://example.org/model-a.jpg' ] ] ,
     ],
 ]
 ```
@@ -197,7 +197,7 @@ The wrapper is what carries the intention **beside** the reference — and the d
 | Property | Type | Description |
 |---|---|---|
 | `followUpType` | `string\|array\|DefinedTerm\|null` | The kind of next step — call back, send the quote, visit again. |
-| `result` | `Thing\|array\|string\|null` | The meeting **booked** to honour it, when there is one. Read back as `Appointment`. |
+| `result` | `Thing\|array\|string\|null` | The meeting **booked** to honour it, when there is one. Read back as `CustomerAppointment`. |
 
 `scheduledTime` (when it is due), `actionStatus` (still owed, or honoured), `agent` (who owes it), `name` and `description` are inherited from `ScheduleAction` and `Action`.
 
@@ -214,7 +214,7 @@ use xyz\oihana\schema\people\Seller;
 
 $seller = new Seller
 ([
-    'name'           => 'A. Perez' ,
+    'name'           => 'Jane Doe' ,
     'hoursAvailable' =>
     [
         [ 'dayOfWeek' => [ 'Monday' , 'Tuesday' , 'Thursday' ] , 'opens' => '08:30' , 'closes' => '18:00' ] ,
@@ -232,40 +232,40 @@ $seller = new Seller
 
 ```json
 {
-  "@type": "Appointment",
+  "@type": "CustomerAppointment",
   "@context": "https://schema.oihana.xyz",
-  "name": "Decking range review",
+  "name": "Product range review",
   "startDate": "2026-09-03T09:30:00+02:00",
   "endDate": "2026-09-03T10:30:00+02:00",
   "eventStatus": "https://schema.org/EventScheduled",
   "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
   "appointmentStatus": "https://schema.oihana.xyz/AppointmentStatus#Done",
   "appointmentType": "VISIT",
-  "tags": ["MEAL", "JOBSITE"],
-  "organizer": { "@type": "Seller", "id": "ALPER", "name": "A. Perez" },
-  "assignedSeller": { "@type": "Seller", "id": "ALPER", "name": "A. Perez" },
-  "customer": { "@type": "Customer", "id": "741278", "name": "Southern Timber Frames" },
-  "attendee": [ { "@type": "CustomerEmployee", "id": "55", "name": "Claire Martin", "jobTitle": "ACH" } ],
+  "tags": ["MEAL", "DEMO"],
+  "organizer": { "@type": "Seller", "id": "JDOE", "name": "Jane Doe" },
+  "assignedSeller": { "@type": "Seller", "id": "JDOE", "name": "Jane Doe" },
+  "customer": { "@type": "Customer", "id": "100200", "name": "Acme Corporation" },
+  "attendee": [ { "@type": "CustomerEmployee", "id": "55", "name": "Alice Smith", "jobTitle": "ACH" } ],
   "location": {
-    "@type": "CustomerSite", "name": "Mérignac yard",
-    "address": { "@type": "PostalAddress", "streetAddress": "12 rue des Pins", "postalCode": "33700", "addressLocality": "Mérignac" },
+    "@type": "CustomerSite", "name": "Head office",
+    "address": { "@type": "PostalAddress", "streetAddress": "1 Example Street", "postalCode": "10000", "addressLocality": "Exampleville" },
     "geo": { "@type": "GeoCoordinates", "latitude": 44.84, "longitude": -0.64 }
   },
-  "description": "Present the composite board, chase the open quote.",
+  "description": "Present the new range, chase the open quote.",
   "makesOffer": [
     {
       "@type": "Offer",
-      "description": "Show them the 21 mm rather than the 25; a discount is possible above 120 m².",
-      "itemOffered": { "@type": "Product", "id": "105997", "name": "Composite board 21 mm" }
+      "description": "Show them model A rather than B; a discount is possible above a hundred units.",
+      "itemOffered": { "@type": "Product", "id": "500100", "name": "Model A widget" }
     }
   ],
   "report": {
     "@type": "VisitReport",
-    "text": "Range well received. They want a price for 120 m² delivered to site.",
+    "text": "Range well received. They want a price for a hundred units delivered.",
     "outcome": "QUOTE",
     "mood": "GREEN",
     "topics": ["PRICING", "DELIVERY"],
-    "attendee": [ { "@type": "CustomerEmployee", "id": "55", "name": "Claire Martin" } ],
+    "attendee": [ { "@type": "CustomerEmployee", "id": "55", "name": "Alice Smith" } ],
     "followUp": [
       {
         "@type": "FollowUp",
@@ -275,7 +275,7 @@ $seller = new Seller
         "actionStatus": "https://schema.org/PotentialActionStatus"
       }
     ],
-    "author": { "@type": "Seller", "id": "ALPER", "name": "A. Perez" },
+    "author": { "@type": "Seller", "id": "JDOE", "name": "Jane Doe" },
     "dateCreated": "2026-09-03T10:41:00+02:00"
   },
   "created": "2026-08-19T10:02:00+02:00",
@@ -287,7 +287,7 @@ $seller = new Seller
 
 ## Related constants
 
-The property keys are exposed by the [`AppointmentTrait`](../../../src/xyz/oihana/schema/constants/traits/appointments/AppointmentTrait.php), [`VisitReportTrait`](../../../src/xyz/oihana/schema/constants/traits/appointments/VisitReportTrait.php) and [`FollowUpTrait`](../../../src/xyz/oihana/schema/constants/traits/appointments/FollowUpTrait.php) traits, composed into the domain aggregator [`AppointmentsTrait`](../../../src/xyz/oihana/schema/constants/traits/AppointmentsTrait.php) and wired into the master class [`Oihana`](../../../src/xyz/oihana/schema/constants/Oihana.php). You can therefore reach them through `Oihana::APPOINTMENT_TYPE`, `Oihana::MOOD`, `Oihana::FOLLOW_UP`, and so on — and each class exposes its own (`Appointment::REPORT`).
+The property keys are exposed by the [`CustomerAppointmentTrait`](../../../src/xyz/oihana/schema/constants/traits/appointments/CustomerAppointmentTrait.php), [`VisitReportTrait`](../../../src/xyz/oihana/schema/constants/traits/appointments/VisitReportTrait.php) and [`FollowUpTrait`](../../../src/xyz/oihana/schema/constants/traits/appointments/FollowUpTrait.php) traits, composed into the domain aggregator [`AppointmentsTrait`](../../../src/xyz/oihana/schema/constants/traits/AppointmentsTrait.php) and wired into the master class [`Oihana`](../../../src/xyz/oihana/schema/constants/Oihana.php). You can therefore reach them through `Oihana::APPOINTMENT_TYPE`, `Oihana::MOOD`, `Oihana::FOLLOW_UP`, and so on — and each class exposes its own (`CustomerAppointment::REPORT`).
 
 The properties borrowed from Schema.org — `customer`, `attendee`, `location`, `organizer`, `makesOffer`, `assignedSeller`, `scheduledTime` — keep their existing constants: they are not redeclared.
 

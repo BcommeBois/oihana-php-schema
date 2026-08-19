@@ -12,7 +12,7 @@ use org\schema\actions\PlanAction;
 use org\schema\actions\ScheduleAction;
 use org\schema\constants\Schema;
 
-use xyz\oihana\schema\appointments\Appointment;
+use xyz\oihana\schema\appointments\CustomerAppointment;
 use xyz\oihana\schema\appointments\FollowUp;
 use xyz\oihana\schema\appointments\VisitReport;
 use xyz\oihana\schema\constants\Oihana;
@@ -44,13 +44,13 @@ class FollowUpTest extends TestCase
             Oihana::FOLLOW_UP_TYPE => 'CALL' ,
             Schema::SCHEDULED_TIME => '2026-09-10' ,
             Schema::ACTION_STATUS  => 'https://schema.org/PotentialActionStatus' ,
-            Schema::DESCRIPTION    => 'Rappeler après envoi du devis.' ,
+            Schema::DESCRIPTION    => 'Call back once the quotation has been sent.' ,
         ]);
 
         $this->assertSame( 'CALL'                                      , $followUp->followUpType  );
         $this->assertSame( '2026-09-10'                                , $followUp->scheduledTime );
         $this->assertSame( 'https://schema.org/PotentialActionStatus'  , $followUp->actionStatus  );
-        $this->assertSame( 'Rappeler après envoi du devis.'            , $followUp->description   );
+        $this->assertSame( 'Call back once the quotation has been sent.'            , $followUp->description   );
     }
 
     /**
@@ -73,13 +73,13 @@ class FollowUpTest extends TestCase
         (
             [
                 Oihana::FOLLOW_UP_TYPE => 'VISIT' ,
-                Schema::RESULT         => [ Schema::NAME => 'Revue de chantier' , Schema::START_DATE => '2026-10-01T09:00:00+02:00' ] ,
+                Schema::RESULT         => [ Schema::NAME => 'On-site review' , Schema::START_DATE => '2026-10-01T09:00:00+02:00' ] ,
             ],
             FollowUp::class
         );
 
-        $this->assertInstanceOf( Appointment::class , $followUp->result       );
-        $this->assertSame( 'Revue de chantier'      , $followUp->result->name );
+        $this->assertInstanceOf( CustomerAppointment::class , $followUp->result       );
+        $this->assertSame( 'On-site review'      , $followUp->result->name );
     }
 
     /**

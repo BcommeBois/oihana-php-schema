@@ -2,7 +2,7 @@
 
 namespace xyz\oihana\schema\constants\traits;
 
-use xyz\oihana\schema\constants\traits\appointments\AppointmentTrait;
+use xyz\oihana\schema\constants\traits\appointments\CustomerAppointmentTrait;
 use xyz\oihana\schema\constants\traits\appointments\FollowUpTrait;
 use xyz\oihana\schema\constants\traits\appointments\VisitReportTrait;
 
@@ -15,7 +15,7 @@ use xyz\oihana\schema\constants\traits\appointments\VisitReportTrait;
  */
 trait AppointmentsTrait
 {
-    use AppointmentTrait ,
+    use CustomerAppointmentTrait ,
         FollowUpTrait    ,
         VisitReportTrait ;
 }

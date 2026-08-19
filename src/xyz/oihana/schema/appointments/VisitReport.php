@@ -29,7 +29,7 @@ use xyz\oihana\schema\people\CustomerEmployee;
  * Both are declared, neither is required : one written on a phone, in a van, with
  * three taps is worth more than the thorough one that never gets written.
  *
- * ⚠️ **Its attendees are not the meeting's.** {@see Appointment::$attendee} lists
+ * ⚠️ **Its attendees are not the meeting's.** {@see CustomerAppointment::$attendee} lists
  * who was expected ; this one lists who came. They disagree often enough that
  * folding them into one would quietly rewrite the plan into a record of fact.
  *
@@ -50,7 +50,7 @@ class VisitReport extends CreativeWork
      * Who actually attended.
      *
      * The people met, as codes or resolved contacts. May differ from
-     * {@see Appointment::$attendee}, which says who was expected.
+     * {@see CustomerAppointment::$attendee}, which says who was expected.
      *
      * @var null|array|Person
      * @since 1.5.0
@@ -98,7 +98,7 @@ class VisitReport extends CreativeWork
     /**
      * Quick qualifiers of the report itself.
      *
-     * Declared for the day one is needed ; the qualifiers of a meeting live on the meeting ({@see Appointment::$tags}),
+     * Declared for the day one is needed ; the qualifiers of a meeting live on the meeting ({@see CustomerAppointment::$tags}),
      * where they are true whether they were planned or observed.
      *
      * @var null|array|string|DefinedTerm
