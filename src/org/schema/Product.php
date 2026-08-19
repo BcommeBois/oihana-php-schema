@@ -71,9 +71,9 @@ class Product extends Thing
      *
      * Should match the textual description specified in the color property. This can be a URL or a fully described ImageObject.
      *
-     * @var string|object|null
+     * @var string|object|null|array
      */
-    public string|object|null $colorSwatch ;
+    public string|object|null|array $colorSwatch ;
 
     /**
      * The place where the product was assembled.
@@ -90,13 +90,16 @@ class Product extends Thing
     /**
      * The country of origin of something, including products as well as creative works such as movie and TV content.
      *
-     * In the case of TV and movie, this would be the country of the principle offices of the production company or individual responsible for the movie. For other kinds of CreativeWork it is difficult to provide fully general guidance, and properties such as contentLocation and locationCreated may be more applicable.
+     * In the case of TV and movie, this would be the country of the principle offices of the production company
+     * or individual responsible for the movie. For other kinds of CreativeWork it is difficult to provide
+     * fully general guidance, and properties such as contentLocation and locationCreated may be more applicable.
      *
-     * In the case of products, the country of origin of the product. The exact interpretation of this may vary by context and product type, and cannot be fully enumerated here.
+     * In the case of products, the country of origin of the product. The exact interpretation of this may vary
+     * by context and product type, and cannot be fully enumerated here.
      *
-     * @var Country|null
+     * @var null|array|Country
      */
-    public null|Country $countryOfOrigin ;
+    public null|array|Country $countryOfOrigin ;
 
     /**
      * The depth of the item.
@@ -260,15 +263,15 @@ class Product extends Thing
 
     /**
      * An associated logo.
-     * @var string|ImageObject|null
+     * @var string|ImageObject|null|array|
      */
-    public null|string|ImageObject $logo ;
+    public null|array|string|ImageObject $logo ;
 
     /**
      * The manufacturer of the product.
-     * @var int|Organization|string|null
+     * @var int|Organization|string|null|array
      */
-    public int|Organization|string|null $manufacturer ;
+    public int|Organization|string|null|array $manufacturer ;
 
     /**
      * A material that something is made from, e.g. leather, wool, cotton, paper.
@@ -284,9 +287,9 @@ class Product extends Thing
 
     /**
      * The model of the product.
-     * @var ProductModel|string|null
+     * @var null|array|ProductModel|string
      */
-    public null|ProductModel|string $model ;
+    public null|array|ProductModel|string $model ;
 
     /**
      * The Manufacturer Part Number (MPN) of the product, or the product to which the offer refers.
@@ -316,13 +319,13 @@ class Product extends Thing
      * An offer to provide this item.
      */
     #[HydrateWith(Offer::class, Demand::class)]
-    public array|Offer|Demand|null $offers ;
+    public null|array|Offer|Demand $offers ;
 
     /**
      * A pattern that something has, for example 'polka dot', 'striped', 'Canadian flag'. Values are typically expressed as text, although links to controlled value schemes are also supported.
-     * @var string|DefinedTerm|null
+     * @var string|array|DefinedTerm|null
      */
-    public null|string|DefinedTerm $pattern ;
+    public null|array|string|DefinedTerm $pattern ;
 
     /**
      * Provides positive considerations regarding something, for example product highlights or (alongside negativeNotes) pro/con lists for reviews.

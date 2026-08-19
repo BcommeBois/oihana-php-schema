@@ -101,6 +101,7 @@ trait Properties
         Permit ,
         Person ,
         Place ,
+        PlanAction ,
         PostalAddress ,
         PostalCodeRangeSpecification ,
         PriceSpecification ,

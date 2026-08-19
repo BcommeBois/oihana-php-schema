@@ -9,7 +9,6 @@ use org\schema\CreativeWork;
 use org\schema\creativeWork\Comment;
 use org\schema\creativeWork\comments\CorrectionComment;
 use org\schema\creativeWork\MediaObject;
-use org\schema\creativeWork\medias\AudioObject;
 use org\schema\creativeWork\WebPage;
 use org\schema\DefinedTerm;
 use org\schema\Demand;
@@ -34,8 +33,9 @@ trait CreativeWorkTrait
 {
     /**
      * The subject matter of the content.
+     * @var string|object|array|null
      */
-    public string|object|null $about ;
+    public string|object|array|null $about ;
 
     /**
      * An abstract is a short description that summarizes a CreativeWork.
@@ -51,9 +51,9 @@ trait CreativeWorkTrait
 
     /**
      * A list of single or combined accessModes that are sufficient to understand all the intellectual content of a resource.
-     * @var ItemList|null
+     * @var ItemList|array|null
      */
-    public null|ItemList $accessModeSufficient;
+    public null|array|ItemList $accessModeSufficient;
 
     /**
      * Indicates that the resource is compatible with the referenced accessibility API.
@@ -93,9 +93,9 @@ trait CreativeWorkTrait
 
     /**
      * Indicates a page documenting how licenses can be purchased or otherwise acquired, for the current item.
-     * @var string|CreativeWork|null
+     * @var string|CreativeWork|array|null
      */
-    public null|string|CreativeWork $acquireLicensePage ;
+    public null|string|array|CreativeWork $acquireLicensePage ;
 
     /**
      * The overall rating, based on a collection of reviews or ratings, of the item.
@@ -118,9 +118,9 @@ trait CreativeWorkTrait
 
     /**
      * The item being described is intended to assess the competency or learning outcome defined by the referenced term.
-     * @var string|DefinedTerm|null
+     * @var string|DefinedTerm|array|null
      */
-    public null|string|DefinedTerm $assesses ;
+    public null|string|array|DefinedTerm $assesses ;
 
     /**
      * A media object that encodes this CreativeWork. This property is a synonym for encoding.
@@ -135,13 +135,18 @@ trait CreativeWorkTrait
 
     /**
      * An embedded audio object.
+     * @var array|object|null
      */
-    public ?object $audio ;
+    public null|array|object $audio ;
 
     /**
-     * The author of this content.
+     * The author of this content — the person or the organization who wrote it.
+     *
+     * Not to be confused with {@see CreativeWorkTrait::$audio}, the audio object a
+     * work may embed : the two say entirely different things and one is not a fallback
+     * for the other.
      */
-    public null|string|AudioObject $author ;
+    public null|string|array|Organization|Person $author ;
 
     /**
      * An award won by or for this item.
@@ -162,7 +167,7 @@ trait CreativeWorkTrait
      * Comments, typically from users.
      * @var Comment|array|null
      */
-    public null|Comment|array $comment ;
+    public null|array|Comment $comment ;
 
     /**
      * The number of comments this CreativeWork (e.g. Article, Question or Answer) has received.
@@ -179,34 +184,39 @@ trait CreativeWorkTrait
      * It is expressed only in natural language.
      *
      * For example "Available by appointment from the Reading Room" or "Accessible only from logged-in accounts ".
+     *
+     * @var null|string|object
      */
     public null|string|object $conditionsOfAccess ;
 
     /**
      * The location depicted or described in the content. For example, the location in a photograph or painting.
+     * @var string|array|Place|null
      */
-    public string|Place|null $contentLocation ;
+    public null|string|array|Place $contentLocation ;
 
     /**
      * Official rating of a piece of content—for example,'MPAA PG-13'.
+     * @var null|array|string|Rating
      */
-    public null|string|Rating|array $contentRating ;
+    public null|array|string|Rating $contentRating ;
 
     /**
      * The specific time described by a creative work, for works (e.g. articles, video objects etc.)
      * that emphasise a particular moment within an Event.
+     * @var string|null|int
      */
     public string|null|int $contentReferenceTime ;
 
     /**
      * A secondary contributor to the CreativeWork or Event.
      */
-    public null|Organization|Person|array $contributor ;
+    public null|array|Organization|Person $contributor ;
 
     /**
      * The party holding the legal copyright to the CreativeWork.
      */
-    public null|Organization|Person|array $copyrightHolder ;
+    public null|array|Organization|Person $copyrightHolder ;
 
     /**
      * Text of a notice appropriate for describing the copyright aspects of this Creative Work,
@@ -223,9 +233,9 @@ trait CreativeWorkTrait
 
     /**
      * Indicates a correction to a CreativeWork, either via a CorrectionComment, textually or in another document.
-     * @var null|CorrectionComment|string
+     * @var null|array|CorrectionComment|string
      */
-    public null|CorrectionComment|string $correction ;
+    public null|array|CorrectionComment|string $correction ;
 
     /**
      * The country of origin of something, including products as well as creative works such as movie and TV content.
@@ -237,9 +247,9 @@ trait CreativeWorkTrait
      * In the case of products, the country of origin of the product. The exact interpretation of this may vary
      * by context and product type, and cannot be fully enumerated here.
      *
-     * @var Country|null
+     * @var null|array|Country
      */
-    public null|Country $countryOfOrigin ;
+    public null|array|Country $countryOfOrigin ;
 
     /**
      * The status of a creative work in terms of its stage in a lifecycle.

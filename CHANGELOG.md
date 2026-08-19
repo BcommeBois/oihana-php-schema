@@ -41,7 +41,40 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   its catalogue, a property table for each, and the note that a target is not an
   observation even though it reads like one.
 
+- `PlanAction::$scheduledTime` — the moment a planned thing is due, which every
+  subtype that schedules something now reads from one place : `ScheduleAction`,
+  `CancelAction`, `ReserveAction`.
+
+  🔑 **A plan states two different moments.** `startTime` and `endTime`, inherited
+  from `Action`, bound the act of planning itself — done in a minute, this morning.
+  `scheduledTime` is the thing planned — the call to make next Thursday. Collapsing
+  them loses the only reason to write a plan down.
+
+- `org\schema\constants\traits\PlanAction` carries the property name constant
+  and joins the `Properties` aggregator, so `Schema::SCHEDULED_TIME` names it like
+  every other term.
+
 ### Fixed
+
+- **Hydration** — every property union that names a class also accepts `array`,
+  across `CreativeWork` and `Product`.
+
+  🔑 **A joined value arrives as an array before it becomes an object.** The
+  constructor assigns what it is given and the hydration converts afterwards, so a
+  union that names only the class rejects the very shape the data comes in — and
+  the failure is a type error on the way in, not a wrong value on the way out.
+  Unions are written `null|array|<Class>` from here on.
+
+- **Breaking** — `CreativeWork::$author` is typed `null|string|array|Organization|Person`
+  instead of `null|string|AudioObject`.
+
+  The union named the class of the property *beside* it — `audio`, an embedded audio
+  object — which is a copy-and-paste an author never recovers from : assigning the
+  person or the organization who wrote the work raised a type error, so the one
+  thing `author` exists to hold was the one thing it refused. Nothing could have
+  been storing an `AudioObject` there and meant it, which is why the widening is
+  safe in practice ; it is still listed as breaking because the declared type of a
+  public property changed.
 
 - The **statistics guide** now covers every class of the namespace. `CompanyStatistics`
   and `ProductStatistics` were added to the library after the guide was written,
