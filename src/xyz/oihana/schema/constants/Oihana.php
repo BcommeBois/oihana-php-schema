@@ -15,6 +15,7 @@ use xyz\oihana\schema\constants\traits\PeopleTrait;
 use xyz\oihana\schema\constants\traits\places\Site;
 use xyz\oihana\schema\constants\traits\ProductsTrait;
 use xyz\oihana\schema\constants\traits\ShippingTrait;
+use xyz\oihana\schema\constants\traits\StatisticsTrait;
 use xyz\oihana\schema\constants\traits\ThesaurusTrait;
 use xyz\oihana\schema\constants\traits\WebsiteTrait;
 
@@ -22,8 +23,8 @@ use xyz\oihana\schema\constants\traits\WebsiteTrait;
  * The enumeration of all the Oihana schema properties constants.
  *
  * Aggregates the domain specific constants traits (audit, auth, extras, http, log,
- * organizations, pagination, people, places, products, thesaurus, website) in a
- * single access point.
+ * organizations, pagination, people, places, products, statistics, thesaurus,
+ * website) in a single access point.
  *
  * @author  Marc Alcaraz (eKameleon)
  * @package xyz\oihana\schema\constants
@@ -49,6 +50,7 @@ class Oihana
         PeopleTrait       ,
         ShippingTrait     ,
         Site              ,
+        StatisticsTrait   ,
         ThesaurusTrait    ,
         WebsiteTrait      ;
 }

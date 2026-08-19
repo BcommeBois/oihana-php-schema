@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [1.4.0] - 2026-08-19
 
 ### Changed
 
@@ -343,6 +343,56 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   consumer reading `value` and `unitCode` sees exactly what it saw before.
 
 ### Added
+
+- `xyz\oihana\schema\statistics` — a namespace for bodies of figures, opened by
+  `Statistics` and `ObservationSeries`.
+
+  A statistics record answers four questions and no others : *whose* figures
+  these are (`about`), *which side of the trade* they were measured on
+  (`direction`), *which year* they cover (`year`) and *at which step* the series
+  inside them are cut (`observationPeriod`) — plus the company they were measured
+  for (`assignedCompany`). **The figures themselves are not on it** : each family
+  of statistics composes the measures it carries, so a customer, an article and a
+  company are described by the same head and by whichever measures their source
+  actually publishes.
+
+  🔑 **It extends `Intangible`, not `Dataset`.** A dataset is a body of
+  structured information that gets published, catalogued and downloaded, and
+  carries the editorial terms that go with that. This is a *reading* — one
+  subject, one period — closer to the `Observation` it is made of than to the
+  corpus it may end up in.
+
+  🔑 **The subject is a reference, never a copy.** `about` and `assignedCompany`
+  hold the code the source gives, or the resolved object, and a consumer joins on
+  read. Each family redeclares `about` with the same union and its own
+  `#[HydrateAs]`, which is what lets `Reflection::hydrate()` read a joined row
+  back as the right class while a bare code is left as read.
+
+  `year` is an integer : a year is compared, sorted and grouped far more often
+  than it is printed, and `2025` does all three without a cast.
+
+- `ObservationSeries` extends `Observation` with `values` — the same measure, cut
+  at a regular step : a year of revenue as a total *and* as twelve monthly
+  figures, on one object, because they are one measure.
+
+  🔑 **A measure carries what its source states, and nothing else.** A total with
+  no run and a run with no total are both ordinary : a margin published once a
+  year has no monthly detail to give, and a cost published month by month was
+  never totalled. Neither absence is filled in : **a summed total and a derived
+  monthly figure look exactly like published ones once written**, and nothing
+  downstream can tell them apart. The consumer sums or divides when it needs to,
+  and knows it did.
+
+  The unit is `unitCode`, inherited from `QuantitativeValue` — `MTQ`, `KGM`, and
+  the ISO 4217 code for a monetary measure (`EUR`). A quantity states its unit,
+  so a reader of a record's measures reads all of them the same way ; a second
+  term for money would be a second place to look, and a second place to disagree.
+
+- The constants follow the source, term by term :
+  `xyz\oihana\schema\constants\traits\statistics\StatisticsRecordTrait` names the
+  five terms of the record, `…\statistics\ObservationSeriesTrait` the one a series
+  adds. Both are composed by `…\traits\StatisticsTrait` and wired into `Oihana`,
+  so `Oihana::YEAR`, `Oihana::OBSERVATION_PERIOD` and `Oihana::VALUES` reach them.
 
 - `org\schema\Observation`, and the `org\schema\traits\MeasurementVariableTrait`
   it shares with `StatisticalVariable`.
