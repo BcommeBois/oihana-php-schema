@@ -344,7 +344,32 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- `CompanyStatistics` and `ProductStatistics` — the two remaining families that
+  read the same ten measures against a different subject : a company (commonly
+  one of the operator's own subsidiaries, and just as commonly the whole group
+  read as one) and an article.
+
+  🔑 **`CompanyStatistics` is the one family whose subject is the perimeter.**
+  Elsewhere `assignedCompany` says which company a counterparty's figures were
+  measured for ; here that company *is* the subject, and the property stays
+  unset rather than repeating it — a reader looking for the perimeter of any
+  record reads `about` first and `assignedCompany` only when the two differ. Its
+  subject is typed at `Company` rather than at `Subsidiary`, which adds no term
+  of its own : the same property then names a member of the group and the group
+  itself, and a stored `additionalType` still tells a reader which is which.
+
+  ⚠️ **A group total and the sum of its members are not interchangeable** — a
+  record about the whole group is a reading in its own right, and adding it to
+  its members' records counts every figure twice.
+
+  🔑 **`ProductStatistics` is the one family where `quantity` is worth its
+  total.** Elsewhere a quantity spanning several articles adds square metres to
+  cubic metres to pieces ; here every figure counts the same article in the same
+  unit, and the run and its total both mean something. It carries no dimension of
+  its own — what an article belongs to lives on the article, and stays there.
+
 - The **statistics guide** (FR canonical + EN mirror) documents the namespace :
+ (FR canonical + EN mirror) documents the namespace :
   when to reach for it rather than for a `Dataset`, the model in three pieces —
   the record, the measure, the ten measures —, a property table per class, the
   rule that a measure carries what its source states, why six of the ten are
