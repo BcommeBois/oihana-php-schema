@@ -79,8 +79,21 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   the other who came ; they disagree often enough that folding them together would
   rewrite a plan into a record of fact.
 
-- `AppointmentTrait`, `VisitReportTrait` and the `AppointmentsTrait` aggregator
-  carry the property name constants and join `constants\Oihana`.
+- `FollowUp` — what comes next after a meeting, and when, with `VisitReport::$followUp`
+  to carry them.
+
+  🔑 **A promise is not an appointment.** « Call them back in a fortnight » is owed
+  by someone and has no slot ; the meeting booked to honour it, when there is one,
+  is named in `result`. Writing the promise as a meeting would put a placeholder in
+  a diary and lose the distinction between what is agreed and what is booked.
+
+  It is a `ScheduleAction`, so everything a promise needs is already published :
+  `scheduledTime` says when it is due, `actionStatus` whether it is still owed,
+  `agent` who owes it. Only the kind of step — call back, send the quote, visit
+  again — had to be added.
+
+- `AppointmentTrait`, `FollowUpTrait`, `VisitReportTrait` and the `AppointmentsTrait`
+  aggregator carry the property name constants and join `constants\Oihana`.
 
 - `Event::$location` also accepts `array`, for the same hydration reason as the
   rest : a place arrives as an array before it becomes a `Place`.

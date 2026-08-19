@@ -59,6 +59,18 @@ class VisitReport extends CreativeWork
     public null|array|Person $attendee ;
 
     /**
+     * What comes next, and when.
+     *
+     * None, one or several promises : each says what is owed, when it is due, and —
+     * once it is booked — the meeting made to honour it.
+     *
+     * @var null|array|FollowUp
+     * @since 1.5.0
+     */
+    #[HydrateWith(FollowUp::class)]
+    public null|array|FollowUp $followUp ;
+
+    /**
      * How the meeting felt — satisfied, neutral, a problem to deal with.
      *
      * A term of a controlled vocabulary : a code as published, or the resolved term.
