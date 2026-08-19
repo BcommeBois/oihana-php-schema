@@ -148,7 +148,7 @@ class Event extends Thing
     /**
      * The location of the event, organization or action.
      */
-    public PostalAddress|Place|VirtualLocation|string|null $location ;
+    public PostalAddress|Place|VirtualLocation|string|array|null $location ;
 
     /**
      * The total number of individuals that may attend an event or venue.

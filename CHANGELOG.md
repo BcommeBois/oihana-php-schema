@@ -54,6 +54,37 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   and joins the `Properties` aggregator, so `Schema::SCHEDULED_TIME` names it like
   every other term.
 
+- The **`xyz\oihana\schema\appointments` namespace** — a meeting arranged with a
+  customer, and what was written after it took place : `Appointment`, `VisitReport`,
+  and the `AppointmentStatus` enumeration.
+
+  🔑 **A meeting is an `Event`, which is what every diary already reads.** Its
+  place, its hours, the people expected and the one whose diary holds it are
+  schema.org's own properties ; what the vocabulary has no word for is added
+  beside them — the customer it is with, what kind of meeting it is, what one
+  means to put in front of them, and the report.
+
+  🔑 **Two axes of state, and they answer different questions.** `Event::$eventStatus`
+  says what became of the *slot* — scheduled, moved, postponed, called off — and
+  publishes no member for « it happened ». `Appointment::$appointmentStatus` says
+  what became of the *meeting* : planned, done, nobody there, cancelled. A diary
+  reads the first, a report reads the second, and one axis could not carry both.
+
+  🔑 **What one means to show is wrapped in offers**, one per product :
+  `Appointment::$makesOffer` reuses the name and the meaning `Organization::$makesOffer`
+  already carries, so an intention can gain a price, a discount or a quantity the
+  day it becomes a figure — without a property having to be invented for it.
+
+  ⚠️ **The report's attendees are not the meeting's.** One lists who was expected,
+  the other who came ; they disagree often enough that folding them together would
+  rewrite a plan into a record of fact.
+
+- `AppointmentTrait`, `VisitReportTrait` and the `AppointmentsTrait` aggregator
+  carry the property name constants and join `constants\Oihana`.
+
+- `Event::$location` also accepts `array`, for the same hydration reason as the
+  rest : a place arrives as an array before it becomes a `Place`.
+
 ### Fixed
 
 - **`BusinessDocument::$customer` is read back as a `Customer`.** The candidate list
