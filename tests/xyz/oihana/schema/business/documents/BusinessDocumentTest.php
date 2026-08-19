@@ -27,6 +27,10 @@ use xyz\oihana\schema\enumerations\BusinessDocumentDirection;
 use xyz\oihana\schema\enumerations\BusinessDocumentStatus;
 use xyz\oihana\schema\enumerations\DocumentTotalsAccuracy;
 use xyz\oihana\schema\organizations\Customer;
+use xyz\oihana\schema\organizations\Subsidiary;
+use xyz\oihana\schema\people\CustomerEmployee;
+use xyz\oihana\schema\people\Seller;
+use xyz\oihana\schema\places\Warehouse;
 
 class BusinessDocumentTest extends TestCase
 {
@@ -479,6 +483,60 @@ class BusinessDocumentTest extends TestCase
         $this->assertSame( '741278' , $document->customer->id             );
         $this->assertSame( 'ALPER'  , $document->customer->assignedSeller );
         $this->assertSame( 'OK'     , $document->customer->creditStatus   );
+    }
+
+
+    /**
+     * Every party of a document is read back as the class that names it.
+     *
+     * The subclasses are not decoration : a subsidiary carries ten properties an
+     * organization does not, a warehouse six a place does not, a salesperson and a
+     * customer contact three a person does not. Read back as their parent, those
+     * are dropped on the way in — no error, no trace, and a reader with no way of
+     * telling the difference.
+     *
+     * @throws ReflectionException
+     */
+    public function testEveryPartyIsReadBackAsItsOwnClass(): void
+    {
+        $document = new Reflection()->hydrate
+        (
+            [
+                Oihana::ASSIGNED_SELLER => [ Oihana::ID => 'MADEL' , Oihana::POSITION => 2 ] ,
+                Oihana::AUTHOR          => [ Oihana::AT_TYPE => Seller::getSchemaType()     , Oihana::ID => 'ALPER' ] ,
+                Oihana::CONTACT         => [ Oihana::AT_TYPE => CustomerEmployee::getSchemaType() , Oihana::NAME => 'Claire Martin' , Oihana::POSITION => 1 ] ,
+                Oihana::POINT_OF_SALE   => [ Oihana::AT_TYPE => Warehouse::getSchemaType()  , Oihana::NAME => 'Mérignac' , Oihana::OWNED_BY => '500' ] ,
+                Oihana::PUBLISHER       => [ Oihana::AT_TYPE => Subsidiary::getSchemaType() , Oihana::NAME => 'Bouney' , Oihana::VAT => '20' ] ,
+                Oihana::SELLER          => [ Oihana::AT_TYPE => Subsidiary::getSchemaType() , Oihana::NAME => 'Bouney' , Oihana::WEBSITE => 'https://example.org' ] ,
+            ],
+            BusinessDocument::class
+        );
+
+        $this->assertInstanceOf( Seller::class           , $document->assignedSeller );
+        $this->assertInstanceOf( Seller::class           , $document->author         );
+        $this->assertInstanceOf( CustomerEmployee::class , $document->contact        );
+        $this->assertInstanceOf( Warehouse::class        , $document->pointOfSale    );
+        $this->assertInstanceOf( Subsidiary::class       , $document->publisher      );
+        $this->assertInstanceOf( Subsidiary::class       , $document->seller         );
+
+        $this->assertSame( 2                     , $document->assignedSeller->position );
+        $this->assertSame( 1                     , $document->contact->position        );
+        $this->assertSame( '500'                 , $document->pointOfSale->ownedBy     );
+        $this->assertSame( '20'                  , $document->publisher->vat           );
+        $this->assertSame( 'https://example.org' , $document->seller->website          );
+    }
+
+    /**
+     * A bare key stays a bare key : naming a class says how to read a joined row,
+     * never that one has to be there.
+     *
+     * @throws ReflectionException
+     */
+    public function testABarePartyReferenceIsLeftAsRead(): void
+    {
+        $document = new Reflection()->hydrate( [ Oihana::ASSIGNED_SELLER => 'MADEL' ] , BusinessDocument::class );
+
+        $this->assertSame( 'MADEL' , $document->assignedSeller );
     }
 
 }

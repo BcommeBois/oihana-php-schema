@@ -22,6 +22,10 @@ use xyz\oihana\schema\enumerations\BusinessDocumentDirection;
 use xyz\oihana\schema\enumerations\BusinessDocumentStatus;
 use xyz\oihana\schema\enumerations\DocumentTotalsAccuracy;
 use xyz\oihana\schema\organizations\Customer;
+use xyz\oihana\schema\organizations\Subsidiary;
+use xyz\oihana\schema\people\CustomerEmployee;
+use xyz\oihana\schema\people\Seller;
+use xyz\oihana\schema\places\Warehouse;
 
 /**
  * The common parent of the quote → purchase order → invoice cycle (and its
@@ -75,14 +79,14 @@ class BusinessDocument extends Intangible
      * later must not rewrite who took the order.
      *
      * Holds the raw seller reference as read from the source (a key, or the
-     * joined row), or the resolved {@see Person}. No `#[HydrateAs]` is needed :
-     * the union names a single class, so {@see \oihana\reflect\Reflection::hydrate()}
-     * resolves a joined row — and each entry of a joined list — on its own,
-     * while a bare key is left as read.
+     * joined row), or the resolved {@see Seller} : a bare key is left as read, a
+     * joined row — and each entry of a joined list — is read back as the class the
+     * attribute names.
      *
      * @var string|int|array|Person|null
      * @since 1.4.0
      */
+    #[HydrateAs(Seller::class)]
     public null|int|string|array|Person $assignedSeller ;
 
     /**
@@ -96,7 +100,7 @@ class BusinessDocument extends Intangible
      * authored it. Reuses the Schema.org `author` name.
      * @var null|Organization|Person|array
      */
-    #[HydrateWith(Organization::class, Person::class)]
+    #[HydrateWith(Seller::class, Organization::class, Person::class)]
     public null|Organization|Person|array $author ;
 
     /**
@@ -138,7 +142,7 @@ class BusinessDocument extends Intangible
      * documents, hence added here.
      * @var null|array|Person
      */
-    #[HydrateAs(Person::class)]
+    #[HydrateWith(CustomerEmployee::class, Person::class)]
     public null|array|Person $contact ;
 
     /**
@@ -205,8 +209,20 @@ class BusinessDocument extends Intangible
      * the other header references.
      * @var null|array|Place
      */
-    #[HydrateAs(Place::class)]
+    #[HydrateWith(Warehouse::class, Place::class)]
     public null|array|Place $pointOfSale ;
+
+    /**
+     * The company that issues the document and will invoice it.
+     *
+     * Redeclares {@see \org\schema\Thing::$publisher} with the same union, to name
+     * the subject : a stored row is read back as a {@see Subsidiary}, which is what
+     * the issuing party is here.
+     *
+     * @var string|array|Person|Organization|null
+     */
+    #[HydrateWith(Subsidiary::class, Organization::class, Person::class)]
+    public string|array|Person|Organization|null $publisher ;
 
     /**
      * References to other related documents (e.g. a purchase order number quoted on an invoice).
@@ -218,7 +234,7 @@ class BusinessDocument extends Intangible
      * The party issuing the document.
      * @var null|array|Organization|Person
      */
-    #[HydrateWith(Organization::class, Person::class)]
+    #[HydrateWith(Subsidiary::class, Organization::class, Person::class)]
     public null|array|Organization|Person $seller ;
 
     /**

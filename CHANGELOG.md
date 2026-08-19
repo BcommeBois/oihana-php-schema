@@ -87,6 +87,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Fixed
 
+- **Every party of a `BusinessDocument` is read back as the class that names it** —
+  `assignedSeller` and `author` as a `Seller`, `contact` as a `CustomerEmployee`,
+  `pointOfSale` as a `Warehouse`, `seller` and `publisher` as a `Subsidiary`.
+
+  The same defect as the customer's, in the six slots beside it : the subclasses
+  are not decoration — a subsidiary carries ten properties an organization does
+  not, a warehouse six a place does not, a salesperson and a customer contact three
+  a person does not — and read back as their parent, those were dropped on the way
+  in. `publisher` is redeclared for the purpose, with the union it inherits.
+
+  🔑 **A bare key is still left as read.** Naming a class says how to read a joined
+  row, never that one has to be there.
+
 - **`BusinessDocument::$customer` is read back as a `Customer`.** The candidate list
   named `Organization` and `Person` only, and the hydration cannot pick a class it
   is not given : a stored customer came back as a bare organization, and the
