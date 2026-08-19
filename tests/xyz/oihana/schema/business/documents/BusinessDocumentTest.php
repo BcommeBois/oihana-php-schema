@@ -26,6 +26,7 @@ use xyz\oihana\schema\enumerations\BusinessDocumentAuthority;
 use xyz\oihana\schema\enumerations\BusinessDocumentDirection;
 use xyz\oihana\schema\enumerations\BusinessDocumentStatus;
 use xyz\oihana\schema\enumerations\DocumentTotalsAccuracy;
+use xyz\oihana\schema\organizations\Customer;
 
 class BusinessDocumentTest extends TestCase
 {
@@ -445,4 +446,39 @@ class BusinessDocumentTest extends TestCase
         $this->assertSame( 326.5456 , $document->weight ) ;
         $this->assertFalse( property_exists( $document->totals , BusinessDocument::WEIGHT ) ) ;
     }
+
+    /**
+     * A stored customer is read back as one.
+     *
+     * The candidate list is what the hydration chooses from, so a class it does not
+     * name cannot be picked : the row came back as a bare `Organization` and the
+     * seventeen properties only a customer declares — its salesperson, its point of
+     * sale, its credit status, its price segment — were dropped on the way in,
+     * without an error and without a trace.
+     *
+     * @throws ReflectionException
+     */
+    public function testTheCustomerIsReadBackWithWhatOnlyACustomerCarries(): void
+    {
+        $document = new Reflection()->hydrate
+        (
+            [
+                Oihana::CUSTOMER =>
+                [
+                    Oihana::AT_TYPE         => Customer::getSchemaType() ,
+                    Oihana::ID              => '741278' ,
+                    Oihana::NAME            => 'Charpentes du Sud' ,
+                    Oihana::ASSIGNED_SELLER => 'ALPER' ,
+                    Oihana::CREDIT_STATUS   => 'OK' ,
+                ],
+            ],
+            BusinessDocument::class
+        );
+
+        $this->assertInstanceOf( Customer::class , $document->customer );
+        $this->assertSame( '741278' , $document->customer->id             );
+        $this->assertSame( 'ALPER'  , $document->customer->assignedSeller );
+        $this->assertSame( 'OK'     , $document->customer->creditStatus   );
+    }
+
 }

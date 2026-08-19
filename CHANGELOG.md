@@ -56,6 +56,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Fixed
 
+- **`BusinessDocument::$customer` is read back as a `Customer`.** The candidate list
+  named `Organization` and `Person` only, and the hydration cannot pick a class it
+  is not given : a stored customer came back as a bare organization, and the
+  seventeen properties only a customer declares — its salesperson, its point of
+  sale, its credit status, its price segment — were dropped on the way in, without
+  an error and without a trace.
+
+  *(Consumers that hydrate the slot themselves, naming the class as they read it,
+  were never affected.)*
+
 - **Hydration** — every property union that names a class also accepts `array`,
   across `CreativeWork` and `Product`.
 

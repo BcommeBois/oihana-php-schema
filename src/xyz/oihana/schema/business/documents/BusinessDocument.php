@@ -21,6 +21,7 @@ use xyz\oihana\schema\enumerations\BusinessDocumentAuthority;
 use xyz\oihana\schema\enumerations\BusinessDocumentDirection;
 use xyz\oihana\schema\enumerations\BusinessDocumentStatus;
 use xyz\oihana\schema\enumerations\DocumentTotalsAccuracy;
+use xyz\oihana\schema\organizations\Customer;
 
 /**
  * The common parent of the quote → purchase order → invoice cycle (and its
@@ -148,9 +149,16 @@ class BusinessDocument extends Intangible
 
     /**
      * The party the document is addressed to.
+     *
+     * 🔑 **{@see Customer} is named first among the candidates**, so a stored row
+     * carrying the type is read back with the properties only a customer has — its
+     * salesperson, its point of sale, its credit status, its price segment. A class
+     * that is not named cannot be chosen, and what it alone declares is dropped
+     * without a word.
+     *
      * @var null|array|Organization|Person
      */
-    #[HydrateWith(Organization::class, Person::class)]
+    #[HydrateWith(Customer::class, Organization::class, Person::class)]
     public null|array|Organization|Person $customer ;
 
     /**
