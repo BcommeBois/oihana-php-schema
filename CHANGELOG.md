@@ -8,6 +8,66 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Changed
 
+- **Breaking** — `measurementMethod` and `measurementTechnique` are declared
+  once, in `org\schema\traits\MeasurementTechniqueTrait`, and composed by the
+  six types that carry them : `Dataset`, `DataCatalog`, `DataDownload`,
+  `PropertyValue`, `Observation` and `StatisticalVariable`.
+
+  The pair was written by hand on each of them, and **had already drifted** :
+  five declarations for three different types. `Dataset` and `DataCatalog`
+  accepted the raw row a store hands back, `DataDownload` did not — the very same
+  payload went in on the dataset and **threw a TypeError on its download** — and
+  `PropertyValue` typed both as `mixed`, which reads everything and guarantees
+  nothing. A term that means one thing in the vocabulary cannot mean three in the
+  library, and nothing was going to notice : each copy was correct on its own.
+
+  ⚠️ **`PropertyValue::$measurementMethod` and `$measurementTechnique` narrow
+  from `mixed`** to the union the other five already used —
+  `null|string|array|DefinedTerm|MeasurementMethodEnum`. Everything schema.org
+  publishes on them passes ; a value outside the vocabulary, an int or an
+  unrelated object, now meets an error where it used to be stored and serialized
+  unread. `LocationFeatureSpecification`, which extends PropertyValue, follows.
+
+  🔑 **`MeasurementVariableTrait` composes the pair rather than repeating it**,
+  and keeps the three terms a *variable* adds : `measuredProperty`,
+  `measurementDenominator`, `measurementQualifier`. A user of that trait carries
+  the same five terms as before.
+
+- **Breaking** — `org\schema\creativeWork\Dataset` and
+  `org\schema\creativeWork\DataCatalog` extend `CreativeWork`, where they
+  extended `MediaObject`.
+
+  A dataset is a body of structured information, and a catalogue is a collection
+  of them : neither is a media file. Schema.org publishes both under
+  CreativeWork, and the file — when there is one — hangs off `distribution` as a
+  `DataDownload`. Inheriting from MediaObject handed each of them twenty terms
+  schema.org does not publish on them (`contentUrl`, `contentSize`,
+  `encodesCreativeWork`, `bitrate`, `width`, `height`, `duration`, `startTime`,
+  `uploadDate`…), and a payload that filled them serialized a dataset **claiming
+  to be a file** — one whose `contentUrl` no consumer of the vocabulary would
+  ever look for.
+
+  ⚠️ A consumer setting one of those terms on either class now meets an error
+  rather than a property. The file terms move to the `DataDownload` on
+  `distribution`, which is where a reader of schema.org already expects them.
+  `DataFeed`, which extends Dataset, follows.
+
+  DataCatalog also gets its own description : it carried DataDownload's, `@see`
+  included, and read « All or part of a Dataset in downloadable form » — the one
+  sentence in the file that still called it a file.
+
+- The reference terms of `ConstraintNode`, `StatisticalVariable` and `Dataset`
+  accept `array` : `constraintProperty`, `populationType`, `statType`,
+  `distribution`, `measurementMethod`, `measurementTechnique` and the five terms
+  of `MeasurementVariableTrait`.
+
+  A union naming only the class rejects the raw row a store hands back, and the
+  constructor assigns without hydrating — so the payload that came out of a base
+  **threw a TypeError on the way back in**, on the very properties whose whole
+  purpose is to point at another node. The same union also refused a repeated
+  value, which schema.org allows on every one of them : a node constraining two
+  properties, a dataset published in three formats.
+
 - **Breaking** — `findPhysicalQuantityByType()`, and therefore
   `Product::findEligibleQuantityByType()`, types the level it returns **and the
   chain below it**, where it used to type that one level alone.
@@ -283,6 +343,65 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   consumer reading `value` and `unitCode` sees exactly what it saw before.
 
 ### Added
+
+- `org\schema\Observation`, and the `org\schema\traits\MeasurementVariableTrait`
+  it shares with `StatisticalVariable`.
+
+  An Observation is the measured figure itself — a population, at a place, on a
+  date — and the library named the abstract specification without ever naming
+  what it specifies. A Data Commons or W3C Data Cube payload is made of
+  Observations ; with no class for them, each one was read back as a bare
+  `QuantitativeValue`, which declares none of `observationAbout`,
+  `observationDate`, `observationPeriod` or `marginOfError`. **The place, the
+  date and the error bar were dropped, without an error and without a trace**,
+  and what survived was a number with no idea what it counted or when.
+
+  🔑 **It extends `QuantitativeValue` rather than `Intangible`.** An Observation
+  *is* a quantity : it takes `value`, `unitCode` and `unitText` from the same
+  place every other measure in this library does, so a consumer reading a figure
+  does not have to know it came from an observation to read it.
+
+  🔑 **The five measurement terms are declared once.** `measuredProperty`,
+  `measurementDenominator`, `measurementMethod`, `measurementQualifier` and
+  `measurementTechnique` are published by schema.org on both types, and a second
+  copy of the block is a second place for them to drift. `StatisticalVariable`
+  loses its own declarations and takes the trait's ; what they say is unchanged.
+
+- The constants follow the source, term by term : a property is named where it
+  is declared. `org\schema\constants\traits\Observation` names the four terms
+  an Observation brings of its own — `MARGIN_OF_ERROR`, `OBSERVATION_ABOUT`,
+  `OBSERVATION_DATE`, `OBSERVATION_PERIOD` — `…\traits\MeasurementVariable`
+  names the three of `MeasurementVariableTrait`, and `…\traits\MeasurementTechnique`
+  the pair of `MeasurementTechniqueTrait`.
+
+  ⚠️ `MEASUREMENT_METHOD` and `MEASUREMENT_TECHNIQUE` **leave** the
+  `StatisticalVariable`, `Dataset`, `DataCatalog` and `Values` constants traits,
+  and `MEASURED_PROPERTY`, `MEASUREMENT_DENOMINATOR`, `MEASUREMENT_QUALIFIER`
+  leave `StatisticalVariable`, for the two traits above. All of them are composed
+  into `Properties`, so `Schema::MEASUREMENT_TECHNIQUE` and
+  `Prop::MEASUREMENT_TECHNIQUE` answer exactly as before ; only a consumer
+  composing a constants trait directly — which nothing in this library does — has
+  a second trait to add.
+
+- `ObservationTest`, `StatisticalVariableTest`, `ConstraintNodeTest`,
+  `DatasetTest` and `MeasurementVariableTraitTest` cover the four types and the
+  trait : the hierarchy each one sits in, construction from a typed value and
+  from the raw row a store hands back, the serialized `@type`, and that both
+  users of the trait carry the same five terms and name them from the same
+  constants.
+
+  `DatasetTest` holds the parent as a regression : it asserts a Dataset is a
+  `CreativeWork`, is **not** a `MediaObject`, and carries none of `contentUrl`,
+  `contentSize` or `bitrate` — the terms it used to inherit and never had.
+
+- `MeasurementTechniqueTraitTest` is the guard against the copy coming back. It
+  **reads the source tree** rather than a list, so a type added later is guarded
+  the day it lands : every `org\schema` class carrying `measurementMethod` or
+  `measurementTechnique` must take them from `MeasurementTechniqueTrait`, must
+  accept exactly what the trait accepts — the union is compared term by term, by
+  reflection — and must swallow the raw row a store hands back. It catches today
+  the eight types concerned, `DataFeed` and `LocationFeatureSpecification`
+  included, which inherit the pair without naming it.
 
 - `BusinessDocument` gains `$totalsAccuracy`, and the library the
   `xyz\oihana\schema\enumerations\DocumentTotalsAccuracy` enumeration it reads
