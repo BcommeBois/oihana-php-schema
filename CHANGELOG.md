@@ -92,6 +92,20 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   `agent` who owes it. Only the kind of step — call back, send the quote, visit
   again — had to be added.
 
+- `Seller::$hoursAvailable` — when a salesperson takes appointments, and when they
+  take none.
+
+  The weekly rhythm and the closures are written the same way : a specification
+  stating days and hours is when meetings are taken, one stating a range of dates
+  and no hours is a week away. The term is borrowed from `Service::$hoursAvailable`
+  rather than invented — schema.org publishes it on a contact point and on a
+  service, never on a person, and a person taking appointments states exactly the
+  same thing.
+
+  🔑 **Silence is not an opening.** Whoever offers a slot needs a positive statement
+  of when it may be offered ; saying nothing means no slot can be proposed, which is
+  the safe reading rather than the permissive one.
+
 - `AppointmentTrait`, `FollowUpTrait`, `VisitReportTrait` and the `AppointmentsTrait`
   aggregator carry the property name constants and join `constants\Oihana`.
 
