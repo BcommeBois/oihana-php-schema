@@ -344,6 +344,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- The **statistics guide** (FR canonical + EN mirror) documents the namespace :
+  when to reach for it rather than for a `Dataset`, the model in three pieces —
+  the record, the measure, the ten measures —, a property table per class, the
+  rule that a measure carries what its source states, why six of the ten are
+  confidential and why hiding them from a projection is not enough, and a
+  complete JSON-LD document. Listed in both wiki indexes.
+
 - `xyz\oihana\schema\traits\HasTradingMeasures` — the ten measures a body of
   trading figures is made of, and `CustomerStatistics` / `ProviderStatistics`,
   the two families that carry them.

@@ -19,6 +19,7 @@ The `xyz\oihana\schema` namespace is the library's **house layer**: the domain t
 | [Commerce layer](products.md) | `…\products` | `Product` (eligible-quantity tree, conversions, `resolveUnitCode()` hook) and its satellites. |
 | [Places](places.md) | `…\places` | Operational locations: `Site`, `Office`, `Warehouse`, `JobSite`. |
 | [Shipping](shipping.md) | `…\shipping` | Standing shipping arrangements: `DeliveryRouteAssignment` — which delivery route serves an address, and when. |
+| [Statistics](statistics.md) | `…\statistics` | Bodies of already-measured figures: `Statistics` (subject, direction, year, step), `ObservationSeries` (one measure and its run), the ten trading measures, and the `CustomerStatistics` / `ProviderStatistics` families. |
 | [Thesaurus (SKOS)](thesaurus.md) | `…\thesaurus` | SKOS concept trees and the registry layer (`ThesaurusScheme`, `ThesaurusDomain`). |
 | [HTTP](http.md) | `…\http` | Structured request metadata: `UserAgentInfo`. |
 | [Cross-cutting types](core.md) | root | `Pagination`, `Log`, `AuditAction`, audit enumerations. |
