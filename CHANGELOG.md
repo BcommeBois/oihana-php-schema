@@ -4,6 +4,43 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+
+### Added
+
+- `SellerStatistics` and `SalesObjectives` — the outcome and the target, written
+  in the same shape so that one can be read against the other.
+
+  🔑 **Both take the salesperson as their subject, and narrow with a dimension.**
+  A record attributed customer by customer names the customer in
+  `assignedCustomer` ; a target set on a range of goods names it in
+  `assignedCategory`, which reuses the shape `Product::$category` already carries
+  — a single code, or the ordered codes of a path through a classification. The
+  two narrowings of a target are alternatives, never both at once, and a figure
+  set on the salesperson alone leaves them unset. Keeping the salesperson as the
+  subject on both sides is the whole point : a target and its outcome line up key
+  for key, with nothing to translate between them.
+
+  ⚠️ **Attribution is a choice, and two defensible ones disagree.** A source that
+  attributes at the moment of the sale credits whoever made it, for good ; a
+  portfolio read from `CustomerStatistics::$assignedSeller` credits whoever holds
+  the account *now*, and moves a whole history along with the account. Both are
+  true sentences about different things, and they part company at every transfer.
+
+  ⚠️ **A target is rarely as detailed as it looks.** Sources commonly publish one
+  measure — a revenue figure — and leave the nine others empty ; and where a
+  yearly target does carry a value per month, that detail is often the yearly
+  figure spread over a seasonal curve rather than twelve decisions. Neither is
+  visible in the record once written, so a reader who needs to know which one is
+  in front of them has to be told by whoever published it.
+
+- `SalesObjectivesTrait` and `SellerStatisticsTrait` carry the property name
+  constants of the two classes, and join the `StatisticsTrait` aggregator.
+
+- The **statistics guide** (FR canonical + EN mirror) gains the two classes in
+  its catalogue, a property table for each, and the note that a target is not an
+  observation even though it reads like one.
+
 ## [1.4.0] - 2026-08-19
 
 ### Changed

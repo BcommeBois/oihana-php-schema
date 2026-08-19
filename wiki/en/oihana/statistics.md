@@ -101,6 +101,8 @@ A **family** is a record whose subject is named: `CustomerStatistics` for a cust
 | `ObservationSeries`  | `org\schema\Observation` | One measure, read over the whole period and step by step.                                   |
 | `CustomerStatistics` | `Statistics` | What a **customer** traded over one year, plus the salesperson and point of sale of the time.           |
 | `ProviderStatistics` | `Statistics` | What was bought from a **supplier** over one year.                                                      |
+| `SellerStatistics`   | `Statistics` | What a **salesperson** traded over one year, possibly customer by customer.                             |
+| `SalesObjectives`    | `Statistics` | What a **salesperson** is aiming at over one year — the same measures, read as targets.                 |
 
 ### `Statistics` properties
 
@@ -150,6 +152,22 @@ A **family** is a record whose subject is named: `CustomerStatistics` for a cust
 | `assignedPOS`    | `int\|string\|array\|Warehouse\|null`     | The point of sale that served the customer.                        |
 
 `ProviderStatistics` names its subject a `Provider` and adds no dimension: a supplier is not attached to a salesperson or to a point of sale the way a customer is.
+
+### `SellerStatistics` and `SalesObjectives` properties
+
+| Property           | Type                                          | Description                                                                   |
+|--------------------|-----------------------------------------------|-------------------------------------------------------------------------------|
+| `about`            | `#[HydrateAs(Seller::class)]`                 | The salesperson — same union as on the record, subject named.                 |
+| `assignedCustomer` | `int\|string\|array\|Customer\|null`         | The customer the figure or the target is set on. Unset when the source totals the salesperson. |
+| `assignedCategory` | `array\|string\|CategoryCode\|Thing\|null`   | *(`SalesObjectives` only)* The range of goods aimed at — a single code, or the ordered codes of a path through a classification, widest first. Unset when the target is set on a customer. |
+
+**The two narrowings are alternatives**: a target is set on a customer **or** on a range of goods, never on both, and a target set on the salesperson alone leaves both unset.
+
+**Both classes carry the same subject, and that is the whole point.** The outcome and the target line up key for key, with nothing to translate between them.
+
+⚠️ **A target is rarely as detailed as it looks.** Sources commonly publish one measure — a revenue figure — and leave the nine others empty; and where a yearly target does carry a value per month, that detail is often the yearly figure spread over a seasonal curve rather than twelve decisions. None of this is visible in the record once written, so a reader who needs to know has to be told by whoever published it.
+
+⚠️ **Attributing a figure to a salesperson is a choice, and two defensible ones disagree.** A source that attributes at the moment of the sale credits whoever made it, for good. A portfolio read from `CustomerStatistics::$assignedSeller` credits whoever holds the account *now*, and moves a whole history along with the account. Both are true sentences about different things, and they part company at every transfer.
 
 ---
 
@@ -208,7 +226,7 @@ The three costs and the three margins say what an operator earns on a given coun
 
 ## Related constants
 
-Property keys are exposed by the [`StatisticsRecordTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/StatisticsRecordTrait.php), [`ObservationSeriesTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/ObservationSeriesTrait.php), [`HasTradingMeasuresTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/HasTradingMeasuresTrait.php) and [`CustomerStatisticsTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/CustomerStatisticsTrait.php) traits, composed in the [`StatisticsTrait`](../../../src/xyz/oihana/schema/constants/traits/StatisticsTrait.php) domain aggregator and wired into the [`Oihana`](../../../src/xyz/oihana/schema/constants/Oihana.php) master class. You can therefore reach them through `Oihana::YEAR`, `Oihana::REVENUE`, `Oihana::GROSS_MARGIN`, and each class exposes its own (`CustomerStatistics::REVENUE`).
+Property keys are exposed by the [`StatisticsRecordTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/StatisticsRecordTrait.php), [`ObservationSeriesTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/ObservationSeriesTrait.php), [`HasTradingMeasuresTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/HasTradingMeasuresTrait.php), [`CustomerStatisticsTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/CustomerStatisticsTrait.php), [`SellerStatisticsTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/SellerStatisticsTrait.php) and [`SalesObjectivesTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/SalesObjectivesTrait.php) traits, composed in the [`StatisticsTrait`](../../../src/xyz/oihana/schema/constants/traits/StatisticsTrait.php) domain aggregator and wired into the [`Oihana`](../../../src/xyz/oihana/schema/constants/Oihana.php) master class. You can therefore reach them through `Oihana::YEAR`, `Oihana::REVENUE`, `Oihana::GROSS_MARGIN`, and each class exposes its own (`CustomerStatistics::REVENUE`).
 
 ---
 

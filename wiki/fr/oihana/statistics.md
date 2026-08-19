@@ -101,6 +101,8 @@ Une **famille** est une fiche dont le sujet est nommé : `CustomerStatistics` po
 | `ObservationSeries`  | `org\schema\Observation` | Une mesure, lue sur toute la période et pas à pas.                                            |
 | `CustomerStatistics` | `Statistics`             | Ce qu'un **client** a échangé sur une année, plus le commercial et le point de vente d'alors. |
 | `ProviderStatistics` | `Statistics`             | Ce qui a été acheté à un **fournisseur** sur une année.                                       |
+| `SellerStatistics`   | `Statistics`             | Ce qu'un **commercial** a échangé sur une année, éventuellement client par client.            |
+| `SalesObjectives`    | `Statistics`             | Ce qu'un **commercial** vise sur une année — les mêmes mesures, lues comme des cibles.        |
 
 ### Propriétés de `Statistics`
 
@@ -150,6 +152,22 @@ Une **famille** est une fiche dont le sujet est nommé : `CustomerStatistics` po
 | `assignedPOS`    | `int\|string\|array\|Warehouse\|null` | Le point de vente qui servait le client.              |
 
 `ProviderStatistics` nomme son sujet un `Provider` et n'ajoute aucune dimension : un fournisseur n'est pas rattaché à un commercial ni à un point de vente comme l'est un client.
+
+### Propriétés de `SellerStatistics` et de `SalesObjectives`
+
+| Propriété          | Type                                            | Description                                                                 |
+|--------------------|-------------------------------------------------|-----------------------------------------------------------------------------|
+| `about`            | `#[HydrateAs(Seller::class)]`                   | Le commercial — même union que sur la fiche, sujet nommé.                   |
+| `assignedCustomer` | `int\|string\|array\|Customer\|null`           | Le client sur lequel porte le chiffre ou la cible. Absent si la source totalise le commercial. |
+| `assignedCategory` | `array\|string\|CategoryCode\|Thing\|null`     | *(`SalesObjectives` seul)* Le rayon de marchandises visé — un code, ou les codes ordonnés d'un chemin de classification, du plus large au plus fin. Absent si la cible porte sur un client. |
+
+**Les deux narrations sont exclusives** : une cible porte sur un client **ou** sur un rayon, jamais sur les deux, et une cible posée sur le seul commercial les laisse toutes deux absentes.
+
+**Les deux classes portent le même sujet, et c'est tout l'intérêt.** Le réalisé et la cible s'alignent clé pour clé, sans rien à traduire de l'un vers l'autre.
+
+⚠️ **Une cible est rarement aussi détaillée qu'elle en a l'air.** Il est courant qu'une source ne renseigne qu'une seule mesure — un chiffre d'affaires — et laisse les neuf autres vides ; et quand une cible annuelle porte bien une valeur par mois, ce détail est souvent l'annuel étalé sur une courbe de saison plutôt que douze décisions. Rien de tout cela ne se voit dans la fiche une fois écrite : le lecteur qui a besoin de le savoir doit l'apprendre de qui l'a publiée.
+
+⚠️ **Attribuer un chiffre à un commercial est un choix, et deux choix défendables se contredisent.** Une source qui attribue au moment de la vente crédite celui qui l'a faite, définitivement. Un portefeuille lu depuis `CustomerStatistics::$assignedSeller` crédite celui qui tient le compte *aujourd'hui*, et déplace tout un historique avec le compte. Les deux énoncés sont vrais, ils ne parlent pas de la même chose, et ils divergent à chaque transfert.
 
 ---
 
@@ -208,7 +226,7 @@ Les trois coûts et les trois marges disent ce qu'un opérateur gagne sur un par
 
 ## Constantes associées
 
-Les clés de propriétés sont exposées par les traits [`StatisticsRecordTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/StatisticsRecordTrait.php), [`ObservationSeriesTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/ObservationSeriesTrait.php), [`HasTradingMeasuresTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/HasTradingMeasuresTrait.php) et [`CustomerStatisticsTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/CustomerStatisticsTrait.php), composés dans l'agrégateur de domaine [`StatisticsTrait`](../../../src/xyz/oihana/schema/constants/traits/StatisticsTrait.php) et câblés dans la classe maîtresse [`Oihana`](../../../src/xyz/oihana/schema/constants/Oihana.php). Vous pouvez donc y accéder via `Oihana::YEAR`, `Oihana::REVENUE`, `Oihana::GROSS_MARGIN`, etc. — et chaque classe expose les siennes (`CustomerStatistics::REVENUE`).
+Les clés de propriétés sont exposées par les traits [`StatisticsRecordTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/StatisticsRecordTrait.php), [`ObservationSeriesTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/ObservationSeriesTrait.php), [`HasTradingMeasuresTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/HasTradingMeasuresTrait.php) [`CustomerStatisticsTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/CustomerStatisticsTrait.php), [`SellerStatisticsTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/SellerStatisticsTrait.php) et [`SalesObjectivesTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/SalesObjectivesTrait.php), composés dans l'agrégateur de domaine [`StatisticsTrait`](../../../src/xyz/oihana/schema/constants/traits/StatisticsTrait.php) et câblés dans la classe maîtresse [`Oihana`](../../../src/xyz/oihana/schema/constants/Oihana.php). Vous pouvez donc y accéder via `Oihana::YEAR`, `Oihana::REVENUE`, `Oihana::GROSS_MARGIN`, etc. — et chaque classe expose les siennes (`CustomerStatistics::REVENUE`).
 
 ---
 
