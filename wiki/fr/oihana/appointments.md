@@ -1,0 +1,302 @@
+# `xyz\oihana\schema\appointments` — Rendez-vous
+
+Le namespace `xyz\oihana\schema\appointments` décrit une **rencontre convenue avec un client** — chez lui, sur un chantier, au téléphone, en visioconférence — et **ce qu'on en écrit** une fois qu'elle a eu lieu.
+
+> 🇬🇧 This page is also available in [English](../../en/oihana/appointments.md).
+
+---
+
+## Quand l'utiliser
+
+Choisissez ces classes lorsque vous devez **planifier, retrouver ou raconter une rencontre** :
+
+- tenir l'agenda d'un commercial — ce qu'il a aujourd'hui, cette semaine, ce mois ;
+- préparer une visite : qui on va voir, où, et ce qu'on compte lui montrer ;
+- consigner ce qui s'est dit, sur quel ton, et ce qu'il reste à faire ;
+- compter — combien de visites, combien ont abouti, lesquelles sont à relancer.
+
+Un rendez-vous étend `org\schema\Event`. C'est ce que **tout agenda lit déjà** : son lieu, ses horaires, les personnes attendues et celle dont c'est l'agenda sont les propriétés de Schema.org, pas des inventions maison. Ce que le vocabulaire n'a pas de mot pour dire s'ajoute à côté — le client, le type de rencontre, ce qu'on veut lui présenter, le compte rendu.
+
+> ℹ️ **Pourquoi pas une `Action` ?** Une `Action` décrit un agent qui agit sur un objet et produit un résultat — et un rendez-vous en a l'air. Mais elle n'a **pas de mot pour dire qu'un créneau a été déplacé**, là où `Event` publie `eventStatus` et `previousStartDate` ; et c'est l'`Event` que les agendas, les exports iCalendar et les composants d'interface savent lire sans qu'on leur apprenne rien. Le vocabulaire de l'action reste employé là où il est juste : la suite à donner en est une.
+
+---
+
+## Exemple express
+
+```php
+use org\schema\constants\Schema;
+
+use xyz\oihana\schema\appointments\Appointment;
+use xyz\oihana\schema\constants\Oihana;
+use xyz\oihana\schema\enumerations\AppointmentStatus;
+
+$appointment = new Appointment
+([
+    Schema::NAME               => 'Point gamme terrasse' ,
+    Schema::START_DATE         => '2026-09-03T09:30:00+02:00' ,
+    Schema::END_DATE           => '2026-09-03T10:30:00+02:00' ,
+    Schema::DESCRIPTION        => 'Présenter la lame composite, relancer le devis en cours.' ,
+
+    Oihana::APPOINTMENT_TYPE   => 'VISIT' ,                       // un terme de thésaurus
+    Oihana::APPOINTMENT_STATUS => AppointmentStatus::PLANNED ,
+    Oihana::TAGS               => [ 'MEAL' , 'JOBSITE' ] ,        // les mentions rapides
+
+    Schema::ORGANIZER          => [ Schema::ID => 'ALPER' , Schema::NAME => 'A. Perez' ] ,
+    Schema::CUSTOMER           => [ Schema::ID => '741278' , Schema::NAME => 'Charpentes du Sud' ] ,
+    Schema::ATTENDEE           => [ [ Schema::NAME => 'Claire Martin' ] ] ,
+]);
+
+echo json_encode( $appointment , JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
+```
+
+Et la relecture d'un document stocké, qui retype tout l'arbre d'un coup :
+
+```php
+use oihana\reflect\Reflection;
+
+$appointment = new Reflection()->hydrate( $document , Appointment::class );
+
+$appointment->organizer;          // xyz\oihana\schema\people\Seller
+$appointment->customer;           // xyz\oihana\schema\organizations\Customer
+$appointment->attendee[ 0 ];      // xyz\oihana\schema\people\CustomerEmployee
+$appointment->location;           // xyz\oihana\schema\places\CustomerSite
+$appointment->report;             // xyz\oihana\schema\appointments\VisitReport
+$appointment->report->followUp;   // xyz\oihana\schema\appointments\FollowUp[]
+```
+
+> ⚠️ **Le constructeur assigne brut, l'hydratation type.** `new Appointment([ … ])` recopie ce qu'on lui donne tel quel ; c'est `Reflection::hydrate()` qui lit les attributs et rend les objets imbriqués dans leur classe. Les deux chemins sont normaux — le premier écrit, le second relit.
+
+---
+
+## Le modèle en trois pièces
+
+| Pièce | Ce qu'elle dit |
+|---|---|
+| **La rencontre** (`Appointment`) | *avec qui*, *quand*, *où*, *de quelle nature*, et *ce qu'on compte présenter*. Écrite **avant**. |
+| **Le compte rendu** (`VisitReport`) | *comment ça s'est passé*, *ce que ça a produit*, *qui était vraiment là*. Écrit **après**. |
+| **La suite** (`FollowUp`) | *ce qui reste dû*, *pour quand*, et le rendez-vous éventuellement pris pour l'honorer. |
+
+```
+                     Appointment  (Event)
+                     customer · organizer · location · attendee · appointmentType
+                     appointmentStatus · tags · makesOffer
+                              │
+                              └── report ──▶ VisitReport  (CreativeWork)
+                                             mood · outcome · topics · attendee · text
+                                                   │
+                                                   └── followUp[] ──▶ FollowUp  (ScheduleAction)
+                                                                      followUpType · scheduledTime
+                                                                      actionStatus · result ──▶ Appointment
+```
+
+Ce qui est écrit **avant** et ce qui est écrit **après** cohabitent : `description`, `makesOffer` et `tags` sont la préparation, `report` est ce qui en est advenu. L'un n'écrase jamais l'autre — une rencontre vaut d'être relue précisément pour l'écart entre les deux.
+
+---
+
+## Catalogue des classes
+
+| Classe | Étend | Rôle |
+|---|---|---|
+| `Appointment` | `org\schema\Event` | Une rencontre convenue avec un client. |
+| `VisitReport` | `org\schema\CreativeWork` | Ce qui a été écrit une fois la rencontre passée. |
+| `FollowUp` | `org\schema\actions\ScheduleAction` | Ce qui reste à faire ensuite, et pour quand. |
+| `AppointmentStatus` | `org\schema\enumerations\StatusEnumeration` | Ce qu'il est advenu de la rencontre elle-même. |
+
+---
+
+## 🔑 Deux axes d'état, et ils ne se remplacent pas
+
+C'est le point le plus important de la page, et celui qui coûte le plus cher à découvrir en chemin.
+
+| Axe | Propriété | Ce qu'il dit | Valeurs |
+|---|---|---|---|
+| **Le créneau** | `eventStatus` *(hérité d'`Event`)* | ce qu'il est advenu de **l'horaire** | `EventScheduled`, `EventRescheduled`, `EventPostponed`, `EventCancelled`, `EventMovedOnline` |
+| **La rencontre** | `appointmentStatus` | ce qu'il est advenu de **la rencontre** | `Planned`, `Done`, `NoShow`, `Cancelled` |
+
+Schema.org **ne publie aucun membre pour « ça a eu lieu »** : son énumération suit un événement annoncé, pas un événement vécu. Un agenda lit le premier axe — un rendez-vous déplacé garde son `previousStartDate` et reste à venir ; un compte rendu lit le second — une rencontre `Done` ne bouge plus. Un seul axe ne pourrait pas répondre aux deux questions.
+
+🔑 **`NoShow` n'est pas `Cancelled`.** Une annulation est annoncée et libère le temps ; une absence se découvre sur le pas de la porte et coûte le déplacement. Les compter ensemble masque la seule des deux sur laquelle on peut agir.
+
+---
+
+## Propriétés d'`Appointment`
+
+| Propriété | Type | Description |
+|---|---|---|
+| `appointmentStatus` | `string\|AppointmentStatus\|null` | Ce qu'il est advenu de la rencontre. Se lit à côté d'`eventStatus`. |
+| `appointmentType` | `string\|array\|DefinedTerm\|null` | La nature de la rencontre — chez le client, au téléphone, en visio, sur un chantier. Une seule valeur. |
+| `assignedSeller` | `int\|string\|array\|Person\|null` | Le commercial auquel le client est rattaché. Peut différer de l'organisateur. |
+| `attendee` | `Person\|Organization\|array\|null` | Les contacts du client **attendus**. Facultatifs, aucun ou plusieurs. Relus en `CustomerEmployee`. |
+| `customer` | `array\|Organization\|Person\|null` | Le client. Une référence et sa copie figée, ou un client **libre** — un nom, un téléphone — pour une entreprise qui n'est pas encore au fichier. Relu en `Customer`. |
+| `location` | `PostalAddress\|Place\|VirtualLocation\|string\|array\|null` | Le lieu : une adresse du client, un chantier, une salle virtuelle. Relu en `CustomerSite`, `JobSite`, `Place`… |
+| `makesOffer` | `Offer[]\|null` | Ce qu'on compte présenter. Voir ci-dessous. |
+| `organizer` | `Person\|Organization\|array\|null` | Le commercial **dont c'est l'agenda**. Relu en `Seller`. |
+| `report` | `array\|VisitReport\|null` | Le compte rendu. **Un seul**, absent tant qu'il n'y a rien à raconter. |
+| `tags` | `string[]\|DefinedTerm[]\|null` | Les mentions rapides — repas avec le client, visite de l'entreprise, chantier, démonstration. Plusieurs. |
+
+`name`, `description`, `startDate`, `endDate`, `duration`, `eventStatus`, `eventAttendanceMode`, `previousStartDate`, `remarks`, `about`, `subEvent`/`superEvent` sont hérités d'`Event` ; `id`, `identifier`, `url`, `created`, `modified` de `Thing`.
+
+### 🔑 Le client est la seule chose dont une rencontre ne peut pas se passer
+
+Tout le reste est facultatif : les contacts attendus, le lieu, ce qu'on compte montrer. Et le client peut prendre deux formes, sans que la classe ait à distinguer :
+
+```php
+// Un client connu : une référence et sa copie figée.
+Schema::CUSTOMER => [ '@type' => 'Customer' , '_key' => '137191259' , 'id' => '741278' , 'name' => 'Charpentes du Sud' ]
+
+// Un client libre : ce qu'on sait de lui, et pas de clé.
+Schema::CUSTOMER => [ 'name' => 'Charpentes du Sud' , 'telephone' => '05 56 00 00 00' ]
+```
+
+La bibliothèque accepte les deux ; c'est au consommateur de décider quand la référence devient obligatoire, et comment un client libre est **rattaché** plus tard à une fiche créée entre-temps.
+
+### 🔑 `makesOffer` — une intention, pas un devis
+
+Ce qu'un commercial compte mettre sous les yeux de son client s'écrit en **offres**, une par produit :
+
+```php
+Schema::MAKES_OFFER =>
+[
+    [
+        Schema::DESCRIPTION  => 'Lui montrer la 21 mm plutôt que la 25.' ,
+        Schema::ITEM_OFFERED => [ 'id' => '105997' , 'name' => 'Lame composite 21 mm' ,
+                                  'image' => [ '@type' => 'ImageObject' , 'contentUrl' => 'https://…/lame.jpg' ] ] ,
+    ],
+]
+```
+
+L'enveloppe est ce qui porte l'intention **à côté** de la référence — et le jour où l'intention devient un chiffre (une remise envisagée, une quantité qui vaut d'être chiffrée), `Offer` a déjà `price`, `priceSpecification` et `eligibleQuantity` : aucune propriété à inventer. Le nom et le sens sont ceux que `Organization::$makesOffer` porte déjà.
+
+⚠️ **Rien ici n'engage personne.** Le document qui engage s'écrit ailleurs, et pointe vers la rencontre dont il est issu (`Thing::$subjectOf`).
+
+---
+
+## Propriétés de `VisitReport`
+
+| Propriété | Type | Description |
+|---|---|---|
+| `attendee` | `array\|Person\|null` | Qui était **vraiment** là. Relus en `CustomerEmployee`. |
+| `followUp` | `FollowUp[]\|null` | Ce qui reste à faire. Aucune, une ou plusieurs. |
+| `mood` | `string\|array\|DefinedTerm\|null` | Le climat de la rencontre — satisfait, neutre, un problème à traiter. Une seule valeur. |
+| `outcome` | `string\|array\|DefinedTerm\|null` | Ce que la rencontre a produit — une commande, un devis à écrire, une relance, rien. Une seule valeur. |
+| `tags` | `string[]\|DefinedTerm[]\|null` | Des qualificatifs du compte rendu lui-même. Déclarée pour le jour où — les qualificatifs d'une rencontre vivent sur la rencontre. |
+| `topics` | `string[]\|DefinedTerm[]\|null` | Les sujets abordés. Plusieurs. |
+
+`text` (le corps du compte rendu), `author`, `dateCreated`, `dateModified`, `audio` et `associatedMedia` sont hérités de `CreativeWork`.
+
+🔑 **Les cases et le texte ne sont pas des alternatives.** Un compte rendu réduit à des codes perd ce qui le rend digne d'être lu ; réduit à de la prose, il ne se compte pas. Les deux sont déclarés, **aucun n'est obligatoire** : celui qu'on écrit sur un téléphone, dans une camionnette, en trois gestes, vaut mieux que le compte rendu exhaustif qui ne sera jamais écrit.
+
+🔑 **Le climat n'est pas le résultat.** Une rencontre peut bien se passer et ne rien produire, une rencontre tendue finir en commande. Lus ensemble, les deux disent quelque chose qu'aucun ne dit seul.
+
+⚠️ **Les présents du compte rendu ne sont pas ceux de la rencontre.** L'un dit qui était attendu, l'autre qui est venu. Ils divergent assez souvent pour qu'on ne les confonde pas : les fusionner réécrirait discrètement un plan en constat.
+
+---
+
+## Propriétés de `FollowUp`
+
+| Propriété | Type | Description |
+|---|---|---|
+| `followUpType` | `string\|array\|DefinedTerm\|null` | La nature du prochain geste — rappeler, envoyer le devis, repasser. |
+| `result` | `Thing\|array\|string\|null` | Le rendez-vous **pris** pour l'honorer, quand il y en a un. Relu en `Appointment`. |
+
+`scheduledTime` (pour quand c'est dû), `actionStatus` (encore dû, ou honoré), `agent` (qui le doit), `name` et `description` sont hérités de `ScheduleAction` et d'`Action`.
+
+🔑 **Une promesse n'est pas un rendez-vous.** « Le rappeler dans quinze jours » est dû par quelqu'un et n'a pas de créneau. Écrire la promesse comme un rendez-vous mettrait un fantôme dans l'agenda et effacerait la différence entre **ce qui est convenu** et **ce qui est calé**. Le jour où le rendez-vous est pris, il est nommé dans `result` — et la promesse passe en `CompletedActionStatus`.
+
+---
+
+## Les disponibilités d'un commercial
+
+Elles ne vivent pas ici mais sur la fiche de la personne — [`Seller::$hoursAvailable`](people.md) — parce qu'elles ne dépendent d'aucune rencontre : c'est le rythme dans lequel les rencontres viennent se poser.
+
+```php
+use xyz\oihana\schema\people\Seller;
+
+$seller = new Seller
+([
+    'name'           => 'A. Perez' ,
+    'hoursAvailable' =>
+    [
+        [ 'dayOfWeek' => [ 'Monday' , 'Tuesday' , 'Thursday' ] , 'opens' => '08:30' , 'closes' => '18:00' ] ,
+        [ 'dayOfWeek' => 'Friday' , 'opens' => '08:30' , 'closes' => '12:00' ] ,
+        [ 'validFrom' => '2026-08-10' , 'validThrough' => '2026-08-21' ] ,   // une fermeture : ni opens ni closes
+    ],
+]);
+```
+
+🔑 **Le silence n'est pas une ouverture.** Qui propose un créneau a besoin d'un énoncé **positif** de quand il peut le proposer ; ne rien dire signifie qu'aucun créneau n'est proposable — la lecture prudente plutôt que la permissive.
+
+---
+
+## Le document complet
+
+```json
+{
+  "@type": "Appointment",
+  "@context": "https://schema.oihana.xyz",
+  "name": "Point gamme terrasse",
+  "startDate": "2026-09-03T09:30:00+02:00",
+  "endDate": "2026-09-03T10:30:00+02:00",
+  "eventStatus": "https://schema.org/EventScheduled",
+  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "appointmentStatus": "https://schema.oihana.xyz/AppointmentStatus#Done",
+  "appointmentType": "VISIT",
+  "tags": ["MEAL", "JOBSITE"],
+  "organizer": { "@type": "Seller", "id": "ALPER", "name": "A. Perez" },
+  "assignedSeller": { "@type": "Seller", "id": "ALPER", "name": "A. Perez" },
+  "customer": { "@type": "Customer", "id": "741278", "name": "Charpentes du Sud" },
+  "attendee": [ { "@type": "CustomerEmployee", "id": "55", "name": "Claire Martin", "jobTitle": "ACH" } ],
+  "location": {
+    "@type": "CustomerSite", "name": "Dépôt de Mérignac",
+    "address": { "@type": "PostalAddress", "streetAddress": "12 rue des Pins", "postalCode": "33700", "addressLocality": "Mérignac" },
+    "geo": { "@type": "GeoCoordinates", "latitude": 44.84, "longitude": -0.64 }
+  },
+  "description": "Présenter la lame composite, relancer le devis en cours.",
+  "makesOffer": [
+    {
+      "@type": "Offer",
+      "description": "Lui montrer la 21 mm plutôt que la 25 ; remise possible à partir de 120 m².",
+      "itemOffered": { "@type": "Product", "id": "105997", "name": "Lame composite 21 mm" }
+    }
+  ],
+  "report": {
+    "@type": "VisitReport",
+    "text": "Gamme bien reçue. Le client veut un prix pour 120 m² livrés chantier.",
+    "outcome": "QUOTE",
+    "mood": "GREEN",
+    "topics": ["PRICING", "DELIVERY"],
+    "attendee": [ { "@type": "CustomerEmployee", "id": "55", "name": "Claire Martin" } ],
+    "followUp": [
+      {
+        "@type": "FollowUp",
+        "followUpType": "CALL",
+        "scheduledTime": "2026-09-10",
+        "description": "Rappeler après envoi du devis.",
+        "actionStatus": "https://schema.org/PotentialActionStatus"
+      }
+    ],
+    "author": { "@type": "Seller", "id": "ALPER", "name": "A. Perez" },
+    "dateCreated": "2026-09-03T10:41:00+02:00"
+  },
+  "created": "2026-08-19T10:02:00+02:00",
+  "modified": "2026-09-03T10:41:00+02:00"
+}
+```
+
+---
+
+## Constantes associées
+
+Les clés de propriétés sont exposées par les traits [`AppointmentTrait`](../../../src/xyz/oihana/schema/constants/traits/appointments/AppointmentTrait.php), [`VisitReportTrait`](../../../src/xyz/oihana/schema/constants/traits/appointments/VisitReportTrait.php) et [`FollowUpTrait`](../../../src/xyz/oihana/schema/constants/traits/appointments/FollowUpTrait.php), composés dans l'agrégateur de domaine [`AppointmentsTrait`](../../../src/xyz/oihana/schema/constants/traits/AppointmentsTrait.php) et câblés dans la classe maîtresse [`Oihana`](../../../src/xyz/oihana/schema/constants/Oihana.php). Vous pouvez donc y accéder via `Oihana::APPOINTMENT_TYPE`, `Oihana::MOOD`, `Oihana::FOLLOW_UP`, etc. — et chaque classe expose les siennes (`Appointment::REPORT`).
+
+Les propriétés reprises de Schema.org — `customer`, `attendee`, `location`, `organizer`, `makesOffer`, `assignedSeller`, `scheduledTime` — gardent leurs constantes existantes : elles ne sont pas redéclarées.
+
+---
+
+## Voir aussi
+
+- [Vocabulaire Schema.org](../schema-org/README.md) — `Event`, `CreativeWork`, `Action` et `OpeningHoursSpecification`, le socle sur lequel tout repose.
+- [Personnes](people.md) — `Seller` et ses disponibilités, `CustomerEmployee` pour les contacts rencontrés.
+- [Entités commerciales](organizations.md) — `Customer`, le sujet de toute rencontre.
+- [Lieux](places.md) — `CustomerSite` et `JobSite`, où les rencontres ont lieu.
+- [Documents commerciaux](business-documents.md) — les devis et commandes qui naissent d'une rencontre.

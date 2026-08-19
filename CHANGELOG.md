@@ -109,6 +109,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - `AppointmentTrait`, `FollowUpTrait`, `VisitReportTrait` and the `AppointmentsTrait`
   aggregator carry the property name constants and join `constants\Oihana`.
 
+- The **appointments guide** (FR canonical + EN mirror) : when to reach for these
+  classes, why a meeting is an `Event` rather than an `Action`, the two axes of
+  state and why one could not carry both, the customer as the only thing a meeting
+  cannot do without, `makesOffer` as an intention rather than a quote, and a whole
+  document read from the wire. The people guide gains the availability of a
+  salesperson ; both indexes gain the namespace.
+
 - `Event::$location` also accepts `array`, for the same hydration reason as the
   rest : a place arrives as an array before it becomes a `Place`.
 
