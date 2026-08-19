@@ -344,6 +344,55 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- `xyz\oihana\schema\traits\HasTradingMeasures` — the ten measures a body of
+  trading figures is made of, and `CustomerStatistics` / `ProviderStatistics`,
+  the two families that carry them.
+
+  What was sold and what it earned (`revenue`), what that trade was worth at each
+  of the three costs a merchant keeps (`purchaseCost`, `averageCost`,
+  `costPrice`), the margin over each of them (`purchaseMargin`, `averageMargin`,
+  `grossMargin`), and what physically moved (`quantity`, `volume`, `weight`).
+  Each is an `ObservationSeries`.
+
+  🔑 **Declared once rather than once per family.** A customer, a supplier, an
+  article and a company are measured by the same ten figures ; ten properties
+  written out four times are forty chances to drift. A family composes the trait
+  and adds only what is its own — who the figures are about, and the dimensions
+  that qualify them. The companion constants live in
+  `constants\traits\statistics\HasTradingMeasuresTrait`, composed alongside it.
+
+  ⚠️ **Six of the ten are confidential by nature.** The three costs and the three
+  margins say what an operator earns on a given counterparty : they are the
+  figures a customer must never read about itself, and an application serving
+  them owes them a permission of their own. Hiding them from a projection is not
+  enough on its own — sorting, filtering, faceting and grouping reconstruct a
+  figure as surely as reading it. The library states the shape ; the guard
+  belongs to the consumer, which alone knows its readers.
+
+- `CustomerStatistics` names its subject a `Customer` and adds the two dimensions
+  it was measured under : the salesperson who carried the account
+  (`assignedSeller`) and the point of sale that served it (`assignedPOS`) — same
+  names, same shapes, same meanings as on `Customer` itself.
+
+  ⚠️ **They are a photograph, not a history.** A customer reassigned to another
+  salesperson takes its whole past with it at the next write : the figures then
+  read as *the customer's current owner's*, which is a true statement and rarely
+  the same one as *what that salesperson invoiced*. An application showing them
+  owes its reader the distinction ; sources that attribute at invoicing time
+  answer the other question, and belong in their own records.
+
+- `ProviderStatistics` names its subject a `Provider` and carries no dimension of
+  its own — a supplier is not attached to a salesperson or to a point of sale the
+  way a customer is, and the company the goods were bought for is on the record
+  already.
+
+  🔑 **A purchase record fills fewer of the ten, and says so by leaving the rest
+  out.** What was bought has a cost and a quantity ; it has no revenue, and
+  therefore no margin — those belong to the sale that follows, on the customer's
+  own record. A property left unset disappears from the document ; writing zeros
+  instead would state that nothing was earned, which is a different claim and a
+  false one.
+
 - `xyz\oihana\schema\statistics` — a namespace for bodies of figures, opened by
   `Statistics` and `ObservationSeries`.
 

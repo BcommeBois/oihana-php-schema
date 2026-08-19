@@ -2,6 +2,8 @@
 
 namespace xyz\oihana\schema\constants\traits;
 
+use xyz\oihana\schema\constants\traits\statistics\CustomerStatisticsTrait;
+use xyz\oihana\schema\constants\traits\statistics\HasTradingMeasuresTrait;
 use xyz\oihana\schema\constants\traits\statistics\ObservationSeriesTrait;
 use xyz\oihana\schema\constants\traits\statistics\StatisticsRecordTrait;
 
@@ -14,6 +16,8 @@ use xyz\oihana\schema\constants\traits\statistics\StatisticsRecordTrait;
  */
 trait StatisticsTrait
 {
-    use ObservationSeriesTrait ,
-        StatisticsRecordTrait  ;
+    use CustomerStatisticsTrait ,
+        HasTradingMeasuresTrait ,
+        ObservationSeriesTrait  ,
+        StatisticsRecordTrait   ;
 }
