@@ -105,6 +105,7 @@ Une **famille** est une fiche dont le sujet est nommé : `CustomerStatistics` po
 | `ProductStatistics`  | `Statistics`             | Ce qu'un **article** a échangé sur une année, à l'achat comme à la vente.                     |
 | `SellerStatistics`   | `Statistics`             | Ce qu'un **commercial** a échangé sur une année, éventuellement client par client.            |
 | `SalesObjectives`    | `Statistics`             | Ce qu'un **commercial** vise sur une année — les mêmes mesures, lues comme des cibles.        |
+| `StatisticsSummary`  | `Statistics`             | **Plusieurs fiches, additionnées** — une sélection, sommée mesure par mesure et mois par mois. |
 
 ### Propriétés de `Statistics`
 
@@ -180,6 +181,51 @@ Ni l'une ni l'autre n'ajoute de propriété : elles nomment leur sujet, et c'est
 ⚠️ **Une cible est rarement aussi détaillée qu'elle en a l'air.** Il est courant qu'une source ne renseigne qu'une seule mesure — un chiffre d'affaires — et laisse les neuf autres vides ; et quand une cible annuelle porte bien une valeur par mois, ce détail est souvent l'annuel étalé sur une courbe de saison plutôt que douze décisions. Rien de tout cela ne se voit dans la fiche une fois écrite : le lecteur qui a besoin de le savoir doit l'apprendre de qui l'a publiée.
 
 ⚠️ **Attribuer un chiffre à un commercial est un choix, et deux choix défendables se contredisent.** Une source qui attribue au moment de la vente crédite celui qui l'a faite, définitivement. Un portefeuille lu depuis `CustomerStatistics::$assignedSeller` crédite celui qui tient le compte *aujourd'hui*, et déplace tout un historique avec le compte. Les deux énoncés sont vrais, ils ne parlent pas de la même chose, et ils divergent à chaque transfert.
+
+---
+
+### Propriétés de `StatisticsSummary`
+
+| Propriété       | Type        | Description                                            |
+|-----------------|-------------|--------------------------------------------------------|
+| `numberOfItems` | `int\|null` | Combien de fiches ont été additionnées pour faire cette ligne. |
+
+C'est la somme d'une sélection : un portefeuille sur une année, une agence, une gamme d'articles.
+Elle porte les mêmes dix mesures que n'importe quelle fiche, chacune sommée **terme à terme** — le
+janvier du résumé est la somme des janviers, le février la somme des février, sur les douze
+positions. C'est ce qui permet de tracer la courbe mensuelle d'un **ensemble**.
+
+🔑 **Une seule classe pour toutes les familles, parce qu'un résumé perd la seule chose qui les
+distinguait.** `CustomerStatistics` et `ProviderStatistics` diffèrent par leur sujet et par les
+dimensions qu'un sujet porte ; les dix mesures sont les mêmes des deux côtés, et trois familles sur
+six n'ajoutent rien du tout. Une classe de résumé par famille produirait des classes identiques
+jusqu'à la dernière propriété. Et le lecteur ne perd pas de quoi il s'agit : `direction` est héritée
+et reste vraie — une somme de ventes est une vente.
+
+🚨 **`about` a deux états, et la différence est tout le contrat.**
+
+- **Absente** quand le résumé répond pour une sélection simple : il ne parle de personne, et
+  répondre `null` affirmerait que le sujet est inconnu là où la vérité est que la question ne se
+  pose pas. La propriété est héritée et n'est simplement jamais affectée — déclarée sans valeur par
+  défaut, elle reste non initialisée, et la sérialisation la saute.
+- **Portant la clé du regroupement** quand la sélection a été groupée sur une dimension : un résumé
+  groupé par point de vente **est** « les chiffres du dépôt 400 », et ce dépôt en est le sujet.
+  L'union héritée l'accepte déjà.
+
+⚠️ Il n'y a qu'**un** `about` : un regroupement sur deux dimensions à la fois n'a nulle part où le
+dire. C'est une question de conception le jour où le besoin apparaît, pas un oubli.
+
+🚨 **`numberOfItems` compte des fiches, pas des tiers.** Une source qui écrit une fiche par tiers
+**par année et par société d'exploitation** fait peser deux fiches à un tiers facturé par deux
+sociétés — et cette propriété le compte deux fois. Un lecteur qui légende « clients » plutôt que
+« fiches » affiche un nombre qui n'a jamais été mesuré.
+
+⚠️ **La règle de `quantity` s'applique ici aussi**, et pour la même raison : une quantité qui
+traverse plusieurs articles additionne des mètres carrés à des mètres cubes et à des pièces. Voir
+plus haut, à propos de `ProductStatistics`.
+
+⚠️ **Cette classe range un résultat ; elle ne calcule rien.** L'addition appartient à qui lit les
+fiches — la bibliothèque ne modélise que la forme, comme pour `AgingSummary`.
 
 ---
 

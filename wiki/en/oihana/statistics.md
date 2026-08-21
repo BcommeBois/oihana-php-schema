@@ -105,6 +105,7 @@ A **family** is a record whose subject is named: `CustomerStatistics` for a cust
 | `ProductStatistics`  | `Statistics` | What an **article** traded over one year, on the purchase side as on the sale side.                     |
 | `SellerStatistics`   | `Statistics` | What a **salesperson** traded over one year, possibly customer by customer.                             |
 | `SalesObjectives`    | `Statistics` | What a **salesperson** is aiming at over one year — the same measures, read as targets.                 |
+| `StatisticsSummary`  | `Statistics` | **Several records, added together** — one selection, summed measure by measure and month by month.      |
 
 ### `Statistics` properties
 
@@ -180,6 +181,50 @@ Neither adds a property: they name their subject, and that is all. `CompanyStati
 ⚠️ **A target is rarely as detailed as it looks.** Sources commonly publish one measure — a revenue figure — and leave the nine others empty; and where a yearly target does carry a value per month, that detail is often the yearly figure spread over a seasonal curve rather than twelve decisions. None of this is visible in the record once written, so a reader who needs to know has to be told by whoever published it.
 
 ⚠️ **Attributing a figure to a salesperson is a choice, and two defensible ones disagree.** A source that attributes at the moment of the sale credits whoever made it, for good. A portfolio read from `CustomerStatistics::$assignedSeller` credits whoever holds the account *now*, and moves a whole history along with the account. Both are true sentences about different things, and they part company at every transfer.
+
+---
+
+### `StatisticsSummary` properties
+
+| Property        | Type        | Description                                             |
+|-----------------|-------------|---------------------------------------------------------|
+| `numberOfItems` | `int\|null` | How many records were summed to produce this line.      |
+
+It is the sum of a selection: a portfolio over a year, a branch, a range of goods. It carries the
+same ten measures as any record, each summed **term by term** — the January of the summary is the
+sum of the Januaries, the February the sum of the Februaries, over the twelve positions. That is
+what lets a reader draw the monthly curve of a **set**.
+
+🔑 **One class for every family, because a summary loses the only thing that told them apart.**
+`CustomerStatistics` and `ProviderStatistics` differ by their subject and by the dimensions a
+subject carries; the ten measures are the same on both sides, and three of the six families add
+nothing at all. Writing one summary class per family would produce classes identical down to the
+last property. And the reader still knows which side of the trade is being read: `direction` is
+inherited and stays true — a sum of sales is a sale.
+
+🚨 **`about` has two states, and the difference is the whole contract.**
+
+- **Absent** when the summary answers for a plain selection: it is about no one, and saying `null`
+  would claim the subject is unknown where the truth is that the question does not apply. The
+  property is inherited and simply never assigned — declared without a default, it stays
+  uninitialized, and the serialization skips it.
+- **Set to the grouping key** when the selection was grouped by a dimension: a summary grouped by
+  point of sale *is* « the figures of warehouse 400 », and that warehouse is its subject. The
+  inherited union already accepts it.
+
+⚠️ There is only **one** `about`: a grouping over two dimensions at once has nowhere to say so. That
+is a design question the day it is needed, not an oversight.
+
+🚨 **`numberOfItems` counts records, not counterparties.** A source that writes one record per
+counterparty **per year and per operating company** makes a counterparty traded with by two
+companies weigh two records — and this property counts it twice. A reader captioning it
+« customers » rather than « records » states a number that was never measured.
+
+⚠️ **The `quantity` rule applies here too**, and for the same reason: a quantity spanning several
+articles adds square metres to cubic metres and to pieces. See above, under `ProductStatistics`.
+
+⚠️ **This class stores a result; it computes nothing.** The summing belongs to whoever reads the
+records — the library only models the shape, as it does for `AgingSummary`.
 
 ---
 

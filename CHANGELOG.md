@@ -8,6 +8,54 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- `StatisticsSummary` — **several records, added together**, which no existing class could carry.
+
+  🔑 **Every concrete family of `Statistics` redeclares `$about` towards its subject** — a
+  `Customer`, a `Provider`, a `Company`, a `Seller`, a `Product`. A summary has no subject: it is
+  the sum of a selection, and what it adds up is none of those. The two available fallbacks were
+  both wrong. `Statistics` alone does not use `HasTradingMeasures`, so it has no measure to carry —
+  it is the head of a record, not a record. And borrowing a family's class would make its `@type`
+  assert that the line *is* one counterparty's record, which is precisely the untruth a `@type` on
+  an aggregated row amounts to.
+
+  🔑 **One class for all six families, because a summary loses the only thing that told them
+  apart.** They differ by their subject and by the dimensions a subject carries; the ten measures
+  are the same on every side, and three of the six add nothing at all — one summary class per
+  family would produce classes identical down to the last property. The reader still knows which
+  side of the trade is being read: `direction` is inherited and stays true, a sum of sales being a
+  sale.
+
+  🚨 **`about` has two states, and the difference is the whole contract.** **Absent** when the
+  summary answers for a plain selection — it is about no one, and `null` would claim the subject is
+  unknown where the truth is that the question does not apply; the inherited property is simply
+  never assigned, so it stays uninitialized and the serialization skips it. **Set to the grouping
+  key** when the selection was grouped by a dimension — a summary grouped by point of sale *is* the
+  figures of that point of sale, and the inherited union already accepts a `Warehouse`, a `Seller`
+  or a `Company`. Nothing had to be added for the second state, which is what keeps the class
+  generic as consumers start grouping by more than a year.
+
+  ⚠️ **There is only one `about`**, so a grouping over two dimensions at once has nowhere to say so.
+  Written down as a design question for the day it is needed, rather than discovered as an
+  oversight.
+
+  🚨 **`numberOfItems` counts records, not counterparties.** A source that writes one record per
+  counterparty **per year and per operating company** makes a counterparty traded with by two
+  companies weigh two records, and this property counts it twice. It reuses the name schema.org
+  gives the same idea on `ItemList` — the name only, not `ItemListTrait`, which would drag
+  `itemListElement` along: a summary has melted its members, it does not enumerate them.
+
+  ⚠️ **The class stores a result; it computes nothing** — the summing belongs to whoever reads the
+  records, in the same spirit as `AgingSummary`.
+
+  - **Tests:** 10 new `StatisticsSummaryTest` cases — the inheritance, the context, the constant
+    matching `Schema::NUMBER_OF_ITEMS`, the ten measures, the inherited head, the count, both states
+    of `about`, hydration of every measure as an `ObservationSeries`, and a series keeping its
+    twelve positions beside its total. The one that holds the contract asserts that a plain summary
+    **serializes neither `about` nor `assignedCompany`** — it turns red the day either is
+    redeclared with a default.
+  - New `StatisticsSummaryTrait`, added to the `StatisticsTrait` aggregator beside its five
+    neighbours. FR/EN wiki `oihana/statistics.md` gain a catalogue row and a section of their own.
+
 - `SellerStatistics` and `SalesObjectives` — the outcome and the target, written
   in the same shape so that one can be read against the other.
 

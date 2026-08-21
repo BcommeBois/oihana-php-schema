@@ -8,6 +8,7 @@ use xyz\oihana\schema\constants\traits\statistics\ObservationSeriesTrait;
 use xyz\oihana\schema\constants\traits\statistics\SalesObjectivesTrait;
 use xyz\oihana\schema\constants\traits\statistics\SellerStatisticsTrait;
 use xyz\oihana\schema\constants\traits\statistics\StatisticsRecordTrait;
+use xyz\oihana\schema\constants\traits\statistics\StatisticsSummaryTrait;
 
 /**
  * The enumeration of all statistics properties constants.
@@ -23,5 +24,6 @@ trait StatisticsTrait
         ObservationSeriesTrait  ,
         SalesObjectivesTrait    ,
         SellerStatisticsTrait   ,
-        StatisticsRecordTrait   ;
+        StatisticsRecordTrait   ,
+        StatisticsSummaryTrait  ;
 }
