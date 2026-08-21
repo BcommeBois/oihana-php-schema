@@ -14,12 +14,13 @@ use org\schema\Place;
 use org\schema\PostalAddress;
 use org\schema\VirtualLocation;
 
+use xyz\oihana\schema\auth\User;
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\constants\traits\appointments\CustomerAppointmentTrait;
 use xyz\oihana\schema\enumerations\AppointmentStatus;
 use xyz\oihana\schema\organizations\Customer;
+use xyz\oihana\schema\organizations\Subsidiary;
 use xyz\oihana\schema\people\CustomerEmployee;
-use xyz\oihana\schema\people\Seller;
 use xyz\oihana\schema\places\CustomerSite;
 use xyz\oihana\schema\places\JobSite;
 
@@ -68,10 +69,10 @@ class CustomerAppointment extends Event
      *
      * Reads beside {@see Event::$eventStatus}, which says what became of the slot.
      *
-     * @var null|string|AppointmentStatus
+     * @var null|array|string|AppointmentStatus
      * @since 1.5.0
      */
-    public null|string|AppointmentStatus $appointmentStatus ;
+    public null|array|string|AppointmentStatus $appointmentStatus ;
 
     /**
      * What kind of meeting it is — on the customer's premises, on a site, over the
@@ -81,9 +82,29 @@ class CustomerAppointment extends Event
      * term. One value.
      *
      * @var null|string|array|DefinedTerm
-     * @since 1.5.0
      */
     public null|string|array|DefinedTerm $appointmentType ;
+
+    /**
+     * The company this meeting was arranged for.
+     *
+     * A code, or the resolved organization : the one whose books the meeting is
+     * held on — the organizer's, frozen at creation. Reuses the name, the shape
+     * and the meaning
+     * {@see \xyz\oihana\schema\statistics\Statistics::$assignedCompany}
+     * already carries.
+     *
+     * 🔑 **It is here so that a perimeter can be a filter rather than a walk.**
+     * Reading « the meetings of my branch » from the organizer would mean joining
+     * back to the account, then to its company, for every row ; frozen on the
+     * meeting it is one clause — and it says what was true the day the meeting was
+     * arranged, which a later transfer does not rewrite.
+     *
+     * @var null|string|array|Organization
+     * @since 1.5.0
+     */
+    #[HydrateWith(Subsidiary::class, Organization::class)]
+    public null|string|array|Organization $assignedCompany ;
 
     /**
      * The salesperson the customer is attached to.
@@ -161,17 +182,23 @@ class CustomerAppointment extends Event
     public null|array|Offer $makesOffer ;
 
     /**
-     * Whose diary this meeting is in — the salesperson who holds it.
+     * Whose diary this meeting is in.
      *
      * Redeclares {@see Event::$organizer} with the same union, to name the subject :
-     * a stored row is read back as a {@see Seller}. Not necessarily whoever entered
-     * it : an assistant books meetings for someone else's diary, and it is the
-     * diary that matters here.
+     * a stored row is read back as a {@see User}.
+     *
+     * 🔑 **The account, not the business role.** A diary belongs to a person, and a
+     * person may hold more than one role over time — a salesperson who also becomes
+     * a sales manager keeps one diary and one set of hours. Hanging the meeting on
+     * the role would mean merging two diaries the day the second one is granted.
+     *
+     * Not necessarily whoever entered it, either : an assistant books meetings for
+     * someone else's diary, and it is the diary that matters here.
      *
      * @var null|array|Person|Organization
      * @since 1.5.0
      */
-    #[HydrateAs(Seller::class)]
+    #[HydrateAs(User::class)]
     public array|null|Person|Organization $organizer ;
 
     /**

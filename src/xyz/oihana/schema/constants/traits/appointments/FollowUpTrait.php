@@ -11,6 +11,6 @@ namespace xyz\oihana\schema\constants\traits\appointments;
  */
 trait FollowUpTrait
 {
-    const string FOLLOW_UP      = 'followUp'     ;
-    const string FOLLOW_UP_TYPE = 'followUpType' ;
+    public const string FOLLOW_UP      = 'followUp'     ;
+    public const string FOLLOW_UP_TYPE = 'followUpType' ;
 }

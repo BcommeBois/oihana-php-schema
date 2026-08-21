@@ -5,6 +5,10 @@ namespace tests\xyz\oihana\schema\auth ;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
 
+use oihana\reflect\Reflection;
+
+use org\schema\constants\Schema;
+use org\schema\OpeningHoursSpecification;
 use org\schema\Person;
 
 use xyz\oihana\schema\auth\Permission;
@@ -210,4 +214,55 @@ class UserTest extends TestCase
 
         $this->assertNull( $user->firstIdentityBySubjectType( 'Seller' ) );
     }
+
+    public function testHoursAvailableDefaultsToNull(): void
+    {
+        $this->assertNull( new User()->hoursAvailable ?? null );
+    }
+
+    /**
+     * The ordinary rhythm and the closures are written the same way : a
+     * specification stating days and hours is when meetings are taken, one stating
+     * a range of dates and no hours is a week away.
+     *
+     * They belong to the account rather than to a business role : a person may hold
+     * more than one role over time and still keeps one diary, and one set of hours.
+     *
+     * @throws ReflectionException
+     */
+    public function testItStatesTheHoursItTakesAppointmentsIn(): void
+    {
+        $user = new Reflection()->hydrate
+        (
+            [
+                Schema::HOURS_AVAILABLE =>
+                [
+                    [ Schema::DAY_OF_WEEK => [ 'Monday' , 'Tuesday' ] , Schema::OPENS => '08:30' , Schema::CLOSES => '18:00' ] ,
+                    [ Schema::VALID_FROM  => '2026-08-10' , Schema::VALID_THROUGH => '2026-08-21' ] ,
+                ],
+            ],
+            User::class
+        );
+
+        $this->assertIsArray( $user->hoursAvailable );
+        $this->assertCount( 2 , $user->hoursAvailable );
+        $this->assertInstanceOf( OpeningHoursSpecification::class , $user->hoursAvailable[ 0 ] );
+        $this->assertSame( '08:30' , $user->hoursAvailable[ 0 ]->opens );
+
+        $holiday = $user->hoursAvailable[ 1 ] ;
+
+        $this->assertSame( '2026-08-10' , $holiday->validFrom    );
+        $this->assertSame( '2026-08-21' , $holiday->validThrough );
+        $this->assertNull( $holiday->opens ?? null );
+    }
+
+    /**
+     * Saying nothing is the safe reading : whoever offers a slot has nothing to
+     * offer from, rather than the whole clock.
+     */
+    public function testSayingNothingIsNotAnOpening(): void
+    {
+        $this->assertNull( new User([ Schema::NAME => 'Jane Doe' ] )->hoursAvailable ?? null );
+    }
+
 }

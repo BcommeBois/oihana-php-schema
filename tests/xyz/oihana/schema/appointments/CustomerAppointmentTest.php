@@ -14,11 +14,11 @@ use org\schema\Product;
 
 use xyz\oihana\schema\appointments\CustomerAppointment;
 use xyz\oihana\schema\appointments\VisitReport;
+use xyz\oihana\schema\auth\User;
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\enumerations\AppointmentStatus;
 use xyz\oihana\schema\organizations\Customer;
 use xyz\oihana\schema\people\CustomerEmployee;
-use xyz\oihana\schema\people\Seller;
 use xyz\oihana\schema\places\CustomerSite;
 
 class CustomerAppointmentTest extends TestCase
@@ -129,7 +129,7 @@ class CustomerAppointmentTest extends TestCase
             CustomerAppointment::class
         );
 
-        $this->assertInstanceOf( Seller::class           , $appointment->organizer      );
+        $this->assertInstanceOf( User::class             , $appointment->organizer      );
         $this->assertInstanceOf( Customer::class         , $appointment->customer       );
         $this->assertInstanceOf( CustomerEmployee::class , $appointment->attendee[ 0 ]  );
         $this->assertInstanceOf( CustomerSite::class     , $appointment->location       );
@@ -179,7 +179,7 @@ class CustomerAppointmentTest extends TestCase
     {
         $appointment = new CustomerAppointment
         ([
-            Schema::ORGANIZER        => new Seller([ Schema::ID => 'JDOE' ] ) ,
+            Schema::ORGANIZER        => new User([ Schema::ID => 'JDOE' ] ) ,
             Oihana::ASSIGNED_SELLER  => 'RROE' ,
         ]);
 
@@ -199,4 +199,24 @@ class CustomerAppointmentTest extends TestCase
         $this->assertArrayNotHasKey( Oihana::REPORT , $json );
         $this->assertArrayNotHasKey( Oihana::TAGS   , $json );
     }
+
+    /**
+     * The meeting axis states itself two ways, like the slot axis beside it : the
+     * bare constant, or a stored object carrying what the constant cannot say. Both
+     * have to survive a round trip, which is why `array` is part of the union.
+     */
+    public function testAppointmentStatusAcceptsTheBareConstantAndAStoredObject(): void
+    {
+        $bare = new CustomerAppointment([ Oihana::APPOINTMENT_STATUS => AppointmentStatus::NO_SHOW ] );
+
+        $this->assertSame( AppointmentStatus::NO_SHOW , $bare->appointmentStatus );
+
+        $stored = new CustomerAppointment
+        ([
+            Oihana::APPOINTMENT_STATUS => [ Schema::AT_TYPE => 'AppointmentStatus' , Schema::DESCRIPTION => 'Nobody at the door.' ] ,
+        ]);
+
+        $this->assertIsArray( $stored->appointmentStatus );
+    }
+
 }

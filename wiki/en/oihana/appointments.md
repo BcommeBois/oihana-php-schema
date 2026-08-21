@@ -56,7 +56,7 @@ use oihana\reflect\Reflection;
 
 $appointment = new Reflection()->hydrate( $document , CustomerAppointment::class );
 
-$appointment->organizer;          // xyz\oihana\schema\people\Seller
+$appointment->organizer;          // xyz\oihana\schema\auth\User
 $appointment->customer;           // xyz\oihana\schema\organizations\Customer
 $appointment->attendee[ 0 ];      // xyz\oihana\schema\people\CustomerEmployee
 $appointment->location;           // xyz\oihana\schema\places\CustomerSite
@@ -117,20 +117,23 @@ Schema.org **publishes no member for "it happened"**: its enumeration follows an
 
 🔑 **`NoShow` is not `Cancelled`.** A cancellation is announced and frees the time; an absence is discovered on the doorstep and costs the journey. Counting them together hides the only one worth acting on.
 
+🔑 **And a status may state *why*.** Both axes accept the bare constant — `EventStatusType::CANCELLED` — or the **member class** when there is more to say: `new EventCancelled([ 'description' => 'The customer called off the day before.' ])`. Both spellings answer the same URI, so the choice is free; the second survives a round trip through storage because the union also accepts an array.
+
 ---
 
 ## `CustomerAppointment` properties
 
 | Property | Type | Description |
 |---|---|---|
-| `appointmentStatus` | `string\|AppointmentStatus\|null` | What became of the meeting. Reads beside `eventStatus`. |
+| `appointmentStatus` | `string\|array\|AppointmentStatus\|null` | What became of the meeting. Reads beside `eventStatus`. |
 | `appointmentType` | `string\|array\|DefinedTerm\|null` | The kind of meeting — on the customer's premises, on the phone, over video, on a site. One value. |
+| `assignedCompany` | `string\|array\|Organization\|null` | The **company the meeting was arranged for** — the organizer's, frozen at creation. Read back as `Subsidiary`. It is there so that a perimeter ("the meetings of my branch") is **a filter rather than a walk**. |
 | `assignedSeller` | `int\|string\|array\|Person\|null` | The salesperson the customer is attached to. May differ from the organizer. |
 | `attendee` | `Person\|Organization\|array\|null` | The customer's contacts **expected**. Optional, none or several. Read back as `CustomerEmployee`. |
 | `customer` | `array\|Organization\|Person\|null` | The customer. A reference and its frozen copy, or a **free-form** one — a name, a telephone number — for a company not on the books yet. Read back as `Customer`. |
 | `location` | `PostalAddress\|Place\|VirtualLocation\|string\|array\|null` | Where it takes place: a customer address, a job site, a virtual room. Read back as `CustomerSite`, `JobSite`, `Place`… |
 | `makesOffer` | `Offer[]\|null` | What one means to present. See below. |
-| `organizer` | `Person\|Organization\|array\|null` | The salesperson **whose diary this is**. Read back as `Seller`. |
+| `organizer` | `Person\|Organization\|array\|null` | The **account** whose diary this is. Read back as `User`. 🔑 The account, never the business role: a person gaining a second role keeps **one diary**. |
 | `report` | `array\|VisitReport\|null` | The report. **One only**, absent until there is something to report. |
 | `tags` | `string[]\|DefinedTerm[]\|null` | The quick qualifiers — a meal with the customer, a tour of their premises, a tour of their premises, a demonstration. Several. |
 
@@ -207,12 +210,12 @@ The wrapper is what carries the intention **beside** the reference — and the d
 
 ## A salesperson's availability
 
-It does not live here but on the person's record — [`Seller::$hoursAvailable`](people.md) — because it depends on no meeting: it is the rhythm meetings come and sit in.
+It does not live here but on the **account** — [`User::$hoursAvailable`](auth.md) — because it depends on no meeting: it is the rhythm meetings come and sit in. And on the account rather than on a business role, because a person gaining a second role keeps **one diary** and **one set of hours**.
 
 ```php
-use xyz\oihana\schema\people\Seller;
+use xyz\oihana\schema\auth\User;
 
-$seller = new Seller
+$user = new User
 ([
     'name'           => 'Jane Doe' ,
     'hoursAvailable' =>
@@ -296,7 +299,8 @@ The properties borrowed from Schema.org — `customer`, `attendee`, `location`, 
 ## See also
 
 - [Schema.org vocabulary](../schema-org/README.md) — `Event`, `CreativeWork`, `Action` and `OpeningHoursSpecification`, the foundation it all rests on.
-- [People](people.md) — `Seller` and its availability, `CustomerEmployee` for the contacts met.
+- [Authentication](auth.md) — `User`, the account whose diary holds the meetings, and its availability.
+- [People](people.md) — `Seller`, `CustomerEmployee` for the contacts met.
 - [Business entities](organizations.md) — `Customer`, the subject of every meeting.
 - [Places](places.md) — `CustomerSite` and `JobSite`, where meetings take place.
 - [Business documents](business-documents.md) — the quotes and orders a meeting gives rise to.

@@ -56,7 +56,7 @@ use oihana\reflect\Reflection;
 
 $appointment = new Reflection()->hydrate( $document , CustomerAppointment::class );
 
-$appointment->organizer;          // xyz\oihana\schema\people\Seller
+$appointment->organizer;          // xyz\oihana\schema\auth\User
 $appointment->customer;           // xyz\oihana\schema\organizations\Customer
 $appointment->attendee[ 0 ];      // xyz\oihana\schema\people\CustomerEmployee
 $appointment->location;           // xyz\oihana\schema\places\CustomerSite
@@ -117,20 +117,23 @@ Schema.org **ne publie aucun membre pour « ça a eu lieu »** : son énumérati
 
 🔑 **`NoShow` n'est pas `Cancelled`.** Une annulation est annoncée et libère le temps ; une absence se découvre sur le pas de la porte et coûte le déplacement. Les compter ensemble masque la seule des deux sur laquelle on peut agir.
 
+🔑 **Et un statut peut dire *pourquoi*.** Les deux axes acceptent la constante nue — `EventStatusType::CANCELLED` — ou la **classe membre** quand il y a davantage à dire : `new EventCancelled([ 'description' => 'Le client a annulé la veille.' ])`. Les deux écritures répondent le même URI, donc le choix est libre ; la seconde survit à l'aller-retour en base parce que l'union accepte aussi un tableau.
+
 ---
 
 ## Propriétés de `CustomerAppointment`
 
 | Propriété | Type | Description |
 |---|---|---|
-| `appointmentStatus` | `string\|AppointmentStatus\|null` | Ce qu'il est advenu de la rencontre. Se lit à côté d'`eventStatus`. |
+| `appointmentStatus` | `string\|array\|AppointmentStatus\|null` | Ce qu'il est advenu de la rencontre. Se lit à côté d'`eventStatus`. |
 | `appointmentType` | `string\|array\|DefinedTerm\|null` | La nature de la rencontre — chez le client, au téléphone, en visio, sur un chantier. Une seule valeur. |
+| `assignedCompany` | `string\|array\|Organization\|null` | La **société pour laquelle** la rencontre a été prise — celle de l'organisateur, figée à la création. Relue en `Subsidiary`. Elle est là pour qu'un périmètre (« les rendez-vous de mon agence ») soit **un filtre et non un parcours**. |
 | `assignedSeller` | `int\|string\|array\|Person\|null` | Le commercial auquel le client est rattaché. Peut différer de l'organisateur. |
 | `attendee` | `Person\|Organization\|array\|null` | Les contacts du client **attendus**. Facultatifs, aucun ou plusieurs. Relus en `CustomerEmployee`. |
 | `customer` | `array\|Organization\|Person\|null` | Le client. Une référence et sa copie figée, ou un client **libre** — un nom, un téléphone — pour une entreprise qui n'est pas encore au fichier. Relu en `Customer`. |
 | `location` | `PostalAddress\|Place\|VirtualLocation\|string\|array\|null` | Le lieu : une adresse du client, un chantier, une salle virtuelle. Relu en `CustomerSite`, `JobSite`, `Place`… |
 | `makesOffer` | `Offer[]\|null` | Ce qu'on compte présenter. Voir ci-dessous. |
-| `organizer` | `Person\|Organization\|array\|null` | Le commercial **dont c'est l'agenda**. Relu en `Seller`. |
+| `organizer` | `Person\|Organization\|array\|null` | Le **compte** dont c'est l'agenda. Relu en `User`. 🔑 Le compte, jamais le rôle métier : une personne qui gagne un second rôle garde **un seul agenda**. |
 | `report` | `array\|VisitReport\|null` | Le compte rendu. **Un seul**, absent tant qu'il n'y a rien à raconter. |
 | `tags` | `string[]\|DefinedTerm[]\|null` | Les mentions rapides — repas avec le client, visite de l'entreprise, chantier, démonstration. Plusieurs. |
 
@@ -207,12 +210,12 @@ L'enveloppe est ce qui porte l'intention **à côté** de la référence — et 
 
 ## Les disponibilités d'un commercial
 
-Elles ne vivent pas ici mais sur la fiche de la personne — [`Seller::$hoursAvailable`](people.md) — parce qu'elles ne dépendent d'aucune rencontre : c'est le rythme dans lequel les rencontres viennent se poser.
+Elles ne vivent pas ici mais sur le **compte** — [`User::$hoursAvailable`](auth.md) — parce qu'elles ne dépendent d'aucune rencontre : c'est le rythme dans lequel les rencontres viennent se poser. Et sur le compte plutôt que sur un rôle métier, parce qu'une personne qui gagne un second rôle garde **un seul agenda** et **un seul jeu d'horaires**.
 
 ```php
-use xyz\oihana\schema\people\Seller;
+use xyz\oihana\schema\auth\User;
 
-$seller = new Seller
+$user = new User
 ([
     'name'           => 'Jane Doe' ,
     'hoursAvailable' =>
@@ -296,7 +299,8 @@ Les propriétés reprises de Schema.org — `customer`, `attendee`, `location`, 
 ## Voir aussi
 
 - [Vocabulaire Schema.org](../schema-org/README.md) — `Event`, `CreativeWork`, `Action` et `OpeningHoursSpecification`, le socle sur lequel tout repose.
-- [Personnes](people.md) — `Seller` et ses disponibilités, `CustomerEmployee` pour les contacts rencontrés.
+- [Authentification](auth.md) — `User`, le compte dont l'agenda porte les rendez-vous, et ses disponibilités.
+- [Personnes](people.md) — `Seller`, `CustomerEmployee` pour les contacts rencontrés.
 - [Entités commerciales](organizations.md) — `Customer`, le sujet de toute rencontre.
 - [Lieux](places.md) — `CustomerSite` et `JobSite`, où les rencontres ont lieu.
 - [Documents commerciaux](business-documents.md) — les devis et commandes qui naissent d'une rencontre.

@@ -55,10 +55,34 @@ echo json_encode( $application , JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
 
 | Class            | Role                                                                                                  |
 |------------------|-------------------------------------------------------------------------------------------------------|
-| `User`           | Authenticated user — extends `org\schema\Person`, adds activation, login counters, pending-email workflow, blocked-for scope, tokens-invalid-before cutoff, metadata, devices. |
+| `User`           | Authenticated user — extends `org\schema\Person`, adds activation, login counters, pending-email workflow, blocked-for scope, tokens-invalid-before cutoff, metadata, devices and its **availability** (see below). |
 | `Invitation`     | Extends Schema.org `InviteAction` — email invitation lifecycle (pending / accepted / cancelled / expired / revoked). |
 | `PasswordReset`  | Extends Schema.org `UpdateAction` — password-reset workflow (token hash, redirect URL, sent timestamp, status). |
 | `Session`        | Active connection record — IP, user-agent, token hash, expiration, revocation reason. |
+
+#### `User::$hoursAvailable` — when the person takes appointments
+
+The weekly rhythm and the closures are written the same way: a specification stating **days and hours** is the ordinary rhythm; one stating a **range of dates and no hours** is a closure — a holiday, a training week.
+
+```php
+use xyz\oihana\schema\auth\User;
+
+$user = new User
+([
+    'name'           => 'Jane Doe' ,
+    'hoursAvailable' =>
+    [
+        [ 'dayOfWeek' => [ 'Monday' , 'Tuesday' , 'Thursday' ] , 'opens' => '08:30' , 'closes' => '18:00' ] ,
+        [ 'validFrom' => '2026-08-10' , 'validThrough' => '2026-08-21' ] ,   // a closure
+    ],
+]);
+```
+
+🔑 **Silence is not an opening.** Whoever offers a slot needs a **positive** statement of when it may be offered; saying nothing means no slot can be proposed — the safe reading rather than the permissive one.
+
+🔑 **On the account, never on a business role.** A person may hold several roles over time and still keeps **one diary** and **one set of hours**; hanging them on the role would mean merging two sets the day the second is granted. See [Appointments](appointments.md).
+
+ℹ️ **The term is borrowed, not invented.** Schema.org publishes `hoursAvailable` on a `ContactPoint` and on a `Service`, never on a person — but a person taking appointments states exactly the same thing.
 
 ### OAuth2 / OIDC clients
 

@@ -129,6 +129,11 @@ trait UserTrait
     const string FIRST_LOGIN_AT = 'firstLoginAt' ;
 
     /**
+     * When this user is available for events or appointments.
+     */
+    const string HOURS_AVAILABLE = 'hoursAvailable' ;
+
+    /**
      * Business identities linked to the user.
      *
      * Each entry ties the account to a business entity (a person or an

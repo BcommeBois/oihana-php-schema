@@ -140,7 +140,27 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   `agent` who owes it. Only the kind of step — call back, send the quote, visit
   again — had to be added.
 
-- `Seller::$hoursAvailable` — when a salesperson takes appointments, and when they
+- `EventStatusType` carries the URI of each of its members, and the five member
+  classes now extend it — `EventCancelled` among them, which had been sitting in a
+  folder of its own away from its four siblings.
+
+  🔑 **A status can now be stated two ways, and both answer the same string.** The
+  bare constant when there is nothing more to say ; the member class when there is —
+  `new EventCancelled([ 'description' => '…' ])` says *why* an event was called off,
+  which the constant cannot. `EventCancelled::getSchemaType()` and
+  `EventStatusType::CANCELLED` spell the same URI, so a consumer comparing strings
+  never has to know which was used, and a test now holds that promise.
+
+- `CustomerAppointment::$assignedCompany` — the company a meeting was arranged for,
+  frozen at creation.
+
+  🔑 **It is there so that a perimeter can be a filter rather than a walk.** Reading
+  « the meetings of my branch » from the organizer would mean joining back to the
+  account, then to its company, for every row ; frozen on the meeting it is one
+  clause — and it says what was true the day the meeting was arranged, which a later
+  transfer does not rewrite.
+
+- `User::$hoursAvailable` — when a person takes appointments, and when they
   take none.
 
   The weekly rhythm and the closures are written the same way : a specification
@@ -149,6 +169,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   rather than invented — schema.org publishes it on a contact point and on a
   service, never on a person, and a person taking appointments states exactly the
   same thing.
+
+  🔑 **They belong to the account, not to a business role.** A person may hold more
+  than one role over time — a salesperson who also becomes a sales manager — and
+  still keeps one diary and one set of hours. Hanging them on the role would mean
+  merging two sets the day the second is granted.
 
   🔑 **Silence is not an opening.** Whoever offers a slot needs a positive statement
   of when it may be offered ; saying nothing means no slot can be proposed, which is
@@ -172,6 +197,24 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - `Event::$location` also accepts `array`, for the same hydration reason as the
   rest : a place arrives as an array before it becomes a `Place`.
+
+- The **guides follow** : `auth.md` gains the availability of an account, where the
+  people guide used to carry it for a salesperson ; `appointments.md` names the
+  account as the diary's owner, adds `assignedCompany` to its property table, and
+  says that a status may state why.
+
+### Changed
+
+- **`CustomerAppointment::$organizer` is read back as a `User`**, not as a `Seller`.
+
+  A diary belongs to a person, not to a role. The union did not have to move —
+  `User` extends `org\schema\Person`, which `Event::$organizer` already accepts —
+  so only the class named for hydration changed.
+
+- **`Event::$eventStatus` and `CustomerAppointment::$appointmentStatus` also accept
+  `array`.** A status stated as an object is stored as one, and comes back as an
+  array before anything types it : without `array` in the union the object form
+  could be written in PHP and never read back from a document.
 
 ### Fixed
 

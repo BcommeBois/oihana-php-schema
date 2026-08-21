@@ -55,10 +55,34 @@ echo json_encode( $application , JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES );
 
 | Classe           | Rôle                                                                                                  |
 |------------------|-------------------------------------------------------------------------------------------------------|
-| `User`           | Utilisateur authentifié — étend `org\schema\Person`, ajoute l'activation, les compteurs de login, le workflow pending-email, le scope blocked-for, le cutoff tokens-invalid-before, les métadonnées et les devices. |
+| `User`           | Utilisateur authentifié — étend `org\schema\Person`, ajoute l'activation, les compteurs de login, le workflow pending-email, le scope blocked-for, le cutoff tokens-invalid-before, les métadonnées, les devices et ses **disponibilités** (voir ci-dessous). |
 | `Invitation`     | Étend `InviteAction` de Schema.org — cycle de vie d'invitation par email (pending / accepted / cancelled / expired / revoked). |
 | `PasswordReset`  | Étend `UpdateAction` de Schema.org — workflow de réinitialisation (hash de token, URL de redirection, horodatage d'envoi, statut). |
 | `Session`        | Enregistrement de connexion active — IP, user-agent, hash de token, expiration, raison de révocation. |
+
+#### `User::$hoursAvailable` — quand la personne prend des rendez-vous
+
+Le rythme hebdomadaire et les fermetures s'écrivent de la même façon : une spécification qui énonce des **jours et des heures** est le rythme ordinaire ; une spécification qui énonce une **plage de dates et aucune heure** est une fermeture — des congés, une semaine de formation.
+
+```php
+use xyz\oihana\schema\auth\User;
+
+$user = new User
+([
+    'name'           => 'Jane Doe' ,
+    'hoursAvailable' =>
+    [
+        [ 'dayOfWeek' => [ 'Monday' , 'Tuesday' , 'Thursday' ] , 'opens' => '08:30' , 'closes' => '18:00' ] ,
+        [ 'validFrom' => '2026-08-10' , 'validThrough' => '2026-08-21' ] ,   // une fermeture
+    ],
+]);
+```
+
+🔑 **Le silence n'est pas une ouverture.** Qui propose un créneau a besoin d'un énoncé **positif** de quand il peut le proposer ; ne rien dire signifie qu'aucun créneau n'est proposable — la lecture prudente plutôt que la permissive.
+
+🔑 **Sur le compte, jamais sur un rôle métier.** Une personne peut porter plusieurs rôles au fil du temps et garde **un seul agenda** et **un seul jeu d'horaires** ; les accrocher au rôle obligerait à les fusionner le jour où le second est accordé. Voir [Rendez-vous](appointments.md).
+
+ℹ️ **Le terme est emprunté, pas inventé.** Schema.org publie `hoursAvailable` sur un `ContactPoint` et sur un `Service`, jamais sur une personne — mais une personne qui prend des rendez-vous énonce exactement la même chose.
 
 ### Clients OAuth2 / OIDC
 

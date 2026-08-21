@@ -11,8 +11,10 @@ namespace xyz\oihana\schema\constants\traits\appointments;
  */
 trait CustomerAppointmentTrait
 {
-    const string APPOINTMENT_STATUS = 'appointmentStatus' ;
-    const string APPOINTMENT_TYPE   = 'appointmentType'   ;
-    const string REPORT             = 'report'            ;
-    const string TAGS               = 'tags'              ;
+    public const string APPOINTMENT_STATUS = 'appointmentStatus' ;
+    public const string APPOINTMENT_TYPE   = 'appointmentType'   ;
+    public const string ASSIGNED_COMPANY   = 'assignedCompany'   ;
+    public const string ASSIGNED_SELLER    = 'assignedSeller'    ;
+    public const string REPORT             = 'report'            ;
+    public const string TAGS               = 'tags'              ;
 }

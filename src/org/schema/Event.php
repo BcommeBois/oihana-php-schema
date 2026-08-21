@@ -97,9 +97,9 @@ class Event extends Thing
 
     /**
      * An eventStatus of an event represents its status; particularly useful when an event is cancelled or rescheduled.
-     * @var string|DefinedTerm|EventStatusType|null
+     * @var string|DefinedTerm|EventStatusType|array|null
      */
-    public string|DefinedTerm|EventStatusType|null $eventStatus ;
+    public string|DefinedTerm|EventStatusType|array|null $eventStatus ;
 
     /**
      * A person or organization that supports (sponsors) something through some kind of financial contribution.

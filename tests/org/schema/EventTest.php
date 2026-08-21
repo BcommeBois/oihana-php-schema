@@ -12,6 +12,8 @@ use org\schema\constants\Schema;
 use org\schema\constants\traits\Event as EventProperties;
 use org\schema\Event;
 use org\schema\enumerations\events\EventAttendanceModeEnumeration;
+use org\schema\enumerations\events\EventCancelled;
+use org\schema\enumerations\events\EventStatusType;
 use org\schema\Offer;
 use org\schema\Organization;
 use org\schema\Place;
@@ -204,4 +206,32 @@ class EventTest extends TestCase
             );
         }
     }
+
+    /**
+     * A status states itself two ways, and both have to survive a round trip.
+     *
+     * The bare constant is the ordinary case. The member class is for when the
+     * status has something more to say — why an event was called off — and a stored
+     * one comes back as an array before anything types it, which is why `array` is
+     * part of the union. Without it the object form could be written in PHP and
+     * never read back.
+     *
+     * @throws ReflectionException
+     */
+    public function testEventStatusAcceptsTheBareConstantAndTheStatedReason(): void
+    {
+        $bare = new Event([ Schema::EVENT_STATUS => EventStatusType::CANCELLED ] );
+
+        $this->assertSame( 'https://schema.org/EventCancelled' , $bare->eventStatus );
+
+        $stated = new Event([ Schema::EVENT_STATUS => new EventCancelled([ Schema::DESCRIPTION => 'Called off.' ] ) ] );
+
+        $this->assertInstanceOf( EventCancelled::class , $stated->eventStatus );
+        $this->assertSame( 'Called off.' , $stated->eventStatus->description );
+
+        $stored = new Event([ Schema::EVENT_STATUS => [ Schema::AT_TYPE => 'EventCancelled' , Schema::DESCRIPTION => 'Called off.' ] ] );
+
+        $this->assertIsArray( $stored->eventStatus );
+    }
+
 }

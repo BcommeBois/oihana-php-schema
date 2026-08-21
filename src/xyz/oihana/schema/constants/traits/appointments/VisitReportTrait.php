@@ -11,7 +11,7 @@ namespace xyz\oihana\schema\constants\traits\appointments;
  */
 trait VisitReportTrait
 {
-    const string MOOD    = 'mood'    ;
-    const string OUTCOME = 'outcome' ;
-    const string TOPICS  = 'topics'  ;
+    public const string MOOD    = 'mood'    ;
+    public const string OUTCOME = 'outcome' ;
+    public const string TOPICS  = 'topics'  ;
 }
