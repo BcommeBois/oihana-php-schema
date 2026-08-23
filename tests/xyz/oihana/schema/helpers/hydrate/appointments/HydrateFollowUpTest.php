@@ -176,17 +176,45 @@ final class HydrateFollowUpTest extends TestCase
         $this->assertContainsOnlyInstancesOf( CustomerAppointment::class , $followUp->result ) ;
 
         $this->assertNull( hydrateFollowUp( [ 'result' => [] ] )->result ) ;
-        $this->assertNull( hydrateFollowUp( [ 'result' => [ 'appointment-ref-42' ] ] )->result ) ;
+
+        // A meeting nobody joined yet is a handle, and a handle in a list is still a handle.
+        $this->assertSame( [ 'appointment-ref-42' ] , hydrateFollowUp( [ 'result' => [ 'appointment-ref-42' ] ] )->result ) ;
+        $this->assertNull( hydrateFollowUp( [ 'result' => [ null ] ] )->result ) ;
     }
 
     /**
-     * A list where nothing is a follow-up answers `null` : the empty list says « none »,
-     * this one says « nothing here was readable », and the two are not the same answer.
+     * A list where nothing resolved answers `null` : the empty list says « none », this one
+     * says « nothing here was readable », and the two are not the same answer. A list of
+     * handles is neither — it is the answer itself.
      *
      * @throws ReflectionException
      */
     public function testAListThatResolvesToNothingAnswersNull(): void
     {
-        $this->assertNull( hydrateFollowUp( [ 'raw' , 42 ] ) ) ;
+        $this->assertNull( hydrateFollowUp( [ null , null ] ) ) ;
+        $this->assertSame( [ 'follow-up-ref-42' , 42 ] , hydrateFollowUp( [ 'follow-up-ref-42' , 42 ] ) ) ;
+    }
+
+    /**
+     * 🔑 **A bare reference survives inside a list**, exactly as it does on its own — the
+     * contract every helper of the family states in its header, applied entry by entry.
+     * A property that stores handles rather than resolved objects used to read back `null`.
+     *
+     * The keys matter as much as the contents : a filtered list left with gaps serializes
+     * as a JSON **object**, and a consumer walking the value gets something it cannot walk.
+     *
+     * @throws ReflectionException
+     */
+    public function testAListOfReferencesSurvivesAndKeepsItsKeys(): void
+    {
+        $bare = hydrateFollowUp( [ 'follow-up-ref-42' , 'follow-up-ref-42' ] ) ;
+
+        $this->assertSame( [ 'follow-up-ref-42' , 'follow-up-ref-42' ] , $bare ) ;
+
+        $mixed = hydrateFollowUp( [ 'follow-up-ref-42' , [ 'followUpType' => [ 'id' => 'CALL_BACK' ] ] ] ) ;
+
+        $this->assertSame( [ 0 , 1 ] , array_keys( $mixed ) ) ;
+        $this->assertSame( 'follow-up-ref-42' , $mixed[ 0 ] ) ;
+        $this->assertInstanceOf( FollowUp::class , $mixed[ 1 ] ) ;
     }
 }

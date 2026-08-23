@@ -270,4 +270,24 @@ final class HydrateCustomerAppointmentTest extends TestCase
         $this->assertNull( $appointment->makesOffer ) ;
         $this->assertNull( $appointment->customer ) ;
     }
+
+    /**
+     * 🔑 **A bare reference survives inside a list**, in a nested branch as much as in the
+     * helper's own : a salesperson nobody joined yet is a handle. The keys stay gap-free —
+     * a filtered list left with holes serializes as a JSON object.
+     *
+     * @throws HydrationException
+     * @throws ReflectionException
+     */
+    public function testAListOfSellerReferencesSurvivesAndKeepsItsKeys(): void
+    {
+        $appointment = hydrateCustomerAppointment( [ 'assignedSeller' => [ 'RROE' , [ 'name' => 'Richard Roe' ] ] ] ) ;
+
+        $this->assertSame( [ 0 , 1 ] , array_keys( $appointment->assignedSeller ) ) ;
+        $this->assertSame( 'RROE' , $appointment->assignedSeller[ 0 ] ) ;
+        $this->assertInstanceOf( Seller::class , $appointment->assignedSeller[ 1 ] ) ;
+
+        // And a list of meetings, one level up.
+        $this->assertSame( [ 'appointment-ref-42' ] , hydrateCustomerAppointment( [ 'appointment-ref-42' ] ) ) ;
+    }
 }

@@ -46,6 +46,11 @@ use function oihana\core\arrays\isIndexed;
  * Anything that is not an array — an unresolved string reference, an already typed
  * instance — is left untouched.
  *
+ * 🔑 **A bare reference survives inside a list**, exactly as it does on its own : a list of
+ * unresolved handles comes back as it stands, and only an entry that *was* an array and
+ * resolved to nothing is dropped. The keys stay gap-free — a filtered list left with holes
+ * serializes as a JSON object, and a consumer walking the value gets something it cannot walk.
+ *
  * @param mixed  $init         Single offer data, a list of offer data, or any other value.
  * @param string $productClass The class hydrated when the item offered is not a service. Must extend {@see Product}.
  *
@@ -82,7 +87,9 @@ function hydrateOffer( mixed $init = null , string $productClass = Product::clas
             $init
         );
 
-        $filtered = array_values( array_filter( $offers , fn( $offer ) => $offer instanceof Offer ) ) ;
+        // A scalar entry is an unresolved reference and is kept as it stands ; only an entry that
+        // WAS an array and gave nothing is dropped. `array_values` closes the gaps it leaves.
+        $filtered = array_values( array_filter( $offers , fn( $offer ) => $offer instanceof Offer || is_scalar( $offer ) ) ) ;
 
         return count( $filtered ) > 0 ? $filtered : null ;
     }
@@ -120,7 +127,9 @@ function hydrateOffer( mixed $init = null , string $productClass = Product::clas
                 $itemOffered
             );
 
-            $filtered = array_values( array_filter( $items , fn( $item ) => $item instanceof Product || $item instanceof Service ) ) ;
+            // A scalar entry is an unresolved reference and is kept as it stands ; only an entry that
+            // WAS an array and gave nothing is dropped. `array_values` closes the gaps it leaves.
+            $filtered = array_values( array_filter( $items , fn( $item ) => $item instanceof Product || $item instanceof Service || is_scalar( $item ) ) ) ;
 
             $offer->itemOffered = count( $filtered ) > 0 ? $filtered : null ;
         }

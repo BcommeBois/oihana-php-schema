@@ -59,7 +59,10 @@ final class HydrateCustomerTest extends TestCase
         $this->assertCount( 2 , $customers ) ;
         $this->assertContainsOnlyInstancesOf( Customer::class , $customers ) ;
 
-        $this->assertNull( hydrateCustomer( [ 'raw' ] ) ) ;
+        // A bare reference is kept — in a list as much as on its own. Only an entry that
+        // resolved to nothing is dropped.
+        $this->assertSame( [ 'customer-ref-42' ] , hydrateCustomer( [ 'customer-ref-42' ] ) ) ;
+        $this->assertNull( hydrateCustomer( [ null ] ) ) ;
     }
 
     /**
@@ -114,5 +117,28 @@ final class HydrateCustomerTest extends TestCase
 
         $this->assertNull( $customer->contactPoint ) ;
         $this->assertNull( $customer->address      ) ;
+    }
+
+    /**
+     * 🔑 **A bare reference survives inside a list**, exactly as it does on its own — the
+     * contract every helper of the family states in its header, applied entry by entry.
+     * A property that stores handles rather than resolved objects used to read back `null`.
+     *
+     * The keys matter as much as the contents : a filtered list left with gaps serializes
+     * as a JSON **object**, and a consumer walking the value gets something it cannot walk.
+     *
+     * @throws ReflectionException
+     */
+    public function testAListOfReferencesSurvivesAndKeepsItsKeys(): void
+    {
+        $bare = hydrateCustomer( [ 'customer-ref-42' , 'customer-ref-42' ] ) ;
+
+        $this->assertSame( [ 'customer-ref-42' , 'customer-ref-42' ] , $bare ) ;
+
+        $mixed = hydrateCustomer( [ 'customer-ref-42' , [ 'name' => 'Acme Corporation' ] ] ) ;
+
+        $this->assertSame( [ 0 , 1 ] , array_keys( $mixed ) ) ;
+        $this->assertSame( 'customer-ref-42' , $mixed[ 0 ] ) ;
+        $this->assertInstanceOf( Customer::class , $mixed[ 1 ] ) ;
     }
 }

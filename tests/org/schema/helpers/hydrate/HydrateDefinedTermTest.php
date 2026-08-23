@@ -78,9 +78,15 @@ final class HydrateDefinedTermTest extends TestCase
     /**
      * @throws ReflectionException
      */
-    public function testFiltersNonTermEntriesAndNullifiesAnEmptyResult(): void
+    public function testKeepsBareReferencesAndNullifiesAnEmptyResult(): void
     {
-        $this->assertNull( hydrateDefinedTerm( [ 'foo' , 'bar' ] ) ) ;
+        // A list of handles is the answer, not the absence of one : the property stores the
+        // codes as published, and nothing was ever there to resolve.
+        $this->assertSame( [ 'MEAL' , 'DEMO' ] , hydrateDefinedTerm( [ 'MEAL' , 'DEMO' ] ) ) ;
+
+        // Only an entry that resolved to nothing is dropped.
+        $this->assertNull( hydrateDefinedTerm( [ null , null ] ) ) ;
+        $this->assertSame( [ 'MEAL' ] , hydrateDefinedTerm( [ null , 'MEAL' ] ) ) ;
     }
 
     /**
@@ -90,5 +96,31 @@ final class HydrateDefinedTermTest extends TestCase
     {
         $this->assertNull( hydrateDefinedTerm() ) ;
         $this->assertSame( 'Express' , hydrateDefinedTerm( 'Express' ) ) ;
+    }
+
+    /**
+     * 🔑 **A bare reference survives inside a list**, exactly as it does on its own — the
+     * contract every helper of the family states in its header, applied entry by entry.
+     * A property that stores handles rather than resolved objects used to read back `null`.
+     *
+     * The keys matter as much as the contents : a filtered list left with gaps serializes
+     * as a JSON **object**, and a consumer walking the value gets something it cannot walk.
+     *
+     * @throws ReflectionException
+     */
+    public function testAListOfReferencesSurvivesAndKeepsItsKeys(): void
+    {
+        $bare = hydrateDefinedTerm( [ 'MEAL' , 'MEAL' ] ) ;
+
+        $this->assertSame( [ 'MEAL' , 'MEAL' ] , $bare ) ;
+
+        $mixed = hydrateDefinedTerm( [ 'MEAL' , [ 'name' => 'Demonstration' ] ] ) ;
+
+        $this->assertSame( [ 0 , 1 ] , array_keys( $mixed ) ) ;
+        $this->assertSame( 'MEAL' , $mixed[ 0 ] ) ;
+        $this->assertInstanceOf( DefinedTerm::class , $mixed[ 1 ] ) ;
+
+        // The gap-free keys are what keeps it a JSON array rather than a JSON object.
+        $this->assertSame( '["MEAL",{"@type":"DefinedTerm","@context":"https:\\/\\/schema.org","name":"Demonstration"}]' , json_encode( $mixed ) ) ;
     }
 }

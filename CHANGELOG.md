@@ -327,6 +327,60 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Fixed
 
+- **A list of bare references no longer disappears on the way back in** — every helper of
+  the `hydrateXxx()` family, twenty-four list branches.
+
+  Each of them states the same rule in its header : *anything that is not an array — an
+  unresolved string reference, an already typed instance — is left untouched*. The rule was
+  applied to the **whole value** and never to the **entries of a list** : in the list
+  branch, an entry that stayed a string was thrown away by the `array_filter` on
+  `instanceof`. Measured, on the whole family :
+
+  ```
+  hydrateDefinedTerm( 'MEAL' )                       →  'MEAL'                ✅
+  hydrateDefinedTerm( [ 'MEAL' , 'DEMO' ] )          →  null                  ❌
+  hydrateDefinedTerm( [ 'MEAL' , [ 'name' => '…' ] ] ) →  [ DefinedTerm ]     ❌  'MEAL' gone
+  ```
+
+  It never fires where a stored list holds objects, which is why nothing was red. It bites
+  the moment a property stores **handles** — a published code, a vocabulary identifier —
+  rather than resolved terms : exactly what `CustomerAppointment::$tags`,
+  `VisitReport::$tags` and `VisitReport::$topics` carry, and they read back `null`.
+
+  🚨 **The filtering also left gaps in the keys, and `json_encode` then switches to an
+  object.** `{"1":{…}}` where a consumer walks an array. Half the family already closed the
+  gaps with `array_values()` ; eight helpers did not, and they do now.
+
+  The rule is one line, written the same way at every site : an entry is kept when it
+  resolved **or** when it is a scalar. `is_scalar`, never `!is_array` — `null` is not an
+  array either, and keeping it would reopen the very gaps just closed.
+
+  - **Two helpers did worse than lose the value : they threw.**
+    `hydrateAdditionalProperty()` and `hydrateContactPoint()` map their constructor over
+    every entry, and `PropertyValue`/`ContactPoint` take an array or an object, never a
+    string — so a single handle in the list raised a `TypeError`. The guard belongs to
+    their map, there being no filter to fix.
+  - **`hydrateAggregateOffer()` loses its references in the map too**, for another reason :
+    `hydrateOfferPurchase()` answers `null` for anything it cannot build, so a handle was
+    gone before the filter ever saw it.
+  - **Four of the branches are nested**, invisible to a sweep of function signatures :
+    `hydrateOffer()`'s `itemOffered`, `hydrateFollowUp()`'s `result`,
+    `hydrateCustomerAppointment()`'s `assignedSeller`, `hydrateAggregateOffer()`'s `offers`.
+    Without them, a meeting fixed at the top level would lose a reference one level down.
+
+  ⚠️ **The contract of « a list that resolves to nothing answers `null` » narrows**, and
+  says what it always meant : a list of **arrays** that gave nothing. A list of handles is
+  not nothing — it is the answer. Fifteen existing assertions stated the defect
+  (`hydrateCustomer( [ 'raw' ] )` → `null`) and now state the rule.
+
+  - **Tests:** 24 new cases, one per corrected branch — a list of bare references comes
+    back intact, a mixed list keeps both shapes, and `array_keys( … ) === [ 0 , 1 ]` catches
+    the switch to a JSON object, which the contents alone cannot. Both `TypeError`s have
+    their non-regression case, and `hydrateDefinedTerm` holds the serialized shape itself.
+  - FR/EN wiki `oihana/helpers.md` : « the rule for nested references » says it holds entry
+    by entry, and the example that stated the defect — `hydrateDocumentLine( [ 'raw' ] )` →
+    `null` — is corrected.
+
 - **Every party of a `BusinessDocument` is read back as the class that names it** —
   `assignedSeller` and `author` as a `Seller`, `contact` as a `CustomerEmployee`,
   `pointOfSale` as a `Warehouse`, `seller` and `publisher` as a `Subsidiary`.

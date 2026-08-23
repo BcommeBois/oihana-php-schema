@@ -25,6 +25,11 @@ use function oihana\core\arrays\isIndexed;
  * - anything else gives a {@see Product} — the commerce-enriched product of this package,
  *   which is a `org\schema\Product` and so satisfies the line's declared type.
  *
+ * 🔑 **A bare reference survives inside a list**, exactly as it does on its own : a list of
+ * unresolved handles comes back as it stands, and only an entry that *was* an array and
+ * resolved to nothing is dropped. The keys stay gap-free — a filtered list left with holes
+ * serializes as a JSON object, and a consumer walking the value gets something it cannot walk.
+ *
  * @param mixed $init Single item data or array of item data.
  *
  * @return mixed
@@ -47,7 +52,9 @@ function hydrateDocumentLineItem( mixed $init = null ) :mixed
             $init
         );
 
-        $filtered = array_values( array_filter( $items , fn( $item ) => $item instanceof Product || $item instanceof Service ) ) ;
+        // A scalar entry is an unresolved reference and is kept as it stands ; only an entry that
+        // WAS an array and gave nothing is dropped. `array_values` closes the gaps it leaves.
+        $filtered = array_values( array_filter( $items , fn( $item ) => $item instanceof Product || $item instanceof Service || is_scalar( $item ) ) ) ;
 
         return count( $filtered ) > 0 ? $filtered : null ;
     }

@@ -48,6 +48,11 @@ use function org\schema\helpers\hydrate\hydratePostalAddress;
  * something to hydrate — and its answer is then written as is, `null` included :
  * an array that resolves to nothing becomes `null`, never a leftover raw array.
  *
+ * 🔑 **A bare reference survives inside a list**, exactly as it does on its own : a list of
+ * unresolved handles comes back as it stands, and only an entry that *was* an array and
+ * resolved to nothing is dropped. The keys stay gap-free — a filtered list left with holes
+ * serializes as a JSON object, and a consumer walking the value gets something it cannot walk.
+ *
  * @param mixed                     $init                Single delivery data or array of delivery data.
  * @param class-string<DefinedTerm> $deliveryMethodClass The class the delivery method is hydrated into.
  * @param class-string<DefinedTerm> $deliveryRouteClass  The class the delivery route is hydrated into.
@@ -92,7 +97,9 @@ function hydrateParcelDelivery
             $init
         );
 
-        $filtered = array_values( array_filter( $deliveries , fn( $delivery ) => $delivery instanceof ParcelDelivery ) ) ;
+        // A scalar entry is an unresolved reference and is kept as it stands ; only an entry that
+        // WAS an array and gave nothing is dropped. `array_values` closes the gaps it leaves.
+        $filtered = array_values( array_filter( $deliveries , fn( $delivery ) => $delivery instanceof ParcelDelivery || is_scalar( $delivery ) ) ) ;
 
         return count( $filtered ) > 0 ? $filtered : null ;
     }

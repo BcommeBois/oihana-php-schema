@@ -64,6 +64,11 @@ use function xyz\oihana\schema\helpers\hydrate\hydrateCustomerEmployee;
  * an array that resolves to nothing becomes `null`, never a leftover raw array. Anything
  * else is left to whatever {@see Reflection::hydrate()} made of it.
  *
+ * 🔑 **A bare reference survives inside a list**, exactly as it does on its own : a list of
+ * unresolved handles comes back as it stands, and only an entry that *was* an array and
+ * resolved to nothing is dropped. The keys stay gap-free — a filtered list left with holes
+ * serializes as a JSON object, and a consumer walking the value gets something it cannot walk.
+ *
  * @param mixed $init Single meeting data or array of meeting data.
  *
  * @return mixed
@@ -102,7 +107,9 @@ function hydrateCustomerAppointment( mixed $init = null ) :mixed
             $init
         );
 
-        $filtered = array_values( array_filter( $appointments , fn( $appointment ) => $appointment instanceof CustomerAppointment ) ) ;
+        // A scalar entry is an unresolved reference and is kept as it stands ; only an entry that
+        // WAS an array and gave nothing is dropped. `array_values` closes the gaps it leaves.
+        $filtered = array_values( array_filter( $appointments , fn( $appointment ) => $appointment instanceof CustomerAppointment || is_scalar( $appointment ) ) ) ;
 
         return count( $filtered ) > 0 ? $filtered : null ;
     }
@@ -154,7 +161,9 @@ function hydrateCustomerAppointment( mixed $init = null ) :mixed
                 $assignedSeller
             );
 
-            $filtered = array_values( array_filter( $sellers , fn( $seller ) => $seller instanceof Seller ) ) ;
+            // A scalar entry is an unresolved reference and is kept as it stands ; only an entry that
+            // WAS an array and gave nothing is dropped. `array_values` closes the gaps it leaves.
+            $filtered = array_values( array_filter( $sellers , fn( $seller ) => $seller instanceof Seller || is_scalar( $seller ) ) ) ;
 
             $appointment->assignedSeller = count( $filtered ) > 0 ? $filtered : null ;
         }

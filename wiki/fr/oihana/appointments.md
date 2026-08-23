@@ -313,7 +313,7 @@ $appointment->report->followUp[ 0 ]        instanceof FollowUp         ; // true
 $appointment->appointmentStatus            instanceof AppointmentDone  ; // true
 ```
 
-Un appel suffit : la tête passe par `Reflection::hydrate()`, puis relit depuis la charge brute ce que la réflexion ne sait pas trancher ou ce qu'elle type moins profondément que l'aide. Ce qui n'est pas un tableau — une référence en chaîne, une instance déjà typée — ressort intact, et une liste qui ne résout rien rend `null` plutôt qu'un tableau brut résiduel.
+Un appel suffit : la tête passe par `Reflection::hydrate()`, puis relit depuis la charge brute ce que la réflexion ne sait pas trancher ou ce qu'elle type moins profondément que l'aide. Ce qui n'est pas un tableau — une référence en chaîne, une instance déjà typée — ressort intact, **entrée par entrée dans une liste comme tout seul**, et une liste dont chaque entrée était un tableau sans rien donner rend `null` plutôt qu'un tableau brut résiduel.
 
 🚨 **Le rendez-vous nommé en résultat d'une suite n'est pas déplié.** `FollowUp::$result` désigne une rencontre, dont le compte rendu porte des suites à donner, qui nomment des rencontres à leur tour : descendre par l'aide profonde ouvre un cycle que seule la donnée arrête. C'est une **référence**, typée sur un niveau et pas davantage — ce qu'elle porte elle-même reste brut, et qui en a besoin demande cette rencontre-là.
 

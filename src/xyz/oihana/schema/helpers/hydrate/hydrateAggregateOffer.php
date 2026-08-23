@@ -17,6 +17,11 @@ use function org\schema\helpers\hydrate\hydrateOfferPurchase;
  *
  * Use it in the 'products' definition in the DI container.
  *
+ * 🔑 **A bare reference survives inside a list**, exactly as it does on its own : a list of
+ * unresolved handles comes back as it stands, and only an entry that *was* an array and
+ * resolved to nothing is dropped. The keys stay gap-free — a filtered list left with holes
+ * serializes as a JSON object, and a consumer walking the value gets something it cannot walk.
+ *
  * @throws ReflectionException
  */
 function hydrateAggregateOffer( ?array $init = null  ):?AggregateOffer
@@ -49,12 +54,16 @@ function hydrateAggregateOffer( ?array $init = null  ):?AggregateOffer
             $offer->eligibleQuantity = hydratePhysicalQuantity( $eligibleQuantity ) ;
         }
 
+        // An entry that is not an array is an unresolved reference — a handle, a code — and it
+        // is kept as it stands. The guard belongs to the map here rather than to the filter :
+        // hydrateOfferPurchase() answers `null` for anything it cannot build, so a reference
+        // handed to it would be lost before the filter ever saw it.
         $offers = $offer->offers ?? null ;
         if( is_array( $offers ) && !empty( $offers ) )
         {
             $offer->offers = array_values( array_filter( array_map
             (
-                fn( $item ) => hydrateOfferPurchase( $item ) , $offers
+                fn( $item ) => is_scalar( $item ) ? $item : hydrateOfferPurchase( $item ) , $offers
             ))) ;
         }
 

@@ -55,4 +55,31 @@ final class HydrateContactPointTest extends TestCase
         $this->assertSame( 'contact-ref-42' , hydrateContactPoint( 'contact-ref-42' ) ) ;
         $this->assertSame( 42               , hydrateContactPoint( 42 ) ) ;
     }
+
+    /**
+     * 🔑 **A bare reference survives inside a list**, exactly as it does on its own — the
+     * contract every helper of the family states in its header, applied entry by entry.
+     * A property that stores handles rather than resolved objects used to read back `null`.
+     *
+     * The keys matter as much as the contents : a filtered list left with gaps serializes
+     * as a JSON **object**, and a consumer walking the value gets something it cannot walk.
+     *
+     * @throws ReflectionException
+     */
+    public function testAListOfReferencesSurvivesAndKeepsItsKeys(): void
+    {
+        $bare = hydrateContactPoint( [ 'contact-ref-42' , 'contact-ref-42' ] ) ;
+
+        $this->assertSame( [ 'contact-ref-42' , 'contact-ref-42' ] , $bare ) ;
+
+        $mixed = hydrateContactPoint( [ 'contact-ref-42' , [ 'telephone' => '05 00 00 00 00' ] ] ) ;
+
+        $this->assertSame( [ 0 , 1 ] , array_keys( $mixed ) ) ;
+        $this->assertSame( 'contact-ref-42' , $mixed[ 0 ] ) ;
+        $this->assertInstanceOf( ContactPoint::class , $mixed[ 1 ] ) ;
+
+        // It used to be worse than a value lost : the constructor takes an array or an
+        // object, never a string, so a handle in the list threw.
+        $this->assertSame( [ 'a' , 'b' ] , hydrateContactPoint( [ 'a' , 'b' ] ) ) ;
+    }
 }

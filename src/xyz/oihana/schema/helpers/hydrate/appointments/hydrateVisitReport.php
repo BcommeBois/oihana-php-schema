@@ -39,6 +39,11 @@ use function xyz\oihana\schema\helpers\hydrate\hydrateCustomerEmployee;
  * {@see hydrateFollowUp()} holds that rule, and this helper writes back whatever it
  * answers.
  *
+ * 🔑 **A bare reference survives inside a list**, exactly as it does on its own : a list of
+ * unresolved handles comes back as it stands, and only an entry that *was* an array and
+ * resolved to nothing is dropped. The keys stay gap-free — a filtered list left with holes
+ * serializes as a JSON object, and a consumer walking the value gets something it cannot walk.
+ *
  * @param mixed $init Single report data or array of report data.
  *
  * @return mixed
@@ -74,7 +79,9 @@ function hydrateVisitReport( mixed $init = null ) :mixed
             $init
         );
 
-        $filtered = array_values( array_filter( $reports , fn( $report ) => $report instanceof VisitReport ) ) ;
+        // A scalar entry is an unresolved reference and is kept as it stands ; only an entry that
+        // WAS an array and gave nothing is dropped. `array_values` closes the gaps it leaves.
+        $filtered = array_values( array_filter( $reports , fn( $report ) => $report instanceof VisitReport || is_scalar( $report ) ) ) ;
 
         return count( $filtered ) > 0 ? $filtered : null ;
     }

@@ -144,4 +144,26 @@ final class HydrateOfferTest extends TestCase
 
         $this->assertNull( hydrateOffer( [ 'itemOffered' => [] ] )->itemOffered ) ;
     }
+
+    /**
+     * 🔑 **A bare reference survives inside a list**, in a nested branch as much as in the
+     * helper's own — an item nobody joined yet is a handle, and a handle stays what it is.
+     * The keys stay gap-free : a filtered list left with holes serializes as a JSON object.
+     *
+     * @throws HydrationException
+     * @throws ReflectionException
+     */
+    public function testAListOfItemReferencesSurvivesAndKeepsItsKeys(): void
+    {
+        $offer = hydrateOffer( [ 'itemOffered' => [ 'item-ref-42' , [ 'name' => 'Model A widget' ] ] ] ) ;
+
+        $this->assertSame( [ 0 , 1 ] , array_keys( $offer->itemOffered ) ) ;
+        $this->assertSame( 'item-ref-42' , $offer->itemOffered[ 0 ] ) ;
+        $this->assertInstanceOf( Product::class , $offer->itemOffered[ 1 ] ) ;
+
+        $this->assertSame( [ 'a' , 'b' ] , hydrateOffer( [ 'itemOffered' => [ 'a' , 'b' ] ] )->itemOffered ) ;
+
+        // A list of offers answers the same, one level up.
+        $this->assertSame( [ 'offer-ref-42' ] , hydrateOffer( [ 'offer-ref-42' ] ) ) ;
+    }
 }

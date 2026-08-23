@@ -25,6 +25,11 @@ use function org\schema\helpers\hydrate\hydrateDefinedTerm;
  * nested helper called on its own. Anything that is not an array — an unresolved string
  * reference, an already typed instance — is left untouched.
  *
+ * 🔑 **A bare reference survives inside a list**, exactly as it does on its own : a list of
+ * unresolved handles comes back as it stands, and only an entry that *was* an array and
+ * resolved to nothing is dropped. The keys stay gap-free — a filtered list left with holes
+ * serializes as a JSON object, and a consumer walking the value gets something it cannot walk.
+ *
  * @param mixed $init Single employee data or array of employee data
  *
  * @return mixed
@@ -46,7 +51,9 @@ function hydrateCustomerEmployee( mixed $init = null  ):mixed
             $init
         );
 
-        $filtered = array_filter( $employees , fn( $emp ) => $emp instanceof CustomerEmployee ) ;
+        // A scalar entry is an unresolved reference and is kept as it stands ; only an entry that
+        // WAS an array and gave nothing is dropped. `array_values` closes the gaps it leaves.
+        $filtered = array_values( array_filter( $employees , fn( $emp ) => $emp instanceof CustomerEmployee || is_scalar( $emp ) ) ) ;
 
         return count( $filtered ) > 0 ? $filtered : null ;
     }

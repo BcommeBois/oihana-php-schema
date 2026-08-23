@@ -62,9 +62,14 @@ final class HydratePostalAddressTest extends TestCase
     /**
      * @throws ReflectionException
      */
-    public function testFiltersNonAddressEntriesAndNullifiesAnEmptyResult(): void
+    public function testKeepsBareReferencesAndNullifiesAnEmptyResult(): void
     {
-        $this->assertNull( hydratePostalAddress( [ 'foo' ] ) ) ;
+        $this->assertSame( [ 'address-ref-42' ] , hydratePostalAddress( [ 'address-ref-42' ] ) ) ;
+
+        // An entry that WAS an array and gave nothing is the one that is dropped : an empty
+        // address normalizes to nothing.
+        $this->assertNull( hydratePostalAddress( [ [] ] ) ) ;
+        $this->assertNull( hydratePostalAddress( [ null ] ) ) ;
     }
 
     /**
@@ -74,5 +79,28 @@ final class HydratePostalAddressTest extends TestCase
     {
         $this->assertNull( hydratePostalAddress() ) ;
         $this->assertSame( 'raw' , hydratePostalAddress( 'raw' ) ) ;
+    }
+
+    /**
+     * 🔑 **A bare reference survives inside a list**, exactly as it does on its own — the
+     * contract every helper of the family states in its header, applied entry by entry.
+     * A property that stores handles rather than resolved objects used to read back `null`.
+     *
+     * The keys matter as much as the contents : a filtered list left with gaps serializes
+     * as a JSON **object**, and a consumer walking the value gets something it cannot walk.
+     *
+     * @throws ReflectionException
+     */
+    public function testAListOfReferencesSurvivesAndKeepsItsKeys(): void
+    {
+        $bare = hydratePostalAddress( [ 'address-ref-42' , 'address-ref-42' ] ) ;
+
+        $this->assertSame( [ 'address-ref-42' , 'address-ref-42' ] , $bare ) ;
+
+        $mixed = hydratePostalAddress( [ 'address-ref-42' , [ 'streetAddress' => '1 Example street' ] ] ) ;
+
+        $this->assertSame( [ 0 , 1 ] , array_keys( $mixed ) ) ;
+        $this->assertSame( 'address-ref-42' , $mixed[ 0 ] ) ;
+        $this->assertInstanceOf( PostalAddress::class , $mixed[ 1 ] ) ;
     }
 }

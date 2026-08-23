@@ -33,6 +33,11 @@ use function oihana\core\arrays\isIndexed;
  * nothing keeps the family's `null` — there, nothing usable was found, which is
  * a different statement.
  *
+ * 🔑 **A bare reference survives inside a list**, exactly as it does on its own : a list of
+ * unresolved handles comes back as it stands, and only an entry that *was* an array and
+ * resolved to nothing is dropped. The keys stay gap-free — a filtered list left with holes
+ * serializes as a JSON object, and a consumer walking the value gets something it cannot walk.
+ *
  * @param mixed $init Single adjustment data or array of adjustment data.
  *
  * @return mixed
@@ -75,7 +80,9 @@ function hydrateAdjustment( mixed $init = null ) :mixed
             $init
         );
 
-        $filtered = array_values( array_filter( $adjustments , fn( $adjustment ) => $adjustment instanceof Adjustment ) ) ;
+        // A scalar entry is an unresolved reference and is kept as it stands ; only an entry that
+        // WAS an array and gave nothing is dropped. `array_values` closes the gaps it leaves.
+        $filtered = array_values( array_filter( $adjustments , fn( $adjustment ) => $adjustment instanceof Adjustment || is_scalar( $adjustment ) ) ) ;
 
         return count( $filtered ) > 0 ? $filtered : null ;
     }

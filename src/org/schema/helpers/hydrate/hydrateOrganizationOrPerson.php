@@ -36,6 +36,11 @@ use function oihana\core\arrays\isIndexed;
  *
  * Handles both a single definition and an indexed list of definitions.
  *
+ * 🔑 **A bare reference survives inside a list**, exactly as it does on its own : a list of
+ * unresolved handles comes back as it stands, and only an entry that *was* an array and
+ * resolved to nothing is dropped. The keys stay gap-free — a filtered list left with holes
+ * serializes as a JSON object, and a consumer walking the value gets something it cannot walk.
+ *
  * @param mixed  $init              Single Organization/Person data, a list of such data, or any other value.
  * @param string $organizationClass The class hydrated when the payload is not a Person. Must extend {@see Organization}.
  * @param string $personClass       The class hydrated when the payload's `@type` says Person. Must extend {@see Person}.
@@ -60,7 +65,9 @@ function hydrateOrganizationOrPerson( mixed $init = null , string $organizationC
             $init
         );
 
-        $filtered = array_values( array_filter( $entities , fn( $entity ) => $entity instanceof Organization || $entity instanceof Person ) ) ;
+        // A scalar entry is an unresolved reference and is kept as it stands ; only an entry that
+        // WAS an array and gave nothing is dropped. `array_values` closes the gaps it leaves.
+        $filtered = array_values( array_filter( $entities , fn( $entity ) => $entity instanceof Organization || $entity instanceof Person || is_scalar( $entity ) ) ) ;
 
         return count( $filtered ) > 0 ? $filtered : null ;
     }

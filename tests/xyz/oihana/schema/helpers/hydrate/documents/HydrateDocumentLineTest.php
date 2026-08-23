@@ -136,7 +136,10 @@ final class HydrateDocumentLineTest extends TestCase
         $this->assertInstanceOf( QuantitativeValue::class , $lines[ 0 ]->quantity ) ;
         $this->assertInstanceOf( MonetaryAmount::class    , $lines[ 1 ]->total    ) ;
 
-        $this->assertNull( hydrateDocumentLine( [ 'raw' ] ) ) ;
+        // A bare reference is kept — in a list as much as on its own. Only an entry that
+        // resolved to nothing is dropped.
+        $this->assertSame( [ 'line-ref-42' ] , hydrateDocumentLine( [ 'line-ref-42' ] ) ) ;
+        $this->assertNull( hydrateDocumentLine( [ null ] ) ) ;
     }
 
     /**
@@ -194,5 +197,29 @@ final class HydrateDocumentLineTest extends TestCase
 
         $this->assertNull( $line->item ) ;
         $this->assertSame( 1 , $line->position ) ;
+    }
+
+    /**
+     * 🔑 **A bare reference survives inside a list**, exactly as it does on its own — the
+     * contract every helper of the family states in its header, applied entry by entry.
+     * A property that stores handles rather than resolved objects used to read back `null`.
+     *
+     * The keys matter as much as the contents : a filtered list left with gaps serializes
+     * as a JSON **object**, and a consumer walking the value gets something it cannot walk.
+     *
+     * @throws HydrationException
+     * @throws ReflectionException
+     */
+    public function testAListOfReferencesSurvivesAndKeepsItsKeys(): void
+    {
+        $bare = hydrateDocumentLine( [ 'line-ref-42' , 'line-ref-42' ] ) ;
+
+        $this->assertSame( [ 'line-ref-42' , 'line-ref-42' ] , $bare ) ;
+
+        $mixed = hydrateDocumentLine( [ 'line-ref-42' , [ 'position' => 1 ] ] ) ;
+
+        $this->assertSame( [ 0 , 1 ] , array_keys( $mixed ) ) ;
+        $this->assertSame( 'line-ref-42' , $mixed[ 0 ] ) ;
+        $this->assertInstanceOf( BusinessDocumentLine::class , $mixed[ 1 ] ) ;
     }
 }

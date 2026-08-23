@@ -80,6 +80,7 @@ Les trois formes acceptées par les hydrateurs de choses (`hydrateCustomer`, `hy
 hydrateCustomer( [ 'name' => 'A' ] ) ;                      // une définition  → Customer
 hydrateCustomer( [ [ 'name' => 'A' ] , [ 'name' => 'B' ] ] ); // une liste       → Customer[]
 hydrateCustomer( 'brut' ) ;                                 // autre valeur    → rendue telle quelle
+hydrateCustomer( [ 'brut' , [ 'name' => 'A' ] ] ) ;          // liste mixte     → [ 'brut' , Customer ]
 ```
 
 ### La règle des références imbriquées
@@ -89,10 +90,12 @@ Un hydrateur qui résout des références imbriquées (`hydrateCustomer`, `hydra
 
 - **il n'hydrate que ce qui est un tableau** — là où il y a quelque chose à hydrater. Une
   référence textuelle non résolue ou une instance déjà typée est laissée intacte, jamais
-  réécrite ;
+  réécrite. 🔑 **Cela vaut entrée par entrée à l'intérieur d'une liste** : une liste de
+  poignées — des codes publiés, des identifiants de vocabulaire — ressort telle quelle, et
+  les clés restent sans trou, un tableau troué se sérialisant en **objet** JSON ;
 - **la réponse de l'hydrateur imbriqué est ensuite écrite telle quelle, `null` compris.**
-  Un tableau qui ne résout rien — liste vide, liste d'entrées non hydratables — devient
-  `null`, jamais un tableau brut résiduel ;
+  Un tableau qui ne résout rien — liste vide, liste d'entrées **qui étaient des tableaux**
+  et n'ont rien donné — devient `null`, jamais un tableau brut résiduel ;
 - **une propriété que la charge utile n'a jamais portée n'est pas inventée.** L'hydratation
   la laisse dans l'état que lui donne sa déclaration : déclarée sans valeur par défaut,
   elle reste non initialisée, donc absente de la forme sérialisée ; déclarée `= null`, elle
@@ -117,7 +120,8 @@ Deux hydrateurs échappent à ce `null` — mais **sur leur argument de premier 
 hydrateDocumentLine( [] ) ;   // []  — « ce document n'a aucune ligne »
 hydrateAdjustment  ( [] ) ;   // []  — « ce document n'a aucun ajustement »
 
-hydrateDocumentLine( [ 'brut' ] ) ; // null — rien n'était lisible : ce n'est pas la même réponse
+hydrateDocumentLine( [ null ] ) ;   // null — rien n'était lisible : ce n'est pas la même réponse
+hydrateDocumentLine( [ 'brut' ] ) ; // [ 'brut' ] — une poignée n'est pas une ligne illisible, c'est une référence
 ```
 
 Les lignes et les ajustements sont les deux endroits où « il n'y en a pas » est une réponse qui vaut la peine d'être servie : un brouillon naît couramment sans une seule ligne, et un `null` fait disparaître la clé de la forme sérialisée — le consommateur qui parcourt la valeur tombe alors sur une absence au lieu de la liste vide qu'il pouvait parcourir.

@@ -120,4 +120,27 @@ final class HydrateAppointmentStatusTest extends TestCase
 
         $this->assertSame( $bare , hydrateAppointmentStatus( json_decode( json_encode( $bare ) , true ) ) ) ;
     }
+
+    /**
+     * 🔑 **A bare reference survives inside a list**, exactly as it does on its own — the
+     * contract every helper of the family states in its header, applied entry by entry.
+     * A property that stores handles rather than resolved objects used to read back `null`.
+     *
+     * The keys matter as much as the contents : a filtered list left with gaps serializes
+     * as a JSON **object**, and a consumer walking the value gets something it cannot walk.
+     *
+     * @throws ReflectionException
+     */
+    public function testAListOfReferencesSurvivesAndKeepsItsKeys(): void
+    {
+        $bare = hydrateAppointmentStatus( [ AppointmentStatus::PLANNED , AppointmentStatus::PLANNED ] ) ;
+
+        $this->assertSame( [ AppointmentStatus::PLANNED , AppointmentStatus::PLANNED ] , $bare ) ;
+
+        $mixed = hydrateAppointmentStatus( [ AppointmentStatus::PLANNED , [ Schema::AT_TYPE => 'AppointmentDone' ] ] ) ;
+
+        $this->assertSame( [ 0 , 1 ] , array_keys( $mixed ) ) ;
+        $this->assertSame( AppointmentStatus::PLANNED , $mixed[ 0 ] ) ;
+        $this->assertInstanceOf( AppointmentDone::class , $mixed[ 1 ] ) ;
+    }
 }

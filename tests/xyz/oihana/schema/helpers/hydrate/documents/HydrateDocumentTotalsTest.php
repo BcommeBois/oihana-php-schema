@@ -82,7 +82,10 @@ final class HydrateDocumentTotalsTest extends TestCase
         $this->assertInstanceOf( MonetaryAmount::class , $totals[ 0 ]->subtotal ) ;
         $this->assertInstanceOf( MonetaryAmount::class , $totals[ 1 ]->total    ) ;
 
-        $this->assertNull( hydrateDocumentTotals( [ 'raw' ] ) ) ;
+        // A bare reference is kept — in a list as much as on its own. Only an entry that
+        // resolved to nothing is dropped.
+        $this->assertSame( [ 'totals-ref-42' ] , hydrateDocumentTotals( [ 'totals-ref-42' ] ) ) ;
+        $this->assertNull( hydrateDocumentTotals( [ null ] ) ) ;
     }
 
     /**
@@ -118,5 +121,29 @@ final class HydrateDocumentTotalsTest extends TestCase
     {
         $this->assertNull( hydrateDocumentTotals() ) ;
         $this->assertSame( 'raw' , hydrateDocumentTotals( 'raw' ) ) ;
+    }
+
+    /**
+     * 🔑 **A bare reference survives inside a list**, exactly as it does on its own — the
+     * contract every helper of the family states in its header, applied entry by entry.
+     * A property that stores handles rather than resolved objects used to read back `null`.
+     *
+     * The keys matter as much as the contents : a filtered list left with gaps serializes
+     * as a JSON **object**, and a consumer walking the value gets something it cannot walk.
+     *
+     * @throws HydrationException
+     * @throws ReflectionException
+     */
+    public function testAListOfReferencesSurvivesAndKeepsItsKeys(): void
+    {
+        $bare = hydrateDocumentTotals( [ 'totals-ref-42' , 'totals-ref-42' ] ) ;
+
+        $this->assertSame( [ 'totals-ref-42' , 'totals-ref-42' ] , $bare ) ;
+
+        $mixed = hydrateDocumentTotals( [ 'totals-ref-42' , [ 'subtotal' => [ 'value' => 10.0 , 'currency' => 'EUR' ] ] ] ) ;
+
+        $this->assertSame( [ 0 , 1 ] , array_keys( $mixed ) ) ;
+        $this->assertSame( 'totals-ref-42' , $mixed[ 0 ] ) ;
+        $this->assertInstanceOf( DocumentTotals::class , $mixed[ 1 ] ) ;
     }
 }

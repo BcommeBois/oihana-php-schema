@@ -313,7 +313,7 @@ $appointment->report->followUp[ 0 ]        instanceof FollowUp         ; // true
 $appointment->appointmentStatus            instanceof AppointmentDone  ; // true
 ```
 
-One call is enough : the head goes through `Reflection::hydrate()`, then re-reads from the raw payload whatever reflection cannot settle, or types less deeply than the helper does. Anything that is not an array — an unresolved string reference, an already typed instance — comes back untouched, and a list that resolves to nothing answers `null` rather than a leftover raw array.
+One call is enough : the head goes through `Reflection::hydrate()`, then re-reads from the raw payload whatever reflection cannot settle, or types less deeply than the helper does. Anything that is not an array — an unresolved string reference, an already typed instance — comes back untouched, **entry by entry inside a list as much as on its own**, and a list whose every entry was an array that gave nothing answers `null` rather than a leftover raw array.
 
 🚨 **The meeting a follow-up names is not unfolded.** `FollowUp::$result` names a meeting, whose report carries follow-ups, which name meetings in turn : going down through the deep helper opens a cycle only the data would stop. It is a **reference**, typed one level and no further — what it carries itself stays raw, and whoever needs it asks for that meeting on its own.
 

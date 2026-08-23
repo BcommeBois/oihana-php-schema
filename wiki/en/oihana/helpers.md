@@ -80,6 +80,7 @@ The three shapes accepted by the thing hydrators (`hydrateCustomer`, `hydrateWar
 hydrateCustomer( [ 'name' => 'A' ] ) ;                        // one definition → Customer
 hydrateCustomer( [ [ 'name' => 'A' ] , [ 'name' => 'B' ] ] ); // a list         → Customer[]
 hydrateCustomer( 'raw' ) ;                                    // anything else  → returned unchanged
+hydrateCustomer( [ 'raw' , [ 'name' => 'A' ] ] ) ;            // a mixed list   → [ 'raw' , Customer ]
 ```
 
 ### The rule for nested references
@@ -88,10 +89,13 @@ A hydrator that resolves nested references (`hydrateCustomer`, `hydrateCustomerS
 `hydrateBusinessDocument`, …) applies one rule to each of them:
 
 - **it hydrates only what is an array** — there is something to hydrate. An unresolved
-  string reference or an already typed instance is left untouched, never rewritten;
+  string reference or an already typed instance is left untouched, never rewritten.
+  🔑 **This holds entry by entry inside a list**: a list of handles — published codes,
+  vocabulary identifiers — comes back as it stands, and the keys stay gap-free, a list
+  left with holes serializing as a JSON **object**;
 - **the nested hydrator's answer is then written as is, `null` included.** An array that
-  resolves to nothing — an empty list, a list of unhydratable entries — becomes `null`,
-  never a leftover raw array;
+  resolves to nothing — an empty list, a list of entries that **were arrays** and gave
+  nothing — becomes `null`, never a leftover raw array;
 - **a property the payload never carried is not invented.** Hydration leaves it in
   whatever state its declaration gives it: declared without a default, it stays
   uninitialized and so absent from the serialized shape; declared `= null`, it stays
@@ -115,7 +119,8 @@ Two hydrators escape that `null` — but **on their top-level argument only**, n
 hydrateDocumentLine( [] ) ;   // []  — "this document has no line"
 hydrateAdjustment  ( [] ) ;   // []  — "this document has no adjustment"
 
-hydrateDocumentLine( [ 'raw' ] ) ; // null — nothing was readable: not the same answer
+hydrateDocumentLine( [ null ] ) ;  // null — nothing was readable: not the same answer
+hydrateDocumentLine( [ 'raw' ] ) ; // [ 'raw' ] — a handle is not an unreadable line, it is a reference
 ```
 
 The lines and the adjustments are the two places where "there are none" is an answer worth serving: a draft is commonly born without a single line, and a `null` makes the key vanish from the serialized shape — a consumer walking the value then falls on an absence instead of the empty list it could walk.

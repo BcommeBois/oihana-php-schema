@@ -35,6 +35,11 @@ use function oihana\core\arrays\isIndexed;
  * ⚠️ A status is single-valued. An indexed array is still read as a list, for consistency
  * with the rest of the family, and answers `null` when nothing in it resolves.
  *
+ * 🔑 **A bare reference survives inside a list**, exactly as it does on its own : a list of
+ * unresolved handles comes back as it stands, and only an entry that *was* an array and
+ * resolved to nothing is dropped. The keys stay gap-free — a filtered list left with holes
+ * serializes as a JSON object, and a consumer walking the value gets something it cannot walk.
+ *
  * @param mixed $init Single status data, a list of such data, or any other value.
  *
  * @return mixed
@@ -63,7 +68,9 @@ function hydrateEventStatus( mixed $init = null ) :mixed
             $init
         );
 
-        $filtered = array_values( array_filter( $statuses , fn( $status ) => $status instanceof EventStatusType ) ) ;
+        // A scalar entry is an unresolved reference and is kept as it stands ; only an entry that
+        // WAS an array and gave nothing is dropped. `array_values` closes the gaps it leaves.
+        $filtered = array_values( array_filter( $statuses , fn( $status ) => $status instanceof EventStatusType || is_scalar( $status ) ) ) ;
 
         return count( $filtered ) > 0 ? $filtered : null ;
     }

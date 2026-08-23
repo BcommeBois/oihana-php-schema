@@ -46,6 +46,11 @@ use function org\schema\helpers\hydrate\hydrateOrganizationOrPerson;
  * unhydratable entries) becomes `null`, never a leftover raw array. Anything else is
  * left to whatever {@see Reflection::hydrate()} made of it.
  *
+ * 🔑 **A bare reference survives inside a list**, exactly as it does on its own : a list of
+ * unresolved handles comes back as it stands, and only an entry that *was* an array and
+ * resolved to nothing is dropped. The keys stay gap-free — a filtered list left with holes
+ * serializes as a JSON object, and a consumer walking the value gets something it cannot walk.
+ *
  * @param mixed  $init  Single document data or array of document data.
  * @param string $class The BusinessDocument subclass to hydrate into. Defaults to
  *                       {@see BusinessDocument} itself.
@@ -77,7 +82,9 @@ function hydrateBusinessDocument( mixed $init = null , string $class = BusinessD
             $init
         );
 
-        $filtered = array_values( array_filter( $documents , fn( $document ) => $document instanceof BusinessDocument ) ) ;
+        // A scalar entry is an unresolved reference and is kept as it stands ; only an entry that
+        // WAS an array and gave nothing is dropped. `array_values` closes the gaps it leaves.
+        $filtered = array_values( array_filter( $documents , fn( $document ) => $document instanceof BusinessDocument || is_scalar( $document ) ) ) ;
 
         return count( $filtered ) > 0 ? $filtered : null ;
     }

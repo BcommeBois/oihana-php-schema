@@ -41,6 +41,11 @@ use function org\schema\helpers\hydrate\findEnumerationMember;
  * Nothing recognized gives an {@see AppointmentStatus} : the status is unknown to this
  * vocabulary, and answering `null` would throw away the reason it carried.
  *
+ * 🔑 **A bare reference survives inside a list**, exactly as it does on its own : a list of
+ * unresolved handles comes back as it stands, and only an entry that *was* an array and
+ * resolved to nothing is dropped. The keys stay gap-free — a filtered list left with holes
+ * serializes as a JSON object, and a consumer walking the value gets something it cannot walk.
+ *
  * @param mixed $init Single status data, a list of such data, or any other value.
  *
  * @return mixed
@@ -69,7 +74,9 @@ function hydrateAppointmentStatus( mixed $init = null ) :mixed
             $init
         );
 
-        $filtered = array_values( array_filter( $statuses , fn( $status ) => $status instanceof AppointmentStatus ) ) ;
+        // A scalar entry is an unresolved reference and is kept as it stands ; only an entry that
+        // WAS an array and gave nothing is dropped. `array_values` closes the gaps it leaves.
+        $filtered = array_values( array_filter( $statuses , fn( $status ) => $status instanceof AppointmentStatus || is_scalar( $status ) ) ) ;
 
         return count( $filtered ) > 0 ? $filtered : null ;
     }

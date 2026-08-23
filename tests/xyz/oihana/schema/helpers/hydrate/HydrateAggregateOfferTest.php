@@ -112,4 +112,20 @@ final class HydrateAggregateOfferTest extends TestCase
         $this->assertNull( hydrateAggregateOffer() ) ;
         $this->assertNull( hydrateAggregateOffer( null ) ) ;
     }
+
+    /**
+     * 🔑 **A bare reference survives inside a list.** The guard belongs to the map here
+     * rather than to the filter : `hydrateOfferPurchase()` answers `null` for anything it
+     * cannot build, so a handle handed to it was lost before the filter ever saw it.
+     *
+     * @throws ReflectionException
+     */
+    public function testAListOfOfferReferencesSurvivesAndKeepsItsKeys(): void
+    {
+        $offer = hydrateAggregateOffer( [ 'offers' => [ 'offer-ref-42' , [ 'price' => 10 ] ] ] ) ;
+
+        $this->assertSame( [ 0 , 1 ] , array_keys( $offer->offers ) ) ;
+        $this->assertSame( 'offer-ref-42' , $offer->offers[ 0 ] ) ;
+        $this->assertInstanceOf( OfferForPurchase::class , $offer->offers[ 1 ] ) ;
+    }
 }
