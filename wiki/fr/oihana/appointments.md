@@ -101,6 +101,7 @@ Ce qui est écrit **avant** et ce qui est écrit **après** cohabitent : `descri
 | `VisitReport` | `org\schema\CreativeWork` | Ce qui a été écrit une fois la rencontre passée. |
 | `FollowUp` | `org\schema\actions\ScheduleAction` | Ce qui reste à faire ensuite, et pour quand. |
 | `AppointmentStatus` | `org\schema\enumerations\StatusEnumeration` | Ce qu'il est advenu de la rencontre elle-même. |
+| `AppointmentCancelled`, `AppointmentDone`, `AppointmentNoShow`, `AppointmentPlanned` | `AppointmentStatus` | Les classes membres du statut — la forme objet, celle qui porte un motif. |
 
 ---
 
@@ -285,6 +286,56 @@ $user = new User
   "modified": "2026-09-03T10:41:00+02:00"
 }
 ```
+
+---
+
+## Relire un rendez-vous
+
+Un consommateur relit rarement un rendez-vous par la réflexion : il tient une ligne de base et écrit `new CustomerAppointment( $row )`. Or **un constructeur affecte à plat** — les attributs `#[HydrateAs]` / `#[HydrateWith]` que portent les classes ne sont honorés que par `Reflection::hydrate()`, chemin qu'il ne prend pas. Le `report` reste un tableau, chaque contact aussi, et le statut écrit sous sa forme objet revient en tableau brut.
+
+Quatre aides couvrent le domaine, sur le modèle de la famille `hydrateXxx()` de la bibliothèque :
+
+| Fonction | Rend | Références imbriquées hydratées |
+|---|---|---|
+| [`hydrateCustomerAppointment()`](helpers.md#xyzoihanaschemahelpershydrateappointments--les-hydrateurs-de-rendez-vous) | `CustomerAppointment` ou liste | `customer`, `attendee`, `assignedSeller`, `appointmentType`, `tags`, `makesOffer`, `report`, `eventStatus`, `appointmentStatus` |
+| [`hydrateVisitReport()`](helpers.md#xyzoihanaschemahelpershydrateappointments--les-hydrateurs-de-rendez-vous) | `VisitReport` ou liste | `attendee`, `followUp`, `mood`, `outcome`, `tags`, `topics`, `author` |
+| [`hydrateFollowUp()`](helpers.md#xyzoihanaschemahelpershydrateappointments--les-hydrateurs-de-rendez-vous) | `FollowUp` ou liste | `followUpType`, `agent`, `result` |
+| [`hydrateAppointmentStatus()`](helpers.md#xyzoihanaschemahelpershydrateappointments--les-hydrateurs-de-rendez-vous) | la classe membre d'`AppointmentStatus` | — |
+
+```php
+use function xyz\oihana\schema\helpers\hydrate\appointments\hydrateCustomerAppointment;
+
+$appointment = hydrateCustomerAppointment( $row ) ;
+
+$appointment->customer                     instanceof Customer         ; // true
+$appointment->attendee[ 0 ]->workLocation  instanceof CustomerSite     ; // true
+$appointment->report->followUp[ 0 ]        instanceof FollowUp         ; // true
+$appointment->appointmentStatus            instanceof AppointmentDone  ; // true
+```
+
+Un appel suffit : la tête passe par `Reflection::hydrate()`, puis relit depuis la charge brute ce que la réflexion ne sait pas trancher ou ce qu'elle type moins profondément que l'aide. Ce qui n'est pas un tableau — une référence en chaîne, une instance déjà typée — ressort intact, et une liste qui ne résout rien rend `null` plutôt qu'un tableau brut résiduel.
+
+🚨 **Le rendez-vous nommé en résultat d'une suite n'est pas déplié.** `FollowUp::$result` désigne une rencontre, dont le compte rendu porte des suites à donner, qui nomment des rencontres à leur tour : descendre par l'aide profonde ouvre un cycle que seule la donnée arrête. C'est une **référence**, typée sur un niveau et pas davantage — ce qu'elle porte elle-même reste brut, et qui en a besoin demande cette rencontre-là.
+
+🔑 **Une liste de suites vide reste une liste vide**, là où le reste de la famille rend `null`. « Ce compte rendu n'a aucune suite » est une réponse, et ce n'est pas la réponse « rien n'était lisible ici » : un lecteur qui parcourt la valeur mérite une liste à parcourir.
+
+🔑 **Trois propriétés sont laissées à leur attribut**, et c'est délibéré. `organizer`, `assignedCompany` et `location` sont déjà tranchées exactement par la réflexion, d'après le `@type` de la charge. Leur imposer une classe ferait pire que rien : une organisation simple relue en filiale, une salle virtuelle relue en site client. `assignedSeller` est la seule qui ait besoin de la main de l'aide — elle ne déclare aucun attribut et son union ne nomme qu'un `Person`, quand la propriété veut dire un `Seller`.
+
+### Un statut se relit, et il se filtre
+
+Les deux axes acceptent la constante nue ou la classe membre. Mesuré : la forme objet sérialise `{"@type":"AppointmentCancelled", …}` — le `@type` porte le **nom court**, jamais l'URI. Sans plus, les deux écritures ne se comparent à rien de commun, et un magasin ne peut plus filtrer « les rendez-vous annulés » sans abandonner l'une des deux.
+
+Deux réponses, sans nouvelle propriété :
+
+- **le membre pose son URI tout seul** — construit, il renseigne l'`additionalType` que `Thing` déclare déjà, avec l'URI que porte la constante nue. `??=` : un appelant reste libre d'imposer autre chose, et une valeur relue de la base n'est jamais écrasée ;
+- **`hydrateAppointmentStatus()` et [`hydrateEventStatus()`](helpers.md#orgschemahelpershydrate--les-hydrateurs-purs)** relisent cet URI — puis, à défaut, le `@type` — et rendent l'instance de la bonne classe membre. La chaîne nue ressort intacte, un tableau redevient l'objet qui porte son motif.
+
+```php
+new AppointmentCancelled([ 'description' => 'Le client a annulé la veille.' ])->additionalType
+    === AppointmentStatus::CANCELLED ; // true, avant comme après un aller-retour JSON
+```
+
+⚠️ **Les deux ne coïncident jamais côté maison** : le vocabulaire écrit `…/AppointmentStatus#NoShow` là où la classe s'appelle `AppointmentNoShow`. Aucune règle ne mène de l'un à l'autre — c'est précisément pourquoi l'URI est **déclaré** par le membre plutôt que dérivé de son nom.
 
 ---
 

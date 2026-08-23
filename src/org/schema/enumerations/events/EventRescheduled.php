@@ -12,5 +12,12 @@ namespace org\schema\enumerations\events;
  */
 class EventRescheduled extends EventStatusType
 {
-
+    /**
+     * The URI this member states, kept towards the enumeration's own constant so the
+     * two forms cannot drift apart.
+     *
+     * @var string|null
+     * @since 1.5.0
+     */
+    protected static ?string $TYPE = EventStatusType::RESCHEDULED ;
 }

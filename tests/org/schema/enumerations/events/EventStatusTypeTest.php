@@ -88,4 +88,53 @@ class EventStatusTypeTest extends TestCase
         $this->assertSame( 'EventCancelled'             , $json[ Schema::AT_TYPE ]     ?? null );
         $this->assertSame( 'Called off the day before.' , $json[ Schema::DESCRIPTION ] ?? null );
     }
+
+    /**
+     * The member states its URI the moment it is built, so the object form carries the
+     * identifier the bare constant carries — and a store filled with both can be
+     * filtered by one clause.
+     */
+    public function testEachMemberStatesItsConstant(): void
+    {
+        $this->assertSame( EventStatusType::CANCELLED    , new EventCancelled()->additionalType   );
+        $this->assertSame( EventStatusType::MOVED_ONLINE , new EventMovedOnline()->additionalType );
+        $this->assertSame( EventStatusType::POSTPONED    , new EventPostponed()->additionalType   );
+        $this->assertSame( EventStatusType::RESCHEDULED  , new EventRescheduled()->additionalType );
+        $this->assertSame( EventStatusType::SCHEDULED    , new EventScheduled()->additionalType   );
+    }
+
+    /**
+     * The head of an enumeration is not a member of itself : it states no URI, and
+     * serializes without one.
+     */
+    public function testTheHeadStatesNoUri(): void
+    {
+        $status = new EventStatusType() ;
+
+        $this->assertFalse( isset( $status->additionalType ) );
+        $this->assertArrayNotHasKey( Schema::ADDITIONAL_TYPE , $status->jsonSerialize() );
+    }
+
+    /**
+     * `??=` : a caller may impose something else, and a value read back from a store is
+     * never overwritten by the class it is read into.
+     */
+    public function testAStatedTypeIsNotOverwritten(): void
+    {
+        $status = new EventCancelled( [ Schema::ADDITIONAL_TYPE => 'https://example.org/Cancelled' ] );
+
+        $this->assertSame( 'https://example.org/Cancelled' , $status->additionalType );
+    }
+
+    /**
+     * 🚨 The `TYPE` slot is a static property rather than a class constant : `Enumeration`
+     * uses `ConstantsTrait`, which enumerates every constant of the class — a `TYPE`
+     * constant holding `null` on the head would join `enums()` and make `includes( null )`
+     * answer true, in the very enumeration whose point is to say what a valid status is.
+     */
+    public function testTheMemberSlotIsNotAMemberOfTheEnumeration(): void
+    {
+        $this->assertFalse( EventStatusType::includes( null ) );
+        $this->assertNotContains( null , EventStatusType::enums() );
+    }
 }

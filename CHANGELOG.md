@@ -8,6 +8,115 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- **The appointment classes gain their `hydrateXxx()` helpers** — four of them, plus two
+  the status axes needed and one they share.
+
+  A consumer reads a stored document back through a class constructor, and **a constructor
+  assigns flat** : the `#[HydrateAs]` / `#[HydrateWith]` attributes the classes carry are
+  honored only by `Reflection::hydrate()`, a path it does not take. Every nested object
+  therefore comes back a raw array, and a list comes back one object. The library already
+  answers that with a family of helpers — `hydrateCustomer()`, `hydrateCustomerEmployee()`,
+  `hydrateCustomerSite()`, `hydrateDocumentLine()`… The appointment classes shipped in
+  1.5.0 had none.
+
+  - `hydrateCustomerAppointment()` — the head, mirroring `hydrateBusinessDocument()` : the
+    meeting is built through `Reflection::hydrate()`, then `customer`, `attendee`,
+    `assignedSeller`, `appointmentType`, `tags`, `makesOffer`, `report` and both statuses
+    are re-read from the raw payload. One call, and the whole meeting is typed.
+  - `hydrateVisitReport()` — `attendee`, `followUp`, `mood`, `outcome`, `tags`, `topics`,
+    `author`.
+  - `hydrateFollowUp()` — `followUpType`, `agent`, `result`.
+  - `hydrateOffer()`, in `org\schema` — the first helper for a **bare** `Offer` :
+    `hydrateOfferPurchase()` only ever builds an `OfferForPurchase` and
+    `hydrateAggregateOffer()` an aggregate. Serves `Organization::$makesOffer` and every
+    property carrying a list of bare offers.
+
+  🚨 **The meeting a follow-up names is typed one level and no further.**
+  `FollowUp::$result` names a meeting, whose report carries follow-ups, which name meetings
+  in turn : going down through the deep helper opens a cycle only the data would stop. It
+  is a **reference**, not a document to unfold — so it is built flat, and whoever needs
+  what it carries asks for that meeting on its own.
+
+  🔑 **An empty follow-up list stays an empty list**, the `hydrateAdjustment()` rule.
+  « This report has no follow-up » is an answer worth serving, and a reader walking the
+  value deserves a list to walk. A non-empty list that resolves to nothing keeps the
+  family's `null` — there, nothing usable was found, which is a different statement.
+
+  🔑 **Three properties are left to their attribute, on purpose.** `organizer`,
+  `assignedCompany` and `location` are already settled exactly by reflection, from the
+  payload's `@type`. Forcing a class over them would do worse than nothing : a plain
+  `Organization` read back as a `Subsidiary`, a `VirtualLocation` as a `CustomerSite`.
+  `assignedSeller` is the one that needs the helper's hand — it declares no attribute and
+  its union names a plain `Person`, where the property means a `Seller`.
+
+  🔑 **`hydrateOffer()` stays in `org\schema` because the product class is a parameter.**
+  The commerce-enriched `Product` lives in `xyz\oihana\schema\products` and `org` knows
+  nothing of `xyz` : `$productClass` defaults to the plain Schema.org class, and
+  `hydrateCustomerAppointment()` passes this package's own — so the layering holds and
+  nothing is lost on the business side.
+
+  - **Tests:** 4 new helper test classes — single value, list, empty list, non-array input,
+    string reference, and the nested case that justifies each helper. `HydrateOfferTest`
+    covers the `Product|Service` split and the product-class parameter ;
+    `HydrateCustomerAppointmentTest` holds the three attribute-settled properties, the
+    `Seller` re-read, and that a follow-up's meeting is **not** unfolded.
+  - FR/EN wiki `oihana/appointments.md` gain a « reading an appointment back » section ;
+    `oihana/helpers.md` gains a catalogue section for the namespace and three rows for the
+    pure hydrators.
+
+- **A status states itself two ways, and both now filter alike.**
+
+  `Event::$eventStatus` and `CustomerAppointment::$appointmentStatus` accept the bare
+  constant **or** the member class when there is a reason to give
+  (`new EventCancelled([ 'description' => '…' ])`). Measured : the object form serializes
+  `{"@type":"EventCancelled","@context":"https://schema.org","description":"…"}` — the
+  `@type` carries the **short name**, never the URI. The two spellings compared to nothing
+  in common, and a consumer filing meetings in a store could no longer filter « the
+  cancelled meetings » without giving up one of the two forms.
+
+  Two additions close it, and neither adds a property :
+
+  - **The member states its own URI.** A constructor on `EventStatusType` and on
+    `AppointmentStatus` fills in the `additionalType` that `Thing` already declares. `??=` :
+    a caller stays free to impose something else, and a value read back from a store is
+    never overwritten.
+  - **`hydrateEventStatus()` and `hydrateAppointmentStatus()`** read that URI back — then,
+    failing that, the `@type` — and answer the right member class. The bare string comes
+    back untouched, an array becomes the object carrying its reason again. Both are called
+    by `hydrateCustomerAppointment()`, and both resolve through the shared
+    `findEnumerationMember()`, the two vocabularies asking the same question.
+
+  - `AppointmentStatus` gains its four member classes — `AppointmentCancelled`,
+    `AppointmentDone`, `AppointmentNoShow`, `AppointmentPlanned` — which `EventStatusType`
+    already had and this axis did not, so the object form had nowhere to be read back into.
+
+  🚨 **The URI is stated by the member, not derived from its class name.** On the
+  Schema.org side the two coincide — `EventCancelled` against
+  `https://schema.org/EventCancelled` — and `getSchemaType()` would have been enough. On
+  this side they never do : the vocabulary spells `…/AppointmentStatus#NoShow` where the
+  class is named `AppointmentNoShow`, in the fragment style every enumeration of this
+  package uses. Each member therefore declares its URI **towards the enumeration's own
+  constant**, never towards a literal : the two forms cannot drift apart, and renaming one
+  is a compile-time matter rather than a silent change of identifier.
+
+  🚨 **The slot holding it is a static property, not a class constant.** `Enumeration` uses
+  `ConstantsTrait`, which enumerates *every* constant of the class : a `TYPE` constant
+  holding `null` on the enumeration head would join `enums()` and make `includes( null )`
+  answer true — in the very enumeration whose point is to say what a valid status is.
+
+  ⚠️ **`AppointmentStatus` now declares its `CONTEXT`.** It is instantiated for the first
+  time, so it publishes itself : without the declaration its members would serialize under
+  the Schema.org context inherited from `Thing`, which is not the vocabulary they belong
+  to. The bare constants are untouched.
+
+  - **Tests:** `EventStatusTypeTest` and `AppointmentStatusTest` gain the member/constant
+    agreement, the head stating no URI, a stated type never being overwritten, and the
+    `TYPE` slot staying out of the enumeration. Both status helpers hold the round trip :
+    the bare constant and the member class answer the **same identifier** before and after
+    `json_encode()` and hydration. `SchemaCoverageTest` lists `TYPE` among the
+    machinery a `Schema` constant must not name — it holds no schema.org term, like
+    `DEFAULT_JSON_SERIALIZE_OPTIONS` and `ALL` beside it.
+
 - `StatisticsSummary` — **several records, added together**, which no existing class could carry.
 
   🔑 **Every concrete family of `Statistics` redeclares `$about` towards its subject** — a

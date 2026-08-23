@@ -222,10 +222,13 @@ An account carries zero, one or several business identities (see [`BusinessIdent
 
 | Function                    | Produces                         | Accepted shapes                        |
 |-----------------------------|----------------------------------|----------------------------------------|
+| `findEnumerationMember`     | the member class of an enumeration | Builds nothing : **reads** from a raw payload the `additionalType` (the URI each member states), then failing that the `@type` (the short class name), and answers the class to hydrate into — the enumeration head when nothing is recognized, so an unknown status keeps the reason it carried. Shared by both status helpers, the two vocabularies asking the same question. |
 | `hydrateAdditionalProperty` | `PropertyValue[]`                | indexed list only, `null` otherwise    |
 | `hydrateContactPoint`       | `ContactPoint[]`                 | indexed list only, `null` otherwise    |
 | `hydrateDefinedTerm`        | `DefinedTerm` or `DefinedTerm[]` | single, list, passthrough — target class overridable via `$class` (e.g. `DeliveryMethodTerm::class`) |
+| `hydrateEventStatus`        | the member class of `EventStatusType` | single, list, passthrough — **the bare constant comes back untouched**, an array becomes the object carrying its reason again (`EventCancelled` and its `description`). Member resolved by `findEnumerationMember`. |
 | `hydrateGeoCoordinates`     | `GeoCoordinates` or list         | single, list, passthrough              |
+| `hydrateOffer`              | a **bare** `Offer`, or list      | single, list, passthrough — `eligibleQuantity` and `priceSpecification` come from `Reflection::hydrate()`, `itemOffered` is settled by the payload's `@type` (a `Service` suffix → `Service`, otherwise `$productClass`). 🔑 `$productClass` is what keeps the helper in `org\schema` : the commerce-enriched `Product` lives in `xyz`, so it is passed in. Serves `Organization::$makesOffer` and every property carrying a list of bare offers. |
 | `hydrateOfferPurchase`      | `OfferForPurchase`               | array or instance, `null` otherwise — types the `eligibleCustomerType` as `BusinessEntityType` |
 | `hydrateOrganizationOrPerson` | `Organization` or `Person`, or list | Resolves the union from the `@type`: `Person` → `Person`, otherwise `Organization` (the safe default) — target classes overridable via `$organizationClass`/`$personClass` |
 | `hydratePostalAddress`      | `PostalAddress` or list          | single (empty values cleaned), list, passthrough |
@@ -245,6 +248,15 @@ An account carries zero, one or several business identities (see [`BusinessIdent
 | `hydratePhysicalQuantity` | `PhysicalQuantity`  | `valueReference` — **recursively**, every packaging level keeping its `weight` and its `volume`. A level already typed is handed back as it stands. For the **constructor** path only: `Reflection::hydrate()` walks the chain on its own, the attribute being declared on the property. |
 | `hydrateStockLevel`       | `StockLevel`        | `assignedPOS` (Warehouse)                                |
 | `hydrateWarehouse`        | `Warehouse` or list | `ownedBy` (Subsidiary)                                   |
+
+### `xyz\oihana\schema\helpers\hydrate\appointments` — the appointment hydrators
+
+| Function                    | Produces                          | Nested references hydrated                               |
+|-----------------------------|-----------------------------------|----------------------------------------------------------|
+| `hydrateAppointmentStatus` | the member class of `AppointmentStatus` | Goes nowhere down : **the bare constant comes back untouched**, an array becomes the object carrying its reason again. The twin of `hydrateEventStatus` on the other axis — what became of the meeting, not of the slot. ⚠️ The vocabulary spells `…/AppointmentStatus#NoShow` where the class is named `AppointmentNoShow` : no rule takes one to the other, so the URI is **stated** by the member. |
+| `hydrateCustomerAppointment` | `CustomerAppointment` or list | `customer`, `attendee` (CustomerEmployee[] and their own references), `assignedSeller` (Seller), `appointmentType` (one term) and `tags` (several), `makesOffer` (through `hydrateOffer`, given this package's `Product`), `report` (through `hydrateVisitReport`), `eventStatus` and `appointmentStatus`. The rest comes from `Reflection::hydrate()`. 🔑 `organizer`, `assignedCompany` and `location` are **left to their attribute**, which reflection already settles exactly from the `@type` : forcing a class over them would read a plain organization back as a subsidiary, a virtual room as a customer site. |
+| `hydrateFollowUp`         | `FollowUp` or list               | `followUpType`, `agent` (resolved by `hydrateOrganizationOrPerson`), `result` — 🚨 **flat, never the deep helper** : the meeting named as the result is a reference, and going down would open a cycle only the data would stop. **An empty list is kept as an empty list.** |
+| `hydrateVisitReport`      | `VisitReport` or list            | `attendee` (CustomerEmployee[]), `followUp` (FollowUp[], an empty list kept), `mood` and `outcome` (one term), `tags` and `topics` (several), `author` (resolved by `hydrateOrganizationOrPerson`) |
 
 ### `xyz\oihana\schema\helpers\hydrate\documents` — the document hydrators
 
@@ -271,4 +283,5 @@ An account carries zero, one or several business identities (see [`BusinessIdent
 
 - [Oihana business](business.md) — `BusinessIdentity`, the account ↔ entity link the pivots walk through.
 - [Business documents](business-documents.md) — `BusinessDocument`, `BusinessDocumentLine` and the value objects the document hydrators produce.
+- [Appointments](appointments.md) — `CustomerAppointment`, `VisitReport`, `FollowUp` and the « reading an appointment back » section.
 - [Schema.org vocabulary](../schema-org/README.md) — the classes produced by the pure hydrators.

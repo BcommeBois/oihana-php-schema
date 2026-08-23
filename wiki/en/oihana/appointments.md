@@ -101,6 +101,7 @@ What is written **before** and what is written **after** sit side by side: `desc
 | `VisitReport` | `org\schema\CreativeWork` | What was written once the meeting took place. |
 | `FollowUp` | `org\schema\actions\ScheduleAction` | What comes next, and when. |
 | `AppointmentStatus` | `org\schema\enumerations\StatusEnumeration` | What became of the meeting itself. |
+| `AppointmentCancelled`, `AppointmentDone`, `AppointmentNoShow`, `AppointmentPlanned` | `AppointmentStatus` | The member classes of the status — the object form, the one that carries a reason. |
 
 ---
 
@@ -285,6 +286,56 @@ $user = new User
   "modified": "2026-09-03T10:41:00+02:00"
 }
 ```
+
+---
+
+## Reading an appointment back
+
+A consumer rarely reads a stored meeting back through reflection : they hold a row and write `new CustomerAppointment( $row )`. But **a constructor assigns flat** — the `#[HydrateAs]` / `#[HydrateWith]` attributes the classes carry are honored only by `Reflection::hydrate()`, a path it does not take. The `report` stays an array, so does every contact, and a status written in its object form comes back a raw array.
+
+Four helpers cover the namespace, on the model of the library's `hydrateXxx()` family :
+
+| Function | Answers | Nested references hydrated |
+|---|---|---|
+| [`hydrateCustomerAppointment()`](helpers.md#xyzoihanaschemahelpershydrateappointments--the-appointment-hydrators) | `CustomerAppointment` or a list | `customer`, `attendee`, `assignedSeller`, `appointmentType`, `tags`, `makesOffer`, `report`, `eventStatus`, `appointmentStatus` |
+| [`hydrateVisitReport()`](helpers.md#xyzoihanaschemahelpershydrateappointments--the-appointment-hydrators) | `VisitReport` or a list | `attendee`, `followUp`, `mood`, `outcome`, `tags`, `topics`, `author` |
+| [`hydrateFollowUp()`](helpers.md#xyzoihanaschemahelpershydrateappointments--the-appointment-hydrators) | `FollowUp` or a list | `followUpType`, `agent`, `result` |
+| [`hydrateAppointmentStatus()`](helpers.md#xyzoihanaschemahelpershydrateappointments--the-appointment-hydrators) | the member class of `AppointmentStatus` | — |
+
+```php
+use function xyz\oihana\schema\helpers\hydrate\appointments\hydrateCustomerAppointment;
+
+$appointment = hydrateCustomerAppointment( $row ) ;
+
+$appointment->customer                     instanceof Customer         ; // true
+$appointment->attendee[ 0 ]->workLocation  instanceof CustomerSite     ; // true
+$appointment->report->followUp[ 0 ]        instanceof FollowUp         ; // true
+$appointment->appointmentStatus            instanceof AppointmentDone  ; // true
+```
+
+One call is enough : the head goes through `Reflection::hydrate()`, then re-reads from the raw payload whatever reflection cannot settle, or types less deeply than the helper does. Anything that is not an array — an unresolved string reference, an already typed instance — comes back untouched, and a list that resolves to nothing answers `null` rather than a leftover raw array.
+
+🚨 **The meeting a follow-up names is not unfolded.** `FollowUp::$result` names a meeting, whose report carries follow-ups, which name meetings in turn : going down through the deep helper opens a cycle only the data would stop. It is a **reference**, typed one level and no further — what it carries itself stays raw, and whoever needs it asks for that meeting on its own.
+
+🔑 **An empty follow-up list stays an empty list**, where the rest of the family answers `null`. « This report has no follow-up » is an answer, and it is not the answer « nothing here was readable » : a reader walking the value deserves a list to walk.
+
+🔑 **Three properties are left to their attribute**, on purpose. `organizer`, `assignedCompany` and `location` are already settled exactly by reflection, from the payload's `@type`. Forcing a class over them would do worse than nothing : a plain organization read back as a subsidiary, a virtual room as a customer site. `assignedSeller` is the only one that needs the helper's hand — it declares no attribute and its union names a plain `Person`, where the property means a `Seller`.
+
+### A status is read back, and it is filtered
+
+Both axes accept the bare constant or the member class. Measured : the object form serializes as `{"@type":"AppointmentCancelled", …}` — the `@type` carries the **short name**, never the URI. Left there, the two spellings compare to nothing in common, and a store can no longer filter « the cancelled meetings » without giving up one of them.
+
+Two answers, and no new property :
+
+- **the member states its own URI** — built, it fills in the `additionalType` that `Thing` already declares, with the URI the bare constant carries. `??=` : a caller stays free to impose something else, and a value read back from a store is never overwritten ;
+- **`hydrateAppointmentStatus()` and [`hydrateEventStatus()`](helpers.md#orgschemahelpershydrate--the-pure-hydrators)** read that URI back — then, failing that, the `@type` — and answer the right member class. The bare string comes back untouched, an array becomes the object carrying its reason again.
+
+```php
+new AppointmentCancelled([ 'description' => 'The customer called it off the day before.' ])->additionalType
+    === AppointmentStatus::CANCELLED ; // true, before and after a JSON round trip
+```
+
+⚠️ **The two never coincide on this side** : the vocabulary spells `…/AppointmentStatus#NoShow` where the class is named `AppointmentNoShow`. No rule takes one to the other — which is precisely why the URI is **stated** by the member rather than derived from its name.
 
 ---
 

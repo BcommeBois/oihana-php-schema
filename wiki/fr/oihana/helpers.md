@@ -224,10 +224,13 @@ Un compte porte zéro, une ou plusieurs identités métier (voir [`BusinessIdent
 
 | Fonction                    | Produit                          | Formes acceptées                        |
 |-----------------------------|----------------------------------|-----------------------------------------|
+| `findEnumerationMember`     | la classe membre d'une énumération | Ne construit rien : **lit** dans une charge brute l'`additionalType` (l'URI que chaque membre déclare), puis à défaut le `@type` (le nom court de la classe), et rend la classe à hydrater — la tête de l'énumération quand rien n'est reconnu, pour qu'un statut inconnu garde le motif qu'il portait. Partagée par les deux aides de statut, les deux vocabulaires posant la même question. |
 | `hydrateAdditionalProperty` | `PropertyValue[]`                | liste indexée seulement, sinon `null`   |
 | `hydrateContactPoint`       | `ContactPoint[]`                 | liste indexée seulement, sinon `null`   |
 | `hydrateDefinedTerm`        | `DefinedTerm` ou `DefinedTerm[]` | simple, liste, passage à travers — classe cible personnalisable via `$class` (ex. `DeliveryMethodTerm::class`) |
+| `hydrateEventStatus`        | la classe membre d'`EventStatusType` | simple, liste, passage à travers — **la constante nue ressort intacte**, un tableau redevient l'objet qui porte son motif (`EventCancelled` et sa `description`). Membre résolu par `findEnumerationMember`. |
 | `hydrateGeoCoordinates`     | `GeoCoordinates` ou liste        | simple, liste, passage à travers        |
+| `hydrateOffer`              | `Offer` **nue**, ou liste        | simple, liste, passage à travers — `eligibleQuantity` et `priceSpecification` viennent de `Reflection::hydrate()`, `itemOffered` est tranché d'après le `@type` de la charge (suffixe `Service` → `Service`, sinon `$productClass`). 🔑 `$productClass` est ce qui garde l'aide dans `org\schema` : le `Product` enrichi commerce vit dans `xyz`, il se passe donc en paramètre. Sert `Organization::$makesOffer` et toute propriété portant une liste d'offres nues. |
 | `hydrateOfferPurchase`      | `OfferForPurchase`               | tableau ou instance, sinon `null` — type le `eligibleCustomerType` en `BusinessEntityType` |
 | `hydrateOrganizationOrPerson` | `Organization` ou `Person`, ou liste | Résout l'union d'après le `@type` : `Person` → `Person`, sinon `Organization` (défaut sûr) — classes cibles personnalisables via `$organizationClass`/`$personClass` |
 | `hydratePostalAddress`      | `PostalAddress` ou liste         | simple (valeurs vides nettoyées), liste, passage à travers |
@@ -247,6 +250,15 @@ Un compte porte zéro, une ou plusieurs identités métier (voir [`BusinessIdent
 | `hydratePhysicalQuantity` | `PhysicalQuantity`  | `valueReference` — **récursivement**, chaque étage du conditionnement gardant son `weight` et son `volume`. Un niveau déjà typé est rendu tel quel. Réservé au chemin du **constructeur** : `Reflection::hydrate()` descend la chaîne tout seul, l'attribut étant déclaré sur la propriété. |
 | `hydrateStockLevel`       | `StockLevel`        | `assignedPOS` (Warehouse)                                |
 | `hydrateWarehouse`        | `Warehouse` ou liste | `ownedBy` (Subsidiary)                                  |
+
+### `xyz\oihana\schema\helpers\hydrate\appointments` — les hydrateurs de rendez-vous
+
+| Fonction                    | Produit                          | Références imbriquées hydratées                          |
+|-----------------------------|-----------------------------------|----------------------------------------------------------|
+| `hydrateAppointmentStatus` | la classe membre d'`AppointmentStatus` | Ne descend nulle part : **la constante nue ressort intacte**, un tableau redevient l'objet qui porte son motif. Le jumeau de `hydrateEventStatus` sur l'autre axe — ce qu'il est advenu de la rencontre, non du créneau. ⚠️ Le vocabulaire écrit `…/AppointmentStatus#NoShow` là où la classe s'appelle `AppointmentNoShow` : aucune règle ne mène de l'un à l'autre, l'URI est donc **déclaré** par le membre. |
+| `hydrateCustomerAppointment` | `CustomerAppointment` ou liste | `customer`, `attendee` (CustomerEmployee[] et leurs propres références), `assignedSeller` (Seller), `appointmentType` (un terme) et `tags` (plusieurs), `makesOffer` (par `hydrateOffer`, avec le `Product` maison), `report` (par `hydrateVisitReport`), `eventStatus` et `appointmentStatus`. Le reste vient de `Reflection::hydrate()`. 🔑 `organizer`, `assignedCompany` et `location` sont **laissés à leur attribut**, que la réflexion tranche déjà exactement d'après le `@type` : leur imposer une classe relirait une organisation simple en filiale, une salle virtuelle en site client. |
+| `hydrateFollowUp`         | `FollowUp` ou liste              | `followUpType`, `agent` (résolu par `hydrateOrganizationOrPerson`), `result` — 🚨 **à plat, jamais l'aide profonde** : la rencontre nommée en résultat est une référence, et descendre ouvrirait un cycle que seule la donnée arrête. **Une liste vide est rendue telle quelle.** |
+| `hydrateVisitReport`      | `VisitReport` ou liste           | `attendee` (CustomerEmployee[]), `followUp` (FollowUp[], liste vide conservée), `mood` et `outcome` (un terme), `tags` et `topics` (plusieurs), `author` (résolu par `hydrateOrganizationOrPerson`) |
 
 ### `xyz\oihana\schema\helpers\hydrate\documents` — les hydrateurs de documents
 
@@ -273,4 +285,5 @@ Un compte porte zéro, une ou plusieurs identités métier (voir [`BusinessIdent
 
 - [Métier Oihana](business.md) — `BusinessIdentity`, le lien compte ↔ entité que les pivots parcourent.
 - [Documents commerciaux](business-documents.md) — `BusinessDocument`, `BusinessDocumentLine` et les objets de valeur que les hydrateurs de documents produisent.
+- [Rendez-vous](appointments.md) — `CustomerAppointment`, `VisitReport`, `FollowUp` et la section « relire un rendez-vous ».
 - [Vocabulaire Schema.org](../schema-org/README.md) — les classes produites par les hydrateurs purs.

@@ -35,7 +35,7 @@ class SchemaCoverageTest extends TestCase
     private const array INTERNALS =
     [
         'atContext' , 'atType' , 'schemaTypeCache' , '__reflection' , '__shortName' ,
-        'DEFAULT_JSON_SERIALIZE_OPTIONS' , 'ALL' , 'CONSTANTS' , 'map' , 'default' ,
+        'DEFAULT_JSON_SERIALIZE_OPTIONS' , 'ALL' , 'CONSTANTS' , 'map' , 'default' , 'TYPE' ,
     ];
 
     /**
