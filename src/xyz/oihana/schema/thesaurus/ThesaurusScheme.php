@@ -16,12 +16,14 @@ use xyz\oihana\schema\traits\HasColor;
  * the SKOS {@see ConceptScheme} (so it keeps `hasTopConcept` and the inherited
  * `hasDefinedTerm` member list) and adds what a registry needs to manage it —
  * visibility (`active`), display (`color`, `order`), filing (`domain`), routing
- * (`path`) and provenance (`harvested`, `system`).
+ * (`path`), provenance (`harvested`, `system`) and the write surface (`writes`).
  *
  * The provenance flags split the editing rights : on a `harvested` scheme the
  * term core (`id`/`name`) is fed by an external source and read-only, only the
  * house overlays are editable ; on a `system` scheme the technical skeleton is
- * defined in code, so it cannot be deleted through an API.
+ * defined in code, so it cannot be deleted through an API. The `writes` map
+ * states that surface field by field, per HTTP verb, so a consumer knows what
+ * a write on the family honors without guessing it from the flags.
  *
  * The `domain` property carries the domain↔scheme link (see
  * {@see ThesaurusDomain}) : a bare key, an AQL-projected associative array or a
@@ -42,6 +44,7 @@ use xyz\oihana\schema\traits\HasColor;
  *     ThesaurusScheme::ORDER      => 1 ,
  *     ThesaurusScheme::PATH       => '/thesaurus/products/categories' ,
  *     ThesaurusScheme::SYSTEM     => true ,
+ *     ThesaurusScheme::WRITES     => [ 'patch' => [ 'active' , 'color' ] ] ,
  * ]);
  * ```
  *
@@ -100,4 +103,33 @@ class ThesaurusScheme extends ConceptScheme
      * @var bool|null
      */
     public ?bool $system ;
+
+    /**
+     * The write surface of the scheme, keyed by HTTP verb : each entry lists
+     * the body fields a write on the family honors — what the body allow-list
+     * of the family actually keeps, not what a caller is permitted to send
+     * (permissions answer *who*, this property answers *what*).
+     *
+     * An empty array reads as read-only, and a missing verb key means the verb
+     * is not exposed at all. The value is derived from the family's body
+     * allow-list by the registry maintainer, never written by hand.
+     *
+     * ```php
+     * // a natively administered family
+     * $scheme->writes =
+     * [
+     *     'post'  => [ 'name' , 'active' , 'alternateName' , 'color' , 'description' ] ,
+     *     'patch' => [ 'active' , 'alternateName' , 'color' , 'description' ] ,
+     * ] ;
+     *
+     * // a harvested family with editable overlays
+     * $scheme->writes = [ 'patch' => [ 'active' , 'color' ] ] ;
+     *
+     * // a read-only mirror
+     * $scheme->writes = [] ;
+     * ```
+     *
+     * @var array<string, list<string>>|null
+     */
+    public ?array $writes ;
 }

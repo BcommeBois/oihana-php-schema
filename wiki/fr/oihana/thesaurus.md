@@ -104,6 +104,7 @@ $scheme = new ThesaurusScheme
     ThesaurusScheme::HARVESTED => true ,                              // cœur des termes en lecture seule
     ThesaurusScheme::PATH      => '/thesaurus/products/categories' ,
     ThesaurusScheme::SYSTEM    => true ,                              // non supprimable via une API
+    ThesaurusScheme::WRITES    => [ 'patch' => [ 'active' , 'color' ] ] , // ce qu'une écriture honore
 ]);
 ```
 
@@ -114,6 +115,7 @@ $scheme = new ThesaurusScheme
 Au-dessus du cœur SKOS, le namespace modélise la vue **registre** d'un catalogue de vocabulaires — quatre couches : *registre → domaines → schémas → concepts (→ liens)*.
 
 - Un **`ThesaurusScheme`** est un thésaurus pris comme un tout, tel qu'il apparaît dans un registre : le `ConceptScheme` plus les métadonnées administrables — `active` (un schéma inactif est masqué, pas supprimé), `color`/`order` (affichage), `domain` (rangement), `path` (le chemin relatif des routes) — et les drapeaux de provenance : sur un schéma `harvested`, le cœur des termes (`id`/`name`) est alimenté par une source externe et en lecture seule, seules les surcouches maison sont éditables ; sur un schéma `system`, le squelette technique est défini en code, donc non supprimable via une API.
+- La carte **`writes`** énonce la surface d'écriture de la famille, champ par champ et par verbe HTTP : `[ 'patch' => [ 'active' , 'color' ] ]` se lit *un `PATCH` honore `active` et `color`, et rien d'autre*. Une carte vide se lit « lecture seule », et une clé de verbe absente signifie que le verbe n'est pas exposé du tout. Elle répond à *ce que la ressource accepte* — pas à *qui* peut écrire, qui reste l'affaire des permissions — et elle a vocation à être dérivée de la liste blanche du corps de la famille par le mainteneur du registre, jamais recopiée à la main.
 - Un **`ThesaurusDomain`** est une pure étagère de rangement : il regroupe des schémas mais n'est **pas** un ensemble de termes (il étend `Intangible`, pas `DefinedTermSet`). Le lien domaine↔schéma est porté par `ThesaurusScheme::$domain` — une clé nue, un tableau projeté par AQL ou un objet hydraté (`#[HydrateWith(ThesaurusDomain::class)]`, chemin réflexion uniquement) — et les domaines sont **plats par conception** : ils ne s'imbriquent pas.
 
 ---
@@ -131,7 +133,7 @@ Au-dessus du cœur SKOS, le namespace modélise la vue **registre** d'un catalog
 | `ConceptScheme`       | `DefinedTermSet` | Un **schéma de concepts SKOS** (un vocabulaire), exposant ses concepts racines via `hasTopConcept`. L'appartenance d'un concept reste portée par `inDefinedTermSet` hérité (`skos:inScheme`). |
 | `Collection`          | `Intangible`     | Une **collection SKOS** — un regroupement étiqueté et **non hiérarchique** de concepts (`member`). Les membres sont polymorphes : concepts et/ou sous-collections imbriquées. |
 | `OrderedCollection`   | `Collection`     | Une `Collection` dont les membres ont un ordre signifiant (`memberList`).                                                 |
-| `ThesaurusScheme`     | `ConceptScheme`  | Un thésaurus **tel qu'enregistré dans un registre** — les métadonnées administrables (`active`, `color`, `order`, `domain`, `path`) plus les drapeaux de provenance (`harvested`, `system`). |
+| `ThesaurusScheme`     | `ConceptScheme`  | Un thésaurus **tel qu'enregistré dans un registre** — les métadonnées administrables (`active`, `color`, `order`, `domain`, `path`), les drapeaux de provenance (`harvested`, `system`) et la surface d'écriture (`writes`, par verbe HTTP). |
 | `ThesaurusDomain`     | `Intangible`     | Un **domaine de registre** — le regroupement plat, de haut niveau, des schémas. Le lien est porté par `ThesaurusScheme::$domain`, pas par le domaine. |
 
 ### Couverture SKOS en un coup d'œil

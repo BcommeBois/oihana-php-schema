@@ -8,6 +8,31 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- **`ThesaurusScheme` gains its write surface : the `writes` map.** A registry
+  entry could say where a family lives (`path`), where it comes from
+  (`harvested`, `system`) and how to show it (`color`, `order`) — but nothing
+  said **what a write on the family honors**. Permissions answer *who* may
+  write ; no answer existed for *what the resource accepts*, and the two are
+  different axes : a harvested term's `name` is not forbidden to a caller, it
+  is forbidden to everyone, always, because the source owns it.
+
+  The `writes` property states that surface, field by field and per HTTP verb :
+  `[ 'patch' => [ 'active' , 'color' ] ]` reads as *a `PATCH` honors `active`
+  and `color`, and nothing else*. An empty map reads as read-only — and it
+  **survives serialization as an empty map** (measured), distinct from the
+  `null` of « unknown ». A missing verb key means the verb is not exposed at
+  all, so the absence of `delete` is itself an answer.
+
+  The value is meant to be **derived from the family's body allow-list** by the
+  registry maintainer, never written by hand : a hand-copied list would drift
+  the day the allow-list moves.
+
+  - `ThesaurusSchemeTrait::WRITES` constant, aggregated into `Oihana` as usual.
+  - **Tests:** defaults, constants, constructor copy, empty-map round trip,
+    `jsonSerialize()` exposure.
+  - **Wiki:** the thesaurus page (EN/FR) documents the map, its empty and
+    missing-key readings, and the derivation doctrine.
+
 - **The appointment classes gain their `hydrateXxx()` helpers** — four of them, plus two
   the status axes needed and one they share.
 

@@ -29,6 +29,7 @@ class ThesaurusSchemeTest extends TestCase
         $this->assertNull( $scheme->order         ?? null );
         $this->assertNull( $scheme->path          ?? null );
         $this->assertNull( $scheme->system        ?? null );
+        $this->assertNull( $scheme->writes        ?? null );
         $this->assertNull( $scheme->hasTopConcept ?? null );
     }
 
@@ -59,6 +60,7 @@ class ThesaurusSchemeTest extends TestCase
         $this->assertSame( 'order'     , ThesaurusScheme::ORDER );
         $this->assertSame( 'path'      , ThesaurusScheme::PATH );
         $this->assertSame( 'system'    , ThesaurusScheme::SYSTEM );
+        $this->assertSame( 'writes'    , ThesaurusScheme::WRITES );
     }
 
     public function testInheritsConceptSchemeConstants(): void
@@ -74,6 +76,7 @@ class ThesaurusSchemeTest extends TestCase
         $this->assertSame( 'order'     , Oihana::ORDER );
         $this->assertSame( 'path'      , Oihana::PATH );
         $this->assertSame( 'system'    , Oihana::SYSTEM );
+        $this->assertSame( 'writes'    , Oihana::WRITES );
     }
 
     /**
@@ -92,6 +95,7 @@ class ThesaurusSchemeTest extends TestCase
             ThesaurusScheme::ORDER     => 1 ,
             ThesaurusScheme::PATH      => '/thesaurus/products/categories' ,
             ThesaurusScheme::SYSTEM    => true ,
+            ThesaurusScheme::WRITES    => [ 'patch' => [ 'active' , 'color' ] ] ,
         ]);
 
         $this->assertSame( 'Product categories'             , $scheme->name );
@@ -102,6 +106,23 @@ class ThesaurusSchemeTest extends TestCase
         $this->assertSame( 1                                , $scheme->order );
         $this->assertSame( '/thesaurus/products/categories' , $scheme->path );
         $this->assertTrue( $scheme->system );
+        $this->assertSame( [ 'patch' => [ 'active' , 'color' ] ] , $scheme->writes );
+    }
+
+    /**
+     * An empty write surface is a statement — « read-only » — and must survive
+     * the round trip as an empty array, distinct from the null of « unknown ».
+     */
+    public function testEmptyWritesStaysAnEmptyArray(): void
+    {
+        $scheme = new ThesaurusScheme([ ThesaurusScheme::WRITES => [] ]);
+
+        $this->assertSame( [] , $scheme->writes );
+
+        $data = $scheme->jsonSerialize() ;
+
+        $this->assertArrayHasKey( ThesaurusScheme::WRITES , (array) $data );
+        $this->assertSame( [] , $data[ ThesaurusScheme::WRITES ] );
     }
 
     public function testDomainViaConstructorIsLeftRaw(): void
@@ -132,6 +153,7 @@ class ThesaurusSchemeTest extends TestCase
             ThesaurusScheme::class
         );
 
+        $this->assertInstanceOf( ThesaurusScheme::class , $scheme );
         $this->assertInstanceOf( ThesaurusDomain::class , $scheme->domain );
         $this->assertSame( 'Products' , $scheme->domain->name );
         $this->assertSame( 1          , $scheme->domain->order );
@@ -151,6 +173,7 @@ class ThesaurusSchemeTest extends TestCase
             ThesaurusScheme::class
         );
 
+        $this->assertInstanceOf( ThesaurusScheme::class , $scheme );
         $this->assertSame( 'products' , $scheme->domain );
     }
 
@@ -166,6 +189,7 @@ class ThesaurusSchemeTest extends TestCase
             ThesaurusScheme::DOMAIN    => 'products' ,
             ThesaurusScheme::HARVESTED => true ,
             ThesaurusScheme::PATH      => '/thesaurus/products/categories' ,
+            ThesaurusScheme::WRITES    => [ 'patch' => [ 'active' , 'color' ] ] ,
         ]);
 
         $data = $scheme->jsonSerialize();
@@ -178,5 +202,6 @@ class ThesaurusSchemeTest extends TestCase
         $this->assertSame( 'products'                       , $data[ ThesaurusScheme::DOMAIN ] );
         $this->assertTrue( $data[ ThesaurusScheme::HARVESTED ] );
         $this->assertSame( '/thesaurus/products/categories' , $data[ ThesaurusScheme::PATH ] );
+        $this->assertSame( [ 'patch' => [ 'active' , 'color' ] ] , $data[ ThesaurusScheme::WRITES ] );
     }
 }

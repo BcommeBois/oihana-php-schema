@@ -98,4 +98,17 @@ trait ThesaurusSchemeTrait
      * ```
      */
     const string SYSTEM = 'system' ;
+
+    /**
+     * The write surface of the scheme, keyed by HTTP verb : each entry lists
+     * the body fields a write on the family honors. An empty array reads as
+     * read-only, and a missing verb key means the verb is not exposed at all.
+     *
+     * Related model property:
+     *
+     * ```php
+     * public ?array $writes ;
+     * ```
+     */
+    const string WRITES = 'writes' ;
 }
