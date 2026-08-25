@@ -16,14 +16,16 @@ use xyz\oihana\schema\traits\HasColor;
  * the SKOS {@see ConceptScheme} (so it keeps `hasTopConcept` and the inherited
  * `hasDefinedTerm` member list) and adds what a registry needs to manage it —
  * visibility (`active`), display (`color`, `order`), filing (`domain`), routing
- * (`path`), provenance (`harvested`, `system`) and the write surface (`writes`).
+ * (`path`), provenance (`harvested`, `system`) and the write surface (`writes`,
+ * `erases`).
  *
  * The provenance flags split the editing rights : on a `harvested` scheme the
  * term core (`id`/`name`) is fed by an external source and read-only, only the
  * house overlays are editable ; on a `system` scheme the technical skeleton is
  * defined in code, so it cannot be deleted through an API. The `writes` map
  * states that surface field by field, per HTTP verb, so a consumer knows what
- * a write on the family honors without guessing it from the flags.
+ * a write on the family honors without guessing it from the flags — and
+ * `erases` names, among them, the fields an explicit `null` clears.
  *
  * The `domain` property carries the domain↔scheme link (see
  * {@see ThesaurusDomain}) : a bare key, an AQL-projected associative array or a
@@ -45,6 +47,7 @@ use xyz\oihana\schema\traits\HasColor;
  *     ThesaurusScheme::PATH       => '/thesaurus/products/categories' ,
  *     ThesaurusScheme::SYSTEM     => true ,
  *     ThesaurusScheme::WRITES     => [ 'patch' => [ 'active' , 'color' ] ] ,
+ *     ThesaurusScheme::ERASES     => [ 'patch' => [ 'color' ] ] ,
  * ]);
  * ```
  *
@@ -72,6 +75,28 @@ class ThesaurusScheme extends ConceptScheme
      */
     #[ HydrateWith( ThesaurusDomain::class ) ]
     public null|string|array|ThesaurusDomain $domain ;
+
+    /**
+     * The erasable fields of the scheme, keyed by HTTP verb : each entry lists
+     * the fields an explicit `null` clears.
+     *
+     * Writing a field and taking it back are two different permissions of the
+     * data, and {@see ThesaurusScheme::$writes} only answers the first : a
+     * partial edit drops the null values it receives, so that an unmentioned
+     * field stays untouched — and a field left out of this list therefore
+     * answers a `null` by doing nothing at all, without an error.
+     *
+     * Always a subset of the matching `writes` entry, and only ever carries the
+     * verbs whose body is read as partial (an edit ; a creation keeps its nulls
+     * anyway, so nothing there is *cleared*).
+     *
+     * ```php
+     * $scheme->erases = [ 'patch' => [ 'alternateName' , 'color' , 'description' ] ] ;
+     * ```
+     *
+     * @var array<string, list<string>>|null
+     */
+    public ?array $erases ;
 
     /**
      * The provenance flag : a harvested scheme is fed by an external source,

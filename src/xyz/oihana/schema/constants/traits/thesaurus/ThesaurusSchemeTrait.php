@@ -41,6 +41,19 @@ trait ThesaurusSchemeTrait
     const string ACTIVE = 'active' ;
 
     /**
+     * The erasable fields of the scheme, keyed by HTTP verb : each entry lists
+     * the fields an explicit `null` clears, a subset of the matching
+     * {@see ThesaurusSchemeTrait::WRITES} entry.
+     *
+     * Related model property:
+     *
+     * ```php
+     * public ?array $erases ;
+     * ```
+     */
+    const string ERASES = 'erases' ;
+
+    /**
      * The domain the scheme is filed under, as a bare key or a hydrated
      * {@see \xyz\oihana\schema\thesaurus\ThesaurusDomain}.
      *

@@ -8,6 +8,25 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- **`ThesaurusScheme` says what a `null` takes back : the `erases` map.** Writing a
+  value and taking it back are two different permissions of the data, and `writes`
+  only answered the first. A partial edit drops the nulls it receives — that is what
+  keeps an unmentioned field untouched — so a field outside this list answers a
+  `null` by **doing nothing at all, and without an error**. A consumer could not
+  tell « cleared » from « ignored », and therefore could not offer the gesture.
+
+  `erases` names, among the writable fields, those an explicit `null` clears :
+  `[ 'patch' => [ 'alternateName' , 'color' , 'description' ] ]`. It is always a
+  subset of the matching `writes` entry, and only ever carries the verbs whose body
+  is read as partial — a creation keeps its nulls anyway, so nothing there is
+  *cleared*. Empty map, empty statement : « writable, but nothing can be taken
+  back », served as such rather than omitted.
+
+  - `ThesaurusSchemeTrait::ERASES` constant, aggregated into `Oihana` as usual.
+  - **Tests:** defaults, constants, constructor copy, empty-map round trip through
+    `jsonSerialize()`, and the subset relation with `writes`.
+  - **Wiki:** the thesaurus page (EN/FR) documents the map beside `writes`.
+
 - **`ThesaurusScheme` gains its write surface : the `writes` map.** A registry
   entry could say where a family lives (`path`), where it comes from
   (`harvested`, `system`) and how to show it (`color`, `order`) — but nothing

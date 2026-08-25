@@ -25,6 +25,7 @@ class ThesaurusSchemeTest extends TestCase
         $this->assertNull( $scheme->active        ?? null );
         $this->assertNull( $scheme->color         ?? null );
         $this->assertNull( $scheme->domain        ?? null );
+        $this->assertNull( $scheme->erases        ?? null );
         $this->assertNull( $scheme->harvested     ?? null );
         $this->assertNull( $scheme->order         ?? null );
         $this->assertNull( $scheme->path          ?? null );
@@ -56,6 +57,7 @@ class ThesaurusSchemeTest extends TestCase
         $this->assertSame( 'active'    , ThesaurusScheme::ACTIVE );
         $this->assertSame( 'color'     , ThesaurusScheme::COLOR );
         $this->assertSame( 'domain'    , ThesaurusScheme::DOMAIN );
+        $this->assertSame( 'erases'    , ThesaurusScheme::ERASES );
         $this->assertSame( 'harvested' , ThesaurusScheme::HARVESTED );
         $this->assertSame( 'order'     , ThesaurusScheme::ORDER );
         $this->assertSame( 'path'      , ThesaurusScheme::PATH );
@@ -72,6 +74,7 @@ class ThesaurusSchemeTest extends TestCase
     {
         $this->assertSame( 'active'    , Oihana::ACTIVE );
         $this->assertSame( 'domain'    , Oihana::DOMAIN );
+        $this->assertSame( 'erases'    , Oihana::ERASES );
         $this->assertSame( 'harvested' , Oihana::HARVESTED );
         $this->assertSame( 'order'     , Oihana::ORDER );
         $this->assertSame( 'path'      , Oihana::PATH );
@@ -96,6 +99,7 @@ class ThesaurusSchemeTest extends TestCase
             ThesaurusScheme::PATH      => '/thesaurus/products/categories' ,
             ThesaurusScheme::SYSTEM    => true ,
             ThesaurusScheme::WRITES    => [ 'patch' => [ 'active' , 'color' ] ] ,
+            ThesaurusScheme::ERASES    => [ 'patch' => [ 'color' ] ] ,
         ]);
 
         $this->assertSame( 'Product categories'             , $scheme->name );
@@ -107,22 +111,53 @@ class ThesaurusSchemeTest extends TestCase
         $this->assertSame( '/thesaurus/products/categories' , $scheme->path );
         $this->assertTrue( $scheme->system );
         $this->assertSame( [ 'patch' => [ 'active' , 'color' ] ] , $scheme->writes );
+        $this->assertSame( [ 'patch' => [ 'color' ] ]            , $scheme->erases );
     }
 
     /**
      * An empty write surface is a statement — « read-only » — and must survive
      * the round trip as an empty array, distinct from the null of « unknown ».
+     * Same for an empty erase surface : « writable, but nothing can be taken
+     * back » is an answer of its own.
      */
     public function testEmptyWritesStaysAnEmptyArray(): void
     {
-        $scheme = new ThesaurusScheme([ ThesaurusScheme::WRITES => [] ]);
+        $scheme = new ThesaurusScheme
+        ([
+            ThesaurusScheme::WRITES => [] ,
+            ThesaurusScheme::ERASES => [] ,
+        ]);
 
         $this->assertSame( [] , $scheme->writes );
+        $this->assertSame( [] , $scheme->erases );
 
-        $data = $scheme->jsonSerialize() ;
+        $data = (array) $scheme->jsonSerialize() ;
 
-        $this->assertArrayHasKey( ThesaurusScheme::WRITES , (array) $data );
+        $this->assertArrayHasKey( ThesaurusScheme::WRITES , $data );
+        $this->assertArrayHasKey( ThesaurusScheme::ERASES , $data );
         $this->assertSame( [] , $data[ ThesaurusScheme::WRITES ] );
+        $this->assertSame( [] , $data[ ThesaurusScheme::ERASES ] );
+    }
+
+    /**
+     * 🔑 Taking a value back is not the same permission as writing it : a
+     * partial edit drops the nulls it receives, so a field outside `erases`
+     * answers a `null` by doing nothing — without an error. The two lists are
+     * therefore served side by side, and `erases` is always a subset.
+     */
+    public function testTheErasableFieldsAreASubsetOfTheWritableOnes(): void
+    {
+        $scheme = new ThesaurusScheme
+        ([
+            ThesaurusScheme::WRITES => [ 'patch' => [ 'active' , 'alternateName' , 'color' ] ] ,
+            ThesaurusScheme::ERASES => [ 'patch' => [ 'alternateName' , 'color' ] ] ,
+        ]);
+
+        $writes = $scheme->writes[ 'patch' ] ?? [] ;
+        $erases = $scheme->erases[ 'patch' ] ?? [] ;
+
+        $this->assertNotSame( [] , $erases );
+        $this->assertSame( [] , array_diff( $erases , $writes ) );
     }
 
     public function testDomainViaConstructorIsLeftRaw(): void

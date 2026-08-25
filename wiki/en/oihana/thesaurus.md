@@ -105,6 +105,7 @@ $scheme = new ThesaurusScheme
     ThesaurusScheme::PATH      => '/thesaurus/products/categories' ,
     ThesaurusScheme::SYSTEM    => true ,                              // not deletable via an API
     ThesaurusScheme::WRITES    => [ 'patch' => [ 'active' , 'color' ] ] , // what a write honors
+    ThesaurusScheme::ERASES    => [ 'patch' => [ 'color' ] ] ,            // …and what a null clears
 ]);
 ```
 
@@ -116,6 +117,7 @@ On top of the SKOS core, the namespace models the **registry** view of a vocabul
 
 - A **`ThesaurusScheme`** is a thesaurus taken as a whole, as it appears in a registry: the `ConceptScheme` plus the manageable metadata — `active` (an inactive scheme is hidden, not deleted), `color`/`order` (display), `domain` (filing), `path` (the relative route path) — and the provenance flags: on a `harvested` scheme the term core (`id`/`name`) is fed by an external source and read-only, only the house overlays are editable; on a `system` scheme the technical skeleton is defined in code, so it cannot be deleted through an API.
 - The **`writes`** map states the write surface of the family, field by field and per HTTP verb: `[ 'patch' => [ 'active' , 'color' ] ]` reads as *a `PATCH` honors `active` and `color`, and nothing else*. An empty map reads as read-only, and a missing verb key means the verb is not exposed at all. It answers *what the resource accepts* — not *who* may write, which stays the business of permissions — and it is meant to be derived from the family's body allow-list by the registry maintainer, never written by hand.
+- The **`erases`** map names, among the writable fields, those an explicit `null` **clears**: writing a value and taking it back are two different permissions of the data. A partial edit drops the nulls it receives — that is what keeps an unmentioned field untouched — so a field outside this list answers a `null` by doing nothing at all, and without an error. Always a subset of the matching `writes` entry, and only ever carrying the verbs whose body is read as partial: a creation keeps its nulls anyway, so nothing there is *cleared*.
 - A **`ThesaurusDomain`** is a pure filing shelf: it groups schemes but is **not** a set of terms (it extends `Intangible`, not `DefinedTermSet`). The domain↔scheme link is carried by `ThesaurusScheme::$domain` — a bare key, an AQL-projected array or a hydrated object (`#[HydrateWith(ThesaurusDomain::class)]`, reflection path only) — and domains are **flat by design**: they do not nest.
 
 ---
@@ -133,7 +135,7 @@ On top of the SKOS core, the namespace models the **registry** view of a vocabul
 | `ConceptScheme`       | `DefinedTermSet` | A **SKOS concept scheme** (a vocabulary), exposing its root concepts via `hasTopConcept`. Concept membership stays on the inherited `inDefinedTermSet` (`skos:inScheme`). |
 | `Collection`          | `Intangible`     | A **SKOS collection** — a labelled, **non-hierarchical** grouping of concepts (`member`). Members are polymorphic: concepts and/or nested collections. |
 | `OrderedCollection`   | `Collection`     | A `Collection` whose members carry a meaningful order (`memberList`).                                                     |
-| `ThesaurusScheme`     | `ConceptScheme`  | A thesaurus **as registered in a registry** — the manageable metadata (`active`, `color`, `order`, `domain`, `path`), the provenance flags (`harvested`, `system`) and the write surface (`writes`, per HTTP verb). |
+| `ThesaurusScheme`     | `ConceptScheme`  | A thesaurus **as registered in a registry** — the manageable metadata (`active`, `color`, `order`, `domain`, `path`), the provenance flags (`harvested`, `system`) and the write surface (`writes` / `erases`, per HTTP verb). |
 | `ThesaurusDomain`     | `Intangible`     | A **registry domain** — the top-level, flat grouping of schemes. The link is carried by `ThesaurusScheme::$domain`, not by the domain. |
 
 ### SKOS coverage at a glance
