@@ -8,49 +8,67 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
-- **`ThesaurusScheme` says what a `null` takes back : the `erases` map.** Writing a
-  value and taking it back are two different permissions of the data, and `writes`
-  only answered the first. A partial edit drops the nulls it receives — that is what
-  keeps an unmentioned field untouched — so a field outside this list answers a
-  `null` by **doing nothing at all, and without an error**. A consumer could not
-  tell « cleared » from « ignored », and therefore could not offer the gesture.
+- **`ThesaurusScheme` gains its write surface : the `writes` map, and `termType`.**
+  A registry entry could say where a family lives (`path`), where it comes from
+  (`harvested`, `system`) and how to show it (`color`, `order`) — but nothing said
+  **what a write on the family honors**. Permissions answer *who* may write ; no
+  answer existed for *what the resource accepts*, and the two are different axes :
+  a harvested term's `name` is not forbidden to a caller, it is forbidden to
+  everyone, always, because the source owns it.
 
-  `erases` names, among the writable fields, those an explicit `null` clears :
-  `[ 'patch' => [ 'alternateName' , 'color' , 'description' ] ]`. It is always a
-  subset of the matching `writes` entry, and only ever carries the verbs whose body
-  is read as partial — a creation keeps its nulls anyway, so nothing there is
-  *cleared*. Empty map, empty statement : « writable, but nothing can be taken
-  back », served as such rather than omitted.
+  `writes` states that surface **per HTTP verb, then per field** — and every field
+  describes itself, so a consumer draws its form without knowing the family
+  beforehand :
 
-  - `ThesaurusSchemeTrait::ERASES` constant, aggregated into `Oihana` as usual.
+  ```php
+  [
+      'post'  => [ 'name'  => [ 'type' => 'string' , 'required' => true ] ] ,
+      'patch' => [ 'color' => [ 'type' => 'string' , 'erasable' => true ] ] ,
+  ]
+  ```
+
+  - `type` — what the field holds (`string`, `i18n`, `bool`, `int`…). It picks the
+    widget, and on an `i18n` field it also says one language may be cleared alone ;
+  - `required` — present only when the field may not be omitted ;
+  - `erasable` — present only when an explicit `null` **takes the value back**.
+    Writing a value and taking it back are two different permissions of the data :
+    a partial edit drops the nulls it receives, which is what keeps an unmentioned
+    field untouched, so a field without this key answers a `null` by doing nothing
+    at all and without an error. It never appears on a creation — clearing supposes
+    something is already there ;
+  - `default` — what the server poses when the caller stays silent.
+
+  An absent key is an answer of its own. An empty map reads as read-only — and it
+  **survives serialization as an empty map** (measured), distinct from the `null`
+  of « unknown ». A missing verb key means the verb is not exposed at all, so the
+  absence of `delete` is itself an answer.
+
+  🚨 **The validation constraints are deliberately absent** — no length, no
+  pattern, no range. Whoever serves the scheme validates and answers per field ;
+  carrying them here too would open a second source of truth, free to drift from
+  the one that decides. `required` is the exception because it shapes the form
+  rather than validating it.
+
+- **`termType` says what the terms are, before any of them is read.** A full URI —
+  `https://schema.oihana.xyz/ProductCategoryTerm`, `https://schema.org/DefinedTerm` —
+  so a consumer picks its rendering from the registry instead of fetching a family's
+  terms just to learn what it will be handed. The full URI rather than the bare name,
+  because the families do not share one vocabulary.
+
+  ⚠️ **It types the members, never the set.** `additionalType` would be the wrong
+  slot : that property adds a type to *the item carrying it*, and a scheme is not
+  one of its own terms.
+
+- The whole surface is meant to be **derived from the family's own declarations** by
+  the registry maintainer, never written by hand : anything restated would drift the
+  day the declaration moves.
+
+  - `ThesaurusSchemeTrait::WRITES` and `::TERM_TYPE` constants, aggregated into
+    `Oihana` as usual.
   - **Tests:** defaults, constants, constructor copy, empty-map round trip through
-    `jsonSerialize()`, and the subset relation with `writes`.
-  - **Wiki:** the thesaurus page (EN/FR) documents the map beside `writes`.
-
-- **`ThesaurusScheme` gains its write surface : the `writes` map.** A registry
-  entry could say where a family lives (`path`), where it comes from
-  (`harvested`, `system`) and how to show it (`color`, `order`) — but nothing
-  said **what a write on the family honors**. Permissions answer *who* may
-  write ; no answer existed for *what the resource accepts*, and the two are
-  different axes : a harvested term's `name` is not forbidden to a caller, it
-  is forbidden to everyone, always, because the source owns it.
-
-  The `writes` property states that surface, field by field and per HTTP verb :
-  `[ 'patch' => [ 'active' , 'color' ] ]` reads as *a `PATCH` honors `active`
-  and `color`, and nothing else*. An empty map reads as read-only — and it
-  **survives serialization as an empty map** (measured), distinct from the
-  `null` of « unknown ». A missing verb key means the verb is not exposed at
-  all, so the absence of `delete` is itself an answer.
-
-  The value is meant to be **derived from the family's body allow-list** by the
-  registry maintainer, never written by hand : a hand-copied list would drift
-  the day the allow-list moves.
-
-  - `ThesaurusSchemeTrait::WRITES` constant, aggregated into `Oihana` as usual.
-  - **Tests:** defaults, constants, constructor copy, empty-map round trip,
-    `jsonSerialize()` exposure.
-  - **Wiki:** the thesaurus page (EN/FR) documents the map, its empty and
-    missing-key readings, and the derivation doctrine.
+    `jsonSerialize()`, and the per-field descriptor with its four keys.
+  - **Wiki:** the thesaurus page (EN/FR) documents both properties, the four
+    descriptor keys, the absent-key readings and the derivation doctrine.
 
 - **The appointment classes gain their `hydrateXxx()` helpers** — four of them, plus two
   the status axes needed and one they share.

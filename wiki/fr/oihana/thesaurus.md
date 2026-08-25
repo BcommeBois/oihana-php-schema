@@ -104,8 +104,11 @@ $scheme = new ThesaurusScheme
     ThesaurusScheme::HARVESTED => true ,                              // cœur des termes en lecture seule
     ThesaurusScheme::PATH      => '/thesaurus/products/categories' ,
     ThesaurusScheme::SYSTEM    => true ,                              // non supprimable via une API
-    ThesaurusScheme::WRITES    => [ 'patch' => [ 'active' , 'color' ] ] , // ce qu'une écriture honore
-    ThesaurusScheme::ERASES    => [ 'patch' => [ 'color' ] ] ,            // …et ce qu'un null efface
+    ThesaurusScheme::TERM_TYPE => 'https://schema.oihana.xyz/ProductCategoryTerm' , // le type des termes
+    ThesaurusScheme::WRITES    =>                                     // ce qu'une écriture honore
+    [
+        'patch' => [ 'color' => [ 'type' => 'string' , 'erasable' => true ] ] ,
+    ],
 ]);
 ```
 
@@ -116,8 +119,8 @@ $scheme = new ThesaurusScheme
 Au-dessus du cœur SKOS, le namespace modélise la vue **registre** d'un catalogue de vocabulaires — quatre couches : *registre → domaines → schémas → concepts (→ liens)*.
 
 - Un **`ThesaurusScheme`** est un thésaurus pris comme un tout, tel qu'il apparaît dans un registre : le `ConceptScheme` plus les métadonnées administrables — `active` (un schéma inactif est masqué, pas supprimé), `color`/`order` (affichage), `domain` (rangement), `path` (le chemin relatif des routes) — et les drapeaux de provenance : sur un schéma `harvested`, le cœur des termes (`id`/`name`) est alimenté par une source externe et en lecture seule, seules les surcouches maison sont éditables ; sur un schéma `system`, le squelette technique est défini en code, donc non supprimable via une API.
-- La carte **`writes`** énonce la surface d'écriture de la famille, champ par champ et par verbe HTTP : `[ 'patch' => [ 'active' , 'color' ] ]` se lit *un `PATCH` honore `active` et `color`, et rien d'autre*. Une carte vide se lit « lecture seule », et une clé de verbe absente signifie que le verbe n'est pas exposé du tout. Elle répond à *ce que la ressource accepte* — pas à *qui* peut écrire, qui reste l'affaire des permissions — et elle a vocation à être dérivée de la liste blanche du corps de la famille par le mainteneur du registre, jamais recopiée à la main.
-- La carte **`erases`** nomme, parmi les champs modifiables, ceux qu'un `null` explicite **efface** : écrire une valeur et la reprendre sont deux permissions différentes de la donnée. Une modification partielle retire les nuls qu'elle reçoit — c'est ce qui laisse intact un champ non mentionné — donc un champ absent de cette liste répond à un `null` en ne faisant rien, et sans erreur. Toujours un sous-ensemble de l'entrée `writes` correspondante, et ne portant que les verbes dont le corps est lu comme partiel : une création conserve ses nuls de toute façon, rien n'y est *effacé*.
+- La carte **`writes`** énonce la surface d'écriture de la famille : par verbe HTTP, puis par champ. Elle répond à *ce que la ressource accepte* — pas à *qui* peut écrire, qui reste l'affaire des permissions. Une carte vide se lit « lecture seule », et une clé de verbe absente signifie que le verbe n'est pas exposé du tout. **Chaque champ se décrit lui-même**, pour qu'un consommateur dessine son formulaire sans connaître la famille à l'avance : `type` (ce qu'il contient — `string`, `i18n`, `bool`… — donc le composant de saisie, et sur un champ `i18n` la possibilité d'effacer une seule langue), `required` (présent seulement si le champ ne peut pas être omis), `erasable` (présent seulement si un `null` explicite reprend la valeur — jamais sur une création, car effacer suppose qu'il y ait déjà quelque chose) et `default` (ce que le serveur pose si l'appelant se tait). Une clé absente est une réponse. 🚨 Les contraintes de validation en sont **délibérément absentes** : celui qui sert le schéma valide et répond champ par champ, les porter ici aussi ouvrirait une seconde source de vérité libre de diverger. L'ensemble est dérivé des déclarations de la famille par le mainteneur du registre, jamais recopié à la main.
+- La propriété **`termType`** donne le type des termes que la famille contient, en URI complète — `https://schema.oihana.xyz/ProductCategoryTerm`, `https://schema.org/DefinedTerm`. Un registre dit quels vocabulaires existent avant qu'on n'en lise le contenu ; sans elle, un consommateur doit charger les termes d'une famille rien que pour savoir ce qu'on va lui servir. L'URI complète plutôt que le nom court, parce que les familles ne partagent pas un seul vocabulaire. ⚠️ Elle type les **membres**, jamais l'ensemble : `additionalType` serait le mauvais emplacement, cette propriété-là ajoutant un type à *l'objet qui la porte*.
 - Un **`ThesaurusDomain`** est une pure étagère de rangement : il regroupe des schémas mais n'est **pas** un ensemble de termes (il étend `Intangible`, pas `DefinedTermSet`). Le lien domaine↔schéma est porté par `ThesaurusScheme::$domain` — une clé nue, un tableau projeté par AQL ou un objet hydraté (`#[HydrateWith(ThesaurusDomain::class)]`, chemin réflexion uniquement) — et les domaines sont **plats par conception** : ils ne s'imbriquent pas.
 
 ---
@@ -135,7 +138,7 @@ Au-dessus du cœur SKOS, le namespace modélise la vue **registre** d'un catalog
 | `ConceptScheme`       | `DefinedTermSet` | Un **schéma de concepts SKOS** (un vocabulaire), exposant ses concepts racines via `hasTopConcept`. L'appartenance d'un concept reste portée par `inDefinedTermSet` hérité (`skos:inScheme`). |
 | `Collection`          | `Intangible`     | Une **collection SKOS** — un regroupement étiqueté et **non hiérarchique** de concepts (`member`). Les membres sont polymorphes : concepts et/ou sous-collections imbriquées. |
 | `OrderedCollection`   | `Collection`     | Une `Collection` dont les membres ont un ordre signifiant (`memberList`).                                                 |
-| `ThesaurusScheme`     | `ConceptScheme`  | Un thésaurus **tel qu'enregistré dans un registre** — les métadonnées administrables (`active`, `color`, `order`, `domain`, `path`), les drapeaux de provenance (`harvested`, `system`) et la surface d'écriture (`writes` / `erases`, par verbe HTTP). |
+| `ThesaurusScheme`     | `ConceptScheme`  | Un thésaurus **tel qu'enregistré dans un registre** — les métadonnées administrables (`active`, `color`, `order`, `domain`, `path`), les drapeaux de provenance (`harvested`, `system`), le type de ses termes (`termType`) et la surface d'écriture (`writes`, par verbe puis par champ). |
 | `ThesaurusDomain`     | `Intangible`     | Un **domaine de registre** — le regroupement plat, de haut niveau, des schémas. Le lien est porté par `ThesaurusScheme::$domain`, pas par le domaine. |
 
 ### Couverture SKOS en un coup d'œil

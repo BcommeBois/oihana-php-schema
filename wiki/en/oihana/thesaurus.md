@@ -104,8 +104,11 @@ $scheme = new ThesaurusScheme
     ThesaurusScheme::HARVESTED => true ,                              // term core is read-only
     ThesaurusScheme::PATH      => '/thesaurus/products/categories' ,
     ThesaurusScheme::SYSTEM    => true ,                              // not deletable via an API
-    ThesaurusScheme::WRITES    => [ 'patch' => [ 'active' , 'color' ] ] , // what a write honors
-    ThesaurusScheme::ERASES    => [ 'patch' => [ 'color' ] ] ,            // …and what a null clears
+    ThesaurusScheme::TERM_TYPE => 'https://schema.oihana.xyz/ProductCategoryTerm' , // the type of its terms
+    ThesaurusScheme::WRITES    =>                                     // what a write honors
+    [
+        'patch' => [ 'color' => [ 'type' => 'string' , 'erasable' => true ] ] ,
+    ],
 ]);
 ```
 
@@ -116,8 +119,8 @@ $scheme = new ThesaurusScheme
 On top of the SKOS core, the namespace models the **registry** view of a vocabulary catalog — four layers: *registry → domains → schemes → concepts (→ links)*.
 
 - A **`ThesaurusScheme`** is a thesaurus taken as a whole, as it appears in a registry: the `ConceptScheme` plus the manageable metadata — `active` (an inactive scheme is hidden, not deleted), `color`/`order` (display), `domain` (filing), `path` (the relative route path) — and the provenance flags: on a `harvested` scheme the term core (`id`/`name`) is fed by an external source and read-only, only the house overlays are editable; on a `system` scheme the technical skeleton is defined in code, so it cannot be deleted through an API.
-- The **`writes`** map states the write surface of the family, field by field and per HTTP verb: `[ 'patch' => [ 'active' , 'color' ] ]` reads as *a `PATCH` honors `active` and `color`, and nothing else*. An empty map reads as read-only, and a missing verb key means the verb is not exposed at all. It answers *what the resource accepts* — not *who* may write, which stays the business of permissions — and it is meant to be derived from the family's body allow-list by the registry maintainer, never written by hand.
-- The **`erases`** map names, among the writable fields, those an explicit `null` **clears**: writing a value and taking it back are two different permissions of the data. A partial edit drops the nulls it receives — that is what keeps an unmentioned field untouched — so a field outside this list answers a `null` by doing nothing at all, and without an error. Always a subset of the matching `writes` entry, and only ever carrying the verbs whose body is read as partial: a creation keeps its nulls anyway, so nothing there is *cleared*.
+- The **`writes`** map states the write surface of the family: per HTTP verb, then per field. It answers *what the resource accepts* — not *who* may write, which stays the business of permissions. An empty map reads as read-only, and a missing verb key means the verb is not exposed at all. **Every field describes itself**, so a consumer draws its form without knowing the family beforehand: `type` (what it holds — `string`, `i18n`, `bool`… — hence the widget, and on an `i18n` field the ability to clear one language alone), `required` (present only when the field may not be omitted), `erasable` (present only when an explicit `null` takes the value back — never on a creation, since clearing supposes something is already there) and `default` (what the server poses when the caller stays silent). An absent key is an answer. 🚨 The validation constraints are **deliberately absent**: whoever serves the scheme validates and answers per field, and carrying the constraints here too would open a second source of truth free to drift. The whole map is derived from the family's own declarations by the registry maintainer, never written by hand.
+- The **`termType`** property gives the type of the terms the family holds, as a full URI — `https://schema.oihana.xyz/ProductCategoryTerm`, `https://schema.org/DefinedTerm`. A registry answers what vocabularies exist before anything is read from them; without it, a consumer has to fetch a family's terms just to learn what it will be handed. The full URI rather than the bare name, because the families do not share one vocabulary. ⚠️ It types the **members**, never the set: `additionalType` would be the wrong slot, that property adding a type to *the item carrying it*.
 - A **`ThesaurusDomain`** is a pure filing shelf: it groups schemes but is **not** a set of terms (it extends `Intangible`, not `DefinedTermSet`). The domain↔scheme link is carried by `ThesaurusScheme::$domain` — a bare key, an AQL-projected array or a hydrated object (`#[HydrateWith(ThesaurusDomain::class)]`, reflection path only) — and domains are **flat by design**: they do not nest.
 
 ---
@@ -135,7 +138,7 @@ On top of the SKOS core, the namespace models the **registry** view of a vocabul
 | `ConceptScheme`       | `DefinedTermSet` | A **SKOS concept scheme** (a vocabulary), exposing its root concepts via `hasTopConcept`. Concept membership stays on the inherited `inDefinedTermSet` (`skos:inScheme`). |
 | `Collection`          | `Intangible`     | A **SKOS collection** — a labelled, **non-hierarchical** grouping of concepts (`member`). Members are polymorphic: concepts and/or nested collections. |
 | `OrderedCollection`   | `Collection`     | A `Collection` whose members carry a meaningful order (`memberList`).                                                     |
-| `ThesaurusScheme`     | `ConceptScheme`  | A thesaurus **as registered in a registry** — the manageable metadata (`active`, `color`, `order`, `domain`, `path`), the provenance flags (`harvested`, `system`) and the write surface (`writes` / `erases`, per HTTP verb). |
+| `ThesaurusScheme`     | `ConceptScheme`  | A thesaurus **as registered in a registry** — the manageable metadata (`active`, `color`, `order`, `domain`, `path`), the provenance flags (`harvested`, `system`), the type of its terms (`termType`) and the write surface (`writes`, per verb then per field). |
 | `ThesaurusDomain`     | `Intangible`     | A **registry domain** — the top-level, flat grouping of schemes. The link is carried by `ThesaurusScheme::$domain`, not by the domain. |
 
 ### SKOS coverage at a glance

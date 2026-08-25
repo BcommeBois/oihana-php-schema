@@ -25,11 +25,11 @@ class ThesaurusSchemeTest extends TestCase
         $this->assertNull( $scheme->active        ?? null );
         $this->assertNull( $scheme->color         ?? null );
         $this->assertNull( $scheme->domain        ?? null );
-        $this->assertNull( $scheme->erases        ?? null );
         $this->assertNull( $scheme->harvested     ?? null );
         $this->assertNull( $scheme->order         ?? null );
         $this->assertNull( $scheme->path          ?? null );
         $this->assertNull( $scheme->system        ?? null );
+        $this->assertNull( $scheme->termType      ?? null );
         $this->assertNull( $scheme->writes        ?? null );
         $this->assertNull( $scheme->hasTopConcept ?? null );
     }
@@ -57,11 +57,11 @@ class ThesaurusSchemeTest extends TestCase
         $this->assertSame( 'active'    , ThesaurusScheme::ACTIVE );
         $this->assertSame( 'color'     , ThesaurusScheme::COLOR );
         $this->assertSame( 'domain'    , ThesaurusScheme::DOMAIN );
-        $this->assertSame( 'erases'    , ThesaurusScheme::ERASES );
         $this->assertSame( 'harvested' , ThesaurusScheme::HARVESTED );
         $this->assertSame( 'order'     , ThesaurusScheme::ORDER );
         $this->assertSame( 'path'      , ThesaurusScheme::PATH );
         $this->assertSame( 'system'    , ThesaurusScheme::SYSTEM );
+        $this->assertSame( 'termType'  , ThesaurusScheme::TERM_TYPE );
         $this->assertSame( 'writes'    , ThesaurusScheme::WRITES );
     }
 
@@ -74,11 +74,11 @@ class ThesaurusSchemeTest extends TestCase
     {
         $this->assertSame( 'active'    , Oihana::ACTIVE );
         $this->assertSame( 'domain'    , Oihana::DOMAIN );
-        $this->assertSame( 'erases'    , Oihana::ERASES );
         $this->assertSame( 'harvested' , Oihana::HARVESTED );
         $this->assertSame( 'order'     , Oihana::ORDER );
         $this->assertSame( 'path'      , Oihana::PATH );
         $this->assertSame( 'system'    , Oihana::SYSTEM );
+        $this->assertSame( 'termType'  , Oihana::TERM_TYPE );
         $this->assertSame( 'writes'    , Oihana::WRITES );
     }
 
@@ -98,8 +98,8 @@ class ThesaurusSchemeTest extends TestCase
             ThesaurusScheme::ORDER     => 1 ,
             ThesaurusScheme::PATH      => '/thesaurus/products/categories' ,
             ThesaurusScheme::SYSTEM    => true ,
-            ThesaurusScheme::WRITES    => [ 'patch' => [ 'active' , 'color' ] ] ,
-            ThesaurusScheme::ERASES    => [ 'patch' => [ 'color' ] ] ,
+            ThesaurusScheme::TERM_TYPE => 'https://schema.oihana.xyz/ProductCategoryTerm' ,
+            ThesaurusScheme::WRITES    => [ 'patch' => [ 'color' => [ 'type' => 'string' , 'erasable' => true ] ] ] ,
         ]);
 
         $this->assertSame( 'Product categories'             , $scheme->name );
@@ -110,54 +110,60 @@ class ThesaurusSchemeTest extends TestCase
         $this->assertSame( 1                                , $scheme->order );
         $this->assertSame( '/thesaurus/products/categories' , $scheme->path );
         $this->assertTrue( $scheme->system );
-        $this->assertSame( [ 'patch' => [ 'active' , 'color' ] ] , $scheme->writes );
-        $this->assertSame( [ 'patch' => [ 'color' ] ]            , $scheme->erases );
+        $this->assertSame( 'https://schema.oihana.xyz/ProductCategoryTerm' , $scheme->termType );
+        $this->assertSame( [ 'patch' => [ 'color' => [ 'type' => 'string' , 'erasable' => true ] ] ] , $scheme->writes );
     }
 
     /**
      * An empty write surface is a statement — « read-only » — and must survive
      * the round trip as an empty array, distinct from the null of « unknown ».
-     * Same for an empty erase surface : « writable, but nothing can be taken
-     * back » is an answer of its own.
      */
     public function testEmptyWritesStaysAnEmptyArray(): void
     {
-        $scheme = new ThesaurusScheme
-        ([
-            ThesaurusScheme::WRITES => [] ,
-            ThesaurusScheme::ERASES => [] ,
-        ]);
+        $scheme = new ThesaurusScheme([ ThesaurusScheme::WRITES => [] ]);
 
         $this->assertSame( [] , $scheme->writes );
-        $this->assertSame( [] , $scheme->erases );
 
         $data = (array) $scheme->jsonSerialize() ;
 
         $this->assertArrayHasKey( ThesaurusScheme::WRITES , $data );
-        $this->assertArrayHasKey( ThesaurusScheme::ERASES , $data );
         $this->assertSame( [] , $data[ ThesaurusScheme::WRITES ] );
-        $this->assertSame( [] , $data[ ThesaurusScheme::ERASES ] );
     }
 
     /**
-     * 🔑 Taking a value back is not the same permission as writing it : a
-     * partial edit drops the nulls it receives, so a field outside `erases`
-     * answers a `null` by doing nothing — without an error. The two lists are
-     * therefore served side by side, and `erases` is always a subset.
+     * 🔑 A field carries its own description, so a consumer draws the form
+     * without knowing the family beforehand : what it holds, whether it may be
+     * omitted, whether a null takes it back, what the server poses in silence.
      */
-    public function testTheErasableFieldsAreASubsetOfTheWritableOnes(): void
+    public function testEachWritableFieldCarriesItsOwnDescriptor(): void
     {
         $scheme = new ThesaurusScheme
         ([
-            ThesaurusScheme::WRITES => [ 'patch' => [ 'active' , 'alternateName' , 'color' ] ] ,
-            ThesaurusScheme::ERASES => [ 'patch' => [ 'alternateName' , 'color' ] ] ,
+            ThesaurusScheme::WRITES =>
+            [
+                'post' =>
+                [
+                    'name'   => [ 'type' => 'string' , 'required' => true ] ,
+                    'active' => [ 'type' => 'bool'   , 'default'  => true ] ,
+                ],
+                'patch' =>
+                [
+                    'color' => [ 'type' => 'string' , 'erasable' => true ] ,
+                ],
+            ],
         ]);
 
-        $writes = $scheme->writes[ 'patch' ] ?? [] ;
-        $erases = $scheme->erases[ 'patch' ] ?? [] ;
+        $writes = $scheme->writes ;
 
-        $this->assertNotSame( [] , $erases );
-        $this->assertSame( [] , array_diff( $erases , $writes ) );
+        $this->assertIsArray( $writes );
+
+        $this->assertSame( 'string' , $writes[ 'post'  ][ 'name'   ][ 'type'     ] );
+        $this->assertTrue           ( $writes[ 'post'  ][ 'name'   ][ 'required' ] );
+        $this->assertTrue           ( $writes[ 'post'  ][ 'active' ][ 'default'  ] );
+        $this->assertTrue           ( $writes[ 'patch' ][ 'color'  ][ 'erasable' ] );
+
+        // Clearing supposes something is already there : a creation never carries it.
+        $this->assertArrayNotHasKey( 'erasable' , $writes[ 'post' ][ 'name' ] );
     }
 
     public function testDomainViaConstructorIsLeftRaw(): void
@@ -224,7 +230,7 @@ class ThesaurusSchemeTest extends TestCase
             ThesaurusScheme::DOMAIN    => 'products' ,
             ThesaurusScheme::HARVESTED => true ,
             ThesaurusScheme::PATH      => '/thesaurus/products/categories' ,
-            ThesaurusScheme::WRITES    => [ 'patch' => [ 'active' , 'color' ] ] ,
+            ThesaurusScheme::TERM_TYPE => 'https://schema.org/DefinedTerm' ,
         ]);
 
         $data = $scheme->jsonSerialize();
@@ -237,6 +243,6 @@ class ThesaurusSchemeTest extends TestCase
         $this->assertSame( 'products'                       , $data[ ThesaurusScheme::DOMAIN ] );
         $this->assertTrue( $data[ ThesaurusScheme::HARVESTED ] );
         $this->assertSame( '/thesaurus/products/categories' , $data[ ThesaurusScheme::PATH ] );
-        $this->assertSame( [ 'patch' => [ 'active' , 'color' ] ] , $data[ ThesaurusScheme::WRITES ] );
+        $this->assertSame( 'https://schema.org/DefinedTerm' , $data[ ThesaurusScheme::TERM_TYPE ] );
     }
 }

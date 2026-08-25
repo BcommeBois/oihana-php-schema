@@ -41,19 +41,6 @@ trait ThesaurusSchemeTrait
     const string ACTIVE = 'active' ;
 
     /**
-     * The erasable fields of the scheme, keyed by HTTP verb : each entry lists
-     * the fields an explicit `null` clears, a subset of the matching
-     * {@see ThesaurusSchemeTrait::WRITES} entry.
-     *
-     * Related model property:
-     *
-     * ```php
-     * public ?array $erases ;
-     * ```
-     */
-    const string ERASES = 'erases' ;
-
-    /**
      * The domain the scheme is filed under, as a bare key or a hydrated
      * {@see \xyz\oihana\schema\thesaurus\ThesaurusDomain}.
      *
@@ -113,8 +100,19 @@ trait ThesaurusSchemeTrait
     const string SYSTEM = 'system' ;
 
     /**
-     * The write surface of the scheme, keyed by HTTP verb : each entry lists
-     * the body fields a write on the family honors. An empty array reads as
+     * The type of the terms the scheme holds, as a full URI.
+     *
+     * Related model property:
+     *
+     * ```php
+     * public ?string $termType ;
+     * ```
+     */
+    const string TERM_TYPE = 'termType' ;
+
+    /**
+     * The write surface of the scheme : per HTTP verb, then per field, what a
+     * write on the family honors and how to draw it. An empty array reads as
      * read-only, and a missing verb key means the verb is not exposed at all.
      *
      * Related model property:

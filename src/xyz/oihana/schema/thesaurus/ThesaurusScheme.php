@@ -16,16 +16,16 @@ use xyz\oihana\schema\traits\HasColor;
  * the SKOS {@see ConceptScheme} (so it keeps `hasTopConcept` and the inherited
  * `hasDefinedTerm` member list) and adds what a registry needs to manage it —
  * visibility (`active`), display (`color`, `order`), filing (`domain`), routing
- * (`path`), provenance (`harvested`, `system`) and the write surface (`writes`,
- * `erases`).
+ * (`path`), provenance (`harvested`, `system`), the type of the terms it holds
+ * (`termType`) and the write surface (`writes`).
  *
  * The provenance flags split the editing rights : on a `harvested` scheme the
  * term core (`id`/`name`) is fed by an external source and read-only, only the
  * house overlays are editable ; on a `system` scheme the technical skeleton is
  * defined in code, so it cannot be deleted through an API. The `writes` map
  * states that surface field by field, per HTTP verb, so a consumer knows what
- * a write on the family honors without guessing it from the flags — and
- * `erases` names, among them, the fields an explicit `null` clears.
+ * a write on the family honors — and how to draw it — without guessing any of
+ * it from the flags.
  *
  * The `domain` property carries the domain↔scheme link (see
  * {@see ThesaurusDomain}) : a bare key, an AQL-projected associative array or a
@@ -46,8 +46,8 @@ use xyz\oihana\schema\traits\HasColor;
  *     ThesaurusScheme::ORDER      => 1 ,
  *     ThesaurusScheme::PATH       => '/thesaurus/products/categories' ,
  *     ThesaurusScheme::SYSTEM     => true ,
- *     ThesaurusScheme::WRITES     => [ 'patch' => [ 'active' , 'color' ] ] ,
- *     ThesaurusScheme::ERASES     => [ 'patch' => [ 'color' ] ] ,
+ *     ThesaurusScheme::TERM_TYPE  => 'https://schema.oihana.xyz/ProductCategoryTerm' ,
+ *     ThesaurusScheme::WRITES     => [ 'patch' => [ 'color' => [ 'type' => 'string' , 'erasable' => true ] ] ] ,
  * ]);
  * ```
  *
@@ -75,28 +75,6 @@ class ThesaurusScheme extends ConceptScheme
      */
     #[ HydrateWith( ThesaurusDomain::class ) ]
     public null|string|array|ThesaurusDomain $domain ;
-
-    /**
-     * The erasable fields of the scheme, keyed by HTTP verb : each entry lists
-     * the fields an explicit `null` clears.
-     *
-     * Writing a field and taking it back are two different permissions of the
-     * data, and {@see ThesaurusScheme::$writes} only answers the first : a
-     * partial edit drops the null values it receives, so that an unmentioned
-     * field stays untouched — and a field left out of this list therefore
-     * answers a `null` by doing nothing at all, without an error.
-     *
-     * Always a subset of the matching `writes` entry, and only ever carries the
-     * verbs whose body is read as partial (an edit ; a creation keeps its nulls
-     * anyway, so nothing there is *cleared*).
-     *
-     * ```php
-     * $scheme->erases = [ 'patch' => [ 'alternateName' , 'color' , 'description' ] ] ;
-     * ```
-     *
-     * @var array<string, list<string>>|null
-     */
-    public ?array $erases ;
 
     /**
      * The provenance flag : a harvested scheme is fed by an external source,
@@ -130,31 +108,77 @@ class ThesaurusScheme extends ConceptScheme
     public ?bool $system ;
 
     /**
-     * The write surface of the scheme, keyed by HTTP verb : each entry lists
-     * the body fields a write on the family honors — what the body allow-list
-     * of the family actually keeps, not what a caller is permitted to send
-     * (permissions answer *who*, this property answers *what*).
+     * The type of the terms the scheme holds, as a full URI —
+     * `https://schema.oihana.xyz/ProductCategoryTerm`, `https://schema.org/DefinedTerm`.
      *
-     * An empty array reads as read-only, and a missing verb key means the verb
-     * is not exposed at all. The value is derived from the family's body
-     * allow-list by the registry maintainer, never written by hand.
+     * A registry answers what vocabularies exist before anything is read from
+     * them ; without this, a consumer has to fetch a family's terms just to
+     * learn what it will be handed, and pick its rendering afterwards.
+     *
+     * 🔑 **The full URI, not the bare name.** The families do not share one
+     * vocabulary — a plain term comes from Schema.org, an enriched one from this
+     * package — so `DefinedTerm` alone would not say where to look it up.
+     *
+     * ⚠️ **It types the members, never the set.** `additionalType` would be the
+     * wrong slot for it : that property adds a type to *the item carrying it*,
+     * and a scheme is not one of its own terms.
+     *
+     * @var string|null
+     */
+    public ?string $termType ;
+
+    /**
+     * The write surface of the scheme : per HTTP verb, then per field, what a
+     * write on the family honors — what the body allow-list actually keeps, not
+     * what a caller is permitted to send (permissions answer *who*, this
+     * property answers *what*).
+     *
+     * **Every field describes itself**, so a consumer draws its form without
+     * knowing the family beforehand :
+     *
+     * - `type` — what the field holds (`string`, `i18n`, `bool`, `int`…). It
+     *   picks the widget, and on an `i18n` field it also says one language may
+     *   be cleared on its own ;
+     * - `required` — present only when the field may not be omitted ;
+     * - `erasable` — present only when an explicit `null` takes the value back.
+     *   It never appears on a creation : clearing supposes something is already
+     *   there, and only a body read as partial strips the nulls it receives ;
+     * - `default` — what the server poses when the caller stays silent.
+     *
+     * An absent key is an answer of its own. An empty array reads as read-only,
+     * and a missing verb key means the verb is not exposed at all.
      *
      * ```php
      * // a natively administered family
      * $scheme->writes =
      * [
-     *     'post'  => [ 'name' , 'active' , 'alternateName' , 'color' , 'description' ] ,
-     *     'patch' => [ 'active' , 'alternateName' , 'color' , 'description' ] ,
+     *     'post' =>
+     *     [
+     *         'name'   => [ 'type' => 'string' , 'required' => true ] ,
+     *         'active' => [ 'type' => 'bool'   , 'default'  => true ] ,
+     *         'color'  => [ 'type' => 'string' ] ,
+     *     ],
+     *     'patch' =>
+     *     [
+     *         'active' => [ 'type' => 'bool'   ] ,
+     *         'color'  => [ 'type' => 'string' , 'erasable' => true ] ,
+     *     ],
      * ] ;
-     *
-     * // a harvested family with editable overlays
-     * $scheme->writes = [ 'patch' => [ 'active' , 'color' ] ] ;
      *
      * // a read-only mirror
      * $scheme->writes = [] ;
      * ```
      *
-     * @var array<string, list<string>>|null
+     * 🚨 **The validation constraints are deliberately absent** — no length, no
+     * pattern, no range. Whoever serves the scheme validates and answers per
+     * field ; carrying the constraints here too would open a second source of
+     * truth, free to drift from the one that decides. `required` is the
+     * exception because it shapes the form rather than validating it.
+     *
+     * The whole map is derived from the family's own declarations by the
+     * registry maintainer, never written by hand.
+     *
+     * @var array<string, array<string, array<string, mixed>>>|null
      */
     public ?array $writes ;
 }
