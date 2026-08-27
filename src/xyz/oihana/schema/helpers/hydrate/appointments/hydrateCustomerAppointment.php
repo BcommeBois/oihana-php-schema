@@ -8,10 +8,12 @@ use oihana\reflect\Reflection;
 use oihana\reflect\exceptions\HydrationException;
 
 use org\schema\constants\Schema;
+use org\schema\DefinedTerm;
 
 use xyz\oihana\schema\appointments\CustomerAppointment;
 use xyz\oihana\schema\people\Seller;
 use xyz\oihana\schema\products\Product;
+use xyz\oihana\schema\thesaurus\ThesaurusTerm;
 
 use function oihana\core\arrays\isIndexed;
 
@@ -21,6 +23,7 @@ use function org\schema\helpers\hydrate\hydrateOffer;
 
 use function xyz\oihana\schema\helpers\hydrate\hydrateCustomer;
 use function xyz\oihana\schema\helpers\hydrate\hydrateCustomerEmployee;
+use function xyz\oihana\schema\helpers\hydrate\termClassOf;
 
 /**
  * Hydrate an array definition with the CustomerAppointment class.
@@ -51,7 +54,8 @@ use function xyz\oihana\schema\helpers\hydrate\hydrateCustomerEmployee;
  * - `customer` → {@see hydrateCustomer()}, the class the property names first ;
  * - `attendee` → {@see hydrateCustomerEmployee()}, which also types each contact's own
  *   references ;
- * - `appointmentType` (one term) and `tags` (several) → {@see hydrateDefinedTerm()} ;
+ * - `appointmentType` (one term) and `tags` (several) → {@see hydrateDefinedTerm()}, given
+ *   the business term class the families actually serve ;
  * - `makesOffer` → {@see hydrateOffer()}, given this package's own {@see Product} so an
  *   offered item keeps its commerce properties ;
  * - `report` → {@see hydrateVisitReport()}, and with it the follow-ups it carries ;
@@ -64,12 +68,44 @@ use function xyz\oihana\schema\helpers\hydrate\hydrateCustomerEmployee;
  * an array that resolves to nothing becomes `null`, never a leftover raw array. Anything
  * else is left to whatever {@see Reflection::hydrate()} made of it.
  *
+ * 🔑 **The meeting's vocabularies are read as the class their family serves.**
+ * `appointmentType`, `tags` and the two terms the report carries all come from **business**
+ * families, administered rather than harvested, and those carry properties {@see DefinedTerm}
+ * does not declare — `color` first among them. Hydrating them as a plain `DefinedTerm` dropped
+ * those properties silently, so the same term changed shape depending on the door it was read
+ * through.
+ *
+ * The class is a **parameter rather than a hard-wired name**, exactly as
+ * {@see \xyz\oihana\schema\helpers\hydrate\hydrateParcelDelivery()} takes its travel terms.
+ * It takes the two forms {@see termClassOf()} reads — one class for every term, or a map
+ * naming them one by one :
+ *
+ * ```php
+ * hydrateCustomerAppointment( $raw ) ;                      // the house term, everywhere
+ * hydrateCustomerAppointment( $raw , DefinedTerm::class ) ; // one named class, everywhere
+ * hydrateCustomerAppointment( $raw ,
+ * [
+ *     Prop::DEFAULT                         => ThesaurusTerm::class ,
+ *     CustomerAppointment::APPOINTMENT_TYPE => AppointmentTypeTerm::class ,
+ *     CustomerAppointment::REPORT           => [ VisitReport::MOOD => MoodTerm::class ] ,
+ * ]) ;
+ * ```
+ *
+ * ⚠️ **The report reads the meeting's map until it is given one of its own.** A map is keyed
+ * by property name, and `tags` is declared on both classes over two different families — a
+ * meeting's quick qualifiers are not a report's. A {@see CustomerAppointment::REPORT} branch
+ * is what tells them apart : without it the report inherits the meeting's map, which is right
+ * as long as the two agree, and wrong the day they stop. With it, the branch is handed down alone.
+ *
  * 🔑 **A bare reference survives inside a list**, exactly as it does on its own : a list of
  * unresolved handles comes back as it stands, and only an entry that *was* an array and
  * resolved to nothing is dropped. The keys stay gap-free — a filtered list left with holes
  * serializes as a JSON object, and a consumer walking the value gets something it cannot walk.
  *
  * @param mixed $init Single meeting data or array of meeting data.
+ * @param class-string<DefinedTerm>|array<string,class-string<DefinedTerm>|array<string,class-string<DefinedTerm>>> $termClass
+ *        The class the meeting's terms — and its report's — are hydrated into, or a map naming
+ *        them one by one, `report` included. See {@see termClassOf()}.
  *
  * @return mixed
  *
@@ -90,9 +126,10 @@ use function xyz\oihana\schema\helpers\hydrate\hydrateCustomerEmployee;
  *
  * $appointment->customer instanceof Customer            ; // true
  * $appointment->report->followUp[ 0 ] instanceof FollowUp ; // true
+ * $appointment->appointmentType instanceof ThesaurusTerm  ; // true
  * ```
  */
-function hydrateCustomerAppointment( mixed $init = null ) :mixed
+function hydrateCustomerAppointment( mixed $init = null , string|array $termClass = ThesaurusTerm::class ) :mixed
 {
     if( !is_array( $init ) )
     {
@@ -103,7 +140,7 @@ function hydrateCustomerAppointment( mixed $init = null ) :mixed
     {
         $appointments = array_map
         (
-            fn( $appointment ) => hydrateCustomerAppointment( $appointment ) ,
+            fn( $appointment ) => hydrateCustomerAppointment( $appointment , $termClass ) ,
             $init
         );
 
@@ -122,6 +159,10 @@ function hydrateCustomerAppointment( mixed $init = null ) :mixed
 
     $appointment = $reflection->hydrate( $init , CustomerAppointment::class ) ;
 
+    // The report keeps the meeting's map until the caller names a branch for it : `tags` is
+    // declared on both classes over two different families, and the branch is what tells them apart.
+    $reportClass = is_array( $termClass ) ? ( $termClass[ CustomerAppointment::REPORT ] ?? $termClass ) : $termClass ;
+
     // Read from the raw payload : what reflection made of these properties is either
     // unresolvable from the property type alone, or shallower than the helper's answer.
 
@@ -132,9 +173,9 @@ function hydrateCustomerAppointment( mixed $init = null ) :mixed
         Schema::MAKES_OFFER                     => fn( $raw ) => hydrateOffer( $raw , Product::class ) ,
         Schema::EVENT_STATUS                    => hydrateEventStatus( ... )       ,
         CustomerAppointment::APPOINTMENT_STATUS => hydrateAppointmentStatus( ... ) ,
-        CustomerAppointment::APPOINTMENT_TYPE   => hydrateDefinedTerm( ... )       ,
-        CustomerAppointment::TAGS               => hydrateDefinedTerm( ... )       ,
-        CustomerAppointment::REPORT             => hydrateVisitReport( ... )       ,
+        CustomerAppointment::APPOINTMENT_TYPE   => fn( $raw ) => hydrateDefinedTerm( $raw , termClassOf( $termClass , CustomerAppointment::APPOINTMENT_TYPE ) ) ,
+        CustomerAppointment::TAGS               => fn( $raw ) => hydrateDefinedTerm( $raw , termClassOf( $termClass , CustomerAppointment::TAGS ) ) ,
+        CustomerAppointment::REPORT             => fn( $raw ) => hydrateVisitReport( $raw , $reportClass ) ,
     ];
 
     foreach( $resolvers as $property => $resolve )

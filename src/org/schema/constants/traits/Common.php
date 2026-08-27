@@ -15,6 +15,7 @@ trait Common
     const string COLOR = 'color' ;
     const string COURSES = 'courses' ;
     const string CREATOR = 'creator' ;
+    const string DEFAULT = 'default' ;
     const string DISCOVER = 'discover' ;
     const string EDITOR = 'editor' ;
     const string FORMAT = 'format' ;

@@ -13,5 +13,6 @@ trait VisitReportTrait
 {
     public const string MOOD    = 'mood'    ;
     public const string OUTCOME = 'outcome' ;
+    public const string TAGS    = 'tags'    ;
     public const string TOPICS  = 'topics'  ;
 }

@@ -39,7 +39,6 @@
         "files" :
         [
             "src/org/schema/helpers/hydrate/findEnumerationMember.php" ,
-            "src/org/schema/helpers/hydrate/findEnumerationMember.php" ,
             "src/org/schema/helpers/hydrate/hydrateAdditionalProperty.php" ,
             "src/org/schema/helpers/hydrate/hydrateContactPoint.php" ,
             "src/org/schema/helpers/hydrate/hydrateDefinedTerm.php" ,
@@ -69,6 +68,7 @@
             "src/xyz/oihana/schema/helpers/hydrate/hydratePhysicalQuantity.php" ,
             "src/xyz/oihana/schema/helpers/hydrate/hydrateStockLevel.php" ,
             "src/xyz/oihana/schema/helpers/hydrate/hydrateWarehouse.php" ,
+            "src/xyz/oihana/schema/helpers/hydrate/termClassOf.php" ,
             "src/xyz/oihana/schema/helpers/pivots/customerKey.php" ,
             "src/xyz/oihana/schema/helpers/pivots/customerKeys.php" ,
             "src/xyz/oihana/schema/helpers/pivots/sellerKey.php" ,

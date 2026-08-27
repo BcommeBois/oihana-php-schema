@@ -374,6 +374,41 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   account as the diary's owner, adds `assignedCompany` to its property table, and
   says that a status may state why.
 
+- **`termClassOf()`** — a new helper of `xyz\oihana\schema\helpers\hydrate` that answers
+  the class one term property is read back into, so a hydrator resolving several
+  vocabularies takes **one** parameter rather than one per property. It reads two forms :
+
+  ```php
+  hydrateCustomerAppointment( $raw ) ;                      // the house term, everywhere
+  hydrateCustomerAppointment( $raw , DefinedTerm::class ) ; // one named class, everywhere
+
+  hydrateCustomerAppointment( $raw ,
+  [
+      Prop::DEFAULT                         => ThesaurusTerm::class ,
+      CustomerAppointment::APPOINTMENT_TYPE => AppointmentTypeTerm::class ,
+      CustomerAppointment::REPORT           => [ VisitReport::MOOD => MoodTerm::class ] ,
+  ]) ;
+  ```
+
+  The two forms are the same statement at two levels of detail, so a caller only writes
+  a map the day one family stops answering what the others answer. What a map does not
+  name falls back on `Prop::DEFAULT`, then on `ThesaurusTerm`.
+
+  ⚠️ **A map is keyed by property, not by family.** `tags` is declared on the meeting
+  **and** on its report, over two different families — a meeting's quick qualifiers are
+  not the qualifiers of the text written about it — and one flat key cannot tell them
+  apart. The `CustomerAppointment::REPORT` branch is what separates them : without it the
+  report **inherits the meeting's map**, which is right as long as the two families agree,
+  and is what the branch exists to undo the day they diverge.
+
+  🔑 **A nested branch is never answered as a class.** It is a map, not a class name, and
+  it belongs to the hydrator owning that property, which reads it and hands it down itself.
+
+- **`Prop::DEFAULT` and `VisitReportTrait::TAGS`** — the two constants a `$termClass`
+  map is keyed with, so it is written without a magic string. `Prop::DEFAULT` names the
+  fallback key ; `TAGS` is the property name `VisitReport` declared without its constants
+  trait ever naming it, next to `MOOD`, `OUTCOME` and `TOPICS`.
+
 ### Changed
 
 - **`CustomerAppointment::$organizer` is read back as a `User`**, not as a `Seller`.
@@ -388,6 +423,41 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   could be written in PHP and never read back from a document.
 
 ### Fixed
+
+- **A meeting's thesaurus terms keep the properties their family serves.** The four
+  vocabularies a meeting carries — `appointmentType` and `tags` at the root, `report.mood`
+  and `report.outcome` inside the report — come from **business** families, administered
+  rather than harvested. Those families carry properties `org\schema\DefinedTerm` does not
+  declare, `color` first among them.
+
+  `hydrateVisitReport()` and `hydrateCustomerAppointment()` hydrated them into the plain
+  `DefinedTerm`, and a constructor only assigns the properties its class declares : the key
+  fell **without an error and without a trace**. A term read on its own family kept its
+  color, the same term read inside a report did not, and the only remedy on the reader's
+  side was to re-read both families on every screen that showed a report.
+
+  Both helpers now take a `$termClass` parameter, defaulting to
+  `xyz\oihana\schema\thesaurus\ThesaurusTerm` — the class the families actually serve —
+  exactly as `hydrateParcelDelivery()` already takes its two travel terms. Nothing new is
+  invented : a pattern already established is applied to the two helpers that missed it.
+
+  ⚠️ **The served `@type` changes**, from `DefinedTerm` to `ThesaurusTerm`, and the
+  `@context` from `https://schema.org` to `https://schema.oihana.xyz`. It is listed as
+  **fixed** rather than breaking because `ThesaurusTerm` **extends** `DefinedTerm` : every
+  type test keeps passing, no declared property type moves, nothing disappears and one
+  property is added. A reader comparing `@type` to the exact string `"DefinedTerm"` is the
+  one case that sees a difference.
+
+  🔑 **`hydrateFollowUp()` and `hydrateCustomerEmployee()` are deliberately untouched.** No
+  business family answers `followUpType` yet, and the job-title family is **harvested** and
+  served as a plain `DefinedTerm` on its own route : it is already consistent with itself,
+  and typing it here would move the disagreement rather than close it.
+
+- **The namespace table of the helpers guide counts what is actually there.** It announced
+  7 pure hydrators for 9, 7 business ones for 10, 3 account pivots for 4, and left the
+  `hydrate\appointments` namespace out altogether — a reader looking for the appointment
+  helpers found no namespace holding them and could reasonably conclude there was none.
+  What is not a hydrator is now named rather than counted in.
 
 - **A list of bare references no longer disappears on the way back in** — every helper of
   the `hydrateXxx()` family, twenty-four list branches.

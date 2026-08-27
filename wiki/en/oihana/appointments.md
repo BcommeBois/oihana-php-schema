@@ -140,6 +140,8 @@ Schema.org **publishes no member for "it happened"**: its enumeration follows an
 
 `name`, `description`, `startDate`, `endDate`, `duration`, `eventStatus`, `eventAttendanceMode`, `previousStartDate`, `remarks`, `about`, `subEvent`/`superEvent` are inherited from `Event`; `id`, `identifier`, `url`, `created`, `modified` from `Thing`.
 
+🔑 **The declared type says `DefinedTerm`, the hydrator serves `ThesaurusTerm`.** `appointmentType` and `tags` come from **business** families — administered, not harvested — which carry properties `DefinedTerm` does not declare, `color` first among them. The union stays written `DefinedTerm` because it is the widest contract, and because `ThesaurusTerm` inherits from it: nothing that used to pass stops passing. But `hydrateCustomerAppointment()` now reads those terms back into the class the family actually serves, and its `$termClass` parameter lets a caller name another one — see [the hydrators](helpers.md).
+
 ### 🔑 The customer is the one thing a meeting cannot do without
 
 Everything else is optional: the contacts expected, the place, what one means to show. And the customer may take two forms, without the class having to tell them apart:
@@ -187,6 +189,8 @@ The wrapper is what carries the intention **beside** the reference — and the d
 | `topics` | `string[]\|DefinedTerm[]\|null` | What was discussed. Several. |
 
 `text` (the body of the report), `author`, `dateCreated`, `dateModified`, `audio` and `associatedMedia` are inherited from `CreativeWork`.
+
+🔑 **The same holds for the report's four vocabularies.** `mood`, `outcome`, `tags` and `topics` are declared `DefinedTerm` and served as `ThesaurusTerm` by `hydrateVisitReport()`. That is what makes a term read inside a report and the same term read on its own family **answer the same shape**, `color` included: only the second one carried it before.
 
 🔑 **The boxes and the text are not alternatives.** A report reduced to codes loses what makes it worth reading; reduced to prose, it cannot be counted. Both are declared, **neither is required**: the one written on a phone, in a van, with three taps is worth more than the thorough one that never gets written.
 

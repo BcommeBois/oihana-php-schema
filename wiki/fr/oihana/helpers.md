@@ -38,12 +38,13 @@ use function xyz\oihana\schema\helpers\pivots\sellerKeys;
 
 La couche respecte la règle de la bibliothèque : `org\schema` est le miroir pur du vocabulaire Schema.org, `xyz\oihana\schema` est l'extension maison qui s'appuie dessus — **jamais l'inverse**.
 
-| Namespace                                     | Contenu                             | Dépend de              |
-|-----------------------------------------------|-------------------------------------|------------------------|
-| `org\schema\helpers\hydrate`                  | Les 7 hydrateurs Schema.org purs    | `org\schema` seulement |
-| `xyz\oihana\schema\helpers\hydrate`           | Les 7 hydrateurs métier             | `xyz` + `org`          |
-| `xyz\oihana\schema\helpers\hydrate\documents` | Les 5 hydrateurs de documents       | `xyz` + `org`          |
-| `xyz\oihana\schema\helpers\pivots`            | Les 3 pivots de compte              | `xyz` + `org`          |
+| Namespace                                        | Contenu                                                                    | Dépend de              |
+|--------------------------------------------------|----------------------------------------------------------------------------|------------------------|
+| `org\schema\helpers\hydrate`                     | Les 9 hydrateurs Schema.org purs, plus `findEnumerationMember`              | `org\schema` seulement |
+| `xyz\oihana\schema\helpers\hydrate`              | Les 10 hydrateurs métier, plus `findPhysicalQuantityByType` et `termClassOf` | `xyz` + `org`          |
+| `xyz\oihana\schema\helpers\hydrate\appointments` | Les 4 hydrateurs de rendez-vous                                             | `xyz` + `org`          |
+| `xyz\oihana\schema\helpers\hydrate\documents`    | Les 5 hydrateurs de documents                                               | `xyz` + `org`          |
+| `xyz\oihana\schema\helpers\pivots`               | Les 4 pivots de compte                                                      | `xyz` + `org`          |
 
 Les hydrateurs métier appellent les hydrateurs purs pour leurs références imbriquées (`hydrateCustomer` délègue à `hydrateContactPoint` et `hydratePostalAddress`) — le sens de la flèche est toujours `xyz` → `org`.
 
@@ -52,6 +53,26 @@ Le sous-dossier `hydrate/documents` regroupe les hydrateurs des [documents comme
 `hydrateOrganizationOrPerson`, lui, vit dans `org\schema\helpers\hydrate` : n'ayant besoin que des classes `org\schema\Organization`/`org\schema\Person`, il reste un hydrateur pur. Il résout une union `Organization|Person` d'après le `@type` du contenu, et accepte deux classes cibles personnalisées (`$organizationClass`/`$personClass`) pour viser un sous-type métier.
 
 `hydrateParcelDelivery` est le contre-exemple qui montre le mieux à quoi sert cet étagement. La livraison d'un document est une `org\schema\ParcelDelivery`, mais son mode et sa tournée sont des termes de thésaurus **maison** (`DeliveryMethodTerm`, `DeliveryRouteTerm`). Les nommer dans un `#[HydrateAs]` posé sur `ParcelDelivery` aurait retourné la flèche : la classe Schema.org se serait mise à dépendre de la couche métier. L'hydrateur les prend donc en **paramètres** (`class-string<DefinedTerm>`, avec les termes maison par défaut), et vit du côté `xyz` où cette connaissance a le droit d'exister. C'est aussi pourquoi il est le seul de la famille documentaire à passer par le constructeur plutôt que par `Reflection::hydrate()` : sans attribut à honorer sur ces trois propriétés, la réflexion n'apporterait rien — et sa sévérité écarterait au passage tout ce qu'une livraison stockée porte au-delà du vocabulaire Schema.org.
+
+**Ce que `hydrateParcelDelivery` a inauguré est devenu un motif.** Les hydrateurs de rendez-vous prennent le même genre de paramètre : `hydrateVisitReport` et `hydrateCustomerAppointment` acceptent un `$termClass` qui dit dans quelle classe leurs vocabulaires sont relus — `ThesaurusTerm` par défaut, la classe que les familles maison servent réellement. Sans lui, un terme perdait en silence tout ce que `DefinedTerm` ne déclare pas, `color` en tête : un constructeur n'assigne que les propriétés déclarées par sa classe, et la clé tombait sans erreur ni trace. Le même terme changeait alors d'apparence selon la porte par laquelle on le lisait — sa propre famille, ou le compte rendu qui le cite.
+
+Là où la livraison nomme deux paramètres (`$deliveryMethodClass`, `$deliveryRouteClass`), une rencontre porte quatre vocabulaires et son compte rendu quatre autres. D'où **un seul paramètre à deux formes**, lu par `termClassOf` :
+
+```php
+hydrateCustomerAppointment( $raw ) ;                      // le terme maison, partout
+hydrateCustomerAppointment( $raw , DefinedTerm::class ) ; // une classe nommée, partout
+
+hydrateCustomerAppointment( $raw ,
+[
+    Prop::DEFAULT                         => ThesaurusTerm::class ,
+    CustomerAppointment::APPOINTMENT_TYPE => AppointmentTypeTerm::class ,
+    CustomerAppointment::REPORT           => [ VisitReport::MOOD => MoodTerm::class ] ,
+]) ;
+```
+
+Les deux formes sont la même phrase à deux niveaux de détail : on n'écrit une carte que le jour où une famille cesse de répondre ce que les autres répondent.
+
+⚠️ **Une carte est indexée par propriété, pas par famille.** `tags` est déclarée sur la rencontre **et** sur son compte rendu, au-dessus de deux familles différentes — les mentions rapides d'une rencontre ne sont pas les qualificatifs du texte écrit à son sujet. Une seule clé `tags` ne peut pas les distinguer : la branche `report` est ce qui les sépare. Sans elle, le compte rendu **hérite de la carte de la rencontre**, ce qui est juste tant que les deux familles s'accordent, et ce que la branche est là pour défaire le jour où elles divergent.
 
 > **Note.** Les unions ambiguës des documents (`customer`/`seller`/`author`, `broker`/`provider`, `item`, `ownedBy`) sont désormais tranchées **déclarativement**, par un `#[HydrateWith(A::class, B::class)]` posé sur la propriété : `Reflection::hydrate()` choisit alors la bonne classe d'après le discriminateur (`@type`, `atType` ou `type`) et, à défaut, d'après les propriétés présentes. La résolution est donc correcte **même sans passer par un helper**. Les hydrateurs de cette couche restent utiles pour ce que la réflexion ne fait pas : accepter indifféremment une définition simple, une liste indexée ou une valeur quelconque rendue telle quelle.
 
@@ -254,15 +275,16 @@ Un compte porte zéro, une ou plusieurs identités métier (voir [`BusinessIdent
 | `hydratePhysicalQuantity` | `PhysicalQuantity`  | `valueReference` — **récursivement**, chaque étage du conditionnement gardant son `weight` et son `volume`. Un niveau déjà typé est rendu tel quel. Réservé au chemin du **constructeur** : `Reflection::hydrate()` descend la chaîne tout seul, l'attribut étant déclaré sur la propriété. |
 | `hydrateStockLevel`       | `StockLevel`        | `assignedPOS` (Warehouse)                                |
 | `hydrateWarehouse`        | `Warehouse` ou liste | `ownedBy` (Subsidiary)                                  |
+| `termClassOf`             | une `class-string<DefinedTerm>` | Ne construit rien : **répond la classe** dans laquelle une propriété de terme est relue. Lit les deux formes du paramètre `$termClass` — un nom de classe, ou une carte `[ Prop::DEFAULT => …, '<propriété>' => … ]`. Ce qu'une carte ne nomme pas retombe sur `Prop::DEFAULT`, puis sur `ThesaurusTerm`. 🔑 Une **branche imbriquée** — une sous-carte, comme `report` — n'est pas un nom de classe et n'est jamais rendue comme telle : elle appartient à l'hydrateur qui possède cette propriété, qui la lit et la transmet lui-même. |
 
 ### `xyz\oihana\schema\helpers\hydrate\appointments` — les hydrateurs de rendez-vous
 
 | Fonction                    | Produit                          | Références imbriquées hydratées                          |
 |-----------------------------|-----------------------------------|----------------------------------------------------------|
 | `hydrateAppointmentStatus` | la classe membre d'`AppointmentStatus` | Ne descend nulle part : **la constante nue ressort intacte**, un tableau redevient l'objet qui porte son motif. Le jumeau de `hydrateEventStatus` sur l'autre axe — ce qu'il est advenu de la rencontre, non du créneau. ⚠️ Le vocabulaire écrit `…/AppointmentStatus#NoShow` là où la classe s'appelle `AppointmentNoShow` : aucune règle ne mène de l'un à l'autre, l'URI est donc **déclaré** par le membre. |
-| `hydrateCustomerAppointment` | `CustomerAppointment` ou liste | `customer`, `attendee` (CustomerEmployee[] et leurs propres références), `assignedSeller` (Seller), `appointmentType` (un terme) et `tags` (plusieurs), `makesOffer` (par `hydrateOffer`, avec le `Product` maison), `report` (par `hydrateVisitReport`), `eventStatus` et `appointmentStatus`. Le reste vient de `Reflection::hydrate()`. 🔑 `organizer`, `assignedCompany` et `location` sont **laissés à leur attribut**, que la réflexion tranche déjà exactement d'après le `@type` : leur imposer une classe relirait une organisation simple en filiale, une salle virtuelle en site client. |
+| `hydrateCustomerAppointment` | `CustomerAppointment` ou liste | `customer`, `attendee` (CustomerEmployee[] et leurs propres références), `assignedSeller` (Seller), `appointmentType` (un terme) et `tags` (plusieurs) — **relus en `ThesaurusTerm`**, classe cible personnalisable via `$termClass` (un nom de classe, ou une carte par propriété lue par `termClassOf`, branche `report` comprise) —, `makesOffer` (par `hydrateOffer`, avec le `Product` maison), `report` (par `hydrateVisitReport`), `eventStatus` et `appointmentStatus`. Le reste vient de `Reflection::hydrate()`. 🔑 `organizer`, `assignedCompany` et `location` sont **laissés à leur attribut**, que la réflexion tranche déjà exactement d'après le `@type` : leur imposer une classe relirait une organisation simple en filiale, une salle virtuelle en site client. |
 | `hydrateFollowUp`         | `FollowUp` ou liste              | `followUpType`, `agent` (résolu par `hydrateOrganizationOrPerson`), `result` — 🚨 **à plat, jamais l'aide profonde** : la rencontre nommée en résultat est une référence, et descendre ouvrirait un cycle que seule la donnée arrête. **Une liste vide est rendue telle quelle.** |
-| `hydrateVisitReport`      | `VisitReport` ou liste           | `attendee` (CustomerEmployee[]), `followUp` (FollowUp[], liste vide conservée), `mood` et `outcome` (un terme), `tags` et `topics` (plusieurs), `author` (résolu par `hydrateOrganizationOrPerson`) |
+| `hydrateVisitReport`      | `VisitReport` ou liste           | `attendee` (CustomerEmployee[]), `followUp` (FollowUp[], liste vide conservée), `mood` et `outcome` (un terme), `tags` et `topics` (plusieurs) — les quatre **relus en `ThesaurusTerm`**, classe cible personnalisable via `$termClass` (un nom de classe, ou une carte par propriété lue par `termClassOf`) —, `author` (résolu par `hydrateOrganizationOrPerson`) |
 
 ### `xyz\oihana\schema\helpers\hydrate\documents` — les hydrateurs de documents
 

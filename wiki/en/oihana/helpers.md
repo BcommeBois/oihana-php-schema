@@ -38,12 +38,13 @@ use function xyz\oihana\schema\helpers\pivots\sellerKeys;
 
 The layer follows the library's rule: `org\schema` is the pure mirror of the Schema.org vocabulary, `xyz\oihana\schema` is the house extension built on top of it — **never the other way around**.
 
-| Namespace                                     | Content                         | Depends on         |
-|-----------------------------------------------|---------------------------------|--------------------|
-| `org\schema\helpers\hydrate`                  | The 7 pure Schema.org hydrators | `org\schema` only  |
-| `xyz\oihana\schema\helpers\hydrate`           | The 7 business-layer hydrators  | `xyz` + `org`      |
-| `xyz\oihana\schema\helpers\hydrate\documents` | The 5 document hydrators        | `xyz` + `org`      |
-| `xyz\oihana\schema\helpers\pivots`            | The 3 account pivots            | `xyz` + `org`      |
+| Namespace                                        | Content                                                                    | Depends on         |
+|--------------------------------------------------|----------------------------------------------------------------------------|--------------------|
+| `org\schema\helpers\hydrate`                     | The 9 pure Schema.org hydrators, plus `findEnumerationMember`               | `org\schema` only  |
+| `xyz\oihana\schema\helpers\hydrate`              | The 10 business-layer hydrators, plus `findPhysicalQuantityByType` and `termClassOf` | `xyz` + `org`      |
+| `xyz\oihana\schema\helpers\hydrate\appointments` | The 4 appointment hydrators                                                 | `xyz` + `org`      |
+| `xyz\oihana\schema\helpers\hydrate\documents`    | The 5 document hydrators                                                    | `xyz` + `org`      |
+| `xyz\oihana\schema\helpers\pivots`               | The 4 account pivots                                                        | `xyz` + `org`      |
 
 The business hydrators delegate their nested references to the pure ones (`hydrateCustomer` calls `hydrateContactPoint` and `hydratePostalAddress`) — the arrow always points `xyz` → `org`.
 
@@ -52,6 +53,26 @@ The `hydrate/documents` subfolder gathers the hydrators of the [business documen
 `hydrateOrganizationOrPerson`, on the other hand, lives in `org\schema\helpers\hydrate`: since it only needs `org\schema\Organization`/`org\schema\Person`, it stays a pure hydrator. It resolves an `Organization|Person` union from the payload's `@type`, and accepts two custom target classes (`$organizationClass`/`$personClass`) to aim at a business subtype.
 
 `hydrateParcelDelivery` is the counter-example that shows best what this layering is for. A document's delivery is an `org\schema\ParcelDelivery`, but its method and its round are **business** thesaurus terms (`DeliveryMethodTerm`, `DeliveryRouteTerm`). Naming them in a `#[HydrateAs]` carried by `ParcelDelivery` would have reversed the arrow: the Schema.org class would have started depending on the business layer. The hydrator therefore takes them as **parameters** (`class-string<DefinedTerm>`, defaulting to the business terms), and lives on the `xyz` side where that knowledge is allowed to exist. It is also why it is the only one of the document family to go through the constructor rather than `Reflection::hydrate()`: with no attribute to honor on those three properties, reflection would bring nothing — and its strictness would drop, on the way, whatever a stored delivery carries beyond the Schema.org vocabulary.
+
+**What `hydrateParcelDelivery` started has become a pattern.** The appointment hydrators take the same kind of parameter: `hydrateVisitReport` and `hydrateCustomerAppointment` accept a `$termClass` saying which class their vocabularies are read back into — `ThesaurusTerm` by default, the class the business families actually serve. Without it, a term silently lost whatever `DefinedTerm` does not declare, `color` first among them: a constructor only assigns the properties its class declares, and the key fell without an error and without a trace. The same term then changed shape depending on the door it was read through — its own family, or the report quoting it.
+
+Where the delivery names two parameters (`$deliveryMethodClass`, `$deliveryRouteClass`), a meeting carries four vocabularies and its report four more. Hence **one parameter with two forms**, read by `termClassOf`:
+
+```php
+hydrateCustomerAppointment( $raw ) ;                      // the house term, everywhere
+hydrateCustomerAppointment( $raw , DefinedTerm::class ) ; // one named class, everywhere
+
+hydrateCustomerAppointment( $raw ,
+[
+    Prop::DEFAULT                         => ThesaurusTerm::class ,
+    CustomerAppointment::APPOINTMENT_TYPE => AppointmentTypeTerm::class ,
+    CustomerAppointment::REPORT           => [ VisitReport::MOOD => MoodTerm::class ] ,
+]) ;
+```
+
+The two forms are the same statement at two levels of detail: a caller only writes a map the day one family stops answering what the others answer.
+
+⚠️ **A map is keyed by property, not by family.** `tags` is declared on the meeting **and** on its report, over two different families — a meeting's quick qualifiers are not the qualifiers of the text written about it. One key named `tags` cannot tell them apart: the `report` branch is what separates them. Without it, the report **inherits the meeting's map**, which is right as long as the two families agree, and is what the branch exists to undo the day they diverge.
 
 > **Note.** The documents' ambiguous unions (`customer`/`seller`/`author`, `broker`/`provider`, `item`, `ownedBy`) are now settled **declaratively**, through a `#[HydrateWith(A::class, B::class)]` carried by the property: `Reflection::hydrate()` then picks the right class from the discriminator (`@type`, `atType` or `type`) and, failing that, from the properties present. Resolution is therefore correct **even without going through a helper**. The hydrators of this layer stay useful for what reflection does not do: accepting a single definition, an indexed list, or any other value returned unchanged.
 
@@ -253,15 +274,16 @@ An account carries zero, one or several business identities (see [`BusinessIdent
 | `hydratePhysicalQuantity` | `PhysicalQuantity`  | `valueReference` — **recursively**, every packaging level keeping its `weight` and its `volume`. A level already typed is handed back as it stands. For the **constructor** path only: `Reflection::hydrate()` walks the chain on its own, the attribute being declared on the property. |
 | `hydrateStockLevel`       | `StockLevel`        | `assignedPOS` (Warehouse)                                |
 | `hydrateWarehouse`        | `Warehouse` or list | `ownedBy` (Subsidiary)                                   |
+| `termClassOf`             | a `class-string<DefinedTerm>` | Builds nothing: **answers the class** one term property is read back into. Reads both forms of the `$termClass` parameter — a class name, or a map `[ Prop::DEFAULT => …, '<property>' => … ]`. What a map does not name falls back on `Prop::DEFAULT`, then on `ThesaurusTerm`. 🔑 A **nested branch** — a sub-map, such as `report` — is not a class name and is never answered as one: it belongs to the hydrator owning that property, which reads it and hands it down itself. |
 
 ### `xyz\oihana\schema\helpers\hydrate\appointments` — the appointment hydrators
 
 | Function                    | Produces                          | Nested references hydrated                               |
 |-----------------------------|-----------------------------------|----------------------------------------------------------|
 | `hydrateAppointmentStatus` | the member class of `AppointmentStatus` | Goes nowhere down : **the bare constant comes back untouched**, an array becomes the object carrying its reason again. The twin of `hydrateEventStatus` on the other axis — what became of the meeting, not of the slot. ⚠️ The vocabulary spells `…/AppointmentStatus#NoShow` where the class is named `AppointmentNoShow` : no rule takes one to the other, so the URI is **stated** by the member. |
-| `hydrateCustomerAppointment` | `CustomerAppointment` or list | `customer`, `attendee` (CustomerEmployee[] and their own references), `assignedSeller` (Seller), `appointmentType` (one term) and `tags` (several), `makesOffer` (through `hydrateOffer`, given this package's `Product`), `report` (through `hydrateVisitReport`), `eventStatus` and `appointmentStatus`. The rest comes from `Reflection::hydrate()`. 🔑 `organizer`, `assignedCompany` and `location` are **left to their attribute**, which reflection already settles exactly from the `@type` : forcing a class over them would read a plain organization back as a subsidiary, a virtual room as a customer site. |
+| `hydrateCustomerAppointment` | `CustomerAppointment` or list | `customer`, `attendee` (CustomerEmployee[] and their own references), `assignedSeller` (Seller), `appointmentType` (one term) and `tags` (several) — **read back as `ThesaurusTerm`**, the target class being customizable through `$termClass` (a class name, or a per-property map read by `termClassOf`, `report` branch included) —, `makesOffer` (through `hydrateOffer`, given this package's `Product`), `report` (through `hydrateVisitReport`), `eventStatus` and `appointmentStatus`. The rest comes from `Reflection::hydrate()`. 🔑 `organizer`, `assignedCompany` and `location` are **left to their attribute**, which reflection already settles exactly from the `@type` : forcing a class over them would read a plain organization back as a subsidiary, a virtual room as a customer site. |
 | `hydrateFollowUp`         | `FollowUp` or list               | `followUpType`, `agent` (resolved by `hydrateOrganizationOrPerson`), `result` — 🚨 **flat, never the deep helper** : the meeting named as the result is a reference, and going down would open a cycle only the data would stop. **An empty list is kept as an empty list.** |
-| `hydrateVisitReport`      | `VisitReport` or list            | `attendee` (CustomerEmployee[]), `followUp` (FollowUp[], an empty list kept), `mood` and `outcome` (one term), `tags` and `topics` (several), `author` (resolved by `hydrateOrganizationOrPerson`) |
+| `hydrateVisitReport`      | `VisitReport` or list            | `attendee` (CustomerEmployee[]), `followUp` (FollowUp[], an empty list kept), `mood` and `outcome` (one term), `tags` and `topics` (several) — all four **read back as `ThesaurusTerm`**, the target class being customizable through `$termClass` (a class name, or a per-property map read by `termClassOf`) —, `author` (resolved by `hydrateOrganizationOrPerson`) |
 
 ### `xyz\oihana\schema\helpers\hydrate\documents` — the document hydrators
 

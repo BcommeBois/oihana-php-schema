@@ -140,6 +140,8 @@ Schema.org **ne publie aucun membre pour « ça a eu lieu »** : son énumérati
 
 `name`, `description`, `startDate`, `endDate`, `duration`, `eventStatus`, `eventAttendanceMode`, `previousStartDate`, `remarks`, `about`, `subEvent`/`superEvent` sont hérités d'`Event` ; `id`, `identifier`, `url`, `created`, `modified` de `Thing`.
 
+🔑 **Le type déclaré dit `DefinedTerm`, l'hydrateur sert `ThesaurusTerm`.** `appointmentType` et `tags` viennent de familles **maison** — administrées, pas moissonnées — qui portent des propriétés que `DefinedTerm` ne déclare pas, `color` en tête. L'union reste écrite `DefinedTerm` parce que c'est le contrat le plus large, et parce que `ThesaurusTerm` en hérite : rien de ce qui passait ne cesse de passer. Mais `hydrateCustomerAppointment()` relit désormais ces termes dans la classe que la famille sert réellement, et son paramètre `$termClass` permet d'en nommer une autre — voir [les hydrateurs](helpers.md).
+
 ### 🔑 Le client est la seule chose dont une rencontre ne peut pas se passer
 
 Tout le reste est facultatif : les contacts attendus, le lieu, ce qu'on compte montrer. Et le client peut prendre deux formes, sans que la classe ait à distinguer :
@@ -187,6 +189,8 @@ L'enveloppe est ce qui porte l'intention **à côté** de la référence — et 
 | `topics` | `string[]\|DefinedTerm[]\|null` | Les sujets abordés. Plusieurs. |
 
 `text` (le corps du compte rendu), `author`, `dateCreated`, `dateModified`, `audio` et `associatedMedia` sont hérités de `CreativeWork`.
+
+🔑 **Même remarque pour les quatre vocabulaires du compte rendu.** `mood`, `outcome`, `tags` et `topics` sont déclarés `DefinedTerm` et servis en `ThesaurusTerm` par `hydrateVisitReport()`. C'est ce qui fait qu'un terme lu dans un compte rendu et le même terme lu sur sa famille **rendent la même forme**, `color` comprise : auparavant, seul le second la portait.
 
 🔑 **Les cases et le texte ne sont pas des alternatives.** Un compte rendu réduit à des codes perd ce qui le rend digne d'être lu ; réduit à de la prose, il ne se compte pas. Les deux sont déclarés, **aucun n'est obligatoire** : celui qu'on écrit sur un téléphone, dans une camionnette, en trois gestes, vaut mieux que le compte rendu exhaustif qui ne sera jamais écrit.
 

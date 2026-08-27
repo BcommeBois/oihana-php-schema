@@ -7,6 +7,7 @@ use ReflectionException;
 
 use oihana\reflect\exceptions\HydrationException;
 
+use org\schema\constants\Prop;
 use org\schema\constants\Schema;
 use org\schema\DefinedTerm;
 use org\schema\Offer;
@@ -28,6 +29,7 @@ use xyz\oihana\schema\people\CustomerEmployee;
 use xyz\oihana\schema\people\Seller;
 use xyz\oihana\schema\places\CustomerSite;
 use xyz\oihana\schema\products\Product;
+use xyz\oihana\schema\thesaurus\ThesaurusTerm;
 
 use function xyz\oihana\schema\helpers\hydrate\appointments\hydrateCustomerAppointment;
 
@@ -289,5 +291,186 @@ final class HydrateCustomerAppointmentTest extends TestCase
 
         // And a list of meetings, one level up.
         $this->assertSame( [ 'appointment-ref-42' ] , hydrateCustomerAppointment( [ 'appointment-ref-42' ] ) ) ;
+    }
+
+    /**
+     * 🚨 **The test the lot exists for.** The four vocabularies a meeting carries come from
+     * the same business families, projected by the same query, with the same fields — so the
+     * same term must read back as the same thing wherever it sits, at the root of the meeting
+     * or inside its report. The very same raw term is served under both, and the assertion is
+     * exact : one shape, `@type` and `@context` included.
+     *
+     * Agreement alone was never the fault — both readings agreed on `DefinedTerm`, and both
+     * dropped the `color` the family serves. What this test holds is the pair : they agree,
+     * **and** what they agree on is the term the family actually answers.
+     *
+     * @throws HydrationException
+     * @throws ReflectionException
+     */
+    public function testTheRootTermAndTheReportTermAnswerTheSameShape(): void
+    {
+        $term =
+        [
+            '_key'  => '3841020' ,
+            'name'  => 'SATISFIED' ,
+            'url'   => 'https://example.org/thesaurus/appointments/moods/3841020' ,
+            'color' => '#2563EB' ,
+        ];
+
+        $appointment = hydrateCustomerAppointment
+        ([
+            'appointmentType' => $term ,
+            'report'          => [ 'mood' => $term ] ,
+        ]) ;
+
+        $this->assertSame
+        (
+            json_encode( $appointment->appointmentType ) ,
+            json_encode( $appointment->report->mood ) ,
+        );
+
+        $this->assertSame( '#2563EB' , $appointment->appointmentType->color ) ;
+        $this->assertSame( '#2563EB' , $appointment->report->mood->color ) ;
+    }
+
+    /**
+     * The same fault on the meeting's own two vocabularies, one single-valued and one list :
+     * `color` lives on {@see ThesaurusTerm} and never on {@see DefinedTerm}, so a term
+     * hydrated into the plain Schema.org class lost it silently.
+     *
+     * @throws HydrationException
+     * @throws ReflectionException
+     */
+    public function testTheMeetingsOwnTermsKeepTheirColor(): void
+    {
+        $appointment = hydrateCustomerAppointment
+        ([
+            'appointmentType' => [ 'id' => 'ONSITE' , 'color' => '#2563EB' ] ,
+            'tags'            => [ [ 'id' => 'DEMO' , 'color' => '#F59E0B' ] , [ 'id' => 'MEAL' ] ] ,
+        ]) ;
+
+        $this->assertInstanceOf( ThesaurusTerm::class , $appointment->appointmentType ) ;
+        $this->assertContainsOnlyInstancesOf( ThesaurusTerm::class , $appointment->tags ) ;
+
+        $this->assertSame( '#2563EB' , $appointment->appointmentType->color ) ;
+        $this->assertSame( '#F59E0B' , $appointment->tags[ 0 ]->color ) ;
+
+        // A term that carries no color leaves the property unset, exactly as it was served.
+        $this->assertFalse( isset( $appointment->tags[ 1 ]->color ) ) ;
+    }
+
+    /**
+     * The class is a parameter and not a hard-wired name — and it travels through the list
+     * recursion and down into the report, so a caller reading a **harvested** family gets
+     * the plain `DefinedTerm` that family serves, everywhere.
+     *
+     * @throws HydrationException
+     * @throws ReflectionException
+     */
+    public function testAnExplicitClassIsHonoredThroughTheListRecursionAndTheReport(): void
+    {
+        $appointments = hydrateCustomerAppointment
+        ([
+            [
+                'appointmentType' => [ 'id' => 'ONSITE' ] ,
+                'tags'            => [ [ 'id' => 'DEMO' ] ] ,
+                'report'          => [ 'mood' => [ 'id' => 'SATISFIED' ] ] ,
+            ] ,
+        ] , DefinedTerm::class ) ;
+
+        $appointment = $appointments[ 0 ] ;
+
+        $this->assertInstanceOf( DefinedTerm::class , $appointment->appointmentType ) ;
+        $this->assertNotInstanceOf( ThesaurusTerm::class , $appointment->appointmentType ) ;
+        $this->assertNotInstanceOf( ThesaurusTerm::class , $appointment->tags[ 0 ] ) ;
+        $this->assertNotInstanceOf( ThesaurusTerm::class , $appointment->report->mood ) ;
+    }
+
+    /**
+     * A handle nobody resolved yet is not something to hydrate — the class named, or left to
+     * its default, changes nothing to that.
+     *
+     * @throws HydrationException
+     * @throws ReflectionException
+     */
+    public function testABareReferenceIsUntouchedWithOrWithoutAnExplicitClass(): void
+    {
+        $init = [ 'appointmentType' => 'ONSITE' , 'tags' => [ 'DEMO' ] ] ;
+
+        $default  = hydrateCustomerAppointment( $init ) ;
+        $explicit = hydrateCustomerAppointment( $init , DefinedTerm::class ) ;
+
+        $this->assertSame( 'ONSITE'   , $default->appointmentType ) ;
+        $this->assertSame( 'ONSITE'   , $explicit->appointmentType ) ;
+        $this->assertSame( [ 'DEMO' ] , $default->tags ) ;
+        $this->assertSame( [ 'DEMO' ] , $explicit->tags ) ;
+    }
+
+    /**
+     * The long form of the same parameter : a map names the class property by property, and
+     * {@see Prop::DEFAULT} covers what is left.
+     *
+     * @throws HydrationException
+     * @throws ReflectionException
+     */
+    public function testAMapNamesTheClassPropertyByProperty(): void
+    {
+        $appointment = hydrateCustomerAppointment
+        ([
+            'appointmentType' => [ 'id' => 'ONSITE' , 'color' => '#2563EB' ] ,
+            'tags'            => [ [ 'id' => 'DEMO' ] ] ,
+        ] ,
+        [
+            Prop::DEFAULT                         => DefinedTerm::class ,
+            CustomerAppointment::APPOINTMENT_TYPE => ThesaurusTerm::class ,
+        ]) ;
+
+        $this->assertInstanceOf( ThesaurusTerm::class , $appointment->appointmentType ) ;
+        $this->assertSame( '#2563EB' , $appointment->appointmentType->color ) ;
+
+        $this->assertNotInstanceOf( ThesaurusTerm::class , $appointment->tags[ 0 ] ) ;
+    }
+
+    /**
+     * 🔑 **The angle a flat map cannot cover.** `tags` is declared on the meeting **and** on
+     * its report, over two different families — the quick qualifiers of a meeting are not
+     * the qualifiers of the text written about it. One key named `tags` cannot tell them apart.
+     *
+     * So the report **inherits the meeting's map** until the caller names a branch for it,
+     * which is right as long as the two families agree, and is what the branch exists to undo
+     * the day they stop.
+     *
+     * @throws HydrationException
+     * @throws ReflectionException
+     */
+    public function testTheReportInheritsTheMeetingsMapUntilItIsGivenABranch(): void
+    {
+        $raw =
+        [
+            'tags'   => [ [ 'id' => 'DEMO' ] ] ,
+            'report' => [ 'tags' => [ [ 'id' => 'TO_REREAD' ] ] ] ,
+        ];
+
+        // No branch : one map, read at both levels.
+        $inherited = hydrateCustomerAppointment( $raw ,
+        [
+            Prop::DEFAULT             => DefinedTerm::class ,
+            CustomerAppointment::TAGS => ThesaurusTerm::class ,
+        ]) ;
+
+        $this->assertInstanceOf( ThesaurusTerm::class , $inherited->tags[ 0 ] ) ;
+        $this->assertInstanceOf( ThesaurusTerm::class , $inherited->report->tags[ 0 ] ) ;
+
+        // A branch : the report reads its own map, and the two `tags` part company.
+        $split = hydrateCustomerAppointment( $raw ,
+        [
+            Prop::DEFAULT               => DefinedTerm::class ,
+            CustomerAppointment::TAGS   => ThesaurusTerm::class ,
+            CustomerAppointment::REPORT => [ VisitReport::TAGS => DefinedTerm::class ] ,
+        ]) ;
+
+        $this->assertInstanceOf( ThesaurusTerm::class , $split->tags[ 0 ] ) ;
+        $this->assertNotInstanceOf( ThesaurusTerm::class , $split->report->tags[ 0 ] ) ;
+        $this->assertInstanceOf( DefinedTerm::class , $split->report->tags[ 0 ] ) ;
     }
 }
