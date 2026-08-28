@@ -11,7 +11,6 @@ use org\schema\constants\Prop;
 use org\schema\constants\Schema;
 use org\schema\DefinedTerm;
 use org\schema\Offer;
-use org\schema\Organization;
 use org\schema\QuantitativeValue;
 use org\schema\VirtualLocation;
 use org\schema\enumerations\events\EventCancelled;
@@ -24,7 +23,6 @@ use xyz\oihana\schema\auth\User;
 use xyz\oihana\schema\enumerations\AppointmentDone;
 use xyz\oihana\schema\enumerations\AppointmentStatus;
 use xyz\oihana\schema\organizations\Customer;
-use xyz\oihana\schema\organizations\Subsidiary;
 use xyz\oihana\schema\people\CustomerEmployee;
 use xyz\oihana\schema\people\Seller;
 use xyz\oihana\schema\places\CustomerSite;
@@ -47,7 +45,6 @@ final class HydrateCustomerAppointmentTest extends TestCase
             'about'             => [ 'name' => 'Acme Corporation' , 'address' => [ 'streetAddress' => '1 Example street' ] ] ,
             'attendee'          => [ [ 'name' => 'Jane Doe' , 'jobTitle' => [ 'id' => 'BUYER' ] , 'workLocation' => [ 'name' => 'Head office' ] ] ] ,
             'organizer'         => [ 'name' => 'Alice Smith' ] ,
-            'assignedCompany'   => [ Schema::AT_TYPE => 'Subsidiary' , 'name' => 'Acme Corporation' ] ,
             'assignedSeller'    => [ 'name' => 'Richard Roe' ] ,
             'location'          => [ Schema::AT_TYPE => 'CustomerSite' , 'name' => 'Head office' ] ,
             'appointmentType'   => [ 'id' => 'ONSITE' , 'name' => 'On site' ] ,
@@ -76,7 +73,6 @@ final class HydrateCustomerAppointmentTest extends TestCase
         $this->assertInstanceOf( CustomerAppointment::class , $appointment ) ;
         $this->assertInstanceOf( Customer::class    , $appointment->about ) ;
         $this->assertInstanceOf( User::class        , $appointment->organizer ) ;
-        $this->assertInstanceOf( Subsidiary::class  , $appointment->assignedCompany ) ;
         $this->assertInstanceOf( Seller::class      , $appointment->assignedSeller ) ;
         $this->assertInstanceOf( CustomerSite::class, $appointment->location ) ;
         $this->assertInstanceOf( DefinedTerm::class , $appointment->appointmentType ) ;
@@ -150,9 +146,9 @@ final class HydrateCustomerAppointmentTest extends TestCase
     }
 
     /**
-     * 🔑 Three properties are left to their attribute, because reflection already
-     * settles them from the payload's `@type` : forcing a class over them would read a
-     * plain organization back as a subsidiary, or a virtual room as a customer site.
+     * 🔑 The location is left to its attribute, because reflection already settles
+     * it from the payload's `@type` : forcing a class over it would read a virtual
+     * room back as a customer site.
      *
      * @throws HydrationException
      * @throws ReflectionException
@@ -161,12 +157,8 @@ final class HydrateCustomerAppointmentTest extends TestCase
     {
         $appointment = hydrateCustomerAppointment
         ([
-            'assignedCompany' => [ Schema::AT_TYPE => 'Organization' , 'name' => 'Acme Corporation' ] ,
-            'location'        => [ Schema::AT_TYPE => 'VirtualLocation' , 'url' => 'https://example.org/room/1' ] ,
+            'location' => [ Schema::AT_TYPE => 'VirtualLocation' , 'url' => 'https://example.org/room/1' ] ,
         ]) ;
-
-        $this->assertInstanceOf( Organization::class , $appointment->assignedCompany ) ;
-        $this->assertNotInstanceOf( Subsidiary::class , $appointment->assignedCompany ) ;
 
         $this->assertInstanceOf( VirtualLocation::class , $appointment->location ) ;
     }

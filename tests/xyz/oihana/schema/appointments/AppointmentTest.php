@@ -33,16 +33,16 @@ class AppointmentTest extends TestCase
         $this->assertNull( $appointment->about             ?? null );
         $this->assertNull( $appointment->appointmentStatus ?? null );
         $this->assertNull( $appointment->appointmentType   ?? null );
-        $this->assertNull( $appointment->assignedCompany   ?? null );
         $this->assertNull( $appointment->attendee          ?? null );
+        $this->assertNull( $appointment->makesOffer        ?? null );
         $this->assertNull( $appointment->organizer         ?? null );
         $this->assertNull( $appointment->report            ?? null );
         $this->assertNull( $appointment->tags              ?? null );
     }
 
     /**
-     * A meeting requires a moment and a diary ; whether it requires somebody on the
-     * other side is the family's business, not this class's.
+     * A meeting requires a moment and a diary ; whether somebody sits on the other
+     * side is a fact of the meeting, not a kind of it.
      */
     public function testAMeetingMayBeWithNobodyOutside(): void
     {

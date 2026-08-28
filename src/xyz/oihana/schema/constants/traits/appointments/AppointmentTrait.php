@@ -13,7 +13,7 @@ trait AppointmentTrait
 {
     public const string APPOINTMENT_STATUS = 'appointmentStatus' ;
     public const string APPOINTMENT_TYPE   = 'appointmentType'   ;
-    public const string ASSIGNED_COMPANY   = 'assignedCompany'   ;
+    public const string MAKES_OFFER        = 'makesOffer'        ;
     public const string REPORT             = 'report'            ;
     public const string TAGS               = 'tags'              ;
 }
