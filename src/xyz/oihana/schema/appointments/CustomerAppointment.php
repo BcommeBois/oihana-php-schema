@@ -5,8 +5,6 @@ namespace xyz\oihana\schema\appointments;
 use oihana\reflect\attributes\HydrateAs;
 use oihana\reflect\attributes\HydrateWith;
 
-use org\schema\DefinedTerm;
-use org\schema\Event;
 use org\schema\Offer;
 use org\schema\Organization;
 use org\schema\Person;
@@ -14,12 +12,9 @@ use org\schema\Place;
 use org\schema\PostalAddress;
 use org\schema\VirtualLocation;
 
-use xyz\oihana\schema\auth\User;
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\constants\traits\appointments\CustomerAppointmentTrait;
-use xyz\oihana\schema\enumerations\AppointmentStatus;
 use xyz\oihana\schema\organizations\Customer;
-use xyz\oihana\schema\organizations\Subsidiary;
 use xyz\oihana\schema\people\CustomerEmployee;
 use xyz\oihana\schema\places\CustomerSite;
 use xyz\oihana\schema\places\JobSite;
@@ -28,34 +23,26 @@ use xyz\oihana\schema\places\JobSite;
  * A meeting arranged with a customer — on their premises, on a site, over the
  * phone, over video.
  *
- * It is an {@see Event} : something that happens at a moment, in a place, with
- * people. That is also what every calendar reads, which is why a diary needs to
- * be taught nothing to show one.
+ * An {@see Appointment} like any other : a moment, a place, a diary, two axes of
+ * state, and a report once it has happened. What a customer meeting adds is the
+ * salesperson's side of it — who follows this customer, and what one means to put
+ * in front of them.
  *
- * 🔑 **Two axes of state, and they are not interchangeable.** The one inherited
- * from schema.org, {@see Event::$eventStatus}, says what became of the *slot* —
- * scheduled, moved, postponed, called off — and publishes no member for « it
- * happened ». {@see CustomerAppointment::$appointmentStatus} says what became of the
- * *meeting* : planned, done, nobody there, cancelled. A diary reads the first, a
- * report reads the second, and a single axis could not answer both.
- *
- * 🔑 **The customer is the one thing a meeting cannot do without.** Everything
- * else is optional : the contacts expected, the place, what one means to show.
- * A customer may be a known one — a reference and a frozen copy — or a free-form
- * one, a name and a telephone number, for the company that is not on the books
- * yet.
+ * 🔑 **The customer sits in {@see Appointment::$about}**, redeclared here to name
+ * what it holds : a reference and a frozen copy of a known customer, or a
+ * free-form one — a name, a telephone number — for a company that is not on the
+ * books yet.
  *
  * ⚠️ **What is written before, and what is written after, sit side by side.**
- * `description`, {@see CustomerAppointment::$makesOffer} and {@see CustomerAppointment::$tags}
- * are the preparation ; {@see CustomerAppointment::$report} is what came of it. Neither
- * overwrites the other — a meeting is worth reading precisely for the distance
- * between the two.
+ * `description`, {@see CustomerAppointment::$makesOffer} and the tags are the
+ * preparation ; the report is what came of it. Neither overwrites the other — a
+ * meeting is worth reading precisely for the distance between the two.
  *
  * @package xyz\oihana\schema\appointments
  * @author  Marc Alcaraz (eKameleon)
  * @since   1.5.0
  */
-class CustomerAppointment extends Event
+class CustomerAppointment extends Appointment
 {
     use CustomerAppointmentTrait ;
 
@@ -65,53 +52,29 @@ class CustomerAppointment extends Event
     public const string CONTEXT = Oihana::SCHEMA ;
 
     /**
-     * What became of the meeting — planned, done, nobody there, cancelled.
+     * The customer the meeting is with.
      *
-     * Reads beside {@see Event::$eventStatus}, which says what became of the slot.
+     * Redeclares {@see Appointment::$about} with the same union, to name who is
+     * meant. A reference and a frozen copy of a known customer, or a free-form one
+     * — a name, a telephone number — for a company not on the books yet.
      *
-     * @var null|array|string|AppointmentStatus
+     * 🔑 **{@see Customer} is named first among the candidates**, so a stored row
+     * carrying the type is read back with the properties only a customer has. A
+     * class that is not named cannot be chosen, and what it alone declares is
+     * dropped without a word.
+     *
+     * @var null|string|object|array
      * @since 1.5.0
      */
-    public null|array|string|AppointmentStatus $appointmentStatus ;
-
-    /**
-     * What kind of meeting it is — on the customer's premises, on a site, over the
-     * phone, over video.
-     *
-     * A term of a controlled vocabulary : a code as published, or the resolved
-     * term. One value.
-     *
-     * @var null|string|array|DefinedTerm
-     */
-    public null|string|array|DefinedTerm $appointmentType ;
-
-    /**
-     * The company this meeting was arranged for.
-     *
-     * A code, or the resolved organization : the one whose books the meeting is
-     * held on — the organizer's, frozen at creation. Reuses the name, the shape
-     * and the meaning
-     * {@see \xyz\oihana\schema\statistics\Statistics::$assignedCompany}
-     * already carries.
-     *
-     * 🔑 **It is here so that a perimeter can be a filter rather than a walk.**
-     * Reading « the meetings of my branch » from the organizer would mean joining
-     * back to the account, then to its company, for every row ; frozen on the
-     * meeting it is one clause — and it says what was true the day the meeting was
-     * arranged, which a later transfer does not rewrite.
-     *
-     * @var null|string|array|Organization
-     * @since 1.5.0
-     */
-    #[HydrateWith(Subsidiary::class, Organization::class)]
-    public null|string|array|Organization $assignedCompany ;
+    #[HydrateWith(Customer::class, Organization::class, Person::class)]
+    public string|object|array|null $about ;
 
     /**
      * The salesperson the customer is attached to.
      *
      * A code, or the resolved person. Reuses the name, the shape and the meaning
      * {@see Customer::$assignedSeller} already carries — and may differ from
-     * {@see CustomerAppointment::$organizer}, who is whoever holds *this* meeting.
+     * {@see Appointment::$organizer}, who is whoever holds *this* meeting.
      *
      * @var null|int|string|array|Person
      * @since 1.5.0
@@ -121,9 +84,9 @@ class CustomerAppointment extends Event
     /**
      * The customer's contacts expected at the meeting.
      *
-     * Redeclares {@see Event::$attendee} with the same union, to name who is meant :
-     * a stored row is read back as a {@see CustomerEmployee}. Optional, none or
-     * several.
+     * Redeclares {@see Appointment::$attendee} with the same union, to name who is
+     * meant : a stored row is read back as a {@see CustomerEmployee}. Optional,
+     * none or several.
      *
      * @var null|array|Person|Organization
      * @since 1.5.0
@@ -132,30 +95,11 @@ class CustomerAppointment extends Event
     public Person|Organization|array|null $attendee ;
 
     /**
-     * The customer the meeting is with.
-     *
-     * A reference and a frozen copy of a known customer, or a free-form one — a
-     * name, a telephone number — for a company not on the books yet. Reuses the
-     * name and the shape
-     * {@see \xyz\oihana\schema\business\documents\BusinessDocument::$customer}
-     * already carries.
-     *
-     * 🔑 **{@see Customer} is named first among the candidates**, so a stored row
-     * carrying the type is read back with the properties only a customer has. A
-     * class that is not named cannot be chosen, and what it alone declares is
-     * dropped without a word.
-     *
-     * @var null|array|Organization|Person
-     * @since 1.5.0
-     */
-    #[HydrateWith(Customer::class, Organization::class, Person::class)]
-    public null|array|Organization|Person $customer ;
-
-    /**
      * Where it takes place.
      *
-     * Redeclares {@see Event::$location} with the same union, to name the places a
-     * meeting is actually held in : a customer address, a site, or a virtual room.
+     * Redeclares {@see Appointment::$location} with the same union, to name the
+     * places a customer meeting is actually held in : a customer address, a site,
+     * or a virtual room.
      *
      * @var null|array|PostalAddress|Place|VirtualLocation|string
      * @since 1.5.0
@@ -182,46 +126,14 @@ class CustomerAppointment extends Event
     public null|array|Offer $makesOffer ;
 
     /**
-     * Whose diary this meeting is in.
-     *
-     * Redeclares {@see Event::$organizer} with the same union, to name the subject :
-     * a stored row is read back as a {@see User}.
-     *
-     * 🔑 **The account, not the business role.** A diary belongs to a person, and a
-     * person may hold more than one role over time — a salesperson who also becomes
-     * a sales manager keeps one diary and one set of hours. Hanging the meeting on
-     * the role would mean merging two diaries the day the second one is granted.
-     *
-     * Not necessarily whoever entered it, either : an assistant books meetings for
-     * someone else's diary, and it is the diary that matters here.
-     *
-     * @var null|array|Person|Organization
-     * @since 1.5.0
-     */
-    #[HydrateAs(User::class)]
-    public array|null|Person|Organization $organizer ;
-
-    /**
      * What was written once the meeting took place.
      *
-     * One report, absent until there is something to report.
+     * Redeclares {@see Appointment::$report} to name the class that carries what a
+     * visit brings back : how it felt, and what it produced.
      *
-     * @var null|array|VisitReport
+     * @var null|array|MeetingReport
      * @since 1.5.0
      */
     #[HydrateAs(VisitReport::class)]
-    public null|array|VisitReport $report ;
-
-    /**
-     * Quick qualifiers a salesperson ticks rather than writes — a meal with the
-     * customer, a tour of their premises, a site visit, a demonstration.
-     *
-     * Terms of a controlled vocabulary : codes as published, or resolved terms.
-     * Several. True of the meeting whether they were planned or observed, which is
-     * why they live here and not on the report.
-     *
-     * @var null|array|string|DefinedTerm
-     * @since 1.5.0
-     */
-    public null|array|string|DefinedTerm $tags ;
+    public null|array|MeetingReport $report ;
 }

@@ -13,8 +13,12 @@ class Event extends Thing
 {
     /**
      * The subject matter of the content.
+     *
+     * Carries `array` like every other reference of this library : a raw row is
+     * assigned before it is hydrated, and the sibling declaration of
+     * {@see \org\schema\traits\CreativeWorkTrait::$about} already reads that way.
      */
-    public string|object|null $about ;
+    public string|object|array|null $about ;
 
     /**
      * An actor (individual or a group), e.g. in TV, radio, movie, video games etc., or in an event.

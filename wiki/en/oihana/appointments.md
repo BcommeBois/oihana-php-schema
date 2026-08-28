@@ -42,7 +42,7 @@ $appointment = new CustomerAppointment
     Oihana::TAGS               => [ 'MEAL' , 'DEMO' ] ,        // the quick qualifiers
 
     Schema::ORGANIZER          => [ Schema::ID => 'JDOE' , Schema::NAME => 'Jane Doe' ] ,
-    Schema::CUSTOMER           => [ Schema::ID => '100200' , Schema::NAME => 'Acme Corporation' ] ,
+    Schema::ABOUT              => [ Schema::ID => '100200' , Schema::NAME => 'Acme Corporation' ] ,
     Schema::ATTENDEE           => [ [ Schema::NAME => 'Alice Smith' ] ] ,
 ]);
 
@@ -57,7 +57,7 @@ use oihana\reflect\Reflection;
 $appointment = new Reflection()->hydrate( $document , CustomerAppointment::class );
 
 $appointment->organizer;          // xyz\oihana\schema\auth\User
-$appointment->customer;           // xyz\oihana\schema\organizations\Customer
+$appointment->about;              // xyz\oihana\schema\organizations\Customer
 $appointment->attendee[ 0 ];      // xyz\oihana\schema\people\CustomerEmployee
 $appointment->location;           // xyz\oihana\schema\places\CustomerSite
 $appointment->report;             // xyz\oihana\schema\appointments\VisitReport
@@ -72,14 +72,17 @@ $appointment->report->followUp;   // xyz\oihana\schema\appointments\FollowUp[]
 
 | Piece | What it states |
 |---|---|
-| **The meeting** (`CustomerAppointment`) | *with whom*, *when*, *where*, *of what kind*, and *what one means to present*. Written **before**. |
+| **The meeting** (`Appointment`, and one class per family) | *with whom*, *when*, *where*, *of what kind*. Written **before**. |
 | **The report** (`MeetingReport`, and `VisitReport` for a visit) | *what was said*, *who was actually there*, *what is still owed* — and, for a visit, *how it went* and *what it produced*. Written **after**. |
 | **The follow-up** (`FollowUp`) | *what is still owed*, *by when*, and the meeting booked to honour it. |
 
 ```
-             CustomerAppointment  (Event)
-                     customer · organizer · location · attendee · appointmentType
-                     appointmentStatus · tags · makesOffer
+             Appointment  (Event)
+                     about · organizer · location · attendee · appointmentType
+                     appointmentStatus · tags · assignedCompany
+                              │
+                              ├── CustomerAppointment   assignedSeller · makesOffer
+                              └── InternalMeeting       (nothing more: about stays empty)
                               │
                               └── report ──▶ MeetingReport  (CreativeWork)
                                              topics · attendee · tags · text
@@ -100,7 +103,9 @@ What is written **before** and what is written **after** sit side by side: `desc
 
 | Class | Extends | Role |
 |---|---|---|
-| `CustomerAppointment` | `org\schema\Event` | A meeting arranged with a customer. |
+| `Appointment` | `org\schema\Event` | A meeting arranged, of whatever kind. |
+| `CustomerAppointment` | `Appointment` | A meeting arranged with a customer. |
+| `InternalMeeting` | `Appointment` | A meeting between colleagues — with nobody from outside. |
 | `MeetingReport` | `org\schema\CreativeWork` | What was written once the meeting took place. |
 | `VisitReport` | `MeetingReport` | The report of a customer visit: the mood and the outcome on top. |
 | `FollowUp` | `org\schema\actions\ScheduleAction` | What comes next, and when. |
@@ -126,39 +131,51 @@ Schema.org **publishes no member for "it happened"**: its enumeration follows an
 
 ---
 
+## `Appointment` properties
+
+| Property | Type | Description |
+|---|---|---|
+| `about` | `string\|object\|array\|null` | **Whom** the meeting is with. No class is named at this level: each family narrows the union, and a meeting between colleagues leaves it empty. |
+| `appointmentStatus` | `string\|array\|AppointmentStatus\|null` | What became of the meeting. Reads beside `eventStatus`. |
+| `appointmentType` | `string\|array\|DefinedTerm\|null` | What kind of meeting it is — on the premises, over the phone, over video, on a site. One value. ⚠️ Not to be confused with the **family**, which the stored type carries. |
+| `assignedCompany` | `string\|array\|Organization\|null` | The **company the meeting was arranged for** — the organizer's, frozen at creation. Read back as `Subsidiary`. It is there so a perimeter (« my branch's meetings ») is **a filter and not a walk**. |
+| `attendee` | `Person\|Organization\|array\|null` | Who is **expected**. Optional, none or several. No class is named here either: who may be invited depends on whom one is meeting. |
+| `organizer` | `Person\|Organization\|array\|null` | The **account** whose diary it is. Read back as `User`. 🔑 The account, never the business role: a person who gains a second role keeps **one diary**. |
+| `report` | `array\|MeetingReport\|null` | The report. **One**, absent until there is something to report. |
+| `tags` | `string[]\|DefinedTerm[]\|null` | The quick qualifiers — a meal, a tour of the premises, a site visit, a demonstration. Several. |
+
+`name`, `description`, `startDate`, `endDate`, `duration`, `eventStatus`, `eventAttendanceMode`, `previousStartDate`, `remarks`, `subEvent`/`superEvent` are inherited from `Event`; `id`, `identifier`, `url`, `created`, `modified` from `Thing`.
+
+🔑 **One property for the counterpart, whatever it points at.** A facet and a grouping aim at **one** property and one only: with a name per family, « how many meetings per counterpart » would have no answer at all. Same reason `Statistics::$about` carries the subject of every kind of figure.
+
 ## `CustomerAppointment` properties
 
 | Property | Type | Description |
 |---|---|---|
-| `appointmentStatus` | `string\|array\|AppointmentStatus\|null` | What became of the meeting. Reads beside `eventStatus`. |
-| `appointmentType` | `string\|array\|DefinedTerm\|null` | The kind of meeting — on the customer's premises, on the phone, over video, on a site. One value. |
-| `assignedCompany` | `string\|array\|Organization\|null` | The **company the meeting was arranged for** — the organizer's, frozen at creation. Read back as `Subsidiary`. It is there so that a perimeter ("the meetings of my branch") is **a filter rather than a walk**. |
+| `about` | `string\|object\|array\|null` | Redeclared to name who is meant: the customer, read back as `Customer`. A reference and its frozen copy, or a **free-form** customer. |
 | `assignedSeller` | `int\|string\|array\|Person\|null` | The salesperson the customer is attached to. May differ from the organizer. |
-| `attendee` | `Person\|Organization\|array\|null` | The customer's contacts **expected**. Optional, none or several. Read back as `CustomerEmployee`. |
-| `customer` | `array\|Organization\|Person\|null` | The customer. A reference and its frozen copy, or a **free-form** one — a name, a telephone number — for a company not on the books yet. Read back as `Customer`. |
-| `location` | `PostalAddress\|Place\|VirtualLocation\|string\|array\|null` | Where it takes place: a customer address, a job site, a virtual room. Read back as `CustomerSite`, `JobSite`, `Place`… |
+| `attendee` | `Person\|Organization\|array\|null` | The customer's contacts **expected**. Read back as `CustomerEmployee`. |
+| `location` | `PostalAddress\|Place\|VirtualLocation\|string\|array\|null` | Where it takes place: a customer address, a site, a virtual room. Read back as `CustomerSite`, `JobSite`, `Place`… |
 | `makesOffer` | `Offer[]\|null` | What one means to present. See below. |
-| `organizer` | `Person\|Organization\|array\|null` | The **account** whose diary this is. Read back as `User`. 🔑 The account, never the business role: a person gaining a second role keeps **one diary**. |
-| `report` | `array\|VisitReport\|null` | The report. **One only**, absent until there is something to report. |
-| `tags` | `string[]\|DefinedTerm[]\|null` | The quick qualifiers — a meal with the customer, a tour of their premises, a tour of their premises, a demonstration. Several. |
-
-`name`, `description`, `startDate`, `endDate`, `duration`, `eventStatus`, `eventAttendanceMode`, `previousStartDate`, `remarks`, `about`, `subEvent`/`superEvent` are inherited from `Event`; `id`, `identifier`, `url`, `created`, `modified` from `Thing`.
+| `report` | `array\|MeetingReport\|null` | Redeclared to name the class that carries what a visit brings back: a `VisitReport`. |
 
 🔑 **The declared type says `DefinedTerm`, the hydrator serves `ThesaurusTerm`.** `appointmentType` and `tags` come from **business** families — administered, not harvested — which carry properties `DefinedTerm` does not declare, `color` first among them. The union stays written `DefinedTerm` because it is the widest contract, and because `ThesaurusTerm` inherits from it: nothing that used to pass stops passing. But `hydrateCustomerAppointment()` now reads those terms back into the class the family actually serves, and its `$termClass` parameter lets a caller name another one — see [the hydrators](helpers.md).
 
-### 🔑 The customer is the one thing a meeting cannot do without
+### 🔑 What a meeting requires, and what its family requires
 
-Everything else is optional: the contacts expected, the place, what one means to show. And the customer may take two forms, without the class having to tell them apart:
+A meeting requires **a moment and a diary**. Whether it requires somebody on the other side is the **family's** business, not the parent class's: a customer meeting demands its customer, a meeting between colleagues demands nobody.
+
+And the counterpart may take two forms, without the class having to tell them apart:
 
 ```php
 // A known customer: a reference and its frozen copy.
-Schema::CUSTOMER => [ '@type' => 'Customer' , '_key' => '137191259' , 'id' => '100200' , 'name' => 'Acme Corporation' ]
+Schema::ABOUT => [ '@type' => 'Customer' , '_key' => '137191259' , 'id' => '100200' , 'name' => 'Acme Corporation' ]
 
-// A free-form one: what is known of them, and no key.
-Schema::CUSTOMER => [ 'name' => 'Acme Corporation' , 'telephone' => '05 56 00 00 00' ]
+// A free-form customer: what is known of them, and no key.
+Schema::ABOUT => [ 'name' => 'Acme Corporation' , 'telephone' => '05 56 00 00 00' ]
 ```
 
-The library accepts both; it is up to the consumer to decide when the reference becomes mandatory, and how a free-form customer is later **attached** to a record created in the meantime.
+The library accepts both; it is up to the consumer to decide when the reference becomes mandatory, and how a free-form counterpart is later **attached** to a record created in the meantime.
 
 ### 🔑 `makesOffer` — an intention, not a quote
 
@@ -266,7 +283,7 @@ $user = new User
   "tags": ["MEAL", "DEMO"],
   "organizer": { "@type": "Seller", "id": "JDOE", "name": "Jane Doe" },
   "assignedSeller": { "@type": "Seller", "id": "JDOE", "name": "Jane Doe" },
-  "customer": { "@type": "Customer", "id": "100200", "name": "Acme Corporation" },
+  "about": { "@type": "Customer", "id": "100200", "name": "Acme Corporation" },
   "attendee": [ { "@type": "CustomerEmployee", "id": "55", "name": "Alice Smith", "jobTitle": "ACH" } ],
   "location": {
     "@type": "CustomerSite", "name": "Head office",
@@ -325,7 +342,7 @@ use function xyz\oihana\schema\helpers\hydrate\appointments\hydrateCustomerAppoi
 
 $appointment = hydrateCustomerAppointment( $row ) ;
 
-$appointment->customer                     instanceof Customer         ; // true
+$appointment->about                        instanceof Customer         ; // true
 $appointment->attendee[ 0 ]->workLocation  instanceof CustomerSite     ; // true
 $appointment->report->followUp[ 0 ]        instanceof FollowUp         ; // true
 $appointment->appointmentStatus            instanceof AppointmentDone  ; // true
@@ -361,7 +378,7 @@ new AppointmentCancelled([ 'description' => 'The customer called it off the day 
 
 The property keys are exposed by the [`CustomerAppointmentTrait`](../../../src/xyz/oihana/schema/constants/traits/appointments/CustomerAppointmentTrait.php), [`VisitReportTrait`](../../../src/xyz/oihana/schema/constants/traits/appointments/VisitReportTrait.php) and [`FollowUpTrait`](../../../src/xyz/oihana/schema/constants/traits/appointments/FollowUpTrait.php) traits, composed into the domain aggregator [`AppointmentsTrait`](../../../src/xyz/oihana/schema/constants/traits/AppointmentsTrait.php) and wired into the master class [`Oihana`](../../../src/xyz/oihana/schema/constants/Oihana.php). You can therefore reach them through `Oihana::APPOINTMENT_TYPE`, `Oihana::MOOD`, `Oihana::FOLLOW_UP`, and so on — and each class exposes its own (`CustomerAppointment::REPORT`).
 
-The properties borrowed from Schema.org — `customer`, `attendee`, `location`, `organizer`, `makesOffer`, `assignedSeller`, `scheduledTime` — keep their existing constants: they are not redeclared.
+The properties borrowed from Schema.org — `about`, `attendee`, `location`, `organizer`, `makesOffer`, `assignedSeller`, `scheduledTime` — keep their existing constants: they are not redeclared.
 
 ---
 

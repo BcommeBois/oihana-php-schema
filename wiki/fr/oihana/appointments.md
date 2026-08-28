@@ -42,7 +42,7 @@ $appointment = new CustomerAppointment
     Oihana::TAGS               => [ 'MEAL' , 'DEMO' ] ,        // les mentions rapides
 
     Schema::ORGANIZER          => [ Schema::ID => 'JDOE' , Schema::NAME => 'Jane Doe' ] ,
-    Schema::CUSTOMER           => [ Schema::ID => '100200' , Schema::NAME => 'Acme Corporation' ] ,
+    Schema::ABOUT              => [ Schema::ID => '100200' , Schema::NAME => 'Acme Corporation' ] ,
     Schema::ATTENDEE           => [ [ Schema::NAME => 'Alice Smith' ] ] ,
 ]);
 
@@ -57,7 +57,7 @@ use oihana\reflect\Reflection;
 $appointment = new Reflection()->hydrate( $document , CustomerAppointment::class );
 
 $appointment->organizer;          // xyz\oihana\schema\auth\User
-$appointment->customer;           // xyz\oihana\schema\organizations\Customer
+$appointment->about;              // xyz\oihana\schema\organizations\Customer
 $appointment->attendee[ 0 ];      // xyz\oihana\schema\people\CustomerEmployee
 $appointment->location;           // xyz\oihana\schema\places\CustomerSite
 $appointment->report;             // xyz\oihana\schema\appointments\VisitReport
@@ -72,14 +72,17 @@ $appointment->report->followUp;   // xyz\oihana\schema\appointments\FollowUp[]
 
 | Pièce | Ce qu'elle dit |
 |---|---|
-| **La rencontre** (`CustomerAppointment`) | *avec qui*, *quand*, *où*, *de quelle nature*, et *ce qu'on compte présenter*. Écrite **avant**. |
+| **La rencontre** (`Appointment`, et une classe par famille) | *avec qui*, *quand*, *où*, *de quelle nature*. Écrite **avant**. |
 | **Le compte rendu** (`MeetingReport`, et `VisitReport` pour une visite) | *ce qui a été dit*, *qui était vraiment là*, *ce qui reste dû* — et, pour une visite, *comment ça s'est passé* et *ce que ça a produit*. Écrit **après**. |
 | **La suite** (`FollowUp`) | *ce qui reste dû*, *pour quand*, et le rendez-vous éventuellement pris pour l'honorer. |
 
 ```
-             CustomerAppointment  (Event)
-                     customer · organizer · location · attendee · appointmentType
-                     appointmentStatus · tags · makesOffer
+             Appointment  (Event)
+                     about · organizer · location · attendee · appointmentType
+                     appointmentStatus · tags · assignedCompany
+                              │
+                              ├── CustomerAppointment   assignedSeller · makesOffer
+                              └── InternalMeeting       (rien de plus : about reste vide)
                               │
                               └── report ──▶ MeetingReport  (CreativeWork)
                                              topics · attendee · tags · text
@@ -100,7 +103,9 @@ Ce qui est écrit **avant** et ce qui est écrit **après** cohabitent : `descri
 
 | Classe | Étend | Rôle |
 |---|---|---|
-| `CustomerAppointment` | `org\schema\Event` | Une rencontre convenue avec un client. |
+| `Appointment` | `org\schema\Event` | Une rencontre convenue, quelle qu'elle soit. |
+| `CustomerAppointment` | `Appointment` | Une rencontre convenue avec un client. |
+| `InternalMeeting` | `Appointment` | Une rencontre entre collègues — sans personne de l'extérieur. |
 | `MeetingReport` | `org\schema\CreativeWork` | Ce qui a été écrit une fois la rencontre passée. |
 | `VisitReport` | `MeetingReport` | Le compte rendu d'une visite client : le climat et le résultat en plus. |
 | `FollowUp` | `org\schema\actions\ScheduleAction` | Ce qui reste à faire ensuite, et pour quand. |
@@ -126,39 +131,51 @@ Schema.org **ne publie aucun membre pour « ça a eu lieu »** : son énumérati
 
 ---
 
+## Propriétés d'`Appointment`
+
+| Propriété | Type | Description |
+|---|---|---|
+| `about` | `string\|object\|array\|null` | **Avec qui** la rencontre a lieu. Aucune classe n'est nommée à ce niveau : chaque famille resserre l'union, et une réunion entre collègues laisse la case vide. |
+| `appointmentStatus` | `string\|array\|AppointmentStatus\|null` | Ce qu'il est advenu de la rencontre. Se lit à côté d'`eventStatus`. |
+| `appointmentType` | `string\|array\|DefinedTerm\|null` | La nature de la rencontre — chez le client, au téléphone, en visio, sur un chantier. Une seule valeur. ⚠️ À ne pas confondre avec la **famille**, que porte le type stocké. |
+| `assignedCompany` | `string\|array\|Organization\|null` | La **société pour laquelle** la rencontre a été prise — celle de l'organisateur, figée à la création. Relue en `Subsidiary`. Elle est là pour qu'un périmètre (« les rendez-vous de mon agence ») soit **un filtre et non un parcours**. |
+| `attendee` | `Person\|Organization\|array\|null` | Qui est **attendu**. Facultatif, aucun ou plusieurs. Aucune classe n'est nommée ici non plus : qui peut être invité dépend de qui l'on rencontre. |
+| `organizer` | `Person\|Organization\|array\|null` | Le **compte** dont c'est l'agenda. Relu en `User`. 🔑 Le compte, jamais le rôle métier : une personne qui gagne un second rôle garde **un seul agenda**. |
+| `report` | `array\|MeetingReport\|null` | Le compte rendu. **Un seul**, absent tant qu'il n'y a rien à raconter. |
+| `tags` | `string[]\|DefinedTerm[]\|null` | Les mentions rapides — repas, visite de l'entreprise, chantier, démonstration. Plusieurs. |
+
+`name`, `description`, `startDate`, `endDate`, `duration`, `eventStatus`, `eventAttendanceMode`, `previousStartDate`, `remarks`, `subEvent`/`superEvent` sont hérités d'`Event` ; `id`, `identifier`, `url`, `created`, `modified` de `Thing`.
+
+🔑 **Une seule case pour le vis-à-vis, quoi qu'elle désigne.** Une facette et un regroupement visent **une** propriété et une seule : avec un nom par famille, « combien de rendez-vous par vis-à-vis » n'aurait aucune réponse. C'est la même raison qui fait porter à `Statistics::$about` le sujet de n'importe quelle sorte de chiffre.
+
 ## Propriétés de `CustomerAppointment`
 
 | Propriété | Type | Description |
 |---|---|---|
-| `appointmentStatus` | `string\|array\|AppointmentStatus\|null` | Ce qu'il est advenu de la rencontre. Se lit à côté d'`eventStatus`. |
-| `appointmentType` | `string\|array\|DefinedTerm\|null` | La nature de la rencontre — chez le client, au téléphone, en visio, sur un chantier. Une seule valeur. |
-| `assignedCompany` | `string\|array\|Organization\|null` | La **société pour laquelle** la rencontre a été prise — celle de l'organisateur, figée à la création. Relue en `Subsidiary`. Elle est là pour qu'un périmètre (« les rendez-vous de mon agence ») soit **un filtre et non un parcours**. |
+| `about` | `string\|object\|array\|null` | Redéclarée pour nommer qui est visé : le client, relu en `Customer`. Une référence et sa copie figée, ou un client **libre**. |
 | `assignedSeller` | `int\|string\|array\|Person\|null` | Le commercial auquel le client est rattaché. Peut différer de l'organisateur. |
-| `attendee` | `Person\|Organization\|array\|null` | Les contacts du client **attendus**. Facultatifs, aucun ou plusieurs. Relus en `CustomerEmployee`. |
-| `customer` | `array\|Organization\|Person\|null` | Le client. Une référence et sa copie figée, ou un client **libre** — un nom, un téléphone — pour une entreprise qui n'est pas encore au fichier. Relu en `Customer`. |
+| `attendee` | `Person\|Organization\|array\|null` | Les contacts du client **attendus**. Relus en `CustomerEmployee`. |
 | `location` | `PostalAddress\|Place\|VirtualLocation\|string\|array\|null` | Le lieu : une adresse du client, un chantier, une salle virtuelle. Relu en `CustomerSite`, `JobSite`, `Place`… |
 | `makesOffer` | `Offer[]\|null` | Ce qu'on compte présenter. Voir ci-dessous. |
-| `organizer` | `Person\|Organization\|array\|null` | Le **compte** dont c'est l'agenda. Relu en `User`. 🔑 Le compte, jamais le rôle métier : une personne qui gagne un second rôle garde **un seul agenda**. |
-| `report` | `array\|VisitReport\|null` | Le compte rendu. **Un seul**, absent tant qu'il n'y a rien à raconter. |
-| `tags` | `string[]\|DefinedTerm[]\|null` | Les mentions rapides — repas avec le client, visite de l'entreprise, chantier, démonstration. Plusieurs. |
-
-`name`, `description`, `startDate`, `endDate`, `duration`, `eventStatus`, `eventAttendanceMode`, `previousStartDate`, `remarks`, `about`, `subEvent`/`superEvent` sont hérités d'`Event` ; `id`, `identifier`, `url`, `created`, `modified` de `Thing`.
+| `report` | `array\|MeetingReport\|null` | Redéclarée pour nommer la classe qui porte ce qu'une visite rapporte : un `VisitReport`. |
 
 🔑 **Le type déclaré dit `DefinedTerm`, l'hydrateur sert `ThesaurusTerm`.** `appointmentType` et `tags` viennent de familles **maison** — administrées, pas moissonnées — qui portent des propriétés que `DefinedTerm` ne déclare pas, `color` en tête. L'union reste écrite `DefinedTerm` parce que c'est le contrat le plus large, et parce que `ThesaurusTerm` en hérite : rien de ce qui passait ne cesse de passer. Mais `hydrateCustomerAppointment()` relit désormais ces termes dans la classe que la famille sert réellement, et son paramètre `$termClass` permet d'en nommer une autre — voir [les hydrateurs](helpers.md).
 
-### 🔑 Le client est la seule chose dont une rencontre ne peut pas se passer
+### 🔑 Ce qu'une rencontre exige, et ce que sa famille exige
 
-Tout le reste est facultatif : les contacts attendus, le lieu, ce qu'on compte montrer. Et le client peut prendre deux formes, sans que la classe ait à distinguer :
+Une rencontre exige **un moment et un agenda**. Savoir s'il faut quelqu'un en face est l'affaire de la **famille**, pas de la classe parente : un rendez-vous client exige son client, une réunion entre collègues n'exige personne.
+
+Et le vis-à-vis peut prendre deux formes, sans que la classe ait à distinguer :
 
 ```php
 // Un client connu : une référence et sa copie figée.
-Schema::CUSTOMER => [ '@type' => 'Customer' , '_key' => '137191259' , 'id' => '100200' , 'name' => 'Acme Corporation' ]
+Schema::ABOUT => [ '@type' => 'Customer' , '_key' => '137191259' , 'id' => '100200' , 'name' => 'Acme Corporation' ]
 
 // Un client libre : ce qu'on sait de lui, et pas de clé.
-Schema::CUSTOMER => [ 'name' => 'Acme Corporation' , 'telephone' => '05 56 00 00 00' ]
+Schema::ABOUT => [ 'name' => 'Acme Corporation' , 'telephone' => '05 56 00 00 00' ]
 ```
 
-La bibliothèque accepte les deux ; c'est au consommateur de décider quand la référence devient obligatoire, et comment un client libre est **rattaché** plus tard à une fiche créée entre-temps.
+La bibliothèque accepte les deux ; c'est au consommateur de décider quand la référence devient obligatoire, et comment un vis-à-vis libre est **rattaché** plus tard à une fiche créée entre-temps.
 
 ### 🔑 `makesOffer` — une intention, pas un devis
 
@@ -266,7 +283,7 @@ $user = new User
   "tags": ["MEAL", "DEMO"],
   "organizer": { "@type": "Seller", "id": "JDOE", "name": "Jane Doe" },
   "assignedSeller": { "@type": "Seller", "id": "JDOE", "name": "Jane Doe" },
-  "customer": { "@type": "Customer", "id": "100200", "name": "Acme Corporation" },
+  "about": { "@type": "Customer", "id": "100200", "name": "Acme Corporation" },
   "attendee": [ { "@type": "CustomerEmployee", "id": "55", "name": "Alice Smith", "jobTitle": "ACH" } ],
   "location": {
     "@type": "CustomerSite", "name": "Siège social",
@@ -325,7 +342,7 @@ use function xyz\oihana\schema\helpers\hydrate\appointments\hydrateCustomerAppoi
 
 $appointment = hydrateCustomerAppointment( $row ) ;
 
-$appointment->customer                     instanceof Customer         ; // true
+$appointment->about                        instanceof Customer         ; // true
 $appointment->attendee[ 0 ]->workLocation  instanceof CustomerSite     ; // true
 $appointment->report->followUp[ 0 ]        instanceof FollowUp         ; // true
 $appointment->appointmentStatus            instanceof AppointmentDone  ; // true
@@ -361,7 +378,7 @@ new AppointmentCancelled([ 'description' => 'Le client a annulé la veille.' ])-
 
 Les clés de propriétés sont exposées par les traits [`CustomerAppointmentTrait`](../../../src/xyz/oihana/schema/constants/traits/appointments/CustomerAppointmentTrait.php), [`VisitReportTrait`](../../../src/xyz/oihana/schema/constants/traits/appointments/VisitReportTrait.php) et [`FollowUpTrait`](../../../src/xyz/oihana/schema/constants/traits/appointments/FollowUpTrait.php), composés dans l'agrégateur de domaine [`AppointmentsTrait`](../../../src/xyz/oihana/schema/constants/traits/AppointmentsTrait.php) et câblés dans la classe maîtresse [`Oihana`](../../../src/xyz/oihana/schema/constants/Oihana.php). Vous pouvez donc y accéder via `Oihana::APPOINTMENT_TYPE`, `Oihana::MOOD`, `Oihana::FOLLOW_UP`, etc. — et chaque classe expose les siennes (`CustomerAppointment::REPORT`).
 
-Les propriétés reprises de Schema.org — `customer`, `attendee`, `location`, `organizer`, `makesOffer`, `assignedSeller`, `scheduledTime` — gardent leurs constantes existantes : elles ne sont pas redéclarées.
+Les propriétés reprises de Schema.org — `about`, `attendee`, `location`, `organizer`, `makesOffer`, `assignedSeller`, `scheduledTime` — gardent leurs constantes existantes : elles ne sont pas redéclarées.
 
 ---
 

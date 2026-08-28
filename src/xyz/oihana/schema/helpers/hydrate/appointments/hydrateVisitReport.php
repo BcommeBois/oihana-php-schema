@@ -94,33 +94,32 @@ function hydrateVisitReport( mixed $init = null , string|array $termClass = Thes
 
     $report = hydrateMeetingReport( $init , $termClass , VisitReport::class ) ;
 
-    if( !$report instanceof VisitReport )
+    if( $report instanceof VisitReport )
     {
-        return $report ;
-    }
+        // ------- attendee
 
-    // ------- attendee
+        $attendee = $report->attendee ?? null ;
+        if( is_array( $attendee ) )
+        {
+            $report->attendee = hydrateCustomerEmployee( $attendee ) ;
+        }
 
-    $attendee = $report->attendee ?? null ;
-    if( is_array( $attendee ) )
-    {
-        $report->attendee = hydrateCustomerEmployee( $attendee ) ;
-    }
+        // ------- mood
 
-    // ------- mood
+        $mood = $report->mood ?? null ;
+        if( is_array( $mood ) )
+        {
+            $report->mood = hydrateDefinedTerm( $mood , termClassOf( $termClass , VisitReport::MOOD ) ) ;
+        }
 
-    $mood = $report->mood ?? null ;
-    if( is_array( $mood ) )
-    {
-        $report->mood = hydrateDefinedTerm( $mood , termClassOf( $termClass , VisitReport::MOOD ) ) ;
-    }
+        // ------- outcome
 
-    // ------- outcome
+        $outcome = $report->outcome ?? null ;
+        if( is_array( $outcome ) )
+        {
+            $report->outcome = hydrateDefinedTerm( $outcome , termClassOf( $termClass , VisitReport::OUTCOME ) ) ;
+        }
 
-    $outcome = $report->outcome ?? null ;
-    if( is_array( $outcome ) )
-    {
-        $report->outcome = hydrateDefinedTerm( $outcome , termClassOf( $termClass , VisitReport::OUTCOME ) ) ;
     }
 
     return $report ;

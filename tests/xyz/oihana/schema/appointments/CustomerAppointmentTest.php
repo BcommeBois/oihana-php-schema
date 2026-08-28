@@ -12,6 +12,7 @@ use org\schema\Event;
 use org\schema\Offer;
 use org\schema\Product;
 
+use xyz\oihana\schema\appointments\Appointment;
 use xyz\oihana\schema\appointments\CustomerAppointment;
 use xyz\oihana\schema\appointments\VisitReport;
 use xyz\oihana\schema\auth\User;
@@ -23,10 +24,17 @@ use xyz\oihana\schema\places\CustomerSite;
 
 class CustomerAppointmentTest extends TestCase
 {
-    public function testIsAnEvent(): void
+    /**
+     * A customer meeting is an appointment first : what it adds of its own is the
+     * salesperson's side of it — who follows this customer, and what one means to put
+     * in front of them.
+     */
+    public function testIsAnAppointment(): void
     {
         $appointment = new CustomerAppointment() ;
-        $this->assertInstanceOf( Event::class , $appointment );
+
+        $this->assertInstanceOf( Appointment::class , $appointment );
+        $this->assertInstanceOf( Event::class       , $appointment );
     }
 
     public function testSchemaType(): void
@@ -41,7 +49,7 @@ class CustomerAppointmentTest extends TestCase
         $this->assertNull( $appointment->appointmentStatus ?? null );
         $this->assertNull( $appointment->appointmentType   ?? null );
         $this->assertNull( $appointment->assignedSeller    ?? null );
-        $this->assertNull( $appointment->customer          ?? null );
+        $this->assertNull( $appointment->about             ?? null );
         $this->assertNull( $appointment->makesOffer        ?? null );
         $this->assertNull( $appointment->report            ?? null );
         $this->assertNull( $appointment->tags              ?? null );
@@ -102,11 +110,11 @@ class CustomerAppointmentTest extends TestCase
     {
         $appointment = new CustomerAppointment
         ([
-            Schema::CUSTOMER => [ Schema::NAME => 'Acme Corporation' , Schema::TELEPHONE => '05 56 00 00 00' ] ,
+            Schema::ABOUT => [ Schema::NAME => 'Acme Corporation' , Schema::TELEPHONE => '05 56 00 00 00' ] ,
         ]);
 
-        $this->assertIsArray( $appointment->customer );
-        $this->assertSame( 'Acme Corporation' , $appointment->customer[ Schema::NAME ] );
+        $this->assertIsArray( $appointment->about );
+        $this->assertSame( 'Acme Corporation' , $appointment->about[ Schema::NAME ] );
     }
 
     /**
@@ -121,7 +129,7 @@ class CustomerAppointmentTest extends TestCase
         (
             [
                 Schema::ORGANIZER => [ Schema::ID => 'JDOE' , Schema::NAME => 'Jane Doe' ] ,
-                Schema::CUSTOMER  => [ Schema::AT_TYPE => Customer::getSchemaType() , Schema::ID => '100200' , Schema::NAME => 'Acme Corporation' ] ,
+                Schema::ABOUT     => [ Schema::AT_TYPE => Customer::getSchemaType() , Schema::ID => '100200' , Schema::NAME => 'Acme Corporation' ] ,
                 Schema::ATTENDEE  => [ [ Schema::NAME => 'Alice Smith' ] ] ,
                 Schema::LOCATION  => [ Schema::AT_TYPE => CustomerSite::getSchemaType() , Schema::NAME => 'Head office' ] ,
                 Oihana::REPORT    => [ Schema::TEXT => 'A quotation is expected.' ] ,
@@ -130,7 +138,7 @@ class CustomerAppointmentTest extends TestCase
         );
 
         $this->assertInstanceOf( User::class             , $appointment->organizer      );
-        $this->assertInstanceOf( Customer::class         , $appointment->customer       );
+        $this->assertInstanceOf( Customer::class         , $appointment->about          );
         $this->assertInstanceOf( CustomerEmployee::class , $appointment->attendee[ 0 ]  );
         $this->assertInstanceOf( CustomerSite::class     , $appointment->location       );
         $this->assertInstanceOf( VisitReport::class      , $appointment->report         );

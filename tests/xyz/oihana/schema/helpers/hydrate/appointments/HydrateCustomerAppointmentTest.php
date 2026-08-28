@@ -44,7 +44,7 @@ final class HydrateCustomerAppointmentTest extends TestCase
         [
             'name'              => 'Meeting with Acme Corporation' ,
             'startDate'         => '2026-09-01T10:00:00+02:00' ,
-            'customer'          => [ 'name' => 'Acme Corporation' , 'address' => [ 'streetAddress' => '1 Example street' ] ] ,
+            'about'             => [ 'name' => 'Acme Corporation' , 'address' => [ 'streetAddress' => '1 Example street' ] ] ,
             'attendee'          => [ [ 'name' => 'Jane Doe' , 'jobTitle' => [ 'id' => 'BUYER' ] , 'workLocation' => [ 'name' => 'Head office' ] ] ] ,
             'organizer'         => [ 'name' => 'Alice Smith' ] ,
             'assignedCompany'   => [ Schema::AT_TYPE => 'Subsidiary' , 'name' => 'Acme Corporation' ] ,
@@ -74,7 +74,7 @@ final class HydrateCustomerAppointmentTest extends TestCase
         $appointment = hydrateCustomerAppointment( self::payload() ) ;
 
         $this->assertInstanceOf( CustomerAppointment::class , $appointment ) ;
-        $this->assertInstanceOf( Customer::class    , $appointment->customer ) ;
+        $this->assertInstanceOf( Customer::class    , $appointment->about ) ;
         $this->assertInstanceOf( User::class        , $appointment->organizer ) ;
         $this->assertInstanceOf( Subsidiary::class  , $appointment->assignedCompany ) ;
         $this->assertInstanceOf( Seller::class      , $appointment->assignedSeller ) ;
@@ -264,13 +264,13 @@ final class HydrateCustomerAppointmentTest extends TestCase
             'attendee'   => [] ,
             'tags'       => [] ,
             'makesOffer' => [] ,
-            'customer'   => [] ,
+            'about'      => [] ,
         ]) ;
 
         $this->assertNull( $appointment->attendee ) ;
         $this->assertNull( $appointment->tags ) ;
         $this->assertNull( $appointment->makesOffer ) ;
-        $this->assertNull( $appointment->customer ) ;
+        $this->assertNull( $appointment->about ) ;
     }
 
     /**

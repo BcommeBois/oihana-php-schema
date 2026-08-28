@@ -17,13 +17,10 @@ use xyz\oihana\schema\thesaurus\ThesaurusTerm;
 
 use function oihana\core\arrays\isIndexed;
 
-use function org\schema\helpers\hydrate\hydrateDefinedTerm;
-use function org\schema\helpers\hydrate\hydrateEventStatus;
 use function org\schema\helpers\hydrate\hydrateOffer;
 
 use function xyz\oihana\schema\helpers\hydrate\hydrateCustomer;
 use function xyz\oihana\schema\helpers\hydrate\hydrateCustomerEmployee;
-use function xyz\oihana\schema\helpers\hydrate\termClassOf;
 
 /**
  * Hydrate an array definition with the CustomerAppointment class.
@@ -151,67 +148,67 @@ function hydrateCustomerAppointment( mixed $init = null , string|array $termClas
         return count( $filtered ) > 0 ? $filtered : null ;
     }
 
-    // The hydration plan is cached by the Reflection instance : keep it across calls so a
-    // list of meetings costs one plan, not one plan per meeting.
-    static $reflection = null ;
+    $appointment = hydrateAppointment( $init , $termClass , CustomerAppointment::class ) ;
 
-    $reflection ??= new Reflection() ;
-
-    $appointment = $reflection->hydrate( $init , CustomerAppointment::class ) ;
-
-    // The report keeps the meeting's map until the caller names a branch for it : `tags` is
-    // declared on both classes over two different families, and the branch is what tells them apart.
-    $reportClass = is_array( $termClass ) ? ( $termClass[ CustomerAppointment::REPORT ] ?? $termClass ) : $termClass ;
-
-    // Read from the raw payload : what reflection made of these properties is either
-    // unresolvable from the property type alone, or shallower than the helper's answer.
-
-    $resolvers =
-    [
-        Schema::CUSTOMER                        => hydrateCustomer( ... )          ,
-        Schema::ATTENDEE                        => hydrateCustomerEmployee( ... )  ,
-        Schema::MAKES_OFFER                     => fn( $raw ) => hydrateOffer( $raw , Product::class ) ,
-        Schema::EVENT_STATUS                    => hydrateEventStatus( ... )       ,
-        CustomerAppointment::APPOINTMENT_STATUS => hydrateAppointmentStatus( ... ) ,
-        CustomerAppointment::APPOINTMENT_TYPE   => fn( $raw ) => hydrateDefinedTerm( $raw , termClassOf( $termClass , CustomerAppointment::APPOINTMENT_TYPE ) ) ,
-        CustomerAppointment::TAGS               => fn( $raw ) => hydrateDefinedTerm( $raw , termClassOf( $termClass , CustomerAppointment::TAGS ) ) ,
-        CustomerAppointment::REPORT             => fn( $raw ) => hydrateVisitReport( $raw , $reportClass ) ,
-    ];
-
-    foreach( $resolvers as $property => $resolve )
+    if( $appointment instanceof CustomerAppointment )
     {
-        $raw = $init[ $property ] ?? null ;
-        if( is_array( $raw ) )
+        // The report keeps the meeting's map until the caller names a branch for it : `tags` is
+        // declared on both classes over two different families, and the branch is what tells them apart.
+        $reportClass = is_array( $termClass ) ? ( $termClass[ CustomerAppointment::REPORT ] ?? $termClass ) : $termClass ;
+
+        // What only a customer meeting knows : whom it is with, who may be invited, what one
+        // means to present, and the write-up a visit brings back.
+
+        $resolvers =
+        [
+            Schema::ABOUT               => hydrateCustomer( ... )         ,
+            Schema::ATTENDEE            => hydrateCustomerEmployee( ... ) ,
+            Schema::MAKES_OFFER         => fn( $raw ) => hydrateOffer( $raw , Product::class ) ,
+            CustomerAppointment::REPORT => fn( $raw ) => hydrateVisitReport( $raw , $reportClass ) ,
+        ];
+
+        foreach( $resolvers as $property => $resolve )
         {
-            $appointment->{ $property } = $resolve( $raw ) ;
+            $raw = $init[ $property ] ?? null ;
+            if( is_array( $raw ) )
+            {
+                $appointment->{ $property } = $resolve( $raw ) ;
+            }
         }
-    }
 
-    // ------- assignedSeller
-    // No attribute, and a union naming a plain Person : reflection cannot answer the Seller
-    // the property means.
+        // ------- assignedSeller
+        // No attribute, and a union naming a plain Person : reflection cannot answer the Seller
+        // the property means.
 
-    $assignedSeller = $init[ CustomerAppointment::ASSIGNED_SELLER ] ?? null ;
-    if( is_array( $assignedSeller ) )
-    {
-        if( isIndexed( $assignedSeller ) )
+        // The hydration plan is cached by the Reflection instance : keep it across calls so a
+        // list of meetings costs one plan, not one plan per meeting.
+        static $reflection = null ;
+
+        $reflection ??= new Reflection() ;
+
+        $assignedSeller = $init[ CustomerAppointment::ASSIGNED_SELLER ] ?? null ;
+        if( is_array( $assignedSeller ) )
         {
-            $sellers = array_map
-            (
-                fn( $seller ) => is_array( $seller ) ? $reflection->hydrate( $seller , Seller::class ) : $seller ,
-                $assignedSeller
-            );
+            if( isIndexed( $assignedSeller ) )
+            {
+                $sellers = array_map
+                (
+                    fn( $seller ) => is_array( $seller ) ? $reflection->hydrate( $seller , Seller::class ) : $seller ,
+                    $assignedSeller
+                );
 
-            // A scalar entry is an unresolved reference and is kept as it stands ; only an entry that
-            // WAS an array and gave nothing is dropped. `array_values` closes the gaps it leaves.
-            $filtered = array_values( array_filter( $sellers , fn( $seller ) => $seller instanceof Seller || is_scalar( $seller ) ) ) ;
+                // A scalar entry is an unresolved reference and is kept as it stands ; only an entry that
+                // WAS an array and gave nothing is dropped. `array_values` closes the gaps it leaves.
+                $filtered = array_values( array_filter( $sellers , fn( $seller ) => $seller instanceof Seller || is_scalar( $seller ) ) ) ;
 
-            $appointment->assignedSeller = count( $filtered ) > 0 ? $filtered : null ;
+                $appointment->assignedSeller = count( $filtered ) > 0 ? $filtered : null ;
+            }
+            else
+            {
+                $appointment->assignedSeller = $reflection->hydrate( $assignedSeller , Seller::class ) ;
+            }
         }
-        else
-        {
-            $appointment->assignedSeller = $reflection->hydrate( $assignedSeller , Seller::class ) ;
-        }
+
     }
 
     return $appointment ;
