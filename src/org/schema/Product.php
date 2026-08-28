@@ -263,7 +263,7 @@ class Product extends Thing
 
     /**
      * An associated logo.
-     * @var string|ImageObject|null|array|
+     * @var string|ImageObject|null|array
      */
     public null|array|string|ImageObject $logo ;
 

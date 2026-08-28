@@ -219,7 +219,7 @@ class BusinessDocument extends Intangible
      * the subject : a stored row is read back as a {@see Subsidiary}, which is what
      * the issuing party is here.
      *
-     * @var string|array|Person|Organization|null
+     * @var string|array<string|Person|Organization>|Person|Organization|null
      */
     #[HydrateWith(Subsidiary::class, Organization::class, Person::class)]
     public string|array|Person|Organization|null $publisher ;
