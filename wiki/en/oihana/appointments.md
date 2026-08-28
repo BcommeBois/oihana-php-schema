@@ -73,7 +73,7 @@ $appointment->report->followUp;   // xyz\oihana\schema\appointments\FollowUp[]
 | Piece | What it states |
 |---|---|
 | **The meeting** (`CustomerAppointment`) | *with whom*, *when*, *where*, *of what kind*, and *what one means to present*. Written **before**. |
-| **The report** (`VisitReport`) | *how it went*, *what it produced*, *who was actually there*. Written **after**. |
+| **The report** (`MeetingReport`, and `VisitReport` for a visit) | *what was said*, *who was actually there*, *what is still owed* — and, for a visit, *how it went* and *what it produced*. Written **after**. |
 | **The follow-up** (`FollowUp`) | *what is still owed*, *by when*, and the meeting booked to honour it. |
 
 ```
@@ -81,8 +81,11 @@ $appointment->report->followUp;   // xyz\oihana\schema\appointments\FollowUp[]
                      customer · organizer · location · attendee · appointmentType
                      appointmentStatus · tags · makesOffer
                               │
-                              └── report ──▶ VisitReport  (CreativeWork)
-                                             mood · outcome · topics · attendee · text
+                              └── report ──▶ MeetingReport  (CreativeWork)
+                                             topics · attendee · tags · text
+                                                   │
+                                                   └── VisitReport  (MeetingReport)
+                                                       mood · outcome
                                                    │
                                                    └── followUp[] ──▶ FollowUp  (ScheduleAction)
                                                                       followUpType · scheduledTime
@@ -98,7 +101,8 @@ What is written **before** and what is written **after** sit side by side: `desc
 | Class | Extends | Role |
 |---|---|---|
 | `CustomerAppointment` | `org\schema\Event` | A meeting arranged with a customer. |
-| `VisitReport` | `org\schema\CreativeWork` | What was written once the meeting took place. |
+| `MeetingReport` | `org\schema\CreativeWork` | What was written once the meeting took place. |
+| `VisitReport` | `MeetingReport` | The report of a customer visit: the mood and the outcome on top. |
 | `FollowUp` | `org\schema\actions\ScheduleAction` | What comes next, and when. |
 | `AppointmentStatus` | `org\schema\enumerations\StatusEnumeration` | What became of the meeting itself. |
 | `AppointmentCancelled`, `AppointmentDone`, `AppointmentNoShow`, `AppointmentPlanned` | `AppointmentStatus` | The member classes of the status — the object form, the one that carries a reason. |
@@ -177,20 +181,30 @@ The wrapper is what carries the intention **beside** the reference — and the d
 
 ---
 
-## `VisitReport` properties
+## `MeetingReport` properties
 
 | Property | Type | Description |
 |---|---|---|
-| `attendee` | `array\|Person\|null` | Who was **actually** there. Read back as `CustomerEmployee`. |
+| `attendee` | `array\|Person\|null` | Who was **actually** there. No class is named here: who sits at a table depends on the kind of meeting, and each family narrows the union. |
 | `followUp` | `FollowUp[]\|null` | What is left to do. None, one or several. |
-| `mood` | `string\|array\|DefinedTerm\|null` | How the meeting felt — satisfied, neutral, a problem to deal with. One value. |
-| `outcome` | `string\|array\|DefinedTerm\|null` | What the meeting produced — an order, a quote to write, something to chase, nothing. One value. |
 | `tags` | `string[]\|DefinedTerm[]\|null` | Qualifiers of the report itself. Declared for the day one is needed — a meeting's qualifiers live on the meeting. |
 | `topics` | `string[]\|DefinedTerm[]\|null` | What was discussed. Several. |
 
 `text` (the body of the report), `author`, `dateCreated`, `dateModified`, `audio` and `associatedMedia` are inherited from `CreativeWork`.
 
-🔑 **The same holds for the report's four vocabularies.** `mood`, `outcome`, `tags` and `topics` are declared `DefinedTerm` and served as `ThesaurusTerm` by `hydrateVisitReport()`. That is what makes a term read inside a report and the same term read on its own family **answer the same shape**, `color` included: only the second one carried it before.
+🔑 **What a report stores has nothing to do with who the meeting was with.** A text, its promises, what was covered, who came: an appointment of any kind writes the same things afterwards. That is why this class sits **above** `VisitReport` rather than beside it.
+
+## `VisitReport` properties
+
+| Property | Type | Description |
+|---|---|---|
+| `attendee` | `array\|Person\|null` | Redeclared to name who is meant: read back as `CustomerEmployee`. |
+| `mood` | `string\|array\|DefinedTerm\|null` | How the meeting felt — satisfied, neutral, a problem to deal with. One value. |
+| `outcome` | `string\|array\|DefinedTerm\|null` | What the meeting produced — an order, a quote to write, something to chase, nothing. One value. |
+
+🔑 **Those two are what a sales review reads**, and they are the reason this class exists: « how many visits produced an order » is a question no free text can answer.
+
+🔑 **The same holds for the four vocabularies of a visit report.** `mood`, `outcome`, `tags` and `topics` are declared `DefinedTerm` and served as `ThesaurusTerm` by `hydrateVisitReport()`. That is what makes a term read inside a report and the same term read on its own family **answer the same shape**, `color` included: only the second one carried it before.
 
 🔑 **The boxes and the text are not alternatives.** A report reduced to codes loses what makes it worth reading; reduced to prose, it cannot be counted. Both are declared, **neither is required**: the one written on a phone, in a van, with three taps is worth more than the thorough one that never gets written.
 

@@ -8,6 +8,29 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- **`MeetingReport` — a report belongs to every meeting, not only to a visit.**
+  What a report actually stores — a text, its promises, what was covered, who came —
+  has nothing to do with who the meeting was with : an appointment of any kind writes
+  the same things afterwards. `MeetingReport` carries those, and **`VisitReport`
+  becomes its subclass**, keeping only what a visit brings back : how it felt
+  (`mood`) and what it produced (`outcome`), the pair a sales review reads.
+
+  ⚠️ **`attendee` is redeclared rather than moved.** The parent leaves the union wide
+  on purpose — who sits at a table depends on the kind of meeting — and a visit
+  narrows it back to the customer's staff. A parent naming one kind of person would
+  read every report back as the wrong one.
+
+  🔑 **`hydrateMeetingReport()` takes the class it builds as a parameter**, in the
+  same spirit as the term class it already took. `hydrateVisitReport()` asks it for a
+  `VisitReport` and then resolves what only a visit carries, instead of copying forty
+  lines of body. A second family of report costs one call, not one copy.
+
+  ⚠️ It deliberately **leaves `attendee` alone** : it cannot know which kind of person
+  a row is, so whoever knows resolves it afterwards.
+
+  `VisitReportTrait` keeps `MOOD` and `OUTCOME` and composes the new
+  `MeetingReportTrait`, which holds `TAGS` and `TOPICS`.
+
 - **`ThesaurusScheme` gains its write surface : the `writes` map, and `termType`.**
   A registry entry could say where a family lives (`path`), where it comes from
   (`harvested`, `system`) and how to show it (`color`, `order`) — but nothing said

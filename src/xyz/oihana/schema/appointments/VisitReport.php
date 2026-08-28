@@ -4,7 +4,6 @@ namespace xyz\oihana\schema\appointments;
 
 use oihana\reflect\attributes\HydrateWith;
 
-use org\schema\CreativeWork;
 use org\schema\DefinedTerm;
 use org\schema\Person;
 
@@ -13,31 +12,25 @@ use xyz\oihana\schema\constants\traits\appointments\VisitReportTrait;
 use xyz\oihana\schema\people\CustomerEmployee;
 
 /**
- * What was written after a meeting took place.
+ * What a salesperson writes after a meeting with a customer.
  *
- * A report answers, in the order a reader wants them : how it went ({@see VisitReport::$mood}),
- * what it produced ({@see VisitReport::$outcome}), what was discussed ({@see VisitReport::$topics}),
- * who was actually there ({@see VisitReport::$attendee}) — and, in the {@see CreativeWork::$text} it
- * inherits, everything the boxes cannot hold.
+ * A {@see MeetingReport} like any other — a text, its promises, what was covered,
+ * who came — plus the two things only a visit brings back : how it went
+ * ({@see VisitReport::$mood}) and what it produced ({@see VisitReport::$outcome}).
  *
- * It is a {@see CreativeWork} rather than an {@see \org\schema\Action} : it is a
- * piece of writing, with an author, a moment it was written and a body of text,
- * and it is read far more often than the meeting is replayed.
+ * 🔑 **Those two are what a sales review reads**, and they are the reason this
+ * class exists rather than the parent alone : « how many visits produced an
+ * order » is a question no free text can answer.
  *
- * 🔑 **The boxes and the text are not alternatives.** A report reduced to codes
- * loses what makes it worth reading ; a report reduced to prose cannot be counted.
- * Both are declared, neither is required : one written on a phone, in a van, with
- * three taps is worth more than the thorough one that never gets written.
- *
- * ⚠️ **Its attendees are not the meeting's.** {@see CustomerAppointment::$attendee} lists
- * who was expected ; this one lists who came. They disagree often enough that
- * folding them into one would quietly rewrite the plan into a record of fact.
+ * ⚠️ **Its attendees are the customer's staff**, which is what narrows the union
+ * the parent leaves wide : a report of a visit is read back as the people of the
+ * company one visited, never as somebody of ours.
  *
  * @package xyz\oihana\schema\appointments
  * @author  Marc Alcaraz (eKameleon)
  * @since   1.5.0
  */
-class VisitReport extends CreativeWork
+class VisitReport extends MeetingReport
 {
     use VisitReportTrait ;
 
@@ -49,26 +42,14 @@ class VisitReport extends CreativeWork
     /**
      * Who actually attended.
      *
-     * The people met, as codes or resolved contacts. May differ from
-     * {@see CustomerAppointment::$attendee}, which says who was expected.
+     * Redeclares {@see MeetingReport::$attendee} with the same union, to name who
+     * is meant : a stored row is read back as a {@see CustomerEmployee}.
      *
      * @var null|array|Person
      * @since 1.5.0
      */
     #[HydrateWith(CustomerEmployee::class)]
     public null|array|Person $attendee ;
-
-    /**
-     * What comes next, and when.
-     *
-     * None, one or several promises : each says what is owed, when it is due, and —
-     * once it is booked — the meeting made to honour it.
-     *
-     * @var null|array|FollowUp
-     * @since 1.5.0
-     */
-    #[HydrateWith(FollowUp::class)]
-    public null|array|FollowUp $followUp ;
 
     /**
      * How the meeting felt — satisfied, neutral, a problem to deal with.
@@ -94,26 +75,4 @@ class VisitReport extends CreativeWork
      * @since 1.5.0
      */
     public null|string|array|DefinedTerm $outcome ;
-
-    /**
-     * Quick qualifiers of the report itself.
-     *
-     * Declared for the day one is needed ; the qualifiers of a meeting live on the meeting ({@see CustomerAppointment::$tags}),
-     * where they are true whether they were planned or observed.
-     *
-     * @var null|array|string|DefinedTerm
-     * @since 1.5.0
-     */
-    public null|array|string|DefinedTerm $tags ;
-
-    /**
-     * What was discussed.
-     *
-     * Terms of a controlled vocabulary : codes as published, or resolved terms.
-     * Several, a meeting rarely covering one subject.
-     *
-     * @var null|array|string|DefinedTerm
-     * @since 1.5.0
-     */
-    public null|array|string|DefinedTerm $topics ;
 }

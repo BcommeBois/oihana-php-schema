@@ -73,7 +73,7 @@ $appointment->report->followUp;   // xyz\oihana\schema\appointments\FollowUp[]
 | Pièce | Ce qu'elle dit |
 |---|---|
 | **La rencontre** (`CustomerAppointment`) | *avec qui*, *quand*, *où*, *de quelle nature*, et *ce qu'on compte présenter*. Écrite **avant**. |
-| **Le compte rendu** (`VisitReport`) | *comment ça s'est passé*, *ce que ça a produit*, *qui était vraiment là*. Écrit **après**. |
+| **Le compte rendu** (`MeetingReport`, et `VisitReport` pour une visite) | *ce qui a été dit*, *qui était vraiment là*, *ce qui reste dû* — et, pour une visite, *comment ça s'est passé* et *ce que ça a produit*. Écrit **après**. |
 | **La suite** (`FollowUp`) | *ce qui reste dû*, *pour quand*, et le rendez-vous éventuellement pris pour l'honorer. |
 
 ```
@@ -81,8 +81,11 @@ $appointment->report->followUp;   // xyz\oihana\schema\appointments\FollowUp[]
                      customer · organizer · location · attendee · appointmentType
                      appointmentStatus · tags · makesOffer
                               │
-                              └── report ──▶ VisitReport  (CreativeWork)
-                                             mood · outcome · topics · attendee · text
+                              └── report ──▶ MeetingReport  (CreativeWork)
+                                             topics · attendee · tags · text
+                                                   │
+                                                   └── VisitReport  (MeetingReport)
+                                                       mood · outcome
                                                    │
                                                    └── followUp[] ──▶ FollowUp  (ScheduleAction)
                                                                       followUpType · scheduledTime
@@ -98,7 +101,8 @@ Ce qui est écrit **avant** et ce qui est écrit **après** cohabitent : `descri
 | Classe | Étend | Rôle |
 |---|---|---|
 | `CustomerAppointment` | `org\schema\Event` | Une rencontre convenue avec un client. |
-| `VisitReport` | `org\schema\CreativeWork` | Ce qui a été écrit une fois la rencontre passée. |
+| `MeetingReport` | `org\schema\CreativeWork` | Ce qui a été écrit une fois la rencontre passée. |
+| `VisitReport` | `MeetingReport` | Le compte rendu d'une visite client : le climat et le résultat en plus. |
 | `FollowUp` | `org\schema\actions\ScheduleAction` | Ce qui reste à faire ensuite, et pour quand. |
 | `AppointmentStatus` | `org\schema\enumerations\StatusEnumeration` | Ce qu'il est advenu de la rencontre elle-même. |
 | `AppointmentCancelled`, `AppointmentDone`, `AppointmentNoShow`, `AppointmentPlanned` | `AppointmentStatus` | Les classes membres du statut — la forme objet, celle qui porte un motif. |
@@ -177,20 +181,30 @@ L'enveloppe est ce qui porte l'intention **à côté** de la référence — et 
 
 ---
 
-## Propriétés de `VisitReport`
+## Propriétés de `MeetingReport`
 
 | Propriété | Type | Description |
 |---|---|---|
-| `attendee` | `array\|Person\|null` | Qui était **vraiment** là. Relus en `CustomerEmployee`. |
+| `attendee` | `array\|Person\|null` | Qui était **vraiment** là. Aucune classe n'est nommée ici : qui s'assied à une table dépend de la nature de la rencontre, et chaque famille resserre l'union. |
 | `followUp` | `FollowUp[]\|null` | Ce qui reste à faire. Aucune, une ou plusieurs. |
-| `mood` | `string\|array\|DefinedTerm\|null` | Le climat de la rencontre — satisfait, neutre, un problème à traiter. Une seule valeur. |
-| `outcome` | `string\|array\|DefinedTerm\|null` | Ce que la rencontre a produit — une commande, un devis à écrire, une relance, rien. Une seule valeur. |
 | `tags` | `string[]\|DefinedTerm[]\|null` | Des qualificatifs du compte rendu lui-même. Déclarée pour le jour où — les qualificatifs d'une rencontre vivent sur la rencontre. |
 | `topics` | `string[]\|DefinedTerm[]\|null` | Les sujets abordés. Plusieurs. |
 
 `text` (le corps du compte rendu), `author`, `dateCreated`, `dateModified`, `audio` et `associatedMedia` sont hérités de `CreativeWork`.
 
-🔑 **Même remarque pour les quatre vocabulaires du compte rendu.** `mood`, `outcome`, `tags` et `topics` sont déclarés `DefinedTerm` et servis en `ThesaurusTerm` par `hydrateVisitReport()`. C'est ce qui fait qu'un terme lu dans un compte rendu et le même terme lu sur sa famille **rendent la même forme**, `color` comprise : auparavant, seul le second la portait.
+🔑 **Ce qu'un compte rendu stocke n'a rien à voir avec l'interlocuteur de la rencontre.** Un texte, des promesses, ce qui a été couvert, qui est venu : un rendez-vous de n'importe quelle nature écrit les mêmes choses après coup. C'est pourquoi cette classe est **au-dessus** de `VisitReport` et non à côté.
+
+## Propriétés de `VisitReport`
+
+| Propriété | Type | Description |
+|---|---|---|
+| `attendee` | `array\|Person\|null` | Redéclarée pour nommer qui est visé : relus en `CustomerEmployee`. |
+| `mood` | `string\|array\|DefinedTerm\|null` | Le climat de la rencontre — satisfait, neutre, un problème à traiter. Une seule valeur. |
+| `outcome` | `string\|array\|DefinedTerm\|null` | Ce que la rencontre a produit — une commande, un devis à écrire, une relance, rien. Une seule valeur. |
+
+🔑 **Ces deux-là sont ce que relit une revue commerciale**, et c'est la raison d'être de la classe : « combien de visites ont produit une commande » est une question à laquelle aucun texte libre ne répond.
+
+🔑 **Même remarque pour les quatre vocabulaires d'un compte rendu de visite.** `mood`, `outcome`, `tags` et `topics` sont déclarés `DefinedTerm` et servis en `ThesaurusTerm` par `hydrateVisitReport()`. C'est ce qui fait qu'un terme lu dans un compte rendu et le même terme lu sur sa famille **rendent la même forme**, `color` comprise : auparavant, seul le second la portait.
 
 🔑 **Les cases et le texte ne sont pas des alternatives.** Un compte rendu réduit à des codes perd ce qui le rend digne d'être lu ; réduit à de la prose, il ne se compte pas. Les deux sont déclarés, **aucun n'est obligatoire** : celui qu'on écrit sur un téléphone, dans une camionnette, en trois gestes, vaut mieux que le compte rendu exhaustif qui ne sera jamais écrit.
 

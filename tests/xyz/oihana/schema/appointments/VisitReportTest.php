@@ -11,6 +11,7 @@ use org\schema\constants\Schema;
 use org\schema\CreativeWork;
 use org\schema\Thing;
 
+use xyz\oihana\schema\appointments\MeetingReport;
 use xyz\oihana\schema\appointments\VisitReport;
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\people\CustomerEmployee;
@@ -18,12 +19,17 @@ use xyz\oihana\schema\people\Seller;
 
 class VisitReportTest extends TestCase
 {
-    public function testIsACreativeWork(): void
+    /**
+     * A visit report is a report first : what it stores of its own — how it felt and
+     * what it produced — is what a sales review reads, and it is all it adds.
+     */
+    public function testIsAMeetingReport(): void
     {
         $report = new VisitReport() ;
 
-        $this->assertInstanceOf( CreativeWork::class , $report );
-        $this->assertInstanceOf( Thing::class        , $report );
+        $this->assertInstanceOf( MeetingReport::class , $report );
+        $this->assertInstanceOf( CreativeWork::class  , $report );
+        $this->assertInstanceOf( Thing::class         , $report );
     }
 
     public function testSchemaType(): void

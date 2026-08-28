@@ -12,7 +12,6 @@ use xyz\oihana\schema\thesaurus\ThesaurusTerm;
 use function oihana\core\arrays\isIndexed;
 
 use function org\schema\helpers\hydrate\hydrateDefinedTerm;
-use function org\schema\helpers\hydrate\hydrateOrganizationOrPerson;
 
 use function xyz\oihana\schema\helpers\hydrate\hydrateCustomerEmployee;
 use function xyz\oihana\schema\helpers\hydrate\termClassOf;
@@ -22,39 +21,18 @@ use function xyz\oihana\schema\helpers\hydrate\termClassOf;
  *
  * Handles both a single report array and an array of reports.
  *
- * Each nested reference is hydrated only when the raw value is an array — when there is
- * something to hydrate. The helper's answer is then written as is, `null` included : an
- * array that resolves to nothing becomes `null`, never a leftover raw array, so the report
- * answers the same thing as the nested helper called on its own. Anything that is not an
- * array — an unresolved string reference, an already typed instance — is left untouched.
- *
- * What it resolves :
+ * 🔑 **What every report carries is resolved by {@see hydrateMeetingReport()}** — the
+ * promises, the qualifiers, what was covered, who wrote it — and this helper asks it for a
+ * {@see VisitReport} rather than copying its body. What is left here is what only a visit
+ * carries :
  *
  * - `attendee` — the people actually met, as {@see \xyz\oihana\schema\people\CustomerEmployee},
- *   one or several ;
- * - `followUp` — what comes next, through {@see hydrateFollowUp()} ;
- * - `mood` and `outcome` — one term each, how it felt and what it produced ;
- * - `tags` and `topics` — several terms each ;
- * - `author` — whoever wrote it, an `Organization|Person` union that only the payload's
- *   `@type` can settle.
+ *   one or several. The parent leaves the union wide on purpose : who sits at a table depends
+ *   on the kind of meeting, and a visit is the family that knows ;
+ * - `mood` and `outcome` — one term each, how it felt and what it produced.
  *
- * 🔑 **An empty `followUp` list stays an empty list.** « This report has no follow-up » is
- * an answer worth serving, and a reader walking the value deserves a list to walk —
- * {@see hydrateFollowUp()} holds that rule, and this helper writes back whatever it
- * answers.
- *
- * 🔑 **The four vocabularies are read as the class their family serves.** A report's `mood`
- * is a term of a **business** family, administered rather than harvested, and those families
- * carry properties {@see DefinedTerm} does not declare — `color` first among them. Hydrating
- * them as a plain `DefinedTerm` dropped those properties silently, so the same term changed
- * shape depending on whether it was read on its own family or inside a report.
- *
- * The class is a **parameter rather than a hard-wired name**, exactly as
- * {@see \xyz\oihana\schema\helpers\hydrate\hydrateParcelDelivery()} takes its travel terms :
- * naming a business class in an attribute carried by the Schema.org class would reverse the
- * arrow, where this helper lives on the `xyz` side and may know. It takes the two forms
- * {@see termClassOf()} reads — one class for the four properties, or a map naming them one by
- * one :
+ * 🔑 **The vocabularies are read as the class their family serves**, in the two forms
+ * {@see termClassOf()} reads — one class for every property, or a map naming them one by one :
  *
  * ```php
  * hydrateVisitReport( $raw ) ;                       // the house term, everywhere
@@ -69,7 +47,7 @@ use function xyz\oihana\schema\helpers\hydrate\termClassOf;
  *
  * @param mixed $init Single report data or array of report data.
  * @param class-string<DefinedTerm>|array<string,class-string<DefinedTerm>|array<string,class-string<DefinedTerm>>> $termClass
- *        The class the four term properties are hydrated into, or a map naming them one by one.
+ *        The class the term properties are hydrated into, or a map naming them one by one.
  *        A map may carry entries this helper does not read — a report hydrated from a meeting
  *        receives the meeting's map as it stands, branches included. See {@see termClassOf()}.
  *
@@ -114,7 +92,12 @@ function hydrateVisitReport( mixed $init = null , string|array $termClass = Thes
         return count( $filtered ) > 0 ? $filtered : null ;
     }
 
-    $report = new VisitReport( $init ) ;
+    $report = hydrateMeetingReport( $init , $termClass , VisitReport::class ) ;
+
+    if( !$report instanceof VisitReport )
+    {
+        return $report ;
+    }
 
     // ------- attendee
 
@@ -122,14 +105,6 @@ function hydrateVisitReport( mixed $init = null , string|array $termClass = Thes
     if( is_array( $attendee ) )
     {
         $report->attendee = hydrateCustomerEmployee( $attendee ) ;
-    }
-
-    // ------- followUp
-
-    $followUp = $report->followUp ?? null ;
-    if( is_array( $followUp ) )
-    {
-        $report->followUp = hydrateFollowUp( $followUp ) ;
     }
 
     // ------- mood
@@ -146,30 +121,6 @@ function hydrateVisitReport( mixed $init = null , string|array $termClass = Thes
     if( is_array( $outcome ) )
     {
         $report->outcome = hydrateDefinedTerm( $outcome , termClassOf( $termClass , VisitReport::OUTCOME ) ) ;
-    }
-
-    // ------- tags
-
-    $tags = $report->tags ?? null ;
-    if( is_array( $tags ) )
-    {
-        $report->tags = hydrateDefinedTerm( $tags , termClassOf( $termClass , VisitReport::TAGS ) ) ;
-    }
-
-    // ------- topics
-
-    $topics = $report->topics ?? null ;
-    if( is_array( $topics ) )
-    {
-        $report->topics = hydrateDefinedTerm( $topics , termClassOf( $termClass , VisitReport::TOPICS ) ) ;
-    }
-
-    // ------- author
-
-    $author = $report->author ?? null ;
-    if( is_array( $author ) )
-    {
-        $report->author = hydrateOrganizationOrPerson( $author ) ;
     }
 
     return $report ;
