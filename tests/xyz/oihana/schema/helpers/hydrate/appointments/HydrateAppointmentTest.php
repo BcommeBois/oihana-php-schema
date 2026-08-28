@@ -16,7 +16,6 @@ use org\schema\Person;
 
 use xyz\oihana\schema\appointments\Appointment;
 use xyz\oihana\schema\appointments\FollowUp;
-use xyz\oihana\schema\appointments\InternalMeeting;
 use xyz\oihana\schema\appointments\MeetingReport;
 use xyz\oihana\schema\appointments\VisitReport;
 use xyz\oihana\schema\auth\User;
@@ -199,9 +198,9 @@ class HydrateAppointmentTest extends TestCase
      */
     public function testItBuildsTheClassItIsAskedFor(): void
     {
-        $meeting = hydrateAppointment( [ Schema::NAME => 'Weekly review' ] , DefinedTerm::class , InternalMeeting::class ) ;
+        $meeting = hydrateAppointment( [ Schema::NAME => 'Weekly review' ] , DefinedTerm::class , SampleMeeting::class ) ;
 
-        $this->assertInstanceOf( InternalMeeting::class , $meeting );
+        $this->assertInstanceOf( SampleMeeting::class , $meeting );
     }
 
     /**
@@ -224,3 +223,8 @@ class HydrateAppointmentTest extends TestCase
         $this->assertSame( 'a-bare-reference' , $appointments[ 1 ] );
     }
 }
+
+/**
+ * A subclass a consumer may declare on its own — what the class parameter must build.
+ */
+class SampleMeeting extends Appointment {}

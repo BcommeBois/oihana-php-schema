@@ -12,7 +12,7 @@ use org\schema\actions\PlanAction;
 use org\schema\actions\ScheduleAction;
 use org\schema\constants\Schema;
 
-use xyz\oihana\schema\appointments\CustomerAppointment;
+use xyz\oihana\schema\appointments\Appointment;
 use xyz\oihana\schema\appointments\FollowUp;
 use xyz\oihana\schema\appointments\VisitReport;
 use xyz\oihana\schema\constants\Oihana;
@@ -78,7 +78,7 @@ class FollowUpTest extends TestCase
             FollowUp::class
         );
 
-        $this->assertInstanceOf( CustomerAppointment::class , $followUp->result       );
+        $this->assertInstanceOf( Appointment::class , $followUp->result       );
         $this->assertSame( 'On-site review'      , $followUp->result->name );
     }
 

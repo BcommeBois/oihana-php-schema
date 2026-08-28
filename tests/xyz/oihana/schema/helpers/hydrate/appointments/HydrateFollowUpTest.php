@@ -10,7 +10,7 @@ use org\schema\DefinedTerm;
 use org\schema\Organization;
 use org\schema\Person;
 
-use xyz\oihana\schema\appointments\CustomerAppointment;
+use xyz\oihana\schema\appointments\Appointment;
 use xyz\oihana\schema\appointments\FollowUp;
 
 use function xyz\oihana\schema\helpers\hydrate\appointments\hydrateFollowUp;
@@ -70,7 +70,7 @@ final class HydrateFollowUpTest extends TestCase
 
         $meeting = $followUp->result ;
 
-        $this->assertInstanceOf( CustomerAppointment::class , $meeting ) ;
+        $this->assertInstanceOf( Appointment::class , $meeting ) ;
         $this->assertSame( 'Second meeting with Acme Corporation' , $meeting->name ) ;
 
         // One level, and no further : what the meeting itself carries stays raw.
@@ -173,7 +173,7 @@ final class HydrateFollowUpTest extends TestCase
 
         $this->assertIsArray( $followUp->result ) ;
         $this->assertCount( 2 , $followUp->result ) ;
-        $this->assertContainsOnlyInstancesOf( CustomerAppointment::class , $followUp->result ) ;
+        $this->assertContainsOnlyInstancesOf( Appointment::class , $followUp->result ) ;
 
         $this->assertNull( hydrateFollowUp( [ 'result' => [] ] )->result ) ;
 

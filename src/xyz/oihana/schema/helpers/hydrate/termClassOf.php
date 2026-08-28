@@ -49,12 +49,12 @@ use xyz\oihana\schema\thesaurus\ThesaurusTerm;
  * [
  *     Prop::DEFAULT               => ThesaurusTerm::class ,
  *     VisitReport::MOOD           => MoodTerm::class ,
- *     CustomerAppointment::REPORT => [ VisitReport::MOOD => ReportMoodTerm::class ] , // a branch
+ *     Appointment::REPORT => [ VisitReport::MOOD => ReportMoodTerm::class ] , // a branch
  * ];
  *
  * termClassOf( $map , VisitReport::MOOD    ) ; // MoodTerm
  * termClassOf( $map , VisitReport::OUTCOME ) ; // ThesaurusTerm — through Prop::DEFAULT
- * termClassOf( $map , CustomerAppointment::REPORT ) ; // ThesaurusTerm — a branch is not a class
+ * termClassOf( $map , Appointment::REPORT ) ; // ThesaurusTerm — a branch is not a class
  * ```
  */
 function termClassOf( string|array $termClass , string $property ) :string

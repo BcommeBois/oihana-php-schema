@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 use org\schema\constants\Prop;
 use org\schema\DefinedTerm;
 
-use xyz\oihana\schema\appointments\CustomerAppointment;
+use xyz\oihana\schema\appointments\Appointment;
 use xyz\oihana\schema\appointments\VisitReport;
 use xyz\oihana\schema\thesaurus\ProductCategoryTerm;
 use xyz\oihana\schema\thesaurus\ThesaurusTerm;
@@ -64,14 +64,14 @@ final class TermClassOfTest extends TestCase
         $map =
         [
             Prop::DEFAULT               => DefinedTerm::class ,
-            CustomerAppointment::REPORT => [ VisitReport::MOOD => ProductCategoryTerm::class ] ,
+            Appointment::REPORT => [ VisitReport::MOOD => ProductCategoryTerm::class ] ,
         ];
 
-        $this->assertSame( DefinedTerm::class , termClassOf( $map , CustomerAppointment::REPORT ) ) ;
+        $this->assertSame( DefinedTerm::class , termClassOf( $map , Appointment::REPORT ) ) ;
 
         // And with no default to fall back on, the house term rather than the branch.
-        $branchOnly = [ CustomerAppointment::REPORT => [ VisitReport::MOOD => ProductCategoryTerm::class ] ] ;
+        $branchOnly = [ Appointment::REPORT => [ VisitReport::MOOD => ProductCategoryTerm::class ] ] ;
 
-        $this->assertSame( ThesaurusTerm::class , termClassOf( $branchOnly , CustomerAppointment::REPORT ) ) ;
+        $this->assertSame( ThesaurusTerm::class , termClassOf( $branchOnly , Appointment::REPORT ) ) ;
     }
 }

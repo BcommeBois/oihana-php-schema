@@ -50,8 +50,6 @@
             "src/org/schema/helpers/hydrate/hydratePostalAddress.php" ,
             "src/xyz/oihana/schema/helpers/hydrate/appointments/hydrateAppointment.php" ,
             "src/xyz/oihana/schema/helpers/hydrate/appointments/hydrateAppointmentStatus.php" ,
-            "src/xyz/oihana/schema/helpers/hydrate/appointments/hydrateInternalMeeting.php" ,
-            "src/xyz/oihana/schema/helpers/hydrate/appointments/hydrateCustomerAppointment.php" ,
             "src/xyz/oihana/schema/helpers/hydrate/appointments/hydrateFollowUp.php" ,
             "src/xyz/oihana/schema/helpers/hydrate/appointments/hydrateMeetingReport.php" ,
             "src/xyz/oihana/schema/helpers/hydrate/appointments/hydrateVisitReport.php" ,

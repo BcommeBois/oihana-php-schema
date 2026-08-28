@@ -4,7 +4,7 @@ namespace xyz\oihana\schema\helpers\hydrate\appointments;
 
 use ReflectionException;
 
-use xyz\oihana\schema\appointments\CustomerAppointment;
+use xyz\oihana\schema\appointments\Appointment;
 use xyz\oihana\schema\appointments\FollowUp;
 
 use function oihana\core\arrays\isIndexed;
@@ -27,7 +27,7 @@ use function org\schema\helpers\hydrate\hydrateOrganizationOrPerson;
  * 🚨 **`result` is built flat, and deliberately so.** It names the meeting booked to
  * honour the promise ; that meeting has a report, that report has follow-ups, and each of
  * those may name a meeting in turn. Going down through
- * {@see hydrateCustomerAppointment()} would follow that chain for as long as the data
+ * {@see hydrateAppointment()} would follow that chain for as long as the data
  * holds, and only the data would stop it. What is named here is a **reference** — a
  * meeting to open, not a document to unfold — so it is typed one level and no further :
  * its own nested references stay raw, and a consumer that needs them asks for that
@@ -119,19 +119,19 @@ function hydrateFollowUp( mixed $init = null ) :mixed
         {
             $meetings = array_map
             (
-                fn( $meeting ) => is_array( $meeting ) ? new CustomerAppointment( $meeting ) : $meeting ,
+                fn( $meeting ) => is_array( $meeting ) ? new Appointment( $meeting ) : $meeting ,
                 $result
             );
 
             // A scalar entry is an unresolved reference and is kept as it stands ; only an entry that
             // WAS an array and gave nothing is dropped. `array_values` closes the gaps it leaves.
-            $filtered = array_values( array_filter( $meetings , fn( $meeting ) => $meeting instanceof CustomerAppointment || is_scalar( $meeting ) ) ) ;
+            $filtered = array_values( array_filter( $meetings , fn( $meeting ) => $meeting instanceof Appointment || is_scalar( $meeting ) ) ) ;
 
             $followUp->result = count( $filtered ) > 0 ? $filtered : null ;
         }
         else
         {
-            $followUp->result = new CustomerAppointment( $result ) ;
+            $followUp->result = new Appointment( $result ) ;
         }
     }
 

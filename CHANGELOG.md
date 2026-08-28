@@ -8,31 +8,29 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
-- **`Appointment` and `InternalMeeting` — a meeting is not necessarily with a customer.**
-  A meeting between colleagues has no customer and is a meeting all the same. `Appointment`
-  now carries what every meeting has — the two axes of state, the kind, the qualifiers, the
-  diary, the company it is arranged for, the report — and `CustomerAppointment` becomes its
-  subclass, keeping only the salesperson's side of it : who follows this customer, and what
-  one means to put in front of them. `InternalMeeting` declares **nothing of its own**, and
-  that is the point : a family is told apart by the type a document carries.
+- **`Appointment` — one class for every meeting, and the counterpart carries the type.**
+  A visit to a customer, a meeting between colleagues, a plain diary note : one stored
+  shape. What tells a customer meeting apart is not a subclass — it is the stored type of
+  its counterpart : `about` holds a frozen copy that carries its own `additionalType`,
+  which is what filters, facets and guards read. The class carries everything a meeting
+  may need — the two axes of state, the kind, the qualifiers, the diary, the report, and
+  `makesOffer` for what one means to present — and a case is simply absent when the
+  meeting has no use for it.
 
-  🚨 **`CustomerAppointment::$customer` is gone : the counterpart is `about`.** The property
-  `Event` already published, and which this library had never used. A facet and a grouping
-  aim at **one** property and one only — with a name per family, « how many meetings per
-  counterpart » would have no answer at all — so each family redeclares `about` rather than
-  naming its own. Same pattern `Statistics::$about` has carried since 1.4.0.
+  🚨 **`customer` is gone : the counterpart is `about`.** The property `Event` already
+  published, and which this library had never used. A facet and a grouping aim at **one**
+  property and one only. ⚠️ **Breaking** : a payload keyed `customer` is keyed `about`
+  from now on. Same pattern `Statistics::$about` has carried since 1.4.0.
 
-  ⚠️ **Breaking.** A consumer reading `$appointment->customer` reads `$appointment->about`
-  from now on, and a payload keyed `customer` is keyed `about`.
-
-  🔑 **`hydrateAppointment()` takes the class it builds as a parameter**, as the report
-  helper does : `hydrateCustomerAppointment()` and the new `hydrateInternalMeeting()` ask it
-  for their own class and then resolve what only they know. It deliberately leaves `about`
-  and `attendee` alone — whom a meeting is with and who may be invited are exactly what tell
-  the families apart — and the report comes back typed but **shallow**, the family naming the
-  helper that fills it.
-
-  `CustomerAppointmentTrait` keeps `ASSIGNED_SELLER` and composes the new `AppointmentTrait`.
+  🔑 **`hydrateAppointment()` resolves every polymorphic case on the stored type of the
+  value itself** — never on a class imposed from the outside. The counterpart : a value
+  announcing a customer is read back as one, anything else falls back on its `@type`, an
+  organization or a person, and a bare reference survives as it stands. The attendees,
+  entry by entry : an account, a customer contact, a plain person or organization — one
+  table may seat them together. The offers. And the report, on **its** stored type : a
+  visit's write-up comes back with its richer class, any other with the common one, both
+  resolved in depth. The class it builds stays a parameter, for a consumer's own
+  subclass.
 
 ### Changed
 
@@ -477,6 +475,20 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   `array`.** A status stated as an object is stored as one, and comes back as an
   array before anything types it : without `array` in the union the object form
   could be written in PHP and never read back from a document.
+
+### Removed
+
+- **`CustomerAppointment` and `InternalMeeting`, with their helpers, their constants trait
+  and their tests.** ⚠️ **Breaking.** A meeting is stored as `Appointment`, and the stored
+  type of its counterpart is what tells a customer meeting apart — a subclass per
+  counterpart restated what the value already says, and nothing had ever consumed either
+  class. `assignedSeller` was a fact of the customer and travels inside the frozen copy
+  `about` holds ; `makesOffer` moved up to `Appointment` ; `FollowUp::$result` builds an
+  `Appointment` accordingly.
+
+- **`Appointment::$assignedCompany`.** ⚠️ **Breaking.** Frozen at creation, nullable by
+  design — an account without a business identity, or with several pointing at different
+  companies, answered `null` — and consumed by nobody.
 
 ### Fixed
 
