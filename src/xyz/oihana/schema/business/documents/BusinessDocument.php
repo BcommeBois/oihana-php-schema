@@ -166,6 +166,27 @@ class BusinessDocument extends Intangible
     public null|array|Organization|Person $customer ;
 
     /**
+     * The date the document left draft and reached the outside world — the
+     * moment it stopped being ours alone to change.
+     *
+     * Reuses {@see https://schema.org/datePublished}, whose own definition
+     * (« date of first broadcast/publication ») already names exactly this : a
+     * document is drafted, corrected, drafted again, and then, once, published.
+     *
+     * 🔑 **Not {@see self::$issueDate}.** `issueDate` is the date printed on
+     * the document — the one a reader sees, chosen when the document is
+     * created and free to be edited like any other header field of a draft.
+     * `datePublished` is a system fact : when *this* copy first left the
+     * draft state, set once, by whatever publishes it, never by a caller.
+     * The two usually fall close together and are never the same property —
+     * a document back-dated to match a paper original still publishes today.
+     *
+     * @var string|null
+     * @since 1.5.0
+     */
+    public ?string $datePublished ;
+
+    /**
      * The commercial direction of the document (sale / purchase), from the
      * operator's point of view — which of {@see self::$seller} / {@see self::$customer}
      * is the operator's own organization.

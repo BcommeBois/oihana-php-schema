@@ -55,6 +55,7 @@ class BusinessDocumentTest extends TestCase
         $this->assertSame( 'contact'        , BusinessDocument::CONTACT         );
         $this->assertSame( 'currency'       , BusinessDocument::CURRENCY        );
         $this->assertSame( 'customer'       , BusinessDocument::CUSTOMER        );
+        $this->assertSame( 'datePublished'  , BusinessDocument::DATE_PUBLISHED  );
         $this->assertSame( 'direction'      , BusinessDocument::DIRECTION       );
         $this->assertSame( 'documentLines'  , BusinessDocument::DOCUMENT_LINES  );
         $this->assertSame( 'issueDate'      , BusinessDocument::ISSUE_DATE      );
@@ -74,6 +75,7 @@ class BusinessDocumentTest extends TestCase
         $this->assertSame( Oihana::BILLING_ADDRESS , BusinessDocument::BILLING_ADDRESS );
         $this->assertSame( Oihana::CONTACT         , BusinessDocument::CONTACT         );
         $this->assertSame( Oihana::CUSTOMER        , BusinessDocument::CUSTOMER        );
+        $this->assertSame( Oihana::DATE_PUBLISHED  , BusinessDocument::DATE_PUBLISHED  );
         $this->assertSame( Oihana::ORDER_DELIVERY  , BusinessDocument::ORDER_DELIVERY  );
         $this->assertSame( Oihana::POINT_OF_SALE   , BusinessDocument::POINT_OF_SALE   );
         $this->assertSame( Oihana::TOTALS          , BusinessDocument::TOTALS          );
@@ -97,6 +99,7 @@ class BusinessDocumentTest extends TestCase
         $this->assertNull( $document->contact        ?? null );
         $this->assertNull( $document->currency       ?? null );
         $this->assertNull( $document->customer       ?? null );
+        $this->assertNull( $document->datePublished  ?? null );
         $this->assertNull( $document->direction      ?? null );
         $this->assertNull( $document->documentLines  ?? null );
         $this->assertNull( $document->issueDate      ?? null );
@@ -133,6 +136,40 @@ class BusinessDocumentTest extends TestCase
         $this->assertInstanceOf( Person::class , $document->customer ) ;
         $this->assertInstanceOf( Organization::class , $document->seller ) ;
         $this->assertInstanceOf( Organization::class , $document->author ) ;
+    }
+
+    /**
+     * `datePublished` and `issueDate` answer two different questions, and a
+     * document mid-life shows it : printed with a date the customer reads,
+     * still silent on when — or whether — a copy of it ever left the draft.
+     */
+    public function testDatePublishedIsAbsentUntilStated(): void
+    {
+        $document = new BusinessDocument
+        ([
+            BusinessDocument::ISSUE_DATE => '2026-09-03' ,
+            BusinessDocument::STATUS     => BusinessDocumentStatus::DRAFT ,
+        ]);
+
+        $this->assertSame( '2026-09-03' , $document->issueDate ) ;
+        $this->assertNull( $document->datePublished ?? null ) ;
+    }
+
+    /**
+     * Once stated, `datePublished` is read back exactly as given — a plain
+     * date string, the same shape `issueDate` already keeps.
+     */
+    public function testDatePublishedHydratesAsAPlainDate(): void
+    {
+        $document = new BusinessDocument
+        ([
+            BusinessDocument::ISSUE_DATE     => '2026-09-01' ,
+            BusinessDocument::DATE_PUBLISHED => '2026-09-03' ,
+            BusinessDocument::STATUS         => BusinessDocumentStatus::SENT ,
+        ]);
+
+        $this->assertSame( '2026-09-01' , $document->issueDate ) ;
+        $this->assertSame( '2026-09-03' , $document->datePublished ) ;
     }
 
     /**

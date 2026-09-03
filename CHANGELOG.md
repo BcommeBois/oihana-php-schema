@@ -8,6 +8,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- **`BusinessDocument::$datePublished`** — reuses [schema.org's own
+  `datePublished`](https://schema.org/datePublished) (« date of first broadcast/publication »)
+  for the one date a business document did not yet have a name for : when a draft first left
+  our own base and reached the outside world.
+
+  🔑 **Not `$issueDate`, and never the same property.** `issueDate` is the date printed on the
+  document — chosen at creation, editable like any other header field of a draft.
+  `datePublished` is a system fact, set once by whatever publishes the document, never by a
+  caller : a document back-dated to match a paper original still publishes today. Silence means
+  the document never left draft, the same reading `$authority` and `$totalsAccuracy` already
+  give their own absence.
+
 - **`Appointment` — one class for every meeting, and the counterpart carries the type.**
   A visit to a customer, a meeting between colleagues, a plain diary note : one stored
   shape. What tells a customer meeting apart is not a subclass — it is the stored type of

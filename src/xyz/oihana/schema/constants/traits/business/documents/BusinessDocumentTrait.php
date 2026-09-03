@@ -20,6 +20,7 @@ trait BusinessDocumentTrait
     public const string CONTACT         = 'contact' ;
     public const string CURRENCY        = 'currency' ;
     public const string CUSTOMER        = 'customer' ;
+    public const string DATE_PUBLISHED  = 'datePublished' ;
     public const string DIRECTION       = 'direction' ;
     public const string DOCUMENT_LINES  = 'documentLines' ;
     public const string ISSUE_DATE      = 'issueDate' ;
