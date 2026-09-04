@@ -8,6 +8,35 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- **`ApplicableResource` and `Product::$hasApplicableResource`** — what an item may **receive** : a
+  service, a treatment, an option. Each possibility is a link carrying the resource (`item`), its
+  rank (`position`) and whether it applies **by default** (`appliedByDefault`).
+
+  🚨 **The flag belongs to the link, never to the resource.** The same service can apply by default
+  to one item and be merely offered on another — a treatment included in the price of one board is
+  an option on the next. Put on the resource itself it would read « I apply everywhere », which is
+  false, and false in a way nothing shows since the resource looks perfectly ordinary. A bare list
+  of resources could not say it ; that is the whole reason the class exists.
+
+  🔑 **`item` carries a reference, not a copy of the record.** The price, the unit and the
+  availability of a resource live on its own record, and a price depends on who is buying : copying
+  them into the link would freeze, at the moment it is written, figures that belong to the moment it
+  is read.
+
+  ⚠️ **An absent `appliedByDefault` is not a `false`** — absent says « the source does not tell »,
+  `false` says « the source says no ».
+
+  🚨 **It does not extend `ListItem`**, which names `item` and `position` already : that class types
+  `item` as `?Thing`, and PHP forbids widening the type of an inherited property to
+  `null|array|Thing`. Every class here is built from an array, so an `item` unable to hold one would
+  throw on the constructor path while working through reflection — the worst of both. The property
+  names are identical, so the JSON-LD is unchanged ; only the inheritance differs.
+
+- **`hydrateApplicableResource()`** — types the `item` of a link down to a `Product` on the
+  **constructor** path, an already typed resource being left alone. The attribute on
+  `Product::$hasApplicableResource` covers `Reflection::hydrate()` ; the two doors have to agree,
+  and an essay compares them.
+
 - **`BusinessDocument::$datePublished`** — reuses [schema.org's own
   `datePublished`](https://schema.org/datePublished) (« date of first broadcast/publication »)
   for the one date a business document did not yet have a name for : when a draft first left

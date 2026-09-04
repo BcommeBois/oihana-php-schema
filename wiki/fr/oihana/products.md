@@ -143,6 +143,7 @@ class MyProduct extends Product
 | `vat` | `TaxRate` ou référence | Le régime de TVA. |
 | `density` / `length` / `volume` | numériques | Les caractéristiques physiques. |
 | `fees` | `FeeSpecification[]` | Les frais dus **en plus du prix** — contribution environnementale, consigne, emballage, port (voir ci-dessous). |
+| `hasApplicableResource` | `ApplicableResource[]` | Les ressources qui peuvent lui être appliquées — une prestation, une option (voir ci-dessous). |
 | `status` | `int` | Le statut applicatif. |
 
 Le trait descriptif `ProductProperty` (essence, apparence, certification, couleurs, …) et les propriétés additionnelles normalisées (`ProductAdditionalProperty::normalize()`) complètent la fiche — voir [Ingestion](ingestion.md).
@@ -189,6 +190,32 @@ L'entrée existe alors **sans `price`**, avec son `rate` et un `unresolvedReason
 🔑 **Se lit avec l'absence de `price`** : « c'est dû, voici le barème, et voici ce qui nous empêche de le chiffrer ». Un zéro dirait « rien n'est dû », ce qui est faux. Un consommateur qui multiplie une quantité par un `price` absent obtient zéro ou une erreur — **jamais un montant faux**.
 
 ⚠️ **À ne pas confondre avec `ExtraPriceSpecification`**, qui dérive aussi d'`UnitPriceSpecification` mais sert la segmentation tarifaire et n'a rien à voir avec les frais.
+
+### Les ressources applicables — `hasApplicableResource`
+
+Un article peut **recevoir** quelque chose : une prestation d'atelier, un traitement, une option. Chaque possibilité est une `ApplicableResource`, qui porte trois choses — la ressource, son rang, et **si elle s'applique par défaut**.
+
+```json
+{
+  "@type": "Product",
+  "id": "board-42",
+  "hasApplicableResource":
+  [
+    { "@type": "ApplicableResource", "item": { "id": "srv-treatment" }, "position": 1, "appliedByDefault": true  },
+    { "@type": "ApplicableResource", "item": { "id": "srv-polish"    }, "position": 2, "appliedByDefault": false }
+  ]
+}
+```
+
+🚨 **Le drapeau appartient au LIEN, jamais à la ressource.** La même prestation peut s'appliquer d'office sur un article et n'être qu'une option sur le suivant : un traitement compris dans le prix d'une planche est un supplément sur la voisine. Posé sur la ressource elle-même, le drapeau dirait « je m'applique partout » — ce qui est faux, et faux sans que rien ne le montre, puisque la ressource a l'air parfaitement ordinaire. **C'est toute la raison d'être de cette classe** : une simple liste de ressources ne saurait pas le dire.
+
+🔑 **`item` porte une référence, pas une copie de la fiche.** Le prix, l'unité et la disponibilité d'une ressource vivent sur sa propre fiche, et un prix dépend de qui achète : les recopier ici figerait, au moment où le lien est écrit, des chiffres qui appartiennent au moment où il est lu.
+
+⚠️ **Un `appliedByDefault` absent n'est pas un `false`.** Absent dit « la source ne le dit pas » ; `false` dit « la source dit non ». Un consommateur qui doit distinguer les deux le peut, et celui qui n'en a pas besoin lit les deux comme « pas par défaut ».
+
+🚨 **Pourquoi la classe n'hérite pas de `ListItem`**, qui nomme pourtant `item` et `position`. Cette classe-là type `item` en `?Thing`, et PHP interdit d'élargir le type d'une propriété héritée : une sous-classe ne peut pas en faire un `null|array|Thing`. Or toutes les classes de cette bibliothèque se construisent depuis un tableau — `new Product( [ … ] )` — donc un `item` incapable de porter un tableau échouerait sur le chemin du constructeur tout en fonctionnant par réflexion, c'est-à-dire le pire des deux. **Les noms de propriétés sont identiques**, ce que dit le JSON-LD ne change pas ; seul l'héritage diffère.
+
+⚠️ **Le constructeur assigne brut**, comme pour les frais. Sur ce chemin, passez par [`hydrateApplicableResource()`](helpers.md) : il type l'`item` en `Product` et laisse tel quel celui qui l'est déjà.
 
 ---
 

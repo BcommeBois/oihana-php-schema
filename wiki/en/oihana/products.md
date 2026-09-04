@@ -143,6 +143,7 @@ class MyProduct extends Product
 | `vat` | `TaxRate` or reference | The VAT regime. |
 | `density` / `length` / `volume` | numerics | The physical characteristics. |
 | `fees` | `FeeSpecification[]` | The fees owed **on top of the price** — environmental contribution, deposit, packaging, carriage (see below). |
+| `hasApplicableResource` | `ApplicableResource[]` | The resources that may be applied to it — a service, an option (see below). |
 | `status` | `int` | The applicative status. |
 
 The descriptive `ProductProperty` trait (essence, appearance, certification, colors, …) and the normalized additional properties (`ProductAdditionalProperty::normalize()`) complete the record — see [Ingestion](ingestion.md).
@@ -189,6 +190,32 @@ The entry then exists **without a `price`**, carrying its `rate` and an `unresol
 🔑 **Read it together with the absence of `price`**: "this is owed, here is the published rate, and here is what stops us from quantifying it". A zero would say "nothing is owed", which is false. A consumer multiplying a quantity by an absent `price` gets zero or an error — **never a wrong amount**.
 
 ⚠️ **Not to be confused with `ExtraPriceSpecification`**, which also derives from `UnitPriceSpecification` but serves price segmentation and has nothing to do with fees.
+
+### The applicable resources — `hasApplicableResource`
+
+An item may **receive** something : a workshop service, a treatment, an option. Each possibility is an `ApplicableResource`, carrying three things — the resource, its rank, and **whether it applies by default**.
+
+```json
+{
+  "@type": "Product",
+  "id": "board-42",
+  "hasApplicableResource":
+  [
+    { "@type": "ApplicableResource", "item": { "id": "srv-treatment" }, "position": 1, "appliedByDefault": true  },
+    { "@type": "ApplicableResource", "item": { "id": "srv-polish"    }, "position": 2, "appliedByDefault": false }
+  ]
+}
+```
+
+🚨 **The flag belongs to the LINK, never to the resource.** The same service can apply by default to one item and be merely offered on another : a treatment included in the price of one board is an option on the next. Put on the resource itself, the flag would read « I apply everywhere » — which is false, and false in a way nothing shows, since the resource looks perfectly ordinary. **That is the whole reason this class exists** : a bare list of resources could not say it.
+
+🔑 **`item` carries a reference, not a copy of the record.** The price, the unit and the availability of a resource live on its own record, and a price depends on who is buying : copying them here would freeze, at the moment the link is written, figures that belong to the moment it is read.
+
+⚠️ **An absent `appliedByDefault` is not a `false`.** Absent says « the source does not tell » ; `false` says « the source says no ». A consumer that needs to tell one from the other can, and one that does not can read both as « not by default ».
+
+🚨 **Why the class does not extend `ListItem`**, which names `item` and `position` already. That class types `item` as `?Thing`, and PHP forbids widening the type of an inherited property : a subclass may not turn it into `null|array|Thing`. Yet every class of this library is built from an array — `new Product( [ … ] )` — so an `item` unable to hold an array would throw on the constructor path while working through reflection, which is the worst of both. **The property names are identical**, so what the JSON-LD says is unchanged ; only the inheritance differs.
+
+⚠️ **The constructor assigns raw**, as it does for fees. On that path, go through [`hydrateApplicableResource()`](helpers.md) : it types the `item` down to a `Product` and leaves an already typed one alone.
 
 ---
 
