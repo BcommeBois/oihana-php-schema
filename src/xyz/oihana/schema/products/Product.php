@@ -112,6 +112,26 @@ class Product extends SomeProducts
     public null|array|FeeSpecification $fees ;
 
     /**
+     * The resources that may be applied to this product — a service it can
+     * receive, an option it can take — each with its rank and whether it
+     * applies by default.
+     *
+     * 🚨 **Every entry is a LINK, not a resource** : the flag saying « applies
+     * by default » belongs to the pair (this product, that resource) and to
+     * nothing else. The same service can be included on one product and merely
+     * offered on the next — {@see ApplicableResource} carries that, a bare list
+     * of products could not.
+     *
+     * 🔑 **The entries hold references, not records.** The price and the unit
+     * of a resource live on its own record ; a price also depends on who is
+     * buying, so freezing one here would answer the wrong question.
+     *
+     * @var array|ApplicableResource|null
+     */
+    #[HydrateWith(ApplicableResource::class)]
+    public null|array|ApplicableResource $hasApplicableResource ;
+
+    /**
      * Indicates if the product is managed in stock.
      * @var null|bool
      */

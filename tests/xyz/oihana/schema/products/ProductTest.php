@@ -16,8 +16,11 @@ use xyz\oihana\schema\enumerations\FeeUnresolvedReason;
 use xyz\oihana\schema\enumerations\UnitOfSaleType;
 use xyz\oihana\schema\products\FeeSpecification;
 use xyz\oihana\schema\products\PhysicalQuantity;
+use xyz\oihana\schema\products\ApplicableResource;
 use xyz\oihana\schema\products\Product;
 use xyz\oihana\schema\products\StockLevel;
+
+use function xyz\oihana\schema\helpers\hydrate\hydrateApplicableResource;
 
 class ProductTest extends TestCase
 {
@@ -628,6 +631,86 @@ class ProductTest extends TestCase
                     Oihana::WEIGHT          => 15.419 ,
                     Oihana::VOLUME          => 0.0312 ,
                 ]
+            ]
+        ];
+    }
+    // ---- hasApplicableResource
+
+    /**
+     * The links are typed by the attribute on the property.
+     *
+     * @return void
+     * @throws ReflectionException
+     */
+    public function testHasApplicableResourceIsHydrated(): void
+    {
+        $product = new Reflection()->hydrate( $this->productWithApplicableResources() , Product::class ) ;
+
+        $links = $product->hasApplicableResource ;
+
+        $this->assertIsArray( $links );
+        $this->assertCount( 2 , $links );
+
+        $this->assertInstanceOf( ApplicableResource::class , $links[ 0 ] );
+        $this->assertInstanceOf( ApplicableResource::class , $links[ 1 ] );
+
+        $this->assertTrue ( $links[ 0 ]->appliedByDefault );
+        $this->assertFalse( $links[ 1 ]->appliedByDefault );
+
+        $this->assertSame( 1 , $links[ 0 ]->position );
+        $this->assertSame( 2 , $links[ 1 ]->position );
+    }
+
+    /**
+     * 🔑 **The essay that keeps the helper honest.** A payload reaches this class
+     * by two doors — the constructor and `Reflection::hydrate()` — and the
+     * attribute only covers the second. Comparing them is what catches a
+     * property typed on one side and left raw on the other.
+     *
+     * @return void
+     * @throws ReflectionException
+     */
+    public function testBothHydrationPathsAgreeOnApplicableResources(): void
+    {
+        $payload = $this->productWithApplicableResources() ;
+
+        $reflected  = new Reflection()->hydrate( $payload , Product::class ) ;
+        $constructed = new Product( $payload ) ;
+
+        $fromReflection  = $reflected->hasApplicableResource ;
+        $fromConstructor = array_map( hydrateApplicableResource( ... ) , (array) $constructed->hasApplicableResource ) ;
+
+        // ⚠️ What the two must agree on is what they SAY, not what they hold :
+        // `Reflection::hydrate()` leaves an internal reflection handle on the
+        // objects it builds, and the constructor does not. Comparing the
+        // serialized form asks the only question that matters.
+        $this->assertEquals
+        (
+            json_decode( json_encode( $fromReflection  ) , true ) ,
+            json_decode( json_encode( $fromConstructor ) , true ) ,
+        );
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function productWithApplicableResources() :array
+    {
+        return
+        [
+            Oihana::ID                     => 'board-42' ,
+            Oihana::HAS_APPLICABLE_RESOURCE =>
+            [
+                [
+                    Oihana::ITEM               => [ Oihana::ID => 'srv-treatment' ] ,
+                    Oihana::POSITION           => 1 ,
+                    Oihana::APPLIED_BY_DEFAULT => true ,
+                ],
+                [
+                    Oihana::ITEM               => [ Oihana::ID => 'srv-polish' ] ,
+                    Oihana::POSITION           => 2 ,
+                    Oihana::APPLIED_BY_DEFAULT => false ,
+                ],
             ]
         ];
     }
