@@ -19,6 +19,7 @@ use xyz\oihana\schema\business\documents\Adjustment;
 use xyz\oihana\schema\business\documents\BusinessDocumentLine;
 use xyz\oihana\schema\business\documents\TaxDetail;
 use xyz\oihana\schema\constants\Oihana;
+use xyz\oihana\schema\enumerations\QuantityOrigin;
 use xyz\oihana\schema\enumerations\UnitOfSaleType;
 
 class BusinessDocumentLineTest extends TestCase
@@ -44,6 +45,7 @@ class BusinessDocumentLineTest extends TestCase
         $this->assertSame( 'position'           , BusinessDocumentLine::POSITION            );
         $this->assertSame( 'price'              , BusinessDocumentLine::PRICE               );
         $this->assertSame( 'quantity'           , BusinessDocumentLine::QUANTITY            );
+        $this->assertSame( 'quantityOrigin'     , BusinessDocumentLine::QUANTITY_ORIGIN     );
         $this->assertSame( 'section'            , BusinessDocumentLine::SECTION             );
         $this->assertSame( 'subtotal'           , BusinessDocumentLine::SUBTOTAL            );
         $this->assertSame( 'taxes'              , BusinessDocumentLine::TAXES               );
@@ -69,6 +71,7 @@ class BusinessDocumentLineTest extends TestCase
         $this->assertNull( $line->position           ?? null );
         $this->assertNull( $line->price              ?? null );
         $this->assertNull( $line->quantity           ?? null );
+        $this->assertNull( $line->quantityOrigin     ?? null );
         $this->assertNull( $line->section            ?? null );
         $this->assertNull( $line->subtotal           ?? null );
         $this->assertNull( $line->taxes              ?? null );
@@ -181,6 +184,49 @@ class BusinessDocumentLineTest extends TestCase
 
         $this->assertSame( 'Parquet chêne fumé léger' , $line->description ) ;
         $this->assertSame( 'PARQUET CHENE FUME'       , $line->section     ) ;
+    }
+
+    /**
+     * A line says nothing about where its quantity came from unless someone states
+     * it — and silence must not be read as « a human chose this number ».
+     *
+     * @return void
+     * @throws ReflectionException
+     */
+    public function testQuantityOriginIsSilentUnlessStated(): void
+    {
+        $line = new BusinessDocumentLine
+        ([
+            BusinessDocumentLine::POSITION => 100 ,
+            BusinessDocumentLine::QUANTITY => 12  ,
+        ]);
+
+        $this->assertNull( $line->quantityOrigin ) ;
+    }
+
+    /**
+     * The two states survive hydration, and the value travels as it was written —
+     * a reader tells a computed quantity from a typed one by this and nothing else.
+     *
+     * @return void
+     * @throws ReflectionException
+     */
+    public function testQuantityOriginHydratesBothStates(): void
+    {
+        $computed = new BusinessDocumentLine
+        ([
+            BusinessDocumentLine::QUANTITY        => 0.076                     ,
+            BusinessDocumentLine::QUANTITY_ORIGIN => QuantityOrigin::CALCULATED ,
+        ]);
+
+        $typed = new BusinessDocumentLine
+        ([
+            BusinessDocumentLine::QUANTITY        => 2.5                    ,
+            BusinessDocumentLine::QUANTITY_ORIGIN => QuantityOrigin::ENTERED ,
+        ]);
+
+        $this->assertSame( QuantityOrigin::CALCULATED , $computed->quantityOrigin ) ;
+        $this->assertSame( QuantityOrigin::ENTERED    , $typed->quantityOrigin    ) ;
     }
 
     /**

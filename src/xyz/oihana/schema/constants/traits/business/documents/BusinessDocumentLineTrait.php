@@ -20,6 +20,7 @@ trait BusinessDocumentLineTrait
     const string POSITION            = 'position' ;
     const string PRICE               = 'price' ;
     const string QUANTITY            = 'quantity' ;
+    const string QUANTITY_ORIGIN     = 'quantityOrigin' ;
     const string SECTION             = 'section' ;
     const string SUBTOTAL            = 'subtotal' ;
     const string TAXES               = 'taxes' ;

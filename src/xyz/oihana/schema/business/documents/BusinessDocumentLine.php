@@ -18,6 +18,7 @@ use org\schema\UnitPriceSpecification;
 
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\constants\traits\business\documents\BusinessDocumentLineTrait;
+use xyz\oihana\schema\enumerations\QuantityOrigin;
 use xyz\oihana\schema\enumerations\UnitOfSaleType;
 use xyz\oihana\schema\products\Product as OihanaProduct;
 use xyz\oihana\schema\traits\HasColor;
@@ -142,6 +143,41 @@ class BusinessDocumentLine extends StructuredValue
      */
     #[HydrateAs(QuantitativeValue::class)]
     public null|array|int|float|QuantitativeValue $quantity ;
+
+    /**
+     * Where the quantity above comes from — worked out by the system, or typed by
+     * someone ({@see QuantityOrigin}).
+     *
+     * A line written **as the consequence of another** — a treatment that comes
+     * with the timber, a service an article carries — holds a quantity nobody
+     * typed : it is worked out from the line it serves, and the two are bound.
+     * Four boards of `0.019` cubic metres each make `0.076` cubic metres of
+     * treatment, and nothing else.
+     *
+     * 🚨 **Two rules are right, and they exclude each other.** A bound quantity
+     * that stops following under-bills in silence — raise the boards to a hundred
+     * and the treatment stays at `0.076`, twenty-five times short of the work that
+     * will be done, with nothing on screen to say so. A typed quantity that gets
+     * overwritten erases a decision just as quietly : whoever typed it had
+     * measured, or agreed a lump sum.
+     *
+     * The line therefore has to remember which of the two it is under, and this is
+     * where it does. It is born `CALCULATED` and turns `ENTERED` on the first
+     * figure typed into it ; **it does not come back on its own**.
+     *
+     * ⚠️ **An absent value states nothing**, and must not be read as `ENTERED` : a
+     * line written before the property existed says nothing about where its number
+     * came from.
+     *
+     * 🔑 **This says where the number came from, never what it is bound to.** The
+     * line it follows — when it follows one — is named by the inherited `isPartOf`,
+     * and the two answer different questions : one is a provenance, the other a
+     * relation.
+     *
+     * @var string|QuantityOrigin|null
+     * @since 1.5.0
+     */
+    public null|string|QuantityOrigin $quantityOrigin = null ;
 
     /**
      * The heading this line belongs to, when the document is written in

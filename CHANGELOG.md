@@ -8,6 +8,36 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- **`QuantityOrigin` and `BusinessDocumentLine::$quantityOrigin`** — where the quantity of a line
+  comes from : worked out by the system, or typed by someone.
+
+  Most lines are typed, and the question does not arise. It arises the moment a line is written **as
+  the consequence of another** — a treatment that comes with the timber, a service an article
+  carries : its quantity is then worked out from the line it serves, and the two are bound. Four
+  boards of `0.019` cubic metres each make `0.076` cubic metres of treatment, and nothing else.
+
+  🚨 **Two rules are right, and they exclude each other.** A bound quantity that stops following
+  under-bills in silence — raise the boards from four to a hundred and leave the treatment at
+  `0.076`, and the document charges twenty-five times less work than will be done, with nothing on
+  screen to say so. A typed quantity that gets overwritten erases a decision just as quietly :
+  whoever typed the figure had measured, or agreed a lump sum. The line therefore has to remember
+  which of the two it is under.
+
+  A line is born `CALCULATED` and turns `ENTERED` on the first figure typed into it, and **does not
+  come back on its own** : returning to the computed value is a gesture in its own right, and
+  clearing the quantity is the usual way to ask for it.
+
+  ⚠️ **An absent value states nothing**, and must not be read as `ENTERED` : a line written before
+  the property existed says nothing about where its number came from.
+
+  🔑 **Two values today, and the wording leaves room for a third** — a line mirrored from another
+  system carries a quantity that was neither worked out nor typed here. A yes-or-no flag would have
+  had to be renamed the day it has to say so.
+
+  🔑 **It states a provenance, never a relation.** The line a computed quantity follows is named by
+  the inherited `isPartOf` : the two answer different questions, and keeping them apart is what lets
+  a line be bound to another without its quantity being bound to it.
+
 - **`ApplicableResource` and `Product::$hasApplicableResource`** — what an item may **receive** : a
   service, a treatment, an option. Each possibility is a link carrying the resource (`item`), its
   rank (`position`) and whether it applies **by default** (`appliedByDefault`).
