@@ -15,7 +15,7 @@ namespace xyz\oihana\schema\constants\traits\products ;
  *
  * @author  Marc Alcaraz (eKameleon)
  * @package xyz\oihana\schema\constants\traits\products
- * @since   1.4.0
+ * @since   1.5.0
  */
 trait ApplicableResource
 {

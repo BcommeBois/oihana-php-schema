@@ -55,7 +55,7 @@ use xyz\oihana\schema\constants\Oihana;
  *
  * @author  Marc Alcaraz (eKameleon)
  * @package xyz\oihana\schema\products
- * @since   1.4.0
+ * @since   1.5.0
  */
 class ApplicableResource extends Intangible
 {

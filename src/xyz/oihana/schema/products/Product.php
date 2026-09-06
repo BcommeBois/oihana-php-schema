@@ -127,6 +127,7 @@ class Product extends SomeProducts
      * buying, so freezing one here would answer the wrong question.
      *
      * @var array|ApplicableResource|null
+     * @since 1.5.0
      */
     #[HydrateWith(ApplicableResource::class)]
     public null|array|ApplicableResource $hasApplicableResource ;

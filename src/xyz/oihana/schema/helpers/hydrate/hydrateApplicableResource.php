@@ -33,7 +33,7 @@ use xyz\oihana\schema\products\Product;
  *
  * @return ApplicableResource|null The link, or null when there is nothing to build.
  *
- * @since 1.4.0
+ * @since 1.5.0
  */
 function hydrateApplicableResource( mixed $init = null ) :?ApplicableResource
 {
