@@ -7,7 +7,7 @@ namespace xyz\oihana\schema\constants\traits\statistics;
  *
  * @package xyz\oihana\schema\constants\traits\statistics
  * @author  Marc Alcaraz (eKameleon)
- * @since   1.4.0
+ * @since   1.5.0
  */
 trait StatisticsSummaryTrait
 {

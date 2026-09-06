@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+### Fixed
+
+- **The `@since` annotations of the unreleased work name 1.5.0**, not 1.4.0 — that version was
+  tagged on 2026-08-19 and none of this is in it. Corrected on `ApplicableResource` (the class, its
+  constants trait and its hydration helper), on `Product::$hasApplicableResource` which named no
+  version at all, and on `StatisticsSummary` and its constants trait.
+
+  ⚠️ **Nine other annotations were checked and left alone** : the properties `BusinessDocument`
+  and `BusinessDocumentLine` gained — `assignedSeller`, `authority`, `totalsAccuracy`, `volume`,
+  `weight`, `freeReason`, `includedInTotal`, `section`, `technicalNote` — were all introduced
+  before the tag, and their `1.4.0` is right.
+
 ### Added
 
 - **`QuantityOrigin` and `BusinessDocumentLine::$quantityOrigin`** — where the quantity of a line

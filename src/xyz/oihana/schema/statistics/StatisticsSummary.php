@@ -66,7 +66,7 @@ use xyz\oihana\schema\traits\HasTradingMeasures;
  *
  * @package xyz\oihana\schema\statistics
  * @author  Marc Alcaraz (eKameleon)
- * @since   1.4.0
+ * @since   1.5.0
  */
 class StatisticsSummary extends Statistics
 {
@@ -93,7 +93,7 @@ class StatisticsSummary extends Statistics
      * summary has melted its members, it does not enumerate them.
      *
      * @var int|null
-     * @since 1.4.0
+     * @since 1.5.0
      */
     public null|int $numberOfItems ;
 }
