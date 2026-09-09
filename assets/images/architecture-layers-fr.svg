@@ -1,0 +1,161 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1144 1074" width="1144" height="1074" role="img" aria-label="Cinq bandes empilées : les domaines Oihana, le socle Oihana, le vocabulaire Schema.org, le noyau Schema.org, puis PHP et les paquets oihana. Les flèches descendent toujours." xml:space="preserve">
+<style>
+text{fill:#2E302A;font-variant-numeric:tabular-nums}
+.mono{font-family:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,"DejaVu Sans Mono",monospace;white-space:pre}
+.sans,.tag{font-family:"IBM Plex Sans",-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;white-space:pre}
+.ns{font-size:13px;font-weight:500}.role{font-size:12px;fill:#6B6E64}.ctx{font-size:11px;fill:#6B6E64}
+.name{font-size:12.5px;font-weight:500}.desc{font-size:11px}.label{font-size:12px}.muted{fill:#6B6E64}
+.band{fill:#EBEDE7}.box.org{fill:#DCEAEB}.box.xyz{fill:#F6E3D5}.box.neutral{fill:#E3E5DF}
+.org-ink{fill:#0B454B}.xyz-ink{fill:#853B14}.neutral-ink{fill:#4B4D43}
+.org-text{fill:#0F5E66}.xyz-text{fill:#C5622B}.neutral-text{fill:#4B4D43}
+.edge{stroke:#2E302A;stroke-width:1.2;fill:none}.edge.direct{stroke:#6B6E64}.edge.mutual{stroke:#C5622B}
+.mk path{fill:#2E302A}.mk.muted path{fill:#6B6E64}.mk.xyz path{fill:#C5622B}
+.rule{stroke:#D8DAD2;stroke-width:1}.colhead{font-size:11.5px;fill:#6B6E64;font-weight:500}
+.eyebrow{font-size:10.5px;fill:#6B6E64;letter-spacing:.08em;font-weight:500}
+.chiptext{font-size:11.5px;font-weight:500}.leaves{font-size:11.5px}.leaf{fill:#853B14}.tag{font-size:11px;fill:#6B6E64}
+.node{fill:#F6E3D5}.node.iso{fill:none;stroke:#D8DAD2;stroke-width:1.2;stroke-dasharray:4 3}
+.badge{fill:#C5622B}.badge-text{fill:#F4F5F1;font-size:11px;font-weight:600}
+.foot{font-size:10.5px}.foot-title{font-size:11.5px;font-weight:500}
+</style>
+<rect width="1144" height="1074" fill="#F4F5F1"/>
+<defs><marker id="arr1" class="mk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<g transform="translate(32,32)">
+<rect class="band" x="0" y="0" width="1080" height="170" rx="8"/>
+<text class="mono ns xyz-text" x="14" y="21">xyz\oihana\schema</text>
+<text class="sans role" x="161" y="21">— les domaines métier · 112 classes</text>
+<text class="mono ctx" x="1066" y="21" text-anchor="end">@context https://schema.oihana.xyz</text>
+<rect class="box xyz" x="14" y="46" width="173.2" height="50" rx="4"/>
+<text class="mono name xyz-ink" x="28" y="67">business\documents</text>
+<text class="sans desc xyz-ink" x="28" y="84">27 classes · dont export</text>
+<rect class="box xyz" x="197.2" y="46" width="90" height="50" rx="4"/>
+<text class="mono name xyz-ink" x="211.2" y="67">products</text>
+<text class="sans desc xyz-ink" x="211.2" y="84">19 classes</text>
+<rect class="box xyz" x="297.2" y="46" width="88.5" height="50" rx="4"/>
+<text class="mono name xyz-ink" x="311.2" y="67">auth</text>
+<text class="sans desc xyz-ink" x="311.2" y="84">14 classes</text>
+<rect class="box xyz" x="395.7" y="46" width="97.8" height="50" rx="4"/>
+<text class="mono name xyz-ink" x="409.7" y="67">thesaurus</text>
+<text class="sans desc xyz-ink" x="409.7" y="84">11 classes</text>
+<rect class="box xyz" x="503.5" y="46" width="105.5" height="50" rx="4"/>
+<text class="mono name xyz-ink" x="517.5" y="67">statistics</text>
+<text class="sans desc xyz-ink" x="517.5" y="84">9 classes</text>
+<rect class="box xyz" x="619" y="46" width="82.5" height="50" rx="4"/>
+<text class="mono name xyz-ink" x="633" y="67">places</text>
+<text class="sans desc xyz-ink" x="633" y="84">8 classes</text>
+<rect class="box xyz" x="711.4" y="46" width="82.5" height="50" rx="4"/>
+<text class="mono name xyz-ink" x="725.4" y="67">people</text>
+<text class="sans desc xyz-ink" x="725.4" y="84">6 classes</text>
+<rect class="box xyz" x="14" y="106" width="385" height="50" rx="4"/>
+<text class="mono name xyz-ink" x="28" y="127">racine</text>
+<text class="sans desc xyz-ink" x="28" y="144">5 classes · AuditAction, Favorite, Log, Pagination, Website</text>
+<rect class="box xyz" x="409" y="106" width="128.8" height="50" rx="4"/>
+<text class="mono name xyz-ink" x="423" y="127">organizations</text>
+<text class="sans desc xyz-ink" x="423" y="144">5 classes</text>
+<rect class="box xyz" x="547.7" y="106" width="121" height="50" rx="4"/>
+<text class="mono name xyz-ink" x="561.7" y="127">appointments</text>
+<text class="sans desc xyz-ink" x="561.7" y="144">4 classes</text>
+<rect class="box xyz" x="678.7" y="106" width="90" height="50" rx="4"/>
+<text class="mono name xyz-ink" x="692.7" y="127">business</text>
+<text class="sans desc xyz-ink" x="692.7" y="144">2 classes</text>
+<rect class="box xyz" x="778.7" y="106" width="76.4" height="50" rx="4"/>
+<text class="mono name xyz-ink" x="792.7" y="127">http</text>
+<text class="sans desc xyz-ink" x="792.7" y="144">1 classe</text>
+<rect class="box xyz" x="865.1" y="106" width="90" height="50" rx="4"/>
+<text class="mono name xyz-ink" x="879.1" y="127">shipping</text>
+<text class="sans desc xyz-ink" x="879.1" y="144">1 classe</text>
+<rect class="band" x="0" y="180" width="1080" height="170" rx="8"/>
+<text class="mono ns xyz-text" x="14" y="201">xyz\oihana\schema</text>
+<text class="sans role" x="161" y="201">— le socle maison, partagé par tous les domaines</text>
+<rect class="box xyz" x="14" y="226" width="403.1" height="50" rx="4"/>
+<text class="mono name xyz-ink" x="28" y="247">constants\Oihana</text>
+<text class="sans desc xyz-ink" x="28" y="264">Properties (org) + 16 traits Oihana · 115 traits de constantes</text>
+<rect class="box xyz" x="427.1" y="226" width="360.8" height="50" rx="4"/>
+<text class="mono name xyz-ink" x="441.1" y="247">constants\*</text>
+<text class="sans desc xyz-ink" x="441.1" y="264">18 registres · JwtClaim, CasbinPolicy, ApplicationType…</text>
+<rect class="box xyz" x="797.9" y="226" width="121" height="50" rx="4"/>
+<text class="mono name xyz-ink" x="811.9" y="247">enumerations</text>
+<text class="sans desc xyz-ink" x="811.9" y="264">26 classes</text>
+<rect class="box xyz" x="928.9" y="226" width="82.5" height="50" rx="4"/>
+<text class="mono name xyz-ink" x="942.9" y="247">traits</text>
+<text class="sans desc xyz-ink" x="942.9" y="264">13 mixins</text>
+<rect class="box xyz" x="14" y="286" width="215.6" height="50" rx="4"/>
+<text class="mono name xyz-ink" x="28" y="307">helpers</text>
+<text class="sans desc xyz-ink" x="28" y="324">27 fonctions · hydrate · pivots</text>
+<line class="edge" x1="120" y1="358" x2="120" y2="428" marker-end="url(#arr1)"/>
+<text class="sans label" x="134" y="387">étend — toujours dans ce sens</text>
+<text class="sans label muted" x="134" y="403">aucun fichier de org\schema n&apos;importe xyz\oihana\schema</text>
+<rect class="box neutral" x="586.2" y="356" width="493.9" height="50" rx="4"/>
+<text class="mono name neutral-ink" x="600.2" y="377">com\progress\schema</text>
+<text class="sans desc neutral-ink" x="600.2" y="394">17 classes · second locataire du socle · @context https://schema.progress.com</text>
+<line class="edge" x1="833.1" y1="408" x2="833.1" y2="428" marker-end="url(#arr1)"/>
+<rect class="band" x="0" y="436" width="1080" height="170" rx="8"/>
+<text class="mono ns org-text" x="14" y="457">org\schema</text>
+<text class="sans role" x="104.6" y="457">— le vocabulaire Schema.org · 443 classes</text>
+<text class="mono ctx" x="1066" y="457" text-anchor="end">@context https://schema.org</text>
+<rect class="box org" x="14" y="482" width="94.6" height="50" rx="4"/>
+<text class="mono name org-ink" x="28" y="503">actions</text>
+<text class="sans desc org-ink" x="28" y="520">115 classes</text>
+<rect class="box org" x="118.6" y="482" width="717.7" height="50" rx="4"/>
+<text class="mono name org-ink" x="132.6" y="503">racine</text>
+<text class="sans desc org-ink" x="132.6" y="520">101 classes · Thing, Intangible, StructuredValue, Enumeration, Person, Organization, Place, Event, Product, Offer…</text>
+<rect class="box org" x="846.3" y="482" width="121" height="50" rx="4"/>
+<text class="mono name org-ink" x="860.3" y="503">enumerations</text>
+<text class="sans desc org-ink" x="860.3" y="520">99 classes</text>
+<rect class="box org" x="14" y="542" width="121" height="50" rx="4"/>
+<text class="mono name org-ink" x="28" y="563">creativeWork</text>
+<text class="sans desc org-ink" x="28" y="580">61 classes</text>
+<rect class="box org" x="145" y="542" width="88.5" height="50" rx="4"/>
+<text class="mono name org-ink" x="159" y="563">places</text>
+<text class="sans desc org-ink" x="159" y="580">26 classes</text>
+<rect class="box org" x="243.5" y="542" width="128.8" height="50" rx="4"/>
+<text class="mono name org-ink" x="257.5" y="563">organizations</text>
+<text class="sans desc org-ink" x="257.5" y="580">18 classes</text>
+<rect class="box org" x="382.3" y="542" width="121" height="50" rx="4"/>
+<text class="mono name org-ink" x="396.3" y="563">reservations</text>
+<text class="sans desc org-ink" x="396.3" y="580">10 classes</text>
+<rect class="box org" x="513.3" y="542" width="90" height="50" rx="4"/>
+<text class="mono name org-ink" x="527.3" y="563">services</text>
+<text class="sans desc org-ink" x="527.3" y="580">7 classes</text>
+<rect class="box org" x="613.3" y="542" width="82.5" height="50" rx="4"/>
+<text class="mono name org-ink" x="627.3" y="563">items</text>
+<text class="sans desc org-ink" x="627.3" y="580">5 classes</text>
+<rect class="box org" x="705.7" y="542" width="76.4" height="50" rx="4"/>
+<text class="mono name org-ink" x="719.7" y="563">events</text>
+<text class="sans desc org-ink" x="719.7" y="580">1 classe</text>
+<rect class="band" x="0" y="616" width="1080" height="230" rx="8"/>
+<text class="mono ns org-text" x="14" y="637">org\schema</text>
+<text class="sans role" x="104.6" y="637">— le noyau, hérité par toute entité</text>
+<rect class="box org" x="14" y="662" width="366.8" height="50" rx="4"/>
+<text class="mono name org-ink" x="28" y="683">Thing</text>
+<text class="sans desc org-ink" x="28" y="700">implements JsonSerializable · ArangoDBTrait + ThingTrait</text>
+<rect class="box org" x="390.8" y="662" width="445.5" height="50" rx="4"/>
+<text class="mono name org-ink" x="404.8" y="683">constants\Schema ≡ Prop</text>
+<text class="sans desc org-ink" x="404.8" y="700">Properties · 146 traits de constantes (JsonLD, ArangoDB, Edge, I18n…)</text>
+<rect class="box org" x="14" y="722" width="342.6" height="50" rx="4"/>
+<text class="mono name org-ink" x="28" y="743">traits</text>
+<text class="sans desc org-ink" x="28" y="760">16 mixins · ValueTrait, PlaceTrait, CollectionTrait…</text>
+<rect class="box org" x="366.6" y="722" width="209.5" height="50" rx="4"/>
+<text class="mono name org-ink" x="380.6" y="743">helpers</text>
+<text class="sans desc org-ink" x="380.6" y="760">SchemaResolver + 10 hydrateurs</text>
+<rect class="box org" x="14" y="782" width="481.8" height="50" rx="4"/>
+<text class="mono name org-ink" x="28" y="803">DublinCore</text>
+<text class="sans desc org-ink" x="28" y="820">à part · JsonSerializable · ThingTrait + DublinCoreTrait + DublinCoreSchema</text>
+<line class="edge" x1="120" y1="854" x2="120" y2="892" marker-end="url(#arr1)"/>
+<text class="sans label" x="134" y="877">s&apos;appuie sur php-reflect pour hydrater (Reflection::hydrate) et sérialiser (JsonSchemaTrait)</text>
+<rect class="band" x="0" y="900" width="1080" height="110" rx="8"/>
+<text class="mono ns neutral-text" x="14" y="921">fondations</text>
+<text class="sans role" x="104.6" y="921">— PHP et les paquets oihana</text>
+<rect class="box neutral" x="14" y="946" width="97.8" height="50" rx="4"/>
+<text class="mono name neutral-ink" x="28" y="976">PHP ≥ 8.4</text>
+<rect class="box neutral" x="121.8" y="946" width="144.3" height="50" rx="4"/>
+<text class="mono name neutral-ink" x="135.8" y="967">oihana/php-core</text>
+<text class="sans desc neutral-ink" x="135.8" y="984">options, accessors</text>
+<rect class="box neutral" x="276" y="946" width="152" height="50" rx="4"/>
+<text class="mono name neutral-ink" x="290" y="976">oihana/php-enums</text>
+<rect class="box neutral" x="438" y="946" width="403.1" height="50" rx="4"/>
+<text class="mono name neutral-ink" x="452" y="967">oihana/php-reflect</text>
+<text class="sans desc neutral-ink" x="452" y="984">Reflection::hydrate() · JsonSchemaTrait · SerializationContext</text>
+<rect class="box neutral" x="851.1" y="946" width="183" height="50" rx="4"/>
+<text class="mono name neutral-ink" x="865.1" y="976">oihana/php-standards</text>
+</g>
+</svg>

@@ -1,0 +1,187 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1144 1504" width="1144" height="1504" role="img" aria-label="28 Schema.org types, on the left, carry every Oihana class, on the right; when a bridge class exists it appears in the middle column." xml:space="preserve">
+<style>
+text{fill:#2E302A;font-variant-numeric:tabular-nums}
+.mono{font-family:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,"DejaVu Sans Mono",monospace;white-space:pre}
+.sans,.tag{font-family:"IBM Plex Sans",-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;white-space:pre}
+.ns{font-size:13px;font-weight:500}.role{font-size:12px;fill:#6B6E64}.ctx{font-size:11px;fill:#6B6E64}
+.name{font-size:12.5px;font-weight:500}.desc{font-size:11px}.label{font-size:12px}.muted{fill:#6B6E64}
+.band{fill:#EBEDE7}.box.org{fill:#DCEAEB}.box.xyz{fill:#F6E3D5}.box.neutral{fill:#E3E5DF}
+.org-ink{fill:#0B454B}.xyz-ink{fill:#853B14}.neutral-ink{fill:#4B4D43}
+.org-text{fill:#0F5E66}.xyz-text{fill:#C5622B}.neutral-text{fill:#4B4D43}
+.edge{stroke:#2E302A;stroke-width:1.2;fill:none}.edge.direct{stroke:#6B6E64}.edge.mutual{stroke:#C5622B}
+.mk path{fill:#2E302A}.mk.muted path{fill:#6B6E64}.mk.xyz path{fill:#C5622B}
+.rule{stroke:#D8DAD2;stroke-width:1}.colhead{font-size:11.5px;fill:#6B6E64;font-weight:500}
+.eyebrow{font-size:10.5px;fill:#6B6E64;letter-spacing:.08em;font-weight:500}
+.chiptext{font-size:11.5px;font-weight:500}.leaves{font-size:11.5px}.leaf{fill:#853B14}.tag{font-size:11px;fill:#6B6E64}
+.node{fill:#F6E3D5}.node.iso{fill:none;stroke:#D8DAD2;stroke-width:1.2;stroke-dasharray:4 3}
+.badge{fill:#C5622B}.badge-text{fill:#F4F5F1;font-size:11px;font-weight:600}
+.foot{font-size:10.5px}.foot-title{font-size:11.5px;font-weight:500}
+</style>
+<rect width="1144" height="1504" fill="#F4F5F1"/>
+<defs><marker id="arr2" class="mk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker><marker id="arr2m" class="mk muted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<g transform="translate(32,32)">
+<text class="sans colhead" x="0" y="14">org\schema — the type extended</text>
+<text class="sans colhead" x="300" y="14">xyz — the bridge class</text>
+<text class="sans colhead" x="480" y="14">xyz — the leaves</text>
+<text class="sans colhead" x="1080" y="14" text-anchor="end">arrow = extends</text>
+<text class="sans eyebrow" x="0" y="48">ACTORS AND PLACES</text>
+<line class="rule" x1="153.2" y1="44" x2="1080" y2="44"/>
+<text class="mono leaves" x="480" y="74"><tspan class="leaf">CustomerEmployee, </tspan><tspan class="leaf">Employee, </tspan><tspan class="leaf">ProviderEmployee, </tspan><tspan class="leaf">Seller, </tspan><tspan class="leaf">SubsidiaryEmployee</tspan><tspan class="tag"> · people</tspan></text>
+<rect class="box xyz" x="300" y="58.5" width="64.8" height="22" rx="3"/><text class="mono chiptext xyz-ink" x="311" y="73.5">Person</text>
+<line class="edge" x1="364.8" y1="69.5" x2="472" y2="69.5" marker-end="url(#arr2)"/>
+<text class="mono leaves" x="480" y="94"><tspan class="leaf">User</tspan><tspan class="tag"> · auth</tspan></text>
+<rect class="box org" x="171.2" y="68.5" width="64.8" height="22" rx="3"/><text class="mono chiptext org-ink" x="182.2" y="83.5">Person</text>
+<line class="edge" x1="236" y1="79.5" x2="262" y2="79.5"/>
+<line class="edge" x1="262" y1="69.5" x2="262" y2="89.5"/>
+<line class="edge" x1="262" y1="69.5" x2="292" y2="69.5" marker-end="url(#arr2)"/>
+<line class="edge direct" x1="262" y1="89.5" x2="472" y2="89.5" marker-end="url(#arr2m)"/>
+<text class="mono leaves" x="480" y="123"><tspan class="leaf">Affiliate, </tspan><tspan class="leaf">Customer, </tspan><tspan class="leaf">Provider, </tspan><tspan class="leaf">Subsidiary</tspan><tspan class="tag"> · organizations</tspan></text>
+<rect class="box xyz" x="300" y="107.5" width="71.9" height="22" rx="3"/><text class="mono chiptext xyz-ink" x="311" y="122.5">Company</text>
+<line class="edge" x1="371.9" y1="118.5" x2="472" y2="118.5" marker-end="url(#arr2)"/>
+<rect class="box org" x="135.6" y="107.5" width="100.4" height="22" rx="3"/><text class="mono chiptext org-ink" x="146.6" y="122.5">Corporation</text>
+<line class="edge" x1="236" y1="118.5" x2="292" y2="118.5" marker-end="url(#arr2)"/>
+<text class="mono leaves" x="480" y="152"><tspan class="leaf">CustomerSite, </tspan><tspan class="leaf">JobSite, </tspan><tspan class="leaf">Office, </tspan><tspan class="leaf">Place, </tspan><tspan class="leaf">ProviderSite, </tspan><tspan class="leaf">Warehouse</tspan><tspan class="tag"> · places</tspan></text>
+<rect class="box xyz" x="300" y="136.5" width="50.5" height="22" rx="3"/><text class="mono chiptext xyz-ink" x="311" y="151.5">Site</text>
+<line class="edge" x1="350.5" y1="147.5" x2="472" y2="147.5" marker-end="url(#arr2)"/>
+<rect class="box org" x="178.4" y="136.5" width="57.7" height="22" rx="3"/><text class="mono chiptext org-ink" x="189.4" y="151.5">Place</text>
+<line class="edge" x1="236" y1="147.5" x2="292" y2="147.5" marker-end="url(#arr2)"/>
+<text class="mono leaves" x="480" y="181"><tspan class="leaf">CustomPostalAddress</tspan><tspan class="tag"> · places</tspan></text>
+<rect class="box org" x="121.3" y="165.5" width="114.7" height="22" rx="3"/><text class="mono chiptext org-ink" x="132.3" y="180.5">PostalAddress</text>
+<line class="edge direct" x1="236" y1="176.5" x2="472" y2="176.5" marker-end="url(#arr2m)"/>
+<text class="sans eyebrow" x="0" y="216">DOCUMENTS, STATISTICS AND VALUES</text>
+<line class="rule" x1="276.1" y1="212" x2="1080" y2="212"/>
+<text class="mono leaves" x="480" y="242"><tspan class="leaf">CreditNote, </tspan><tspan class="leaf">DebitNote, </tspan><tspan class="leaf">DeliveryNote, </tspan><tspan class="leaf">GoodsReceiptConfirmation, </tspan><tspan class="leaf">Invoice, </tspan></text>
+<text class="mono leaves" x="480" y="257"><tspan class="leaf">PurchaseOrder, </tspan><tspan class="leaf">Quote, </tspan><tspan class="leaf">Receipt, </tspan><tspan class="leaf">RemittanceAdvice, </tspan><tspan class="leaf">Statement</tspan><tspan class="tag"> · business\documents</tspan></text>
+<rect class="box xyz" x="300" y="234" width="136.1" height="22" rx="3"/><text class="mono chiptext xyz-ink" x="311" y="249">BusinessDocument</text>
+<line class="edge" x1="436.1" y1="245" x2="472" y2="245" marker-end="url(#arr2)"/>
+<text class="mono leaves" x="480" y="277"><tspan class="leaf">CompanyStatistics, </tspan><tspan class="leaf">CustomerStatistics, </tspan><tspan class="leaf">ProductStatistics, </tspan><tspan class="leaf">ProviderStatistics, </tspan></text>
+<text class="mono leaves" x="480" y="292"><tspan class="leaf">SalesObjectives, </tspan><tspan class="leaf">SellerStatistics, </tspan><tspan class="leaf">StatisticsSummary</tspan><tspan class="tag"> · statistics</tspan></text>
+<rect class="box xyz" x="300" y="269" width="93.3" height="22" rx="3"/><text class="mono chiptext xyz-ink" x="311" y="284">Statistics</text>
+<line class="edge" x1="393.3" y1="280" x2="472" y2="280" marker-end="url(#arr2)"/>
+<text class="mono leaves" x="480" y="312"><tspan class="leaf">OrderedCollection</tspan><tspan class="tag"> · thesaurus</tspan></text>
+<rect class="box xyz" x="300" y="296.5" width="93.3" height="22" rx="3"/><text class="mono chiptext xyz-ink" x="311" y="311.5">Collection</text>
+<line class="edge" x1="393.3" y1="307.5" x2="472" y2="307.5" marker-end="url(#arr2)"/>
+<text class="mono leaves" x="480" y="332"><tspan class="leaf">Favorite, </tspan><tspan class="leaf">Pagination</tspan><tspan class="tag"> · root    </tspan><tspan class="leaf">Permission</tspan><tspan class="tag"> · auth    </tspan><tspan class="leaf">BusinessIdentity, </tspan></text>
+<text class="mono leaves" x="480" y="347"><tspan class="leaf">UserProfile</tspan><tspan class="tag"> · business    </tspan><tspan class="leaf">UserAgentInfo</tspan><tspan class="tag"> · http    </tspan><tspan class="leaf">ApplicableResource, </tspan></text>
+<text class="mono leaves" x="480" y="362"><tspan class="leaf">PriceQuantityDiscount, </tspan><tspan class="leaf">ProductProviderInfo, </tspan><tspan class="leaf">ProductWarehouseInfo</tspan><tspan class="tag"> · products    </tspan></text>
+<text class="mono leaves" x="480" y="377"><tspan class="leaf">ThesaurusDomain</tspan><tspan class="tag"> · thesaurus</tspan></text>
+<rect class="box org" x="142.7" y="294" width="93.3" height="22" rx="3"/><text class="mono chiptext org-ink" x="153.7" y="309">Intangible</text>
+<line class="edge" x1="236" y1="305" x2="262" y2="305"/>
+<line class="edge" x1="262" y1="245" x2="262" y2="350"/>
+<line class="edge" x1="262" y1="245" x2="292" y2="245" marker-end="url(#arr2)"/>
+<line class="edge" x1="262" y1="280" x2="292" y2="280" marker-end="url(#arr2)"/>
+<line class="edge" x1="262" y1="307.5" x2="292" y2="307.5" marker-end="url(#arr2)"/>
+<line class="edge direct" x1="262" y1="350" x2="472" y2="350" marker-end="url(#arr2m)"/>
+<text class="mono leaves" x="480" y="406"><tspan class="leaf">Adjustment, </tspan><tspan class="leaf">AgingSummary, </tspan><tspan class="leaf">AppliedEcoFee, </tspan><tspan class="leaf">BusinessDocumentLine, </tspan><tspan class="leaf">DeliveryLine, </tspan></text>
+<text class="mono leaves" x="480" y="421"><tspan class="leaf">DocumentTotals, </tspan><tspan class="leaf">EcoFeeRule, </tspan><tspan class="leaf">GoodsReceiptLine, </tspan><tspan class="leaf">PaymentInstallment, </tspan><tspan class="leaf">PaymentReminder, </tspan></text>
+<text class="mono leaves" x="480" y="436"><tspan class="leaf">PaymentSchedule, </tspan><tspan class="leaf">ProofOfDelivery, </tspan><tspan class="leaf">StatementEntry, </tspan><tspan class="leaf">TaxDetail</tspan><tspan class="tag"> · business\documents    </tspan></text>
+<text class="mono leaves" x="480" y="451"><tspan class="leaf">PricingCondition, </tspan><tspan class="leaf">PricingConditionSelector</tspan><tspan class="tag"> · products    </tspan></text>
+<text class="mono leaves" x="480" y="466"><tspan class="leaf">DeliveryRouteAssignment</tspan><tspan class="tag"> · shipping</tspan></text>
+<rect class="box org" x="107.1" y="420.5" width="129" height="22" rx="3"/><text class="mono chiptext org-ink" x="118.1" y="435.5">StructuredValue</text>
+<line class="edge direct" x1="236" y1="431.5" x2="472" y2="431.5" marker-end="url(#arr2m)"/>
+<text class="mono leaves" x="480" y="495"><tspan class="leaf">ObservationSeries</tspan><tspan class="tag"> · statistics</tspan></text>
+<rect class="box org" x="135.6" y="479.5" width="100.4" height="22" rx="3"/><text class="mono chiptext org-ink" x="146.6" y="494.5">Observation</text>
+<line class="edge direct" x1="236" y1="490.5" x2="472" y2="490.5" marker-end="url(#arr2m)"/>
+<text class="sans eyebrow" x="0" y="530">PRODUCTS AND PRICES</text>
+<line class="rule" x1="169.6" y1="526" x2="1080" y2="526"/>
+<text class="mono leaves" x="480" y="556"><tspan class="leaf">Product</tspan><tspan class="tag"> · products</tspan></text>
+<rect class="box org" x="128.4" y="540.5" width="107.6" height="22" rx="3"/><text class="mono chiptext org-ink" x="139.4" y="555.5">SomeProducts</text>
+<line class="edge direct" x1="236" y1="551.5" x2="472" y2="551.5" marker-end="url(#arr2m)"/>
+<text class="mono leaves" x="480" y="585"><tspan class="leaf">CustomerOffer</tspan><tspan class="tag"> · products</tspan></text>
+<rect class="box org" x="99.9" y="569.5" width="136.1" height="22" rx="3"/><text class="mono chiptext org-ink" x="110.9" y="584.5">OfferForPurchase</text>
+<line class="edge direct" x1="236" y1="580.5" x2="472" y2="580.5" marker-end="url(#arr2m)"/>
+<text class="mono leaves" x="480" y="614"><tspan class="leaf">ExtraPriceSpecification, </tspan><tspan class="leaf">FeeSpecification, </tspan><tspan class="leaf">TaxRate</tspan><tspan class="tag"> · products</tspan></text>
+<rect class="box org" x="57.1" y="598.5" width="178.9" height="22" rx="3"/><text class="mono chiptext org-ink" x="68.1" y="613.5">UnitPriceSpecification</text>
+<line class="edge direct" x1="236" y1="609.5" x2="472" y2="609.5" marker-end="url(#arr2m)"/>
+<text class="mono leaves" x="480" y="643"><tspan class="leaf">PhysicalQuantity, </tspan><tspan class="leaf">PriceSegmentation, </tspan><tspan class="leaf">StockLevel</tspan><tspan class="tag"> · products</tspan></text>
+<rect class="box org" x="92.8" y="627.5" width="143.2" height="22" rx="3"/><text class="mono chiptext org-ink" x="103.8" y="642.5">QuantitativeValue</text>
+<line class="edge direct" x1="236" y1="638.5" x2="472" y2="638.5" marker-end="url(#arr2m)"/>
+<text class="mono leaves" x="480" y="672"><tspan class="leaf">PaymentCondition, </tspan><tspan class="leaf">PaymentMethod</tspan><tspan class="tag"> · products</tspan></text>
+<rect class="box org" x="121.3" y="656.5" width="114.7" height="22" rx="3"/><text class="mono chiptext org-ink" x="132.3" y="671.5">PaymentMethod</text>
+<line class="edge direct" x1="236" y1="667.5" x2="472" y2="667.5" marker-end="url(#arr2m)"/>
+<text class="sans eyebrow" x="0" y="707">CONTROLLED VOCABULARY (SKOS)</text>
+<line class="rule" x1="243.3" y1="703" x2="1080" y2="703"/>
+<text class="mono leaves" x="480" y="733"><tspan class="leaf">ProductCategoryTerm, </tspan><tspan class="leaf">ProductPriceCategoryTerm</tspan><tspan class="tag"> · thesaurus</tspan></text>
+<rect class="box xyz" x="300" y="717.5" width="71.9" height="22" rx="3"/><text class="mono chiptext xyz-ink" x="311" y="732.5">Concept</text>
+<line class="edge" x1="371.9" y1="728.5" x2="472" y2="728.5" marker-end="url(#arr2)"/>
+<text class="mono leaves" x="480" y="753"><tspan class="leaf">DeliveryMethodTerm, </tspan><tspan class="leaf">DeliveryRouteTerm</tspan><tspan class="tag"> · thesaurus</tspan></text>
+<rect class="box xyz" x="300" y="737.5" width="114.7" height="22" rx="3"/><text class="mono chiptext xyz-ink" x="311" y="752.5">ThesaurusTerm</text>
+<line class="edge" x1="414.7" y1="748.5" x2="472" y2="748.5" marker-end="url(#arr2)"/>
+<text class="mono leaves" x="480" y="773"><tspan class="leaf">ProductType</tspan><tspan class="tag"> · products</tspan></text>
+<rect class="box org" x="135.6" y="737.5" width="100.4" height="22" rx="3"/><text class="mono chiptext org-ink" x="146.6" y="752.5">DefinedTerm</text>
+<line class="edge" x1="236" y1="748.5" x2="262" y2="748.5"/>
+<line class="edge" x1="262" y1="728.5" x2="262" y2="768.5"/>
+<line class="edge" x1="262" y1="728.5" x2="292" y2="728.5" marker-end="url(#arr2)"/>
+<line class="edge" x1="262" y1="748.5" x2="292" y2="748.5" marker-end="url(#arr2)"/>
+<line class="edge direct" x1="262" y1="768.5" x2="472" y2="768.5" marker-end="url(#arr2m)"/>
+<text class="mono leaves" x="480" y="802"><tspan class="leaf">ThesaurusScheme</tspan><tspan class="tag"> · thesaurus</tspan></text>
+<rect class="box xyz" x="300" y="786.5" width="114.7" height="22" rx="3"/><text class="mono chiptext xyz-ink" x="311" y="801.5">ConceptScheme</text>
+<line class="edge" x1="414.7" y1="797.5" x2="472" y2="797.5" marker-end="url(#arr2)"/>
+<rect class="box org" x="114.2" y="786.5" width="121.8" height="22" rx="3"/><text class="mono chiptext org-ink" x="125.2" y="801.5">DefinedTermSet</text>
+<line class="edge" x1="236" y1="797.5" x2="292" y2="797.5" marker-end="url(#arr2)"/>
+<text class="sans eyebrow" x="0" y="837">APPOINTMENTS, ACTIONS AND WEB</text>
+<line class="rule" x1="251.5" y1="833" x2="1080" y2="833"/>
+<text class="mono leaves" x="480" y="863"><tspan class="leaf">Log, </tspan><tspan class="leaf">Website</tspan><tspan class="tag"> · root    </tspan><tspan class="leaf">Application, </tspan><tspan class="leaf">Keyfile, </tspan><tspan class="leaf">OAuthClient, </tspan><tspan class="leaf">PendingRevocation, </tspan></text>
+<text class="mono leaves" x="480" y="878"><tspan class="leaf">Service, </tspan><tspan class="leaf">Session</tspan><tspan class="tag"> · auth    </tspan><tspan class="leaf">ProductWarehouseAvailability, </tspan></text>
+<text class="mono leaves" x="480" y="893"><tspan class="leaf">ProviderProductWarehouseInfo</tspan><tspan class="tag"> · products</tspan></text>
+<rect class="box org" x="178.4" y="862.5" width="57.7" height="22" rx="3"/><text class="mono chiptext org-ink" x="189.4" y="877.5">Thing</text>
+<line class="edge direct" x1="236" y1="873.5" x2="472" y2="873.5" marker-end="url(#arr2m)"/>
+<text class="mono leaves" x="480" y="922"><tspan class="leaf">Appointment</tspan><tspan class="tag"> · appointments</tspan></text>
+<rect class="box org" x="178.4" y="906.5" width="57.7" height="22" rx="3"/><text class="mono chiptext org-ink" x="189.4" y="921.5">Event</text>
+<line class="edge direct" x1="236" y1="917.5" x2="472" y2="917.5" marker-end="url(#arr2m)"/>
+<text class="mono leaves" x="480" y="951"><tspan class="leaf">FollowUp</tspan><tspan class="tag"> · appointments</tspan></text>
+<rect class="box org" x="114.2" y="935.5" width="121.8" height="22" rx="3"/><text class="mono chiptext org-ink" x="125.2" y="950.5">ScheduleAction</text>
+<line class="edge direct" x1="236" y1="946.5" x2="472" y2="946.5" marker-end="url(#arr2m)"/>
+<text class="mono leaves" x="480" y="980"><tspan class="leaf">VisitReport</tspan><tspan class="tag"> · appointments</tspan></text>
+<rect class="box xyz" x="300" y="964.5" width="114.7" height="22" rx="3"/><text class="mono chiptext xyz-ink" x="311" y="979.5">MeetingReport</text>
+<line class="edge" x1="414.7" y1="975.5" x2="472" y2="975.5" marker-end="url(#arr2)"/>
+<rect class="box org" x="128.4" y="964.5" width="107.6" height="22" rx="3"/><text class="mono chiptext org-ink" x="139.4" y="979.5">CreativeWork</text>
+<line class="edge" x1="236" y1="975.5" x2="292" y2="975.5" marker-end="url(#arr2)"/>
+<text class="mono leaves" x="480" y="1009"><tspan class="leaf">AuditAction</tspan><tspan class="tag"> · root</tspan></text>
+<rect class="box org" x="171.2" y="993.5" width="64.8" height="22" rx="3"/><text class="mono chiptext org-ink" x="182.2" y="1008.5">Action</text>
+<line class="edge direct" x1="236" y1="1004.5" x2="472" y2="1004.5" marker-end="url(#arr2m)"/>
+<text class="mono leaves" x="480" y="1038"><tspan class="leaf">Invitation</tspan><tspan class="tag"> · auth</tspan></text>
+<rect class="box org" x="128.4" y="1022.5" width="107.6" height="22" rx="3"/><text class="mono chiptext org-ink" x="139.4" y="1037.5">InviteAction</text>
+<line class="edge direct" x1="236" y1="1033.5" x2="472" y2="1033.5" marker-end="url(#arr2m)"/>
+<text class="mono leaves" x="480" y="1067"><tspan class="leaf">PasswordReset</tspan><tspan class="tag"> · auth</tspan></text>
+<rect class="box org" x="128.4" y="1051.5" width="107.6" height="22" rx="3"/><text class="mono chiptext org-ink" x="139.4" y="1066.5">UpdateAction</text>
+<line class="edge direct" x1="236" y1="1062.5" x2="472" y2="1062.5" marker-end="url(#arr2m)"/>
+<text class="mono leaves" x="480" y="1096"><tspan class="leaf">Policy, </tspan><tspan class="leaf">Role</tspan><tspan class="tag"> · auth</tspan></text>
+<rect class="box xyz" x="300" y="1080.5" width="64.8" height="22" rx="3"/><text class="mono chiptext xyz-ink" x="311" y="1095.5">WebAPI</text>
+<line class="edge" x1="364.8" y1="1091.5" x2="472" y2="1091.5" marker-end="url(#arr2)"/>
+<rect class="box org" x="171.2" y="1080.5" width="64.8" height="22" rx="3"/><text class="mono chiptext org-ink" x="182.2" y="1095.5">WebAPI</text>
+<line class="edge" x1="236" y1="1091.5" x2="292" y2="1091.5" marker-end="url(#arr2)"/>
+<text class="mono leaves" x="480" y="1125"><tspan class="leaf">WebApplication</tspan><tspan class="tag"> · auth</tspan></text>
+<rect class="box org" x="78.5" y="1109.5" width="157.5" height="22" rx="3"/><text class="mono chiptext org-ink" x="89.5" y="1124.5">SoftwareApplication</text>
+<line class="edge direct" x1="236" y1="1120.5" x2="472" y2="1120.5" marker-end="url(#arr2m)"/>
+<text class="sans eyebrow" x="0" y="1160">ENUMERATIONS</text>
+<line class="rule" x1="112.3" y1="1156" x2="1080" y2="1156"/>
+<text class="mono leaves" x="480" y="1186"><tspan class="leaf">AuditActionType, </tspan><tspan class="leaf">BusinessDocumentAuthority, </tspan><tspan class="leaf">BusinessDocumentDirection, </tspan><tspan class="leaf">ContactType, </tspan></text>
+<text class="mono leaves" x="480" y="1201"><tspan class="leaf">CreditNoteDisposition, </tspan><tspan class="leaf">CreditNoteReasonCode, </tspan><tspan class="leaf">DocumentTotalsAccuracy, </tspan></text>
+<text class="mono leaves" x="480" y="1216"><tspan class="leaf">FeeUnresolvedReason, </tspan><tspan class="leaf">PaymentReminderChannel, </tspan><tspan class="leaf">PaymentReminderLevel, </tspan></text>
+<text class="mono leaves" x="480" y="1231"><tspan class="leaf">PricingAreaScope, </tspan><tspan class="leaf">PricingItemScope, </tspan><tspan class="leaf">PricingTargetScope, </tspan><tspan class="leaf">QuantityOrigin, </tspan></text>
+<text class="mono leaves" x="480" y="1246"><tspan class="leaf">ShippingChargeTiming, </tspan><tspan class="leaf">StatementEntryType</tspan><tspan class="tag"> · enumerations</tspan></text>
+<rect class="box org" x="135.6" y="1200.5" width="100.4" height="22" rx="3"/><text class="mono chiptext org-ink" x="146.6" y="1215.5">Enumeration</text>
+<line class="edge direct" x1="236" y1="1211.5" x2="472" y2="1211.5" marker-end="url(#arr2m)"/>
+<text class="mono leaves" x="480" y="1275"><tspan class="leaf">AppointmentCancelled, </tspan><tspan class="leaf">AppointmentDone, </tspan><tspan class="leaf">AppointmentNoShow, </tspan></text>
+<text class="mono leaves" x="480" y="1290"><tspan class="leaf">AppointmentPlanned</tspan><tspan class="tag"> · enumerations</tspan></text>
+<rect class="box xyz" x="300" y="1267" width="143.2" height="22" rx="3"/><text class="mono chiptext xyz-ink" x="311" y="1282">AppointmentStatus</text>
+<line class="edge" x1="443.2" y1="1278" x2="472" y2="1278" marker-end="url(#arr2)"/>
+<text class="mono leaves" x="480" y="1310"><tspan class="leaf">BusinessDocumentStatus</tspan><tspan class="tag"> · enumerations</tspan></text>
+<rect class="box org" x="92.8" y="1277" width="143.2" height="22" rx="3"/><text class="mono chiptext org-ink" x="103.8" y="1292">StatusEnumeration</text>
+<line class="edge" x1="236" y1="1288" x2="262" y2="1288"/>
+<line class="edge" x1="262" y1="1278" x2="262" y2="1305.5"/>
+<line class="edge" x1="262" y1="1278" x2="292" y2="1278" marker-end="url(#arr2)"/>
+<line class="edge direct" x1="262" y1="1305.5" x2="472" y2="1305.5" marker-end="url(#arr2m)"/>
+<text class="mono leaves" x="480" y="1339"><tspan class="leaf">BusinessEntityType, </tspan><tspan class="leaf">UnitOfSaleType</tspan><tspan class="tag"> · enumerations</tspan></text>
+<rect class="box org" x="85.7" y="1323.5" width="150.3" height="22" rx="3"/><text class="mono chiptext org-ink" x="96.7" y="1338.5">BusinessEntityType</text>
+<line class="edge direct" x1="236" y1="1334.5" x2="472" y2="1334.5" marker-end="url(#arr2m)"/>
+<text class="mono leaves" x="480" y="1368"><tspan class="leaf">PriceType</tspan><tspan class="tag"> · enumerations</tspan></text>
+<rect class="box org" x="71.4" y="1352.5" width="164.6" height="22" rx="3"/><text class="mono chiptext org-ink" x="82.4" y="1367.5">PriceTypeEnumeration</text>
+<line class="edge direct" x1="236" y1="1363.5" x2="472" y2="1363.5" marker-end="url(#arr2m)"/>
+<text class="mono leaves" x="480" y="1397"><tspan class="leaf">PriceComponentType</tspan><tspan class="tag"> · enumerations</tspan></text>
+<rect class="box org" x="7.2" y="1381.5" width="228.8" height="22" rx="3"/><text class="mono chiptext org-ink" x="18.2" y="1396.5">PriceComponentTypeEnumeration</text>
+<line class="edge direct" x1="236" y1="1392.5" x2="472" y2="1392.5" marker-end="url(#arr2m)"/>
+<text class="sans label muted" x="0" y="1428">Outside the Schema.org inheritance: BusinessDocumentExporter, JsonLdExporter · business\documents</text>
+</g>
+</svg>

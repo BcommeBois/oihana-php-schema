@@ -154,6 +154,7 @@ Two complementary sets of documentation are available:
 - ✍️ **Hand-written wiki** (concepts, guides, walkthroughs) — bilingual EN/FR under [`wiki/`](wiki/README.md):
   - 🇬🇧 [`wiki/en/README.md`](wiki/en/README.md) — English guides ([Getting started](wiki/en/getting-started.md))
   - 🇫🇷 [`wiki/fr/README.md`](wiki/fr/README.md) — Guides en français ([Démarrage rapide](wiki/fr/demarrage.md))
+  - 🗺️ [Architecture](wiki/en/architecture.md) · [🇫🇷 FR](wiki/fr/architecture.md) — three figures measured from `src/`: the layers, the Schema.org anchors of the Oihana layer, the couplings between its domains. Regenerate them with `composer schema:diagrams`.
 
 While the wiki grows, you can also explore the following namespaces directly:
 - `org\schema\` for value objects

@@ -20,6 +20,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- **An architecture page in the wiki, drawn from the code.** `wiki/fr/architecture.md` and
+  `wiki/en/architecture.md` show the library in three figures — the layers, the Schema.org types
+  the Oihana layer extends (with the bridge class when there is one), the couplings between the
+  Oihana domains — as SVG files under `assets/images/`, in both languages.
+
+  The figures are not drawn by hand : `tools/generate-architecture-diagrams.php`
+  (`composer schema:diagrams`) measures `src/` — class counts per namespace, `extends` clauses,
+  `use` statements between sub-namespaces — and declares only the layout. A new domain or a new
+  anchor shows up on the next run, in a fallback position, with a notice on `stderr` saying where
+  to place it ; a file of `org\schema` importing `xyz\oihana\schema` would show on figure 1 and be
+  reported. The output is deterministic, so a diff on the SVG files means the code moved.
+
 - **`QuantityOrigin` and `BusinessDocumentLine::$quantityOrigin`** — where the quantity of a line
   comes from : worked out by the system, or typed by someone.
 

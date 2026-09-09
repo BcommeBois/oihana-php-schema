@@ -26,7 +26,8 @@
             "php tools/clover-to-markdown.php build/coverage/clover.xml build/coverage/COVERAGE.md"
         ],
         "schemas:all": "php bin/generate-schemas.php",
-        "schema:place": "php bin/generate-schema.php org\\schema\\Place"
+        "schema:place": "php bin/generate-schema.php org\\schema\\Place",
+        "schema:diagrams": "php tools/generate-architecture-diagrams.php"
     },
     "autoload" :
     {

@@ -14,6 +14,7 @@ Ce wiki est un compagnon rédigé à la main de la [référence d'API](../../doc
 
 - [Démarrage rapide](demarrage.md) — installation, hydratation d'un premier `Thing`, sérialisation JSON-LD, utilisation sûre des constantes.
 - [Pourquoi une ontologie](pourquoi-une-ontologie.md) — la vision : pourquoi modéliser sur Schema.org et l'étendre, pour des solutions métier à la fois standardisées et évolutives.
+- [Architecture](architecture.md) — les deux étages de la bibliothèque en trois figures mesurées dans le code : les couches, les types Schema.org qui portent la couche Oihana, les couplages entre domaines.
 
 ### Schémas par namespace
 
