@@ -32,6 +32,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   to place it ; a file of `org\schema` importing `xyz\oihana\schema` would show on figure 1 and be
   reported. The output is deterministic, so a diff on the SVG files means the code moved.
 
+  ⚠️ **`com\progress\schema` is left out of the figures on purpose.** The namespace is still part
+  of the library today, and the README still lists it — but it is to leave `oihana/php-schema` in a
+  coming version, and a figure that draws it would have to be redrawn the day it goes. The two
+  storeys the page describes are `org\schema` and `xyz\oihana\schema`, and nothing else.
+
 - **`QuantityOrigin` and `BusinessDocumentLine::$quantityOrigin`** — where the quantity of a line
   comes from : worked out by the system, or typed by someone.
 

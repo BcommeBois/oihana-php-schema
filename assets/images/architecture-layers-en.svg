@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1144 1014" width="1144" height="1014" role="img" aria-label="Five stacked bands: the Oihana domains, the Oihana base, the Schema.org vocabulary, the Schema.org core, then PHP and the oihana packages. The arrows always point down." xml:space="preserve">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1144 1000" width="1144" height="1000" role="img" aria-label="Five stacked bands: the Oihana domains, the Oihana base, the Schema.org vocabulary, the Schema.org core, then PHP and the oihana packages. The arrows always point down." xml:space="preserve">
 <style>
 text{fill:#2E302A;font-variant-numeric:tabular-nums}
 .mono{font-family:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,"DejaVu Sans Mono",monospace;white-space:pre}
@@ -17,7 +17,7 @@ text{fill:#2E302A;font-variant-numeric:tabular-nums}
 .badge{fill:#C5622B}.badge-text{fill:#F4F5F1;font-size:11px;font-weight:600}
 .foot{font-size:10.5px}.foot-title{font-size:11.5px;font-weight:500}
 </style>
-<rect width="1144" height="1014" fill="#F4F5F1"/>
+<rect width="1144" height="1000" fill="#F4F5F1"/>
 <defs><marker id="arr1" class="mk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker></defs>
 <g transform="translate(32,32)">
 <rect class="band" x="0" y="0" width="1080" height="170" rx="8"/>
@@ -81,81 +81,77 @@ text{fill:#2E302A;font-variant-numeric:tabular-nums}
 <rect class="box xyz" x="14" y="286" width="215.6" height="50" rx="4"/>
 <text class="mono name xyz-ink" x="28" y="307">helpers</text>
 <text class="sans desc xyz-ink" x="28" y="324">27 functions · hydrate · pivots</text>
-<line class="edge" x1="120" y1="358" x2="120" y2="428" marker-end="url(#arr1)"/>
-<text class="sans label" x="134" y="387">extends — always in this direction</text>
-<text class="sans label muted" x="134" y="403">no file of org\schema imports xyz\oihana\schema</text>
-<rect class="box neutral" x="574.1" y="356" width="506" height="50" rx="4"/>
-<text class="mono name neutral-ink" x="588.1" y="377">com\progress\schema</text>
-<text class="sans desc neutral-ink" x="588.1" y="394">17 classes · a second tenant of the base · @context https://schema.progress.com</text>
-<line class="edge" x1="827" y1="408" x2="827" y2="428" marker-end="url(#arr1)"/>
-<rect class="band" x="0" y="436" width="1080" height="170" rx="8"/>
-<text class="mono ns org-text" x="14" y="457">org\schema</text>
-<text class="sans role" x="104.6" y="457">— the Schema.org vocabulary · 443 classes</text>
-<text class="mono ctx" x="1066" y="457" text-anchor="end">@context https://schema.org</text>
-<rect class="box org" x="14" y="482" width="94.6" height="50" rx="4"/>
-<text class="mono name org-ink" x="28" y="503">actions</text>
-<text class="sans desc org-ink" x="28" y="520">115 classes</text>
-<rect class="box org" x="118.6" y="482" width="717.7" height="50" rx="4"/>
-<text class="mono name org-ink" x="132.6" y="503">root</text>
-<text class="sans desc org-ink" x="132.6" y="520">101 classes · Thing, Intangible, StructuredValue, Enumeration, Person, Organization, Place, Event, Product, Offer…</text>
-<rect class="box org" x="846.3" y="482" width="121" height="50" rx="4"/>
-<text class="mono name org-ink" x="860.3" y="503">enumerations</text>
-<text class="sans desc org-ink" x="860.3" y="520">99 classes</text>
-<rect class="box org" x="14" y="542" width="121" height="50" rx="4"/>
-<text class="mono name org-ink" x="28" y="563">creativeWork</text>
-<text class="sans desc org-ink" x="28" y="580">61 classes</text>
-<rect class="box org" x="145" y="542" width="88.5" height="50" rx="4"/>
-<text class="mono name org-ink" x="159" y="563">places</text>
-<text class="sans desc org-ink" x="159" y="580">26 classes</text>
-<rect class="box org" x="243.5" y="542" width="128.8" height="50" rx="4"/>
-<text class="mono name org-ink" x="257.5" y="563">organizations</text>
-<text class="sans desc org-ink" x="257.5" y="580">18 classes</text>
-<rect class="box org" x="382.3" y="542" width="121" height="50" rx="4"/>
-<text class="mono name org-ink" x="396.3" y="563">reservations</text>
-<text class="sans desc org-ink" x="396.3" y="580">10 classes</text>
-<rect class="box org" x="513.3" y="542" width="90" height="50" rx="4"/>
-<text class="mono name org-ink" x="527.3" y="563">services</text>
-<text class="sans desc org-ink" x="527.3" y="580">7 classes</text>
-<rect class="box org" x="613.3" y="542" width="82.5" height="50" rx="4"/>
-<text class="mono name org-ink" x="627.3" y="563">items</text>
-<text class="sans desc org-ink" x="627.3" y="580">5 classes</text>
-<rect class="box org" x="705.7" y="542" width="74.5" height="50" rx="4"/>
-<text class="mono name org-ink" x="719.7" y="563">events</text>
-<text class="sans desc org-ink" x="719.7" y="580">1 class</text>
-<rect class="band" x="0" y="616" width="1080" height="170" rx="8"/>
-<text class="mono ns org-text" x="14" y="637">org\schema</text>
-<text class="sans role" x="104.6" y="637">— the core, inherited by every entity</text>
-<rect class="box org" x="14" y="662" width="366.8" height="50" rx="4"/>
-<text class="mono name org-ink" x="28" y="683">Thing</text>
-<text class="sans desc org-ink" x="28" y="700">implements JsonSerializable · ArangoDBTrait + ThingTrait</text>
-<rect class="box org" x="390.8" y="662" width="415.2" height="50" rx="4"/>
-<text class="mono name org-ink" x="404.8" y="683">constants\Schema ≡ Prop</text>
-<text class="sans desc org-ink" x="404.8" y="700">Properties · 146 constant traits (JsonLD, ArangoDB, Edge, I18n…)</text>
-<rect class="box org" x="14" y="722" width="342.6" height="50" rx="4"/>
-<text class="mono name org-ink" x="28" y="743">traits</text>
-<text class="sans desc org-ink" x="28" y="760">16 mixins · ValueTrait, PlaceTrait, CollectionTrait…</text>
-<rect class="box org" x="366.6" y="722" width="203.5" height="50" rx="4"/>
-<text class="mono name org-ink" x="380.6" y="743">helpers</text>
-<text class="sans desc org-ink" x="380.6" y="760">SchemaResolver + 10 hydrators</text>
-<rect class="box org" x="580.1" y="722" width="475.7" height="50" rx="4"/>
-<text class="mono name org-ink" x="594.1" y="743">DublinCore</text>
-<text class="sans desc org-ink" x="594.1" y="760">apart · JsonSerializable · ThingTrait + DublinCoreTrait + DublinCoreSchema</text>
-<line class="edge" x1="120" y1="794" x2="120" y2="832" marker-end="url(#arr1)"/>
-<text class="sans label" x="134" y="817">relies on php-reflect to hydrate (Reflection::hydrate) and serialize (JsonSchemaTrait)</text>
-<rect class="band" x="0" y="840" width="1080" height="110" rx="8"/>
-<text class="mono ns neutral-text" x="14" y="861">foundations</text>
-<text class="sans role" x="112.7" y="861">— PHP and the oihana packages</text>
-<rect class="box neutral" x="14" y="886" width="97.8" height="50" rx="4"/>
-<text class="mono name neutral-ink" x="28" y="916">PHP ≥ 8.4</text>
-<rect class="box neutral" x="121.8" y="886" width="144.3" height="50" rx="4"/>
-<text class="mono name neutral-ink" x="135.8" y="907">oihana/php-core</text>
-<text class="sans desc neutral-ink" x="135.8" y="924">options, accessors</text>
-<rect class="box neutral" x="276" y="886" width="152" height="50" rx="4"/>
-<text class="mono name neutral-ink" x="290" y="916">oihana/php-enums</text>
-<rect class="box neutral" x="438" y="886" width="403.1" height="50" rx="4"/>
-<text class="mono name neutral-ink" x="452" y="907">oihana/php-reflect</text>
-<text class="sans desc neutral-ink" x="452" y="924">Reflection::hydrate() · JsonSchemaTrait · SerializationContext</text>
-<rect class="box neutral" x="851.1" y="886" width="183" height="50" rx="4"/>
-<text class="mono name neutral-ink" x="865.1" y="916">oihana/php-standards</text>
+<line class="edge" x1="120" y1="358" x2="120" y2="414" marker-end="url(#arr1)"/>
+<text class="sans label" x="134" y="380">extends — always in this direction</text>
+<text class="sans label muted" x="134" y="396">no file of org\schema imports xyz\oihana\schema</text>
+<rect class="band" x="0" y="422" width="1080" height="170" rx="8"/>
+<text class="mono ns org-text" x="14" y="443">org\schema</text>
+<text class="sans role" x="104.6" y="443">— the Schema.org vocabulary · 443 classes</text>
+<text class="mono ctx" x="1066" y="443" text-anchor="end">@context https://schema.org</text>
+<rect class="box org" x="14" y="468" width="94.6" height="50" rx="4"/>
+<text class="mono name org-ink" x="28" y="489">actions</text>
+<text class="sans desc org-ink" x="28" y="506">115 classes</text>
+<rect class="box org" x="118.6" y="468" width="717.7" height="50" rx="4"/>
+<text class="mono name org-ink" x="132.6" y="489">root</text>
+<text class="sans desc org-ink" x="132.6" y="506">101 classes · Thing, Intangible, StructuredValue, Enumeration, Person, Organization, Place, Event, Product, Offer…</text>
+<rect class="box org" x="846.3" y="468" width="121" height="50" rx="4"/>
+<text class="mono name org-ink" x="860.3" y="489">enumerations</text>
+<text class="sans desc org-ink" x="860.3" y="506">99 classes</text>
+<rect class="box org" x="14" y="528" width="121" height="50" rx="4"/>
+<text class="mono name org-ink" x="28" y="549">creativeWork</text>
+<text class="sans desc org-ink" x="28" y="566">61 classes</text>
+<rect class="box org" x="145" y="528" width="88.5" height="50" rx="4"/>
+<text class="mono name org-ink" x="159" y="549">places</text>
+<text class="sans desc org-ink" x="159" y="566">26 classes</text>
+<rect class="box org" x="243.5" y="528" width="128.8" height="50" rx="4"/>
+<text class="mono name org-ink" x="257.5" y="549">organizations</text>
+<text class="sans desc org-ink" x="257.5" y="566">18 classes</text>
+<rect class="box org" x="382.3" y="528" width="121" height="50" rx="4"/>
+<text class="mono name org-ink" x="396.3" y="549">reservations</text>
+<text class="sans desc org-ink" x="396.3" y="566">10 classes</text>
+<rect class="box org" x="513.3" y="528" width="90" height="50" rx="4"/>
+<text class="mono name org-ink" x="527.3" y="549">services</text>
+<text class="sans desc org-ink" x="527.3" y="566">7 classes</text>
+<rect class="box org" x="613.3" y="528" width="82.5" height="50" rx="4"/>
+<text class="mono name org-ink" x="627.3" y="549">items</text>
+<text class="sans desc org-ink" x="627.3" y="566">5 classes</text>
+<rect class="box org" x="705.7" y="528" width="74.5" height="50" rx="4"/>
+<text class="mono name org-ink" x="719.7" y="549">events</text>
+<text class="sans desc org-ink" x="719.7" y="566">1 class</text>
+<rect class="band" x="0" y="602" width="1080" height="170" rx="8"/>
+<text class="mono ns org-text" x="14" y="623">org\schema</text>
+<text class="sans role" x="104.6" y="623">— the core, inherited by every entity</text>
+<rect class="box org" x="14" y="648" width="366.8" height="50" rx="4"/>
+<text class="mono name org-ink" x="28" y="669">Thing</text>
+<text class="sans desc org-ink" x="28" y="686">implements JsonSerializable · ArangoDBTrait + ThingTrait</text>
+<rect class="box org" x="390.8" y="648" width="415.2" height="50" rx="4"/>
+<text class="mono name org-ink" x="404.8" y="669">constants\Schema ≡ Prop</text>
+<text class="sans desc org-ink" x="404.8" y="686">Properties · 146 constant traits (JsonLD, ArangoDB, Edge, I18n…)</text>
+<rect class="box org" x="14" y="708" width="342.6" height="50" rx="4"/>
+<text class="mono name org-ink" x="28" y="729">traits</text>
+<text class="sans desc org-ink" x="28" y="746">16 mixins · ValueTrait, PlaceTrait, CollectionTrait…</text>
+<rect class="box org" x="366.6" y="708" width="203.5" height="50" rx="4"/>
+<text class="mono name org-ink" x="380.6" y="729">helpers</text>
+<text class="sans desc org-ink" x="380.6" y="746">SchemaResolver + 10 hydrators</text>
+<rect class="box org" x="580.1" y="708" width="475.7" height="50" rx="4"/>
+<text class="mono name org-ink" x="594.1" y="729">DublinCore</text>
+<text class="sans desc org-ink" x="594.1" y="746">apart · JsonSerializable · ThingTrait + DublinCoreTrait + DublinCoreSchema</text>
+<line class="edge" x1="120" y1="780" x2="120" y2="818" marker-end="url(#arr1)"/>
+<text class="sans label" x="134" y="803">relies on php-reflect to hydrate (Reflection::hydrate) and serialize (JsonSchemaTrait)</text>
+<rect class="band" x="0" y="826" width="1080" height="110" rx="8"/>
+<text class="mono ns neutral-text" x="14" y="847">foundations</text>
+<text class="sans role" x="112.7" y="847">— PHP and the oihana packages</text>
+<rect class="box neutral" x="14" y="872" width="97.8" height="50" rx="4"/>
+<text class="mono name neutral-ink" x="28" y="902">PHP ≥ 8.4</text>
+<rect class="box neutral" x="121.8" y="872" width="144.3" height="50" rx="4"/>
+<text class="mono name neutral-ink" x="135.8" y="893">oihana/php-core</text>
+<text class="sans desc neutral-ink" x="135.8" y="910">options, accessors</text>
+<rect class="box neutral" x="276" y="872" width="152" height="50" rx="4"/>
+<text class="mono name neutral-ink" x="290" y="902">oihana/php-enums</text>
+<rect class="box neutral" x="438" y="872" width="403.1" height="50" rx="4"/>
+<text class="mono name neutral-ink" x="452" y="893">oihana/php-reflect</text>
+<text class="sans desc neutral-ink" x="452" y="910">Reflection::hydrate() · JsonSchemaTrait · SerializationContext</text>
+<rect class="box neutral" x="851.1" y="872" width="183" height="50" rx="4"/>
+<text class="mono name neutral-ink" x="865.1" y="902">oihana/php-standards</text>
 </g>
 </svg>

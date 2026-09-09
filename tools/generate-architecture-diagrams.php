@@ -35,12 +35,11 @@ declare(strict_types=1);
 const WIDTH  = 1080 ;   // width of the drawing of every figure, in user units
 const MARGIN = 32 ;     // inner margin between the canvas edge and the drawing
 
-/** The three source roots : directory, namespace, and the file + constant carrying the JSON-LD context. */
+/** The two source roots : directory, namespace, and the file + constant carrying the JSON-LD context. */
 const ROOTS =
 [
-    'org' => [ 'dir' => 'src/org/schema'         , 'ns' => 'org\\schema'          , 'context' => [ 'Thing.php'              , 'CONTEXT' ] ] ,
-    'xyz' => [ 'dir' => 'src/xyz/oihana/schema'  , 'ns' => 'xyz\\oihana\\schema'  , 'context' => [ 'constants/Oihana.php'   , 'SCHEMA'  ] ] ,
-    'com' => [ 'dir' => 'src/com/progress/schema', 'ns' => 'com\\progress\\schema', 'context' => [ 'constants/Progress.php' , 'SCHEMA'  ] ] ,
+    'org' => [ 'dir' => 'src/org/schema'       , 'ns' => 'org\\schema'         , 'context' => [ 'Thing.php'            , 'CONTEXT' ] ] ,
+    'xyz' => [ 'dir' => 'src/xyz/oihana/schema', 'ns' => 'xyz\\oihana\\schema' , 'context' => [ 'constants/Oihana.php' , 'SCHEMA'  ] ] ,
 ] ;
 
 /** Sub-directories of xyz\oihana\schema that form the shared base rather than a domain. */
@@ -102,7 +101,6 @@ const LABELS =
         'seam'            => 'étend — toujours dans ce sens' ,
         'seamNone'        => "aucun fichier de org\\schema n'importe xyz\\oihana\\schema" ,
         'seamSome'        => "%d fichier(s) de org\\schema importent xyz\\oihana\\schema — à corriger" ,
-        'tenant'          => '%d classes · second locataire du socle · @context %s' ,
         'reflect'         => "s'appuie sur php-reflect pour hydrater (Reflection::hydrate) et sérialiser (JsonSchemaTrait)" ,
         'baseOihana'      => 'Properties (org) + %d traits Oihana · %d traits de constantes' ,
         'registries'      => '%d registres · %s…' ,
@@ -150,7 +148,6 @@ const LABELS =
         'seam'            => 'extends — always in this direction' ,
         'seamNone'        => 'no file of org\\schema imports xyz\\oihana\\schema' ,
         'seamSome'        => '%d file(s) of org\\schema import xyz\\oihana\\schema — to be fixed' ,
-        'tenant'          => '%d classes · a second tenant of the base · @context %s' ,
         'reflect'         => 'relies on php-reflect to hydrate (Reflection::hydrate) and serialize (JsonSchemaTrait)' ,
         'baseOihana'      => 'Properties (org) + %d Oihana traits · %d constant traits' ,
         'registries'      => '%d registries · %s…' ,
@@ -967,18 +964,10 @@ function renderLayers( Model $m , string $lang ) : string
     $parts[] = $s ; $y += $h ;
 
     // The seam between the two packages : the arrow never points up.
-    $seam    = 86 ;
+    $seam    = 72 ;
     $parts[] = svgLine( $ax , $y + 8 , $ax , $y + $seam - 8 , 'edge' , 'arr1' ) ;
-    $parts[] = svgText( $ax + 14 , $y + 37 , $L['seam'] , 'sans label' ) ;
-    $parts[] = svgText( $ax + 14 , $y + 53 , $m->orgImportsXyz === 0 ? $L['seamNone'] : sprintf( $L['seamSome'] , $m->orgImportsXyz ) , 'sans label muted' ) ;
-
-    $tenant  = sprintf( $L['tenant'] , $src->count( 'com' ) , $contexts['com'] ) ;
-    $pw      = max( monoW( ROOTS['com']['ns'] ) , sansW( $tenant ) ) + 28 ;
-    $px      = WIDTH - $pw ;
-    $parts[] = '<rect class="box neutral" x="' . fmt( $px ) . '" y="' . fmt( $y + 6 ) . '" width="' . fmt( $pw ) . '" height="50" rx="4"/>' ;
-    $parts[] = svgText( $px + 14 , $y + 27 , ROOTS['com']['ns'] , 'mono name neutral-ink' ) ;
-    $parts[] = svgText( $px + 14 , $y + 44 , $tenant , 'sans desc neutral-ink' ) ;
-    $parts[] = svgLine( $px + $pw / 2 , $y + 58 , $px + $pw / 2 , $y + $seam - 8 , 'edge' , 'arr1' ) ;
+    $parts[] = svgText( $ax + 14 , $y + 30 , $L['seam'] , 'sans label' ) ;
+    $parts[] = svgText( $ax + 14 , $y + 46 , $m->orgImportsXyz === 0 ? $L['seamNone'] : sprintf( $L['seamSome'] , $m->orgImportsXyz ) , 'sans label muted' ) ;
     $y += $seam ;
 
     [ $s , $h ] = band( $y , ROOTS['org']['ns'] , sprintf( $L['vocabulary'] , $orgTotal ) , '@context ' . $contexts['org'] , $vocabulary , 'org' ) ;

@@ -18,7 +18,6 @@ Chaque étage a la même anatomie : des **domaines** au-dessus, un **socle** par
 
 - **Le socle Oihana reproduit le socle Schema.org trait pour trait.** `constants\Oihana` reprend `Properties` — toutes les constantes de propriétés de `org\schema` — et y ajoute ses propres traits ; `helpers` prolonge les hydrateurs ; `traits` ajoute les mixins d'ingestion (`Set*`) et de mesures (`Has*`).
 - **Les compteurs disent où vit la masse.** Côté Schema.org, les actions et les énumérations pèsent près de la moitié du vocabulaire. Côté Oihana, les documents commerciaux et les produits dominent.
-- **`com\progress\schema` est un second locataire du socle**, indépendant d'Oihana : ses classes étendent `Thing` sans rien emprunter à la couche maison, et signent leurs documents de leur propre contexte.
 
 ## Figure 2 — Les points d'ancrage
 

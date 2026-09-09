@@ -18,7 +18,6 @@ Each storey has the same anatomy: **domains** on top, a shared **base** undernea
 
 - **The Oihana base mirrors the Schema.org base feature for feature.** `constants\Oihana` takes `Properties` — every property constant of `org\schema` — and adds its own traits; `helpers` extends the hydrators; `traits` adds the ingestion (`Set*`) and measurement (`Has*`) mixins.
 - **The counters say where the mass lives.** On the Schema.org side, actions and enumerations weigh close to half of the vocabulary. On the Oihana side, business documents and products dominate.
-- **`com\progress\schema` is a second tenant of the base**, independent from Oihana: its classes extend `Thing` without borrowing anything from the house layer, and stamp their documents with their own context.
 
 ## Figure 2 — The anchors
 
