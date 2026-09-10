@@ -84,7 +84,7 @@ Les constantes des clés de propriétés `AuditAction` sont exposées par le tra
 
 ## <a id="businessdocumentstatus"></a> `BusinessDocumentStatus`
 
-`BusinessDocumentStatus` énumère le **statut de cycle de vie** d'un document métier (devis, bon de commande, facture…) : `DRAFT`, `SENT`, `ACCEPTED`, `REJECTED`, `EXPIRED`, `CONVERTED`, `CANCELLED`. Elle étend `org\schema\enumerations\StatusEnumeration` et se distingue de l'`OrderStatus` de Schema.org, qui suit le statut de *livraison* d'une commande (expédiée, en transit…), pas celui du document.
+`BusinessDocumentStatus` énumère le **statut de cycle de vie** d'un document métier (devis, bon de commande, facture…) : `DRAFT`, `SENT`, `RECEIVED`, `ACCEPTED`, `REJECTED`, `EXPIRED`, `CONVERTED`, `CANCELLED`. Elle étend `org\schema\enumerations\StatusEnumeration` et se distingue de l'`OrderStatus` de Schema.org, qui suit le statut de *livraison* d'une commande (expédiée, en transit…), pas celui du document.
 
 Elle est consommée par [`BusinessDocument::$status`](business-documents.md#businessdocument) et l'ensemble de la hiérarchie de documents commerciaux (`xyz\oihana\schema\business\documents`).
 

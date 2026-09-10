@@ -84,7 +84,7 @@ Constants for the `AuditAction` property keys are exposed via the [`AuditTrait`]
 
 ## <a id="businessdocumentstatus"></a> `BusinessDocumentStatus`
 
-`BusinessDocumentStatus` enumerates the **lifecycle status** of a business document (quote, purchase order, invoice…): `DRAFT`, `SENT`, `ACCEPTED`, `REJECTED`, `EXPIRED`, `CONVERTED`, `CANCELLED`. It extends `org\schema\enumerations\StatusEnumeration` and is distinct from Schema.org's `OrderStatus`, which tracks an order's *fulfillment* status (shipped, in transit…), not the document's own lifecycle.
+`BusinessDocumentStatus` enumerates the **lifecycle status** of a business document (quote, purchase order, invoice…): `DRAFT`, `SENT`, `RECEIVED`, `ACCEPTED`, `REJECTED`, `EXPIRED`, `CONVERTED`, `CANCELLED`. It extends `org\schema\enumerations\StatusEnumeration` and is distinct from Schema.org's `OrderStatus`, which tracks an order's *fulfillment* status (shipped, in transit…), not the document's own lifecycle.
 
 It is consumed by [`BusinessDocument::$status`](business-documents.md#businessdocument) and the whole business-document hierarchy (`xyz\oihana\schema\business\documents`).
 

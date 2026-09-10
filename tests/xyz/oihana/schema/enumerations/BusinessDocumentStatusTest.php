@@ -21,6 +21,7 @@ class BusinessDocumentStatusTest extends TestCase
         $this->assertSame( 'https://schema.oihana.xyz/BusinessDocumentStatus#Converted' , BusinessDocumentStatus::CONVERTED );
         $this->assertSame( 'https://schema.oihana.xyz/BusinessDocumentStatus#Draft'     , BusinessDocumentStatus::DRAFT     );
         $this->assertSame( 'https://schema.oihana.xyz/BusinessDocumentStatus#Expired'   , BusinessDocumentStatus::EXPIRED   );
+        $this->assertSame( 'https://schema.oihana.xyz/BusinessDocumentStatus#Received'  , BusinessDocumentStatus::RECEIVED  );
         $this->assertSame( 'https://schema.oihana.xyz/BusinessDocumentStatus#Rejected'  , BusinessDocumentStatus::REJECTED  );
         $this->assertSame( 'https://schema.oihana.xyz/BusinessDocumentStatus#Sent'      , BusinessDocumentStatus::SENT      );
     }

@@ -18,6 +18,7 @@ use org\schema\enumerations\StatusEnumeration;
  * | CONVERTED | The document was converted into another one (e.g. a quote into an order). | https://schema.oihana.xyz/BusinessDocumentStatus#Converted |
  * | DRAFT     | The document is still being prepared and has not been sent.           | https://schema.oihana.xyz/BusinessDocumentStatus#Draft       |
  * | EXPIRED   | The document's validity period has elapsed (e.g. a quote past its validity date). | https://schema.oihana.xyz/BusinessDocumentStatus#Expired |
+ * | RECEIVED  | The recipient's system received and registered the document, under a reference of its own. | https://schema.oihana.xyz/BusinessDocumentStatus#Received |
  * | REJECTED  | The recipient rejected the document.                                   | https://schema.oihana.xyz/BusinessDocumentStatus#Rejected    |
  * | SENT      | The document has been sent to the recipient.                          | https://schema.oihana.xyz/BusinessDocumentStatus#Sent        |
  *
@@ -51,6 +52,18 @@ class BusinessDocumentStatus extends StatusEnumeration
      * The document's validity period has elapsed.
      */
     public const string EXPIRED = 'https://schema.oihana.xyz/BusinessDocumentStatus#Expired' ;
+
+    /**
+     * The recipient's system received and registered the document : it is known there
+     * under a reference of its own, and whatever happens to it next happens there.
+     *
+     * Sits between {@see self::SENT} and the recipient's verdict ({@see self::ACCEPTED},
+     * {@see self::REJECTED}), and may be skipped when the verdict is observed before the
+     * reception is.
+     *
+     * @since 1.5.0
+     */
+    public const string RECEIVED = 'https://schema.oihana.xyz/BusinessDocumentStatus#Received' ;
 
     /**
      * The recipient rejected the document.

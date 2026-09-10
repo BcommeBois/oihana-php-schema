@@ -95,6 +95,7 @@ Indépendamment de son type, tout document porte un **statut de cycle de vie** (
 |--------|---------------|
 | `DRAFT` | En préparation, pas encore envoyé. |
 | `SENT` | Transmis au destinataire. |
+| `RECEIVED` | Reçu et enregistré par le **système** du destinataire, sous une référence à lui : ce qui arrive ensuite au document arrive là-bas. |
 | `ACCEPTED` | Accepté par le destinataire (un devis devenu commande, par ex.). |
 | `REJECTED` | Refusé par le destinataire. |
 | `EXPIRED` | Période de validité écoulée (un devis passé sa date). |
@@ -102,6 +103,8 @@ Indépendamment de son type, tout document porte un **statut de cycle de vie** (
 | `CANCELLED` | Annulé après émission. |
 
 Ce cycle de vie est **générique** : il vaut pour un devis comme pour une facture. Le suivi financier fin (une échéance est-elle payée, en retard ?) relève d'un mécanisme distinct — voir ci-dessous.
+
+`RECEIVED` se place entre `SENT` et le verdict (`ACCEPTED`, `REJECTED`), et peut être sauté : quand le verdict est constaté avant la réception, le document passe de `SENT` au verdict directement.
 
 ---
 

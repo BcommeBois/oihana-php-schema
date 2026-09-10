@@ -95,6 +95,7 @@ Whatever its type, every document carries a **lifecycle status** ([`BusinessDocu
 |--------|---------|
 | `DRAFT` | Being prepared, not yet sent. |
 | `SENT` | Transmitted to the recipient. |
+| `RECEIVED` | Received and registered by the recipient's **system**, under a reference of its own: whatever happens to the document next happens there. |
 | `ACCEPTED` | Accepted by the recipient (a quote turned into an order, say). |
 | `REJECTED` | Rejected by the recipient. |
 | `EXPIRED` | Validity period elapsed (a quote past its date). |
@@ -102,6 +103,8 @@ Whatever its type, every document carries a **lifecycle status** ([`BusinessDocu
 | `CANCELLED` | Cancelled after being issued. |
 
 This lifecycle is **generic**: it applies to a quote as much as to an invoice. Fine-grained financial tracking (is an installment paid, overdue?) is a separate mechanism — see below.
+
+`RECEIVED` sits between `SENT` and the verdict (`ACCEPTED`, `REJECTED`), and may be skipped: when the verdict is observed before the reception is, the document goes from `SENT` straight to the verdict.
 
 ---
 

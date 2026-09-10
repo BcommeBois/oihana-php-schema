@@ -20,6 +20,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- **`BusinessDocumentStatus::RECEIVED` — the step between `SENT` and the recipient's verdict.** A
+  document transmitted to its recipient is not yet known to the recipient's system ; once that
+  system has received and registered it under a reference of its own, whatever happens to the
+  document next happens there. `SENT` could not say that, and a consumer showing the two
+  situations under one badge had to cross the status with another field to tell them apart.
+  The step may be skipped : a verdict (`ACCEPTED`, `REJECTED`) observed before the reception takes
+  the document from `SENT` straight to the verdict. Wiki FR and EN updated.
+
 - **An architecture page in the wiki, drawn from the code.** `wiki/fr/architecture.md` and
   `wiki/en/architecture.md` show the library in three figures — the layers, the Schema.org types
   the Oihana layer extends (with the bridge class when there is one), the couplings between the
