@@ -6,6 +6,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+### Changed
+
+- **The quality choice of a product is spelled `choice`, not `choise`** —
+  fix(products): the quality choice is spelled choice, not choise (2026-09-21).
+  `choise` is not an English word : the noun is *choice*, and *choose* is the verb. The constant
+  `ProductAdditionalProperty::CHOISE = 'choise'` becomes `ProductAdditionalProperty::CHOICE =
+  'choice'`, and the property `ProductProperty::$choise` becomes `ProductProperty::$choice`.
+
+  ⚠️ **Renamed without an alias.** An alias keeping `'choise'` would leave the typo valid —
+  `ProductAdditionalProperty::includes( 'choise' )` would still answer `true`, and `Product::__set()`
+  would still accept it — while an alias taking `'choice'` would no longer be an alias. A consumer
+  that stored `choise` as a `propertyID` has to rewrite it.
+
 ### Fixed
 
 - **The `@since` annotations of the unreleased work name 1.5.0**, not 1.4.0 — that version was

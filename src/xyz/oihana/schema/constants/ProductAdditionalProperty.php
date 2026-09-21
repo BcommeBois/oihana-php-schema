@@ -20,7 +20,7 @@ class ProductAdditionalProperty
     public const string APPLICATION          = 'application' ;
     public const string ASSEMBLY             = 'assembly' ;
     public const string CERTIFICATION        = 'certification' ;
-    public const string CHOISE               = 'choise' ;
+    public const string CHOICE               = 'choice' ;
     public const string COLORS               = 'colors' ;
     public const string DENSITY_LABEL        = 'densityLabel' ;
     public const string DOOR_EDGE            = 'doorEdge' ;

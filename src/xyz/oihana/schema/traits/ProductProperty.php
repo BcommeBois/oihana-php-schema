@@ -57,11 +57,11 @@ trait ProductProperty
     public mixed $certification ;
 
     /**
-     * Available choise of the product.
+     * Quality choice (grade) of the product.
      *
      * @var mixed
      */
-    public mixed $choise ;
+    public mixed $choice ;
 
     /**
      * Available colors or finishes palette.
