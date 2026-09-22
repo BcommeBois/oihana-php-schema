@@ -117,10 +117,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   `Product::$hasApplicableResource` covers `Reflection::hydrate()` ; the two doors have to agree,
   and an essay compares them.
 
-- **`BusinessDocument::$datePublished`** — reuses [schema.org's own
-  `datePublished`](https://schema.org/datePublished) (« date of first broadcast/publication »)
-  for the one date a business document did not yet have a name for : when a draft first left
-  our own base and reached the outside world.
+- **`BusinessDocument::$datePublished`** — reuses [schema.org's own `datePublished`](https://schema.org/datePublished) 
+  (« date of first broadcast/publication ») for the one date a business document did not yet have a name for : 
+  when a draft first left our own base and reached the outside world.
 
   🔑 **Not `$issueDate`, and never the same property.** `issueDate` is the date printed on the
   document — chosen at creation, editable like any other header field of a draft.
