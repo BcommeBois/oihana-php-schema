@@ -8,10 +8,12 @@ use org\schema\Thing;
 
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\constants\traits\statistics\HasTradingMeasuresTrait;
+use xyz\oihana\schema\constants\traits\statistics\HasUninvoicedTradeTrait;
 use xyz\oihana\schema\constants\traits\statistics\SellerStatisticsTrait;
 use xyz\oihana\schema\organizations\Customer;
 use xyz\oihana\schema\people\Seller;
 use xyz\oihana\schema\traits\HasTradingMeasures;
+use xyz\oihana\schema\traits\HasUninvoicedTrade;
 
 /**
  * What one salesperson traded over one year.
@@ -20,6 +22,14 @@ use xyz\oihana\schema\traits\HasTradingMeasures;
  * ten measures as every other family ({@see HasTradingMeasures}). It answers the
  * question a salesperson is actually asked — *what did I sell* — and it is the
  * figure a {@see SalesObjectives} target is read against.
+ *
+ * Beside the ten measures, it may carry the trade that is not invoiced yet
+ * ({@see HasUninvoicedTrade}) : what was delivered and is still to invoice
+ * (`uninvoicedRevenue`), and what is ordered and still to deliver
+ * (`orderBacklog`). `revenue` only sees a sale once it is invoiced ; the two
+ * series say how the month stands before that, and `revenue` plus
+ * `uninvoicedRevenue` is what was delivered. A record whose trade is all
+ * invoiced leaves them unset.
  *
  * 🔑 **It is written at whatever grain its source attributes.** A source that
  * attributes each sale to one customer publishes one record per customer, named
@@ -43,6 +53,8 @@ class SellerStatistics extends Statistics
 {
     use HasTradingMeasures      ,
         HasTradingMeasuresTrait ,
+        HasUninvoicedTrade      ,
+        HasUninvoicedTradeTrait ,
         SellerStatisticsTrait   ;
 
     /**

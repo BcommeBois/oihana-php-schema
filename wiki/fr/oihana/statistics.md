@@ -103,9 +103,9 @@ Une **famille** est une fiche dont le sujet est nommé : `CustomerStatistics` po
 | `ProviderStatistics` | `Statistics`             | Ce qui a été acheté à un **fournisseur** sur une année.                                       |
 | `CompanyStatistics`  | `Statistics`             | Ce qu'une **société** a échangé sur une année — la vue chef d'agence et direction.            |
 | `ProductStatistics`  | `Statistics`             | Ce qu'un **article** a échangé sur une année, à l'achat comme à la vente.                     |
-| `SellerStatistics`   | `Statistics`             | Ce qu'un **commercial** a échangé sur une année, éventuellement client par client.            |
+| `SellerStatistics`   | `Statistics`             | Ce qu'un **commercial** a échangé sur une année, éventuellement client par client — plus le livré pas encore facturé et le commandé pas encore livré. |
 | `SalesObjectives`    | `Statistics`             | Ce qu'un **commercial** vise sur une année — les mêmes mesures, lues comme des cibles.        |
-| `StatisticsSummary`  | `Statistics`             | **Plusieurs fiches, additionnées** — une sélection, sommée mesure par mesure et mois par mois. |
+| `StatisticsSummary`  | `Statistics`             | **Plusieurs fiches, additionnées** — une sélection, sommée mesure par mesure et mois par mois, non-facturé des commerciaux compris. |
 
 ### Propriétés de `Statistics`
 
@@ -146,6 +146,37 @@ Une **famille** est une fiche dont le sujet est nommé : `CustomerStatistics` po
 
 *(les colonnes « Total » et « Série » indiquent ce qu'une source publie **d'ordinaire** — voir la règle ci-dessous)*
 
+### Le non-facturé — `HasUninvoicedTrade`
+
+Deux étapes d'une vente que `revenue` ne voit pas, puisqu'il compte ce qui est facturé. `SellerStatistics` et `StatisticsSummary` les portent en plus des dix mesures ; les autres familles, non.
+
+| Mesure              | Ce qu'elle contient                                                          | Ce qu'elle ne contient pas                                                            |
+|---------------------|------------------------------------------------------------------------------|---------------------------------------------------------------------------------------|
+| `uninvoicedRevenue` | Ce qui a été **livré et pas encore facturé**, au mois de la livraison.        | Ce qui est déjà facturé — c'est `revenue` ; ce qui est commandé et pas encore livré.  |
+| `orderBacklog`      | Ce qui est **commandé et pas encore livré**, au mois de la livraison prévue.  | Ce qui est livré, facturé ou non ; les devis.                                         |
+
+🔑 **Les trois ne se recouvrent jamais, et c'est pour cela qu'elles s'additionnent.** Une vente est dans une seule d'entre elles à la fois, et passe de l'une à l'autre en avançant : commandée, puis livrée, puis facturée. Sur une fiche au pas mensuel (`P1M`) :
+
+```
+Mars, une fiche :
+  revenue.values[2]            12 000   facturé en mars
+  uninvoicedRevenue.values[2]   3 500   livré en mars, pas encore facturé
+  orderBacklog.values[2]        4 200   commandé, livraison prévue en mars, pas encore livré
+
+  livré en mars                = 12 000 + 3 500 = 15 500
+  livré ou à livrer en mars    = 15 500 + 4 200 = 19 700
+```
+
+Le 2 avril, mars est facturé : `uninvoicedRevenue.values[2]` tombe à 0 — ou la série disparaît — et `revenue.values[2]` monte à 15 500. Le livré de mars n'a pas bougé ; il a changé de colonne.
+
+⚠️ **Deux séries transitoires.** Leurs montants sont en route vers `revenue`, et une fiche dont tout est facturé n'en porte aucune : la série est **absente**, pas douze zéros — des zéros affirmeraient qu'on a mesuré et trouvé vide.
+
+⚠️ **Des séries seules** : `values`, jamais `value`. Un total sur l'année additionnerait des mois arrivés chacun à une étape différente de leur facturation, et se lirait comme un chiffre de l'année qu'il n'est pas.
+
+`orderBacklog` n'est pas un chiffre d'affaires : rien n'en est livré, et une date prévue peut bouger. Un mois peut être dans le futur — c'est le chiffre encore à venir —, et un mois passé peut en porter encore : une livraison prévue ce mois-là qui n'a pas eu lieu.
+
+Pourquoi pas parmi les dix mesures : celles-là valent pour toutes les familles, alors qu'une étape de la vente appartient à la fiche de qui l'a faite.
+
 ### Propriétés de `CustomerStatistics`
 
 | Propriété        | Type                                  | Description                                           |
@@ -173,10 +204,14 @@ Ni l'une ni l'autre n'ajoute de propriété : elles nomment leur sujet, et c'est
 | `about`            | `#[HydrateAs(Seller::class)]`                   | Le commercial — même union que sur la fiche, sujet nommé.                   |
 | `assignedCustomer` | `int\|string\|array\|Customer\|null`           | Le client sur lequel porte le chiffre ou la cible. Absent si la source totalise le commercial. |
 | `assignedCategory` | `array\|string\|CategoryCode\|Thing\|null`     | *(`SalesObjectives` seul)* Le rayon de marchandises visé — un code, ou les codes ordonnés d'un chemin de classification, du plus large au plus fin. Absent si la cible porte sur un client. |
+| `uninvoicedRevenue` | `null\|array\|ObservationSeries`             | *(`SellerStatistics` seul)* Le livré pas encore facturé — voir « Le non-facturé » plus haut. |
+| `orderBacklog`     | `null\|array\|ObservationSeries`              | *(`SellerStatistics` seul)* Le commandé pas encore livré — voir « Le non-facturé » plus haut. |
 
 **Les deux narrations sont exclusives** : une cible porte sur un client **ou** sur un rayon, jamais sur les deux, et une cible posée sur le seul commercial les laisse toutes deux absentes.
 
 **Les deux classes portent le même sujet, et c'est tout l'intérêt.** Le réalisé et la cible s'alignent clé pour clé, sans rien à traduire de l'un vers l'autre.
+
+**Une cible n'a pas de non-facturé.** Elle se fixe sur ce qui est vendu, pas sur une étape en cours : `SalesObjectives` ne porte ni `uninvoicedRevenue` ni `orderBacklog`, et c'est sur les dix mesures que le réalisé et la cible s'alignent.
 
 ⚠️ **Une cible est rarement aussi détaillée qu'elle en a l'air.** Il est courant qu'une source ne renseigne qu'une seule mesure — un chiffre d'affaires — et laisse les neuf autres vides ; et quand une cible annuelle porte bien une valeur par mois, ce détail est souvent l'annuel étalé sur une courbe de saison plutôt que douze décisions. Rien de tout cela ne se voit dans la fiche une fois écrite : le lecteur qui a besoin de le savoir doit l'apprendre de qui l'a publiée.
 
@@ -194,6 +229,11 @@ C'est la somme d'une sélection : un portefeuille sur une année, une agence, un
 Elle porte les mêmes dix mesures que n'importe quelle fiche, chacune sommée **terme à terme** — le
 janvier du résumé est la somme des janviers, le février la somme des février, sur les douze
 positions. C'est ce qui permet de tracer la courbe mensuelle d'un **ensemble**.
+
+Un résumé de fiches de commerciaux porte aussi leurs deux séries du non-facturé, sommées de la même
+façon. 🚨 **Elles y sont déclarées pour qu'un résumé ne les perde pas** : le constructeur ne garde que
+les propriétés que la classe déclare, et jette les autres sans rien dire. Sur un résumé d'une autre
+famille, elles restent absentes.
 
 🔑 **Une seule classe pour toutes les familles, parce qu'un résumé perd la seule chose qui les
 distinguait.** `CustomerStatistics` et `ProviderStatistics` diffèrent par leur sujet et par les
@@ -284,7 +324,7 @@ Les trois coûts et les trois marges disent ce qu'un opérateur gagne sur un par
 
 ## Constantes associées
 
-Les clés de propriétés sont exposées par les traits [`StatisticsRecordTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/StatisticsRecordTrait.php), [`ObservationSeriesTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/ObservationSeriesTrait.php), [`HasTradingMeasuresTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/HasTradingMeasuresTrait.php) [`CustomerStatisticsTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/CustomerStatisticsTrait.php), [`SellerStatisticsTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/SellerStatisticsTrait.php) et [`SalesObjectivesTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/SalesObjectivesTrait.php), composés dans l'agrégateur de domaine [`StatisticsTrait`](../../../src/xyz/oihana/schema/constants/traits/StatisticsTrait.php) et câblés dans la classe maîtresse [`Oihana`](../../../src/xyz/oihana/schema/constants/Oihana.php). Vous pouvez donc y accéder via `Oihana::YEAR`, `Oihana::REVENUE`, `Oihana::GROSS_MARGIN`, etc. — et chaque classe expose les siennes (`CustomerStatistics::REVENUE`).
+Les clés de propriétés sont exposées par les traits [`StatisticsRecordTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/StatisticsRecordTrait.php), [`ObservationSeriesTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/ObservationSeriesTrait.php), [`HasTradingMeasuresTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/HasTradingMeasuresTrait.php), [`HasUninvoicedTradeTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/HasUninvoicedTradeTrait.php), [`CustomerStatisticsTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/CustomerStatisticsTrait.php), [`SellerStatisticsTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/SellerStatisticsTrait.php), [`SalesObjectivesTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/SalesObjectivesTrait.php) et [`StatisticsSummaryTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/StatisticsSummaryTrait.php), composés dans l'agrégateur de domaine [`StatisticsTrait`](../../../src/xyz/oihana/schema/constants/traits/StatisticsTrait.php) et câblés dans la classe maîtresse [`Oihana`](../../../src/xyz/oihana/schema/constants/Oihana.php). Vous pouvez donc y accéder via `Oihana::YEAR`, `Oihana::REVENUE`, `Oihana::GROSS_MARGIN`, etc. — et chaque classe expose les siennes (`CustomerStatistics::REVENUE`).
 
 ---
 

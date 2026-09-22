@@ -4,6 +4,7 @@ namespace xyz\oihana\schema\constants\traits;
 
 use xyz\oihana\schema\constants\traits\statistics\CustomerStatisticsTrait;
 use xyz\oihana\schema\constants\traits\statistics\HasTradingMeasuresTrait;
+use xyz\oihana\schema\constants\traits\statistics\HasUninvoicedTradeTrait;
 use xyz\oihana\schema\constants\traits\statistics\ObservationSeriesTrait;
 use xyz\oihana\schema\constants\traits\statistics\SalesObjectivesTrait;
 use xyz\oihana\schema\constants\traits\statistics\SellerStatisticsTrait;
@@ -21,6 +22,7 @@ trait StatisticsTrait
 {
     use CustomerStatisticsTrait ,
         HasTradingMeasuresTrait ,
+        HasUninvoicedTradeTrait ,
         ObservationSeriesTrait  ,
         SalesObjectivesTrait    ,
         SellerStatisticsTrait   ,

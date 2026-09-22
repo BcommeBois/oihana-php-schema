@@ -4,8 +4,10 @@ namespace xyz\oihana\schema\statistics;
 
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\constants\traits\statistics\HasTradingMeasuresTrait;
+use xyz\oihana\schema\constants\traits\statistics\HasUninvoicedTradeTrait;
 use xyz\oihana\schema\constants\traits\statistics\StatisticsSummaryTrait;
 use xyz\oihana\schema\traits\HasTradingMeasures;
+use xyz\oihana\schema\traits\HasUninvoicedTrade;
 
 /**
  * Several records, added together.
@@ -16,6 +18,15 @@ use xyz\oihana\schema\traits\HasTradingMeasures;
  * summed **term by term** : the January of the summary is the sum of the
  * Januaries, the February the sum of the Februaries, and so on over the twelve
  * positions. That is what lets a reader draw the monthly curve of a *set*.
+ *
+ * It also carries the two series of the trade that is not invoiced yet
+ * ({@see HasUninvoicedTrade}), which a {@see SellerStatistics} record may hold
+ * beside the ten measures, summed the same way. 🚨 **They are declared here so
+ * that a summary does not lose them** : the constructor keeps only the
+ * properties a class declares and drops the others without a word, so a sum of
+ * salespeople's records built without them would come out with their
+ * `uninvoicedRevenue` and `orderBacklog` gone. A summary of any other family
+ * leaves them unset, and they are not serialized.
  *
  * 🔑 **One class for every family, because a summary loses the only thing that
  * told them apart.** {@see CustomerStatistics} and {@see ProviderStatistics}
@@ -72,6 +83,8 @@ class StatisticsSummary extends Statistics
 {
     use HasTradingMeasures      ,
         HasTradingMeasuresTrait ,
+        HasUninvoicedTrade      ,
+        HasUninvoicedTradeTrait ,
         StatisticsSummaryTrait  ;
 
     /**

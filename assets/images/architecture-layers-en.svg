@@ -68,7 +68,7 @@ text{fill:#2E302A;font-variant-numeric:tabular-nums}
 <text class="sans role" x="161" y="201">— the shared base, used by every domain</text>
 <rect class="box xyz" x="14" y="226" width="372.9" height="50" rx="4"/>
 <text class="mono name xyz-ink" x="28" y="247">constants\Oihana</text>
-<text class="sans desc xyz-ink" x="28" y="264">Properties (org) + 16 Oihana traits · 115 constant traits</text>
+<text class="sans desc xyz-ink" x="28" y="264">Properties (org) + 16 Oihana traits · 116 constant traits</text>
 <rect class="box xyz" x="396.9" y="226" width="366.8" height="50" rx="4"/>
 <text class="mono name xyz-ink" x="410.9" y="247">constants\*</text>
 <text class="sans desc xyz-ink" x="410.9" y="264">18 registries · JwtClaim, CasbinPolicy, ApplicationType…</text>
@@ -77,7 +77,7 @@ text{fill:#2E302A;font-variant-numeric:tabular-nums}
 <text class="sans desc xyz-ink" x="787.7" y="264">26 classes</text>
 <rect class="box xyz" x="904.7" y="226" width="82.5" height="50" rx="4"/>
 <text class="mono name xyz-ink" x="918.7" y="247">traits</text>
-<text class="sans desc xyz-ink" x="918.7" y="264">13 mixins</text>
+<text class="sans desc xyz-ink" x="918.7" y="264">14 mixins</text>
 <rect class="box xyz" x="14" y="286" width="215.6" height="50" rx="4"/>
 <text class="mono name xyz-ink" x="28" y="307">helpers</text>
 <text class="sans desc xyz-ink" x="28" y="324">27 functions · hydrate · pivots</text>

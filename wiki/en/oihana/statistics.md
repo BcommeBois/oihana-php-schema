@@ -103,9 +103,9 @@ A **family** is a record whose subject is named: `CustomerStatistics` for a cust
 | `ProviderStatistics` | `Statistics` | What was bought from a **supplier** over one year.                                                      |
 | `CompanyStatistics`  | `Statistics` | What a **company** traded over one year — the branch manager's and the director's view.                 |
 | `ProductStatistics`  | `Statistics` | What an **article** traded over one year, on the purchase side as on the sale side.                     |
-| `SellerStatistics`   | `Statistics` | What a **salesperson** traded over one year, possibly customer by customer.                             |
+| `SellerStatistics`   | `Statistics` | What a **salesperson** traded over one year, possibly customer by customer — plus what is delivered and not invoiced yet, and what is ordered and not delivered yet. |
 | `SalesObjectives`    | `Statistics` | What a **salesperson** is aiming at over one year — the same measures, read as targets.                 |
-| `StatisticsSummary`  | `Statistics` | **Several records, added together** — one selection, summed measure by measure and month by month.      |
+| `StatisticsSummary`  | `Statistics` | **Several records, added together** — one selection, summed measure by measure and month by month, the salespeople's trade not invoiced yet included. |
 
 ### `Statistics` properties
 
@@ -146,6 +146,37 @@ A **family** is a record whose subject is named: `CustomerStatistics` for a cust
 
 *(the “Total” and “Series” columns state what a source **usually** publishes — see the rule below)*
 
+### Trade not invoiced yet — `HasUninvoicedTrade`
+
+Two stages of a sale that `revenue` cannot see, since it counts what was invoiced. `SellerStatistics` and `StatisticsSummary` carry them beside the ten measures; the other families do not.
+
+| Measure             | What it holds                                                                  | What it does not hold                                                               |
+|---------------------|--------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
+| `uninvoicedRevenue` | What was **delivered and not yet invoiced**, under the month of the delivery.   | What is already invoiced — that is `revenue`; what is ordered and not yet delivered. |
+| `orderBacklog`      | What is **ordered and not yet delivered**, under the month the delivery is planned for. | What is delivered, invoiced or not; the quotes.                              |
+
+🔑 **The three never overlap, and that is why they add up.** A sale sits in one of them at a time and moves along as it goes: ordered, then delivered, then invoiced. On a record stepped month by month (`P1M`):
+
+```
+March, one record:
+  revenue.values[2]            12 000   invoiced in March
+  uninvoicedRevenue.values[2]   3 500   delivered in March, not invoiced yet
+  orderBacklog.values[2]        4 200   ordered, delivery planned in March, not delivered yet
+
+  delivered in March               = 12 000 + 3 500 = 15 500
+  delivered or to deliver in March = 15 500 + 4 200 = 19 700
+```
+
+On 2 April, March is invoiced: `uninvoicedRevenue.values[2]` falls to 0 — or the series goes altogether — and `revenue.values[2]` rises to 15 500. What was delivered in March has not moved; it has changed column.
+
+⚠️ **Both series are transitional.** Their amounts are on their way to `revenue`, and a record whose trade is all invoiced carries neither: the series is **absent**, not twelve zeros — zeros would state that something was measured and found empty.
+
+⚠️ **Both are runs only**: `values`, never `value`. A total over the year would add months that each stand at a different stage of their invoicing, and read as a figure of the year it is not.
+
+`orderBacklog` is not a revenue: nothing of it is delivered, and a planned date can move. A month may lie in the future — the backlog is the trade still to come — and a past month may still hold some: a delivery planned for it that has not happened.
+
+Why not among the ten measures: those hold for every family, while a stage of a sale belongs to the record of whoever made it.
+
 ### `CustomerStatistics` properties
 
 | Property         | Type                                     | Description                                                        |
@@ -173,10 +204,14 @@ Neither adds a property: they name their subject, and that is all. `CompanyStati
 | `about`            | `#[HydrateAs(Seller::class)]`                 | The salesperson — same union as on the record, subject named.                 |
 | `assignedCustomer` | `int\|string\|array\|Customer\|null`         | The customer the figure or the target is set on. Unset when the source totals the salesperson. |
 | `assignedCategory` | `array\|string\|CategoryCode\|Thing\|null`   | *(`SalesObjectives` only)* The range of goods aimed at — a single code, or the ordered codes of a path through a classification, widest first. Unset when the target is set on a customer. |
+| `uninvoicedRevenue` | `null\|array\|ObservationSeries`            | *(`SellerStatistics` only)* What is delivered and not invoiced yet — see “Trade not invoiced yet” above. |
+| `orderBacklog`     | `null\|array\|ObservationSeries`             | *(`SellerStatistics` only)* What is ordered and not delivered yet — see “Trade not invoiced yet” above. |
 
 **The two narrowings are alternatives**: a target is set on a customer **or** on a range of goods, never on both, and a target set on the salesperson alone leaves both unset.
 
 **Both classes carry the same subject, and that is the whole point.** The outcome and the target line up key for key, with nothing to translate between them.
+
+**A target has no trade not invoiced yet.** It is set on what is sold, not on a stage along the way: `SalesObjectives` carries neither `uninvoicedRevenue` nor `orderBacklog`, and the outcome and the target line up on the ten measures.
 
 ⚠️ **A target is rarely as detailed as it looks.** Sources commonly publish one measure — a revenue figure — and leave the nine others empty; and where a yearly target does carry a value per month, that detail is often the yearly figure spread over a seasonal curve rather than twelve decisions. None of this is visible in the record once written, so a reader who needs to know has to be told by whoever published it.
 
@@ -194,6 +229,11 @@ It is the sum of a selection: a portfolio over a year, a branch, a range of good
 same ten measures as any record, each summed **term by term** — the January of the summary is the
 sum of the Januaries, the February the sum of the Februaries, over the twelve positions. That is
 what lets a reader draw the monthly curve of a **set**.
+
+A summary of salespeople's records also carries their two series of the trade not invoiced yet,
+summed the same way. 🚨 **They are declared on it so that a summary does not lose them**: the
+constructor keeps only the properties a class declares, and drops the others without a word. On a
+summary of any other family, they stay unset.
 
 🔑 **One class for every family, because a summary loses the only thing that told them apart.**
 `CustomerStatistics` and `ProviderStatistics` differ by their subject and by the dimensions a
@@ -283,7 +323,7 @@ The three costs and the three margins say what an operator earns on a given coun
 
 ## Related constants
 
-Property keys are exposed by the [`StatisticsRecordTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/StatisticsRecordTrait.php), [`ObservationSeriesTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/ObservationSeriesTrait.php), [`HasTradingMeasuresTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/HasTradingMeasuresTrait.php), [`CustomerStatisticsTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/CustomerStatisticsTrait.php), [`SellerStatisticsTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/SellerStatisticsTrait.php) and [`SalesObjectivesTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/SalesObjectivesTrait.php) traits, composed in the [`StatisticsTrait`](../../../src/xyz/oihana/schema/constants/traits/StatisticsTrait.php) domain aggregator and wired into the [`Oihana`](../../../src/xyz/oihana/schema/constants/Oihana.php) master class. You can therefore reach them through `Oihana::YEAR`, `Oihana::REVENUE`, `Oihana::GROSS_MARGIN`, and each class exposes its own (`CustomerStatistics::REVENUE`).
+Property keys are exposed by the [`StatisticsRecordTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/StatisticsRecordTrait.php), [`ObservationSeriesTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/ObservationSeriesTrait.php), [`HasTradingMeasuresTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/HasTradingMeasuresTrait.php), [`HasUninvoicedTradeTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/HasUninvoicedTradeTrait.php), [`CustomerStatisticsTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/CustomerStatisticsTrait.php), [`SellerStatisticsTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/SellerStatisticsTrait.php), [`SalesObjectivesTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/SalesObjectivesTrait.php) and [`StatisticsSummaryTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/StatisticsSummaryTrait.php) traits, composed in the [`StatisticsTrait`](../../../src/xyz/oihana/schema/constants/traits/StatisticsTrait.php) domain aggregator and wired into the [`Oihana`](../../../src/xyz/oihana/schema/constants/Oihana.php) master class. You can therefore reach them through `Oihana::YEAR`, `Oihana::REVENUE`, `Oihana::GROSS_MARGIN`, and each class exposes its own (`CustomerStatistics::REVENUE`).
 
 ---
 

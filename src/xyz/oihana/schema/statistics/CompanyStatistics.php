@@ -33,11 +33,17 @@ use xyz\oihana\schema\traits\HasTradingMeasures;
  * them owes the distinction to whoever reads them — commonly by never mixing the
  * two in one sum.
  *
- * On the granularity a source may offer beyond the year : an ordered / invoiced /
- * delivered variant of the same period is a *qualification* of the measure, and
- * {@see \org\schema\Observation::$measurementQualifier} — inherited by
- * {@see ObservationSeries} — is where it belongs. No property of this class
- * carries it.
+ * On the variants a source may offer of the same period — ordered, delivered or
+ * invoiced : a source publishing **one** variant per record qualifies that
+ * record's series through {@see \org\schema\Observation::$measurementQualifier},
+ * inherited by {@see ObservationSeries}, and this class carries no property for
+ * it. A record holding **several** stages of the same trade at once needs a
+ * property for each, since one property holds one series whatever qualifies it :
+ * that is what {@see SellerStatistics} does with `uninvoicedRevenue` and
+ * `orderBacklog`, beside `revenue`
+ * ({@see \xyz\oihana\schema\traits\HasUninvoicedTrade}).
+ * Summing records qualified differently counts a sale once at every stage it
+ * went through.
  *
  * @package xyz\oihana\schema\statistics
  * @author  Marc Alcaraz (eKameleon)

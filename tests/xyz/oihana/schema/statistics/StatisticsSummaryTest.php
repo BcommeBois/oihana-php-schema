@@ -34,6 +34,9 @@ class StatisticsSummaryTest extends TestCase
 
         // The same idea schema.org names on a list, reused rather than renamed.
         $this->assertSame( Schema::NUMBER_OF_ITEMS , StatisticsSummary::NUMBER_OF_ITEMS );
+
+        $this->assertSame( 'orderBacklog'      , StatisticsSummary::ORDER_BACKLOG      );
+        $this->assertSame( 'uninvoicedRevenue' , StatisticsSummary::UNINVOICED_REVENUE );
     }
 
     public function testItCarriesTheTenMeasures(): void
@@ -93,7 +96,50 @@ class StatisticsSummaryTest extends TestCase
         $this->assertArrayNotHasKey( StatisticsSummary::ASSIGNED_COMPANY , $document );
 
         // And what was never given stays out, measures included.
-        $this->assertArrayNotHasKey( StatisticsSummary::GROSS_MARGIN , $document );
+        $this->assertArrayNotHasKey( StatisticsSummary::GROSS_MARGIN       , $document );
+        $this->assertArrayNotHasKey( StatisticsSummary::ORDER_BACKLOG      , $document );
+        $this->assertArrayNotHasKey( StatisticsSummary::UNINVOICED_REVENUE , $document );
+    }
+
+    /**
+     * 🚨 A summary of salespeople's records keeps their trade not invoiced yet.
+     *
+     * The constructor keeps only the properties a class declares and drops the
+     * others without a word : the test fails the day the summary stops declaring
+     * them, and a sum of such records starts losing them.
+     */
+    public function testASummaryKeepsTheTradeNotInvoicedYet(): void
+    {
+        $summary = new StatisticsSummary
+        ([
+            StatisticsSummary::NUMBER_OF_ITEMS    => 4 ,
+            StatisticsSummary::UNINVOICED_REVENUE => new ObservationSeries([ Oihana::UNIT_CODE => 'EUR' , Oihana::VALUES => self::UNINVOICED ]) ,
+            StatisticsSummary::ORDER_BACKLOG      => new ObservationSeries([ Oihana::UNIT_CODE => 'EUR' , Oihana::VALUES => self::BACKLOG    ]) ,
+        ]);
+
+        $document = json_decode( json_encode( $summary ) , true );
+
+        $this->assertSame( self::UNINVOICED , $document[ StatisticsSummary::UNINVOICED_REVENUE ][ Oihana::VALUES ] );
+        $this->assertSame( self::BACKLOG    , $document[ StatisticsSummary::ORDER_BACKLOG      ][ Oihana::VALUES ] );
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testReflectionReadsTheTradeNotInvoicedYetAsSeries(): void
+    {
+        $summary = new Reflection()->hydrate
+        (
+            [
+                StatisticsSummary::UNINVOICED_REVENUE => [ 'unitCode' => 'EUR' , 'values' => self::UNINVOICED ] ,
+                StatisticsSummary::ORDER_BACKLOG      => [ 'unitCode' => 'EUR' , 'values' => self::BACKLOG    ] ,
+            ],
+            StatisticsSummary::class
+        );
+
+        $this->assertInstanceOf( ObservationSeries::class , $summary->uninvoicedRevenue );
+        $this->assertInstanceOf( ObservationSeries::class , $summary->orderBacklog );
+        $this->assertSame( self::BACKLOG , $summary->orderBacklog->values );
     }
 
     /**
@@ -159,6 +205,11 @@ class StatisticsSummaryTest extends TestCase
     }
 
     /**
+     * What is ordered and not yet delivered, summed over the selection.
+     */
+    private const array BACKLOG = [ 0 , 0 , 16800 , 7200 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ] ;
+
+    /**
      * The ten measures every family of statistics carries.
      */
     private const array MEASURES =
@@ -174,4 +225,9 @@ class StatisticsSummaryTest extends TestCase
         StatisticsSummary::VOLUME          ,
         StatisticsSummary::WEIGHT          ,
     ];
+
+    /**
+     * What was delivered and not invoiced yet, summed over the selection.
+     */
+    private const array UNINVOICED = [ 0 , 0 , 14000 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ] ;
 }

@@ -33,6 +33,34 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- **A salesperson's record carries the trade that is not invoiced yet** —
+  feat(statistics): a salesperson's record carries what is delivered and not invoiced, and what is
+  ordered and not delivered (2026-09-22).
+  `revenue` counts what was invoiced, so the month in progress reads short of what was actually
+  delivered until its invoices are all out. Two series say how that month stands before then, in a
+  new trait, `HasUninvoicedTrade`, with its constants trait `HasUninvoicedTradeTrait` (composed by
+  `StatisticsTrait`, hence `Oihana::UNINVOICED_REVENUE` and `Oihana::ORDER_BACKLOG`) :
+  `uninvoicedRevenue`, what was delivered and not yet invoiced, under the month of the delivery ; and
+  `orderBacklog`, what is ordered and not yet delivered, under the month the delivery is planned for.
+  With `revenue`, the three never overlap : a sale sits in one of them at a time, and `revenue` plus
+  `uninvoicedRevenue` is what was delivered. Both are transitional — a record whose trade is all
+  invoiced carries neither, absent rather than twelve zeros — and runs only, with no yearly `value`.
+
+  `SellerStatistics` composes the trait, and so does `StatisticsSummary` : the constructor keeps only
+  the properties a class declares, so a summary of salespeople's records built without them would
+  have dropped both series without a word. The other families do not carry them — they are stages of
+  a sale, and a sale belongs to the record of whoever made it —, nor does `SalesObjectives` : a target
+  is set on what is sold, not on a stage along the way.
+
+  The rule on `CompanyStatistics` about the ordered / delivered / invoiced variants of a period is
+  rewritten to make room for them : a source publishing one variant per record still qualifies its
+  series through `measurementQualifier`, while a record holding several stages at once needs a
+  property for each. Wiki FR and EN updated — a section of their own, with a worked example —, and
+  the architecture figures regenerated (one more constants trait, one more mixin).
+
+  ⚠️ **The « Related constants » sentence of the wiki named neither `StatisticsSummaryTrait` nor,
+  now, the new trait** ; both are added, and the French version gets the comma it was missing.
+
 - **`BusinessDocumentStatus::RECEIVED` — the step between `SENT` and the recipient's verdict.** A
   document transmitted to its recipient is not yet known to the recipient's system ; once that
   system has received and registered it under a reference of its own, whatever happens to the

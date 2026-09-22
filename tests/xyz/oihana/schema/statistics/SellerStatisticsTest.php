@@ -29,7 +29,13 @@ class SellerStatisticsTest extends TestCase
 
     public function testTraitConstants(): void
     {
-        $this->assertSame( 'assignedCustomer' , SellerStatistics::ASSIGNED_CUSTOMER );
+        $this->assertSame( 'assignedCustomer'  , SellerStatistics::ASSIGNED_CUSTOMER  );
+        $this->assertSame( 'orderBacklog'      , SellerStatistics::ORDER_BACKLOG      );
+        $this->assertSame( 'uninvoicedRevenue' , SellerStatistics::UNINVOICED_REVENUE );
+
+        // The aggregator composes the new constants trait — a name clash there would be fatal.
+        $this->assertSame( Oihana::ORDER_BACKLOG      , SellerStatistics::ORDER_BACKLOG      );
+        $this->assertSame( Oihana::UNINVOICED_REVENUE , SellerStatistics::UNINVOICED_REVENUE );
     }
 
     public function testItCarriesTheTenMeasures(): void
@@ -40,6 +46,14 @@ class SellerStatisticsTest extends TestCase
         {
             $this->assertNull( $statistics->{ $measure } ?? null , $measure );
         }
+    }
+
+    public function testItCarriesTheTradeNotInvoicedYet(): void
+    {
+        $statistics = new SellerStatistics() ;
+
+        $this->assertNull( $statistics->orderBacklog      ?? null );
+        $this->assertNull( $statistics->uninvoicedRevenue ?? null );
     }
 
     public function testTheHeadIsInherited(): void
@@ -94,6 +108,51 @@ class SellerStatisticsTest extends TestCase
         }
     }
 
+    /**
+     * The trade not invoiced yet is a run only : a stored row carries `values`,
+     * and no total.
+     *
+     * @throws ReflectionException
+     */
+    public function testReflectionReadsTheTradeNotInvoicedYetAsSeries(): void
+    {
+        $statistics = new Reflection()->hydrate
+        (
+            [
+                SellerStatistics::UNINVOICED_REVENUE => [ 'unitCode' => 'EUR' , 'values' => self::UNINVOICED ] ,
+                SellerStatistics::ORDER_BACKLOG      => [ 'unitCode' => 'EUR' , 'values' => self::BACKLOG    ] ,
+            ],
+            SellerStatistics::class
+        );
+
+        $this->assertInstanceOf( ObservationSeries::class , $statistics->uninvoicedRevenue );
+        $this->assertInstanceOf( ObservationSeries::class , $statistics->orderBacklog );
+        $this->assertSame( self::UNINVOICED , $statistics->uninvoicedRevenue->values );
+        $this->assertSame( self::BACKLOG    , $statistics->orderBacklog->values );
+        $this->assertNull( $statistics->uninvoicedRevenue->value ?? null );
+    }
+
+    /**
+     * 🔑 The three stages never overlap : what was invoiced in March plus what
+     * was delivered in March and not invoiced yet is what was delivered in March.
+     */
+    public function testTheInvoicedAndTheUninvoicedAddUpToTheDelivered(): void
+    {
+        $statistics = new SellerStatistics
+        ([
+            SellerStatistics::REVENUE            => new ObservationSeries([ Oihana::VALUES => self::INVOICED   ]) ,
+            SellerStatistics::UNINVOICED_REVENUE => new ObservationSeries([ Oihana::VALUES => self::UNINVOICED ]) ,
+            SellerStatistics::ORDER_BACKLOG      => new ObservationSeries([ Oihana::VALUES => self::BACKLOG    ]) ,
+        ]);
+
+        $march = 2 ;
+
+        $delivered = $statistics->revenue->values[ $march ] + $statistics->uninvoicedRevenue->values[ $march ] ;
+
+        $this->assertSame( 15500 , $delivered );
+        $this->assertSame( 19700 , $delivered + $statistics->orderBacklog->values[ $march ] );
+    }
+
     public function testASubjectAlsoReadsAsABareCode(): void
     {
         $statistics = new SellerStatistics([ SellerStatistics::ABOUT => 'JDOE' ]);
@@ -119,7 +178,22 @@ class SellerStatisticsTest extends TestCase
         $this->assertSame( 100 , $document[ SellerStatistics::REVENUE ][ Oihana::VALUE ] );
         $this->assertArrayNotHasKey( SellerStatistics::ASSIGNED_CUSTOMER , $document );
         $this->assertArrayNotHasKey( SellerStatistics::GROSS_MARGIN , $document );
+
+        // A record whose trade is all invoiced carries no such series — absent, not twelve zeros.
+        $this->assertArrayNotHasKey( SellerStatistics::ORDER_BACKLOG      , $document );
+        $this->assertArrayNotHasKey( SellerStatistics::UNINVOICED_REVENUE , $document );
     }
+
+    /**
+     * What is ordered and not yet delivered, month of the planned delivery — March,
+     * and an April still to come.
+     */
+    private const array BACKLOG = [ 0 , 0 , 4200 , 1800 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ] ;
+
+    /**
+     * What was invoiced, month by month.
+     */
+    private const array INVOICED = [ 9800 , 11300 , 12000 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ] ;
 
     /**
      * The ten measures every family of statistics carries.
@@ -137,4 +211,9 @@ class SellerStatisticsTest extends TestCase
         SellerStatistics::VOLUME          ,
         SellerStatistics::WEIGHT          ,
     ];
+
+    /**
+     * What was delivered and not invoiced yet — March only, the months before are invoiced.
+     */
+    private const array UNINVOICED = [ 0 , 0 , 3500 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ] ;
 }

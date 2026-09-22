@@ -47,6 +47,26 @@ class CustomerStatisticsTest extends TestCase
         }
     }
 
+    /**
+     * The trade not invoiced yet is a stage of a sale, carried by the record of
+     * whoever made it : it does not spill over onto a customer's record, and a
+     * constructor given it drops it.
+     */
+    public function testItDoesNotCarryTheTradeNotInvoicedYet(): void
+    {
+        $this->assertFalse( property_exists( CustomerStatistics::class , Oihana::ORDER_BACKLOG      ) );
+        $this->assertFalse( property_exists( CustomerStatistics::class , Oihana::UNINVOICED_REVENUE ) );
+
+        $statistics = new CustomerStatistics
+        ([
+            Oihana::UNINVOICED_REVENUE => new ObservationSeries([ Oihana::VALUES => [ 0 , 0 , 3500 ] ]) ,
+        ]);
+
+        $document = json_decode( json_encode( $statistics ) , true );
+
+        $this->assertArrayNotHasKey( Oihana::UNINVOICED_REVENUE , $document );
+    }
+
     public function testTheHeadIsInherited(): void
     {
         $statistics = new CustomerStatistics
