@@ -13,4 +13,5 @@ trait SalesObjectivesTrait
 {
     const string ASSIGNED_CATEGORY = 'assignedCategory' ;
     const string ASSIGNED_CUSTOMER = 'assignedCustomer' ;
+    const string MARGIN_RATE       = 'marginRate'       ;
 }

@@ -124,6 +124,29 @@ class StatisticsSummaryTest extends TestCase
     }
 
     /**
+     * ⛔ A summary does not carry a margin rate, and it must not start to.
+     *
+     * A summary adds up what it holds, term by term. A rate does not add up : the
+     * hundred targets of one salesperson would answer a percentage in the
+     * thousands — wrong, and plausible enough to be believed. The rate stays on
+     * the target, where it means something.
+     */
+    public function testASummaryDoesNotCarryAMarginRate(): void
+    {
+        $this->assertFalse( property_exists( StatisticsSummary::class , Oihana::MARGIN_RATE ) );
+
+        $summary = new StatisticsSummary
+        ([
+            StatisticsSummary::NUMBER_OF_ITEMS => 106 ,
+            Oihana::MARGIN_RATE                => [ Oihana::UNIT_CODE => 'P1' , Oihana::VALUE => 25 ] ,
+        ]);
+
+        $document = json_decode( json_encode( $summary ) , true );
+
+        $this->assertArrayNotHasKey( Oihana::MARGIN_RATE , $document );
+    }
+
+    /**
      * @throws ReflectionException
      */
     public function testReflectionReadsTheTradeNotInvoicedYetAsSeries(): void

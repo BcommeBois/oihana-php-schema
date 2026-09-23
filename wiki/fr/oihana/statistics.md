@@ -104,7 +104,7 @@ Une **famille** est une fiche dont le sujet est nommé : `CustomerStatistics` po
 | `CompanyStatistics`  | `Statistics`             | Ce qu'une **société** a échangé sur une année — la vue chef d'agence et direction.            |
 | `ProductStatistics`  | `Statistics`             | Ce qu'un **article** a échangé sur une année, à l'achat comme à la vente.                     |
 | `SellerStatistics`   | `Statistics`             | Ce qu'un **commercial** a échangé sur une année, éventuellement client par client — plus le livré pas encore facturé et le commandé pas encore livré. |
-| `SalesObjectives`    | `Statistics`             | Ce qu'un **commercial** vise sur une année — les mêmes mesures, lues comme des cibles.        |
+| `SalesObjectives`    | `Statistics`             | Ce qu'un **commercial** vise sur une année — les mêmes mesures, lues comme des cibles, plus un taux de marge visé. |
 | `StatisticsSummary`  | `Statistics`             | **Plusieurs fiches, additionnées** — une sélection, sommée mesure par mesure et mois par mois, non-facturé des commerciaux compris. |
 
 ### Propriétés de `Statistics`
@@ -204,6 +204,7 @@ Ni l'une ni l'autre n'ajoute de propriété : elles nomment leur sujet, et c'est
 | `about`            | `#[HydrateAs(Seller::class)]`                   | Le commercial — même union que sur la fiche, sujet nommé.                   |
 | `assignedCustomer` | `int\|string\|array\|Customer\|null`           | Le client sur lequel porte le chiffre ou la cible. Absent si la source totalise le commercial. |
 | `assignedCategory` | `array\|string\|CategoryCode\|Thing\|null`     | *(`SalesObjectives` seul)* Le rayon de marchandises visé — un code, ou les codes ordonnés d'un chemin de classification, du plus large au plus fin. Absent si la cible porte sur un client. |
+| `marginRate`       | `null\|array\|QuantitativeValue`               | *(`SalesObjectives` seul)* Le taux de marge visé — une valeur et le code de pourcentage `P1`. Absent si aucun taux n'est fixé. |
 | `uninvoicedRevenue` | `null\|array\|ObservationSeries`             | *(`SellerStatistics` seul)* Le livré pas encore facturé — voir « Le non-facturé » plus haut. |
 | `orderBacklog`     | `null\|array\|ObservationSeries`              | *(`SellerStatistics` seul)* Le commandé pas encore livré — voir « Le non-facturé » plus haut. |
 
@@ -212,6 +213,10 @@ Ni l'une ni l'autre n'ajoute de propriété : elles nomment leur sujet, et c'est
 **Les deux classes portent le même sujet, et c'est tout l'intérêt.** Le réalisé et la cible s'alignent clé pour clé, sans rien à traduire de l'un vers l'autre.
 
 **Une cible n'a pas de non-facturé.** Elle se fixe sur ce qui est vendu, pas sur une étape en cours : `SalesObjectives` ne porte ni `uninvoicedRevenue` ni `orderBacklog`, et c'est sur les dix mesures que le réalisé et la cible s'alignent.
+
+🔑 **Le taux de marge visé n'est pas une mesure, et c'est délibéré.** Les dix mesures sont des montants : elles portent un pas de douze valeurs, elles portent un total, et un résumé les additionne terme à terme. Un taux ne fait rien de tout cela — additionner les taux de cent fiches répond un nombre à la fois faux et parfaitement crédible. Il est donc une propriété à part, et `StatisticsSummary` ne le porte pas. Un écran qui a besoin du taux d'un commercial le lit sur l'une de ses cibles.
+
+⚠️ **De quoi ce taux est un pourcentage, c'est à qui le publie de le dire**, et la réponse change le chiffre : une marge sur le prix de vente et une marge sur le prix de revient décrivent la même vente avec deux nombres différents. Rien dans la fiche ne dit lequel est visé. Une cible sans taux laisse la propriété absente — jamais `0`, qui se lirait « ne viser aucune marge ».
 
 ⚠️ **Une cible est rarement aussi détaillée qu'elle en a l'air.** Il est courant qu'une source ne renseigne qu'une seule mesure — un chiffre d'affaires — et laisse les neuf autres vides ; et quand une cible annuelle porte bien une valeur par mois, ce détail est souvent l'annuel étalé sur une courbe de saison plutôt que douze décisions. Rien de tout cela ne se voit dans la fiche une fois écrite : le lecteur qui a besoin de le savoir doit l'apprendre de qui l'a publiée.
 
@@ -234,6 +239,10 @@ Un résumé de fiches de commerciaux porte aussi leurs deux séries du non-factu
 façon. 🚨 **Elles y sont déclarées pour qu'un résumé ne les perde pas** : le constructeur ne garde que
 les propriétés que la classe déclare, et jette les autres sans rien dire. Sur un résumé d'une autre
 famille, elles restent absentes.
+
+⛔ **Le taux de marge visé, lui, n'y est pas déclaré, et ne doit pas l'être.** Un résumé additionne ce
+qu'il porte ; un taux ne s'additionne pas. La même mécanique qui protège les deux séries écarte
+celui-là : ce que la classe ne déclare pas, le constructeur le jette.
 
 🔑 **Une seule classe pour toutes les familles, parce qu'un résumé perd la seule chose qui les
 distinguait.** `CustomerStatistics` et `ProviderStatistics` diffèrent par leur sujet et par les

@@ -7,6 +7,8 @@ use ReflectionException;
 
 use oihana\reflect\Reflection;
 
+use org\schema\QuantitativeValue;
+
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\enumerations\BusinessDocumentDirection;
 use xyz\oihana\schema\organizations\Customer;
@@ -31,6 +33,7 @@ class SalesObjectivesTest extends TestCase
     {
         $this->assertSame( 'assignedCategory' , SalesObjectives::ASSIGNED_CATEGORY );
         $this->assertSame( 'assignedCustomer' , SalesObjectives::ASSIGNED_CUSTOMER );
+        $this->assertSame( 'marginRate'       , SalesObjectives::MARGIN_RATE       );
     }
 
     public function testItCarriesTheTenMeasures(): void
@@ -140,6 +143,46 @@ class SalesObjectivesTest extends TestCase
         $this->assertSame( '369980' , $document[ SalesObjectives::ASSIGNED_CUSTOMER ] );
         $this->assertArrayNotHasKey( SalesObjectives::ASSIGNED_CATEGORY , $document );
         $this->assertArrayNotHasKey( SalesObjectives::GROSS_MARGIN , $document );
+        $this->assertArrayNotHasKey( SalesObjectives::MARGIN_RATE , $document );
+    }
+
+    /**
+     * A rate is one number and its unit, never a run of twelve : the percent code
+     * says once and for all that `25` means 25 %, and not 0.25 nor 2 500 %.
+     *
+     * @throws ReflectionException
+     */
+    public function testTheMarginRateReadsAsAPercentage(): void
+    {
+        $objectives = new Reflection()->hydrate
+        (
+            [ SalesObjectives::MARGIN_RATE => [ Oihana::UNIT_CODE => 'P1' , Oihana::VALUE => 25 ] ] ,
+            SalesObjectives::class
+        );
+
+        $this->assertInstanceOf( QuantitativeValue::class , $objectives->marginRate );
+        $this->assertEquals( 25 , $objectives->marginRate->value );
+        $this->assertSame( 'P1' , $objectives->marginRate->unitCode );
+    }
+
+    /**
+     * A rate is not one of the measures : it carries no run of twelve values, and
+     * nothing sums it.
+     *
+     * @throws ReflectionException
+     */
+    public function testTheMarginRateCarriesNoRun(): void
+    {
+        $objectives = new Reflection()->hydrate
+        (
+            [ SalesObjectives::MARGIN_RATE => [ Oihana::UNIT_CODE => 'P1' , Oihana::VALUE => 23.5 ] ] ,
+            SalesObjectives::class
+        );
+
+        $document = json_decode( json_encode( $objectives ) , true );
+
+        $this->assertEquals( 23.5 , $document[ SalesObjectives::MARGIN_RATE ][ Oihana::VALUE ] );
+        $this->assertArrayNotHasKey( Oihana::VALUES , $document[ SalesObjectives::MARGIN_RATE ] );
     }
 
     /**

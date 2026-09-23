@@ -5,6 +5,7 @@ namespace xyz\oihana\schema\statistics;
 use oihana\reflect\attributes\HydrateAs;
 
 use org\schema\CategoryCode;
+use org\schema\QuantitativeValue;
 use org\schema\Thing;
 
 use xyz\oihana\schema\constants\Oihana;
@@ -87,4 +88,34 @@ class SalesObjectives extends Statistics
      * @since 1.5.0
      */
     public null|int|string|array|Customer $assignedCustomer ;
+
+    /**
+     * The margin rate the target is set at.
+     *
+     * A percentage carried as a {@see QuantitativeValue} — `value` and the
+     * UN/CEFACT percent code `P1` — because a bare `25` reads as well as 25 %,
+     * 2 500 % or 0.25, and the reader has no way to tell. The same shape
+     * {@see \xyz\oihana\schema\traits\HasPricingMarkup::$pricingMarkup} already
+     * uses for a markup band.
+     *
+     * 🔑 **Deliberately not one of the measures.** The ten of
+     * {@see HasTradingMeasures} are amounts : they hold a run of twelve values,
+     * they carry a total, and a summary adds them up term by term. A rate does
+     * none of that — adding the rates of a hundred sheets answers a number that
+     * is both wrong and entirely plausible. It is therefore a property of its
+     * own, and a {@see StatisticsSummary} does not carry it.
+     *
+     * ⚠️ **What it is a rate *of* is the publisher's to say**, and the answer
+     * changes the figure : a margin on the selling price and a margin on the cost
+     * describe the same sale with different numbers. Nothing in the record states
+     * which one is meant.
+     *
+     * A target with no rate set leaves the property absent — never `0`, which
+     * would read as « aiming at no margin at all ».
+     *
+     * @var null|array|QuantitativeValue
+     * @since 1.5.0
+     */
+    #[HydrateAs(QuantitativeValue::class)]
+    public null|array|QuantitativeValue $marginRate ;
 }

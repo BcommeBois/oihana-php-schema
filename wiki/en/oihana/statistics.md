@@ -104,7 +104,7 @@ A **family** is a record whose subject is named: `CustomerStatistics` for a cust
 | `CompanyStatistics`  | `Statistics` | What a **company** traded over one year — the branch manager's and the director's view.                 |
 | `ProductStatistics`  | `Statistics` | What an **article** traded over one year, on the purchase side as on the sale side.                     |
 | `SellerStatistics`   | `Statistics` | What a **salesperson** traded over one year, possibly customer by customer — plus what is delivered and not invoiced yet, and what is ordered and not delivered yet. |
-| `SalesObjectives`    | `Statistics` | What a **salesperson** is aiming at over one year — the same measures, read as targets.                 |
+| `SalesObjectives`    | `Statistics` | What a **salesperson** is aiming at over one year — the same measures, read as targets, plus a target margin rate. |
 | `StatisticsSummary`  | `Statistics` | **Several records, added together** — one selection, summed measure by measure and month by month, the salespeople's trade not invoiced yet included. |
 
 ### `Statistics` properties
@@ -204,6 +204,7 @@ Neither adds a property: they name their subject, and that is all. `CompanyStati
 | `about`            | `#[HydrateAs(Seller::class)]`                 | The salesperson — same union as on the record, subject named.                 |
 | `assignedCustomer` | `int\|string\|array\|Customer\|null`         | The customer the figure or the target is set on. Unset when the source totals the salesperson. |
 | `assignedCategory` | `array\|string\|CategoryCode\|Thing\|null`   | *(`SalesObjectives` only)* The range of goods aimed at — a single code, or the ordered codes of a path through a classification, widest first. Unset when the target is set on a customer. |
+| `marginRate`       | `null\|array\|QuantitativeValue`             | *(`SalesObjectives` only)* The margin rate the target is set at — a value and the percent code `P1`. Absent when no rate is set. |
 | `uninvoicedRevenue` | `null\|array\|ObservationSeries`            | *(`SellerStatistics` only)* What is delivered and not invoiced yet — see “Trade not invoiced yet” above. |
 | `orderBacklog`     | `null\|array\|ObservationSeries`             | *(`SellerStatistics` only)* What is ordered and not delivered yet — see “Trade not invoiced yet” above. |
 
@@ -212,6 +213,10 @@ Neither adds a property: they name their subject, and that is all. `CompanyStati
 **Both classes carry the same subject, and that is the whole point.** The outcome and the target line up key for key, with nothing to translate between them.
 
 **A target has no trade not invoiced yet.** It is set on what is sold, not on a stage along the way: `SalesObjectives` carries neither `uninvoicedRevenue` nor `orderBacklog`, and the outcome and the target line up on the ten measures.
+
+🔑 **The target margin rate is not one of the measures, and that is deliberate.** The ten measures are amounts: they hold a run of twelve values, they carry a total, and a summary adds them up term by term. A rate does none of that — adding the rates of a hundred records answers a number that is both wrong and entirely plausible. It is therefore a property of its own, and `StatisticsSummary` does not carry it. A screen that needs a salesperson's rate reads it off one of their targets.
+
+⚠️ **What the rate is a percentage *of* is the publisher's to say**, and the answer changes the figure: a margin on the selling price and a margin on the cost describe the same sale with different numbers. Nothing in the record states which one is meant. A target with no rate leaves the property absent — never `0`, which would read as “aiming at no margin at all”.
 
 ⚠️ **A target is rarely as detailed as it looks.** Sources commonly publish one measure — a revenue figure — and leave the nine others empty; and where a yearly target does carry a value per month, that detail is often the yearly figure spread over a seasonal curve rather than twelve decisions. None of this is visible in the record once written, so a reader who needs to know has to be told by whoever published it.
 
@@ -234,6 +239,10 @@ A summary of salespeople's records also carries their two series of the trade no
 summed the same way. 🚨 **They are declared on it so that a summary does not lose them**: the
 constructor keeps only the properties a class declares, and drops the others without a word. On a
 summary of any other family, they stay unset.
+
+⛔ **The target margin rate, on the other hand, is not declared there, and must not be.** A summary
+adds up what it holds; a rate does not add up. The very mechanism that protects the two series keeps
+that one out: what the class does not declare, the constructor throws away.
 
 🔑 **One class for every family, because a summary loses the only thing that told them apart.**
 `CustomerStatistics` and `ProviderStatistics` differ by their subject and by the dimensions a

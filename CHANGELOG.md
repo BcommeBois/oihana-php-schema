@@ -33,6 +33,26 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- **A sales target carries the margin rate it is set at** —
+  feat(statistics): a sales target carries the margin rate it is set at (2026-09-23).
+  `SalesObjectives` gains `marginRate`, with its constant in `SalesObjectivesTrait` (hence
+  `Oihana::MARGIN_RATE`). It is a `QuantitativeValue` — a value and the UN/CEFACT percent code `P1` —
+  the shape `HasPricingMarkup::$pricingMarkup` already uses for a markup band, because a bare `25`
+  reads as well as 25 %, 2 500 % or 0.25 and the reader has no way to tell.
+
+  🚨 **It is deliberately not one of the ten measures.** Those are amounts : they hold a run of twelve
+  values, they carry a total, and a summary adds them up term by term. A rate does none of that —
+  adding the rates of a hundred records answers a number that is both wrong and entirely plausible.
+  So it is a property of its own, and `StatisticsSummary` does **not** declare it : the same
+  mechanism that keeps the two uninvoiced series on a summary keeps this one off it, since the
+  constructor drops what the class does not declare. A reader who needs the rate of a salesperson
+  reads it off one of their targets.
+
+  What the rate is a percentage *of* stays the publisher's to state — a margin on the selling price
+  and a margin on the cost describe the same sale with different numbers — and a target with no rate
+  leaves the property absent rather than `0`, which would read as aiming at no margin at all. Wiki FR
+  and EN updated.
+
 - **A salesperson's record carries the trade that is not invoiced yet** —
   feat(statistics): a salesperson's record carries what is delivered and not invoiced, and what is
   ordered and not delivered (2026-09-22).
