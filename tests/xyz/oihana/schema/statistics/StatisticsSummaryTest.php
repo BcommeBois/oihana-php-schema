@@ -166,6 +166,53 @@ class StatisticsSummaryTest extends TestCase
     }
 
     /**
+     * 🚨 A summary of records of what is owed and late keeps their figures.
+     *
+     * Same reason as the trade not invoiced yet : the constructor keeps only the
+     * properties a class declares, and a sum of such records built without them
+     * would come out with its overdue gone.
+     */
+    public function testASummaryKeepsTheReceivables(): void
+    {
+        $summary = new StatisticsSummary
+        ([
+            StatisticsSummary::NUMBER_OF_ITEMS     => 5 ,
+            StatisticsSummary::NUMBER_OF_DOCUMENTS => 12 ,
+            StatisticsSummary::OVERDUE             => new ObservationSeries([ Oihana::UNIT_CODE => 'EUR' , Oihana::VALUE => 21250 ]) ,
+            StatisticsSummary::OVERDUE_OVER_90     => new ObservationSeries([ Oihana::UNIT_CODE => 'EUR' , Oihana::VALUE =>  2650 ]) ,
+            StatisticsSummary::DAYS_LATE           => new ObservationSeries([ Oihana::UNIT_CODE => 'DAY' , Oihana::VALUE =>    98 ]) ,
+        ]);
+
+        $document = json_decode( json_encode( $summary ) , true );
+
+        $this->assertSame( 21250 , $document[ StatisticsSummary::OVERDUE         ][ Oihana::VALUE ] );
+        $this->assertSame(  2650 , $document[ StatisticsSummary::OVERDUE_OVER_90 ][ Oihana::VALUE ] );
+        $this->assertSame(    98 , $document[ StatisticsSummary::DAYS_LATE       ][ Oihana::VALUE ] );
+        $this->assertSame(    12 , $document[ StatisticsSummary::NUMBER_OF_DOCUMENTS ] );
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testReflectionReadsTheReceivablesAsSeries(): void
+    {
+        $summary = new Reflection()->hydrate
+        (
+            [
+                StatisticsSummary::OVERDUE   => [ 'unitCode' => 'EUR' , 'value' => 21250 ] ,
+                StatisticsSummary::DAYS_LATE => [ 'unitCode' => 'DAY' , 'value' =>    98 ] ,
+            ],
+            StatisticsSummary::class
+        );
+
+        $this->assertInstanceOf( ObservationSeries::class , $summary->overdue );
+        $this->assertInstanceOf( ObservationSeries::class , $summary->daysLate );
+        $this->assertSame( 21250 , $summary->overdue->value );
+        $this->assertSame( 'DAY' , $summary->daysLate->unitCode );
+        $this->assertNull( $summary->overdue->values ?? null );
+    }
+
+    /**
      * 🔑 The second state of `about` : a selection grouped by a dimension is about
      * that dimension's value — a summary grouped by point of sale *is* the figures
      * of that point of sale.

@@ -3,9 +3,11 @@
 namespace xyz\oihana\schema\statistics;
 
 use xyz\oihana\schema\constants\Oihana;
+use xyz\oihana\schema\constants\traits\statistics\HasReceivablesTrait;
 use xyz\oihana\schema\constants\traits\statistics\HasTradingMeasuresTrait;
 use xyz\oihana\schema\constants\traits\statistics\HasUninvoicedTradeTrait;
 use xyz\oihana\schema\constants\traits\statistics\StatisticsSummaryTrait;
+use xyz\oihana\schema\traits\HasReceivables;
 use xyz\oihana\schema\traits\HasTradingMeasures;
 use xyz\oihana\schema\traits\HasUninvoicedTrade;
 
@@ -27,6 +29,14 @@ use xyz\oihana\schema\traits\HasUninvoicedTrade;
  * salespeople's records built without them would come out with their
  * `uninvoicedRevenue` and `orderBacklog` gone. A summary of any other family
  * leaves them unset, and they are not serialized.
+ *
+ * And it carries what is owed and late ({@see HasReceivables}), which a
+ * {@see CustomerReceivables} record holds instead of the ten measures, declared
+ * here for the same reason. The amounts sum term by term — the overdue of a
+ * portfolio is the sum of its customers' —, and so does `numberOfDocuments` ;
+ * 🚨 **`daysLate` does not** : ten customers ninety days late are not nine
+ * hundred days late. Whoever builds the summary takes the largest, or leaves it
+ * out, and says which.
  *
  * 🔑 **One class for every family, because a summary loses the only thing that
  * told them apart.** {@see CustomerStatistics} and {@see ProviderStatistics}
@@ -81,7 +91,9 @@ use xyz\oihana\schema\traits\HasUninvoicedTrade;
  */
 class StatisticsSummary extends Statistics
 {
-    use HasTradingMeasures      ,
+    use HasReceivables          ,
+        HasReceivablesTrait     ,
+        HasTradingMeasures      ,
         HasTradingMeasuresTrait ,
         HasUninvoicedTrade      ,
         HasUninvoicedTradeTrait ,

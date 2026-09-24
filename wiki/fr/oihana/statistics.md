@@ -105,7 +105,8 @@ Une **famille** est une fiche dont le sujet est nommé : `CustomerStatistics` po
 | `ProductStatistics`  | `Statistics`             | Ce qu'un **article** a échangé sur une année, à l'achat comme à la vente.                     |
 | `SellerStatistics`   | `Statistics`             | Ce qu'un **commercial** a échangé sur une année, éventuellement client par client — plus le livré pas encore facturé et le commandé pas encore livré. |
 | `SalesObjectives`    | `Statistics`             | Ce qu'un **commercial** vise sur une année — les mêmes mesures, lues comme des cibles, plus un taux de marge visé. |
-| `StatisticsSummary`  | `Statistics`             | **Plusieurs fiches, additionnées** — une sélection, sommée mesure par mesure et mois par mois, non-facturé des commerciaux compris. |
+| `CustomerReceivables` | `Statistics`            | Ce qu'un **client** doit **en retard** à une date : l'échu, par ancienneté, la part en douteux, le retard en jours, le nombre de pièces — une photographie, pas une année. |
+| `StatisticsSummary`  | `Statistics`             | **Plusieurs fiches, additionnées** — une sélection, sommée mesure par mesure et mois par mois, non-facturé des commerciaux et retards de paiement compris. |
 
 ### Propriétés de `Statistics`
 
@@ -177,6 +178,42 @@ Le 2 avril, mars est facturé : `uninvoicedRevenue.values[2]` tombe à 0 — ou 
 
 Pourquoi pas parmi les dix mesures : celles-là valent pour toutes les familles, alors qu'une étape de la vente appartient à la fiche de qui l'a faite.
 
+### Le retard de paiement — `HasReceivables`
+
+Ce qu'un client doit et dont l'échéance est dépassée, lu à une date. `CustomerReceivables` le porte à la place des dix mesures, `StatisticsSummary` en plus d'elles ; les autres familles, non.
+
+| Mesure                                                           | Ce qu'elle contient                                                                                          | Ce qu'elle ne contient pas                                                              |
+|------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|
+| `overdue`                                                        | Ce que le client doit **en retard** à la date de lecture : les soldes des pièces non réglées échues, avoirs déduits. | Ce qui n'est pas encore échu ; un effet en attente d'acceptation ; ce qui est réglé.     |
+| `overdue1To30` · `overdue31To60` · `overdue61To90` · `overdueOver90` | L'échu par ancienneté du retard — **les quatre s'additionnent en `overdue`**.                               |                                                                                         |
+| `doubtful`                                                       | La part d'`overdue` passée en clients douteux.                                                               | Rien d'autre : `doubtful ≤ overdue`, jamais une somme à part.                           |
+| `daysLate`                                                       | Le retard, en jours, de la plus vieille pièce échue ; unité `DAY`. **Absente** quand rien n'est échu.        | Une moyenne.                                                                            |
+| `numberOfDocuments`                                              | Le nombre de pièces échues qui composent `overdue`, avoirs compris — un entier nu, pas une mesure.           | Les pièces pas échues ni réglées.                                                       |
+
+Sur une fiche lue le 22 septembre :
+
+```
+Menuiserie Vialaret, lecture du 22 septembre :
+  overdue1To30.value        3 100    échue depuis 21 jours
+  overdue31To60.value           0
+  overdue61To90.value       5 400    échue depuis 62 jours
+  overdueOver90.value       2 650    échue depuis 98 jours
+  overdue.value            11 150    = 3 100 + 0 + 5 400 + 2 650
+  doubtful.value            2 650    la plus vieille, passée en client douteux
+  daysLate.value               98    la plus vieille échéance dépassée
+  numberOfDocuments             3    trois pièces échues
+```
+
+⚠️ **Une photographie, pas une série.** Ces chiffres sont vrais à la date de lecture et à aucune autre : un règlement saisi le lendemain matin les change tous. Une nouvelle lecture **remplace** la précédente — rien ne s'additionne dans le temps —, la date de lecture voyage avec elle (`observationDate`), et chaque mesure porte un `value`, jamais de `values` : une photographie n'a pas de mois.
+
+⚠️ **Absente veut dire « rien de ce genre », jamais zéro.** Une fiche sans `doubtful` n'a rien en douteux ; une fiche sans `daysLate` n'a rien d'échu — et alors elle n'a pas lieu d'exister, puisque ces chiffres décrivent ce qui est en retard. Un zéro affirmerait qu'on a mesuré et trouvé vide.
+
+⚠️ **`daysLate` ne se somme pas.** Les montants se somment terme à terme d'une fiche à l'autre — l'échu d'un portefeuille est la somme de celui de ses clients —, `numberOfDocuments` aussi ; les jours, non : dix clients à quatre-vingt-dix jours de retard ne font pas neuf cents jours. Qui résume plusieurs fiches prend le plus grand, ou l'omet, et le dit.
+
+Les montants sont ceux de la comptabilité, taxes comprises : un commercial qui vient chercher un règlement a besoin du chiffre que le client doit réellement.
+
+Pourquoi pas parmi les dix mesures : celles-là décrivent une année d'échanges, mois par mois ; ceci décrit une dette à une date, sans aucun mois.
+
 ### Propriétés de `CustomerStatistics`
 
 | Propriété        | Type                                  | Description                                           |
@@ -186,6 +223,22 @@ Pourquoi pas parmi les dix mesures : celles-là valent pour toutes les familles,
 | `assignedPOS`    | `int\|string\|array\|Warehouse\|null` | Le point de vente qui servait le client.              |
 
 `ProviderStatistics` nomme son sujet un `Provider` et n'ajoute aucune dimension : un fournisseur n'est pas rattaché à un commercial ni à un point de vente comme l'est un client.
+
+### Propriétés de `CustomerReceivables`
+
+| Propriété         | Type                                  | Description                                                                                     |
+|-------------------|---------------------------------------|-------------------------------------------------------------------------------------------------|
+| `about`           | `#[HydrateAs(Customer::class)]`       | Le client qui doit — même union que sur la fiche, sujet nommé.                                  |
+| `assignedSeller`  | `int\|string\|array\|Person\|null`    | Le commercial auquel le client est rattaché — celui qui relance.                                |
+| `assignedPOS`     | `int\|string\|array\|Warehouse\|null` | Le point de vente qui sert le client.                                                           |
+| `category`        | `string\|array\|DefinedTerm\|null`    | La sorte de client — un code, ou le terme résolu ; ce qui permet d'isoler une sorte de clients. |
+| `observationDate` | `string\|null`                        | La date de lecture, au format ISO 8601 (`2026-09-22`). Les chiffres sont vrais ce jour-là, et à aucun autre. |
+
+Les sept mesures et le compte de pièces viennent de « Le retard de paiement » plus haut, **à la place des dix mesures** : une dette n'a ni chiffre d'affaires ni marge.
+
+🔑 **Une photographie, pas une année.** `year` et `observationPeriod` restent absentes — jamais renseignées, jamais sérialisées. Les trois dimensions sont celles que le client avait au moment de l'écriture, recopiées de sa fiche comme le fait `CustomerStatistics` : la dette est portée par qui tient le compte *aujourd'hui*, celui qui la relancera, pas par qui a fait la vente. Un client réaffecté emporte ses retards avec lui à la lecture suivante.
+
+Ce qu'elle n'est pas : un relevé de compte. Un `Statement` liste les pièces qui ont bougé un compte sur une période ; cette fiche somme ce qui est en retard, et ne nomme aucune pièce.
 
 ### Propriétés de `CompanyStatistics` et de `ProductStatistics`
 
@@ -239,6 +292,12 @@ Un résumé de fiches de commerciaux porte aussi leurs deux séries du non-factu
 façon. 🚨 **Elles y sont déclarées pour qu'un résumé ne les perde pas** : le constructeur ne garde que
 les propriétés que la classe déclare, et jette les autres sans rien dire. Sur un résumé d'une autre
 famille, elles restent absentes.
+
+Il porte aussi le retard de paiement (« Le retard de paiement » plus haut), qu'une fiche
+`CustomerReceivables` tient à la place des dix mesures, déclaré ici pour la même raison. Les montants
+se somment terme à terme, `numberOfDocuments` aussi ; 🚨 **`daysLate` ne se somme pas** — dix clients
+à quatre-vingt-dix jours ne font pas neuf cents jours. Qui bâtit le résumé prend le plus grand, ou
+l'omet, et le dit.
 
 ⛔ **Le taux de marge visé, lui, n'y est pas déclaré, et ne doit pas l'être.** Un résumé additionne ce
 qu'il porte ; un taux ne s'additionne pas. La même mécanique qui protège les deux séries écarte
@@ -333,7 +392,7 @@ Les trois coûts et les trois marges disent ce qu'un opérateur gagne sur un par
 
 ## Constantes associées
 
-Les clés de propriétés sont exposées par les traits [`StatisticsRecordTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/StatisticsRecordTrait.php), [`ObservationSeriesTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/ObservationSeriesTrait.php), [`HasTradingMeasuresTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/HasTradingMeasuresTrait.php), [`HasUninvoicedTradeTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/HasUninvoicedTradeTrait.php), [`CustomerStatisticsTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/CustomerStatisticsTrait.php), [`SellerStatisticsTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/SellerStatisticsTrait.php), [`SalesObjectivesTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/SalesObjectivesTrait.php) et [`StatisticsSummaryTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/StatisticsSummaryTrait.php), composés dans l'agrégateur de domaine [`StatisticsTrait`](../../../src/xyz/oihana/schema/constants/traits/StatisticsTrait.php) et câblés dans la classe maîtresse [`Oihana`](../../../src/xyz/oihana/schema/constants/Oihana.php). Vous pouvez donc y accéder via `Oihana::YEAR`, `Oihana::REVENUE`, `Oihana::GROSS_MARGIN`, etc. — et chaque classe expose les siennes (`CustomerStatistics::REVENUE`).
+Les clés de propriétés sont exposées par les traits [`StatisticsRecordTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/StatisticsRecordTrait.php), [`ObservationSeriesTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/ObservationSeriesTrait.php), [`HasTradingMeasuresTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/HasTradingMeasuresTrait.php), [`HasUninvoicedTradeTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/HasUninvoicedTradeTrait.php), [`HasReceivablesTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/HasReceivablesTrait.php), [`CustomerStatisticsTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/CustomerStatisticsTrait.php), [`CustomerReceivablesTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/CustomerReceivablesTrait.php), [`SellerStatisticsTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/SellerStatisticsTrait.php), [`SalesObjectivesTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/SalesObjectivesTrait.php) et [`StatisticsSummaryTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/StatisticsSummaryTrait.php), composés dans l'agrégateur de domaine [`StatisticsTrait`](../../../src/xyz/oihana/schema/constants/traits/StatisticsTrait.php) et câblés dans la classe maîtresse [`Oihana`](../../../src/xyz/oihana/schema/constants/Oihana.php). Vous pouvez donc y accéder via `Oihana::YEAR`, `Oihana::REVENUE`, `Oihana::GROSS_MARGIN`, etc. — et chaque classe expose les siennes (`CustomerStatistics::REVENUE`).
 
 ---
 

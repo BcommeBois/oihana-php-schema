@@ -33,6 +33,28 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- **A customer's record of what it owes overdue** —
+  feat(statistics): a customer's record of what it owes overdue, by age of the delay (2026-09-24).
+  `CustomerReceivables`, a fifth family of statistics records : one record per customer and
+  company, dated by `observationDate`, carrying totals and no monthly run — a snapshot, not a year.
+  Its measures live in a new trait, `HasReceivables`, with its constants trait `HasReceivablesTrait`
+  (composed by `StatisticsTrait`, hence `Oihana::OVERDUE`, `Oihana::DAYS_LATE`…) : `overdue`, its
+  four age buckets (`overdue1To30` to `overdueOver90`, which add up to it), `doubtful` (the part of
+  it booked on doubtful accounts) and `daysLate`, the last in days (`DAY`), the others in the
+  currency, tax included as the books state them — plus `numberOfDocuments`, a plain count of the
+  overdue pieces. Nothing not yet due, nothing settled : the record says what is late, and a
+  customer with nothing late has no record. It copies the customer's salesperson, point of sale and
+  category (`CustomerReceivablesTrait` adds `CATEGORY` and `OBSERVATION_DATE` ; the two assignment
+  constants come from `CustomerStatisticsTrait`, reused), so a reader groups a portfolio, a branch
+  or a kind of customer without walking back to the customer. `StatisticsSummary` composes the
+  trait too, for the reason it composes `HasUninvoicedTrade` — and its documentation says that
+  `daysLate` is a maximum, never a sum. Wiki FR and EN gain a section with a worked example ; the
+  architecture figures are regenerated.
+
+  ⚠️ `CATEGORY` and `OBSERVATION_DATE` already exist in other constants traits with the same values ;
+  PHP keeps them compatible, and a test asserts the equality so that a drift would fail loudly
+  rather than at class loading.
+
 - **A sales target carries the margin rate it is set at** —
   feat(statistics): a sales target carries the margin rate it is set at (2026-09-23).
   `SalesObjectives` gains `marginRate`, with its constant in `SalesObjectivesTrait` (hence

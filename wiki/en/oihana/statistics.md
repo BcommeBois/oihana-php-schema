@@ -105,7 +105,8 @@ A **family** is a record whose subject is named: `CustomerStatistics` for a cust
 | `ProductStatistics`  | `Statistics` | What an **article** traded over one year, on the purchase side as on the sale side.                     |
 | `SellerStatistics`   | `Statistics` | What a **salesperson** traded over one year, possibly customer by customer — plus what is delivered and not invoiced yet, and what is ordered and not delivered yet. |
 | `SalesObjectives`    | `Statistics` | What a **salesperson** is aiming at over one year — the same measures, read as targets, plus a target margin rate. |
-| `StatisticsSummary`  | `Statistics` | **Several records, added together** — one selection, summed measure by measure and month by month, the salespeople's trade not invoiced yet included. |
+| `CustomerReceivables` | `Statistics` | What a **customer** owes **overdue** at one date: the amount past due, by age, the part in doubt, the days late, the number of pieces — a snapshot, not a year. |
+| `StatisticsSummary`  | `Statistics` | **Several records, added together** — one selection, summed measure by measure and month by month, the salespeople's trade not invoiced yet and the overdue amounts included. |
 
 ### `Statistics` properties
 
@@ -177,6 +178,42 @@ On 2 April, March is invoiced: `uninvoicedRevenue.values[2]` falls to 0 — or t
 
 Why not among the ten measures: those hold for every family, while a stage of a sale belongs to the record of whoever made it.
 
+### What is owed and late — `HasReceivables`
+
+What a customer owes past its due date, read at one date. `CustomerReceivables` carries it instead of the ten measures, `StatisticsSummary` beside them; the other families do not.
+
+| Measure                                                          | What it holds                                                                                                   | What it does not hold                                                                  |
+|------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
+| `overdue`                                                        | What the customer owes **past due** at the reading date: the balances of the unsettled pieces whose due date has passed, credit notes deducted. | What is not yet due; a bill of exchange awaiting acceptance; what is settled. |
+| `overdue1To30` · `overdue31To60` · `overdue61To90` · `overdueOver90` | The overdue amount by age of the delay — **the four add up to `overdue`**.                                    |                                                                                        |
+| `doubtful`                                                       | The part of `overdue` booked on doubtful accounts.                                                              | Anything else: `doubtful ≤ overdue`, never a sum of its own.                           |
+| `daysLate`                                                       | How late the oldest piece past due is, in days; unit `DAY`. **Absent** when nothing is past due.                | An average.                                                                            |
+| `numberOfDocuments`                                              | How many pieces past due make up `overdue`, credit notes included — a plain count, not a measure.               | The pieces not yet due or settled.                                                     |
+
+On a record read on 22 September:
+
+```
+Vialaret Joinery, read on 22 September:
+  overdue1To30.value        3 100    due 21 days ago
+  overdue31To60.value           0
+  overdue61To90.value       5 400    due 62 days ago
+  overdueOver90.value       2 650    due 98 days ago
+  overdue.value            11 150    = 3 100 + 0 + 5 400 + 2 650
+  doubtful.value            2 650    the oldest piece, booked on a doubtful account
+  daysLate.value               98    the oldest due date passed
+  numberOfDocuments             3    three pieces past due
+```
+
+⚠️ **A snapshot, not a series.** These figures are true at the reading date and at no other: a payment recorded the next morning changes every one of them. A new reading **replaces** the previous one — nothing is ever added across time —, the reading date travels with it (`observationDate`), and every measure carries a `value` and never a `values`: a snapshot has no months.
+
+⚠️ **Absent means “nothing of that kind”, never zero.** A record with no `doubtful` has nothing booked on a doubtful account; a record with no `daysLate` has nothing past due — and then it should not exist at all, since these figures describe what is late. A zero would state that something was measured and found empty.
+
+⚠️ **`daysLate` does not add up.** The amounts sum term by term across records — the overdue of a portfolio is the sum of its customers' —, and so does `numberOfDocuments`; the days do not: ten customers ninety days late are not nine hundred days late. Whoever summarizes several records takes the largest, or leaves it out, and says which.
+
+The amounts are those of the books, tax included: a salesperson collecting a payment needs the figure the customer actually owes.
+
+Why not among the ten measures: those describe a year of trade, month by month; this describes a debt at one date, with no month at all.
+
 ### `CustomerStatistics` properties
 
 | Property         | Type                                     | Description                                                        |
@@ -186,6 +223,22 @@ Why not among the ten measures: those hold for every family, while a stage of a 
 | `assignedPOS`    | `int\|string\|array\|Warehouse\|null`     | The point of sale that served the customer.                        |
 
 `ProviderStatistics` names its subject a `Provider` and adds no dimension: a supplier is not attached to a salesperson or to a point of sale the way a customer is.
+
+### `CustomerReceivables` properties
+
+| Property          | Type                                     | Description                                                                                       |
+|-------------------|------------------------------------------|---------------------------------------------------------------------------------------------------|
+| `about`           | `#[HydrateAs(Customer::class)]`          | The customer who owes — same union as on the record, subject named.                               |
+| `assignedSeller`  | `int\|string\|array\|Person\|null`        | The salesperson the customer is attached to — the one who chases the debt.                        |
+| `assignedPOS`     | `int\|string\|array\|Warehouse\|null`     | The point of sale that serves the customer.                                                       |
+| `category`        | `string\|array\|DefinedTerm\|null`        | The kind of customer — a code, or the resolved term; what lets a reader set a kind of customers aside. |
+| `observationDate` | `string\|null`                           | The reading date, as an ISO 8601 date (`2026-09-22`). The figures are true on that day, and on no other. |
+
+The seven measures and the count come from “What is owed and late” above, **instead of the ten measures**: a debt has no revenue and no margin.
+
+🔑 **A snapshot, not a year.** `year` and `observationPeriod` stay unset — never filled, never serialized. The three dimensions are the ones the customer had when the record was written, copied from its record as `CustomerStatistics` does: the debt is credited to whoever holds the account *now*, the one who will chase it, not to whoever made the sale. A customer reassigned takes its late payments along at the next reading.
+
+What it is not: a statement of account. A `Statement` lists the pieces that moved an account over a period; this record sums what is late, and names no piece.
 
 ### `CompanyStatistics` and `ProductStatistics` properties
 
@@ -239,6 +292,12 @@ A summary of salespeople's records also carries their two series of the trade no
 summed the same way. 🚨 **They are declared on it so that a summary does not lose them**: the
 constructor keeps only the properties a class declares, and drops the others without a word. On a
 summary of any other family, they stay unset.
+
+It also carries what is owed and late (“What is owed and late” above), which a
+`CustomerReceivables` record holds instead of the ten measures, declared here for the same reason.
+The amounts sum term by term, and so does `numberOfDocuments`; 🚨 **`daysLate` does not** — ten
+customers ninety days late are not nine hundred days late. Whoever builds the summary takes the
+largest, or leaves it out, and says which.
 
 ⛔ **The target margin rate, on the other hand, is not declared there, and must not be.** A summary
 adds up what it holds; a rate does not add up. The very mechanism that protects the two series keeps
@@ -332,7 +391,7 @@ The three costs and the three margins say what an operator earns on a given coun
 
 ## Related constants
 
-Property keys are exposed by the [`StatisticsRecordTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/StatisticsRecordTrait.php), [`ObservationSeriesTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/ObservationSeriesTrait.php), [`HasTradingMeasuresTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/HasTradingMeasuresTrait.php), [`HasUninvoicedTradeTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/HasUninvoicedTradeTrait.php), [`CustomerStatisticsTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/CustomerStatisticsTrait.php), [`SellerStatisticsTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/SellerStatisticsTrait.php), [`SalesObjectivesTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/SalesObjectivesTrait.php) and [`StatisticsSummaryTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/StatisticsSummaryTrait.php) traits, composed in the [`StatisticsTrait`](../../../src/xyz/oihana/schema/constants/traits/StatisticsTrait.php) domain aggregator and wired into the [`Oihana`](../../../src/xyz/oihana/schema/constants/Oihana.php) master class. You can therefore reach them through `Oihana::YEAR`, `Oihana::REVENUE`, `Oihana::GROSS_MARGIN`, and each class exposes its own (`CustomerStatistics::REVENUE`).
+Property keys are exposed by the [`StatisticsRecordTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/StatisticsRecordTrait.php), [`ObservationSeriesTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/ObservationSeriesTrait.php), [`HasTradingMeasuresTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/HasTradingMeasuresTrait.php), [`HasUninvoicedTradeTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/HasUninvoicedTradeTrait.php), [`HasReceivablesTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/HasReceivablesTrait.php), [`CustomerStatisticsTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/CustomerStatisticsTrait.php), [`CustomerReceivablesTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/CustomerReceivablesTrait.php), [`SellerStatisticsTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/SellerStatisticsTrait.php), [`SalesObjectivesTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/SalesObjectivesTrait.php) and [`StatisticsSummaryTrait`](../../../src/xyz/oihana/schema/constants/traits/statistics/StatisticsSummaryTrait.php) traits, composed in the [`StatisticsTrait`](../../../src/xyz/oihana/schema/constants/traits/StatisticsTrait.php) domain aggregator and wired into the [`Oihana`](../../../src/xyz/oihana/schema/constants/Oihana.php) master class. You can therefore reach them through `Oihana::YEAR`, `Oihana::REVENUE`, `Oihana::GROSS_MARGIN`, and each class exposes its own (`CustomerStatistics::REVENUE`).
 
 ---
 

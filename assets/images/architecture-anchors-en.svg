@@ -54,8 +54,8 @@ text{fill:#2E302A;font-variant-numeric:tabular-nums}
 <text class="mono leaves" x="480" y="257"><tspan class="leaf">PurchaseOrder, </tspan><tspan class="leaf">Quote, </tspan><tspan class="leaf">Receipt, </tspan><tspan class="leaf">RemittanceAdvice, </tspan><tspan class="leaf">Statement</tspan><tspan class="tag"> · business\documents</tspan></text>
 <rect class="box xyz" x="300" y="234" width="136.1" height="22" rx="3"/><text class="mono chiptext xyz-ink" x="311" y="249">BusinessDocument</text>
 <line class="edge" x1="436.1" y1="245" x2="472" y2="245" marker-end="url(#arr2)"/>
-<text class="mono leaves" x="480" y="277"><tspan class="leaf">CompanyStatistics, </tspan><tspan class="leaf">CustomerStatistics, </tspan><tspan class="leaf">ProductStatistics, </tspan><tspan class="leaf">ProviderStatistics, </tspan></text>
-<text class="mono leaves" x="480" y="292"><tspan class="leaf">SalesObjectives, </tspan><tspan class="leaf">SellerStatistics, </tspan><tspan class="leaf">StatisticsSummary</tspan><tspan class="tag"> · statistics</tspan></text>
+<text class="mono leaves" x="480" y="277"><tspan class="leaf">CompanyStatistics, </tspan><tspan class="leaf">CustomerReceivables, </tspan><tspan class="leaf">CustomerStatistics, </tspan><tspan class="leaf">ProductStatistics, </tspan></text>
+<text class="mono leaves" x="480" y="292"><tspan class="leaf">ProviderStatistics, </tspan><tspan class="leaf">SalesObjectives, </tspan><tspan class="leaf">SellerStatistics, </tspan><tspan class="leaf">StatisticsSummary</tspan><tspan class="tag"> · statistics</tspan></text>
 <rect class="box xyz" x="300" y="269" width="93.3" height="22" rx="3"/><text class="mono chiptext xyz-ink" x="311" y="284">Statistics</text>
 <line class="edge" x1="393.3" y1="280" x2="472" y2="280" marker-end="url(#arr2)"/>
 <text class="mono leaves" x="480" y="312"><tspan class="leaf">OrderedCollection</tspan><tspan class="tag"> · thesaurus</tspan></text>
