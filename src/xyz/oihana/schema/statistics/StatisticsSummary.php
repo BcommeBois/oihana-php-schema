@@ -21,14 +21,20 @@ use xyz\oihana\schema\traits\HasUninvoicedTrade;
  * Januaries, the February the sum of the Februaries, and so on over the twelve
  * positions. That is what lets a reader draw the monthly curve of a *set*.
  *
- * It also carries the two series of the trade that is not invoiced yet
+ * It also carries the three series of the trade that is not invoiced yet
  * ({@see HasUninvoicedTrade}), which a {@see SellerStatistics} record may hold
  * beside the ten measures, summed the same way. 🚨 **They are declared here so
  * that a summary does not lose them** : the constructor keeps only the
  * properties a class declares and drops the others without a word, so a sum of
  * salespeople's records built without them would come out with their
- * `uninvoicedRevenue` and `orderBacklog` gone. A summary of any other family
- * leaves them unset, and they are not serialized.
+ * `uninvoicedRevenue`, `uninvoicedCostPrice` and `orderBacklog` gone. A summary
+ * of any other family leaves them unset, and they are not serialized.
+ *
+ * ⚠️ **A summed `uninvoicedCostPrice` only prices the records that carried
+ * one.** When some of the summed records hold `uninvoicedRevenue` without its
+ * cost, the summed cost falls short of the summed revenue, and a margin read
+ * from the two comes out too high. Whoever builds the summary sums only records
+ * that carry both, or says it did not.
  *
  * And it carries what is owed and late ({@see HasReceivables}), which a
  * {@see CustomerReceivables} record holds instead of the ten measures, declared

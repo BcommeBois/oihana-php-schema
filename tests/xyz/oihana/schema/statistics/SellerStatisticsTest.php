@@ -29,13 +29,15 @@ class SellerStatisticsTest extends TestCase
 
     public function testTraitConstants(): void
     {
-        $this->assertSame( 'assignedCustomer'  , SellerStatistics::ASSIGNED_CUSTOMER  );
-        $this->assertSame( 'orderBacklog'      , SellerStatistics::ORDER_BACKLOG      );
-        $this->assertSame( 'uninvoicedRevenue' , SellerStatistics::UNINVOICED_REVENUE );
+        $this->assertSame( 'assignedCustomer'    , SellerStatistics::ASSIGNED_CUSTOMER     );
+        $this->assertSame( 'orderBacklog'        , SellerStatistics::ORDER_BACKLOG         );
+        $this->assertSame( 'uninvoicedCostPrice' , SellerStatistics::UNINVOICED_COST_PRICE );
+        $this->assertSame( 'uninvoicedRevenue'   , SellerStatistics::UNINVOICED_REVENUE    );
 
         // The aggregator composes the new constants trait — a name clash there would be fatal.
-        $this->assertSame( Oihana::ORDER_BACKLOG      , SellerStatistics::ORDER_BACKLOG      );
-        $this->assertSame( Oihana::UNINVOICED_REVENUE , SellerStatistics::UNINVOICED_REVENUE );
+        $this->assertSame( Oihana::ORDER_BACKLOG         , SellerStatistics::ORDER_BACKLOG         );
+        $this->assertSame( Oihana::UNINVOICED_COST_PRICE , SellerStatistics::UNINVOICED_COST_PRICE );
+        $this->assertSame( Oihana::UNINVOICED_REVENUE    , SellerStatistics::UNINVOICED_REVENUE    );
     }
 
     public function testItCarriesTheTenMeasures(): void
@@ -52,8 +54,9 @@ class SellerStatisticsTest extends TestCase
     {
         $statistics = new SellerStatistics() ;
 
-        $this->assertNull( $statistics->orderBacklog      ?? null );
-        $this->assertNull( $statistics->uninvoicedRevenue ?? null );
+        $this->assertNull( $statistics->orderBacklog        ?? null );
+        $this->assertNull( $statistics->uninvoicedCostPrice ?? null );
+        $this->assertNull( $statistics->uninvoicedRevenue   ?? null );
     }
 
     public function testTheHeadIsInherited(): void
@@ -119,17 +122,21 @@ class SellerStatisticsTest extends TestCase
         $statistics = new Reflection()->hydrate
         (
             [
-                SellerStatistics::UNINVOICED_REVENUE => [ 'unitCode' => 'EUR' , 'values' => self::UNINVOICED ] ,
-                SellerStatistics::ORDER_BACKLOG      => [ 'unitCode' => 'EUR' , 'values' => self::BACKLOG    ] ,
+                SellerStatistics::UNINVOICED_REVENUE    => [ 'unitCode' => 'EUR' , 'values' => self::UNINVOICED      ] ,
+                SellerStatistics::UNINVOICED_COST_PRICE => [ 'unitCode' => 'EUR' , 'values' => self::UNINVOICED_COST ] ,
+                SellerStatistics::ORDER_BACKLOG         => [ 'unitCode' => 'EUR' , 'values' => self::BACKLOG         ] ,
             ],
             SellerStatistics::class
         );
 
         $this->assertInstanceOf( ObservationSeries::class , $statistics->uninvoicedRevenue );
+        $this->assertInstanceOf( ObservationSeries::class , $statistics->uninvoicedCostPrice );
         $this->assertInstanceOf( ObservationSeries::class , $statistics->orderBacklog );
-        $this->assertSame( self::UNINVOICED , $statistics->uninvoicedRevenue->values );
-        $this->assertSame( self::BACKLOG    , $statistics->orderBacklog->values );
+        $this->assertSame( self::UNINVOICED      , $statistics->uninvoicedRevenue->values );
+        $this->assertSame( self::UNINVOICED_COST , $statistics->uninvoicedCostPrice->values );
+        $this->assertSame( self::BACKLOG         , $statistics->orderBacklog->values );
         $this->assertNull( $statistics->uninvoicedRevenue->value ?? null );
+        $this->assertNull( $statistics->uninvoicedCostPrice->value ?? null );
     }
 
     /**
@@ -151,6 +158,29 @@ class SellerStatisticsTest extends TestCase
 
         $this->assertSame( 15500 , $delivered );
         $this->assertSame( 19700 , $delivered + $statistics->orderBacklog->values[ $march ] );
+    }
+
+    /**
+     * 💶 The cost of what was delivered adds up the same way, and the margin over
+     * the delivered reads from the four runs — no margin series needed.
+     */
+    public function testTheMarginOverTheDeliveredReadsFromFourRuns(): void
+    {
+        $statistics = new SellerStatistics
+        ([
+            SellerStatistics::REVENUE               => new ObservationSeries([ Oihana::VALUES => self::INVOICED        ]) ,
+            SellerStatistics::COST_PRICE            => new ObservationSeries([ Oihana::VALUES => self::INVOICED_COST   ]) ,
+            SellerStatistics::UNINVOICED_REVENUE    => new ObservationSeries([ Oihana::VALUES => self::UNINVOICED      ]) ,
+            SellerStatistics::UNINVOICED_COST_PRICE => new ObservationSeries([ Oihana::VALUES => self::UNINVOICED_COST ]) ,
+        ]);
+
+        $march = 2 ;
+
+        $delivered = $statistics->revenue->values[ $march ]   + $statistics->uninvoicedRevenue->values[ $march ]   ;
+        $cost      = $statistics->costPrice->values[ $march ] + $statistics->uninvoicedCostPrice->values[ $march ] ;
+
+        $this->assertSame( 12000 , $cost );
+        $this->assertSame( 3500  , $delivered - $cost );
     }
 
     public function testASubjectAlsoReadsAsABareCode(): void
@@ -180,8 +210,9 @@ class SellerStatisticsTest extends TestCase
         $this->assertArrayNotHasKey( SellerStatistics::GROSS_MARGIN , $document );
 
         // A record whose trade is all invoiced carries no such series — absent, not twelve zeros.
-        $this->assertArrayNotHasKey( SellerStatistics::ORDER_BACKLOG      , $document );
-        $this->assertArrayNotHasKey( SellerStatistics::UNINVOICED_REVENUE , $document );
+        $this->assertArrayNotHasKey( SellerStatistics::ORDER_BACKLOG         , $document );
+        $this->assertArrayNotHasKey( SellerStatistics::UNINVOICED_COST_PRICE , $document );
+        $this->assertArrayNotHasKey( SellerStatistics::UNINVOICED_REVENUE    , $document );
     }
 
     /**
@@ -194,6 +225,11 @@ class SellerStatisticsTest extends TestCase
      * What was invoiced, month by month.
      */
     private const array INVOICED = [ 9800 , 11300 , 12000 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ] ;
+
+    /**
+     * The cost price of what was invoiced, month by month.
+     */
+    private const array INVOICED_COST = [ 7600 , 8700 , 9300 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ] ;
 
     /**
      * The ten measures every family of statistics carries.
@@ -216,4 +252,9 @@ class SellerStatisticsTest extends TestCase
      * What was delivered and not invoiced yet — March only, the months before are invoiced.
      */
     private const array UNINVOICED = [ 0 , 0 , 3500 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ] ;
+
+    /**
+     * The cost price of what was delivered and not invoiced yet — March only.
+     */
+    private const array UNINVOICED_COST = [ 0 , 0 , 2700 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ] ;
 }

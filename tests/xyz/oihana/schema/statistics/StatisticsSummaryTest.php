@@ -35,8 +35,9 @@ class StatisticsSummaryTest extends TestCase
         // The same idea schema.org names on a list, reused rather than renamed.
         $this->assertSame( Schema::NUMBER_OF_ITEMS , StatisticsSummary::NUMBER_OF_ITEMS );
 
-        $this->assertSame( 'orderBacklog'      , StatisticsSummary::ORDER_BACKLOG      );
-        $this->assertSame( 'uninvoicedRevenue' , StatisticsSummary::UNINVOICED_REVENUE );
+        $this->assertSame( 'orderBacklog'        , StatisticsSummary::ORDER_BACKLOG         );
+        $this->assertSame( 'uninvoicedCostPrice' , StatisticsSummary::UNINVOICED_COST_PRICE );
+        $this->assertSame( 'uninvoicedRevenue'   , StatisticsSummary::UNINVOICED_REVENUE    );
     }
 
     public function testItCarriesTheTenMeasures(): void
@@ -96,9 +97,10 @@ class StatisticsSummaryTest extends TestCase
         $this->assertArrayNotHasKey( StatisticsSummary::ASSIGNED_COMPANY , $document );
 
         // And what was never given stays out, measures included.
-        $this->assertArrayNotHasKey( StatisticsSummary::GROSS_MARGIN       , $document );
-        $this->assertArrayNotHasKey( StatisticsSummary::ORDER_BACKLOG      , $document );
-        $this->assertArrayNotHasKey( StatisticsSummary::UNINVOICED_REVENUE , $document );
+        $this->assertArrayNotHasKey( StatisticsSummary::GROSS_MARGIN          , $document );
+        $this->assertArrayNotHasKey( StatisticsSummary::ORDER_BACKLOG         , $document );
+        $this->assertArrayNotHasKey( StatisticsSummary::UNINVOICED_COST_PRICE , $document );
+        $this->assertArrayNotHasKey( StatisticsSummary::UNINVOICED_REVENUE    , $document );
     }
 
     /**
@@ -112,15 +114,17 @@ class StatisticsSummaryTest extends TestCase
     {
         $summary = new StatisticsSummary
         ([
-            StatisticsSummary::NUMBER_OF_ITEMS    => 4 ,
-            StatisticsSummary::UNINVOICED_REVENUE => new ObservationSeries([ Oihana::UNIT_CODE => 'EUR' , Oihana::VALUES => self::UNINVOICED ]) ,
-            StatisticsSummary::ORDER_BACKLOG      => new ObservationSeries([ Oihana::UNIT_CODE => 'EUR' , Oihana::VALUES => self::BACKLOG    ]) ,
+            StatisticsSummary::NUMBER_OF_ITEMS       => 4 ,
+            StatisticsSummary::UNINVOICED_REVENUE    => new ObservationSeries([ Oihana::UNIT_CODE => 'EUR' , Oihana::VALUES => self::UNINVOICED      ]) ,
+            StatisticsSummary::UNINVOICED_COST_PRICE => new ObservationSeries([ Oihana::UNIT_CODE => 'EUR' , Oihana::VALUES => self::UNINVOICED_COST ]) ,
+            StatisticsSummary::ORDER_BACKLOG         => new ObservationSeries([ Oihana::UNIT_CODE => 'EUR' , Oihana::VALUES => self::BACKLOG         ]) ,
         ]);
 
         $document = json_decode( json_encode( $summary ) , true );
 
-        $this->assertSame( self::UNINVOICED , $document[ StatisticsSummary::UNINVOICED_REVENUE ][ Oihana::VALUES ] );
-        $this->assertSame( self::BACKLOG    , $document[ StatisticsSummary::ORDER_BACKLOG      ][ Oihana::VALUES ] );
+        $this->assertSame( self::UNINVOICED      , $document[ StatisticsSummary::UNINVOICED_REVENUE    ][ Oihana::VALUES ] );
+        $this->assertSame( self::UNINVOICED_COST , $document[ StatisticsSummary::UNINVOICED_COST_PRICE ][ Oihana::VALUES ] );
+        $this->assertSame( self::BACKLOG         , $document[ StatisticsSummary::ORDER_BACKLOG         ][ Oihana::VALUES ] );
     }
 
     /**
@@ -154,15 +158,18 @@ class StatisticsSummaryTest extends TestCase
         $summary = new Reflection()->hydrate
         (
             [
-                StatisticsSummary::UNINVOICED_REVENUE => [ 'unitCode' => 'EUR' , 'values' => self::UNINVOICED ] ,
-                StatisticsSummary::ORDER_BACKLOG      => [ 'unitCode' => 'EUR' , 'values' => self::BACKLOG    ] ,
+                StatisticsSummary::UNINVOICED_REVENUE    => [ 'unitCode' => 'EUR' , 'values' => self::UNINVOICED      ] ,
+                StatisticsSummary::UNINVOICED_COST_PRICE => [ 'unitCode' => 'EUR' , 'values' => self::UNINVOICED_COST ] ,
+                StatisticsSummary::ORDER_BACKLOG         => [ 'unitCode' => 'EUR' , 'values' => self::BACKLOG         ] ,
             ],
             StatisticsSummary::class
         );
 
         $this->assertInstanceOf( ObservationSeries::class , $summary->uninvoicedRevenue );
+        $this->assertInstanceOf( ObservationSeries::class , $summary->uninvoicedCostPrice );
         $this->assertInstanceOf( ObservationSeries::class , $summary->orderBacklog );
-        $this->assertSame( self::BACKLOG , $summary->orderBacklog->values );
+        $this->assertSame( self::UNINVOICED_COST , $summary->uninvoicedCostPrice->values );
+        $this->assertSame( self::BACKLOG         , $summary->orderBacklog->values );
     }
 
     /**
@@ -300,4 +307,9 @@ class StatisticsSummaryTest extends TestCase
      * What was delivered and not invoiced yet, summed over the selection.
      */
     private const array UNINVOICED = [ 0 , 0 , 14000 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ] ;
+
+    /**
+     * The cost price of what was delivered and not invoiced yet, summed over the selection.
+     */
+    private const array UNINVOICED_COST = [ 0 , 0 , 10900 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ] ;
 }

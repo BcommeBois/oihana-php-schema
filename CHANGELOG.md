@@ -33,6 +33,22 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- **What was delivered and not invoiced has its cost price** —
+  feat(statistics): what was delivered and not invoiced carries its cost price (2026-09-24).
+  `HasUninvoicedTrade` gains `uninvoicedCostPrice` (constant `UNINVOICED_COST_PRICE`, hence
+  `Oihana::UNINVOICED_COST_PRICE`) : the cost price of `uninvoicedRevenue`, under the same month.
+  It is to `uninvoicedRevenue` what `costPrice` is to `revenue`, so the margin over what was
+  delivered reads from four runs a reader already has — `( revenue + uninvoicedRevenue ) −
+  ( costPrice + uninvoicedCostPrice )` — and no margin series comes with it. Transitional and a
+  run only, like the two series beside it ; `SellerStatistics` and `StatisticsSummary` carry it
+  through the trait.
+
+  ⚠️ **Absent is not zero.** A record may carry `uninvoicedRevenue` without its cost, when its
+  source cannot price what was delivered : a reader then has no margin to show for it, and a
+  summary adding records with and without a cost falls short on the cost — both documented on the
+  property, on `StatisticsSummary` and in the wiki. `orderBacklog` gets no cost : nothing of it is
+  delivered, and its cost can still move before it is.
+
 - **A customer's record of what it owes overdue** —
   feat(statistics): a customer's record of what it owes overdue, by age of the delay (2026-09-24).
   `CustomerReceivables`, a fifth family of statistics records : one record per customer and

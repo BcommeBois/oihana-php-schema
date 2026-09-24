@@ -149,11 +149,12 @@ Une **famille** est une fiche dont le sujet est nommé : `CustomerStatistics` po
 
 ### Le non-facturé — `HasUninvoicedTrade`
 
-Deux étapes d'une vente que `revenue` ne voit pas, puisqu'il compte ce qui est facturé. `SellerStatistics` et `StatisticsSummary` les portent en plus des dix mesures ; les autres familles, non.
+Deux étapes d'une vente que `revenue` ne voit pas, puisqu'il compte ce qui est facturé — et le prix de revient de la première. `SellerStatistics` et `StatisticsSummary` les portent en plus des dix mesures ; les autres familles, non.
 
 | Mesure              | Ce qu'elle contient                                                          | Ce qu'elle ne contient pas                                                            |
 |---------------------|------------------------------------------------------------------------------|---------------------------------------------------------------------------------------|
 | `uninvoicedRevenue` | Ce qui a été **livré et pas encore facturé**, au mois de la livraison.        | Ce qui est déjà facturé — c'est `revenue` ; ce qui est commandé et pas encore livré.  |
+| `uninvoicedCostPrice` | Le **prix de revient** de `uninvoicedRevenue`, au même mois.                | Le revient de ce qui est facturé — c'est `costPrice` ; celui du commandé.             |
 | `orderBacklog`      | Ce qui est **commandé et pas encore livré**, au mois de la livraison prévue.  | Ce qui est livré, facturé ou non ; les devis.                                         |
 
 🔑 **Les trois ne se recouvrent jamais, et c'est pour cela qu'elles s'additionnent.** Une vente est dans une seule d'entre elles à la fois, et passe de l'une à l'autre en avançant : commandée, puis livrée, puis facturée. Sur une fiche au pas mensuel (`P1M`) :
@@ -170,11 +171,25 @@ Mars, une fiche :
 
 Le 2 avril, mars est facturé : `uninvoicedRevenue.values[2]` tombe à 0 — ou la série disparaît — et `revenue.values[2]` monte à 15 500. Le livré de mars n'a pas bougé ; il a changé de colonne.
 
-⚠️ **Deux séries transitoires.** Leurs montants sont en route vers `revenue`, et une fiche dont tout est facturé n'en porte aucune : la série est **absente**, pas douze zéros — des zéros affirmeraient qu'on a mesuré et trouvé vide.
+⚠️ **Des séries transitoires.** Leurs montants sont en route vers `revenue` et `costPrice`, et une fiche dont tout est facturé n'en porte aucune : la série est **absente**, pas douze zéros — des zéros affirmeraient qu'on a mesuré et trouvé vide.
 
 ⚠️ **Des séries seules** : `values`, jamais `value`. Un total sur l'année additionnerait des mois arrivés chacun à une étape différente de leur facturation, et se lirait comme un chiffre de l'année qu'il n'est pas.
 
 `orderBacklog` n'est pas un chiffre d'affaires : rien n'en est livré, et une date prévue peut bouger. Un mois peut être dans le futur — c'est le chiffre encore à venir —, et un mois passé peut en porter encore : une livraison prévue ce mois-là qui n'a pas eu lieu.
+
+💶 **Le livré non facturé a un coût, lui aussi.** `uninvoicedCostPrice` est à `uninvoicedRevenue` ce que `costPrice` est à `revenue`. La marge sur le livré se lit donc sur quatre séries que le lecteur a déjà — aucune série de marge ne l'accompagne :
+
+```
+Mars, une fiche :
+  revenue.values[2]               12 000   costPrice.values[2]             9 300
+  uninvoicedRevenue.values[2]      3 500   uninvoicedCostPrice.values[2]   2 700
+
+  marge sur le livré de mars = ( 12 000 + 3 500 ) − ( 9 300 + 2 700 ) = 3 500
+```
+
+⚠️ **Absent n'est pas zéro.** Une fiche peut porter `uninvoicedRevenue` sans son coût, quand sa source ne sait pas chiffrer ce qui est livré. Le lecteur n'a alors pas de marge à montrer pour cette fiche : lire le coût manquant comme un zéro ferait de tout le chiffre une marge. Et un résumé qui additionne des fiches avec et sans coût sous-estime le coût du livré — il n'additionne que celles qui portent les deux, ou il le dit.
+
+Le commandé n'a pas de coût : rien n'en est livré, et son revient peut encore bouger d'ici la livraison.
 
 Pourquoi pas parmi les dix mesures : celles-là valent pour toutes les familles, alors qu'une étape de la vente appartient à la fiche de qui l'a faite.
 
@@ -259,13 +274,14 @@ Ni l'une ni l'autre n'ajoute de propriété : elles nomment leur sujet, et c'est
 | `assignedCategory` | `array\|string\|CategoryCode\|Thing\|null`     | *(`SalesObjectives` seul)* Le rayon de marchandises visé — un code, ou les codes ordonnés d'un chemin de classification, du plus large au plus fin. Absent si la cible porte sur un client. |
 | `marginRate`       | `null\|array\|QuantitativeValue`               | *(`SalesObjectives` seul)* Le taux de marge visé — une valeur et le code de pourcentage `P1`. Absent si aucun taux n'est fixé. |
 | `uninvoicedRevenue` | `null\|array\|ObservationSeries`             | *(`SellerStatistics` seul)* Le livré pas encore facturé — voir « Le non-facturé » plus haut. |
+| `uninvoicedCostPrice` | `null\|array\|ObservationSeries`           | *(`SellerStatistics` seul)* Le prix de revient du livré pas encore facturé — voir « Le non-facturé » plus haut. |
 | `orderBacklog`     | `null\|array\|ObservationSeries`              | *(`SellerStatistics` seul)* Le commandé pas encore livré — voir « Le non-facturé » plus haut. |
 
 **Les deux narrations sont exclusives** : une cible porte sur un client **ou** sur un rayon, jamais sur les deux, et une cible posée sur le seul commercial les laisse toutes deux absentes.
 
 **Les deux classes portent le même sujet, et c'est tout l'intérêt.** Le réalisé et la cible s'alignent clé pour clé, sans rien à traduire de l'un vers l'autre.
 
-**Une cible n'a pas de non-facturé.** Elle se fixe sur ce qui est vendu, pas sur une étape en cours : `SalesObjectives` ne porte ni `uninvoicedRevenue` ni `orderBacklog`, et c'est sur les dix mesures que le réalisé et la cible s'alignent.
+**Une cible n'a pas de non-facturé.** Elle se fixe sur ce qui est vendu, pas sur une étape en cours : `SalesObjectives` ne porte ni `uninvoicedRevenue`, ni `uninvoicedCostPrice`, ni `orderBacklog`, et c'est sur les dix mesures que le réalisé et la cible s'alignent.
 
 🔑 **Le taux de marge visé n'est pas une mesure, et c'est délibéré.** Les dix mesures sont des montants : elles portent un pas de douze valeurs, elles portent un total, et un résumé les additionne terme à terme. Un taux ne fait rien de tout cela — additionner les taux de cent fiches répond un nombre à la fois faux et parfaitement crédible. Il est donc une propriété à part, et `StatisticsSummary` ne le porte pas. Un écran qui a besoin du taux d'un commercial le lit sur l'une de ses cibles.
 

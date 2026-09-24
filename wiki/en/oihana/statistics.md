@@ -149,11 +149,12 @@ A **family** is a record whose subject is named: `CustomerStatistics` for a cust
 
 ### Trade not invoiced yet — `HasUninvoicedTrade`
 
-Two stages of a sale that `revenue` cannot see, since it counts what was invoiced. `SellerStatistics` and `StatisticsSummary` carry them beside the ten measures; the other families do not.
+Two stages of a sale that `revenue` cannot see, since it counts what was invoiced — and the cost price of the first. `SellerStatistics` and `StatisticsSummary` carry them beside the ten measures; the other families do not.
 
 | Measure             | What it holds                                                                  | What it does not hold                                                               |
 |---------------------|--------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
 | `uninvoicedRevenue` | What was **delivered and not yet invoiced**, under the month of the delivery.   | What is already invoiced — that is `revenue`; what is ordered and not yet delivered. |
+| `uninvoicedCostPrice` | The **cost price** of `uninvoicedRevenue`, under the same month.              | The cost of what is invoiced — that is `costPrice`; the cost of what is ordered.     |
 | `orderBacklog`      | What is **ordered and not yet delivered**, under the month the delivery is planned for. | What is delivered, invoiced or not; the quotes.                              |
 
 🔑 **The three never overlap, and that is why they add up.** A sale sits in one of them at a time and moves along as it goes: ordered, then delivered, then invoiced. On a record stepped month by month (`P1M`):
@@ -170,11 +171,25 @@ March, one record:
 
 On 2 April, March is invoiced: `uninvoicedRevenue.values[2]` falls to 0 — or the series goes altogether — and `revenue.values[2]` rises to 15 500. What was delivered in March has not moved; it has changed column.
 
-⚠️ **Both series are transitional.** Their amounts are on their way to `revenue`, and a record whose trade is all invoiced carries neither: the series is **absent**, not twelve zeros — zeros would state that something was measured and found empty.
+⚠️ **These series are transitional.** Their amounts are on their way to `revenue` and `costPrice`, and a record whose trade is all invoiced carries none of them: the series is **absent**, not twelve zeros — zeros would state that something was measured and found empty.
 
-⚠️ **Both are runs only**: `values`, never `value`. A total over the year would add months that each stand at a different stage of their invoicing, and read as a figure of the year it is not.
+⚠️ **They are runs only**: `values`, never `value`. A total over the year would add months that each stand at a different stage of their invoicing, and read as a figure of the year it is not.
 
 `orderBacklog` is not a revenue: nothing of it is delivered, and a planned date can move. A month may lie in the future — the backlog is the trade still to come — and a past month may still hold some: a delivery planned for it that has not happened.
+
+💶 **What was delivered and not invoiced has a cost too.** `uninvoicedCostPrice` is to `uninvoicedRevenue` what `costPrice` is to `revenue`. The margin over what was delivered reads from four runs a reader already has — no margin series comes with it:
+
+```
+March, one record:
+  revenue.values[2]               12 000   costPrice.values[2]             9 300
+  uninvoicedRevenue.values[2]      3 500   uninvoicedCostPrice.values[2]   2 700
+
+  margin over what was delivered in March = ( 12 000 + 3 500 ) − ( 9 300 + 2 700 ) = 3 500
+```
+
+⚠️ **Absent is not zero.** A record may carry `uninvoicedRevenue` without its cost, when its source cannot price what was delivered. A reader then has no margin to show for that record: reading the missing cost as zero would turn the whole revenue into margin. And a summary adding records with and without a cost falls short on the cost of the delivered — it sums only those that carry both, or says it did not.
+
+What is ordered has no cost: nothing of it is delivered, and its cost can still move before it is.
 
 Why not among the ten measures: those hold for every family, while a stage of a sale belongs to the record of whoever made it.
 
@@ -259,13 +274,14 @@ Neither adds a property: they name their subject, and that is all. `CompanyStati
 | `assignedCategory` | `array\|string\|CategoryCode\|Thing\|null`   | *(`SalesObjectives` only)* The range of goods aimed at — a single code, or the ordered codes of a path through a classification, widest first. Unset when the target is set on a customer. |
 | `marginRate`       | `null\|array\|QuantitativeValue`             | *(`SalesObjectives` only)* The margin rate the target is set at — a value and the percent code `P1`. Absent when no rate is set. |
 | `uninvoicedRevenue` | `null\|array\|ObservationSeries`            | *(`SellerStatistics` only)* What is delivered and not invoiced yet — see “Trade not invoiced yet” above. |
+| `uninvoicedCostPrice` | `null\|array\|ObservationSeries`          | *(`SellerStatistics` only)* The cost price of what is delivered and not invoiced yet — see “Trade not invoiced yet” above. |
 | `orderBacklog`     | `null\|array\|ObservationSeries`             | *(`SellerStatistics` only)* What is ordered and not delivered yet — see “Trade not invoiced yet” above. |
 
 **The two narrowings are alternatives**: a target is set on a customer **or** on a range of goods, never on both, and a target set on the salesperson alone leaves both unset.
 
 **Both classes carry the same subject, and that is the whole point.** The outcome and the target line up key for key, with nothing to translate between them.
 
-**A target has no trade not invoiced yet.** It is set on what is sold, not on a stage along the way: `SalesObjectives` carries neither `uninvoicedRevenue` nor `orderBacklog`, and the outcome and the target line up on the ten measures.
+**A target has no trade not invoiced yet.** It is set on what is sold, not on a stage along the way: `SalesObjectives` carries none of `uninvoicedRevenue`, `uninvoicedCostPrice` and `orderBacklog`, and the outcome and the target line up on the ten measures.
 
 🔑 **The target margin rate is not one of the measures, and that is deliberate.** The ten measures are amounts: they hold a run of twelve values, they carry a total, and a summary adds them up term by term. A rate does none of that — adding the rates of a hundred records answers a number that is both wrong and entirely plausible. It is therefore a property of its own, and `StatisticsSummary` does not carry it. A screen that needs a salesperson's rate reads it off one of their targets.
 

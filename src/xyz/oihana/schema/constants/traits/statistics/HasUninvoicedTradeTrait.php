@@ -11,6 +11,7 @@ namespace xyz\oihana\schema\constants\traits\statistics;
  */
 trait HasUninvoicedTradeTrait
 {
-    const string ORDER_BACKLOG      = 'orderBacklog'      ;
-    const string UNINVOICED_REVENUE = 'uninvoicedRevenue' ;
+    const string ORDER_BACKLOG         = 'orderBacklog'        ;
+    const string UNINVOICED_COST_PRICE = 'uninvoicedCostPrice' ;
+    const string UNINVOICED_REVENUE    = 'uninvoicedRevenue'   ;
 }

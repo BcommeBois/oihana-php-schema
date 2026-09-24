@@ -42,6 +42,22 @@ use xyz\oihana\schema\statistics\ObservationSeries;
  * add months that each stand at a different stage of their invoicing, and read
  * as a figure of the year it is not.
  *
+ * 💶 **What was delivered and not invoiced has a cost too** :
+ * `uninvoicedCostPrice` is to `uninvoicedRevenue` what
+ * {@see HasTradingMeasures::$costPrice} is to `revenue`, so the margin over what
+ * was delivered reads from four runs a reader already has :
+ *
+ * ```
+ * March, one record :
+ *   revenue.values[2]               12 000   costPrice.values[2]             9 300
+ *   uninvoicedRevenue.values[2]      3 500   uninvoicedCostPrice.values[2]   2 700
+ *
+ *   margin over what was delivered in March = ( 12 000 + 3 500 ) − ( 9 300 + 2 700 ) = 3 500
+ * ```
+ *
+ * The backlog has no such series : what is ordered is not delivered yet, and its
+ * cost can still move before it is.
+ *
  * They are not among the ten measures of {@see HasTradingMeasures} : those hold
  * for every family, while a stage of a sale belongs to the record of whoever
  * made it. A family composes this trait when it has such stages to carry.
@@ -73,6 +89,29 @@ trait HasUninvoicedTrade
      */
     #[HydrateAs(ObservationSeries::class)]
     public null|array|ObservationSeries $orderBacklog ;
+
+    /**
+     * The cost price of what was delivered and not yet invoiced, month by month —
+     * the cost of {@see HasUninvoicedTrade::$uninvoicedRevenue}, filed under the
+     * same month.
+     *
+     * Read beside {@see HasTradingMeasures::$costPrice} as `uninvoicedRevenue`
+     * is read beside `revenue` : the two never overlap, and what was delivered in
+     * a month cost their sum. No margin series goes with it — a reader subtracts
+     * the two runs it already has.
+     *
+     * ⚠️ **Absent is not zero.** A record may carry `uninvoicedRevenue` without
+     * its cost, when its source cannot price what was delivered. A reader then
+     * has no margin to show for that record : reading the missing cost as zero
+     * would turn the whole revenue into margin.
+     *
+     * Transitional, and a run only — see {@see HasUninvoicedTrade}.
+     *
+     * @var null|array|ObservationSeries
+     * @since 1.5.0
+     */
+    #[HydrateAs(ObservationSeries::class)]
+    public null|array|ObservationSeries $uninvoicedCostPrice ;
 
     /**
      * What was delivered and not yet invoiced, month by month.

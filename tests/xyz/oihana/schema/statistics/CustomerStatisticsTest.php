@@ -54,8 +54,9 @@ class CustomerStatisticsTest extends TestCase
      */
     public function testItDoesNotCarryTheTradeNotInvoicedYet(): void
     {
-        $this->assertFalse( property_exists( CustomerStatistics::class , Oihana::ORDER_BACKLOG      ) );
-        $this->assertFalse( property_exists( CustomerStatistics::class , Oihana::UNINVOICED_REVENUE ) );
+        $this->assertFalse( property_exists( CustomerStatistics::class , Oihana::ORDER_BACKLOG         ) );
+        $this->assertFalse( property_exists( CustomerStatistics::class , Oihana::UNINVOICED_COST_PRICE ) );
+        $this->assertFalse( property_exists( CustomerStatistics::class , Oihana::UNINVOICED_REVENUE    ) );
 
         $statistics = new CustomerStatistics
         ([
