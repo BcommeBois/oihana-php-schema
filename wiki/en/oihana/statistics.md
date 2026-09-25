@@ -295,9 +295,10 @@ Neither adds a property: they name their subject, and that is all. `CompanyStati
 
 ### `StatisticsSummary` properties
 
-| Property        | Type        | Description                                             |
-|-----------------|-------------|---------------------------------------------------------|
-| `numberOfItems` | `int\|null` | How many records were summed to produce this line.      |
+| Property          | Type           | Description                                                                                                                       |
+|-------------------|----------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| `numberOfItems`   | `int\|null`    | How many records were summed to produce this line.                                                                                |
+| `observationDate` | `string\|null` | The date the summed records were read on, as an ISO 8601 date (`2026-09-22`) — set on a summary of snapshots, absent on a summary of a year. |
 
 It is the sum of a selection: a portfolio over a year, a branch, a range of goods. It carries the
 same ten measures as any record, each summed **term by term** — the January of the summary is the
@@ -314,6 +315,13 @@ It also carries what is owed and late (“What is owed and late” above), which
 The amounts sum term by term, and so does `numberOfDocuments`; 🚨 **`daysLate` does not** — ten
 customers ninety days late are not nine hundred days late. Whoever builds the summary takes the
 largest, or leaves it out, and says which.
+
+🔑 **A summary of snapshots is dated like them.** A `CustomerReceivables` record is true on its
+reading date and on no other; their sum is too, and says so under the same name, `observationDate` —
+with no `year`, which stays uninitialized and is not serialized. A summary of a year of trade does
+the opposite: a year, and no reading date. The date is declared here for the reason that holds for
+every key: a date the class does not declare would be dropped by the constructor, and the summary
+would not say which day it was read on.
 
 ⛔ **The target margin rate, on the other hand, is not declared there, and must not be.** A summary
 adds up what it holds; a rate does not add up. The very mechanism that protects the two series keeps

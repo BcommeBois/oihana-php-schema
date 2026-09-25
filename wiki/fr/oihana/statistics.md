@@ -295,9 +295,10 @@ Ni l'une ni l'autre n'ajoute de propriété : elles nomment leur sujet, et c'est
 
 ### Propriétés de `StatisticsSummary`
 
-| Propriété       | Type        | Description                                            |
-|-----------------|-------------|--------------------------------------------------------|
-| `numberOfItems` | `int\|null` | Combien de fiches ont été additionnées pour faire cette ligne. |
+| Propriété         | Type           | Description                                                                                                                                 |
+|-------------------|----------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| `numberOfItems`   | `int\|null`    | Combien de fiches ont été additionnées pour faire cette ligne.                                                                              |
+| `observationDate` | `string\|null` | La date de lecture des fiches additionnées, au format ISO 8601 (`2026-09-22`) — posée sur un résumé de photographies, absente sur un résumé d'année. |
 
 C'est la somme d'une sélection : un portefeuille sur une année, une agence, une gamme d'articles.
 Elle porte les mêmes dix mesures que n'importe quelle fiche, chacune sommée **terme à terme** — le
@@ -314,6 +315,13 @@ Il porte aussi le retard de paiement (« Le retard de paiement » plus haut), qu
 se somment terme à terme, `numberOfDocuments` aussi ; 🚨 **`daysLate` ne se somme pas** — dix clients
 à quatre-vingt-dix jours ne font pas neuf cents jours. Qui bâtit le résumé prend le plus grand, ou
 l'omet, et le dit.
+
+🔑 **Un résumé de photographies est daté comme elles.** Une fiche `CustomerReceivables` est vraie à
+sa date de lecture et à aucune autre ; leur somme l'est aussi, et le dit sous le même nom,
+`observationDate` — sans `year`, qui reste non initialisée et n'est pas sérialisée. Un résumé d'une
+année d'échanges fait l'inverse : une année, pas de date de lecture. La date est déclarée ici pour la
+raison qui vaut pour chaque clé : une date que la classe ne déclare pas serait jetée par le
+constructeur, et le résumé ne dirait pas quel jour il a été lu.
 
 ⛔ **Le taux de marge visé, lui, n'y est pas déclaré, et ne doit pas l'être.** Un résumé additionne ce
 qu'il porte ; un taux ne s'additionne pas. La même mécanique qui protège les deux séries écarte

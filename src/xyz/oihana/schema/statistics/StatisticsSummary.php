@@ -44,6 +44,16 @@ use xyz\oihana\schema\traits\HasUninvoicedTrade;
  * hundred days late. Whoever builds the summary takes the largest, or leaves it
  * out, and says which.
  *
+ * 🔑 **And a summary of such records is dated, as they are.** A receivables
+ * record is a snapshot — true on its {@see CustomerReceivables::$observationDate}
+ * and on no other day —, so a sum of them is a snapshot too : it carries the
+ * same date under the same name ({@see StatisticsSummary::$observationDate})
+ * and no {@see Statistics::$year}, which stays unset and is not serialized. A
+ * summary of a year of trade does the opposite : a year, and no reading date.
+ * Declared here for the reason every other key is : a date the class does not
+ * declare would be dropped by the constructor, and the summary would not say
+ * which day it was read on.
+ *
  * 🔑 **One class for every family, because a summary loses the only thing that
  * told them apart.** {@see CustomerStatistics} and {@see ProviderStatistics}
  * differ by their subject and by the dimensions a subject carries ; the ten
@@ -127,4 +137,21 @@ class StatisticsSummary extends Statistics
      * @since 1.5.0
      */
     public null|int $numberOfItems ;
+
+    /**
+     * The date the summed records were read at, as an ISO 8601 date (`2026-09-22`).
+     *
+     * Set on a summary of records that are snapshots ({@see CustomerReceivables}),
+     * whose figures are true on one day and on no other : their sum is true on
+     * that same day. Left unset on a summary of a year of trade, which is dated by
+     * {@see Statistics::$year} instead — the two never coexist, and neither is
+     * serialized when unset.
+     *
+     * Same term, same format as {@see CustomerReceivables::$observationDate} and
+     * {@see \org\schema\Observation::$observationDate}.
+     *
+     * @var null|string
+     * @since 1.5.0
+     */
+    public null|string $observationDate ;
 }

@@ -12,6 +12,7 @@ use org\schema\constants\Schema;
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\enumerations\BusinessDocumentDirection;
 use xyz\oihana\schema\places\Warehouse;
+use xyz\oihana\schema\statistics\CustomerReceivables;
 use xyz\oihana\schema\statistics\ObservationSeries;
 use xyz\oihana\schema\statistics\Statistics;
 use xyz\oihana\schema\statistics\StatisticsSummary;
@@ -34,6 +35,13 @@ class StatisticsSummaryTest extends TestCase
 
         // The same idea schema.org names on a list, reused rather than renamed.
         $this->assertSame( Schema::NUMBER_OF_ITEMS , StatisticsSummary::NUMBER_OF_ITEMS );
+
+        $this->assertSame( 'observationDate' , StatisticsSummary::OBSERVATION_DATE );
+
+        // The same date a receivables record is read on, and the Schema.org observation's :
+        // declared twice with the same value, and PHP keeps them compatible as long as they agree.
+        $this->assertSame( CustomerReceivables::OBSERVATION_DATE , StatisticsSummary::OBSERVATION_DATE );
+        $this->assertSame( Oihana::OBSERVATION_DATE              , StatisticsSummary::OBSERVATION_DATE );
 
         $this->assertSame( 'orderBacklog'        , StatisticsSummary::ORDER_BACKLOG         );
         $this->assertSame( 'uninvoicedCostPrice' , StatisticsSummary::UNINVOICED_COST_PRICE );
@@ -206,8 +214,9 @@ class StatisticsSummaryTest extends TestCase
         $summary = new Reflection()->hydrate
         (
             [
-                StatisticsSummary::OVERDUE   => [ 'unitCode' => 'EUR' , 'value' => 21250 ] ,
-                StatisticsSummary::DAYS_LATE => [ 'unitCode' => 'DAY' , 'value' =>    98 ] ,
+                StatisticsSummary::OBSERVATION_DATE => '2026-09-22' ,
+                StatisticsSummary::OVERDUE          => [ 'unitCode' => 'EUR' , 'value' => 21250 ] ,
+                StatisticsSummary::DAYS_LATE        => [ 'unitCode' => 'DAY' , 'value' =>    98 ] ,
             ],
             StatisticsSummary::class
         );
@@ -217,6 +226,58 @@ class StatisticsSummaryTest extends TestCase
         $this->assertSame( 21250 , $summary->overdue->value );
         $this->assertSame( 'DAY' , $summary->daysLate->unitCode );
         $this->assertNull( $summary->overdue->values ?? null );
+        $this->assertSame( '2026-09-22' , $summary->observationDate );
+    }
+
+    /**
+     * 🔑 A summary of records that are snapshots is a snapshot too : it says which
+     * day it was read on, under the same name as the records, and carries no year.
+     *
+     * The test fails the day the summary stops declaring the date — the
+     * constructor would then drop it without a word, and a sum of what is owed
+     * would no longer say when it was true.
+     */
+    public function testASummaryOfSnapshotsSaysWhichDayItWasReadOn(): void
+    {
+        $summary = new StatisticsSummary
+        ([
+            StatisticsSummary::OBSERVATION_DATE    => '2026-09-22' ,
+            StatisticsSummary::DIRECTION           => BusinessDocumentDirection::SALE ,
+            StatisticsSummary::NUMBER_OF_ITEMS     => 5 ,
+            StatisticsSummary::NUMBER_OF_DOCUMENTS => 12 ,
+            StatisticsSummary::OVERDUE             => new ObservationSeries([ Oihana::UNIT_CODE => 'EUR' , Oihana::VALUE => 21250 ]) ,
+        ]);
+
+        $this->assertSame( '2026-09-22' , $summary->observationDate );
+
+        $document = json_decode( json_encode( $summary ) , true );
+
+        $this->assertSame( '2026-09-22' , $document[ StatisticsSummary::OBSERVATION_DATE ] );
+        $this->assertSame( 21250        , $document[ StatisticsSummary::OVERDUE ][ Oihana::VALUE ] );
+
+        // A snapshot has no year and no step, and says neither.
+        $this->assertArrayNotHasKey( StatisticsSummary::YEAR               , $document );
+        $this->assertArrayNotHasKey( StatisticsSummary::OBSERVATION_PERIOD , $document );
+    }
+
+    /**
+     * And a summary of a year of trade is dated by its year alone : the reading
+     * date stays unset, and is not serialized.
+     */
+    public function testASummaryOfAYearCarriesNoReadingDate(): void
+    {
+        $summary = new StatisticsSummary
+        ([
+            StatisticsSummary::YEAR            => 2024 ,
+            StatisticsSummary::NUMBER_OF_ITEMS => 128 ,
+        ]);
+
+        $this->assertNull( $summary->observationDate ?? null );
+
+        $document = json_decode( json_encode( $summary ) , true );
+
+        $this->assertSame( 2024 , $document[ StatisticsSummary::YEAR ] );
+        $this->assertArrayNotHasKey( StatisticsSummary::OBSERVATION_DATE , $document );
     }
 
     /**

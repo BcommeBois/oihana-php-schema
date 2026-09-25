@@ -33,6 +33,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- **A summary says which day it was read on** —
+  feat(statistics): a summary says which day it was read on (2026-09-25).
+  `StatisticsSummary` gains `observationDate` (constant `OBSERVATION_DATE` in `StatisticsSummaryTrait`),
+  the date the records it adds up were read on, as an ISO 8601 date. A sum of `CustomerReceivables`
+  records is a snapshot like them — true on that day and on no other — and could not say so : the
+  constructor keeps only the properties a class declares, so the date was dropped without a word.
+  Set on a summary of snapshots, which then carries no `year` ; left unset on a summary of a year of
+  trade, which carries no reading date. Neither is serialized when unset. Wiki FR and EN updated.
+
+  ⚠️ `OBSERVATION_DATE` already exists in `CustomerReceivablesTrait` and on the Schema.org observation
+  with the same value ; a test asserts the equality, as it does for the receivables record.
+
 - **What was delivered and not invoiced has its cost price** —
   feat(statistics): what was delivered and not invoiced carries its cost price (2026-09-24).
   `HasUninvoicedTrade` gains `uninvoicedCostPrice` (constant `UNINVOICED_COST_PRICE`, hence
