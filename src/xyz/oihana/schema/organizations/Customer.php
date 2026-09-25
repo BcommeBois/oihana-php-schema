@@ -10,6 +10,7 @@ use org\schema\traits\helpers\SetAdditionalPropertyTrait;
 use xyz\oihana\schema\constants\CustomerAdditionalProperty;
 use xyz\oihana\schema\places\Warehouse;
 use xyz\oihana\schema\products\PriceSegmentation;
+use xyz\oihana\schema\statistics\StatisticsSummary;
 
 /**
  * A customer representation.
@@ -57,6 +58,17 @@ class Customer extends Company
      * @var null|int|string|array|PriceSegmentation
      */
     public null|int|string|array|PriceSegmentation $priceSegmentation ;
+
+    /**
+     * What the customer owes overdue, summed over the companies that invoice it :
+     * a {@see StatisticsSummary} of its receivables records, carried on the record
+     * itself so a list of customers can mark the ones in arrears without reading
+     * the statistics. Written by whoever reads the receivables, removed when the
+     * customer is settled — absent means nothing overdue.
+     * @var null|array|StatisticsSummary
+     * @since 1.5.0
+     */
+    public null|array|StatisticsSummary $receivables ;
 
     /**
      * The unloading method of the customer.

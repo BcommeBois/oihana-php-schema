@@ -4,7 +4,10 @@ namespace xyz\oihana\schema\helpers\hydrate;
 
 use ReflectionException;
 
+use oihana\reflect\Reflection;
+
 use xyz\oihana\schema\organizations\Customer;
+use xyz\oihana\schema\statistics\StatisticsSummary;
 
 use function oihana\core\arrays\isIndexed;
 
@@ -74,6 +77,19 @@ function hydrateCustomer( mixed $init = null ) :mixed
     if ( is_array( $address ) )
     {
         $customer->address = hydratePostalAddress( $address ) ;
+    }
+
+    // ------- receivables
+
+    // Read back through reflection, not the constructor : the measures of a
+    // summary are typed series, and only the `#[HydrateAs]` walk turns each
+    // stored `{ value , unitCode }` into an ObservationSeries.
+    $receivables = $customer->receivables ?? null ;
+    if ( is_array( $receivables ) )
+    {
+        $summary = new Reflection()->hydrate( $receivables , StatisticsSummary::class ) ;
+
+        $customer->receivables = $summary instanceof StatisticsSummary ? $summary : $receivables ;
     }
 
     return $customer ;

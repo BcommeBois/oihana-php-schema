@@ -9,6 +9,7 @@ use org\schema\ContactPoint;
 use org\schema\PostalAddress;
 
 use xyz\oihana\schema\organizations\Customer;
+use xyz\oihana\schema\statistics\StatisticsSummary;
 
 use function xyz\oihana\schema\helpers\hydrate\hydrateCustomer;
 
@@ -31,6 +32,24 @@ final class HydrateCustomerTest extends TestCase
         $this->assertContainsOnlyInstancesOf( ContactPoint::class , $customer->contactPoint ) ;
         $this->assertInstanceOf( PostalAddress::class , $customer->address ) ;
         $this->assertSame( 'Le Mazel' , $customer->address->streetAddress ) ;
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testHydratesTheReceivablesIntoASummary(): void
+    {
+        $customer = hydrateCustomer(
+        [
+            'name'        => '1000 BOUTS DE BOIS' ,
+            'receivables' => [ 'numberOfItems' => 2 , 'observationDate' => '2026-01-15' , 'overdue' => [ 'value' => 1250.5 , 'unitCode' => 'EUR' ] ] ,
+        ]) ;
+
+        $this->assertInstanceOf( Customer::class , $customer ) ;
+        $this->assertInstanceOf( StatisticsSummary::class , $customer->receivables ) ;
+        $this->assertSame( 2 , $customer->receivables->numberOfItems ) ;
+        $this->assertSame( '2026-01-15' , $customer->receivables->observationDate ) ;
+        $this->assertSame( 1250.5 , $customer->receivables->overdue->value ) ;
     }
 
     /**

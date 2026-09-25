@@ -65,7 +65,7 @@ $customer->defaultTelephone = '05 56 00 00 00' ;    // → $customer->contactPoi
 
 | Classe | Étend | Ce qu'elle ajoute |
 |---|---|---|
-| `Customer` | `Company` | `assignedCompany` / `assignedPOS` / `assignedSeller` (les rattachements société, dépôt, vendeur), `creditStatus`, `paymentTerms`, `priceSegmentation` (référence vers `PriceSegmentation`), `unloadingMethod`, et sa propre normalisation de propriétés additionnelles (`CustomerAdditionalProperty::normalize()`). |
+| `Customer` | `Company` | `assignedCompany` / `assignedPOS` / `assignedSeller` (les rattachements société, dépôt, vendeur), `creditStatus`, `paymentTerms`, `priceSegmentation` (référence vers `PriceSegmentation`), `unloadingMethod`, `receivables` (ce que le client doit **en retard**, toutes sociétés confondues — un [`StatisticsSummary`](statistics.md#propriétés-de-statisticssummary) porté par la fiche elle-même, absent quand rien n'est dû), et sa propre normalisation de propriétés additionnelles (`CustomerAdditionalProperty::normalize()`). |
 | `Provider` | `Company` | `carrier` (le transporteur), `amountCarriagePaid` (le franco), `minimumOrderValue`, `hasAcknowledgmentOfReceipt`, `providerType`, `shareCapital`, et `productInfo` (`ProductProviderInfo`) alimenté par `SetProductProviderInfoTrait`. |
 | `Subsidiary` | `Company` | La filiale du groupe — le type suffit, les propriétés viennent de la base. |
 | `Affiliate` | `Company` | L'enseigne affiliée — même logique. |

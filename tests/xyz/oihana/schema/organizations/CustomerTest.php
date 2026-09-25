@@ -4,12 +4,15 @@ namespace tests\xyz\oihana\schema\organizations ;
 
 use PHPUnit\Framework\TestCase;
 
+use org\schema\constants\Schema;
 use org\schema\PostalAddress;
 use org\schema\PropertyValue;
 
 use xyz\oihana\schema\constants\CustomerAdditionalProperty;
+use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\organizations\Company;
 use xyz\oihana\schema\organizations\Customer;
+use xyz\oihana\schema\statistics\StatisticsSummary;
 
 class CustomerTest extends TestCase
 {
@@ -43,6 +46,28 @@ class CustomerTest extends TestCase
         $this->assertInstanceOf( PostalAddress::class , $customer->address ) ;
         $this->assertSame( '12 rue des Bois' , $customer->address->streetAddress ) ;
         $this->assertNull( $customer->additionalProperty ) ;
+    }
+
+    public function testACustomerCarriesWhatItOwesOverdueAsASummary(): void
+    {
+        $customer = new Customer([ Oihana::RECEIVABLES => new StatisticsSummary([ StatisticsSummary::NUMBER_OF_ITEMS => 2 ]) ]) ;
+
+        $this->assertInstanceOf( StatisticsSummary::class , $customer->receivables ) ;
+        $this->assertSame( 2 , $customer->receivables->numberOfItems ) ;
+    }
+
+    public function testACustomerThatOwesNothingCarriesNoReceivables(): void
+    {
+        $customer = new Customer([ Schema::NAME => 'ACME' ]) ;
+
+        $this->assertNull( $customer->receivables ?? null ) ;
+        $this->assertArrayNotHasKey( Oihana::RECEIVABLES , $customer->jsonSerialize() ) ;
+    }
+
+    public function testTheReceivablesConstantNamesTheProperty(): void
+    {
+        $this->assertSame( 'receivables' , Oihana::RECEIVABLES ) ;
+        $this->assertTrue( property_exists( Customer::class , Oihana::RECEIVABLES ) ) ;
     }
 
     public function testSetAdditionalPropertiesRejectsNonStringOrUnknownValues(): void

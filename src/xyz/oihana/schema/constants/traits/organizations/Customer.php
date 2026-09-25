@@ -42,6 +42,12 @@ trait Customer
     public const string PRICE_SEGMENTATION = 'priceSegmentation' ;
 
     /**
+     * What the customer owes overdue, summed over the companies that invoice it.
+     * @since 1.5.0
+     */
+    public const string RECEIVABLES = 'receivables' ;
+
+    /**
      * The seller relation key — graph-side filter on the `seller_has_customer`
      * edge (by Arango `_key`), distinct from the embedded `assignedSeller` join.
      */

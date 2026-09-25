@@ -65,7 +65,7 @@ $customer->defaultTelephone = '05 56 00 00 00' ;    // → $customer->contactPoi
 
 | Class | Extends | What it adds |
 |---|---|---|
-| `Customer` | `Company` | `assignedCompany` / `assignedPOS` / `assignedSeller` (the company, warehouse and seller assignments), `creditStatus`, `paymentTerms`, `priceSegmentation` (a `PriceSegmentation` reference), `unloadingMethod`, and its own additional-property normalization (`CustomerAdditionalProperty::normalize()`). |
+| `Customer` | `Company` | `assignedCompany` / `assignedPOS` / `assignedSeller` (the company, warehouse and seller assignments), `creditStatus`, `paymentTerms`, `priceSegmentation` (a `PriceSegmentation` reference), `unloadingMethod`, `receivables` (what the customer owes **overdue**, all companies together — a [`StatisticsSummary`](statistics.md#statisticssummary-properties) carried by the record itself, absent when nothing is owed), and its own additional-property normalization (`CustomerAdditionalProperty::normalize()`). |
 | `Provider` | `Company` | `carrier`, `amountCarriagePaid`, `minimumOrderValue`, `hasAcknowledgmentOfReceipt`, `providerType`, `shareCapital`, and `productInfo` (`ProductProviderInfo`) fed by `SetProductProviderInfoTrait`. |
 | `Subsidiary` | `Company` | The group subsidiary — the type is enough, the properties come from the base. |
 | `Affiliate` | `Company` | The affiliated brand — same logic. |

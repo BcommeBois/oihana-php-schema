@@ -33,6 +33,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- **A customer carries what it owes overdue** —
+  feat(organizations): a customer carries what it owes overdue (2026-09-25).
+  `Customer` gains `receivables` (constant `RECEIVABLES` in the customer constants trait, hence
+  `Oihana::RECEIVABLES`) : a `StatisticsSummary` of the customer's receivables records, summed over
+  the companies that invoice it, carried on the record itself so a list of customers can mark the
+  ones in arrears without reading the statistics. Written by whoever reads the receivables, removed
+  when the customer is settled — absent means nothing overdue, and an unset property is not
+  serialized. `hydrateCustomer()` hydrates the block into a `StatisticsSummary`, as it does the
+  address and the contact points. Wiki FR and EN updated.
+
 - **A summary says which day it was read on** —
   feat(statistics): a summary says which day it was read on (2026-09-25).
   `StatisticsSummary` gains `observationDate` (constant `OBSERVATION_DATE` in `StatisticsSummaryTrait`),
