@@ -149,12 +149,13 @@ A **family** is a record whose subject is named: `CustomerStatistics` for a cust
 
 ### Trade not invoiced yet — `HasUninvoicedTrade`
 
-Two stages of a sale that `revenue` cannot see, since it counts what was invoiced — and the cost price of the first. `SellerStatistics` and `StatisticsSummary` carry them beside the ten measures; the other families do not.
+Two stages of a sale that `revenue` cannot see, since it counts what was invoiced — and the two costs of the first, the cost price and the purchase cost. `SellerStatistics` and `StatisticsSummary` carry them beside the ten measures; the other families do not.
 
 | Measure             | What it holds                                                                  | What it does not hold                                                               |
 |---------------------|--------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
 | `uninvoicedRevenue` | What was **delivered and not yet invoiced**, under the month of the delivery.   | What is already invoiced — that is `revenue`; what is ordered and not yet delivered. |
 | `uninvoicedCostPrice` | The **cost price** of `uninvoicedRevenue`, under the same month.              | The cost of what is invoiced — that is `costPrice`; the cost of what is ordered.     |
+| `uninvoicedPurchaseCost` | The **purchase cost** of `uninvoicedRevenue`, under the same month.        | The purchase cost of what is invoiced — that is `purchaseCost`; that of what is ordered. |
 | `orderBacklog`      | What is **ordered and not yet delivered**, under the month the delivery is planned for. | What is delivered, invoiced or not; the quotes.                              |
 
 🔑 **The three never overlap, and that is why they add up.** A sale sits in one of them at a time and moves along as it goes: ordered, then delivered, then invoiced. On a record stepped month by month (`P1M`):
@@ -187,7 +188,17 @@ March, one record:
   margin over what was delivered in March = ( 12 000 + 3 500 ) − ( 9 300 + 2 700 ) = 3 500
 ```
 
-⚠️ **Absent is not zero.** A record may carry `uninvoicedRevenue` without its cost, when its source cannot price what was delivered. A reader then has no margin to show for that record: reading the missing cost as zero would turn the whole revenue into margin. And a summary adding records with and without a cost falls short on the cost of the delivered — it sums only those that carry both, or says it did not.
+And a purchase cost: `uninvoicedPurchaseCost` is to `uninvoicedRevenue` what `purchaseCost` is to `revenue`. The margin on the purchase cost reads the same way, from four other runs, beside the margin on the cost price and never mixed with it:
+
+```
+March, one record:
+  revenue.values[2]               12 000   purchaseCost.values[2]             9 000
+  uninvoicedRevenue.values[2]      3 500   uninvoicedPurchaseCost.values[2]   2 600
+
+  margin on the purchase cost over what was delivered in March = ( 12 000 + 3 500 ) − ( 9 000 + 2 600 ) = 3 900
+```
+
+⚠️ **Absent is not zero.** A record may carry `uninvoicedRevenue` without one of its costs, when its source cannot price what was delivered, or when its reader is not allowed to see that cost. A reader then has no margin to show for that record: reading the missing cost as zero would turn the whole revenue into margin. And a summary adding records with and without a cost falls short on the cost of the delivered — it sums only those that carry both, or says it did not.
 
 What is ordered has no cost: nothing of it is delivered, and its cost can still move before it is.
 
@@ -275,13 +286,14 @@ Neither adds a property: they name their subject, and that is all. `CompanyStati
 | `marginRate`       | `null\|array\|QuantitativeValue`             | *(`SalesObjectives` only)* The margin rate the target is set at — a value and the percent code `P1`. Absent when no rate is set. |
 | `uninvoicedRevenue` | `null\|array\|ObservationSeries`            | *(`SellerStatistics` only)* What is delivered and not invoiced yet — see “Trade not invoiced yet” above. |
 | `uninvoicedCostPrice` | `null\|array\|ObservationSeries`          | *(`SellerStatistics` only)* The cost price of what is delivered and not invoiced yet — see “Trade not invoiced yet” above. |
+| `uninvoicedPurchaseCost` | `null\|array\|ObservationSeries`       | *(`SellerStatistics` only)* The purchase cost of what is delivered and not invoiced yet — see “Trade not invoiced yet” above. |
 | `orderBacklog`     | `null\|array\|ObservationSeries`             | *(`SellerStatistics` only)* What is ordered and not delivered yet — see “Trade not invoiced yet” above. |
 
 **The two narrowings are alternatives**: a target is set on a customer **or** on a range of goods, never on both, and a target set on the salesperson alone leaves both unset.
 
 **Both classes carry the same subject, and that is the whole point.** The outcome and the target line up key for key, with nothing to translate between them.
 
-**A target has no trade not invoiced yet.** It is set on what is sold, not on a stage along the way: `SalesObjectives` carries none of `uninvoicedRevenue`, `uninvoicedCostPrice` and `orderBacklog`, and the outcome and the target line up on the ten measures.
+**A target has no trade not invoiced yet.** It is set on what is sold, not on a stage along the way: `SalesObjectives` carries none of `uninvoicedRevenue`, `uninvoicedCostPrice`, `uninvoicedPurchaseCost` and `orderBacklog`, and the outcome and the target line up on the ten measures.
 
 🔑 **The target margin rate is not one of the measures, and that is deliberate.** The ten measures are amounts: they hold a run of twelve values, they carry a total, and a summary adds them up term by term. A rate does none of that — adding the rates of a hundred records answers a number that is both wrong and entirely plausible. It is therefore a property of its own, and `StatisticsSummary` does not carry it. A screen that needs a salesperson's rate reads it off one of their targets.
 

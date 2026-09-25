@@ -149,12 +149,13 @@ Une **famille** est une fiche dont le sujet est nommé : `CustomerStatistics` po
 
 ### Le non-facturé — `HasUninvoicedTrade`
 
-Deux étapes d'une vente que `revenue` ne voit pas, puisqu'il compte ce qui est facturé — et le prix de revient de la première. `SellerStatistics` et `StatisticsSummary` les portent en plus des dix mesures ; les autres familles, non.
+Deux étapes d'une vente que `revenue` ne voit pas, puisqu'il compte ce qui est facturé — et les deux coûts de la première, le prix de revient et le prix d'achat. `SellerStatistics` et `StatisticsSummary` les portent en plus des dix mesures ; les autres familles, non.
 
 | Mesure              | Ce qu'elle contient                                                          | Ce qu'elle ne contient pas                                                            |
 |---------------------|------------------------------------------------------------------------------|---------------------------------------------------------------------------------------|
 | `uninvoicedRevenue` | Ce qui a été **livré et pas encore facturé**, au mois de la livraison.        | Ce qui est déjà facturé — c'est `revenue` ; ce qui est commandé et pas encore livré.  |
 | `uninvoicedCostPrice` | Le **prix de revient** de `uninvoicedRevenue`, au même mois.                | Le revient de ce qui est facturé — c'est `costPrice` ; celui du commandé.             |
+| `uninvoicedPurchaseCost` | Le **prix d'achat** de `uninvoicedRevenue`, au même mois.                | L'achat de ce qui est facturé — c'est `purchaseCost` ; celui du commandé.             |
 | `orderBacklog`      | Ce qui est **commandé et pas encore livré**, au mois de la livraison prévue.  | Ce qui est livré, facturé ou non ; les devis.                                         |
 
 🔑 **Les trois ne se recouvrent jamais, et c'est pour cela qu'elles s'additionnent.** Une vente est dans une seule d'entre elles à la fois, et passe de l'une à l'autre en avançant : commandée, puis livrée, puis facturée. Sur une fiche au pas mensuel (`P1M`) :
@@ -187,7 +188,17 @@ Mars, une fiche :
   marge sur le livré de mars = ( 12 000 + 3 500 ) − ( 9 300 + 2 700 ) = 3 500
 ```
 
-⚠️ **Absent n'est pas zéro.** Une fiche peut porter `uninvoicedRevenue` sans son coût, quand sa source ne sait pas chiffrer ce qui est livré. Le lecteur n'a alors pas de marge à montrer pour cette fiche : lire le coût manquant comme un zéro ferait de tout le chiffre une marge. Et un résumé qui additionne des fiches avec et sans coût sous-estime le coût du livré — il n'additionne que celles qui portent les deux, ou il le dit.
+Et un prix d'achat : `uninvoicedPurchaseCost` est à `uninvoicedRevenue` ce que `purchaseCost` est à `revenue`. La marge sur le prix d'achat se lit de la même façon, sur quatre autres séries, à côté de la marge sur le prix de revient et sans jamais s'y mêler :
+
+```
+Mars, une fiche :
+  revenue.values[2]               12 000   purchaseCost.values[2]             9 000
+  uninvoicedRevenue.values[2]      3 500   uninvoicedPurchaseCost.values[2]   2 600
+
+  marge sur le prix d'achat du livré de mars = ( 12 000 + 3 500 ) − ( 9 000 + 2 600 ) = 3 900
+```
+
+⚠️ **Absent n'est pas zéro.** Une fiche peut porter `uninvoicedRevenue` sans l'un de ses coûts, quand sa source ne sait pas chiffrer ce qui est livré, ou quand son lecteur n'a pas le droit de voir ce coût. Le lecteur n'a alors pas de marge à montrer pour cette fiche : lire le coût manquant comme un zéro ferait de tout le chiffre une marge. Et un résumé qui additionne des fiches avec et sans coût sous-estime le coût du livré — il n'additionne que celles qui portent les deux, ou il le dit.
 
 Le commandé n'a pas de coût : rien n'en est livré, et son revient peut encore bouger d'ici la livraison.
 
@@ -275,13 +286,14 @@ Ni l'une ni l'autre n'ajoute de propriété : elles nomment leur sujet, et c'est
 | `marginRate`       | `null\|array\|QuantitativeValue`               | *(`SalesObjectives` seul)* Le taux de marge visé — une valeur et le code de pourcentage `P1`. Absent si aucun taux n'est fixé. |
 | `uninvoicedRevenue` | `null\|array\|ObservationSeries`             | *(`SellerStatistics` seul)* Le livré pas encore facturé — voir « Le non-facturé » plus haut. |
 | `uninvoicedCostPrice` | `null\|array\|ObservationSeries`           | *(`SellerStatistics` seul)* Le prix de revient du livré pas encore facturé — voir « Le non-facturé » plus haut. |
+| `uninvoicedPurchaseCost` | `null\|array\|ObservationSeries`        | *(`SellerStatistics` seul)* Le prix d'achat du livré pas encore facturé — voir « Le non-facturé » plus haut. |
 | `orderBacklog`     | `null\|array\|ObservationSeries`              | *(`SellerStatistics` seul)* Le commandé pas encore livré — voir « Le non-facturé » plus haut. |
 
 **Les deux narrations sont exclusives** : une cible porte sur un client **ou** sur un rayon, jamais sur les deux, et une cible posée sur le seul commercial les laisse toutes deux absentes.
 
 **Les deux classes portent le même sujet, et c'est tout l'intérêt.** Le réalisé et la cible s'alignent clé pour clé, sans rien à traduire de l'un vers l'autre.
 
-**Une cible n'a pas de non-facturé.** Elle se fixe sur ce qui est vendu, pas sur une étape en cours : `SalesObjectives` ne porte ni `uninvoicedRevenue`, ni `uninvoicedCostPrice`, ni `orderBacklog`, et c'est sur les dix mesures que le réalisé et la cible s'alignent.
+**Une cible n'a pas de non-facturé.** Elle se fixe sur ce qui est vendu, pas sur une étape en cours : `SalesObjectives` ne porte ni `uninvoicedRevenue`, ni `uninvoicedCostPrice`, ni `uninvoicedPurchaseCost`, ni `orderBacklog`, et c'est sur les dix mesures que le réalisé et la cible s'alignent.
 
 🔑 **Le taux de marge visé n'est pas une mesure, et c'est délibéré.** Les dix mesures sont des montants : elles portent un pas de douze valeurs, elles portent un total, et un résumé les additionne terme à terme. Un taux ne fait rien de tout cela — additionner les taux de cent fiches répond un nombre à la fois faux et parfaitement crédible. Il est donc une propriété à part, et `StatisticsSummary` ne le porte pas. Un écran qui a besoin du taux d'un commercial le lit sur l'une de ses cibles.
 

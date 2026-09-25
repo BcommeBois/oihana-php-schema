@@ -55,6 +55,18 @@ use xyz\oihana\schema\statistics\ObservationSeries;
  *   margin over what was delivered in March = ( 12 000 + 3 500 ) − ( 9 300 + 2 700 ) = 3 500
  * ```
  *
+ * And a purchase cost : `uninvoicedPurchaseCost` is to `uninvoicedRevenue` what
+ * {@see HasTradingMeasures::$purchaseCost} is to `revenue`, so the margin on the
+ * purchase cost reads the same way, from four other runs :
+ *
+ * ```
+ * March, one record :
+ *   revenue.values[2]               12 000   purchaseCost.values[2]             9 000
+ *   uninvoicedRevenue.values[2]      3 500   uninvoicedPurchaseCost.values[2]   2 600
+ *
+ *   margin on the purchase cost over what was delivered in March = ( 12 000 + 3 500 ) − ( 9 000 + 2 600 ) = 3 900
+ * ```
+ *
  * The backlog has no such series : what is ordered is not delivered yet, and its
  * cost can still move before it is.
  *
@@ -112,6 +124,30 @@ trait HasUninvoicedTrade
      */
     #[HydrateAs(ObservationSeries::class)]
     public null|array|ObservationSeries $uninvoicedCostPrice ;
+
+    /**
+     * The purchase cost of what was delivered and not yet invoiced, month by
+     * month — the purchase cost of {@see HasUninvoicedTrade::$uninvoicedRevenue},
+     * filed under the same month.
+     *
+     * Read beside {@see HasTradingMeasures::$purchaseCost} as `uninvoicedRevenue`
+     * is read beside `revenue` : the two never overlap, and what was delivered in
+     * a month was bought for their sum. No margin series goes with it — a reader
+     * subtracts the two runs it already has.
+     *
+     * ⚠️ **Absent is not zero.** A record may carry `uninvoicedRevenue` without
+     * its purchase cost, when its source cannot price what was delivered, or
+     * when its reader is not allowed to see a purchase cost. A reader then has no
+     * margin on the purchase cost to show for that record : reading the missing
+     * cost as zero would turn the whole revenue into margin.
+     *
+     * Transitional, and a run only — see {@see HasUninvoicedTrade}.
+     *
+     * @var null|array|ObservationSeries
+     * @since 1.5.0
+     */
+    #[HydrateAs(ObservationSeries::class)]
+    public null|array|ObservationSeries $uninvoicedPurchaseCost ;
 
     /**
      * What was delivered and not yet invoiced, month by month.

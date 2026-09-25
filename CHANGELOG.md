@@ -33,6 +33,21 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- **What was delivered and not invoiced has its purchase cost** —
+  feat(statistics): what was delivered and not invoiced carries its purchase cost (2026-09-25).
+  `HasUninvoicedTrade` gains `uninvoicedPurchaseCost` (constant `UNINVOICED_PURCHASE_COST`, hence
+  `Oihana::UNINVOICED_PURCHASE_COST`) : the purchase cost of `uninvoicedRevenue`, under the same
+  month. It is to `uninvoicedRevenue` what `purchaseCost` is to `revenue`, so the margin on the
+  purchase cost over what was delivered reads from four runs a reader already has — `( revenue +
+  uninvoicedRevenue ) − ( purchaseCost + uninvoicedPurchaseCost )` —, beside the margin on the cost
+  price and never mixed with it ; no margin series comes with it. Transitional and a run only, like
+  the three series beside it ; `SellerStatistics` and `StatisticsSummary` carry it through the trait.
+
+  ⚠️ **Absent is not zero**, as for `uninvoicedCostPrice` : a record may carry `uninvoicedRevenue`
+  without its purchase cost, when its source cannot price what was delivered or when its reader may
+  not see a purchase cost, and a summary adding records with and without it falls short on the cost
+  — said on the property, on `StatisticsSummary` and in the wiki.
+
 - **A customer carries what it owes overdue** —
   feat(organizations): a customer carries what it owes overdue (2026-09-25).
   `Customer` gains `receivables` (constant `RECEIVABLES` in the customer constants trait, hence

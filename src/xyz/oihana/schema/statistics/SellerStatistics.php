@@ -25,12 +25,13 @@ use xyz\oihana\schema\traits\HasUninvoicedTrade;
  *
  * Beside the ten measures, it may carry the trade that is not invoiced yet
  * ({@see HasUninvoicedTrade}) : what was delivered and is still to invoice
- * (`uninvoicedRevenue`) and its cost price (`uninvoicedCostPrice`), and what is
- * ordered and still to deliver (`orderBacklog`). `revenue` only sees a sale once
- * it is invoiced ; these series say how the month stands before that, `revenue`
- * plus `uninvoicedRevenue` is what was delivered, and `costPrice` plus
- * `uninvoicedCostPrice` what it cost. A record whose trade is all invoiced
- * leaves them unset.
+ * (`uninvoicedRevenue`), its cost price (`uninvoicedCostPrice`) and its purchase
+ * cost (`uninvoicedPurchaseCost`), and what is ordered and still to deliver
+ * (`orderBacklog`). `revenue` only sees a sale once it is invoiced ; these series
+ * say how the month stands before that, `revenue` plus `uninvoicedRevenue` is
+ * what was delivered, `costPrice` plus `uninvoicedCostPrice` what it cost, and
+ * `purchaseCost` plus `uninvoicedPurchaseCost` what it was bought for. A record
+ * whose trade is all invoiced leaves them unset.
  *
  * 🔑 **It is written at whatever grain its source attributes.** A source that
  * attributes each sale to one customer publishes one record per customer, named
