@@ -6,6 +6,40 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+### Added
+
+- **2026-10-14** — **A delivery line can be hydrated** — feat(documents): a delivery line can be hydrated.
+  `hydrateDeliveryLine()` joins the family of `hydrateDocumentLine()`,
+  `hydrateAdjustment()` and `hydrateDocumentTotals()` : it takes a single
+  `DeliveryLine` payload or a list of them, and builds each through
+  `Reflection::hydrate()` so the attributes the class declares are honored — the three
+  quantities it reconciles (`orderedQuantity`, `deliveredQuantity`,
+  `backorderQuantity`) and the `weight` and `volume` it takes from
+  `HasPhysicalMeasures` come out as `QuantitativeValue` instead of staying raw arrays.
+
+  🚨 **The list shape is the whole reason it exists.** `DeliveryLine` descends from
+  `Thing`, so a constructor-based hydration folds a whole list into a **single**
+  object : `$lines[0]->position` then answers nothing, and nothing is raised anywhere.
+  A consumer had no way out — chaining an array alteration with a hydration is read as
+  two steps applied one after the other to the whole value, not as one applied to each
+  element.
+
+  🔑 An **empty list stays an empty list**, where the rest of the family answers
+  `null` : « this note has no line » is an answer, and a consumer mapping over the
+  value deserves the empty list it can map over. A **bare reference survives** inside a
+  list, and the keys stay gap-free — a filtered list left with holes serializes as a
+  JSON object.
+
+  🔑 **The `item` union needs no help, and that was measured rather than assumed** :
+  `Reflection::hydrate()` resolves `Product|Service` from the payload's `@type` on its
+  own. The function first delegated it to `hydrateDocumentLineItem()`, like its
+  neighbour ; a mutation removing that delegation changed nothing, so it was left out
+  rather than kept as a line that looks load-bearing and is not.
+
+  ⚠️ **Nothing else moved.** No class is touched, no existing helper is modified : the
+  function is added beside its siblings, so no consumer behaves differently until it
+  calls it.
+
 ### Changed
 
 - **The quality choice of a product is spelled `choice`, not `choise`** —
