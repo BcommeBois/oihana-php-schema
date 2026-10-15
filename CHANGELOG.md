@@ -8,6 +8,26 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- **2026-10-15** — **A mirrored document can say what became of it in its source** — feat(documents): a mirror says why it stopped being refreshed.
+  A mirror (`authority = MIRRORED`) is refreshed by reading its source again. When the source moves the document
+  elsewhere — an order delivered and archived, a quote turned into an order, a row recreated under another
+  identity — the copy is no longer read, and nothing in it says so : it keeps telling the state of its last
+  reading. A list of orders then shows an order delivered last week as one still in progress.
+
+  - **`BusinessDocumentSourceState`**, a new enumeration of the four reasons a harvester can observe :
+    `DELIVERED` (a delivery note cites the order), `CONVERTED` (an order cites the quote), `REPLACED` (another copy
+    carries the same number), `REMOVED` (nothing else tells). 🔑 No value says « current » : **the absence does**,
+    for a copy read on the last refresh as for a document of ours.
+  - **`BusinessDocument::$sourceState`** and **`$sourceStateDate`** — the reason, and the day the harvester noticed
+    it (not the day the source moved the document, which the copy cannot know). Both default to `null`, so a
+    document read before they existed is current.
+  - Orthogonal to `status`, the lifecycle the document states about itself, and to `authority` : only a mirror has
+    a source to leave.
+  - **Docs:** `wiki/{fr,en}/oihana/business-documents.md` — the property and its enumeration.
+  - **Tests:** `BusinessDocumentSourceStateTest` (the four values, `includes()`), `BusinessDocumentTest` (the two
+    constants, absent on a current document, hydrated with its date beside the status). Three mutations — either
+    default removed, a constant misspelt — each turn the suite red.
+
 - **2026-10-14** — **A delivery line can be hydrated** — feat(documents): a delivery line can be hydrated.
   `hydrateDeliveryLine()` joins the family of `hydrateDocumentLine()`,
   `hydrateAdjustment()` and `hydrateDocumentTotals()` : it takes a single

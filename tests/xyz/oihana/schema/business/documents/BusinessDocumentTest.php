@@ -24,6 +24,7 @@ use xyz\oihana\schema\business\documents\TaxDetail;
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\enumerations\BusinessDocumentAuthority;
 use xyz\oihana\schema\enumerations\BusinessDocumentDirection;
+use xyz\oihana\schema\enumerations\BusinessDocumentSourceState;
 use xyz\oihana\schema\enumerations\BusinessDocumentStatus;
 use xyz\oihana\schema\enumerations\DocumentTotalsAccuracy;
 use xyz\oihana\schema\organizations\Customer;
@@ -64,6 +65,8 @@ class BusinessDocumentTest extends TestCase
         $this->assertSame( 'pointOfSale'    , BusinessDocument::POINT_OF_SALE   );
         $this->assertSame( 'references'     , BusinessDocument::REFERENCES      );
         $this->assertSame( 'seller'         , BusinessDocument::SELLER          );
+        $this->assertSame( 'sourceState'     , BusinessDocument::SOURCE_STATE      );
+        $this->assertSame( 'sourceStateDate' , BusinessDocument::SOURCE_STATE_DATE );
         $this->assertSame( 'status'         , BusinessDocument::STATUS          );
         $this->assertSame( 'taxes'          , BusinessDocument::TAXES           );
         $this->assertSame( 'totals'         , BusinessDocument::TOTALS          );
@@ -204,6 +207,43 @@ class BusinessDocumentTest extends TestCase
         $this->assertSame( BusinessDocumentAuthority::MIRRORED , $document->authority ) ;
         $this->assertSame( BusinessDocumentDirection::SALE     , $document->direction ) ;
         $this->assertSame( BusinessDocumentStatus::ACCEPTED    , $document->status    ) ;
+    }
+
+    /**
+     * A document that says nothing about its source is current : read on the last
+     * refresh, or one of ours. Both properties are initialised, so reading them on a
+     * fresh document never fails.
+     * @throws ReflectionException
+     */
+    public function testSourceStateIsAbsentOnACurrentDocument(): void
+    {
+        $document = new BusinessDocument
+        ([
+            BusinessDocument::AUTHORITY => BusinessDocumentAuthority::MIRRORED ,
+        ]);
+
+        $this->assertNull( $document->sourceState     ) ;
+        $this->assertNull( $document->sourceStateDate ) ;
+    }
+
+    /**
+     * A copy its source left says why, and since when — beside the status it is
+     * orthogonal to : an order the source delivered keeps what it said about itself.
+     * @throws ReflectionException
+     */
+    public function testSourceStateHydratesWithItsDate(): void
+    {
+        $document = new BusinessDocument
+        ([
+            BusinessDocument::AUTHORITY         => BusinessDocumentAuthority::MIRRORED ,
+            BusinessDocument::STATUS            => BusinessDocumentStatus::ACCEPTED    ,
+            BusinessDocument::SOURCE_STATE      => BusinessDocumentSourceState::DELIVERED ,
+            BusinessDocument::SOURCE_STATE_DATE => '2026-10-15' ,
+        ]);
+
+        $this->assertSame( BusinessDocumentSourceState::DELIVERED , $document->sourceState     ) ;
+        $this->assertSame( '2026-10-15'                           , $document->sourceStateDate ) ;
+        $this->assertSame( BusinessDocumentStatus::ACCEPTED       , $document->status          ) ;
     }
 
     /**

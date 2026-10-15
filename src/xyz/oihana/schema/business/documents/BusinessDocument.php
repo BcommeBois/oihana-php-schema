@@ -19,6 +19,7 @@ use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\constants\traits\business\documents\BusinessDocumentTrait;
 use xyz\oihana\schema\enumerations\BusinessDocumentAuthority;
 use xyz\oihana\schema\enumerations\BusinessDocumentDirection;
+use xyz\oihana\schema\enumerations\BusinessDocumentSourceState;
 use xyz\oihana\schema\enumerations\BusinessDocumentStatus;
 use xyz\oihana\schema\enumerations\DocumentTotalsAccuracy;
 use xyz\oihana\schema\organizations\Customer;
@@ -73,7 +74,7 @@ class BusinessDocument extends Intangible
      * sales cycle, while the person answering for a given one is the pivot a
      * salesperson's own resources are scoped by (see
      * {@see \xyz\oihana\schema\helpers\pivots\sellerKey()}). Reuses the name,
-     * the shape and the meaning {@see \xyz\oihana\schema\organizations\Customer::$assignedSeller}
+     * the shape and the meaning {@see Customer}
      * already carries for the seller a customer is attached to — a document
      * commonly gets its own from there and then keeps it : a customer reassigned
      * later must not rewrite who took the order.
@@ -257,6 +258,33 @@ class BusinessDocument extends Intangible
      */
     #[HydrateWith(Subsidiary::class, Organization::class, Person::class)]
     public null|array|Organization|Person $seller ;
+
+    /**
+     * What became of this mirrored document in its source, once the source no longer
+     * holds it where the copy was read — delivered, converted, recreated, removed.
+     *
+     * 🔑 **Its absence means the document is current** : read on the last refresh, or
+     * one of ours. A copy the source left keeps telling the state of its last reading,
+     * and nothing else in it says the reading has stopped — this property does.
+     *
+     * Orthogonal to {@see BusinessDocument::$status}, the lifecycle the document states
+     * about itself : an order the source delivered may still say what it said the day
+     * before. And to {@see BusinessDocument::$authority} : only a mirror has a source to
+     * leave.
+     *
+     * @var null|string|BusinessDocumentSourceState
+     * @since 1.5.0
+     */
+    public null|string|BusinessDocumentSourceState $sourceState = null ;
+
+    /**
+     * The day the copy was found to have left its source — when the harvester noticed,
+     * not when the source moved it, which the copy cannot know.
+     *
+     * @var null|string
+     * @since 1.5.0
+     */
+    public ?string $sourceStateDate = null ;
 
     /**
      * The lifecycle status of the document.
