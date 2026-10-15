@@ -8,6 +8,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- **2026-10-15** — **A mirrored order can say it was settled at the counter, or returned** — feat(documents): an order a source settled at the counter or returned says so.
+  Two cases the four first reasons could not tell, and filed under `REMOVED` : an order the source turned into a
+  counter sale — the goods left with the buyer, with a delivery note number but no delivery note to cite — and an
+  order the source turned into a return — the goods came back, or a credit note was issued against it. `REMOVED`
+  said « gone » of documents that had only changed their kind.
+
+  - **`BusinessDocumentSourceState::COUNTER_SALE`** and **`::RETURNED`**. 🔑 `COUNTER_SALE` is kept apart from
+    `DELIVERED` on purpose : `DELIVERED` promises a delivery note citing the order, `COUNTER_SALE` says there is
+    none to look for. « Delivered, one way or another » reads both.
+  - **Docs:** `wiki/{fr,en}/oihana/business-documents.md` — the two reasons beside the four.
+  - **Tests:** `BusinessDocumentSourceStateTest` — the six values and `includes()`.
+
 - **2026-10-15** — **A mirrored document can say what became of it in its source** — feat(documents): a mirror says why it stopped being refreshed.
   A mirror (`authority = MIRRORED`) is refreshed by reading its source again. When the source moves the document
   elsewhere — an order delivered and archived, a quote turned into an order, a row recreated under another
