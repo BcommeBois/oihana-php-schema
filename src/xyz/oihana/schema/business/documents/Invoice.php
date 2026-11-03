@@ -2,10 +2,12 @@
 
 namespace xyz\oihana\schema\business\documents;
 
+use oihana\reflect\attributes\HydrateAs;
 use oihana\reflect\attributes\HydrateWith;
 
 use org\schema\CategoryCode;
 use org\schema\Duration;
+use org\schema\MonetaryAmount;
 use org\schema\Organization;
 use org\schema\Person;
 use org\schema\Thing;
@@ -45,7 +47,17 @@ use xyz\oihana\schema\constants\traits\business\documents\InvoiceTrait;
  * classes ({@see \org\schema\enumerations\status\PaymentComplete},
  * `PaymentDue`, `PaymentDeclined`, `PaymentPastDue`,
  * `PaymentAutomaticallyApplied`) rather than new constants, following the
- * one-class-per-member convention of the `StatusEnumeration` family.
+ * one-class-per-member convention of the `StatusEnumeration` family. The value
+ * is written with the constants of {@see PaymentStatusType} — the schema.org
+ * URL of the term (`https://schema.org/PaymentPastDue`) —, never with the name
+ * of a member class.
+ *
+ * 🔑 **The state of payment is a reading, and it is dated.** The invoice does
+ * not change once issued ; whether it is paid does. `paymentStatus`,
+ * `paymentDueDate`, `totalPaymentDue` (what is left to pay) and
+ * `paymentStatusDate` (the day they were read at their source) travel
+ * together : an amount left to pay without the day it was read cannot tell a
+ * reader whether it still holds.
  *
  * @package xyz\oihana\schema\business\documents
  * @author  Marc Alcaraz (eKameleon)
@@ -100,6 +112,19 @@ class Invoice extends BusinessDocument
     public null|string|PaymentStatusType $paymentStatus ;
 
     /**
+     * The day the state of payment was read at its source — the books, a payment
+     * provider —, as `Y-m-d`.
+     *
+     * It dates {@see Invoice::$paymentStatus}, {@see Invoice::$paymentDueDate} and
+     * {@see Invoice::$totalPaymentDue} together : a payment received after that
+     * day is not in them.
+     *
+     * @var string|null
+     * @since 1.5.0
+     */
+    public ?string $paymentStatusDate ;
+
+    /**
      * The service provider, service operator, or service performer; the goods producer.
      * Another party (a seller) may offer those services or goods on behalf of the provider, who may also serve as the seller.
      * @var null|array|Organization|Person
@@ -140,4 +165,20 @@ class Invoice extends BusinessDocument
      * @var string|int|null
      */
     public null|string|int $scheduledPaymentDate ;
+
+    /**
+     * The total amount left to pay on the invoice, taxes included, as its source
+     * stated it on {@see Invoice::$paymentStatusDate}.
+     *
+     * 🔑 **Not {@see DocumentTotals::$balanceDue}.** The balance of the totals is a
+     * figure of the document itself — the total less the prepaid amount — and does
+     * not move once the invoice is issued. This one moves with every payment, and
+     * may be lower than the total when the invoice is partly paid, or negative
+     * when the buyer is owed money.
+     *
+     * @var null|array|MonetaryAmount
+     * @since 1.5.0
+     */
+    #[HydrateAs(MonetaryAmount::class)]
+    public null|array|MonetaryAmount $totalPaymentDue ;
 }

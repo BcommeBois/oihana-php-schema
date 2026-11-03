@@ -18,8 +18,10 @@ trait InvoiceTrait
     const string CONFIRMATION_NUMBER      = 'confirmationNumber' ;
     const string PAYMENT_DUE_DATE         = 'paymentDueDate' ;
     const string PAYMENT_STATUS           = 'paymentStatus' ;
+    const string PAYMENT_STATUS_DATE      = 'paymentStatusDate' ;
     const string PROVIDER                 = 'provider' ;
     const string REFERENCES_DELIVERY_NOTE = 'referencesDeliveryNote' ;
     const string REFERENCES_ORDER         = 'referencesOrder' ;
     const string SCHEDULED_PAYMENT_DATE   = 'scheduledPaymentDate' ;
+    const string TOTAL_PAYMENT_DUE        = 'totalPaymentDue' ;
 }

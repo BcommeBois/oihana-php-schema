@@ -8,9 +8,11 @@ use ReflectionException;
 use oihana\reflect\Reflection;
 
 use org\schema\CategoryCode;
+use org\schema\MonetaryAmount;
 use org\schema\Organization;
 use org\schema\Person;
 use org\schema\enumerations\status\PaymentComplete;
+use org\schema\enumerations\status\PaymentStatusType;
 
 use xyz\oihana\schema\business\documents\BusinessDocument;
 use xyz\oihana\schema\business\documents\DeliveryNote;
@@ -39,10 +41,12 @@ class InvoiceTest extends TestCase
         $this->assertSame( 'confirmationNumber'     , Invoice::CONFIRMATION_NUMBER      );
         $this->assertSame( 'paymentDueDate'         , Invoice::PAYMENT_DUE_DATE         );
         $this->assertSame( 'paymentStatus'          , Invoice::PAYMENT_STATUS           );
+        $this->assertSame( 'paymentStatusDate'      , Invoice::PAYMENT_STATUS_DATE      );
         $this->assertSame( 'provider'               , Invoice::PROVIDER                 );
         $this->assertSame( 'referencesDeliveryNote' , Invoice::REFERENCES_DELIVERY_NOTE );
         $this->assertSame( 'referencesOrder'        , Invoice::REFERENCES_ORDER         );
         $this->assertSame( 'scheduledPaymentDate'   , Invoice::SCHEDULED_PAYMENT_DATE   );
+        $this->assertSame( 'totalPaymentDue'        , Invoice::TOTAL_PAYMENT_DUE        );
 
         $this->assertSame( Oihana::ACCOUNT_ID , Invoice::ACCOUNT_ID );
         $this->assertSame( Oihana::PROVIDER   , Invoice::PROVIDER   );
@@ -59,10 +63,12 @@ class InvoiceTest extends TestCase
         $this->assertNull( $invoice->confirmationNumber   ?? null );
         $this->assertNull( $invoice->paymentDueDate       ?? null );
         $this->assertNull( $invoice->paymentStatus        ?? null );
+        $this->assertNull( $invoice->paymentStatusDate    ?? null );
         $this->assertNull( $invoice->provider               ?? null );
         $this->assertNull( $invoice->referencesDeliveryNote ?? null );
         $this->assertNull( $invoice->referencesOrder        ?? null );
         $this->assertNull( $invoice->scheduledPaymentDate ?? null );
+        $this->assertNull( $invoice->totalPaymentDue      ?? null );
     }
 
     public function testConstructorHydratesScalarProperties(): void
@@ -90,6 +96,63 @@ class InvoiceTest extends TestCase
         $invoice = new Invoice([ Invoice::PAYMENT_STATUS => PaymentComplete::class ]) ;
 
         $this->assertSame( PaymentComplete::class , $invoice->paymentStatus ) ;
+    }
+
+    /**
+     * The value a status is written with is the schema.org URL of its term — what a
+     * consumer outside PHP filters on.
+     */
+    public function testPaymentStatusIsWrittenWithTheUrlOfItsTerm(): void
+    {
+        $invoice = new Invoice([ Invoice::PAYMENT_STATUS => PaymentStatusType::PAYMENT_PAST_DUE ]) ;
+
+        $this->assertSame( 'https://schema.org/PaymentPastDue' , $invoice->paymentStatus ) ;
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function testReflectionHydratesTotalPaymentDueAsAMonetaryAmount(): void
+    {
+        $invoice = new Reflection()->hydrate
+        (
+            [
+                Invoice::TOTAL_PAYMENT_DUE   => [ 'value' => 1840.2 , 'currency' => 'EUR' ] ,
+                Invoice::PAYMENT_STATUS_DATE => '2026-03-02' ,
+            ],
+            Invoice::class
+        );
+
+        $this->assertInstanceOf( MonetaryAmount::class , $invoice->totalPaymentDue ) ;
+        $this->assertSame( 1840.2 , $invoice->totalPaymentDue->value ) ;
+        $this->assertSame( '2026-03-02' , $invoice->paymentStatusDate ) ;
+    }
+
+    /**
+     * The four properties of payment are written together, and an invoice whose
+     * payment was never read carries none of them.
+     */
+    public function testTheStateOfPaymentSerializesTogetherOrNotAtAll(): void
+    {
+        $read = json_decode( json_encode( new Invoice
+        ([
+            Invoice::PAYMENT_STATUS      => PaymentStatusType::PAYMENT_DUE ,
+            Invoice::PAYMENT_DUE_DATE    => '2026-03-31' ,
+            Invoice::TOTAL_PAYMENT_DUE   => new MonetaryAmount([ 'value' => 1840.2 , 'currency' => 'EUR' ]) ,
+            Invoice::PAYMENT_STATUS_DATE => '2026-03-02' ,
+        ])) , true ) ;
+
+        $this->assertSame( PaymentStatusType::PAYMENT_DUE , $read[ Invoice::PAYMENT_STATUS ] ) ;
+        $this->assertSame( '2026-03-31' , $read[ Invoice::PAYMENT_DUE_DATE ] ) ;
+        $this->assertSame( 1840.2 , $read[ Invoice::TOTAL_PAYMENT_DUE ][ 'value' ] ) ;
+        $this->assertSame( '2026-03-02' , $read[ Invoice::PAYMENT_STATUS_DATE ] ) ;
+
+        $unread = json_decode( json_encode( new Invoice([ Invoice::ACCOUNT_ID => 'ACC-001' ]) ) , true ) ;
+
+        $this->assertArrayNotHasKey( Invoice::PAYMENT_STATUS      , $unread ) ;
+        $this->assertArrayNotHasKey( Invoice::PAYMENT_DUE_DATE    , $unread ) ;
+        $this->assertArrayNotHasKey( Invoice::TOTAL_PAYMENT_DUE   , $unread ) ;
+        $this->assertArrayNotHasKey( Invoice::PAYMENT_STATUS_DATE , $unread ) ;
     }
 
     public function testCategoryAcceptsPlainStringOrCategoryCode(): void

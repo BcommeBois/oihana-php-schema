@@ -8,6 +8,30 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- **2026-11-03** — **An invoice says how much is left to pay, and the day it was read** — feat(documents): an invoice says how much is left to pay, and when it was read.
+  An `Invoice` could say whether it was paid (`paymentStatus`) and when it was due (`paymentDueDate`), but not
+  how much was still owed, nor when that was true. The invoice does not change once issued ; its payment does,
+  and an amount left to pay without the day it was read cannot tell a reader whether it still holds.
+
+  - **`Invoice::$totalPaymentDue`** (`MonetaryAmount`, the schema.org name) — what is left to pay, as the source
+    stated it. 🔑 Not `DocumentTotals::$balanceDue`, a figure of the document (the total less the prepaid
+    amount) that does not move once issued : this one moves with every payment, and may be negative.
+  - **`Invoice::$paymentStatusDate`** — the day the state of payment was read at its source, dating
+    `paymentStatus`, `paymentDueDate` and `totalPaymentDue` together. Named after `sourceState` /
+    `sourceStateDate`.
+  - **`PaymentStatusType` carries its five terms as constants** — `PAYMENT_AUTOMATICALLY_APPLIED`,
+    `PAYMENT_COMPLETE`, `PAYMENT_DECLINED`, `PAYMENT_DUE`, `PAYMENT_PAST_DUE`, the schema.org URL of each term,
+    as `ReservationStatusType` and `EventStatusType` do. A status was written until now with the name of a
+    member class (`org\schema\enumerations\status\PaymentComplete`), a value a consumer outside PHP could only
+    read as a PHP namespace. The member classes stay.
+  - **Docs:** `wiki/{fr,en}/oihana/business-documents.md` — the two properties on `Invoice`, and the example
+    written with the constant. Its output is now the one the exporter writes : it also carries the four
+    properties declared `= null` by default (`authority`, `sourceState`, `sourceStateDate`,
+    `totalsAccuracy`), which the comment had left out.
+  - **Tests:** `PaymentStatusTypeTest` (new) — each member serializes to the term its constant names ;
+    `InvoiceTest` — the two constants, hydration of `totalPaymentDue`, the four properties of payment serialized
+    together or not at all.
+
 - **2026-10-15** — **A mirrored order can say it was settled at the counter, or returned** — feat(documents): an order a source settled at the counter or returned says so.
   Two cases the four first reasons could not tell, and filed under `REMOVED` : an order the source turned into a
   counter sale — the goods left with the buyer, with a delivery note number but no delivery note to cite — and an
