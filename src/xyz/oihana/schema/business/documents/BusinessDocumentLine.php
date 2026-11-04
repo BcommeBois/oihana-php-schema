@@ -5,7 +5,6 @@ namespace xyz\oihana\schema\business\documents;
 use oihana\reflect\attributes\HydrateAs;
 use oihana\reflect\attributes\HydrateWith;
 
-use org\schema\CompoundPriceSpecification;
 use org\schema\DefinedTerm;
 use org\schema\MonetaryAmount;
 use org\schema\PriceSpecification;
@@ -14,7 +13,6 @@ use org\schema\PropertyValue;
 use org\schema\QuantitativeValue;
 use org\schema\Service;
 use org\schema\StructuredValue;
-use org\schema\UnitPriceSpecification;
 
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\constants\traits\business\documents\BusinessDocumentLineTrait;
@@ -131,6 +129,12 @@ class BusinessDocumentLine extends StructuredValue
      * A raw payload is hydrated into a {@see CompoundPriceSpecification}, so a
      * unit price can be broken down into the {@see UnitPriceSpecification}
      * components applying in parallel (base price, eco-fee, deposit...).
+     *
+     * Both are the document classes, not the schema.org ones they extend : a
+     * component can say the document does not print it
+     * ({@see UnitPriceSpecification::$printed}), and a raw payload hydrated with
+     * the schema.org classes would lose that flag. They keep their parents'
+     * short names, so the `@type` a price serializes with is unchanged.
      *
      * @var MonetaryAmount|PriceSpecification|array|null
      */

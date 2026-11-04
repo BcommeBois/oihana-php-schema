@@ -17,7 +17,9 @@ use org\schema\UnitPriceSpecification;
 
 use xyz\oihana\schema\business\documents\Adjustment;
 use xyz\oihana\schema\business\documents\BusinessDocumentLine;
+use xyz\oihana\schema\business\documents\CompoundPriceSpecification as DocumentCompoundPriceSpecification;
 use xyz\oihana\schema\business\documents\TaxDetail;
+use xyz\oihana\schema\business\documents\UnitPriceSpecification as DocumentUnitPriceSpecification;
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\enumerations\QuantityOrigin;
 use xyz\oihana\schema\enumerations\UnitOfSaleType;
@@ -445,6 +447,41 @@ class BusinessDocumentLineTest extends TestCase
         $this->assertSame( 'CompoundPriceSpecification' , $json[ 'price' ][ '@type' ] ) ;
         $this->assertEquals( 20.0 , $json[ 'price' ][ 'price'         ] ) ;
         $this->assertSame( 'EUR'  , $json[ 'price' ][ 'priceCurrency' ] ) ;
+    }
+
+    /**
+     * A price folded into the printed one : the price the customer read, then
+     * the list price and the discount it was reached from, marked unprinted.
+     * Hydrated with the schema.org classes, the mark would be lost.
+     *
+     * @throws ReflectionException
+     */
+    public function testReflectionKeepsTheUnprintedComponents(): void
+    {
+        $line = new Reflection()->hydrate
+        (
+            [
+                BusinessDocumentLine::PRICE =>
+                [
+                    'priceComponent' =>
+                    [
+                        [ 'price' => 36.0 , 'priceCurrency' => 'EUR' ] ,
+                        [ 'price' => 40.0 , 'priceCurrency' => 'EUR' , DocumentUnitPriceSpecification::PRINTED => false ] ,
+                        [ 'price' => 10.0 , 'unitCode' => 'P1' , DocumentUnitPriceSpecification::PRINTED => false ] ,
+                    ] ,
+                ] ,
+            ],
+            BusinessDocumentLine::class
+        );
+
+        $this->assertInstanceOf( DocumentCompoundPriceSpecification::class , $line->price ) ;
+        $this->assertContainsOnlyInstancesOf( DocumentUnitPriceSpecification::class , $line->price->priceComponent ) ;
+
+        $json = json_decode( json_encode( $line ) , true ) ;
+
+        $this->assertArrayNotHasKey( DocumentUnitPriceSpecification::PRINTED , $json[ 'price' ][ 'priceComponent' ][ 0 ] ) ;
+        $this->assertFalse( $json[ 'price' ][ 'priceComponent' ][ 1 ][ DocumentUnitPriceSpecification::PRINTED ] ) ;
+        $this->assertFalse( $json[ 'price' ][ 'priceComponent' ][ 2 ][ DocumentUnitPriceSpecification::PRINTED ] ) ;
     }
 
     // ---- HasPhysicalMeasures

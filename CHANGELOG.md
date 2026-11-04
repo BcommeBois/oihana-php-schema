@@ -8,6 +8,25 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- **2026-11-04** — **A line price says which of its components the document prints** — feat(documents): a line price says which of its components the document prints.
+  A source may fold a discount into the price it prints : the customer reads a single net price, while the list
+  price and the discount it was reached from stay on record. A line could carry both truths, but not tell them
+  apart : its price hydrated into the schema.org classes, which have no room for the difference and dropped any
+  key saying it.
+
+  - **`xyz\oihana\schema\business\documents\UnitPriceSpecification`** — the schema.org class plus **`printed`** :
+    whether the document the customer receives prints the component. 🔑 **Its absence means it is printed** ; only
+    a component left out says so, with `false`, and an unmarked component serializes without the key.
+  - **`xyz\oihana\schema\business\documents\CompoundPriceSpecification`** — the schema.org class, its
+    `priceComponent` hydrated into the class above. `BusinessDocumentLine::$price` now hydrates into it.
+  - 🔑 Both keep their parents' short names : a line price and its components serialize with the same `@type` as
+    before. Their `@context` becomes `https://schema.oihana.xyz`, as for every class of the namespace.
+  - **`UnitPriceSpecificationTrait`** — the `PRINTED` constant, also reachable as `Oihana::PRINTED`.
+  - **Docs:** `wiki/{fr,en}/oihana/business-documents.md` — the two classes in the catalog, and the price of
+    `BusinessDocumentLine`.
+  - **Tests:** `UnitPriceSpecificationTest`, `CompoundPriceSpecificationTest` (new) — the flag, its absence when
+    printed, the `@type` kept ; `BusinessDocumentLineTest` — a line keeps its unprinted components.
+
 - **2026-11-03** — **An invoice says how much is left to pay, and the day it was read** — feat(documents): an invoice says how much is left to pay, and when it was read.
   An `Invoice` could say whether it was paid (`paymentStatus`) and when it was due (`paymentDueDate`), but not
   how much was still owed, nor when that was true. The invoice does not change once issued ; its payment does,

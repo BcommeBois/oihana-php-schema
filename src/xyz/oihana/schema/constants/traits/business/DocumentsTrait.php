@@ -27,6 +27,7 @@ use xyz\oihana\schema\constants\traits\business\documents\RemittanceAdviceTrait;
 use xyz\oihana\schema\constants\traits\business\documents\StatementEntryTrait;
 use xyz\oihana\schema\constants\traits\business\documents\StatementTrait;
 use xyz\oihana\schema\constants\traits\business\documents\TaxDetailTrait;
+use xyz\oihana\schema\constants\traits\business\documents\UnitPriceSpecificationTrait;
 
 /**
  * The enumeration of all business-document properties.
@@ -61,5 +62,6 @@ trait DocumentsTrait
         RemittanceAdviceTrait           ,
         StatementEntryTrait             ,
         StatementTrait                  ,
-        TaxDetailTrait                  ;
+        TaxDetailTrait                  ,
+        UnitPriceSpecificationTrait     ;
 }
