@@ -8,6 +8,24 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- **2026-11-04** — **A document line says which delivery note shipped it and which order it comes from** — feat(documents): a line names its delivery note and its order.
+  An invoice settling several delivery notes is commonly printed note by note, each block under the heading of
+  its note, then order by order within a note. The invoice listed its notes and its orders, but a line could not
+  say which of them it belongs to : sorted in the printed order, an invoice still left a reader unable to tell
+  where a block begins.
+
+  - **`BusinessDocumentLine::$referencesDeliveryNote`** (→ `DeliveryNote`) and **`$referencesOrder`**
+    (→ `PurchaseOrder`) — the note that shipped the line, and the order it comes from. A reader groups the
+    consecutive lines sharing a note, and reads the heading of each block from `Invoice::$referencesDeliveryNote`.
+  - ⚠️ The two are read together : one order can be delivered by two notes, and one note can deliver two orders.
+  - 🔑 Absent unless stated — a quote line or an order line has no note, and serializes without the keys. A bare
+    key is left as read, a joined row resolves into its class, as on `DeliveryLine`.
+  - **`BusinessDocumentLineTrait`** — the `REFERENCES_DELIVERY_NOTE` and `REFERENCES_ORDER` constants, with the
+    same values as on `InvoiceTrait`.
+  - **Docs:** `wiki/{fr,en}/oihana/business-documents.md` — the two properties in the `BusinessDocumentLine` entry.
+  - **Tests:** `BusinessDocumentLineTest` — the constants and their match with `Invoice`, a bare key, a raw row,
+    the resolved classes, the keys absent from a line that does not state them.
+
 - **2026-11-04** — **A line price says which of its components the document prints** — feat(documents): a line price says which of its components the document prints.
   A source may fold a discount into the price it prints : the customer reads a single net price, while the list
   price and the discount it was reached from stay on record. A line could carry both truths, but not tell them

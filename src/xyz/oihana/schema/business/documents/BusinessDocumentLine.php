@@ -184,6 +184,47 @@ class BusinessDocumentLine extends StructuredValue
     public null|string|QuantityOrigin $quantityOrigin = null ;
 
     /**
+     * The delivery note that shipped the goods this line bills.
+     *
+     * 🔑 **What lets an invoice be read in the blocks it is printed in.** An
+     * invoice settling several notes is commonly printed note by note, each
+     * block under the heading of its note. The invoice lists its notes
+     * ({@see Invoice::$referencesDeliveryNote}), but only the line can say which
+     * one it belongs to : a reader groups the consecutive lines sharing the same
+     * note, and reads the heading of each block from the invoice's own list.
+     *
+     * A line written before its goods left — on a quote, on an order — has no
+     * note, and leaves the property absent.
+     *
+     * The sibling of {@see BusinessDocumentLine::$referencesOrder}. The union
+     * names a single class, so {@see \oihana\reflect\Reflection::hydrate()}
+     * resolves a joined row on its own, while a bare key is left as read.
+     *
+     * @var null|array|string|DeliveryNote
+     * @since 1.5.0
+     */
+    public null|array|string|DeliveryNote $referencesDeliveryNote ;
+
+    /**
+     * The purchase order this line comes from.
+     *
+     * Within the block of a delivery note, a note carrying the goods of several
+     * orders is printed order by order, and this is what tells them apart.
+     *
+     * ⚠️ **Read with {@see BusinessDocumentLine::$referencesDeliveryNote}, never
+     * in its place.** One order can be delivered by two notes, and one note can
+     * deliver two orders : neither reference alone says which block a line
+     * belongs to.
+     *
+     * Holds the raw reference as read from the source, or the resolved
+     * {@see PurchaseOrder}, by the same rule as its sibling.
+     *
+     * @var null|array|string|PurchaseOrder
+     * @since 1.5.0
+     */
+    public null|array|string|PurchaseOrder $referencesOrder ;
+
+    /**
      * The heading this line belongs to, when the document is written in
      * chapters — « roof frame », « oak flooring », « laying ».
      *

@@ -11,22 +11,24 @@ namespace xyz\oihana\schema\constants\traits\business\documents;
  */
 trait BusinessDocumentLineTrait
 {
-    const string ADDITIONAL_PROPERTY = 'additionalProperty' ;
-    const string ADJUSTMENTS         = 'adjustments' ;
-    const string COLOR               = 'color' ;
-    const string FREE_REASON         = 'freeReason' ;
-    const string INCLUDED_IN_TOTAL   = 'includedInTotal' ;
-    const string ITEM                = 'item' ;
-    const string POSITION            = 'position' ;
-    const string PRICE               = 'price' ;
-    const string QUANTITY            = 'quantity' ;
-    const string QUANTITY_ORIGIN     = 'quantityOrigin' ;
-    const string SECTION             = 'section' ;
-    const string SUBTOTAL            = 'subtotal' ;
-    const string TAXES               = 'taxes' ;
-    const string TECHNICAL_NOTE      = 'technicalNote' ;
-    const string TOTAL               = 'total' ;
-    const string UNIT                = 'unit' ;
-    const string VOLUME              = 'volume' ;
-    const string WEIGHT              = 'weight' ;
+    const string ADDITIONAL_PROPERTY      = 'additionalProperty' ;
+    const string ADJUSTMENTS              = 'adjustments' ;
+    const string COLOR                    = 'color' ;
+    const string FREE_REASON              = 'freeReason' ;
+    const string INCLUDED_IN_TOTAL        = 'includedInTotal' ;
+    const string ITEM                     = 'item' ;
+    const string POSITION                 = 'position' ;
+    const string PRICE                    = 'price' ;
+    const string QUANTITY                 = 'quantity' ;
+    const string QUANTITY_ORIGIN          = 'quantityOrigin' ;
+    const string REFERENCES_DELIVERY_NOTE = 'referencesDeliveryNote' ;
+    const string REFERENCES_ORDER         = 'referencesOrder' ;
+    const string SECTION                  = 'section' ;
+    const string SUBTOTAL                 = 'subtotal' ;
+    const string TAXES                    = 'taxes' ;
+    const string TECHNICAL_NOTE           = 'technicalNote' ;
+    const string TOTAL                    = 'total' ;
+    const string UNIT                     = 'unit' ;
+    const string VOLUME                   = 'volume' ;
+    const string WEIGHT                   = 'weight' ;
 }

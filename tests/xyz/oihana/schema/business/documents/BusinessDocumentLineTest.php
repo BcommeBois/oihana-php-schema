@@ -18,6 +18,9 @@ use org\schema\UnitPriceSpecification;
 use xyz\oihana\schema\business\documents\Adjustment;
 use xyz\oihana\schema\business\documents\BusinessDocumentLine;
 use xyz\oihana\schema\business\documents\CompoundPriceSpecification as DocumentCompoundPriceSpecification;
+use xyz\oihana\schema\business\documents\DeliveryNote;
+use xyz\oihana\schema\business\documents\Invoice;
+use xyz\oihana\schema\business\documents\PurchaseOrder;
 use xyz\oihana\schema\business\documents\TaxDetail;
 use xyz\oihana\schema\business\documents\UnitPriceSpecification as DocumentUnitPriceSpecification;
 use xyz\oihana\schema\constants\Oihana;
@@ -38,50 +41,67 @@ class BusinessDocumentLineTest extends TestCase
 
     public function testTraitConstants(): void
     {
-        $this->assertSame( 'additionalProperty' , BusinessDocumentLine::ADDITIONAL_PROPERTY );
-        $this->assertSame( 'adjustments'        , BusinessDocumentLine::ADJUSTMENTS         );
-        $this->assertSame( 'color'              , BusinessDocumentLine::COLOR               );
-        $this->assertSame( 'freeReason'         , BusinessDocumentLine::FREE_REASON         );
-        $this->assertSame( 'includedInTotal'    , BusinessDocumentLine::INCLUDED_IN_TOTAL   );
-        $this->assertSame( 'item'               , BusinessDocumentLine::ITEM                );
-        $this->assertSame( 'position'           , BusinessDocumentLine::POSITION            );
-        $this->assertSame( 'price'              , BusinessDocumentLine::PRICE               );
-        $this->assertSame( 'quantity'           , BusinessDocumentLine::QUANTITY            );
-        $this->assertSame( 'quantityOrigin'     , BusinessDocumentLine::QUANTITY_ORIGIN     );
-        $this->assertSame( 'section'            , BusinessDocumentLine::SECTION             );
-        $this->assertSame( 'subtotal'           , BusinessDocumentLine::SUBTOTAL            );
-        $this->assertSame( 'taxes'              , BusinessDocumentLine::TAXES               );
-        $this->assertSame( 'technicalNote'      , BusinessDocumentLine::TECHNICAL_NOTE      );
-        $this->assertSame( 'total'              , BusinessDocumentLine::TOTAL               );
-        $this->assertSame( 'unit'               , BusinessDocumentLine::UNIT                );
-        $this->assertSame( 'volume'             , BusinessDocumentLine::VOLUME              );
-        $this->assertSame( 'weight'             , BusinessDocumentLine::WEIGHT              );
+        $this->assertSame( 'additionalProperty'     , BusinessDocumentLine::ADDITIONAL_PROPERTY      );
+        $this->assertSame( 'adjustments'            , BusinessDocumentLine::ADJUSTMENTS              );
+        $this->assertSame( 'color'                  , BusinessDocumentLine::COLOR                    );
+        $this->assertSame( 'freeReason'             , BusinessDocumentLine::FREE_REASON              );
+        $this->assertSame( 'includedInTotal'        , BusinessDocumentLine::INCLUDED_IN_TOTAL        );
+        $this->assertSame( 'item'                   , BusinessDocumentLine::ITEM                     );
+        $this->assertSame( 'position'               , BusinessDocumentLine::POSITION                 );
+        $this->assertSame( 'price'                  , BusinessDocumentLine::PRICE                    );
+        $this->assertSame( 'quantity'               , BusinessDocumentLine::QUANTITY                 );
+        $this->assertSame( 'quantityOrigin'         , BusinessDocumentLine::QUANTITY_ORIGIN          );
+        $this->assertSame( 'referencesDeliveryNote' , BusinessDocumentLine::REFERENCES_DELIVERY_NOTE );
+        $this->assertSame( 'referencesOrder'        , BusinessDocumentLine::REFERENCES_ORDER         );
+        $this->assertSame( 'section'                , BusinessDocumentLine::SECTION                  );
+        $this->assertSame( 'subtotal'               , BusinessDocumentLine::SUBTOTAL                 );
+        $this->assertSame( 'taxes'                  , BusinessDocumentLine::TAXES                    );
+        $this->assertSame( 'technicalNote'          , BusinessDocumentLine::TECHNICAL_NOTE           );
+        $this->assertSame( 'total'                  , BusinessDocumentLine::TOTAL                    );
+        $this->assertSame( 'unit'                   , BusinessDocumentLine::UNIT                     );
+        $this->assertSame( 'volume'                 , BusinessDocumentLine::VOLUME                   );
+        $this->assertSame( 'weight'                 , BusinessDocumentLine::WEIGHT                   );
 
         $this->assertSame( Oihana::ADJUSTMENTS , BusinessDocumentLine::ADJUSTMENTS );
+    }
+
+    /**
+     * A line and its invoice name the same references with the same words :
+     * a reader learns the key once, and the constants of the two traits meet
+     * in the umbrella trait without a conflict.
+     */
+    public function testTheReferencesShareTheirNamesWithTheInvoice(): void
+    {
+        $this->assertSame( Invoice::REFERENCES_DELIVERY_NOTE , BusinessDocumentLine::REFERENCES_DELIVERY_NOTE ) ;
+        $this->assertSame( Invoice::REFERENCES_ORDER         , BusinessDocumentLine::REFERENCES_ORDER         ) ;
+        $this->assertSame( Oihana::REFERENCES_DELIVERY_NOTE  , BusinessDocumentLine::REFERENCES_DELIVERY_NOTE ) ;
+        $this->assertSame( Oihana::REFERENCES_ORDER          , BusinessDocumentLine::REFERENCES_ORDER         ) ;
     }
 
     public function testDefaults(): void
     {
         $line = new BusinessDocumentLine() ;
 
-        $this->assertNull( $line->additionalProperty ?? null );
-        $this->assertNull( $line->adjustments        ?? null );
-        $this->assertNull( $line->color              ?? null );
-        $this->assertNull( $line->freeReason         ?? null );
-        $this->assertNull( $line->includedInTotal    ?? null );
-        $this->assertNull( $line->item               ?? null );
-        $this->assertNull( $line->position           ?? null );
-        $this->assertNull( $line->price              ?? null );
-        $this->assertNull( $line->quantity           ?? null );
-        $this->assertNull( $line->quantityOrigin     ?? null );
-        $this->assertNull( $line->section            ?? null );
-        $this->assertNull( $line->subtotal           ?? null );
-        $this->assertNull( $line->taxes              ?? null );
-        $this->assertNull( $line->technicalNote      ?? null );
-        $this->assertNull( $line->total              ?? null );
-        $this->assertNull( $line->unit               ?? null );
-        $this->assertNull( $line->volume             ?? null );
-        $this->assertNull( $line->weight             ?? null );
+        $this->assertNull( $line->additionalProperty     ?? null );
+        $this->assertNull( $line->adjustments            ?? null );
+        $this->assertNull( $line->color                  ?? null );
+        $this->assertNull( $line->freeReason             ?? null );
+        $this->assertNull( $line->includedInTotal        ?? null );
+        $this->assertNull( $line->item                   ?? null );
+        $this->assertNull( $line->position               ?? null );
+        $this->assertNull( $line->price                  ?? null );
+        $this->assertNull( $line->quantity               ?? null );
+        $this->assertNull( $line->quantityOrigin         ?? null );
+        $this->assertNull( $line->referencesDeliveryNote ?? null );
+        $this->assertNull( $line->referencesOrder        ?? null );
+        $this->assertNull( $line->section                ?? null );
+        $this->assertNull( $line->subtotal               ?? null );
+        $this->assertNull( $line->taxes                  ?? null );
+        $this->assertNull( $line->technicalNote          ?? null );
+        $this->assertNull( $line->total                  ?? null );
+        $this->assertNull( $line->unit                   ?? null );
+        $this->assertNull( $line->volume                 ?? null );
+        $this->assertNull( $line->weight                 ?? null );
     }
 
     /**
@@ -229,6 +249,89 @@ class BusinessDocumentLineTest extends TestCase
 
         $this->assertSame( QuantityOrigin::CALCULATED , $computed->quantityOrigin ) ;
         $this->assertSame( QuantityOrigin::ENTERED    , $typed->quantityOrigin    ) ;
+    }
+
+    /**
+     * A bare key is left as read : the reference of a note or of an order is
+     * often all a source gives about it.
+     *
+     * @throws ReflectionException
+     */
+    public function testTheReferencesKeepABareKey(): void
+    {
+        $line = new BusinessDocumentLine
+        ([
+            BusinessDocumentLine::POSITION                 => 1             ,
+            BusinessDocumentLine::REFERENCES_DELIVERY_NOTE => 'DN-2026-0412' ,
+            BusinessDocumentLine::REFERENCES_ORDER         => 'CDE-1148902'  ,
+        ]);
+
+        $this->assertSame( 'DN-2026-0412' , $line->referencesDeliveryNote ) ;
+        $this->assertSame( 'CDE-1148902'  , $line->referencesOrder        ) ;
+    }
+
+    /**
+     * The constructor assigns raw : a row naming the note and the order sits in
+     * the properties until `Reflection::hydrate()` resolves it.
+     *
+     * @throws ReflectionException
+     */
+    public function testConstructorKeepsTheReferencesAsRawArrays(): void
+    {
+        $line = new BusinessDocumentLine
+        ([
+            BusinessDocumentLine::REFERENCES_DELIVERY_NOTE => [ 'id' => 'DN-2026-0412' ] ,
+            BusinessDocumentLine::REFERENCES_ORDER         => [ 'id' => 'CDE-1148902'  ] ,
+        ]);
+
+        $this->assertIsArray( $line->referencesDeliveryNote ) ;
+        $this->assertIsArray( $line->referencesOrder        ) ;
+        $this->assertSame( 'DN-2026-0412' , $line->referencesDeliveryNote[ 'id' ] ) ;
+        $this->assertSame( 'CDE-1148902'  , $line->referencesOrder[ 'id' ]        ) ;
+    }
+
+    /**
+     * Each union names a single class, so a row resolves on its own : the note
+     * into a `DeliveryNote`, the order into a `PurchaseOrder`.
+     *
+     * @throws ReflectionException
+     */
+    public function testReflectionResolvesTheDeliveryNoteAndTheOrder(): void
+    {
+        $line = new Reflection()->hydrate
+        (
+            [
+                BusinessDocumentLine::REFERENCES_DELIVERY_NOTE => [ 'id' => 'DN-2026-0412' ] ,
+                BusinessDocumentLine::REFERENCES_ORDER         => [ 'id' => 'CDE-1148902'  ] ,
+            ],
+            BusinessDocumentLine::class
+        );
+
+        $this->assertInstanceOf( DeliveryNote::class  , $line->referencesDeliveryNote ) ;
+        $this->assertInstanceOf( PurchaseOrder::class , $line->referencesOrder        ) ;
+        $this->assertSame( 'DN-2026-0412' , $line->referencesDeliveryNote->id ) ;
+        $this->assertSame( 'CDE-1148902'  , $line->referencesOrder->id        ) ;
+    }
+
+    /**
+     * A line that names no note — a quote line, an order line — serializes
+     * without the keys, rather than with a `null` a reader could take for a
+     * line delivered by nothing.
+     *
+     * @throws ReflectionException
+     */
+    public function testTheReferencesAreAbsentFromALineThatDoesNotStateThem(): void
+    {
+        $line = new BusinessDocumentLine
+        ([
+            BusinessDocumentLine::POSITION => 1 ,
+            BusinessDocumentLine::QUANTITY => 5 ,
+        ]);
+
+        $json = json_decode( json_encode( $line ) , true ) ;
+
+        $this->assertArrayNotHasKey( BusinessDocumentLine::REFERENCES_DELIVERY_NOTE , $json ) ;
+        $this->assertArrayNotHasKey( BusinessDocumentLine::REFERENCES_ORDER         , $json ) ;
     }
 
     /**
