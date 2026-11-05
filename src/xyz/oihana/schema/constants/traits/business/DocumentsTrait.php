@@ -15,6 +15,7 @@ use xyz\oihana\schema\constants\traits\business\documents\DocumentTotalsTrait;
 use xyz\oihana\schema\constants\traits\business\documents\EcoFeeRuleTrait;
 use xyz\oihana\schema\constants\traits\business\documents\GoodsReceiptConfirmationTrait;
 use xyz\oihana\schema\constants\traits\business\documents\GoodsReceiptLineTrait;
+use xyz\oihana\schema\constants\traits\business\documents\HasLineCostsTrait;
 use xyz\oihana\schema\constants\traits\business\documents\InvoiceTrait;
 use xyz\oihana\schema\constants\traits\business\documents\PaymentInstallmentTrait;
 use xyz\oihana\schema\constants\traits\business\documents\PaymentReminderTrait;
@@ -51,6 +52,7 @@ trait DocumentsTrait
         EcoFeeRuleTrait                 ,
         GoodsReceiptConfirmationTrait   ,
         GoodsReceiptLineTrait           ,
+        HasLineCostsTrait               ,
         InvoiceTrait                    ,
         PaymentInstallmentTrait         ,
         PaymentReminderTrait            ,

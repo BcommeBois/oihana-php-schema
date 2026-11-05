@@ -26,6 +26,7 @@ use xyz\oihana\schema\business\documents\UnitPriceSpecification as DocumentUnitP
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\enumerations\QuantityOrigin;
 use xyz\oihana\schema\enumerations\UnitOfSaleType;
+use xyz\oihana\schema\statistics\ProductStatistics;
 
 class BusinessDocumentLineTest extends TestCase
 {
@@ -44,6 +45,7 @@ class BusinessDocumentLineTest extends TestCase
         $this->assertSame( 'additionalProperty'     , BusinessDocumentLine::ADDITIONAL_PROPERTY      );
         $this->assertSame( 'adjustments'            , BusinessDocumentLine::ADJUSTMENTS              );
         $this->assertSame( 'color'                  , BusinessDocumentLine::COLOR                    );
+        $this->assertSame( 'costPrice'              , BusinessDocumentLine::COST_PRICE               );
         $this->assertSame( 'freeReason'             , BusinessDocumentLine::FREE_REASON              );
         $this->assertSame( 'includedInTotal'        , BusinessDocumentLine::INCLUDED_IN_TOTAL        );
         $this->assertSame( 'item'                   , BusinessDocumentLine::ITEM                     );
@@ -59,6 +61,8 @@ class BusinessDocumentLineTest extends TestCase
         $this->assertSame( 'technicalNote'          , BusinessDocumentLine::TECHNICAL_NOTE           );
         $this->assertSame( 'total'                  , BusinessDocumentLine::TOTAL                    );
         $this->assertSame( 'unit'                   , BusinessDocumentLine::UNIT                     );
+        $this->assertSame( 'unitCostPrice'          , BusinessDocumentLine::UNIT_COST_PRICE          );
+        $this->assertSame( 'unitPurchasePrice'      , BusinessDocumentLine::UNIT_PURCHASE_PRICE      );
         $this->assertSame( 'volume'                 , BusinessDocumentLine::VOLUME                   );
         $this->assertSame( 'weight'                 , BusinessDocumentLine::WEIGHT                   );
 
@@ -85,6 +89,7 @@ class BusinessDocumentLineTest extends TestCase
         $this->assertNull( $line->additionalProperty     ?? null );
         $this->assertNull( $line->adjustments            ?? null );
         $this->assertNull( $line->color                  ?? null );
+        $this->assertNull( $line->costPrice              ?? null );
         $this->assertNull( $line->freeReason             ?? null );
         $this->assertNull( $line->includedInTotal        ?? null );
         $this->assertNull( $line->item                   ?? null );
@@ -100,6 +105,8 @@ class BusinessDocumentLineTest extends TestCase
         $this->assertNull( $line->technicalNote          ?? null );
         $this->assertNull( $line->total                  ?? null );
         $this->assertNull( $line->unit                   ?? null );
+        $this->assertNull( $line->unitCostPrice          ?? null );
+        $this->assertNull( $line->unitPurchasePrice      ?? null );
         $this->assertNull( $line->volume                 ?? null );
         $this->assertNull( $line->weight                 ?? null );
     }
@@ -670,5 +677,114 @@ class BusinessDocumentLineTest extends TestCase
 
         $this->assertSame( 537.6 , $line->weight ) ;
         $this->assertNull( $line->volume ?? null ) ;
+    }
+
+    /**
+     * The cost of a whole line and the cost of a body of trades are named alike :
+     * `costPrice` is an amount wherever it is met, and the constants of the two
+     * traits meet in the umbrella trait without a conflict.
+     */
+    public function testTheCostPriceSharesItsNameWithTheTradingMeasures(): void
+    {
+        $this->assertSame( ProductStatistics::COST_PRICE , BusinessDocumentLine::COST_PRICE ) ;
+        $this->assertSame( Oihana::COST_PRICE            , BusinessDocumentLine::COST_PRICE ) ;
+        $this->assertSame( Oihana::UNIT_COST_PRICE       , BusinessDocumentLine::UNIT_COST_PRICE ) ;
+        $this->assertSame( Oihana::UNIT_PURCHASE_PRICE   , BusinessDocumentLine::UNIT_PURCHASE_PRICE ) ;
+    }
+
+    /**
+     * The constructor assigns raw : the three costs sit as read until
+     * `Reflection::hydrate()` resolves them.
+     *
+     * @throws ReflectionException
+     */
+    public function testConstructorKeepsTheCostsAsRawArrays(): void
+    {
+        $line = new BusinessDocumentLine
+        ([
+            BusinessDocumentLine::COST_PRICE          => [ 'value' => 1284.88 , 'currency' => 'EUR' ] ,
+            BusinessDocumentLine::UNIT_COST_PRICE     => [ 'price' => 25.40 , 'priceCurrency' => 'EUR' , 'unitCode' => 'MTK' ] ,
+            BusinessDocumentLine::UNIT_PURCHASE_PRICE => [ 'price' => 24.10 , 'priceCurrency' => 'EUR' , 'unitCode' => 'MTK' ] ,
+        ]);
+
+        $this->assertIsArray( $line->costPrice         ) ;
+        $this->assertIsArray( $line->unitCostPrice     ) ;
+        $this->assertIsArray( $line->unitPurchasePrice ) ;
+        $this->assertSame( 1284.88 , $line->costPrice[ 'value' ] ) ;
+    }
+
+    /**
+     * The costs are declared by {@see \xyz\oihana\schema\traits\HasLineCosts} :
+     * a row resolves into the classes the trait names, the amount into a
+     * `MonetaryAmount`, the two unit prices into `UnitPriceSpecification`s.
+     *
+     * @throws ReflectionException
+     */
+    public function testReflectionHydratesTheCosts(): void
+    {
+        $line = new Reflection()->hydrate
+        (
+            [
+                BusinessDocumentLine::COST_PRICE          => [ 'value' => 1284.88 , 'currency' => 'EUR' ] ,
+                BusinessDocumentLine::UNIT_COST_PRICE     => [ 'price' => 25.40 , 'priceCurrency' => 'EUR' , 'unitCode' => 'MTK' ] ,
+                BusinessDocumentLine::UNIT_PURCHASE_PRICE => [ 'price' => 24.10 , 'priceCurrency' => 'EUR' , 'unitCode' => 'MTK' ] ,
+            ],
+            BusinessDocumentLine::class
+        );
+
+        $this->assertInstanceOf( MonetaryAmount::class         , $line->costPrice         ) ;
+        $this->assertInstanceOf( UnitPriceSpecification::class , $line->unitCostPrice     ) ;
+        $this->assertInstanceOf( UnitPriceSpecification::class , $line->unitPurchasePrice ) ;
+
+        $this->assertSame( 1284.88 , $line->costPrice->value             ) ;
+        $this->assertSame( 'EUR'   , $line->costPrice->currency          ) ;
+        $this->assertSame( 25.40   , $line->unitCostPrice->price         ) ;
+        $this->assertSame( 'MTK'   , $line->unitCostPrice->unitCode      ) ;
+        $this->assertSame( 24.10   , $line->unitPurchasePrice->price     ) ;
+    }
+
+    /**
+     * A line that discloses no cost — none is known, or the reader may not see
+     * it — serializes without the keys, rather than with a `null` or a zero a
+     * reader could take for a whole margin.
+     *
+     * @throws ReflectionException
+     */
+    public function testTheCostsAreAbsentFromALineThatDoesNotStateThem(): void
+    {
+        $line = new BusinessDocumentLine
+        ([
+            BusinessDocumentLine::POSITION => 1 ,
+            BusinessDocumentLine::SUBTOTAL => [ 'value' => 1525.00 , 'currency' => 'EUR' ] ,
+        ]);
+
+        $json = json_decode( json_encode( $line ) , true ) ;
+
+        $this->assertArrayNotHasKey( BusinessDocumentLine::COST_PRICE          , $json ) ;
+        $this->assertArrayNotHasKey( BusinessDocumentLine::UNIT_COST_PRICE     , $json ) ;
+        $this->assertArrayNotHasKey( BusinessDocumentLine::UNIT_PURCHASE_PRICE , $json ) ;
+    }
+
+    /**
+     * A zero is a cost the source states — a fee that costs nothing to sell —
+     * and it is kept : only an absent key says the cost is unknown.
+     *
+     * @throws ReflectionException
+     */
+    public function testAZeroCostIsKept(): void
+    {
+        $line = new Reflection()->hydrate
+        (
+            [
+                BusinessDocumentLine::SUBTOTAL   => [ 'value' => 4.50 , 'currency' => 'EUR' ] ,
+                BusinessDocumentLine::COST_PRICE => [ 'value' => 0    , 'currency' => 'EUR' ] ,
+            ],
+            BusinessDocumentLine::class
+        );
+
+        $json = json_decode( json_encode( $line ) , true ) ;
+
+        $this->assertArrayHasKey( BusinessDocumentLine::COST_PRICE , $json ) ;
+        $this->assertEquals( 0 , $json[ BusinessDocumentLine::COST_PRICE ][ 'value' ] ) ;
     }
 }

@@ -8,6 +8,25 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- **2026-11-05** — **A document line says what its goods cost** — feat(documents): a line states its cost price and its purchase price.
+  A line stated its selling price and its amount, but nothing of what its goods cost the operator selling them :
+  the margin of a line, of a document, could not be read from it.
+
+  - **`HasLineCosts`** (new trait) — **`costPrice`** (→ `MonetaryAmount`), the cost of the whole line ;
+    **`unitCostPrice`** and **`unitPurchasePrice`** (→ `UnitPriceSpecification`), the cost price and the purchase
+    price of one unit, in the unit the selling price of the line is stated in. A reader works out the margin —
+    `subtotal − costPrice` —, its rate and its coefficient, and sums the lines for the document.
+  - 🔑 The cost of the whole line is stated, never left to unit price × quantity : goods sold by the package, a
+    flat fee, a cost corrected at invoicing all break the product. Named as in `HasTradingMeasures` : `costPrice`
+    is an amount wherever it is met.
+  - 🔑 Absent unless stated, and absent is not zero : a zero is a cost the source states, an absent key says no
+    cost is known or disclosed. ⚠️ Confidential by nature — the guard belongs to the consumer.
+  - **`BusinessDocumentLine`** composes the trait ; **`HasLineCostsTrait`** (new) carries the `COST_PRICE`,
+    `UNIT_COST_PRICE` and `UNIT_PURCHASE_PRICE` constants, composed by the line and by `DocumentsTrait`.
+  - **Docs:** `wiki/{fr,en}/oihana/business-documents.md` — the three properties in the `BusinessDocumentLine` entry.
+  - **Tests:** `BusinessDocumentLineTest` — the constants and their match with the trading measures, a raw row, the
+    resolved classes, the keys absent from a line that does not state them, a zero cost kept.
+
 - **2026-11-04** — **A document line says which delivery note shipped it and which order it comes from** — feat(documents): a line names its delivery note and its order.
   An invoice settling several delivery notes is commonly printed note by note, each block under the heading of
   its note, then order by order within a note. The invoice listed its notes and its orders, but a line could not

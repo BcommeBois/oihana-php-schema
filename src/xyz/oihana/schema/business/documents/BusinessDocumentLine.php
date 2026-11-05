@@ -16,10 +16,12 @@ use org\schema\StructuredValue;
 
 use xyz\oihana\schema\constants\Oihana;
 use xyz\oihana\schema\constants\traits\business\documents\BusinessDocumentLineTrait;
+use xyz\oihana\schema\constants\traits\business\documents\HasLineCostsTrait;
 use xyz\oihana\schema\enumerations\QuantityOrigin;
 use xyz\oihana\schema\enumerations\UnitOfSaleType;
 use xyz\oihana\schema\products\Product as OihanaProduct;
 use xyz\oihana\schema\traits\HasColor;
+use xyz\oihana\schema\traits\HasLineCosts;
 use xyz\oihana\schema\traits\HasPhysicalMeasures;
 
 /**
@@ -31,6 +33,10 @@ use xyz\oihana\schema\traits\HasPhysicalMeasures;
  * lines taxed at different rates, or carry a line-specific discount,
  * independently of the document-level {@see DocumentTotals}.
  *
+ * What the goods of the line cost — the unit cost and purchase prices, and the
+ * cost of the whole line — come from {@see HasLineCosts}, confidential figures a
+ * consumer opens only to the readers allowed to see a margin.
+ *
  * @package xyz\oihana\schema\business\documents
  * @author  Marc Alcaraz (eKameleon)
  * @since   1.3.0
@@ -39,6 +45,8 @@ class BusinessDocumentLine extends StructuredValue
 {
     use BusinessDocumentLineTrait ,
         HasColor                  ,
+        HasLineCosts              ,
+        HasLineCostsTrait         ,
         HasPhysicalMeasures       ;
 
     /**
