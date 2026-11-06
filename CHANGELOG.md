@@ -8,6 +8,20 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- **2026-11-06** — **Two buying prices in the unit of the selling tariff** — feat(prices): the discounted and the net buying prices, converted.
+  An offer stated its buying prices in the buying unit — a cubic metre, a package — while a line of a document is
+  priced in the unit of the selling tariff, a metre or a square metre. A reader wanting the purchase price or the
+  cost of a line had to redo the unit conversion the offer had already done, and the net buying price — the
+  supplier discounts applied, before any buying margin — was stated nowhere.
+
+  - **`PriceType::BUYING_DISCOUNTED_CONVERTED`** (`https://schema.oihana.xyz/BuyingPriceDiscountedConverted`) — the
+    discounted buying price (buying margin and supplier variations applied), in the unit of the selling tariff.
+  - **`PriceType::BUYING_NET_CONVERTED`** (`https://schema.oihana.xyz/BuyingPriceNetConverted`) — the net buying
+    price (supplier variations applied, before any buying margin), in the unit of the selling tariff.
+  - 🔑 No fee in either : the fees keep their own components. ⚠️ Beside one another the two reveal the buying
+    margin — the guard belongs to the consumer.
+  - **Tests:** `PriceTypeTest` — the two values and `includes()`.
+
 - **2026-11-05** — **A document line says what its goods cost** — feat(documents): a line states its cost price and its purchase price.
   A line stated its selling price and its amount, but nothing of what its goods cost the operator selling them :
   the margin of a line, of a document, could not be read from it.
