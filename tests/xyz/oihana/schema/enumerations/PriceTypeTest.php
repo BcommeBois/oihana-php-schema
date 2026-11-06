@@ -43,6 +43,13 @@ class PriceTypeTest extends TestCase
         $this->assertNotSame( PriceType::BUYING_DISCOUNTED , PriceType::BUYING_DISCOUNTED_CONVERTED );
     }
 
+    public function testNetBuyingPriceConstant(): void
+    {
+        $this->assertSame( 'https://schema.oihana.xyz/BuyingPriceNet' , PriceType::BUYING_NET );
+        $this->assertTrue( PriceType::includes( PriceType::BUYING_NET ) );
+        $this->assertNotSame( PriceType::BUYING_NET , PriceType::BUYING_NET_CONVERTED );
+    }
+
     public function testSellingUnitPriceConstant(): void
     {
         $this->assertSame( 'https://schema.oihana.xyz/SellingUnitPrice' , PriceType::SELLING_UNIT_PRICE );

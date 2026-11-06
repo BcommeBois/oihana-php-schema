@@ -8,6 +8,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
+- **2026-11-06** — **The net buying price, in the buying unit** — feat(prices): the net buying price joins the buying chain.
+  The net buying price was stated converted only (`BUYING_NET_CONVERTED`), while the buying chain that computes it —
+  next to the discounted price, from the same supplier variations — speaks the buying unit, and hands its prices to
+  the step that converts them as components. Without a type of its own in the buying unit, the net price could not
+  travel from one to the other.
+
+  - **`PriceType::BUYING_NET`** (`https://schema.oihana.xyz/BuyingPriceNet`) — the net buying price (supplier
+    variations applied, before any buying margin), in the buying unit, like `BUYING_REFERENCE` and
+    `BUYING_DISCOUNTED`. `BUYING_NET_CONVERTED` is the same price in the unit of the selling tariff.
+  - ⚠️ Beside the discounted price it reveals the buying margin — the guard belongs to the consumer.
+  - **Tests:** `PriceTypeTest` — the value, `includes()`, distinct from its converted twin.
+
 - **2026-11-06** — **Two buying prices in the unit of the selling tariff** — feat(prices): the discounted and the net buying prices, converted.
   An offer stated its buying prices in the buying unit — a cubic metre, a package — while a line of a document is
   priced in the unit of the selling tariff, a metre or a square metre. A reader wanting the purchase price or the

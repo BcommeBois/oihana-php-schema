@@ -31,6 +31,16 @@ class PriceType extends PriceTypeEnumeration
     public const string BUYING_DISCOUNTED_CONVERTED = 'https://schema.oihana.xyz/BuyingPriceDiscountedConverted' ;
 
     /**
+     * Represents the schema.org URL for "Buying price net" constant.
+     * The net buying price — the supplier reference with the supplier variations (discounts, surcharges)
+     * applied, before any buying margin — expressed in the buying unit, like the reference.
+     * No fee is included.
+     * Note : Prix d'achat net (remises fournisseur faites, sans marge d'achat) (fr)
+     * @since 1.5.0
+     */
+    public const string BUYING_NET = 'https://schema.oihana.xyz/BuyingPriceNet' ;
+
+    /**
      * Represents the schema.org URL for "Buying price net, converted" constant.
      * The net buying price — the supplier reference with the supplier variations (discounts, surcharges)
      * applied, before any buying margin — expressed in the unit of the selling tariff.
